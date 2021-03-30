@@ -8,6 +8,7 @@
     <title>Registreringsformulär</title>
     <link rel="stylesheet" href="../../styles/style.css" />
     <link rel="stylesheet" href="../../styles/bootstrap.css">
+    <link rel="stylesheet" href="register.css">
 </head>
 
 <body>
@@ -16,6 +17,7 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerForm">
         Launch demo modal
     </button>
+
 
     <!-- Modal -->
     <div class="modal fade" id="registerForm" data-bs-backdrop="static" tabindex="-1"
@@ -31,98 +33,151 @@
                     <div class="container mt-3 ">
 
                         <form class="row g-3">
-                            <div class="col-md-6">
-                                <label for="register-first-name" class="form-label">Förnamn</label>
-                                <input type="text" class="form-control" id="register-first-name">
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="text" class="form-control" id="register-first-name" placeholder="Förnamn">
+                                <label for="register-first-name" class="form-label text-muted">Förnamn</label>
                             </div>
-                            <div class="col-md-6">
-                                <label for="register-last-name" class="form-label">Efternamn</label>
-                                <input type="text" class="form-control" id="register-last-name">
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="text" class="form-control" id="register-last-name" placeholder="Efternamn">
+                                <label for="register-last-name" class="form-label text-muted">Efternamn</label>
+
                             </div>
-                            <div class="col-md-6">
-                                <label for="register-email" class="form-label">E-post</label>
-                                <input type="email" class="form-control" id="register-email">
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="email" class="form-control" id="register-email" placeholder="E-post">
+                                <label for="register-email" class="form-label text-muted">E-post</label>
+
                             </div>
-                            <div class="col-md-6">
-                                <label for="register-phone-number" class="form-label">Telefonnummer</label>
-                                <input type="tel" class="form-control" id="register-phone-number">
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="tel" class="form-control" id="register-phone-number" placeholder="Telefonnummer">
+                                <label for="register-phone-number" class="form-label text-muted">Telefonnummer</label>
+
                             </div>
-                            <div class="col-md-6">
-                                <label for="register-password" class="form-label">Välj lösenord</label>
-                                <input type="password" class="form-control" id="register-password">
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="password" class="form-control" id="register-password"
+                                    placeholder="Efternamn">
+                                <label for="register-password" class="form-label text-muted">Välj lösenord</label>
+                                
                             </div>
-                            <div class="col-md-6">
-                                <label for="register-confirm-password" class="form-label">Bekräfta lösenord</label>
-                                <input type="password" class="form-control" id="register-confirm-password">
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="password" class="form-control" id="register-confirm-password"
+                                    placeholder="Efternamn">
+                                <label for="register-confirm-password" class="form-label text-muted">Bekräfta lösenord</label>
                             </div>
-                            <div class="col-12">
-                                <label for="register-street" class="form-label">Gatuadress</label>
-                                <input type="text" class="form-control" id="register-street" placeholder="1234 Main St">
+                            <div class="col-12 form-floating mb-3">
+                                <input type="text" class="form-control" id="register-street" placeholder="Efternamn">
+                                <label for="register-street" class="form-label text-muted">Gatuadress</label>
                             </div>
-                            
-                            <div class="col-md-8">
-                                <label for="register-city" class="form-label">Postort</label>
-                                <input type="text" class="form-control" id="register-city">
+
+                            <div class="col-md-8 form-floating mb-3">
+                                <input type="text" class="form-control" id="register-city" placeholder="Efternamn">
+                                <label for="register-city" class="form-label text-muted">Postort</label>
                             </div>
-                            
-                            <div class="col-md-4">
-                                <label for="inputZip" class="form-label">Postnummer</label>
-                                <input type="text" class="form-control" id="inputZip">
+
+                            <div class="col-md-4 form-floating mb-3">
+                                <input type="text" class="form-control" id="inputZip" placeholder="Efternamn">
+                                <label for="inputZip" class="form-label text-muted">Postnummer</label>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="register-year" class="form-label">Födelseår</label>
-                                <select id="register-year" class="form-select">
+                                <select id="register-year" class="form-select" placeholder="Efternamn">
                                     <option selected>Välj</option>
-                                    <option>...</option>
+                                    <option>1920</option>
+                                    <option>1921</option>
+                                    <option>1922</option>
+                                    <option>1923</option>
+                                    <option>1924</option>
+                                    <option>1925</option>
+                                    <option>1926</option>
+                                    <option>1927</option>
+                                    <option>1928</option>
+                                    <option>1929</option>
+                                    <option>1930</option>
+                                    <option>1931</option>
+                                    <option>1932</option>
+                                    <option>1933</option>
+                                    <option>1934</option>
+                                    <option>1935</option>
+                                    <option>1936</option>
+                                    <option>1937</option>
+                                    <option>1938</option>
+                                    <option>1939</option>
+                                    <option>1940</option>
+                                    <option>1941</option>
+                                    <option>1942</option>
+                                    <option>1943</option>
+                                    <option>1944</option>
+                                    <option>1945</option>
+                                    <option>1946</option>
+                                    <option>1939</option>
+                                    <option>1939</option>
+                                    <option>1939</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <label for="register-month" class="form-label">Månad</label>
                                 <select id="register-month" class="form-select">
                                     <option selected>Välj</option>
-                                    <option>Januari</option>
-                                    <option>Februari</option>
-                                    <option>Mars</option>
-                                    <option>April</option>
-                                    <option>Maj</option>
-                                    <option>Juni</option>
-                                    <option>Juli</option>
-                                    <option>Augusti</option>
-                                    <option>September</option>
-                                    <option>Oktober</option>
-                                    <option>November</option>
-                                    <option>December</option>
+                                    <option value="1">Januari</option>
+                                    <option value="2">Februari</option>
+                                    <option value="3">Mars</option>
+                                    <option value="4">April</option>
+                                    <option value="5">Maj</option>
+                                    <option value="6">Juni</option>
+                                    <option value="7">Juli</option>
+                                    <option value="8">Augusti</option>
+                                    <option value="9">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <label for="register-day" class="form-label">Dag</label>
                                 <select id="register-day" class="form-select">
                                     <option selected>Välj</option>
-                                    <option>...</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
                                 </select>
                             </div>
-
-                            
-
-                            
                             <div class="col-12">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                    <label class="form-check-label" for="gridCheck">
-                                        Check me out
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Sign in</button>
+                                <button type="button" class="btn btn-primary" id="test-button">Testa inputs</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tillbaka</button>
+                    <button type="button" class="btn btn-primary">Registrera ditt konto</button>
                 </div>
             </div>
         </div>
@@ -157,6 +212,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
+    <script src="register.js"></script>
 </body>
 
 </html>
