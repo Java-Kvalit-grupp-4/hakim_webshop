@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Login</title>
+    <style>
+        .smaller-text{
+            font-size: 0.75rem;
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>test</h1>
+    <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open modal
+  </button>
+  
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content ">
+  
+        <!-- Modal Header -->
+        <div class="modal-header border-0">
+          <h4 class="modal-title mx-auto">Logga in</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body m-3">
+          <form class ="form-floating">
+              
+            <div>
+                <label for="login-email" class="form-label">Email<span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="login-email" >
+                <label for="login-email" class="form-label smaller-text text-danger" id="wrong-email"></label>
+            </div>
+
+            <div>
+                <label for="login-email" class="form-label">Lösenord<span class="text-danger">*</span></label>
+                <div class="input-group mb-3"> 
+                    <input type="password" class="form-control" id="login-password">
+                    <button class="btn btn-outline-secondary" type="button" id="show-password-button">Visa</button>
+                </div>
+                <label for="login-password" class="form-label smaller-text d-flex">
+                    <div class="text-danger" id="wrong-password"></div>
+                    <div><a href="#">Glömt ditt lösenord?</a></div>
+                </label>
+            </div>
+            
+           
+
+            </form>
+            
+        </div>
+        
+  
+        <!-- Modal footer -->
+        <div class="modal-footer border-0 mx-auto">
+          <button type="button" class="btn btn-dark" id="login-button">Logga in</button>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Ny medlem</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+      crossorigin="anonymous"></script>
+
+    <script>
+        
+        let persons = "";
+        let password = $('#login-password');
+        let loginbutton = $('#login-button');
+        let wrongEmail = $('#wrong-email')
+        let wrongPassword = $('#wrong-password')
+
+        
+        $("#show-password-button").on("click", showHidePassword);
+
+        loginbutton.on("click",checkUsernameAndPassword);
+
+        $.getJSON("testdata_persons.json", function(response) {
+            response.forEach((e)=> console.log(e.id))
+        })
+    
+
+        function showHidePassword(){
+            if($(this).text()=="Visa"){
+                $(this).text("Dölj")
+                password.attr("type", "text");
+                
+            }
+            else{
+                $(this).text("Visa")
+                password.attr("type", "password");
+               
+            }
+        }
+
+        function checkUsernameAndPassword(){
+            let email =$('#login-email');
+            let password =$('#login-password');
+            
+           // wrongPassword.html("Fel lösenord");
+
+            let isCustomer= findUser(email);
+            if(isCustomer){
+
+            }
+            else{
+                wrongEmail.html("Den email-adressen finns inte registrerad");
+            }
+        }
+
+        function findUser(input){
+            persons.forEach(e => {
+                if(e.email== input){
+                    return true;
+                }
+            });
+            return false
+        }
+
+    </script>
+
+</body>
+</html>
