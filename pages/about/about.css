@@ -17,10 +17,10 @@ html{
 }
 .about-container .title-container{
     font-size: var(--header1);
-    margin: 2rem;
+    padding: 2rem;
 }
 .about-container .image-container{
-    max-width: 200px;
+    max-width: 100%;
     height: auto;
     margin: 2rem;
 }
@@ -29,3 +29,33 @@ html{
     margin: auto;
     font-size: var(--paragraf);
 }
+
+
+@media (max-width: 454px) {
+    #about {
+        width: 100%;
+    }
+    .about-container{
+        width: 100%;
+    
+    }
+    
+    .about-container .text-container{
+        font-size: 1.7rem;
+        line-height: 1.6;
+        min-width: 80%;
+    
+    }
+  }
+
+ @media (max-width: 1200px) {
+    .about-container{
+        width: 100%;
+    }
+    .about-container .text-container{
+        margin: auto;
+        font-size: 1.8rem;
+        line-height: 1.6;
+        width: 60%;
+    }
+  } 
