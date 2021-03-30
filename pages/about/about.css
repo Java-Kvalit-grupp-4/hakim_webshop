@@ -1,0 +1,31 @@
+html{
+    --header1: calc(0.5rem + 1vw);
+    --paragraf: calc(0.2rem + 1vw);
+}
+
+#about{
+    min-height: 90vh;
+    width: 100%;
+}
+.about-container{
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.about-container .title-container{
+    font-size: var(--header1);
+    margin: 2rem;
+}
+.about-container .image-container{
+    max-width: 200px;
+    height: auto;
+    margin: 2rem;
+}
+.about-container .text-container{
+    width: 50%;
+    margin: auto;
+    font-size: var(--paragraf);
+}
