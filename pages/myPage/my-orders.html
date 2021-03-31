@@ -14,27 +14,28 @@
 
 <body>
   <nav>
-    <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="my-orders-tab" data-bs-toggle="tab" data-bs-target="#my-orders" type="button"
-          role="tab" aria-controls="my-orders" aria-selected="true">
-          Mina ordrar
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-          role="tab" aria-controls="profile" aria-selected="false">
-          Min information
-        </button>
-      </li>
-    </ul>
+
   </nav>
+  <ul class="nav nav-tabs justify-content-center bg-secondary" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="my-orders-tab" data-bs-toggle="tab" data-bs-target="#my-orders" type="button"
+        role="tab" aria-controls="my-orders" aria-selected="true">
+        Mina ordrar
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+        role="tab" aria-controls="profile" aria-selected="false">
+        Min information
+      </button>
+    </li>
+  </ul>
 
 
   <div class="tab-content">
-    <div class="tab-pane active" id="my-orders" role="tabpanel" aria-labelledby="my-orders-tab">
-      
-      
+    <div class="tab-pane" id="my-orders" role="tabpanel" aria-labelledby="my-orders-tab">
+
+
       <div class="container mt-5 col-xl-10">
         <h4>Mina ordrar</h4>
       </div>
@@ -119,83 +120,108 @@
 
       </div>
     </div>
-    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-       <div class="container">
-      <div class ="customer-info mt-5">
-        <div class="mb-3 px-4">
-            <h2>Kundinformation</h2>
-        </div class="">
-        <form>
-          <div class="row mb-5 " >
-            <div class="col-lg-6 col-md-12 mb- mb-md-0 px-5">
-                <p class="mb-0">Förnamn</p>
-              <input type="text" class="form-control mb-3" placeholder="Förnamn" style="width: 300px;">
+    <div class="tab-pane active " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="container">
+        <div class="container col-8">
+          <div class="customer-info mt-5">
+            <div class="mb-5">
+              <h2>Kundinformation</h2>
             </div>
-            <div class="col-lg-6 col-md-12 mb-4 mb-md-0 px-5">
-                <p class="mb-0">Adress</p>
-              <input type="text" class="form-control mb-3" placeholder="Adress" style="width: 300px;">
-            </div>
-            <div class="col-lg-6 col-md-12 mb-4 mb-md-0 px-5">
-                <p class="mb-0">Efternamn</p>
-              <input type="text" class="form-control mb-3" placeholder="Efternamn" style="width: 300px;">
-            </div>
-            <div class="col-lg-6 col-md-12 mb-4 mb-md-0 px-5">
-                <p class="mb-0">Postnr</p>
-              <input type="text" class="form-control mb-3" placeholder="Postnr" style="width: 300px;">
-            </div>
-              <div class="col-lg-6 col-md-12 mb-4 mb-md-0 px-5">
-                <p class="mb-0">Email</p>
-              <input type="text" class="form-control mb-3" placeholder="Email" style="width: 300px;">
-            </div>
-            <div class="col-lg-6 col-md-12 mb-4 mb-md-0 px-5">
-                <p class="mb-0">Ort</p>
-              <input type="text" class="form-control mb-3" placeholder="Ort" style="width: 300px;">
-            </div>
-            <div class="col-lg-6 col-md-12 mb-4 mb-md-0 px-5">
-                <p class="mb-0">Telefon-nr</p>
-              <input type="text" class="form-control mb-3" placeholder="Telefon-nr" style="width: 300px;">
-            </div>
-            <div class="col-lg-2 col-md-12 mb-4 mb-md-0 px-5">
-                <p class= "text-light mb-0">!</p>
-              <input type="submit" class="form-control btn-secondary" placeholder="Spara" style="width: 100px;">
-            </div>
-            </div>
-          </div>
-        </form>
-      </div>
-        <div class = "container justify-self-center" >
-            <div class ="change-password mt-5">
-                <div class="mb-3 px-4">
-                <h2>Ändra Lösenord</h2>
-                </div class="">
-                <form>
-              <div class="row mb-5" >
-                <div class="col-lg-12 col-md-12 mb- mb-md-0 px-5">
-                    <p class="mb-0">Gammalt lösenord</p>
-                  <input type="text" class="form-control mb-3" placeholder="Gammalt lösenord" style="width: 300px;">
+            <form>
+              <div class="row gx-5">
+                <div class="col-lg-6 mb-3">
+                  <label for="my-info-first-name" class="form-label">Förnamn</label>
+                  <input type="text" class="form-control" placeholder="Förnamn" aria-label="Förnamn"
+                    id="my-info-first-name">
                 </div>
-                <div class="col-lg-12 col-md-12 mb-4 mb-md-0 px-5">
-                    <p class="mb-0">Nytt lösenord</p>
-                  <input type="text" class="form-control mb-3" placeholder="Nytt lösenord" style="width: 300px;">
-                </div>
-                <div class="col-lg-3 col-md-12 mb-4 mb-md-0 px-5">
-                    <p class="mb-0">Repitera lösenord</p>
-                  <input type="text" class="form-control mb-3" placeholder="Repitera nytt lösenord" style="width: 300px;">
-                </div>
-                <div class="col-lg-2 col-md-12 mb-4 mb-md-0 px-5">
-                    <p class= "text-light mb-0">!</p>
-                  <input type="submit" class="form-control btn-secondary" placeholder="Spara" style="width: 100px;">
-                </div>
+                <div class="col mb-3">
+                  <label for="my-info-first-name" class="form-label">Efternamn</label>
+                  <input type="text" class="form-control " placeholder="Efternamn" aria-label="Efternamn"
+                    id="my-info-first-name">
                 </div>
               </div>
-            </form>
-          </div>
-    </div>
+              <div class="row gx-5 ">
+                <div class="col-lg-6 mb-3">
+                  <label for="my-info-first-name" class="form-label">Adress</label>
+                  <input type="text" class="form-control" placeholder="Adress" aria-label="Adress"
+                    id="my-info-first-name">
+                </div>
+                <div class="col mb-3">
+                  <label for="my-info-first-name" class="form-label">Postort</label>
+                  <input type="text" class="form-control " placeholder="Postort" aria-label="Postort"
+                    id="my-info-first-name">
+                </div>
+              </div>
+              <div class="row gx-5 ">
+                <div class="col-lg-6 mb-3">
+                  <label for="my-info-first-name" class="form-label">Postnummer</label>
+                  <input type="text" class="form-control" placeholder="Postnummer" aria-label="Postnummer"
+                    id="my-info-first-name">
+                </div>
+                <div class="col mb-3">
+                  <label for="my-info-first-name" class="form-label">E-post</label>
+                  <input type="text" class="form-control" placeholder="E-post" aria-label="E-post"
+                    id="my-info-first-name">
+                </div>
+              </div>
+              <div class="row gx-5">
+                <div class="col-lg-6 mb-3">
+                  <label for="my-info-first-name" class="form-label">Telefonnummer</label>
+                  <input type="text" class="form-control" placeholder="Telefonnummer" aria-label="Telefonnummer"
+                    id="my-info-first-name">
+                </div>
+                <div class="col mb-3 mt-4">
+                  <button type="submit" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
+                </div>
+              </div>
+              <div class="row mb-5 ">
 
-    </div>
+
+            </div>
+          </div>
+          </form>
+
+            <div class="change-password mt-5">
+              <div class="mb-5 ">
+                <h2>Ändra Lösenord</h2>
+              </div>
+              <form>
+                <div class="row gx-5">
+                <div class="col-lg-6 mb-3">
+                  <label for="my-info-first-name" class="form-label">Gammalt lösenord</label>
+                  <input type="text" class="form-control" placeholder="Gammalt lösenord" aria-label="Gammalt lösenord"
+                    id="my-info-first-name">
+                </div>
+                </div>
+                <div class="row gx-5">
+                <div class="col-lg-6 mb-3">
+                  <label for="my-info-first-name" class="form-label">Nytt lösenord</label>
+                  <input type="text" class="form-control" placeholder="Nytt lösenord" aria-label="Nytt lösenord"
+                    id="my-info-first-name">
+                </div>
+                </div>
+                <div class="row gx-5 mb-5">
+                <div class="col-lg-6 mb-3">
+                  <label for="my-info-first-name" class="form-label">Bekräfta lösenord</label>
+                  <input type="text" class="form-control" placeholder="Bekräfta nytt lösenord" aria-label="Bekräfta nytt lösenord"
+                    id="my-info-first-name">
+                </div>
+                <div class="col mb-3 mt-4">
+                  <button type="submit" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
+                </div>
+                
+                </div>
+                </div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-
+  </div>
+  </div>
+  </div>
 
 
   </div>
