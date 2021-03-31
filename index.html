@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,6 +9,7 @@
   <title>Hakim's Livs homepage</title>
   <link rel="stylesheet" href="./styles/bootstrap.css">
 </head>
+
 <body>
 
   <nav class="navbar navbar-expand-md navbar-light fixed-top">
@@ -50,6 +52,7 @@
 
   </div>
   </div>
+
     <footer class="bg-dark text-center text-lg-start">
 
       <div class="container p-4 justify-content-center">
@@ -96,15 +99,15 @@
         </div>
       </div>
       </footer>
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <script>
 
     let products = [];
-    $(document).ready(function () {
-      load();
-    });
 
+    $(document).ready(load);
+  
     function load() {
       fetch("./TestData/test_data_v.1.0.JSON")
         .then((response) => response.json())
@@ -116,7 +119,7 @@
       products = data;
 
       getProducts(products);
-     
+
       let categories = [];
       products.forEach(element => {
         categories.push(element.category)
@@ -125,32 +128,31 @@
       let uniqueCategories = [...new Set(categories)];
 
       uniqueCategories.forEach(element => {
-      $("#sidomeny").append(`
+        $("#sidomeny").append(`
           <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-2" style="background-color:wheat ;">${element}</button>`
-      );
-    });
+        );
+      });
 
-    $("#sidomeny button").on("click", function(){
-      let btnId = $(this).attr("id");
-      let list = [];
-     products.forEach(element => {
-       if (element.category == btnId){
-           list.push(element);
+      $("#sidomeny button").on("click", function () {
+        let btnId = $(this).attr("id");
+        let list = [];
+        products.forEach(element => {
+          if (element.category == btnId) {
+            list.push(element);
+            $("#products").empty();
+              getProducts(list);
+          }
+          if(btnId === "all"){
+            $("#products").empty();
+            getProducts(products);
           }
         });
-         
-        $("#products").empty();
-        getProducts(list);
 
-        $("#all").click(function(){
-          getProducts(products);
-        });
-            });
-        }
-    </script>
+      });
+    }
+  </script>
 
-    <script src="./js/homepage.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <script src="./js/homepage.js"></script>
 
 </body>
 
