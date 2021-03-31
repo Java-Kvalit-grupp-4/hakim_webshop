@@ -1,30 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles/style.css">
-    <title>Admin-products</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../styles/style.css">
+  <link rel="stylesheet" href="../../styles/bootstrap.css">
+  <title>Produktkatalog</title>
 </head>
+
 <body>
-    <nav>
-        <div id="logo">
-          <h1>Hakim's Livs</h1>
-        </div>
-        <div id="input-search">
-          <input type="text" />
-          <button>Sök</button>
-        </div>
-        <div id="links">
-            <a href="../">Till kundsidan</a>
-            <a href="../Customer/">Kunder</a>
-            <a href="../Information/">Information</a>
-            <a href="./">Produkter</a>
-            <a href="../Orders/">Ordrar</a>
-        </div>
-      </nav>
-    <h1>ADMIN PRODUKTER</h1>
-    
+  <nav>
+    <div id="logo">
+      <h1>Hakim's Livs</h1>
+    </div>
+    <div id="input-search">
+      <input type="text" />
+      <button>Sök</button>
+    </div>
+    <div id="links">
+      <a href="../">Till kundsidan</a>
+      <a href="../Customer/">Kunder</a>
+      <a href="../Information/">Information</a>
+      <a href="./">Produkter</a>
+      <a href="../Orders/">Ordrar</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h3 class="fw-bold">
+      Produktlista
+    </h3>
+    <div class="col-sm-2">
+      <select id="select" class="form-select" aria-label="Default select example">
+        <option selected>Kategori</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <br>
+
+    <div class="col-sm-12">
+      <table class="table" style="width: 100%;">
+        <thead>
+          <tr>
+            <th scope="col">Artikelnummer</th>
+            <th scope="col">Produktnamn</th>
+            <th scope="col">Tillverkare</th>
+            <th scope="col">Pris</th>
+            <th scope="col">Lagersaldo</th>
+          </tr>
+        </thead>
+        <tbody id="products"> </tbody>
+      </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+      $(document).ready(load);
+
+      let products = [];
+
+      function load(){
+        fetch("test_data_v.1.0.JSON")
+          .then((response) => response.json())
+          .then((data) => render(data))
+          .catch((error) => console.error(error));
+
+        function render() {
+          products = data;
+          console.log(products);
+
+          let categories = [];
+          products.forEach(element => {
+            categories.push(element.category)
+          });
+
+          let uniqueCategories = [...new Set(categories)];
+
+          uniqueCategories.forEach(element => {
+            $("#select").append(`
+            <option value="${element.category}">${element.category}</option>`
+            );
+          });
+
+      }
+
+
+        }
+
+
+
+
+
+
+     
+    </script>
+    <script src="../../js/admin-products.js"></script>
+
+
+
+
+
+
 </body>
+
 </html>
