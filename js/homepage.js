@@ -55,7 +55,7 @@ function getProducts(list) {
       console.log(element)
         $("#products").append(`
         <div class="col-sm-3 pb-5">
-          <div id=""class="card text-center h-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)">
+          <div id="${element.product}"class="card text-center h-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)">
             <img src="${element.image}" alt="img" class="card-img-top pt-5 ps-5 pe-5">
             <div class="card-body d-flex flex-column">
               <h3 class="card-title" style="font-weight: bold;">${element.title} 8</h3>
