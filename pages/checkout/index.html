@@ -55,7 +55,7 @@
             <!-- cart ends-->
             <!-- form starts-->
             <div class="col-lg-5 mt-5 mb-5">
-              <form class="row g-3">
+              <div class="row g-3">
                 <div class="col-md-6">
                   <label for="firstName" class="form-label">Förnamn</label>
                   <input type="text" class="form-control" id="firstName" placeholder="Förnamn">
@@ -74,15 +74,15 @@
                 </div>
                 <div class="col-8">
                   <label for="inputAddress" class="form-label">Adress</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="Adress">
+                  <input type="text" class="form-control" id="address" placeholder="Adress">
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Ort</label>
-                  <input type="text" class="form-control" id="inputCity" placeholder="Ort">
+                  <input type="text" class="form-control" id="city" placeholder="Ort">
                 </div>
                 <div class="col-md-2">
                   <label for="inputZip" class="form-label">Postnummer</label>
-                  <input type="text" class="form-control" id="inputZip" placeholder="Postnummer">
+                  <input type="text" class="form-control" id="zip" maxlength="5" placeholder="Postnr">
                 </div>
                 <div class="col-md-12">
                   <h6>Leveransadress</h6> 
@@ -105,12 +105,12 @@
                 </div>
                 <div class="col-md-2">
                   <label for="inputZip" class="form-label">Postnummer</label>
-                  <input type="text" class="form-control" id="inputZip2" placeholder="Postnummer">
+                  <input type="text" class="form-control" id="inputZip2" maxlength="5" placeholder="Postnr">
                 </div>
                 <div class="col-12">
-                  <button type="submit" class="btn btn-primary">Skicka beställning</button>
+                  <button id="send-order-btn" type="" class="btn btn-primary">Skicka beställning</button>
                 </div>
-              </form>
+              </div>
             </div>
             <!-- form ends-->
           </div>
@@ -175,6 +175,8 @@
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"
       ></script>
+      <script src="../../js/validate.js"></script>
+      <script src="./checkout.js"></script>
     </footer>
   </body>
 </html>
