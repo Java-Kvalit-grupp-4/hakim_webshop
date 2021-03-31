@@ -1,7 +1,18 @@
-function renderCart(){
+let cart = []
+
+function load() {
+    let cartTestUrl = '../../TestData/test_data_cart.JSON'
+    fetch(cartTestUrl)
+      .then((response) => response.json())
+      .then((data) => renderCart(data))
+      .catch((error) => console.error(error));
+  }
+
+function renderCart(data){
     const getProducts = JSON.parse(localStorage.getItem("cart"))
 
-    getProducts.array.forEach(element => {
+    data.array.forEach(element => {
+        console.log("funkar?")
         document.getElementById("productsInCart").innerHTML +=
         `<tr class="table-primary">
                 <td scope="row"> X </td>                            <!-- lägg in papperskorg här -->
@@ -19,7 +30,7 @@ function renderCart(){
     });
 }
 
-function removeProduct(product){
+function addProduct(product){
     //uppdatera antalet
     let add = JSON.parse(localStorage.getItem("cart"));
     let adding = add.find((element) => element.id == product);
