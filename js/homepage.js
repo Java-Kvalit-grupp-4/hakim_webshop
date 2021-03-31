@@ -1,6 +1,3 @@
-
-
-
 let products = [];
     $(document).ready(load)
 
@@ -77,7 +74,7 @@ function getProducts(list) {
           products.forEach(product => {
             if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
               saveProductToCart(product)
-
+              saveTotalPrice(product)
             }
           })
         })
@@ -115,5 +112,11 @@ function saveProductToCart(product) {
   localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity))
   localStorage.setItem('cart', JSON.stringify(cart))
   $("#cart-counter").text(cartQuantity)
+}
+
+function saveTotalPrice(product) {
+  console.log(product);
+  let totalPrice = JSON.parse(localStorage.getItem('cartTotalPrice'))
+  totalPrice != null ? localStorage.setItem('cartTotalPrice', totalPrice + product.price) : localStorage.setItem('cartTotalPrice', product.price);
 }
 
