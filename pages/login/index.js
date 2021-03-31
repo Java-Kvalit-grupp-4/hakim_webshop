@@ -33,18 +33,14 @@ function showHidePassword(){
     if($(this).text()=="Visa"){
         $(this).text("Dölj")
         password.attr("type", "text");
-        
     }
     else{
         $(this).text("Visa")
-        password.attr("type", "password");
-       
+        password.attr("type", "password");   
     }
 }
 
 function checkUsernameAndPassword(){
-
-
     let isCustomer= findUser(email.val());
     if(isCustomer){
         let isCorrectPassword = findPassword(password.val());
