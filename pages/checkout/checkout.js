@@ -16,3 +16,6 @@ sendOrderBtn.addEventListener('click',() => {
         console.log(email + ' false');
     }
 });
+
+let cart = [];
+
