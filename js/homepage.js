@@ -2,10 +2,7 @@
 
 
 let products = [];
-    $(document).ready(function () {
-      load();
-      
-    });
+    $(document).ready(load)
 
     function load() {
       fetch("./TestData/test_data_v.1.0.JSON")
@@ -32,23 +29,23 @@ let products = [];
       );
     });
 
-    $("#sidomeny button").on("click", function(){
+    $("#sidomeny button").on("click", function () {
       let btnId = $(this).attr("id");
       let list = [];
-     products.forEach(element => {
-       if (element.category == btnId){
-           list.push(element);
-          }
-        });
-         
-        $("#products").empty();
-        getProducts(list);
-
-        $("#all").click(function(){
-          getProducts(products);
-        });
-            });
+      products.forEach(element => {
+        if (element.category == btnId) {
+          list.push(element);
+          $("#products").empty();
+            getProducts(list);
         }
+        if(btnId === "all"){
+          $("#products").empty();
+          getProducts(products);
+        }
+      });
+
+    });
+}
 /**
  * Render products to UI and adds functions to add-to-cart button
  * @param {Array} list of product 
