@@ -8,7 +8,7 @@
 		"adress": "Ankeborgsstigen 31", 
 		"password": "KalleAnka1",
 		"social_security_number": "5511220331", 
-		"Admin": "false",
+		"admin": "false",
 		"vip": "false",
 		"city":
 			{
@@ -27,7 +27,7 @@
 		"adress": "Uppsalavägen 45", 
 		"password": "PelleSvanslös1",
 		"social_security_number": "8201150036", 
-		"Admin": "true",
+		"admin": "true",
 		"vip": "false",
 		"city":
 			{
@@ -46,7 +46,7 @@
 		"adress": "Ankeborgsstigen 3", 
 		"password": "MussePigg1",
 		"social_security_number": "6907281234", 
-		"Admin": "false",
+		"admin": "false",
 		"vip": "true",
 		"city":
 			{
