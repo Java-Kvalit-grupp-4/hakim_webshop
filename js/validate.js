@@ -1,4 +1,3 @@
-
 /**
  *  Takes input as String and checks for only characters
  *  capital and lowercase allowed
@@ -82,7 +81,7 @@ function testForDecimalNumbers(input) {
  */
  function testForPassword(input) {
     let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/;
-    return  testForSqlInjections(input) ? pattern.test(input) : false
+    return  testForSqlInjections(input) ? false : pattern.test(input)
     
 }
 
