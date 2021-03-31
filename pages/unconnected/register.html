@@ -13,11 +13,9 @@
 
 <body>
 
-
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerForm">
         Launch demo modal
     </button>
-
 
     <!-- Modal -->
     <div class="modal fade" id="registerForm" data-bs-backdrop="static" tabindex="-1"
@@ -34,7 +32,7 @@
 
                         <form class="row g-3">
                             <div class="col-md-6 form-floating mb-3">
-                                <input type="text" class="form-control" id="register-first-name" placeholder="Förnamn">
+                                <input type="text" class="form-control" id="register-first-name" placeholder="Förnamn" required>
                                 <label for="register-first-name" class="form-label text-muted">Förnamn</label>
                             </div>
                             <div class="col-md-6 form-floating mb-3">
@@ -43,7 +41,7 @@
 
                             </div>
                             <div class="col-md-6 form-floating mb-3">
-                                <input type="email" class="form-control" id="register-email" placeholder="E-post">
+                                <input type="email" class="form-control" id="register-email" placeholder="E-post" required>
                                 <label for="register-email" class="form-label text-muted">E-post</label>
 
                             </div>
@@ -74,50 +72,20 @@
                             </div>
 
                             <div class="col-md-4 form-floating mb-3">
-                                <input type="text" class="form-control" id="inputZip" placeholder="Efternamn">
-                                <label for="inputZip" class="form-label text-muted">Postnummer</label>
+                                <input type="text" class="form-control" id="register-zip" placeholder="Efternamn">
+                                <label for="register-zip" class="form-label text-muted">Postnummer</label>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="register-year" class="form-label">Födelseår</label>
                                 <select id="register-year" class="form-select" placeholder="Efternamn">
-                                    <option selected>Välj</option>
-                                    <option>1920</option>
-                                    <option>1921</option>
-                                    <option>1922</option>
-                                    <option>1923</option>
-                                    <option>1924</option>
-                                    <option>1925</option>
-                                    <option>1926</option>
-                                    <option>1927</option>
-                                    <option>1928</option>
-                                    <option>1929</option>
-                                    <option>1930</option>
-                                    <option>1931</option>
-                                    <option>1932</option>
-                                    <option>1933</option>
-                                    <option>1934</option>
-                                    <option>1935</option>
-                                    <option>1936</option>
-                                    <option>1937</option>
-                                    <option>1938</option>
-                                    <option>1939</option>
-                                    <option>1940</option>
-                                    <option>1941</option>
-                                    <option>1942</option>
-                                    <option>1943</option>
-                                    <option>1944</option>
-                                    <option>1945</option>
-                                    <option>1946</option>
-                                    <option>1939</option>
-                                    <option>1939</option>
-                                    <option>1939</option>
+                                    <option selected disabled value="">Välj</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <label for="register-month" class="form-label">Månad</label>
                                 <select id="register-month" class="form-select">
-                                    <option selected>Välj</option>
+                                    <option selected disabled value="">Välj</option>
                                     <option value="1">Januari</option>
                                     <option value="2">Februari</option>
                                     <option value="3">Mars</option>
@@ -135,49 +103,15 @@
                             <div class="col-md-4">
                                 <label for="register-day" class="form-label">Dag</label>
                                 <select id="register-day" class="form-select">
-                                    <option selected>Välj</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                    <option value="19">19</option>
-                                    <option value="20">20</option>
-                                    <option value="21">21</option>
-                                    <option value="22">22</option>
-                                    <option value="23">23</option>
-                                    <option value="24">24</option>
-                                    <option value="25">25</option>
-                                    <option value="26">26</option>
-                                    <option value="27">27</option>
-                                    <option value="28">28</option>
-                                    <option value="29">29</option>
-                                    <option value="30">30</option>
-                                    <option value="31">31</option>
+                                    <option selected disabled value="">Välj</option>
                                 </select>
-                            </div>
-                            <div class="col-12">
-                                <button type="button" class="btn btn-primary" id="test-button">Testa inputs</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tillbaka</button>
-                    <button type="button" class="btn btn-primary">Registrera ditt konto</button>
+                    <button type="submit" class="btn btn-primary" id="confirm-account">Registrera ditt konto</button>
                 </div>
             </div>
         </div>
