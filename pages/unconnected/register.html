@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registreringsformulär</title>
+    <link rel="stylesheet" href="../../styles/style.css" />
+    <link rel="stylesheet" href="../../styles/bootstrap.css">
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+<!-- This button should be removed and the functionality should be added to relevant button on login-from (or from checkout) -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerForm">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="registerForm" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="registerFormLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerFormLabel">Registrera dig</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Registration Form -->
+                    <div class="container mt-3 ">
+
+                        <form class="row g-3">
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="text" class="form-control" id="register-first-name" placeholder="Förnamn" required>
+                                <label for="register-first-name" class="form-label text-muted">Förnamn</label>
+                            </div>
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="text" class="form-control" id="register-last-name" placeholder="Efternamn">
+                                <label for="register-last-name" class="form-label text-muted">Efternamn</label>
+
+                            </div>
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="email" class="form-control" id="register-email" placeholder="E-post" required>
+                                <label for="register-email" class="form-label text-muted">E-post</label>
+
+                            </div>
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="tel" class="form-control" id="register-phone-number" placeholder="Telefonnummer">
+                                <label for="register-phone-number" class="form-label text-muted">Telefonnummer</label>
+
+                            </div>
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="password" class="form-control" id="register-password"
+                                    placeholder="Efternamn">
+                                <label for="register-password" class="form-label text-muted">Välj lösenord</label>
+                                
+                            </div>
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="password" class="form-control" id="register-confirm-password"
+                                    placeholder="Efternamn">
+                                <label for="register-confirm-password" class="form-label text-muted">Bekräfta lösenord</label>
+                            </div>
+                            <div class="col-12 form-floating mb-3">
+                                <input type="text" class="form-control" id="register-street" placeholder="Efternamn">
+                                <label for="register-street" class="form-label text-muted">Gatuadress</label>
+                            </div>
+
+                            <div class="col-md-8 form-floating mb-3">
+                                <input type="text" class="form-control" id="register-city" placeholder="Efternamn" maxlength="5">
+                                <label for="register-city" class="form-label text-muted">Postort</label>
+                            </div>
+
+                            <div class="col-md-4 form-floating mb-3">
+                                <input type="text" class="form-control" id="register-zip" placeholder="Efternamn">
+                                <label for="register-zip" class="form-label text-muted">Postnummer</label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="register-year" class="form-label">Födelseår</label>
+                                <select id="register-year" class="form-select" placeholder="Efternamn">
+                                    <option selected disabled value="">Välj</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="register-month" class="form-label">Månad</label>
+                                <select id="register-month" class="form-select">
+                                    <option selected disabled value="">Välj</option>
+                                    <option value="1">Januari</option>
+                                    <option value="2">Februari</option>
+                                    <option value="3">Mars</option>
+                                    <option value="4">April</option>
+                                    <option value="5">Maj</option>
+                                    <option value="6">Juni</option>
+                                    <option value="7">Juli</option>
+                                    <option value="8">Augusti</option>
+                                    <option value="9">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="register-day" class="form-label">Dag</label>
+                                <select id="register-day" class="form-select">
+                                    <option selected disabled value="">Välj</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tillbaka</button>
+                    <button type="submit" class="btn btn-primary" id="confirm-account">Registrera ditt konto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Vertically centered scrollable modal -->
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        ...
+    </div>
+
+
+
+    <!-- Example of floating labels in form -->
+
+    <form action="">
+        <div class="container">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+    </form>
+    </div>
+
+    <script src="../../js/validate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <script src="register.js"></script>
+</body>
+
+</html>
