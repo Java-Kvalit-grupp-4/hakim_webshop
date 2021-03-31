@@ -1,30 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/style.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <nav>
-      <div id="logo">
-        <h1>Hakim's Livs</h1>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles/style.css" />
+  <title>Hakim's Livs homepage</title>
+  <link rel="stylesheet" href="./styles/bootstrap.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-light fixed-top">
+
+    <div class="container-fluid">
+
+    </div>
+
+  </nav>
+
+  <div class="row ms-1" style="margin-top:10rem; margin-right: 0">
+
+    <div class="col-sm-2">
+      <div class="list-group">
+        <div class="list-group" id="sidomeny">
+          <button id="all" type="button" class="list-group-item list-group-item-action fs-2"
+            style="background-color:sandybrown ;">
+            Alla produkter
+          </button>
+        </div>
       </div>
-      <div id="input-search">
-        <input type="text" />
-        <button>Sök</button>
+    </div>
+
+    <div class="col-sm-8">
+
+      <div class="card w-100 text-white">
+        <img src="https://picsum.photos/1000/300" class="card-img-top" alt="image">
+        <div class="card-img-overlay">
+          <h1 class="card-title" style="text-align: end; text-align: end;">Veckans vara</h1>
+        </div>
       </div>
-      <div id="links">
-        <a href="./admin/">Gå till admin</a>
-        <a href="./">Hem</a>
-        <a href="./pages/about/">Om Hakim's Livs</a>
-        <a href="./pages/checkout/">Till kassan</a>
+
+      <div class="row my-5" id="products"></div>
+
+    </div>
+
+    <div class="col-sm-2">
+      <img src="https://picsum.photos/300/1000" alt="">
+    </div>
+
+  </div>
+  </div>
+    <footer class="bg-dark text-center text-lg-start">
+
+      <div class="container p-4">
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Kontakt</h5>
+    
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-light">070-6666666</a>
+              </li>
+              <li>
+                <a href="mailto:hakimlivs@gmail.com">hakimlivs@gmail.com</a>
+              </li>
+              <li>
+                <a href="#!" class="text-light">Kungsgatan 65, Stockholm 3</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase mb-0">Om Hakim Livs</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="./pages/about/" class="text-light">Om oss</a>
+              </li>
+              </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase mb-0">Öppettider</h5>
+    
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!" class="text-light">Vardagar 08:00-20:00</a>
+              </li>
+              <li>
+                <a href="#!" class="text-light">Lördagar 09:00-19:00</a>
+              </li>
+              <li>
+                <a href="#!" class="text-light">Söndagar 10:00-18:00</a>
+              </li>
+              <li>
+                <a href="./pages/about/" class="text-light">Se avvikande öppetider</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </nav>
-    <header>
-      <h1>HEM</h1>
-    </header>
-  </body>
+      </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script>
+
+    let products = [];
+    $(document).ready(function () {
+      load();
+    });
+
+    function load() {
+      fetch("./TestData/test_data_v.1.0.JSON")
+        .then((response) => response.json())
+        .then((data) => render(data))
+        .catch((error) => console.error(error));
+    }
+
+    function render(data) {
+      products = data;
+
+      getProducts(products);
+     
+      let categories = [];
+      products.forEach(element => {
+        categories.push(element.category)
+      });
+
+      let uniqueCategories = [...new Set(categories)];
+
+      uniqueCategories.forEach(element => {
+      $("#sidomeny").append(`
+          <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-2" style="background-color:wheat ;">${element}</button>`
+      );
+    });
+
+    $("#sidomeny button").on("click", function(){
+      let btnId = $(this).attr("id");
+      let list = [];
+     products.forEach(element => {
+       if (element.category == btnId){
+           list.push(element);
+          }
+        });
+         
+        $("#products").empty();
+        getProducts(list);
+
+        $("#all").click(function(){
+          getProducts(products);
+        });
+            });
+        }
+    </script>
+
+    <script src="./js/homepage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+</body>
+
 </html>
