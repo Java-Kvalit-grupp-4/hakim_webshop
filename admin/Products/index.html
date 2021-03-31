@@ -34,16 +34,13 @@
     </h3>
     <div class="col-sm-2">
       <select id="select" class="form-select" aria-label="Default select example">
-        <option selected>Kategori</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option id="all" selected>Kategori</option>
       </select>
     </div>
     <br>
 
     <div class="col-sm-12">
-      <table class="table" style="width: 100%;">
+      <table class="table table-hover" style="width: 100%;">
         <thead>
           <tr>
             <th scope="col">Artikelnummer</th>
@@ -63,18 +60,23 @@
       $(document).ready(load);
 
       let products = [];
+      let categories = [];
 
-      function load(){
+      function load() {
         fetch("test_data_v.1.0.JSON")
           .then((response) => response.json())
           .then((data) => render(data))
           .catch((error) => console.error(error));
 
-        function render() {
+        function render(data) {
           products = data;
-          console.log(products);
 
-          let categories = [];
+          products.forEach(obj => {
+                Object.assign(obj, {amount: 15});
+            })
+
+          //  console.log(products);
+
           products.forEach(element => {
             categories.push(element.category)
           });
@@ -83,21 +85,35 @@
 
           uniqueCategories.forEach(element => {
             $("#select").append(`
-            <option value="${element.category}">${element.category}</option>`
+            <option id="${element}" value="${element}">${element}</option>`
             );
           });
+
+          $("#select option").on("click", function(){
+            let optionId = $(this).attr("id");
+            let list = [];
+            products.forEach(element => {
+              if(element.category == optionId){
+                list.push(element);
+                $("#products").empty();
+                getProducts(list);
+              }
+              if(optionId === "all"){
+                $("#products").empty();
+                getProducts(products);
+              }
+            })
+          })
+        }
 
       }
 
 
-        }
 
 
 
 
 
-
-     
     </script>
     <script src="../../js/admin-products.js"></script>
 

@@ -72,7 +72,7 @@
       products = data;
 
       getProducts(products);
-     
+
       let categories = [];
       products.forEach(element => {
         categories.push(element.category)
@@ -81,31 +81,31 @@
       let uniqueCategories = [...new Set(categories)];
 
       uniqueCategories.forEach(element => {
-      $("#sidomeny").append(`
+        $("#sidomeny").append(`
           <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-2" style="background-color:wheat ;">${element}</button>`
-      );
-    });
+        );
+      });
 
-    $("#sidomeny button").on("click", function(){
-      let btnId = $(this).attr("id");
-      let list = [];
-     products.forEach(element => {
-       if (element.category == btnId){
-           list.push(element);
+      $("#sidomeny button").on("click", function () {
+        let btnId = $(this).attr("id");
+        let list = [];
+        products.forEach(element => {
+          if (element.category == btnId) {
+            list.push(element);
+            $("#products").empty();
+            getProducts(list);
+          }
+          if (btnId === "all") {
+            $("#products").empty();
+            getProducts(products);
           }
         });
-         
-        $("#products").empty();
-        getProducts(list);
 
-        $("#all").click(function(){
-          getProducts(products);
-        });
-            });
-        }
-    </script>
+      });
+    }
+  </script>
 
-    <script src="./js/homepage.js"></script>
+  <script src="./js/homepage.js"></script>
 
 </body>
 
