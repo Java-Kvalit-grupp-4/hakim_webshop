@@ -114,6 +114,11 @@ function saveProductToCart(product) {
   $("#cart-counter").text(cartQuantity)
 }
 
+/**
+ * Saves the price of the product to localStorage and 
+ * adds the value if there are a value in localStorage allready
+ * @param {object} product 
+ */
 function saveTotalPrice(product) {
   console.log(product);
   let totalPrice = JSON.parse(localStorage.getItem('cartTotalPrice'))
