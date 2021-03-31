@@ -27,27 +27,15 @@
                   <div class="col col-xs-2 col-lg-2 cart-title"><h6>Total pris</h6></div>
                 </div>
                 <!-- line item -->
-                <div class="row pt-2 line-item-border">
-                  <div class="col col-xs-3 col-lg-3 cart-line-item"><p>3412-3452</p></div>
-                  <div class="col col-xs-2 col-lg-4 cart-line-item"><p>kaffe</p></div>
-                  <div class="col col-xs-1 col-lg-1 cart-line-item"><p>3</p></div>
-                  <div class="col col-xs-2 col-lg-2 cart-line-item"><p>48.00</p></div>
-                  <div class="col col-xs-2 col-lg-2 cart-line-item checkout-item-total-price"><p>144.00</p></div>
-                </div>
-                <div class="row pt-2 line-item-border">
-                  <div class="col col-xs-3 col-lg-3 cart-line-item"><p>3232-3982</p></div>
-                  <div class="col col-xs-2 col-lg-4 cart-line-item"><p>Coca Cola</p></div>
-                  <div class="col col-xs-1 col-lg-1 cart-line-item"><p>4</p></div>
-                  <div class="col col-xs-2 col-lg-2 cart-line-item"><p>10.00</p></div>
-                  <div class="col col-xs-2 col-lg-2 cart-line-item"><p>40.00</p></div>
-                </div>
+                <div id="cart-container"></div>
+                
                 <!-- line item -->
                 <div class="row pt-2 cart-footer">
                   <div class="col col-xs-3 col-lg-3 cart-line-item"></div>
-                  <div class="col col-xs-2 col-lg-4 cart-line-item"><h6>Totalt antal varor:</h6></div>
-                  <div id="checkout-cart-quantity"class="col col-xs-1 col-lg-1 cart-line-item"><p>7</p></div>
-                  <div class="col col-xs-2 col-lg-2 cart-line-item"><h6>Totalt pris:</h6></div>
-                  <div id="checkout-cart-total-price" class="col col-xs-2 col-lg-2 cart-line-item"><p>184.00</p></div>
+                  <div class="col col-xs-2 col-lg-4 cart-line-item"><h6 class="cart-line-item">Totalt antal varor:</h6></div>
+                  <div id="checkout-cart-quantity"class="col col-xs-1 col-lg-1 cart-line-item"><p id="cart-total-quantity">0</p></div>
+                  <div class="col col-xs-2 col-lg-2 cart-line-item"><h6 class="cart-line-item">Totalt pris:</h6></div>
+                  <div id="checkout-cart-total-price" class="col col-xs-2 col-lg-2 cart-line-item"><p id="cart-total-price">00.00</p></div>
                 </div>
               </div>
             </div>
@@ -80,7 +68,7 @@
                   <label for="inputCity" class="form-label">Ort</label>
                   <input type="text" class="form-control" id="city" placeholder="Ort">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                   <label for="inputZip" class="form-label">Postnummer</label>
                   <input type="text" class="form-control" id="zip" maxlength="5" placeholder="Postnr">
                 </div>
@@ -97,21 +85,22 @@
                 </div>
                 <div class="col-8">
                   <label for="inputAddress" class="form-label">Adress</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="Adress">
+                  <input type="text" class="form-control" id="address2" placeholder="Adress">
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Ort</label>
-                  <input type="text" class="form-control" id="inputCity2" placeholder="Ort">
+                  <input type="text" class="form-control" id="city2" placeholder="Ort">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                   <label for="inputZip" class="form-label">Postnummer</label>
-                  <input type="text" class="form-control" id="inputZip2" maxlength="5" placeholder="Postnr">
+                  <input type="text" class="form-control" id="zip2" maxlength="5" placeholder="Postnr">
                 </div>
                 <div class="col-12">
                   <button id="send-order-btn" type="" class="btn btn-primary">Skicka beställning</button>
                 </div>
               </div>
             </div>
+            
             <!-- form ends-->
           </div>
       </div>

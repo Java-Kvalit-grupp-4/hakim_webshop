@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "productNummer": "3241-1234",
+        "title": "Fjällraven Backpack",
+        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "image": "https:\/\/picsum.photos\/500?random=1",
+        "price": 109.95,
+        "category": "men clothing",
+        "inCart": 5
+    },
+    {
+        "id": 2,
+        "productNummer": "3341-7234",
+        "title": "Mens Casual T-Shirts ",
+        "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+        "image": "https:\/\/picsum.photos\/500?random=2",
+        "price": 22,
+        "category": "men clothing",
+        "inCart": 3
+    }
+]

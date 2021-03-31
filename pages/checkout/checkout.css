@@ -18,6 +18,7 @@ html {
   .cart-footer {
     border-top: 1px solid var(--border-cl);
   }
+
   @media (max-width: 540px){
     .cart h1 {
       text-align: center;
