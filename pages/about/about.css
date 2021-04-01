@@ -1,5 +1,5 @@
 html{
-    --header1: calc(0.5rem + 1vw);
+    --header1: calc(1rem + 1vw);
     --paragraf: calc(0.2rem + 1vw);
 }
 
@@ -16,7 +16,6 @@ html{
     align-items: center;
 }
 .about-container .title-container{
-    font-size: var(--header1);
     padding: 2rem;
 }
 .about-container .image-container{
@@ -27,6 +26,15 @@ html{
 .about-container .text-container{
     width: 50%;
     margin: auto;
+}
+.oppening-hour{
+    margin: 3rem;
+}
+.title{
+    font-size: var(--header1);
+}
+
+p {
     font-size: var(--paragraf);
 }
 
