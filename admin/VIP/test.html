@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/bootstrap.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+    crossorigin="anonymous"></script>
+
+    <h1>VIP2</h1>
+
+    <script>
+        $.get("../Navbar/index.html", function(data){
+            $("#nav-placeholder").replaceWith(data);
+        });
+
+        $(document).ready(function(){
+            $("#nav-vip").href = "test.html"
+            $("#nav-home").href = "../Navbar/index.html"
+        })
+    
+        </script>
+
+        
+</body>
+</html>
