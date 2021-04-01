@@ -12,6 +12,8 @@
       media="all"
       href="../../styles/daterangpicker-bs3.css"
     />
+    <link rel="stylesheet" href="../../styles/style.css" />
+    <link rel="stylesheet" href="admin-customer.css">
     <title>Admin-custumer</title>
   </head>
   <body>
@@ -97,7 +99,7 @@
       </nav>
     </nav>
 
-    <div class="container col-10 mt-5 pt-5">
+    <div class="container mt-5">
       <h1 class="mt-5 mb-4">Kundkatalogen</h1>
 
       <div class="row mb-5 me-lg-4">
@@ -108,27 +110,14 @@
                 <div class="controls">
                   <div class="input-group input-group-prepend">
                     <span class="input-group-text"
-                      ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        fill="currentColor"
-                        class="bi bi-calendar3"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"
-                        />
-                        <path
-                          d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
-                        /></svg></span
+                      ><i class="bi bi-calendar3"></i></span
                     ><input
                       type="text"
                       style="width: 200px"
                       name="reservation"
                       id="reservation"
                       class="form-control"
-                      value="01/04/2021 - 30/04/2021"
+                      value=""
                     />
                   </div>
                 </div>
@@ -137,7 +126,7 @@
           </form>
         </div>
 
-        <div class="input-group mb-3 col col-lg mt-3 mt-lg-0 ">
+        <div class="input-group mb-3 col col-lg mt-3 mt-lg-0">
           <select
             class="form-select bg-light"
             aria-label="Default select example"
@@ -146,7 +135,7 @@
             <option value="1">Vip-kunder</option>
             <option value="2">Total ordersumma över:</option>
             <option value="3">Totalt antal ordrar över:</option>
-            <option value="4">Three</option>
+            <option value="4">Födelsedag</option>
           </select>
 
           <input
@@ -155,82 +144,139 @@
             aria-label="Text input with dropdown button"
           />
         </div>
-        
-        <div class="d-grid p-0 col-1  m-auto mt-3 mt-lg-0">
-          <button class="btn btn-secondary " type="button">Sök</button>
+
+        <div class="d-grid p-0 col-11 col-md-1 m-auto mt-3 mt-lg-0">
+          <button class="btn btn-secondary" type="button">Sök</button>
         </div>
       </div>
-
-      <table class="table table-secondary">
-        <thead>
-          <tr>
-            <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
-            <th scope="col" class="pb-3 ps-md-5">Kundnummer</th>
-            <th scope="col" class="pb-3">Datum</th>
-            <th scope="col" class="pb-3">Totalt</th>
-            <th scope="col" class="pb-3">Orderstatus</th>
-            <th scope="col" class="pb-3">Betalstatus</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4567</a></th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a></th>
-            <td>2021-01-20</td>
-            <td>135 kr</td>
-            <td>Levererad</td>
-            <td>Mottagen</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4568</a></th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a></th>
-            <td>2021-02-13</td>
-            <td>453 kr</td>
-            <td>Levererad</td>
-            <td>Mottagen</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4569</a></th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a></th>
-            <td>2021-03-26</td>
-            <td>321 kr</td>
-            <td>Skickad</td>
-            <td>Väntar på betalning</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4510</a></th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a></th>
-            <td>2021-02-13</td>
-            <td>453 kr</td>
-            <td>Levererad</td>
-            <td>Mottagen</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4511</a></th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a></th>
-            <td>2021-03-26</td>
-            <td>321 kr</td>
-            <td>Skickad</td>
-            <td>Väntar på betalning</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4512</a></th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a></th>
-            <td>2021-02-13</td>
-            <td>453 kr</td>
-            <td>Levererad</td>
-            <td>Mottagen</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4513</a></th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a></th>
-            <td>2021-03-26</td>
-            <td>321 kr</td>
-            <td>Skickad</td>
-            <td>Väntar på betalning</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="overflow-auto customer-table">
+        <table class="table table-secondary">
+          <thead class="text-center">
+            <tr>
+              <th scope="col" class="pb-3">Kundnummer</th>
+              <th scope="col" class="pb-3">Förnamn</th>
+              <th scope="col" class="pb-3">Efternamn</th>
+              <th scope="col" class="pb-3">Personnummer</th>
+              <th scope="col" class="pb-3">E-post</th>
+              <th scope="col" class="pb-3">Antal ordrar</th>
+              <th scope="col" class="pb-3">Orderbelopp</th>
+              <th scope="col" class="pb-3">VIP-kund</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-check2"></i></i></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-x"></i></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-x"></i></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-check2"></i></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-check2"></i></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-x"></i></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-x"></i></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-x"></i></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-x"></i></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-x"></i></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#">850216</a></th>
+              <td>Julia</td>
+              <td>Wigenstedt</td>
+              <td>900311-xxxx</td>
+              <td>mail@mail.se</td>
+              <td>4</td>
+              <td>3162 kr</td>
+              <td><i class="bi bi-x"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <script
       type="text/javascript"
