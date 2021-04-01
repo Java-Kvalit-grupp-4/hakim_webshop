@@ -9,86 +9,229 @@
     <title>Document</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="../Navbar/index.html" id="nav-home"
-          >ADMIN</a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="d-flex mx-3">
-            <select
-              class="form-select form-select-sm mx-22"
-              aria-label=".form-select-sm example"
-            >
-              <option selected></option>
-              <option value="1">Produktkatalog</option>
-              <option value="2">Orderkatalog</option>
-              <option value="3">Kundkatalog</option>
-            </select>
-            <input
-              class="form-control mx-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-light mx-2" type="submit">
-              Search
-            </button>
-          </form>
-
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="../Products/index.html"
-                id="nav-products"
-                >Produkter</a
+      <nav>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="../Navbar/index.html" id="nav-home"
+                >ADMIN</a
               >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html" id="nav-orders"> Ordrar</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="../Customer/index.html"
-                id="nav-customer"
-                >Kunder</a
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
               >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../VIP/index.html" id="nav-vip">VIP</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="../Information/index.html"
-                id="nav-information"
-                >Webbsidans info</a
-              >
-            </li>
-          </ul>
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Kund vy</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex mx-3">
+                  <select
+                    class="form-select form-select-sm mx-22"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option selected></option>
+                    <option value="1">Produktkatalog</option>
+                    <option value="2">Orderkatalog</option>
+                    <option value="3">Kundkatalog</option>
+                  </select>
+                  <input
+                    class="form-control mx-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <button class="btn btn-outline-light mx-2" type="submit">
+                    Search
+                  </button>
+                </form>
+      
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      href="../Products/index.html"
+                      id="nav-products"
+                      >Produkter</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.html" id="nav-orders"> Ordrar</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      href="../Customer/index.html"
+                      id="nav-customer"
+                      >Kunder</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../VIP/index.html" id="nav-vip">VIP</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      href="../Information/index.html"
+                      id="nav-information"
+                      >Webbsidans info</a
+                    >
+                  </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Kund vy</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+      </nav>
+   
 
     <!--Här ovan endast Navbar -->
+    <div class="container row">
+        <div class="container col-3 pb-5">
+            <div class="container col-12 pb-5">
+                <div class="customer-info mt-5">
+                    <div class="mb-5">
+                        <h2>Kundinformation</h2>
+                    </div>
+                    <form>
+                        <div class="col-lg-12 mb-3">
+                        <label for="my-info-first-name" class="form-label">Förnamn</label>
+                        <input type="text" class="form-control" placeholder="Förnamn" aria-label="Förnamn"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">Efternamn</label>
+                            <input type="text" class="form-control " placeholder="Efternamn" aria-label="Efternamn"
+                         id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">Adress</label>
+                            <input type="text" class="form-control" placeholder="Adress" aria-label="Adress"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">Postort</label>
+                            <input type="text" class="form-control " placeholder="Postort" aria-label="Postort"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">Postnummer</label>
+                            <input type="text" class="form-control" placeholder="Postnummer" aria-label="Postnummer"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">E-post</label>
+                            <input type="text" class="form-control" placeholder="E-post" aria-label="E-post"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">Telefonnummer</label>
+                            <input type="text" class="form-control" placeholder="Telefonnummer" aria-label="Telefonnummer"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col mb-3 mt-4">
+                            <button type="submit" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container col-9 pb-5">
+            <div class="container col-12">
+                <div class="customer-info mt-5">
+                    <div class="mb-5">
+                      <h2>Produkter i ordern</h2>
+                    </div>
+                    <div class="container"> 
+                        <table class="table table-secondary ">
+                          <thead>
+                            <tr>
+                              <th scope="col" class="pb-3 ps-md-5">Artikel-nr</th>
+                              <th scope="col" class="pb-3 ps-md-5">Produktnamn</th>
+                              <th scope="col" class="pb-3 ">Antal </th>
+                              <th scope="col" class="pb-3">á pris</th>
+                              <th scope="col" class="pb-3">Total pris</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+                              <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
+                              <td>5</td>
+                              <td>50 kr</td>
+                              <td>250</td>
+                            </tr>
+                            <tr>
+                              <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
+                              <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
+                              <td>5</td>
+                              <td>100 kr</td>
+                              <td>500</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
+                                <td>5</td>
+                                <td>50 kr</td>
+                                <td>250</td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
+                                <td>5</td>
+                                <td>100 kr</td>
+                                <td>500</td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
+                                <td>5</td>
+                                <td>50 kr</td>
+                                <td>250</td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
+                                <td>5</td>
+                                <td>100 kr</td>
+                                <td>500</td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
+                                <td>5</td>
+                                <td>50 kr</td>
+                                <td>250</td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
+                                <td>5</td>
+                                <td>100 kr</td>
+                                <td>500</td>
+                              </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                </div>
+                  <div class= "countainer text-end pe-4">
+                      <p>Total Summa: 1000kr</p>
+                  </div>
+            </div>
+            <div class="container col-12 pt-3 ps-5">
+                <h2>Kommentar på ordern</h2>
+            </div>
+            <div class="container col-12 ps-5">
+                <textarea name="" id="" cols="100" rows="10" placeholder="Skriv kommentar här..."></textarea>
+            </div>
+        </div>
+    </div>
 
 
   </body>
