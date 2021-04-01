@@ -99,8 +99,9 @@
 
     <div class="container col-10 mt-5 pt-5">
       <h1 class="mt-5 mb-4">Kundkatalogen</h1>
-      <div class="row mb-5">
-        <div class="datepicker col-3">
+
+      <div class="row mb-5 me-lg-4">
+        <div class="datepicker col-12 col-lg-4">
           <form class="form-horizontal">
             <fieldset>
               <div class="control-group">
@@ -127,7 +128,7 @@
                       name="reservation"
                       id="reservation"
                       class="form-control"
-                      value="04/01/2021 - 04/30/2021"
+                      value="01/04/2021 - 30/04/2021"
                     />
                   </div>
                 </div>
@@ -135,39 +136,28 @@
             </fieldset>
           </form>
         </div>
-        <div class="col-3">
+
+        <div class="input-group mb-3 col col-lg mt-3 mt-lg-0 ">
           <select
             class="form-select bg-light"
             aria-label="Default select example"
           >
             <option selected disabled>Filtrera efter...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="1">Vip-kunder</option>
+            <option value="2">Total ordersumma över:</option>
+            <option value="3">Totalt antal ordrar över:</option>
+            <option value="4">Three</option>
           </select>
-        </div>
 
-        <div class="input-group mb-3 col">
-          <button
-            class="btn btn-outline-secondary dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Dropdown
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-          </ul>
           <input
             type="text"
             class="form-control"
             aria-label="Text input with dropdown button"
           />
+        </div>
+        
+        <div class="d-grid p-0 col-1  m-auto mt-3 mt-lg-0">
+          <button class="btn btn-secondary " type="button">Sök</button>
         </div>
       </div>
 
@@ -247,8 +237,9 @@
       src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"
     ></script>
     <script
-      type="text/javascript"
-      src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
     ></script>
     <script type="text/javascript" src="../../js/moment.js"></script>
     <script type="text/javascript" src="../../js/daterangpicker.js"></script>
