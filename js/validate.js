@@ -17,7 +17,7 @@ function testForOnlyText(input) {
  */
 function testForZipCode(input) {
     let pattern = /\d{3}[ ]?\d{2}/;
-    return pattern.test(input)
+    return testForSqlInjections(input) ? false : pattern.test(input)
 }
 /**
  * Takes input as a String and checks if 
