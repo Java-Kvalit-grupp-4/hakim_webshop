@@ -61,75 +61,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-  <script>
-    $(document).ready(load);
-
-    let products = [];
-    let categories = [];
-
-    /**
-     * Gets products in form of JSON objects 
-     */
-    function load() {
-      fetch("../../TestData/test_data_v.1.0.JSON")
-        .then((response) => response.json())
-        .then((data) => render(data))
-        .catch((error) => console.error(error));
-
-      function render(data) {
-        products = data;
-
-        products.forEach(obj => {
-          Object.assign(obj, { amount: 15 });
-        })
-
-        //  console.log(products);
-
-        products.forEach(element => {
-          categories.push(element.category)
-        });
-
-        let uniqueCategories = [...new Set(categories)];
-
-        uniqueCategories.forEach(element => {
-          $("#select").append(`
-            <option id="${element}" value="${element}">${element}</option>`
-          );
-        });
-
-        $("#select option").on("click", function () {
-          let optionId = $(this).attr("id");
-          let list = [];
-          products.forEach(element => {
-            if (element.category == optionId) {
-              list.push(element);
-              $("#products").empty();
-              showProducts(list);
-            }
-            if (optionId === "all") {
-              $("#products").empty();
-              showProducts(products);
-            }
-          })
-        });
-
-      }
-
-    }
-
-
-
-
-
-
-
-  </script>
-  <script src="../../js/admin-products.js"></script>
-
-
-
-
-
+  <script src="../../js/admin-product-catalog.js"></script>
 
 </body>
 
