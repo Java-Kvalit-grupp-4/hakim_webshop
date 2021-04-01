@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../styles/style.css" />
     <link rel="stylesheet" href="../../styles/bootstrap.css">
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+     <!--dessa två behövs för datepicker men sabbar navbaren-->
+    <!--<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">-->
     <link rel="stylesheet" type="text/css" media="all" href="../../styles/daterangpicker-bs3.css" />
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../js/moment.js"></script>
-    <script type="text/javascript" src="../../js/daterangpicker.js"></script>
+
     <title>Admin-orders</title>
   </head>
   <body>
@@ -61,16 +59,15 @@
         </div>
       </nav>
     </nav>
-    <h1 style="margin-top:70px">Order</h1>
     <div class="container p-4">
       <div class="row">
-        <div class="header col-lg-7 col-md-12">
+        <div class="header col-lg-6 col-md-12">
           <h2>Orderlista</h2>
         </div>
         <div class="price col-lg-3 col-md-6">
           <p>Pris</p>
         </div>
-        <div class="order-nr col-lg-2 col-md-6">
+        <div class="order-nr col-lg-3 col-md-6">
           <p>Order-nr</p>
         </div>
       </div>
@@ -90,7 +87,7 @@
             </form>
           </div>
         </div>
-        <div class="col-lg-2 col-md-4">
+        <div class="col-lg-3 col-md-4">
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Order Status
@@ -103,18 +100,18 @@
           </div>
         </div>
         <div class="col-lg-3">
-          <form class="form-group my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <form class="form-inline my-2 my-lg-0 d-flex">
+            <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search">
+            <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
           </form>
         </div>
-          <div class="col-lg-3">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-          </div>
+        <div class="col-lg-3">
+          <form class="form-inline my-1 my-lg-0  d-flex">
+            <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search">
 
+            <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
+          </form>
+        </div>
       </div>
     </div>
     <div class="container"> 
@@ -189,6 +186,10 @@
         </tbody>
       </table>
     </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/moment.js"></script>
+    <script type="text/javascript" src="../../js/daterangpicker.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
          $('#reservation').daterangepicker(null, function(start, end, label) {
