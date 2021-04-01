@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../styles/style.css" />
+    <link rel="stylesheet" href="../../styles/bootstrap.css">
     <title>Admin-orders</title>
   </head>
   <body>
@@ -16,14 +17,121 @@
         <input type="text" />
         <button>Sök</button>
       </div>
-      <div id="links">
-        <a href="../">Till kundsidan</a>
-        <a href="../Customer/">Kunder</a>
-        <a href="../Information/">Information</a>
-        <a href="../Products/">Produkter</a>
-        <a href="./">Ordrar</a>
-      </div>
     </nav>
-    <h1>ADMIN ORDERS</h1>
+
+    <div class="container p-4">
+      <div class="row">
+        <div class="header col-lg-7 col-md-12">
+          <h2>Orderlista</h2>
+        </div>
+        <div class="price col-lg-3 col-md-6">
+          <p>Pris</p>
+        </div>
+        <div class="order-nr col-lg-2 col-md-6">
+          <p>Order-nr</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2 col-md-4">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+        </div>
+        <div class="col-lg-3">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="col-lg-3">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container"> 
+      <table class="table table-secondary ">
+        <thead>
+          <tr>
+            <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
+            <th scope="col" class="pb-3 ps-md-5">Kundnummer</th>
+            <th scope="col" class="pb-3 ">Datum </th>
+            <th scope="col" class="pb-3">Totalt</th>
+            <th scope="col" class="pb-3">Orderstatus</th>
+            <th scope="col" class="pb-3">Betalstatus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-01-20</td>
+            <td>135 kr</td>
+            <td>Levererad</td>
+            <td>Mottagen</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"><a href="#">2341-4581</a> </th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-02-13</td>
+            <td>453 kr</td>
+            <td>Levererad</td>
+            <td>Mottagen</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"> <a href="#">2341-9867</a></th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-03-26</td>
+            <td>321 kr</td>
+            <td>Skickad</td>
+            <td>Väntar på betalning</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"><a href="#">2341-4581</a> </th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-02-13</td>
+            <td>453 kr</td>
+            <td>Levererad</td>
+            <td>Mottagen</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"> <a href="#">2341-9867</a></th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-03-26</td>
+            <td>321 kr</td>
+            <td>Skickad</td>
+            <td>Väntar på betalning</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"><a href="#">2341-4581</a> </th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-02-13</td>
+            <td>453 kr</td>
+            <td>Levererad</td>
+            <td>Mottagen</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"> <a href="#">2341-9867</a></th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-03-26</td>
+            <td>321 kr</td>
+            <td>Skickad</td>
+            <td>Väntar på betalning</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>
