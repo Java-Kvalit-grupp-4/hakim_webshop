@@ -214,15 +214,15 @@
       this.buttonClasses = ["btn", "btn-small btn-sm"];
       this.applyClass = "btn-success";
       this.cancelClass = "btn-default";
-      this.format = "MM/DD/YYYY";
+      this.format = "DD/MM/YYYY";
       this.separator = " - ";
 
       this.locale = {
-        applyLabel: "Apply",
-        cancelLabel: "Cancel",
-        fromLabel: "From",
-        toLabel: "To",
-        weekLabel: "W",
+        applyLabel: "Bekräfta",
+        cancelLabel: "Avbryt",
+        fromLabel: "Från",
+        toLabel: "Till",
+        weekLabel: "V",
         customRangeLabel: "Custom Range",
         daysOfWeek: moment.weekdaysMin(),
         monthNames: moment.monthsShort(),
@@ -1269,8 +1269,9 @@
       if (this.showWeekNumbers) html += "<th></th>";
 
       if (!minDate || minDate.isBefore(calendar.firstDay)) {
-        html +=
-          '<th class="prev available"><i class="fa fa-arrow-left icon icon-arrow-left glyphicon glyphicon-arrow-left"></i></th>';
+        html += `<th class="prev available"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg></th>`;
       } else {
         html += "<th></th>";
       }
@@ -1286,7 +1287,9 @@
       html += '<th colspan="5" class="month">' + dateHtml + "</th>";
       if (!maxDate || maxDate.isAfter(calendar.lastDay)) {
         html +=
-          '<th class="next available"><i class="fa fa-arrow-right icon icon-arrow-right glyphicon glyphicon-arrow-right"></i></th>';
+          `<th class="next available"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+</svg></th>`;
       } else {
         html += "<th></th>";
       }
