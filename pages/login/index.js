@@ -89,4 +89,7 @@ function findPassword(password){
     }
     return isTrue;
 }
+$("#newCust-button").on("click",function(){
+    $("#registerForm").modal("show");
+})
 
