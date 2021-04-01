@@ -22,7 +22,7 @@ let products = [];
 
       uniqueCategories.forEach(element => {
       $("#sidomeny").append(`
-          <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-2" style="background-color:wheat ;">${element}</button>`
+          <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4" style="background-color:wheat ;">${element}</button>`
       );
     });
 
