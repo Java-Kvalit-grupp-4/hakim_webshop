@@ -14,19 +14,53 @@
     <title>Cart pop-up</title>
 </head>
 <body>
-    <table class="table table-secondary">
-        <thead>
-          <tr class="table-default">
-            <th scope="col">Papperskorg</th>
-            <th scope="col">Produkt</th>
-            <th scope="col"></th>
-            <th scope="col">á pris</th>
-            <th scope="col">Antal</th>
-            <th scope="col">Totalt</th>
-          </tr>
-        </thead>
-        <tbody id="productsInCart"></tbody>
-    </table>
+
+<!-- This button should be removed and the functionality should be added to relevant button on login-from (or from checkout) -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart-pop-up">
+  Launch demo modal
+</button>
+<button id="myBtn">Cart</button>
+
+<div 
+    class="modal fade" 
+    id="cart-pop-up"
+    data-bs-backdrop="static" 
+    data-bs-keyboard="false" 
+    tabindex="-1" 
+    aria-labelledby="staticBackdropLabel" 
+    aria-hidden="true">
+
+  <div class="modal-dialog modal-dialog-scrollable" style="min-width: 1000px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Varukorg</h2>
+        <span class="close">&times;</span>
+      </div>
+      <!--modal-header ends-->
+      <div class="modal-body">
+        <table class="table table-secondary">
+          <thead>
+            <tr class="table-default">
+              <th scope="col">Papperskorg</th>
+              <th scope="col">Produkt</th>
+              <th scope="col"></th>
+              <th scope="col">á pris</th>
+              <th scope="col"></th>
+              <th scope="col">Antal</th>
+              <th scope="col"></th>
+              <th scope="col">Totalt</th>
+            </tr>
+          </thead>
+          <tbody id="productsInCart"></tbody>
+        </table>
+      </div>
+      <!--modal-body ends-->
+    </div>
+    <!--modal-content ends-->
+  </div>
+  <!--modal-dialog ends-->
+</div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="cart-pop-up.js"></script>
     <script>load()</script>
