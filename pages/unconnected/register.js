@@ -3,7 +3,8 @@ $(function () {
   addDayOptions();
 
   $("#confirm-account").on("click", function () {
-    validate(getInputs());
+    //validate(getInputs())
+    validateInput()
   });
 
   //Hämtar input från varje fält och sparar i ett objekt.
@@ -22,7 +23,7 @@ $(function () {
       month: $("#register-month").val(),
       day: $("#register-day").val(),
     };
-
+  
     return input;
   }
 
@@ -83,3 +84,70 @@ $(function () {
     return isFilled;
   }
 });
+
+/**
+ * Vaidates input fields
+ */
+function validateInput(){
+  let firstName = $("#register-first-name").val(),
+    lastName = $("#register-last-name").val(),
+    email = $("#register-email").val(),
+    phoneNr = $("#register-phone-number").val(),
+    password =  $("#register-password").val(),
+    confirmedPassword = $("#register-confirm-password").val(),
+    street = $("#register-street").val(),
+    city = $("#register-city").val(),
+    zip = $("#register-zip").val();
+    
+    if(testForOnlyText(firstName)) {
+      console.log(firstName + ' true')
+    }else{
+        console.log(firstName + ' false')
+    }
+
+    if(testForOnlyText(lastName)) {
+        console.log(lastName + ' true')
+    }else{
+        console.log(lastName + ' false')
+    }
+
+    if(testForEmail(email)){
+        console.log(email + ' true')
+    }else{
+        console.log(email + ' false')
+    }
+
+    if(testForNumbersOnly(phoneNr)){
+        console.log(phoneNr + ' true')
+    }else{
+        console.log(phoneNr + ' false')
+    }
+    if(testForPassword(password)){
+      console.log(password + ' true')
+    }else{
+      console.log(password + ' false')
+    }
+    if(testForPassword(confirmedPassword)){
+      console.log(confirmedPassword + ' true')
+    }else{
+      console.log(confirmedPassword + ' false')
+    }
+
+    if(testForAddress(street)){
+        console.log(street + ' true')
+    }else{
+        console.log(street + ' false')
+    }
+    
+    if(testForZipCode(zip)){
+        console.log(zip + ' true')
+    }else{
+        console.log(zip + ' false')
+    }
+
+    if(testForOnlyText(city)){
+        console.log(city + ' true')
+    }else{
+        console.log(city + ' false')
+    }
+}
