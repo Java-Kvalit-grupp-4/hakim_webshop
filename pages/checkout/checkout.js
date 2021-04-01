@@ -80,14 +80,17 @@ function clearAddressInfo(){
 }
 
 document.getElementById('send-order-btn').addEventListener('click',() => {
-    let firstName = document.getElementById('firstName').value;
-    let lastName = document.getElementById('lastName').value;
-    let email = document.getElementById('email').value;
-    let phoneNumber = document.getElementById('phone').value;
-    let address = document.getElementById('address').value;
-    let zipCode = document.getElementById('zip').value;
-    let city = document.getElementById('city').value;
-    
+    let firstName = document.getElementById('firstName').value,
+    lastName = document.getElementById('lastName').value,
+    email = document.getElementById('email').value,
+    phoneNumber = document.getElementById('phone').value,
+    address = document.getElementById('address').value,
+    zip = document.getElementById('zip').value,
+    city = document.getElementById('city').value,
+    address2 = document.getElementById('address2').value,
+    city2 = document.getElementById('city2').value,
+    zip2 = document.getElementById('zip2').value;
+
     if(testForOnlyText(firstName)) {
         console.log(firstName + ' true')
     }else{
@@ -118,13 +121,31 @@ document.getElementById('send-order-btn').addEventListener('click',() => {
         console.log(address + ' false')
     }
     
-    if(testForZipCode(zipCode)){
-        console.log(zipCode + ' true')
+    if(testForZipCode(zip)){
+        console.log(zip + ' true')
     }else{
-        console.log(zipCode + ' false')
+        console.log(zip + ' false')
     }
 
     if(testForOnlyText(city)){
+        console.log(city + ' true')
+    }else{
+        console.log(city + ' false')
+    }
+    
+    if(testForAddress(address2)){
+        console.log(address + ' true')
+    }else{
+        console.log(address + ' false')
+    }
+    
+    if(testForZipCode(zip2)){
+        console.log(zip + ' true')
+    }else{
+        console.log(zip + ' false')
+    }
+
+    if(testForOnlyText(city2)){
         console.log(city + ' true')
     }else{
         console.log(city + ' false')
