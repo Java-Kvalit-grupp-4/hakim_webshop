@@ -820,14 +820,14 @@
       }
     },
 
-    _months: "January_February_March_April_May_June_July_August_September_October_November_December".split(
+    _months: "Januari_Februari_Mars_April_Maj_Juni_Juli_Augusti_September_Oktober_November_December".split(
       "_"
     ),
     months: function (m) {
       return this._months[m.month()];
     },
 
-    _monthsShort: "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),
+    _monthsShort: "Jan_Feb_Mar_Apr_Maj_Jun_Jul_Aug_Sep_Okt_Nov_Dec".split("_"),
     monthsShort: function (m) {
       return this._monthsShort[m.month()];
     },
@@ -865,7 +865,7 @@
       return this._weekdaysShort[m.day()];
     },
 
-    _weekdaysMin: "Su_Mo_Tu_We_Th_Fr_Sa".split("_"),
+    _weekdaysMin: "Sö_Må_Ti_On_To_Fr_Lö".split("_"),
     weekdaysMin: function (m) {
       return this._weekdaysMin[m.day()];
     },
