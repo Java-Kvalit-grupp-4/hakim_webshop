@@ -1,13 +1,12 @@
 /**
  *  Takes input as String and checks for only characters
- *  capital and lowercase allowed
+ *  capital, lowercase and hyphen allowed
  * @param {String} input to test 
  * @returns true or false
  */
 
 function testForOnlyText(input) {
-    // kolla efter -
-    let pattern = /^[a-zA-ZåäöÅÄÖ]*$/;
+    let pattern = /^[a-zA-ZåäöÅÄÖ\-]*$/;
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
 /**
@@ -17,8 +16,7 @@ function testForOnlyText(input) {
  * @returns true or false
  */
 function testForZipCode(input) {
-    // alt blanksteg mellan 123 34
-    let pattern = /^[0-9]{5}/;
+    let pattern = /\d{3}[ ]?\d{2}/;
     return pattern.test(input)
 }
 /**
