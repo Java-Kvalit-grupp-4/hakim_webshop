@@ -6,12 +6,12 @@
 
 /* Global styles */
 a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 button {
-    padding: 0.2rem 2rem;
+  padding: 0.2rem 2rem;
 }
 
 /* Nav-bar styles */
@@ -24,7 +24,15 @@ nav {
   background-color: rgb(201, 201, 201);
 }
 
-nav #links a{
-    margin: 0rem 1rem;
-    font-size: 1.2rem;
+nav #links a {
+  margin: 0rem 1rem;
+  font-size: 1.2rem;
+}
+footer{
+  background-color: rgb(34, 33, 33);
+  color:white
+}
+footer a{
+  text-decoration: none;
+  color:white;
 }
