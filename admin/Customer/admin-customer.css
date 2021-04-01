@@ -1,3 +1,59 @@
-.customer-table {
-    max-height: 500px;
+body {
+  background-color: #fffbe4;
 }
+
+.customer-table {
+  max-height: 500px;
+}
+
+.customer-order-table {
+  max-height: 300px;
+}
+
+.table-body-scrollable {
+  padding-top: 52em;
+}
+
+.table-head {
+  margin-bottom: 0;
+  border-bottom: black solid 2px;
+}
+
+.table-foot {
+  margin-top: -1rem;
+  border-top: black solid 2px;
+}
+
+.fixed-head {
+  position: absolute;
+}
+
+.table-fixed tbody {
+  height: 300px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+  display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed tbody th,
+.table-fixed thead > tr > th {
+  float: left;
+  position: relative;
+}
+
+.table-fixed tbody td::after,
+.table-fixed tbody th::after,
+.table-fixed thead > tr > th::after {
+  content: '';
+  clear: both;
+  display: block;
+}
+/*# sourceMappingURL=admin-customer.css.map */
