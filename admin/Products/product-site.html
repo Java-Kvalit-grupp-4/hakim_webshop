@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poduktsida</title>
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/bootstrap.css">
+    <link rel="stylesheet" href="style-admin-products.css">
+
+</head>
+
+<body>
+    <nav>
+        <div id="logo">
+            <h1>Hakim's Livs</h1>
+        </div>
+        <div id="input-search">
+            <input type="text" />
+            <button>Sök</button>
+        </div>
+        <div id="links">
+            <a href="../">Till kundsidan</a>
+            <a href="../Customer/">Kunder</a>
+            <a href="../Information/">Information</a>
+            <a href="./">Produkter</a>
+            <a href="../Orders/">Ordrar</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-3 me-5">
+                <label for="titleInput" class="form-label">Titel</label>
+                <input type="text" class="form-control mb-3" id="title">
+                <label for="descriptionInput" class="form-label">Beskrivning</label>
+                <textarea class="form-control mb-3" id="description" rows="8"></textarea>
+
+            </div>
+
+            <div class="col-sm-3">
+                <label for="imageInput" class="form-label">Bild</label>
+                <img src="https://picsum.photos/300" alt="img">
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 me-5" id="column">
+                    <label for="priceInput" class="form-label">Pris</label>
+                    <input type="text" class="form-control" id="price">
+                    <label for="category" class="form-label mt-3">Kategori</label>
+
+                </div>
+                <div class="col-sm-3">
+                    <label for="lagerInput" class="form-label">Lagerstatus</label>
+                    <input type="text" class="form-control" id="lager">
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label for="categoryInput" class="form-label mt-3">Ny kategori</label>
+                        <div class="input-group mb-3">
+                            <input id= "categoryInput" type="text" class="form-control" placeholder="" aria-label="New category" aria-describedby="category-input">
+                            <button class="btn btn-outline-secondary" type="button" id="inputSave">Spara</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+    $(document).ready(load);
+
+    let products = [];
+    let categories = [];
+
+    /**
+     * Gets products in form of JSON objects 
+     */
+    function load() {
+        fetch("../../TestData/test_data_v.1.0.JSON")
+        .then((response) => response.json())
+        .then((data) => render(data))
+        .catch((error) => console.error(error));
+
+      function render(data) {
+        products = data;
+
+        //  console.log(products);
+
+        products.forEach(element => {
+          categories.push(element.category)
+        });
+
+        let uniqueCategories = [...new Set(categories)];
+
+        uniqueCategories.forEach(element =>{
+            $("#column").append(`
+            <div class="form-check">
+                        <input class="form-check-input me-3" type="checkbox" value="" id="${element}">
+                        <label class="form-check-label" for="cat1">${element}</label>
+                    </div>
+            `)
+
+        });
+
+        $("#inputSave").click(function(){
+           let input = $("#categoryInput").val();
+           $("#column").append(`
+            <div class="form-check">
+                        <input class="form-check-input me-3" type="checkbox" value="" id="${input}">
+                        <label class="form-check-label" for="cat1">${input}</label>
+                    </div>
+            `);
+            uniqueCategories.push(input);
+            $("#categoryInput").val("");
+        });
+        
+    }
+    }
+
+    </script>
+
+    <script src="../../js/admin-products.js"></script>
+
+
+</body>
+
+</html>
