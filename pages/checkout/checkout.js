@@ -58,43 +58,92 @@ addressToggle.addEventListener('click', e => {
  * Set values for second address fields
  */
 function getAddressInfo(){
-byt ut till jquery
-
-    let address = document.getElementById('address').value;
-    let zipCode = document.getElementById('zip').value;
-    let city = document.getElementById('city').value;
-    console.log(document.getElementById('address'))
-    document.getElementById('address2').value = address
-    document.getElementById('zip2').value = zipCode
-    document.getElementById('city2').value = city
-
+    $('#address2').val($('#address').val());
+    $('#zip2').val($('#zip').val());
+    $('#city2').val($('#city').val());
 }
 
 /**
  * Clear values for second address fields
  */
 function clearAddressInfo(){
-    fixsa så value blir noll
-    $('#address2').text('')
-    document.getElementById('zip2').value = ''
-    document.getElementById('city2').value = ''
+    $('#address2').val('');
+    $('#zip2').val('');
+    $('#city2').val('');
 
     $('#address2').css("border", "1px solid #ced4da")
     $('#zip2').css("border", "1px solid #ced4da")
     $('#city2').css("border", "1px solid #ced4da")
 }
 
+/**
+ * Gets all customers from database
+ */
+function getLoggedInCustomer(){
+    let cartTestUrl = '../../TestData/testdata_persons.JSON'
+    fetch(cartTestUrl)
+      .then((response) => response.json())
+      .then((data) => renderCustomerInfo(data))
+      .catch((error) => console.error(error));
+
+}
+
+/**
+ * Checks witch customer that is logged in
+ * and render that data to the UI
+ * @param {Array} data customers from the databas
+ */
+function renderCustomerInfo(data) {
+   // alert("Th logged in customer is Kalle Anka")
+    let loggedInCustomer =  data[0]
+
+    $('#firstName').val(loggedInCustomer.first_name);
+    $('#lastName').val(loggedInCustomer.last_name);
+    $('#email').val(loggedInCustomer.email);
+    $('#phone').val(loggedInCustomer.phone_number);
+    $('#address').val(loggedInCustomer.adress);
+    $('#zip').val(loggedInCustomer.city.zipcode);
+    $('#city').val(loggedInCustomer.city.name);
+}
+
+function clearAllInputFields() {
+    $('#firstName').val(''),
+    $('#lastName').val(''),
+    $('#email').val(''),
+    $('#phone').val(''),
+    $('#address').val(''),
+    $('#zip').val(''),
+    $('#city').val(''),
+    $('#address2').val(''),
+    $('#city2').val(''),
+    $('#zip2').val('');
+
+    $('#firstName').css("border", "1px solid #ced4da"),
+    $('#lastName').css("border", "1px solid #ced4da"),
+    $('#email').css("border", "1px solid #ced4da"),
+    $('#phone').css("border", "1px solid #ced4da"),
+    $('#address').css("border", "1px solid #ced4da"),
+    $('#zip').css("border", "1px solid #ced4da"),
+    $('#city').css("border", "1px solid #ced4da"),
+    $('#address2').css("border", "1px solid #ced4da"),
+    $('#city2').css("border", "1px solid #ced4da"),
+    $('#zip2').css("border", "1px solid #ced4da");
+}
+
+
+
+
 document.getElementById('send-order-btn').addEventListener('click',() => {
-    let firstName = document.getElementById('firstName').value,
-    lastName = document.getElementById('lastName').value,
-    email = document.getElementById('email').value,
-    phone = document.getElementById('phone').value,
-    address = document.getElementById('address').value,
-    zip = document.getElementById('zip').value,
-    city = document.getElementById('city').value,
-    address2 = document.getElementById('address2').value,
-    city2 = document.getElementById('city2').value,
-    zip2 = document.getElementById('zip2').value;
+    let firstName = $('#firstName').val(),
+    lastName = $('#lastName').val(),
+    email = $('#email').val(),
+    phone = $('#phone').val(),
+    address = $('#address').val(),
+    zip = $('#zip').val(),
+    city = $('#city').val(),
+    address2 = $('#address2').val(),
+    city2 = $('#city2').val(),
+    zip2 = $('#zip2').val();
 
     // for testing under here
     let bool = true
@@ -177,28 +226,35 @@ document.getElementById('send-order-btn').addEventListener('click',() => {
         console.log('not checked');
         $('#address2').css("border", "1px solid #ced4da")
         $('#zip2').css("border", "1px solid #ced4da")
-        $('#city2').css("border", "1px solid #ced4da")
-
-        
+        $('#city2').css("border", "1px solid #ced4da") 
     }
     
-    
-
     if(bool) {
-        swal(`Tack för din order!
-                \nLeverans adress
-                \n${address}
-                \n${city}
-                \n${zip}`);
+        swal({
+            title: "Tack för din order!",
+            text: `
+            \nLeverans adress
+            \n${address}
+            \n${city}
+            \n${zip}`,
+            icon: "success",
+            button: "Ok",
+          });
+          clearAllInputFields();
                 // todo logga beställningar med överstående adress
                 // tömma localStorage från varukorg och rendera tom varukorg för kund
     }else{
-        swal(`Alla fält måste vara ifyllda korrekt`);
+        swal({
+            title: "Ops, något gick fel!",
+            text: "Alla fält måste vara ifyllda korrekt",
+            icon: "warning",
+            button: "Ok",
+          });
+        
     }
-
-    
 });
 
-load();
 
+load();
+getLoggedInCustomer();
 
