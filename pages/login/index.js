@@ -6,6 +6,7 @@ let wrongEmail = $('#wrong-email')
 let wrongPassword = $('#wrong-password')
 let personsFile = "../../TestData/testdata_persons.json";
 let loggedInText = $('#loggedIn');
+let loginModal = $('#login-modal');
 
 email.on('focus', function() {
     wrongEmail.html('');
@@ -54,7 +55,7 @@ function checkUsernameAndPassword(){
             else{
                 loggedInText.html("Du är inloggad som admin")
             }
-            $("#inlog-modal").modal("hide");
+            loginbutton.attr("data-dismiss", "modal");
         }
         else {
             wrongPassword.html("Fel lösenord")
@@ -89,4 +90,3 @@ function findPassword(password){
 $("#newCust-button").on("click",function(){
     $("#registerForm").modal("show");
 })
-
