@@ -55,31 +55,31 @@
               <div class="row g-3">
                 <div class="col-md-6">
                   <label for="firstName" class="form-label">Förnamn</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Förnamn" maxlength="30">
+                  <input type="text" class="form-control" id="firstName" placeholder="Förnamn" maxlength="30" required>
                 </div>
                 <div class="col-md-6">
                   <label for="lastName" class="form-label">Efternamn</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="Efternamn" maxlength="40">
+                  <input type="text" class="form-control" id="lastName" placeholder="Efternamn" maxlength="40" required>
                 </div>
                 <div class="col-md-6">
                   <label for="email" class="form-label">E-post</label>
-                  <input type="email" class="form-control" id="email" placeholder="E-post" maxlength="325">
+                  <input type="email" class="form-control" id="email" placeholder="E-post" maxlength="325" required>
                 </div>
                 <div class="col-md-6">
                   <label for="phone" class="form-label">Telefonnummer</label>
-                  <input type="text" class="form-control" id="phone" placeholder="Telefonnummer" maxlength="11">
+                  <input type="text" class="form-control" id="phone" placeholder="Telefonnummer" maxlength="11" required>
                 </div>
                 <div class="col-8">
                   <label for="inputAddress" class="form-label">Adress</label>
-                  <input type="text" class="form-control" id="address" placeholder="Adress" maxlength="50">
+                  <input type="text" class="form-control" id="address" placeholder="Adress" maxlength="50" required>
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Ort</label>
-                  <input type="text" class="form-control" id="city" placeholder="Ort" maxlength="25">
+                  <input type="text" class="form-control" id="city" placeholder="Ort" maxlength="25" required>
                 </div>
                 <div class="col-md-3">
                   <label for="inputZip" class="form-label">Postnummer</label>
-                  <input type="text" class="form-control" id="zip"  placeholder="Postnr" maxlength="6">
+                  <input type="text" class="form-control" id="zip"  placeholder="Postnr" maxlength="6" required>
                 </div>
                 <div class="col-md-12">
                   <h6>Leveransadress</h6> 
@@ -94,22 +94,21 @@
                 </div>
                 <div class="col-8">
                   <label for="inputAddress" class="form-label">Adress</label>
-                  <input type="text" class="form-control" id="address2" placeholder="Adress" maxlength="50">
+                  <input type="text" class="form-control" id="address2" placeholder="Adress" maxlength="50" required>
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Ort</label>
-                  <input type="text" class="form-control" id="city2" placeholder="Ort" maxlength="25">
+                  <input type="text" class="form-control" id="city2" placeholder="Ort" maxlength="25" required>
                 </div>
                 <div class="col-md-3">
                   <label for="inputZip" class="form-label">Postnummer</label>
-                  <input type="text" class="form-control" id="zip2" maxlength="5" placeholder="Postnr" maxlength="6">
+                  <input type="text" class="form-control" id="zip2" maxlength="5" placeholder="Postnr" maxlength="6" required>
                 </div>
                 <div class="col-12">
                   <button id="send-order-btn" type="" class="btn btn-primary">Skicka beställning</button>
                 </div>
               </div>
             </div>
-            
             <!-- form ends-->
           </div>
       </div>
@@ -169,6 +168,8 @@
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"
       ></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
      <script src="../../js/validate.js"></script>
       <script src="./checkout.js"></script>
     </footer>

@@ -48,10 +48,8 @@ function load() {
 const addressToggle = document.getElementById('gridCheck')
 addressToggle.addEventListener('click', e => {
     if(e.target.checked){
-        console.log('checked')
         getAddressInfo();
     }else {
-        console.log('not checked')
         clearAddressInfo()
     }
 })
@@ -60,6 +58,8 @@ addressToggle.addEventListener('click', e => {
  * Set values for second address fields
  */
 function getAddressInfo(){
+byt ut till jquery
+
     let address = document.getElementById('address').value;
     let zipCode = document.getElementById('zip').value;
     let city = document.getElementById('city').value;
@@ -74,16 +74,21 @@ function getAddressInfo(){
  * Clear values for second address fields
  */
 function clearAddressInfo(){
-    document.getElementById('address2').value = ''
+    fixsa så value blir noll
+    $('#address2').text('')
     document.getElementById('zip2').value = ''
     document.getElementById('city2').value = ''
+
+    $('#address2').css("border", "1px solid #ced4da")
+    $('#zip2').css("border", "1px solid #ced4da")
+    $('#city2').css("border", "1px solid #ced4da")
 }
 
 document.getElementById('send-order-btn').addEventListener('click',() => {
     let firstName = document.getElementById('firstName').value,
     lastName = document.getElementById('lastName').value,
     email = document.getElementById('email').value,
-    phoneNumber = document.getElementById('phone').value,
+    phone = document.getElementById('phone').value,
     address = document.getElementById('address').value,
     zip = document.getElementById('zip').value,
     city = document.getElementById('city').value,
@@ -91,64 +96,104 @@ document.getElementById('send-order-btn').addEventListener('click',() => {
     city2 = document.getElementById('city2').value,
     zip2 = document.getElementById('zip2').value;
 
-    if(testForOnlyText(firstName)) {
-        console.log(firstName + ' true')
+    // for testing under here
+    let bool = true
+
+    if(testForOnlyText(firstName) && firstName != '') {
+        $('#firstName').css("border", "2px solid green")
     }else{
-        console.log(firstName + ' false')
+        bool = false
+        $('#firstName').css("border", "2px solid red")
     }
 
-    if(testForOnlyText(lastName)) {
-        console.log(lastName + ' true')
+    if(testForOnlyText(lastName) && lastName != '') {
+        $('#lastName').css("border", "2px solid green")
     }else{
-        console.log(lastName + ' false')
+        bool = false
+        $('#lastName').css("border", "2px solid red")
     }
 
-    if(testForEmail(email)){
-        console.log(email + ' true')
+    if(testForEmail(email) && email != ''){
+        $('#email').css("border", "2px solid green")
     }else{
-        console.log(email + ' false')
+        bool = false
+        $('#email').css("border", "2px solid red")
     }
 
-    if(testForNumbersOnly(phoneNumber)){
-        console.log(phoneNumber + ' true')
+    if(testForNumbersOnly(phone) && phone != ''){
+        $('#phone').css("border", "2px solid green")
     }else{
-        console.log(phoneNumber + ' false')
+        bool = false
+        $('#phone').css("border", "2px solid red")
     }
 
-    if(testForAddress(address)){
-        console.log(address + ' true')
+    if(testForAddress(address) && address != ''){
+        $('#address').css("border", "2px solid green")
     }else{
-        console.log(address + ' false')
+        bool = false
+        $('#address').css("border", "2px solid red")
     }
     
-    if(testForZipCode(zip)){
-        console.log(zip + ' true')
+    if(testForZipCode(zip) && zip != ''){
+        $('#zip').css("border", "2px solid green")
     }else{
-        console.log(zip + ' false')
+        bool = false
+        $('#zip').css("border", "2px solid red")
     }
 
-    if(testForOnlyText(city)){
-        console.log(city + ' true')
+    if(testForOnlyText(city) && city != ''){
+        $('#city').css("border", "2px solid green")
     }else{
-        console.log(city + ' false')
+        bool = false
+        $('#city').css("border", "2px solid red")
     }
     
-    if(testForAddress(address2)){
-        console.log(address + ' true')
-    }else{
-        console.log(address + ' false')
-    }
     
-    if(testForZipCode(zip2)){
-        console.log(zip + ' true')
-    }else{
-        console.log(zip + ' false')
-    }
+    if($("#gridCheck")[0].checked){
+        console.log('checked');
 
-    if(testForOnlyText(city2)){
-        console.log(city + ' true')
+        if(testForAddress(address2) && address2 != ''){
+            $('#address2').css("border", "2px solid green")
+        }else{
+            bool = false
+            $('#address2').css("border", "2px solid red")
+        }
+        
+        if(testForZipCode(zip2) && zip2 != ''){
+            $('#zip2').css("border", "2px solid green")
+        }else{
+            bool = false
+            $('#zip2').css("border", "2px solid red")
+        }
+    
+        if(testForOnlyText(city2) && city2 != ''){
+            $('#city2').css("border", "2px solid green")
+        }else{
+            bool = false
+            $('#city2').css("border", "2px solid red")
+        } 
+
     }else{
-        console.log(city + ' false')
+        console.log('not checked');
+        $('#address2').css("border", "1px solid #ced4da")
+        $('#zip2').css("border", "1px solid #ced4da")
+        $('#city2').css("border", "1px solid #ced4da")
+
+        
+    }
+    
+    
+
+    if(bool) {
+        swal(`Tack för din order!
+                \nLeverans adress
+                \n${address}
+                \n${city}
+                \n${zip}`);
+                // todo logga beställningar med överstående adress
+                // tömma localStorage från varukorg och rendera tom varukorg för kund
+    }else{
+        swal(`Alla fält måste vara ifyllda korrekt`);
     }
 
     
