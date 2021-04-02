@@ -1,7 +1,3 @@
-html{
-    --header1: calc(1rem + 1vw);
-    --paragraf: calc(0.2rem + 1vw);
-}
 
 #about{
     min-height: 90vh;
@@ -24,20 +20,19 @@ html{
     margin: 2rem;
 }
 .about-container .text-container{
+    font-size: 1.8rem;
+    line-height: 1.6;
     width: 50%;
     margin: auto;
 }
 .oppening-hour{
+    font-size: 1.8rem;
     margin: 3rem;
 }
 .title{
-    font-size: var(--header1);
+    margin-bottom: 2rem;
+    font-size: 3rem;
 }
-
-p {
-    font-size: var(--paragraf);
-}
-
 
 @media (max-width: 454px) {
     #about {
@@ -47,12 +42,18 @@ p {
         width: 100%;
     
     }
-    
     .about-container .text-container{
         font-size: 1.7rem;
         line-height: 1.6;
         min-width: 80%;
-    
+    }
+    .title{
+        margin-bottom: 2rem;
+        font-size: 2.3rem;
+    }
+    p{
+        font-size: 1.7rem;
+        line-height: 1.6;
     }
   }
 

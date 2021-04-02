@@ -3,9 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-html {
-  font-size: 62.5%;
-}
 
 /* Global styles */
 a {
@@ -30,4 +27,12 @@ nav {
 nav #links a {
   margin: 0rem 1rem;
   font-size: 1.2rem;
+}
+footer{
+  background-color: rgb(34, 33, 33);
+  color:white
+}
+footer a{
+  text-decoration: none;
+  color:white;
 }
