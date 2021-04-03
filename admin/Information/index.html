@@ -1,58 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../styles/bootstrap.css">
-    <title>Admin-Information</title>
-  </head>
-  <body>
-    <nav>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top ">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="../Navbar/index.html" id="nav-home">ADMIN</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <form class="d-flex mx-3">
-                <select class="form-select form-select-sm mx-22" aria-label=".form-select-sm example">
-                  <option selected></option>
-                  <option value="1">Produktkatalog</option>
-                  <option value="2">Orderkatalog</option>
-                  <option value="3">Kundkatalog</option>
-                </select>
-                <input class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light mx-2" type="submit">Search</button>
-              </form>
 
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="../Products/index.html" id="nav-products">Produkter</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../Orders/index.html" id="nav-orders"> Ordrar</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../Customer/index.html" id="nav-customer">Kunder</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../VIP/index.html" id="nav-vip">VIP</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="index.html" id="nav-information">Webbsidans info</a>
-              </li>
-              </ul>
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="../../index.html">Kund vy</a>
-                </li>
-              </ul>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../styles/style.css">
+  <link rel="stylesheet" href="../../styles/bootstrap.css">
+  <link rel="stylesheet" href="style-info.css">
+  <title>Admin-Information</title>
+</head>
+
+<body>
+  <nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top ">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../Navbar/index.html" id="nav-home">ADMIN</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="d-flex mx-3">
+            <select class="form-select form-select-sm mx-22" aria-label=".form-select-sm example">
+              <option selected></option>
+              <option value="1">Produktkatalog</option>
+              <option value="2">Orderkatalog</option>
+              <option value="3">Kundkatalog</option>
+            </select>
+            <input class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light mx-2" type="submit">Search</button>
+          </form>
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="../Products/index.html" id="nav-products">Produkter</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Orders/index.html" id="nav-orders"> Ordrar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Customer/index.html" id="nav-customer">Kunder</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../VIP/index.html" id="nav-vip">VIP</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html" id="nav-information">Webbsidans info</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Kund vy</a>
+            </li>
+          </ul>
+
         </div>
-      </nav>
+      </div>
     </nav>
-    <h1 style="margin-top:70px">Information</h1>
-  </body>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-sm-3 me-5">
+        <h5>Öppetider</h5>
+        <label for="open" class="form-label mt-3">Öppnar</label>
+        <input type="text" class="form-control" id="open">
+        <label for="close" class="form-label mt-2">Stänger</label>
+        <input type="text" class="form-control" id="close">
+        <label for="deviating" class="form-label mt-2">Avvikande öppetider</label>
+        <textarea class="form-control" id="deviating" rows="5"></textarea>
+        <label for="contact" class="form-label fs-5 mt-5">Kontaktuppgifter till butiken</label>
+        <label for="address" class="form-label">Adress</label>
+        <input type="text" class="form-control" id="address">
+        <label for="post" class="form-label">Postnummer</label>
+        <input type="text" class="form-control" id="post">
+        <label for="city" class="form-label">Ort</label>
+        <input type="text" class="form-control" id="city">
+        <label for="telefon" class="form-label">Telefonnummer</label>
+        <input type="text" class="form-control" id="telefon">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email">
+      </div>
+      <!--slutar col-->
+      <div class="col-sm-3">
+        <label for="dayz" class="form-label fs-5 mb-4">Dagar</label>
+        <div class="form-check mb-2">
+          <input class="form-check-input me-3" type="checkbox" value="" id="weekday">
+          <label class="form-check-label" for="weekday">Vardagar</label>
+        </div>
+        <!--slutar form-check-->
+        <div class="form-check mb-2">
+          <input class="form-check-input me-3" type="checkbox" value="" id="saturday">
+          <label class="form-check-label" for="saturday">Lördag</label>
+        </div>
+        <!--slutar form-check-->
+        <div class="form-check mb-5">
+          <input class="form-check-input me-3" type="checkbox" value="" id="sunday">
+          <label class="form-check-label" for="sunday">Söndag</label>
+        </div>
+        <!--slutar form-check-->
+        <button id="btnOpeningHours">Spara ändringar</button>
+        <button id="btnContact" style="margin-top: 532px;">Spara ändringar</button>
+      </div>
+      <!--slutar col-->
+      <div class="col-sm-5">
+        <label for="describing" class="form-label fs-5">Beskrivning av Hakim Livs</label>
+        <textarea class="form-control mb-3" id="descripion" rows="10"></textarea>
+        <button id="btnDescription">Spara ändringar</button>
+        <label for="img" class="form-label d-flex justify-content-start mt-5">Bild</label>
+        <img src="https://picsum.photos/300" alt="img">
+        <button class="d-flex justify-content-start mt-3" id="btnPicture">Ladda up</button>
+      </div>
+      <!--slutar col-->
+    </div>
+    <!--slutar row-->
+  </div>
+  <!--slutar container-->
+</body>
+
 </html>
