@@ -7,6 +7,7 @@ let wrongPassword = $('#wrong-password')
 let personsFile = "../../TestData/testdata_persons.json";
 let loggedInText = $('#loggedIn');
 let loginModal = $('#login-modal');
+let whichPage = $("#login-page");
 
 email.on('focus', function() {
     wrongEmail.html('');
@@ -54,6 +55,7 @@ function checkUsernameAndPassword(){
             }
             else{
                 loggedInText.html("Du är inloggad som admin")
+                whichPage.load( "../../admin/Navbar/index.html")
             }
             loginbutton.attr("data-dismiss", "modal");
         }
