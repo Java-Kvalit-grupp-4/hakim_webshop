@@ -1,6 +1,5 @@
 $(document).ready(loadProducts);
 
-
 let products = [];
 let categories = [];
 let list = [];
@@ -30,10 +29,9 @@ function loadProducts() {
       );
     });
 
-    
+
     $("#select option").on("click", function () {
       let optionId = $(this).attr("id");
-
       products.forEach(element => {
         if (element.category === optionId) {
           $("#products").empty();
@@ -54,9 +52,9 @@ function loadProducts() {
                       <label class="form-check-label" for="cat1">${element}</label>
                   </div>
           `)
-  
+
     });
-  
+
     $("#inputSave").click(function () {
       let input = $("#categoryInput").val();
       $("#column").append(`
@@ -65,6 +63,7 @@ function loadProducts() {
                       <label class="form-check-label" for="cat1">${input}</label>
                   </div>
           `);
+
       uniqueCategories.push(input);
       $("#categoryInput").val("");
     });
@@ -75,7 +74,7 @@ function loadProducts() {
       $(this).addClass("highlight").siblings().removeClass("highlight");
       productId = $(this).attr("id");
     });
-  
+
     $("#choose").click(function () {
       products.forEach(element => {
         if (element.id == productId) {
@@ -86,14 +85,15 @@ function loadProducts() {
           $("#lager").val(element.amount);
           $("#column").find("input").attr(`${element.category}`).prop("checked", true);
         }
-       // if (element.category == productId) {
-         
-       // }
+        // if (element.category == productId) {
+
+        // }
       })
     })
-  
+
 
   }
+}
 
   /**
  * Generates a table with products
@@ -114,7 +114,7 @@ function loadProducts() {
     });
   }
 
-}
+
 
 
 
