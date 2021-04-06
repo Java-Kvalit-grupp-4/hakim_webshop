@@ -73,3 +73,7 @@
     left: 50%;
     display:block;
   }
+
+  svg {
+    pointer-events: none;
+  }
