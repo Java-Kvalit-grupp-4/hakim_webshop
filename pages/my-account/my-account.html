@@ -12,7 +12,7 @@
   <title>my-orders</title>
 </head>
 
-<body>
+<body id = "myAccountPage">
 <nav class="navbar navbar-expand-md navbar-light fixed-top">
   <div class="row">
     <div class="col-md-3">
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="col-1">
-      <a type="button" class="btn btn-outline-primary" id="login-btn">Logga in</a>
+      <a type="button" class="btn btn-outline-primary" id= "login-btn" href="../../index.html" >Logga ut</a>
     </div>
     <div class="col-1">
       <div class="dropdown">
@@ -337,11 +337,9 @@
     crossorigin="anonymous"></script>
   
   <script>
-    $(document).ready(function(){
-      let customer = sessionStorage.getItem("customer") || "";
-      if(customer.length>0){
-        $("#login-btn").text("Logga ut");
-      }
+
+    $("#login-btn").click(function(){
+      sessionStorage.removeItem("customer")
     })
     
   </script>
