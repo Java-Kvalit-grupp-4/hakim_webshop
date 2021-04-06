@@ -33,10 +33,8 @@ function run() {
           .then((data) => renderCart(data))
           .catch((error) => console.error(error));
  */
-         
             let data = getCartFromLocalStorage()
             renderCart(data)
-           
     }
 
     /**
