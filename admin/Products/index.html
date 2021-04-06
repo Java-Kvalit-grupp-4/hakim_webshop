@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../styles/bootstrap.css">
+    <link rel="stylesheet" href="../../styles/style.css">
+    <title>Admin-hemskärm</title>
+</head>
+
+<body>
+    <nav>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" id="nav-home">ADMIN</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="d-flex mx-3">
+                        <select class="form-select form-select-sm mx-22" aria-label=".form-select-sm example">
+                            <option selected></option>
+                            <option value="1">Produktkatalog</option>
+                            <option value="2">Orderkatalog</option>
+                            <option value="3">Kundkatalog</option>
+                        </select>
+                        <input class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light mx-2" type="submit">Search</button>
+                    </form>
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Products/index.html" id="nav-products">Produkter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Orders/index.html" id="nav-orders"> Ordrar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Customer/index.html" id="nav-customer">Kunder</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../VIP/index.html" id="nav-vip">VIP</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Information/index.html" id="nav-information">Webbsidans
+                                info</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html">Kund vy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </nav>
+
+    <div class="nav nav-tabs justify-content-center bg-secondary" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="tab-product-catalog" data-bs-toggle="tab" data-bs-target="#product-catalog"
+            type="button" role="tab" aria-controls="product-catalog" aria-selected="false"> Produktkatalog</button>
+        <button class="nav-link" id="tab-product-site" data-bs-toggle="tab" data-bs-target="#product-site" type="button"
+            role="tab" aria-controls="product-site" aria-selected="false"> Produktsida</button>
+    </div>
+
+    <div class="tab-content" id="tab-content">
+        <div class="tab-pane fade show active" id="product-catalog" role="tabpanel" aria-labelledby="product-catalog-tab">
+            <div class="container mt-5">
+                <h3 class="fw-bold">
+                    Produktlista
+                </h3>
+                <div class="col-sm-2">
+                    <select id="select" class="form-select" aria-label="Default select example">
+                        <option id="all" selected>Kategori</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class="col-sm-12">
+                    <table class="table table-striped table-hover" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Artikelnummer</th>
+                                <th scope="col">Produktnamn</th>
+                                <th scope="col">Tillverkare</th>
+                                <th scope="col">Pris</th>
+                                <th scope="col">Lagersaldo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products"> </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-center mt-5">
+                    <button>Välj</button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="tab-pane fade" id="product-site" role="tabpanel" aria-labelledby="nav-site-tab">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-sm-3 me-5">
+                        <label for="titleInput" class="form-label">Titel</label>
+                        <input type="text" class="form-control mb-3" id="title">
+                        <label for="descriptionInput" class="form-label">Beskrivning</label>
+                        <textarea class="form-control mb-3" id="description" rows="8"></textarea>
+
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="imageInput" class="form-label">Bild</label>
+                        <img src="https://picsum.photos/300" alt="img">
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 me-5" id="column">
+                            <label for="priceInput" class="form-label">Pris</label>
+                            <input type="text" class="form-control" id="price">
+                            <label for="category" class="form-label mt-3">Kategori</label>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="lagerInput" class="form-label">Lagerstatus</label>
+                            <input type="text" class="form-control" id="lager">
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="categoryInput" class="form-label mt-3">Ny kategori</label>
+                                <div class="input-group mb-3">
+                                    <input id="categoryInput" type="text" class="form-control" placeholder=""
+                                        aria-label="New category" aria-describedby="category-input">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        id="inputSave">Spara</button>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt-5 ms-5 d-flex justify-content-center">
+                                <button>Spara ändringar</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+    <script src="../../js/admin-products.js"></script>
+
+</body>
+
+</html>
