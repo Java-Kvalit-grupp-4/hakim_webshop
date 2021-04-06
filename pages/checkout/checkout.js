@@ -60,7 +60,7 @@ function run() {
 
     let totalPrice = 0;
     $.each($('.line-item-total-price'),(index, e) => totalPrice += parseFloat(e.innerText))
-    $('#cart-total-price').text(totalPrice);
+    $('#cart-total-price').text(totalPrice.toFixed(2));
 
     let totalInCart = 0;
     $.each($('.line-item-total-quantity'),(index, e) => totalInCart += parseInt(e.innerText))
