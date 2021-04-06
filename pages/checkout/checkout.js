@@ -202,6 +202,8 @@ function run() {
               clearAllInputFields()
                     // todo logga beställningar med överstående adress
                     // tömma localStorage från varukorg och rendera tom varukorg för kund
+            localStorage.clear()
+            renderCart()
         }else{
             swal({
                 title: "Ops, något gick fel!",
