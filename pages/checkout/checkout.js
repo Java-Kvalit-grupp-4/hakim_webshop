@@ -218,9 +218,9 @@ function run() {
                     title: "Tack för din order!",
                     text: `
                     \nLeverans adress
-                    \n${address2.val()}
-                    \n${city2.val()}
-                    \n${zip2.val()}`,
+                    \n${address.val()}
+                    \n${city.val()}
+                    \n${zip.val()}`,
                     icon: "success",
                     button: "Ok",
                   });
@@ -229,9 +229,9 @@ function run() {
                     title: "Tack för din order!",
                     text: `
                     \nLeverans adress
-                    \n${address.val()}
-                    \n${city.val()}
-                    \n${zip.val()}`,
+                    \n${address2.val()}
+                    \n${city2.val()}
+                    \n${zip2.val()}`,
                     icon: "success",
                     button: "Ok",
                   });
