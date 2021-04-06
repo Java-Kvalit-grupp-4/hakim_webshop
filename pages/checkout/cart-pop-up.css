@@ -3,6 +3,13 @@
     width: 25px;
     height: 25px;
     text-align: center;
+    padding-bottom: 0.2rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    border-bottom: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
 }
 
 .cart-thumbnail {
@@ -41,10 +48,6 @@
     border-color: black;
     box-shadow: 1.5px 1.5px 4px rgb(58, 56, 56);
     border-radius: 25px;
-}
-
-td{
-    border: 1px solid black;
 }
 
   .trashcan-center {
