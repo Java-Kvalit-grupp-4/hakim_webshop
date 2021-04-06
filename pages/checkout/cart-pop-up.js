@@ -72,6 +72,3 @@ function removeProduct(product) {
       modal.style.display = "none";
     }
   }
-
- 
-    
