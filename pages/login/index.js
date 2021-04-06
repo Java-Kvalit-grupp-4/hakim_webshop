@@ -6,6 +6,7 @@ let wrongEmail = $('#wrong-email')
 let wrongPassword = $('#wrong-password')
 let personsFile = "../../TestData/testdata_persons.json";
 let loggedInText = $('#loggedIn');
+let loginModal = $('#login-modal');
 
 email.on('focus', function() {
     wrongEmail.html('');
@@ -13,10 +14,6 @@ email.on('focus', function() {
 
 password.on('focus', function() {
     wrongPassword.html('');
-})
-
-$("#btn2").on('click', function(){
-    $("#myModal").modal("show");
 })
 
 $("#show-password-button").on("click", showHidePassword);
@@ -45,6 +42,7 @@ function checkUsernameAndPassword(){
     if(isCustomer){
         let isCorrectPassword = findPassword(password.val());
         if(isCorrectPassword){
+            
             let customer = JSON.parse(sessionStorage.getItem("customer"))
             if(customer.admin=="false"){
                 if(customer.vip == "false"){
@@ -57,8 +55,7 @@ function checkUsernameAndPassword(){
             else{
                 loggedInText.html("Du är inloggad som admin")
             }
-            
-            $("#myModal").modal("hide");
+            loginbutton.attr("data-dismiss", "modal");
         }
         else {
             wrongPassword.html("Fel lösenord")
@@ -67,6 +64,7 @@ function checkUsernameAndPassword(){
     else{
         wrongEmail.html("Den email-adressen finns inte registrerad");
     }
+    
 }
 
 function findUser(input){
@@ -89,3 +87,6 @@ function findPassword(password){
     }
     return isTrue;
 }
+$("#newCust-button").on("click",function(){
+    $("#registerForm").modal("show");
+})
