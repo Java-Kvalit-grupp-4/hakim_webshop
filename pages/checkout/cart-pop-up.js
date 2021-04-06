@@ -31,11 +31,11 @@ function renderCart(){
                 <td scope="row"><img class="cart-thumbnail" src="${element.image} alt="Product picture"</td>
                 <td scope="row">${element.price}</td>
                 <div>
-                <td><button type="button" class="shadow-button" onclick="removeProduct(${element.id})">-</td>    
-                <td id="quantityInCart"><div> 1 </div></td>
-                    <td><button type="button" class="shadow-button" onclick=addProduct(${element.id})">+</td>
+                <td><button type="button" class="shadow-button" onclick="removeProduct(${element.productNummer})">-</td>    
+                <td id="quantityInCart"><div>${element.inCart}</div></td>
+                    <td><button type="button" class="shadow-button" onclick=addProduct(${element.productNummer})">+</td>
                 </div>
-                <td id="${element.id}">${(element.price * element.quantity).toFixed(2)}</td>
+                <td id="${element.productNummer}">${(element.price * element.inCart).toFixed(2)}</td>
             </tr>`
     });
 
@@ -49,27 +49,27 @@ function renderCart(){
     })
 }
 
-function productQuantity(){
-  document.getElementById("quantityInCart").innerHTML +=
-  JSON.parse(localStorage.getItem("cart"))
-}
-
 function addProduct(product){
     //uppdatera antalet
-    let add = JSON.parse(localStorage.getItem("cart"));
-    let adding = add.find((element) => element.id == product);
-    
-    adding.quantity += 1;
-    localStorage.setItem("cart", JSON.stringify(add));
+    let cartTemp = JSON.parse(localStorage.getItem("cart"));
+    //let adding = cart.find((element) => element.productNummer == product);
+    console.log("funkar detta?")
+    cartTemp.forEach(element => {
+      if (element.productNummer == product.productNummer){
+        console.log("inne i if")
+        element.inCart += 1
+      }})
+   // adding.inCart += 1;
+    localStorage.setItem("cart", JSON.stringify(cartTemp));
 }
 
 function removeProduct(product) {
     //uppdatera antalet
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    let removing = cart.find((element) => element.id == product);
+    let cartTemp = JSON.parse(localStorage.getItem("cart"));
+    let removing = cart.find((element) => element.productNummer == product);
       
-    if (removing.quantity !== 0) {
-        removing.quantity += -1;
+    if (removing.inCart !== 0) {
+        removing.inCart += -1;
         localStorage.setItem("cart", JSON.stringify(removing));
       }
     }
