@@ -73,7 +73,7 @@ function testForDecimalNumbers(input) {
  * @returns true or false
  */
 function testForPhoneNumber(input) {
-    let pattern =  /^[(]{0,1}[0-9]{2,4}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{2,6}$/;
+    let pattern =  /^[(]{0,1}[0-9]{2,4}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{2,6}$/; 
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
 
