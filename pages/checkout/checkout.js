@@ -2,7 +2,7 @@
 $(document).ready(run)
 
 function run() {
-    load()
+    getCart()
     getLoggedInCustomer()
 
     /**
@@ -25,14 +25,7 @@ function run() {
     $('#gridCheck').click(e => e.target.checked ? getAddressInfo() : clearAddressInfo())
     $('#send-order-btn').click(validateInput)
 
-
-    function load() {
-        /* let cartTestUrl = '../../TestData/test_data_cart.JSON'
-        fetch(cartTestUrl)
-          .then((response) => response.json())
-          .then((data) => renderCart(data))
-          .catch((error) => console.error(error));
- */
+    function getCart() {
             let data = getCartFromLocalStorage()
             renderCart(data)
     }
@@ -92,7 +85,6 @@ function run() {
      * @param {Array} data customers from the databas
      */
     function renderCustomerInfo(data) {
-
         /**
          * remove this when testing is over
          * cause the loggedInUser is allready saved 
