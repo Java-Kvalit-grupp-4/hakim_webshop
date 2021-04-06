@@ -2,7 +2,6 @@ $(document).ready(loadProducts);
 
 let products = [];
 let categories = [];
-let list = [];
 
 function loadProducts() {
   fetch("../../TestData/test_data_v.1.0.JSON")
@@ -32,6 +31,7 @@ function loadProducts() {
 
     $("#select option").on("click", function () {
       let optionId = $(this).attr("id");
+      let list = [];
       products.forEach(element => {
         if (element.category === optionId) {
           $("#products").empty();
@@ -52,7 +52,6 @@ function loadProducts() {
                       <label class="form-check-label" for="cat1">${element}</label>
                   </div>
           `)
-
     });
 
     $("#inputSave").click(function () {
@@ -76,6 +75,10 @@ function loadProducts() {
     });
 
     $("#choose").click(function () {
+      $("#column div input").replaceWith(function () {
+        return `
+        <input class="form-check-input me-3" type="checkbox" value="">`
+      })
       products.forEach(element => {
         if (element.id == productId) {
           $("#title").val(element.title);
@@ -83,36 +86,42 @@ function loadProducts() {
           $("#imge").val(element.image);
           $("#price").val(element.price);
           $("#lager").val(element.amount);
-          $("#column").find("input").attr(`${element.category}`).prop("checked", true);
         }
-        // if (element.category == productId) {
-
-        // }
-      })
-    })
-
-
+        $("#column div").filter(function () {
+          if (element.id == productId && element.category == $(this).attr("id")) {
+            $(this).replaceWith(function () {
+              return `<div class="form-check">
+               <input class="form-check-input me-3" type="checkbox" value="" id="${element.category}" checked>
+               <label class="form-check-label" for="cat1">${element.category}</label>
+           </div>`
+            })
+          }
+        });
+      });
+      // Hitta ett sätt att automatiskt switcha till Produktsida-tab???
+      alert("Produkten är vald. Gå till Produktsida.")
+    });
   }
 }
 
-  /**
- * Generates a table with products
- * @param {Array} l - Webshop products to be displayed on the page  
- */
-  function showProducts(l) {
-    l.forEach(element => {
-      let round = parseInt(element.price).toFixed(2);
-      $("#products").append(
-        `<tr id="${element.id}">
+/**
+* Generates a table with products
+* @param {Array} l - Webshop products to be displayed on the page  
+*/
+function showProducts(l) {
+  l.forEach(element => {
+    let round = parseInt(element.price).toFixed(2);
+    $("#products").append(
+      `<tr id="${element.id}">
             <td>${element.id}</td>
             <td ><h5 >${element.title}</h5></td>
             <td ><h5 >Hakim</h5></td>
             <td>${round} kr</td>
             <td> ${element.amount}</td>
             </tr>`
-      )
-    });
-  }
+    )
+  });
+}
 
 
 
