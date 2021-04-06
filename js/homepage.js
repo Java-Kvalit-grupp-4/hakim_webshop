@@ -216,7 +216,7 @@ function checkUsernameAndPassword(){
             }
             else{
                 console.log("Du är inloggad som admin")
-                whichPage.load( "admin/index.html")
+                location.replace("admin/index.html")
             }
         }
         else {
