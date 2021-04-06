@@ -31,6 +31,7 @@ function testForEmail(input) {
 }
 
 function testForAddress(input) {
+    // lägg till 3 siffor efter mellanskalg
     let pattern = /^[a-zA-ZåäöÅÄÖ\s0-9]*$/;
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
@@ -64,6 +65,15 @@ function testForNumbersOnly(input) {
  */
 function testForDecimalNumbers(input) {
     let pattern = /^\d{1,}\.?\d*$/;
+    return testForSqlInjections(input) ? false : pattern.test(input)
+}
+/**
+ * Checks standard for swedish numbers
+ * @param {String} input 
+ * @returns true or false
+ */
+function testForPhoneNumber(input) {
+    let pattern =  /^[(]{0,1}[0-9]{2,4}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{2,6}$/;
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
 
