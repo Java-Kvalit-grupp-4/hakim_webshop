@@ -165,33 +165,6 @@ function run() {
     }
 
     /**
-    * Take a function to test for from validate.js,
-    * and a input field to test value from
-    * changes the border of the inputfield according 
-    * to if it passes(green border) or not(red border)
-    * @param {function} toTestFor 
-    * @param {jQuery inputfield} input 
-    * @returns false or current bool value from input
-    */
-    function checkForInput(toTestFor, input, bool) {
-       if(toTestFor(input.val()) && input.val() != '') {
-           input.css("border", "3px solid #34F458") 
-           return bool
-       }else {
-           input.css("border", "3px solid #F90A0A")
-           return false
-       }
-    }
-
-    /**
-     * Resets the border to the orignal color
-     * @param {jQuery inputfield} inputField 
-     */
-     function resetBorder(inputField) {
-        inputField.css("border", "1px solid #ced4da")
-    }
-
-    /**
      * Validates the inputfields and changes color of the 
      * border of the inputfield according to the answer
      * true(green)/false(red) and gives the correct message
