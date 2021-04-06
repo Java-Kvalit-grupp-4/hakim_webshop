@@ -1,12 +1,13 @@
 let persons = [];
 let password = $('#login-password');
 let email =$('#login-email');
-let loginbutton = $('#login-button');
+let loginButton1 = $('#login-btn');
+let loginbutton2 = $('#login-button');
 let wrongEmail = $('#wrong-email')
 let wrongPassword = $('#wrong-password')
 let personsFile = "../../TestData/testdata_persons.json";
-let loggedInText = $('#loggedIn');
 let loginModal = $('#login-modal');
+let whichPage = $("#login-page");
 
 email.on('focus', function() {
     wrongEmail.html('');
@@ -18,7 +19,7 @@ password.on('focus', function() {
 
 $("#show-password-button").on("click", showHidePassword);
 
-loginbutton.on("click",checkUsernameAndPassword);
+loginbutton2.on("click",checkUsernameAndPassword);
 
 $.getJSON(personsFile, function(response) {
     console.log(response);
@@ -42,20 +43,22 @@ function checkUsernameAndPassword(){
     if(isCustomer){
         let isCorrectPassword = findPassword(password.val());
         if(isCorrectPassword){
-            
+            loginbutton2.modal("hide");
             let customer = JSON.parse(sessionStorage.getItem("customer"))
+            console.log(customer)
             if(customer.admin=="false"){
                 if(customer.vip == "false"){
-                    loggedInText.html("Du är inloggad som vanlig kund")
+                    console.log("Du är inloggad som vanlig kund")
                 }
                 else{
-                    loggedInText.html("Du är inloggad som VIP kund")
+                    console.log("Du är inloggad som VIP kund")
                 }
             }
             else{
-                loggedInText.html("Du är inloggad som admin")
+                console.log("Du är inloggad som admin")
+                whichPage.load( "../../admin/index.html")
             }
-            loginbutton.attr("data-dismiss", "modal");
+            //loginbutton2.attr("data-dismiss", "modal");
         }
         else {
             wrongPassword.html("Fel lösenord")
