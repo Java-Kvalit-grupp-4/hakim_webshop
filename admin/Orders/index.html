@@ -4,26 +4,216 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../styles/style.css" />
+    <link rel="stylesheet" href="../../styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" media="all" href="../../styles/daterangpicker-bs3.css" />
+
     <title>Admin-orders</title>
   </head>
   <body>
     <nav>
-      <div id="logo">
-        <h1>Hakim's Livs</h1>
-      </div>
-      <div id="input-search">
-        <input type="text" />
-        <button>Sök</button>
-      </div>
-      <div id="links">
-        <a href="../">Till kundsidan</a>
-        <a href="../Customer/">Kunder</a>
-        <a href="../Information/">Information</a>
-        <a href="../Products/">Produkter</a>
-        <a href="./">Ordrar</a>
-      </div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top ">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../Navbar/index.html" id="nav-home">ADMIN</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <form class="d-flex mx-3">
+                <select class="form-select form-select-sm mx-22" aria-label=".form-select-sm example">
+                  <option selected></option>
+                  <option value="1">Produktkatalog</option>
+                  <option value="2">Orderkatalog</option>
+                  <option value="3">Kundkatalog</option>
+                </select>
+                <input class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light mx-2" type="submit">Search</button>
+              </form>
+
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="../Products/index.html" id="nav-products">Produkter</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html" id="nav-orders"> Ordrar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../Customer/index.html" id="nav-customer">Kunder</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../VIP/index.html" id="nav-vip">VIP</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../Information/index.html" id="nav-information">Webbsidans info</a>
+              </li>
+              </ul>
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="../../index.html">Kund vy</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
     </nav>
-    <h1>ADMIN ORDERS</h1>
+    <div class="container p-4">
+      <div class="row">
+        <div class="header col-lg-6 col-md-12">
+          <h2>Orderlista</h2>
+        </div>
+        <div class="price col-lg-3 col-md-6">
+          <p>Pris</p>
+        </div>
+        <div class="order-nr col-lg-3 col-md-6">
+          <p>Order-nr</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-4">
+          <div class="datepicker">
+            <form class="form-horizontal">
+              <fieldset>
+                <div class="control-group">
+                  <div class="controls">
+                    <div class="input-group input-group-prepend">
+                      <span class="input-group-text"
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          fill="currentColor"
+                          class="bi bi-calendar3"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"
+                          />
+                          <path
+                            d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                          /></svg></span
+                      ><input
+                        type="text"
+                        style="width: 200px"
+                        name="reservation"
+                        id="reservation"
+                        class="form-control"
+                        value="04/01/2021 - 04/30/2021"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Order Status
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Obehandlad</a>
+              <a class="dropdown-item" href="#">Plockas</a>
+              <a class="dropdown-item" href="#">Leverarad</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <form class="form-inline my-2 my-lg-0 d-flex">
+            <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search">
+            <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
+          </form>
+        </div>
+        <div class="col-lg-3">
+          <form class="form-inline my-1 my-lg-0  d-flex">
+            <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search">
+
+            <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container"> 
+      <table class="table table-secondary ">
+        <thead>
+          <tr>
+            <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
+            <th scope="col" class="pb-3 ps-md-5">Kundnummer</th>
+            <th scope="col" class="pb-3 ">Datum </th>
+            <th scope="col" class="pb-3">Totalt</th>
+            <th scope="col" class="pb-3">Orderstatus</th>
+            <th scope="col" class="pb-3">Betalstatus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-01-20</td>
+            <td>135 kr</td>
+            <td>Levererad</td>
+            <td>Mottagen</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-02-13</td>
+            <td>453 kr</td>
+            <td>Levererad</td>
+            <td>Mottagen</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"> <a href="#">1234-4569</a></th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-03-26</td>
+            <td>321 kr</td>
+            <td>Skickad</td>
+            <td>Väntar på betalning</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"><a href="#">1234-4510</a> </th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-02-13</td>
+            <td>453 kr</td>
+            <td>Levererad</td>
+            <td>Mottagen</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"> <a href="#">1234-4511</a></th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-03-26</td>
+            <td>321 kr</td>
+            <td>Skickad</td>
+            <td>Väntar på betalning</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"><a href="#">1234-4512</a> </th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-02-13</td>
+            <td>453 kr</td>
+            <td>Levererad</td>
+            <td>Mottagen</td>
+          </tr>
+          <tr>
+            <th scope="row" class="ps-md-5"> <a href="#">1234-4513</a></th>
+            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+            <td>2021-03-26</td>
+            <td>321 kr</td>
+            <td>Skickad</td>
+            <td>Väntar på betalning</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/moment.js"></script>
+    <script type="text/javascript" src="../../js/daterangpicker.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+         $('#reservation').daterangepicker(null, function(start, end, label) {
+           console.log(start.toISOString(), end.toISOString(), label);
+         });
+      });
+      </script>
   </body>
 </html>

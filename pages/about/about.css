@@ -1,0 +1,70 @@
+
+#about{
+    min-height: 90vh;
+    width: 100%;
+}
+.about-container{
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.about-container .title-container{
+    padding: 2rem;
+}
+.about-container .image-container{
+    max-width: 100%;
+    height: auto;
+    margin: 2rem;
+}
+.about-container .text-container{
+    font-size: 1.8rem;
+    line-height: 1.6;
+    width: 50%;
+    margin: auto;
+}
+.oppening-hour{
+    font-size: 1.8rem;
+    margin: 3rem;
+}
+.title{
+    margin-bottom: 2rem;
+    font-size: 3rem;
+}
+
+@media (max-width: 454px) {
+    #about {
+        width: 100%;
+    }
+    .about-container{
+        width: 100%;
+    
+    }
+    .about-container .text-container{
+        font-size: 1.7rem;
+        line-height: 1.6;
+        min-width: 80%;
+    }
+    .title{
+        margin-bottom: 2rem;
+        font-size: 2.3rem;
+    }
+    p{
+        font-size: 1.7rem;
+        line-height: 1.6;
+    }
+  }
+
+ @media (max-width: 1200px) {
+    .about-container{
+        width: 100%;
+    }
+    .about-container .text-container{
+        margin: auto;
+        font-size: 1.8rem;
+        line-height: 1.6;
+        width: 60%;
+    }
+  } 
