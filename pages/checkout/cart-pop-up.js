@@ -1,8 +1,3 @@
-/* let cart = JSON.parse(localStorage.getItem("cart"));
-if (cart == null) {
-  cart = [];
-} */
-
 let cart = [];
 
 $(document).ready(load)
@@ -79,6 +74,9 @@ function removeProduct(product) {
       }
     }
 
+    //Ta bort dessa? Följde med från getbootstrap.com. Hittar ingen funktionalitet för dessa, men när de är aktiva funkar inte clear cart
+
+/*
   var modal = document.getElementById("myModal");
   var btn = document.getElementById("myBtn");
   var span = document.getElementsByClassName("close")[0];
@@ -96,8 +94,11 @@ function removeProduct(product) {
       modal.style.display = "none";
     }
   }
+  */
 
   $("#clear").click(function () {
-    localStorage.clear();
+    console.log("rensa")
+    localStorage.clear()
+    document.getElementById("productsInCart").innerHTML = ''
   });
   
