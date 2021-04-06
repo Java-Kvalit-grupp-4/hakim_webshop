@@ -1,19 +1,20 @@
 $(document).ready(() => {
     $('#test').click(() => {
         swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this imaginary file!",
+            title: "Warning",
+            text: "Vill du verklingen ta bort denna produkt från varukorgen?",
             icon: "warning",
-            buttons: true,
             dangerMode: true,
+            buttons: ["Ja", "Nej"],
           })
           .then((willDelete) => {
-            if (willDelete) {
-              swal("Poof! Your imaginary file has been deleted!", {
+            if (!willDelete) {
+              swal("Produkten är borttagen", {
                 icon: "success",
-              });
+              })
+              // ta bort aktuell produkt från varukorgen
             } else {
-              swal("Your imaginary file is safe!");
+              swal("Produkten ej borttagen från varukorgen");
             }
           });
         deleteCart()
