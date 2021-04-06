@@ -1,4 +1,15 @@
 let products = [];
+let persons = [];
+let password = $('#login-password');
+let email =$('#login-email');
+let loginButton1 = $('#login-btn');
+let loginbutton2 = $('#login-button');
+let wrongEmail = $('#wrong-email')
+let wrongPassword = $('#wrong-password')
+let personsFile = "../../TestData/testdata_persons.json";
+let loginModal = $('#login-modal');
+let whichPage = $("#login-page");
+
     $(document).ready(load)
 
     function load() {
@@ -9,6 +20,10 @@ let products = [];
     }
 
     function render(data) {
+      let customer = sessionStorage.getItem("customer") || "";
+      if(customer.length>0){
+        loginButton1.text("Logga ut");
+      }
       products = data;
 
       getProducts(products);
@@ -124,4 +139,132 @@ function saveTotalPrice(product) {
   let totalPrice = JSON.parse(localStorage.getItem('cartTotalPrice'))
   totalPrice != null ? localStorage.setItem('cartTotalPrice', totalPrice + product.price) : localStorage.setItem('cartTotalPrice', product.price);
 }
+
+/**
+ * Opens login-popup if no one is logged in or remove session storage if someone is logged in.
+ */
+$("#login-btn").on("click", function() {
+  if($(this).text()=="Logga in"){
+      $("#login-modal").modal("show");
+  }
+  else{
+      sessionStorage.removeItem("customer")
+      $(this).text("Logga in")
+  }
+});
+
+
+/**
+ * Hides text if email input is focused. 
+ */
+email.on('focus', function() {
+    wrongEmail.html('');
+})
+
+/**
+ * Hides text if password input is focused. 
+ */
+password.on('focus', function() {
+    wrongPassword.html('');
+})
+
+$("#show-password-button").on("click", showHidePassword);
+
+loginbutton2.on("click",checkUsernameAndPassword);
+
+/**
+ * Saves all cutomers from json-file in an array.
+ */
+$.getJSON(personsFile, function(response) {
+    console.log(response);
+    persons = response;
+})
+
+
+/**
+ * Function to show/hide password
+ */
+function showHidePassword(){
+    if($(this).text()=="Visa"){
+        $(this).text("Dölj")
+        password.attr("type", "text");
+    }
+    else{
+        $(this).text("Visa")
+        password.attr("type", "password");   
+    }
+}
+
+/**
+ * function that decides what will happen if username and password is correct/incorrect. 
+ */
+function checkUsernameAndPassword(){
+    let isCustomer= findUser(email.val());
+    if(isCustomer){
+        let isCorrectPassword = findPassword(password.val());
+        if(isCorrectPassword){
+          loginButton1.text("Logga ut");
+          loginModal.modal("hide");
+            let customer = JSON.parse(sessionStorage.getItem("customer"))
+            if(customer.admin=="false"){
+                if(customer.vip == "false"){
+                    console.log("Du är inloggad som vanlig kund")
+                }
+                else{
+                    console.log("Du är inloggad som VIP kund")
+                }
+            }
+            else{
+                console.log("Du är inloggad som admin")
+                whichPage.load( "admin/Navbar/index.html")
+            }
+        }
+        else {
+            wrongPassword.html("Fel lösenord")
+        }
+    }
+    else{
+        wrongEmail.html("Den email-adressen finns inte registrerad");
+    }
+    
+}
+
+/**
+ * function to find if username is in the json file. 
+ * @param {String} input 
+ * @returns boolean
+ */
+function findUser(input){
+    let isTrue = false;
+    persons.forEach(e => {
+        if(e.email== input){
+            sessionStorage.setItem("customer", JSON.stringify(e));
+            isTrue = true;
+        }
+    });
+    return isTrue;
+}
+
+/**
+ * function to find is password is correct/incorrect.
+ * @param {String} password 
+ * @returns boolean
+ */
+function findPassword(password){
+    console.log(password);
+    let customer = JSON.parse(sessionStorage.getItem("customer"))
+    let isTrue = false;
+    if(customer.password==password){
+        isTrue = true;
+    }
+    return isTrue;
+}
+
+/**
+ * Opens registration popup
+ */
+$("#newCust-button").on("click",function(){
+    $("#registerForm").modal("show");
+})
+
 
