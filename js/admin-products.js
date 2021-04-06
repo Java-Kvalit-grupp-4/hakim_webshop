@@ -1,10 +1,13 @@
-$(document).ready(loadProducts);
+$(document).ready(load);
 $(document).ready(loadCategories);
+$(document).ready(select);
+
 
 let products = [];
 let categories = [];
+let list = [];
 
-function loadProducts() {
+function load() {
   fetch("../../TestData/test_data_v.1.0.JSON")
     .then((response) => response.json())
     .then((data) => render(data))
@@ -12,6 +15,7 @@ function loadProducts() {
 
   function render(data) {
     products = data;
+  
 
     products.forEach(obj => {
       Object.assign(obj, { amount: 15 });
@@ -31,7 +35,7 @@ function loadProducts() {
 
     $("#select option").on("click", function () {
       let optionId = $(this).attr("id");
-      let list = [];
+      //let list = [];
       products.forEach(element => {
         if (element.category == optionId) {
           list.push(element);
@@ -106,4 +110,18 @@ function showProducts(list) {
               </tr>`
         )
     });
+}
+
+function select() {
+  $("#products").on("click", "tr", function () {
+    $(this).addClass("highlight").siblings().removeClass("highlight");
+    let productId = "";
+    list.forEach(element => {
+      if (element.id == $(this).find("tr").attr("id")) {
+        productId = id;
+        console.log(productId);
+      }
+    })
+    
+  })
 }
