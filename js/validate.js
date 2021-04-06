@@ -32,7 +32,7 @@ function testForEmail(input) {
 
 function testForAddress(input) {
     // lägg till 3 siffor efter mellanskalg
-    let pattern = /^[a-zA-ZåäöÅÄÖ\s0-9]*$/;
+    let pattern = /^\S[a-zA-ZåäöÅÄÖ\s0-9]*$/;
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
 /**
