@@ -13,7 +13,7 @@ let whichPage = $("#login-page");
     $(document).ready(load)
 
     function load() {
-      fetch("./TestData/test_data_v.1.0.JSON")
+      fetch("./TestData/test_data_products_v1.2.JSON")
         .then((response) => response.json())
         .then((data) => render(data))
         .catch((error) => console.error(error));
@@ -69,7 +69,7 @@ function getProducts(list) {
           <div id="${element.productNr}"class="card text-center h-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)">
             <img src="${element.image}" alt="img" class="card-img-top pt-5 ps-5 pe-5">
             <div class="card-body d-flex flex-column">
-              <h3 class="card-title" style="font-weight: bold;">${element.title} 8</h3>
+              <h3 class="card-title" style="font-weight: bold;">${element.title}</h3>
               <h4 class="card-subtitle mb-4 text-muted">${element.price} kr</h4>
               <h5 class="card-text pb-4 px-3">${element.description}</h5>
               <div class="align-self-end" style="margin-top: auto; margin-left: auto; margin-right: auto">
