@@ -15,7 +15,6 @@ function renderCart(data){
     var getProducts = JSON.parse(localStorage.getItem("cart"))
 
     // centrera papperskorgen och produktantal i cellerna
-    // ta bort borders på produktantal ??
     data.forEach(element => {
         document.getElementById("productsInCart").innerHTML +=
         `<tr class="table-light center-table">
@@ -27,12 +26,17 @@ function renderCart(data){
                 <td scope="row">${element.price}</td>
                 <div>
                 <td><button type="button" class="shadow-button" onclick="removeProduct(${element.id})">-</td>    
-                <td><div id="quantityInCart"> 1 </div></td>
+                <td id="quantityInCart"><div> 1 </div></td>
                     <td><button type="button" class="shadow-button" onclick=addProduct(${element.id})">+</td>
                 </div>
                 <td id="${element.id}">${(element.price * element.quantity).toFixed(2)}</td>
             </tr>`
     });
+}
+
+function productQuantity(){
+  document.getElementById("quantityInCart").innerHTML +=
+  JSON.parse(localStorage.getItem("cart"))
 }
 
 function addProduct(product){
@@ -72,3 +76,8 @@ function removeProduct(product) {
       modal.style.display = "none";
     }
   }
+
+  $("#clear").click(function () {
+    localStorage.clear();
+  });
+  
