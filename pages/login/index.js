@@ -43,7 +43,6 @@ function checkUsernameAndPassword(){
     if(isCustomer){
         let isCorrectPassword = findPassword(password.val());
         if(isCorrectPassword){
-            
             let customer = JSON.parse(sessionStorage.getItem("customer"))
             if(customer.admin=="false"){
                 if(customer.vip == "false"){
