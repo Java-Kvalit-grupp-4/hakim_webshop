@@ -204,7 +204,7 @@ function run() {
         bool = checkForInput(testForOnlyText, firstName, bool)
         bool = checkForInput(testForOnlyText, lastName, bool)
         bool = checkForInput(testForEmail, email, bool)
-        bool = checkForInput(testForPhoneNumber,phone, bool)
+        bool = checkForInput(testForNumbersOnly,phone, bool)
         bool = checkForInput(testForAddress, address, bool)
         bool = checkForInput(testForZipCode, zip, bool)
         bool = checkForInput(testForOnlyText, city,bool)
