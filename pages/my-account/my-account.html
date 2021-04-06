@@ -13,9 +13,44 @@
 </head>
 
 <body>
-  <nav>
-      Här ska det komma en navbar!!!
-  </nav>
+<nav class="navbar navbar-expand-md navbar-light fixed-top">
+  <div class="row">
+    <div class="col-md-3">
+      <img src="../../logo.png" class="img-fluid">
+    </div>
+    <div class="col-3">
+      <div class="input-group">
+        <input type="search" class="form-control rounded" placeholder="Sök" aria-label="Sök"
+               aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-primary">Sök</button>
+      </div>
+    </div>
+    <div class="col-1">
+      <a href="../login/index.html" class="btn btn-outline-primary">Logga in</a>
+    </div>
+    <div class="col-1">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="myAccountDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">Mina sidor
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="myAccountDropdown">
+          <li><a class="dropdown-item" href="../my-account/my-account.html">Ändra kunduppgifter</a></li>
+          <li><a class="dropdown-item" href="#">Se tidigare ordrar</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-1">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="cartDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">Kundvagn
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="cartDropdown">
+          <li><a class="dropdown-item" href="../checkout">X produkter</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
   <ul class="nav nav-tabs justify-content-center bg-secondary" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="my-orders-tab" data-bs-toggle="tab" data-bs-target="#my-orders" type="button"

@@ -101,8 +101,7 @@ function run() {
          * in localstorage when the customer loggs in
          */
         localStorage.setItem('loggedInUser', JSON.stringify(data[0]))
-
-        
+ 
         let loggedInCustomer =  JSON.parse(localStorage.getItem('loggedInUser'))
 
         firstName.val(loggedInCustomer.first_name);
