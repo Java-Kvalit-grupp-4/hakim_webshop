@@ -2,7 +2,7 @@
 $(document).ready(run)
 
 function run() {
-    load()
+    getCart()
     getLoggedInCustomer()
 
     /**
@@ -25,18 +25,9 @@ function run() {
     $('#gridCheck').click(e => e.target.checked ? getAddressInfo() : clearAddressInfo())
     $('#send-order-btn').click(validateInput)
 
-
-    function load() {
-        let cartTestUrl = '../../TestData/test_data_cart.JSON'
-        fetch(cartTestUrl)
-          .then((response) => response.json())
-          .then((data) => renderCart(data))
-          .catch((error) => console.error(error));
-
-          /** 
-           * let data = getCartFromLocalStorage()
-           * renderCart(data)
-           */
+    function getCart() {
+            let data = getCartFromLocalStorage()
+            renderCart(data)
     }
 
     /**
@@ -58,7 +49,7 @@ function run() {
     $.each(data, (index, e) => {
         cart.append(`
         <div class="row pt-2 line-item-border">
-            <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${e.productNummer}</p></div>
+            <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${e.productNr}</p></div>
             <div class="col col-xs-2 col-lg-4 cart-line-item"><p>${e.title}</p></div>
             <div class="col col-xs-1 col-lg-1 cart-line-item"><p class="line-item-total-quantity">${e.inCart}</p></div>
             <div class="col col-xs-2 col-lg-2 cart-line-item"><p>${e.price.toFixed(2)}</p></div>
@@ -69,7 +60,7 @@ function run() {
 
     let totalPrice = 0;
     $.each($('.line-item-total-price'),(index, e) => totalPrice += parseFloat(e.innerText))
-    $('#cart-total-price').text(totalPrice);
+    $('#cart-total-price').text(totalPrice.toFixed(2));
 
     let totalInCart = 0;
     $.each($('.line-item-total-quantity'),(index, e) => totalInCart += parseInt(e.innerText))
@@ -94,7 +85,6 @@ function run() {
      * @param {Array} data customers from the databas
      */
     function renderCustomerInfo(data) {
-
         /**
          * remove this when testing is over
          * cause the loggedInUser is allready saved 
@@ -212,6 +202,8 @@ function run() {
               clearAllInputFields()
                     // todo logga beställningar med överstående adress
                     // tömma localStorage från varukorg och rendera tom varukorg för kund
+            localStorage.clear()
+            renderCart()
         }else{
             swal({
                 title: "Ops, något gick fel!",
