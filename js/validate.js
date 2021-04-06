@@ -26,7 +26,7 @@ function testForZipCode(input) {
  * @returns true or false
  */
 function testForEmail(input) {
-    let pattern =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
 
@@ -53,7 +53,7 @@ function testForSocialSecurityNumber(input) {
  * @returns true or false
  */
 function testForNumbersOnly(input) {
-    let pattern = /^[0-9]*$/;
+    let pattern = /^[0-9\s]*$/;
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
 
@@ -73,8 +73,9 @@ function testForDecimalNumbers(input) {
  * @returns true or false
  */
 function testForPhoneNumber(input) {
-    let pattern =  /^[(]{0,1}[0-9]{2,4}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{2,6}$/;
-    return testForSqlInjections(input) ? false : pattern.test(input)
+    let test = input.replace(" ", "")
+    let pattern =  /^[(]{0,1}[0-9]{2,4}[)]{0,1}[-\s\.]{0,1}[0-9][-\s\.][0-9]{2,6}$/; 
+    return testForSqlInjections(test) ? false : pattern.test(test)
 }
 
 /**
@@ -104,6 +105,34 @@ function testForPhoneNumber(input) {
     let pattern = /\b(ALTER|CREATE|DELETE|DROP|EXEC(UTE){0,1}|INSERT( +INTO){0,1}|MERGE|SELECT|UPDATE|UNION( +ALL){0,1})\b/;
     return pattern.test(input)
 }
+
+/**
+    * Take a function to test for from validate.js,
+    * and a input field to test value from
+    * changes the border of the inputfield according 
+    * to if it passes(green border) or not(red border)
+    * @param {function} toTestFor 
+    * @param {jQuery inputfield} input 
+    * @returns false or current bool value from input
+    */
+ function checkForInput(toTestFor, input, bool) {
+    let testInput = input.val().trim()
+    if(toTestFor(testInput) && testInput != '') {
+        input.css("border", "3px solid #34F458") 
+        return bool
+    }else {
+        input.css("border", "3px solid #F90A0A")
+        return false
+    }
+ }
+
+ /**
+  * Resets the border to the orignal color
+  * @param {jQuery inputfield} inputField 
+  */
+  function resetBorder(inputField) {
+     inputField.css("border", "1px solid #ced4da")
+ }
 
 
 

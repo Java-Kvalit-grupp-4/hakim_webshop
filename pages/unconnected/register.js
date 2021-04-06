@@ -23,12 +23,11 @@ $(function () {
       month: $("#register-month").val(),
       day: $("#register-day").val(),
     };
-  
     return input;
   }
 
   function addYearOptions() {
-    let year = new Date().getFullYear();
+    let year = new Date().getFullYear() - 18;
     for (let index = year; index >= year - 110; index--) {
       $("#register-year").append(`<option value="${index}">
                                        ${index}
@@ -89,65 +88,62 @@ $(function () {
  * Vaidates input fields
  */
 function validateInput(){
-  let firstName = $("#register-first-name").val(),
-    lastName = $("#register-last-name").val(),
-    email = $("#register-email").val(),
-    phoneNr = $("#register-phone-number").val(),
-    password =  $("#register-password").val(),
-    confirmedPassword = $("#register-confirm-password").val(),
-    street = $("#register-street").val(),
-    city = $("#register-city").val(),
-    zip = $("#register-zip").val();
+ let firstName = $("#register-first-name"),
+    lastName = $("#register-last-name"),
+    email = $("#register-email"),
+    phoneNr = $("#register-phone-number"),
+    password =  $("#register-password"),
+    confirmedPassword = $("#register-confirm-password"),
+    street = $("#register-street"),
+    city = $("#register-city"),
+    zip = $("#register-zip"),
+    year = $("#register-year"),
+    month = $("#register-month"),
+    day = $("#register-day");
+
+  
     
-    if(testForOnlyText(firstName)) {
-      console.log(firstName + ' true')
+    let bool = true
+    if(password.val() === confirmedPassword.val()){
+      if(bool){
+        bool = checkForInput(testForPassword,password, bool)
+        bool = checkForInput(testForPassword,confirmedPassword, bool)
+        alert("works")
+      }
     }else{
-        console.log(firstName + ' false')
+      password.css("border", "3px solid #F90A0A")
+      confirmedPassword.css("border", "3px solid #F90A0A")
+      swal({
+        title: "FEL!",
+        text: "Lösenorden stämmer ej överräns\noch måste innehålla en siffra, en stor bokstav samt en liten bokstav",
+        icon: "warning",
+        button: "Ok",
+      });
     }
 
-    if(testForOnlyText(lastName)) {
-        console.log(lastName + ' true')
-    }else{
-        console.log(lastName + ' false')
-    }
+    bool = checkForInput(testForOnlyText, firstName, bool)
+    bool = checkForInput(testForOnlyText, lastName, bool)
+    bool = checkForInput(testForEmail, email, bool)
+    bool = checkForInput(testForNumbersOnly,phoneNr, bool)
+    bool = checkForInput(testForAddress, street, bool)
+    bool = checkForInput(testForZipCode, zip, bool)
+    bool = checkForInput(testForOnlyText, city,bool)
 
-    if(testForEmail(email)){
-        console.log(email + ' true')
-    }else{
-        console.log(email + ' false')
-    }
-
-    if(testForNumbersOnly(phoneNr)){
-        console.log(phoneNr + ' true')
-    }else{
-        console.log(phoneNr + ' false')
-    }
-    if(testForPassword(password)){
-      console.log(password + ' true')
-    }else{
-      console.log(password + ' false')
-    }
-    if(testForPassword(confirmedPassword)){
-      console.log(confirmedPassword + ' true')
-    }else{
-      console.log(confirmedPassword + ' false')
-    }
-
-    if(testForAddress(street)){
-        console.log(street + ' true')
-    }else{
-        console.log(street + ' false')
+    if(year.val() && month.val() && day.val()){
+      swal({
+        title: `Välkommen, ${firstName.val()}!`,
+        text: "Du har nu skapat ett konto hos Hakim's livs och kan börja handla",
+        icon: "success",
+        button: "Ok",
+      });
+    }else {
+      swal({
+        title: "FEL!",
+        text: "Du måste fylla i alla fält korrekt",
+        icon: "warning",
+        button: "Ok",
+      });
     }
     
-    if(testForZipCode(zip)){
-        console.log(zip + ' true')
-    }else{
-        console.log(zip + ' false')
-    }
-
-    if(testForOnlyText(city)){
-        console.log(city + ' true')
-    }else{
-        console.log(city + ' false')
-    }
+    
 }
