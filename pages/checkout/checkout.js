@@ -27,16 +27,16 @@ function run() {
 
 
     function load() {
-        let cartTestUrl = '../../TestData/test_data_cart.JSON'
+        /* let cartTestUrl = '../../TestData/test_data_cart.JSON'
         fetch(cartTestUrl)
           .then((response) => response.json())
           .then((data) => renderCart(data))
-          .catch((error) => console.error(error));
+          .catch((error) => console.error(error)); */
 
-          /** 
-           * let data = getCartFromLocalStorage()
-           * renderCart(data)
-           */
+          
+           let data = getCartFromLocalStorage()
+            renderCart(data)
+          
     }
 
     /**
@@ -56,9 +56,10 @@ function run() {
     let cart = $('#cart-container')
     cart.html('')
     $.each(data, (index, e) => {
+        console.log(e)
         cart.append(`
         <div class="row pt-2 line-item-border">
-            <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${e.productNummer}</p></div>
+            <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${e.productNr}</p></div>
             <div class="col col-xs-2 col-lg-4 cart-line-item"><p>${e.title}</p></div>
             <div class="col col-xs-1 col-lg-1 cart-line-item"><p class="line-item-total-quantity">${e.inCart}</p></div>
             <div class="col col-xs-2 col-lg-2 cart-line-item"><p>${e.price.toFixed(2)}</p></div>
