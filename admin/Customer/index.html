@@ -4,56 +4,638 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <link rel="stylesheet" href="../../styles/bootstrap.css">
+
+    <link rel="stylesheet" href="../../styles/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+      href="../../styles/daterangpicker-bs3.css"
+    />
+    <link rel="stylesheet" href="../../styles/style.css" />
+    <link rel="stylesheet" href="admin-customer.css" />
     <title>Admin-custumer</title>
   </head>
+
   <body>
     <nav>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top ">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand" href="../Navbar/index.html" id="nav-home">ADMIN</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <a class="navbar-brand" href="../Navbar/index.html" id="nav-home"
+            >ADMIN</a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <form class="d-flex mx-3">
-                <select class="form-select form-select-sm mx-22" aria-label=".form-select-sm example">
-                  <option selected></option>
-                  <option value="1">Produktkatalog</option>
-                  <option value="2">Orderkatalog</option>
-                  <option value="3">Kundkatalog</option>
-                </select>
-                <input class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light mx-2" type="submit">Search</button>
-              </form>
+            <form class="d-flex mx-3">
+              <select
+                class="form-select form-select-sm mx-22"
+                aria-label=".form-select-sm example"
+              >
+                <option selected disabled>Välj...</option>
+                <option value="1">Produktkatalog</option>
+                <option value="2">Orderkatalog</option>
+                <option value="3">Kundkatalog</option>
+              </select>
+              <input
+                class="form-control mx-2"
+                type="search"
+                placeholder="Sök"
+                aria-label="Sök"
+              />
+              <button class="btn btn-outline-light mx-2" type="submit">
+                Sök
+              </button>
+            </form>
 
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="../Products/index.html" id="nav-products">Produkter</a>
+                <a
+                  class="nav-link"
+                  href="../Products/index.html"
+                  id="nav-products"
+                  >Produkter</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../Orders/index.html" id="nav-orders"> Ordrar</a>
+                <a class="nav-link" href="../Orders/index.html" id="nav-orders">
+                  Ordrar</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.html" id="nav-customer">Kunder</a>
+                <a class="nav-link" href="index.html" id="nav-customer"
+                  >Kunder</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../VIP/index.html" id="nav-vip">VIP</a>
+                <a class="nav-link" href="../VIP/index.html" id="nav-vip"
+                  >VIP</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../Information/index.html" id="nav-information">Webbsidans info</a>
+                <a
+                  class="nav-link"
+                  href="../Information/index.html"
+                  id="nav-information"
+                  >Webbsidans info</a
+                >
               </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Kundvy</a>
+              </li>
+
               </ul>
               <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Kund vy</a>
+                  <a class="nav-link" href="../../index.html">Kund vy</a>
                 </li>
               </ul>
+
+
           </div>
         </div>
       </nav>
     </nav>
-    <h1 style="margin-top:70px">Customer</h1>
+
+    <div
+      class="nav nav-tabs justify-content-center bg-secondary"
+      id="nav-tab"
+      role="tablist"
+    >
+      <button
+        class="nav-link active"
+        id="nav-profile-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-profile"
+        type="button"
+        role="tab"
+        aria-controls="nav-profile"
+        aria-selected="false"
+      >
+        Kundkatalogen
+      </button>
+      <button
+        class="nav-link"
+        id="nav-contact-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-contact"
+        type="button"
+        role="tab"
+        aria-controls="nav-contact"
+        aria-selected="false"
+      >
+        Kundkonto
+      </button>
+    </div>
+
+    <div class="tab-content" id="nav-tabContent">
+      <div
+        class="tab-pane fade show active"
+        id="nav-profile"
+        role="tabpanel"
+        aria-labelledby="nav-profile-tab"
+      >
+        <div class="container mt-5">
+          <h1 class="mt-5 mb-4">Kundkatalogen</h1>
+
+          <div class="row mb-5 me-lg-4">
+            <div class="datepicker col-12 col-lg-4">
+              <form class="form-horizontal">
+                <fieldset>
+                  <div class="control-group">
+                    <div class="controls">
+                      <div class="input-group input-group-prepend">
+                        <span class="input-group-text"
+                          ><i class="bi bi-calendar3"></i></span
+                        ><input
+                          type="text"
+                          style="width: 200px"
+                          name="reservation"
+                          id="reservation"
+                          class="form-control"
+                          value="Tryck för att välja datum"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+
+            <div class="input-group mb-3 col col-lg mt-3 mt-lg-0">
+              <select
+                class="form-select bg-light"
+                aria-label="Default select example"
+              >
+                <option selected disabled>Filtrera efter...</option>
+                <option value="1">Vip-kunder</option>
+                <option value="2">Total ordersumma över:</option>
+                <option value="3">Totalt antal ordrar över:</option>
+                <option value="4">Födelsedag</option>
+              </select>
+
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Text input with dropdown button"
+              />
+            </div>
+
+            <div class="d-grid p-0 col-11 col-md-1 m-auto mt-3 mt-lg-0">
+              <button class="btn btn-secondary" type="button">Sök</button>
+            </div>
+          </div>
+          <div class="overflow-auto customer-table">
+            <table class="table table-secondary">
+              <thead class="text-center">
+                <tr>
+                  <th scope="col" class="pb-3">Kundnummer</th>
+                  <th scope="col" class="pb-3">Förnamn</th>
+                  <th scope="col" class="pb-3">Efternamn</th>
+                  <th scope="col" class="pb-3">Personnummer</th>
+                  <th scope="col" class="pb-3">E-post</th>
+                  <th scope="col" class="pb-3">Antal ordrar</th>
+                  <th scope="col" class="pb-3">Orderbelopp</th>
+                  <th scope="col" class="pb-3">VIP-kund</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <tr>
+                  <th scope="row"><a href="#">850216</a></th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-check2"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <a data-bs-target="#nav-contact">850216</a>
+                  </th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-x"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="#">850216</a></th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-x"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="#">850216</a></th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-check2"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="#">850216</a></th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-check2"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="#">850216</a></th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-x"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="#">850216</a></th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-x"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="#">850216</a></th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-x"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="#">850216</a></th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-x"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="#">850216</a></th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-x"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="#">850216</a></th>
+                  <td>Julia</td>
+                  <td>Wigenstedt</td>
+                  <td>900311-xxxx</td>
+                  <td>mail@mail.se</td>
+                  <td>4</td>
+                  <td>3162 kr</td>
+                  <td><i class="bi bi-x"></i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="nav-contact"
+        role="tabpanel"
+        aria-labelledby="nav-contact-tab"
+      >
+        <div class="container">
+          <div class="row">
+            <div class="container col-12 col-xl-4 me-5">
+              <h1 class="mt-5 mb-4">Kundinformation</h1>
+
+              <div class="row">
+                <div class="mb-2 col">
+                  <label for="customer-first-name" class="form-label"
+                    >Förnamn</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="customer-first-name"
+                    placeholder="Förnamn"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-2 col">
+                  <label for="customer-last-name" class="form-label"
+                    >Efternamn</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="customer-last-name"
+                    placeholder="Efternamn"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-2 col">
+                  <label for="customer-email" class="form-label">E-post</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="customer-email"
+                    placeholder="E-post"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-2 col">
+                  <label for="customer-phone" class="form-label"
+                    >Telefonnummer</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="customer-phone"
+                    placeholder="Telefonnummer"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-2 col">
+                  <label for="customer-street" class="form-label">Adress</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="customer-street"
+                    placeholder="Adress"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-2 col">
+                  <label for="customer-city" class="form-label">Postort</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="customer-city"
+                    placeholder="Postort"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-5 col">
+                  <label for="customer-zip" class="form-label"
+                    >Postnummer</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="customer-zip"
+                    placeholder="Postnummer"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-4 col">
+                  <button class="btn-secondary btn" type="submit">
+                    Spara ändringar
+                  </button>
+                </div>
+              </div>
+              <div class="row">
+                <h3>Top 5 mest köpta produkter</h3>
+                <div class="mb-3 col">
+                  <table class="table table-secondary">
+                    <thead>
+                      <tr>
+                        <th scope="col">SKU</th>
+                        <th scope="col">Produktnamn</th>
+                        <th scope="col">Antal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1234-456</th>
+                        <td>Gevalia Kaffe</td>
+                        <td>890</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">1234-654</th>
+                        <td>Löfbergs Kaffe</td>
+                        <td>840</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">1234-564</th>
+                        <td>Arvid Nordqvist Kaffe</td>
+                        <td>800</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4561-231</th>
+                        <td>Zoega's Kaffe</td>
+                        <td>740</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4561-324</th>
+                        <td>Marabou Mjölkchoklad</td>
+                        <td>500</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="container col-12 col-xl-7 order-container ms-xl-5 mb-5">
+              <h1 class="mt-5 mb-4">Ordrar</h1>
+              <div class="table-responsive col">
+                <table class="table table-fixed table-secondary">
+                  <thead class="text-center">
+                    <tr>
+                      <th scope="col" class="col-3 text-center">Ordernummer</th>
+                      <th scope="col" class="col-2">Orderstatus</th>
+                      <th scope="col" class="col-2">Betalstatus</th>
+                      <th scope="col" class="col-3">Datum</th>
+                      <th scope="col" class="col-2">Totalt</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-center">
+                    <tr>
+                      <th scope="row" class="col-3">
+                        <a href="#">850216</a>
+                      </th>
+                      <td class="col-2">Levererad</td>
+                      <td class="col-2">Mottagen</td>
+                      <td class="col-3">2021-03-13</td>
+                      <td class="col-2">720 kr</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="col-3">
+                        <a href="#">850216</a>
+                      </th>
+                      <td class="col-2">Levererad</td>
+                      <td class="col-2">Mottagen</td>
+                      <td class="col-3">2021-03-13</td>
+                      <td class="col-2">720 kr</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="col-3">
+                        <a href="#">850216</a>
+                      </th>
+                      <td class="col-2">Levererad</td>
+                      <td class="col-2">Mottagen</td>
+                      <td class="col-3">2021-03-13</td>
+                      <td class="col-2">720 kr</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="col-3">
+                        <a href="#">850216</a>
+                      </th>
+                      <td class="col-2">Levererad</td>
+                      <td class="col-2">Mottagen</td>
+                      <td class="col-3">2021-03-13</td>
+                      <td class="col-2">720 kr</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="col-3">
+                        <a href="#">850216</a>
+                      </th>
+                      <td class="col-2">Levererad</td>
+                      <td class="col-2">Mottagen</td>
+                      <td class="col-3">2021-03-13</td>
+                      <td class="col-2">720 kr</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="col-3">
+                        <a href="#">850216</a>
+                      </th>
+                      <td class="col-2">Levererad</td>
+                      <td class="col-2">Mottagen</td>
+                      <td class="col-3">2021-03-13</td>
+                      <td class="col-2">720 kr</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="col-3">
+                        <a href="#">850216</a>
+                      </th>
+                      <td class="col-2">Levererad</td>
+                      <td class="col-2">Mottagen</td>
+                      <td class="col-3">2021-03-13</td>
+                      <td class="col-2">720 kr</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="col-3">
+                        <a href="#">850216</a>
+                      </th>
+                      <td class="col-2">Levererad</td>
+                      <td class="col-2">Mottagen</td>
+                      <td class="col-3">2021-03-13</td>
+                      <td class="col-2">720 kr</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="col-3">
+                        <a href="#">850216</a>
+                      </th>
+                      <td class="col-2">Levererad</td>
+                      <td class="col-2">Mottagen</td>
+                      <td class="col-3">2021-03-13</td>
+                      <td class="col-2">720 kr</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="col-3">
+                        <a href="#">850216</a>
+                      </th>
+                      <td class="col-2">Levererad</td>
+                      <td class="col-2">Mottagen</td>
+                      <td class="col-3">2021-03-13</td>
+                      <td class="col-2">720 kr</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-secondary table-foot">
+                  <tfoot class="text-center">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th class="text-end">Total summa:</th>
+                    <td>2160 kr</td>
+                  </tfoot>
+                </table>
+              </div>
+              <div class="row">
+                <div class="col mb-5">
+                  <h2 class="my-5">Kommentar om kund</h2>
+                  <div class="mb-3 form-floating">
+                    <textarea
+                      class="form-control"
+                      id="customer-comments"
+                      style="height: 22rem"
+                    ></textarea
+                    ><label for="customer-comments" class="form-label"
+                      >Skriv meddelande...</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="../../js/moment.js"></script>
+    <script type="text/javascript" src="../../js/daterangpicker.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#reservation").daterangepicker(null, function (start, end, label) {
+          console.log(start.toISOString(), end.toISOString(), label);
+        });
+      });
+    </script>
   </body>
 </html>
