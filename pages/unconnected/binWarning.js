@@ -1,6 +1,21 @@
 $(document).ready(() => {
-    $('#bin-warning-yes-btn').click(() => {
-        console.log('yes')
+    $('#test').click(() => {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Poof! Your imaginary file has been deleted!", {
+                icon: "success",
+              });
+            } else {
+              swal("Your imaginary file is safe!");
+            }
+          });
         deleteCart()
     })
 })
