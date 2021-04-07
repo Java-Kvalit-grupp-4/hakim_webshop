@@ -98,7 +98,6 @@ function loadProducts() {
           }
         });
       });
-      // Hitta ett sätt att automatiskt switcha till Produktsida-tab???
       alert("Produkten är vald. Gå till Produktsida.")
     });
   }
