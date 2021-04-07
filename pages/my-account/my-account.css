@@ -2,6 +2,10 @@ html {
     font-size: 100%;
 }
 
+.tab-menu{
+    margin-top: 7.28rem;
+}
+
 .save-button {
     margin-top: 0.5rem;
 }
