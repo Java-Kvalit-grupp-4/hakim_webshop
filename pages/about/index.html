@@ -11,44 +11,105 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-md navbar-light fixed-top">
-        <div class="row">
-          <div class="col-md-3">
-            <img src="../../logo.png" class="img-fluid">
-          </div>
-          <div class="col-3">
-            <div class="input-group">
-              <input type="search" class="form-control rounded" placeholder="Sök" aria-label="Sök"
-                     aria-describedby="search-addon" />
-              <button type="button" class="btn btn-outline-primary">Sök</button>
-            </div>
-          </div>
-          <div class="col-1">
-            <a href="../login/index.html" class="btn btn-outline-primary">Logga in</a>
-          </div>
-          <div class="col-1">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="myAccountDropdown"
-                      data-bs-toggle="dropdown" aria-expanded="false">Mina sidor
+      <!-- navbar (prototype) -->
+  
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand " href="../../index.html"
+          ><img src="../../logo.png" class="img-fluid nav-image " style=" margin-left: -0.5rem;"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
+        <div
+          class="d-flex justify-content-evenly collapse navbar-collapse"
+          id="navbarTogglerDemo02"
+        >
+          <div class="container col-md-6 mt-3">
+            <div class="input-group mb-3 me-5">
+              <input
+                type="text"
+                class="form-control product-search"
+                placeholder="Sök produkt"
+                aria-label="Sök"
+                aria-describedby="search-button"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="search-button"
+                style="width: 5rem"
+              >
+                Sök
               </button>
-              <ul class="dropdown-menu" aria-labelledby="myAccountDropdown">
-                <li><a class="dropdown-item" href="../my-account/my-account.html">Ändra kunduppgifter</a></li>
-                <li><a class="dropdown-item" href="#">Se tidigare ordrar</a></li>
-              </ul>
             </div>
           </div>
-          <div class="col-1">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="cartDropdown"
-                      data-bs-toggle="dropdown" aria-expanded="false">Kundvagn
+
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item me-4">
+              <a
+                type="button nav-link"
+                class="btn btn-outline-secondary text-dark"
+                id="login-btn"
+                >Logga in</a
+              >
+            </li>
+            <li class="nav-item me-4">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="myAccountDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Mina sidor
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="myAccountDropdown">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="../my-account/my-account.html"
+                      >Ändra kunduppgifter</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="../my-account/my-account.html">Se tidigare ordrar</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <button
+                class="btn btn-secondary"
+                type="button"
+                id="cartDropdown"
+                data-bs-toggle="modal"
+                aria-expanded="false"
+              >
+                Varukorg&nbsp;&nbsp;<span
+                  class="badge badge-pill bg-danger"
+                  id="cart-label-2"
+                  style="display: inline"
+                  >2</span
+                >
               </button>
-              <ul class="dropdown-menu" aria-labelledby="cartDropdown">
-                <li><a class="dropdown-item" href="../checkout">X produkter</a></li>
-              </ul>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
+
+    <!-- navbar end -->
     </header>
     <section id="about">
       <div class="about-container">
