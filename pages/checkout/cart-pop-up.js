@@ -32,10 +32,10 @@ function renderCart(){
                 <td scope="row">${element.price}</td>
                 <div>
                 <td><button type="button" class="shadow-button" onclick="removeProduct(${element.productNr})">-</td>    
-                <td id="quantityInCart"><div class="temp">${element.inCart}</div></td>
+                <td id="quantityInCart"><div class="quantity${element.productNr}">${element.inCart}</div></td>
                     <td><button type="button" class="shadow-button" onclick="addProduct(${element.productNr})">+</td>
                 </div>
-                <td id="${element.productNr}">${(element.price * element.inCart).toFixed(2)}</td>
+                <td id="${element.productNr}" class="price${element.productNr}">${(element.price * element.inCart).toFixed(2)}</td>
             </tr>`
     });
 
@@ -61,6 +61,7 @@ function addProduct(product){
         element.inCart += 1
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
+    updateCartQuantity()
 }
 
 function removeProduct(product) {
@@ -74,10 +75,20 @@ function removeProduct(product) {
         if (element.inCart !== 0){
         console.log("inne i if")
         element.inCart -= 1
-        document.querySelectorAll(".temp").textContent -= 1
         }
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
+    updateCartQuantity()
+    }
+
+    function updateCartQuantity(){
+      let cartTemp = JSON.parse(localStorage.getItem("cart"));
+      console.log("utanför foreach, update")
+      cartTemp.forEach(element => {
+        console.log("inne i foreach, update")
+        document.querySelector(`.quantity${element.productNr}`).textContent = element.inCart
+        document.querySelector(`.price${element.productNr}`).textContent = (element.price * element.inCart).toFixed(2)
+      }); 
     }
 
     //Ta bort dessa? Följde med från getbootstrap.com. Hittar ingen funktionalitet för dessa, men när de är aktiva funkar inte clear cart
