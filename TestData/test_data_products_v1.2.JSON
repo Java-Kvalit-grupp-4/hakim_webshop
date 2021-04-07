@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "productNr": "3241-0001",
+        "productNr": "32410001",
         "title": "Havregryn",
         "description": "Gott till kokosbollar och havregrynsgröt",
         "brand": "Axa",
@@ -12,7 +12,7 @@
     },
     {
         "id": 2,
-        "productNr": "3241-0002",
+        "productNr": "32410002",
         "title": "Soltorkade tomater",
         "description": "Finaste soltorkade tomaterna från spanien",
         "brand": "Santa maria",
@@ -23,7 +23,7 @@
     },
     {
         "id": 3,
-        "productNr": "3241-0003",
+        "productNr": "32410003",
         "title": "Saffran pistiller",
         "description": "Pestiller från saffransblomman, torkade",
         "brand": "Persiskt",
@@ -34,7 +34,7 @@
     },
     {
         "id": 4,
-        "productNr": "3241-0004",
+        "productNr": "32410004",
         "title": "Senap stark",
         "description": "Stark senap, gul",
         "brand": "Hultsberg",
@@ -45,7 +45,7 @@
     },
     {
         "id": 5,
-        "productNr": "3241-0005",
+        "productNr": "32410005",
         "title": "Dressing Italiensk",
         "description": "God klassisk Italiensk salladsdressing",
         "brand": "Felix",
@@ -56,7 +56,7 @@
     },
     {
         "id": 6,
-        "productNr": "3241-0006",
+        "productNr": "32410006",
         "title": "Coca-cola Zero",
         "description": "Cola zero, god och utan socker",
         "brand": "Coca-Cola",
@@ -67,7 +67,7 @@
     },
     {
         "id": 7,
-        "productNr": "3241-0007",
+        "productNr": "32410007",
         "title": "Ginger ale",
         "description": "God smak, algom med bubblor",
         "brand": "Fever-Tree",
@@ -78,7 +78,7 @@
     },
     {
         "id": 8,
-        "productNr": "3241-0008",
+        "productNr": "32410008",
         "title": "Indain Tonic Water",
         "description": "Indian Tonic Water från Fever-Tree",
         "image": "https:\/\/picsum.photos\/500?random=8",
@@ -87,7 +87,7 @@
     },
     {
         "id": 9,
-        "productNr": "3241-0009",
+        "productNr": "32410009",
         "title": "Sojamjölk",
         "description": "Laktosfri sojamjölk speciellt framtaget för att ha i kaffet",
         "brand": "Alpro",
@@ -98,7 +98,7 @@
     },
     {
         "id": 10,
-        "productNr": "3241-0010",
+        "productNr": "32410010",
         "title": "Saft bara bär hallon",
         "description": "Bobs hallonsaft - 100 procent från bär och frukt. Innehåller inget konserveringsmedel",
         "brand": "Bob",
@@ -109,7 +109,7 @@
     },
     {
         "id": 11,
-        "productNr": "3241-0011",
+        "productNr": "32410011",
         "title": "Linschips",
         "description": "Räfflade för extra krispighet med grillad lök och en nypa peppar.",
         "brand": "Olw",
@@ -120,7 +120,7 @@
     },
     {
         "id": 12,
-        "productNr": "3241-0012",
+        "productNr": "32410012",
         "title": "Valnötter",
         "description": "Valnötter från Exotic Snacks.",
         "brand": "Exotic Snacks",
@@ -131,7 +131,7 @@
     },
     {
         "id": 13,
-        "productNr": "3241-0013",
+        "productNr": "32410013",
         "title": "Hundra Härliga Praliner",
         "description": "800 g sorterade italienska praliner.",
         "brand": "Royal Confect",
@@ -142,7 +142,7 @@
     },
     {
         "id": 14,
-        "productNr": "3241-0014",
+        "productNr": "32410014",
         "title": "Stora Nappar Cola Skum ",
         "description": "Stora godisnappar med skum och smak av läsken cola",
         "brand": "Haribo",
@@ -153,7 +153,7 @@
     },
     {
         "id": 15,
-        "productNr": "3241-0015",
+        "productNr": "32410015",
         "title": "Russin",
         "description": "Torkade russin från klassiska Sun Maid.",
         "brand": "Sun Maid",
@@ -164,7 +164,7 @@
     },
     {
         "id": 16,
-        "productNr": "3241-0016",
+        "productNr": "32410016",
         "title": "Tandkräm White System",
         "description": "Pepsodent White System är en tandkräm som är utvecklad speciellt för att ta bort missfärgningar på tandemaljen.",
         "brand": "Pepsodent",
@@ -175,7 +175,7 @@
     },
     {
         "id": 17,
-        "productNr": "3241-0017",
+        "productNr": "32410017",
         "title": "Blooming Color Shampoo",
         "description": "Håll liv i ditt färgade hår. Vårt vegan-certifierade schampo med naturligt murumurusmör från Amazonas och doft med etiskt odlad bulgarisk ros återfuktar ditt hår och får det att se livfullt ut.",
         "brand": "Love Beauty & Planet",
@@ -186,7 +186,7 @@
     },
     {
         "id": 18,
-        "productNr": "3241-0018",
+        "productNr": "32410018",
         "title": "Roll-On Deodorant Gold",
         "description": "Roll-on deodorant med 48 timmars antiperspirerande skydd.",
         "brand": "Axe",
@@ -197,7 +197,7 @@
     },
     {
         "id": 19,
-        "productNr": "3241-0019",
+        "productNr": "32410019",
         "title": "Resorb Balance Svartvinbär 10 påsar",
         "description": "Resorb® Balance är en kolhydrat-elektrolytdryck i pulverform som förbättrar vattenupptaget vid fysisk aktivitet.",
         "brand": "Nestlé",
@@ -208,7 +208,7 @@
     },
     {
         "id": 20,
-        "productNr": "3241-0020",
+        "productNr": "32410020",
         "title": "Tvål Yoghurt Aloe Vera",
         "description": "Flytande tvål från Barnängen med doft av yoghurt & aloe vera.",
         "brand": "Barnängen",

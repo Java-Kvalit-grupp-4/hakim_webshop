@@ -3,11 +3,11 @@ let cart = [];
 $(document).ready(load)
 
 function load() {
-    let cartTestUrl = '../../TestData/test_data_cart.JSON'
+    /* let cartTestUrl = '../../TestData/test_data_cart.JSON'
     fetch(cartTestUrl)
       .then((response) => response.json())
       .then((data) => makeArrayFromData(data))
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error)); */
 
       renderCart()
 }
