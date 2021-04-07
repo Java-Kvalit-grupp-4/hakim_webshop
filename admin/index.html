@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Admin-hemskärm</title>
+  </head>
+  <body>
+    <nav>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top ">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html" id="nav-home">ADMIN</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <form class="d-flex mx-3">
+                <select class="form-select form-select-sm mx-22" aria-label=".form-select-sm example">
+                  <option selected disabled>Välj...</option>
+                  <option value="1">Produktkatalog</option>
+                  <option value="2">Orderkatalog</option>
+                  <option value="3">Kundkatalog</option>
+                </select>
+                <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Sök">
+                <button class="btn btn-outline-light mx-2" type="submit">Sök</button>
+              </form>
+
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="Products/index.html" id="nav-products">Produkter</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Orders/index.html" id="nav-orders"> Ordrar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Customer/index.html" id="nav-customer">Kunder</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="VIP/index.html" id="nav-vip">VIP</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../Information/index.html" id="nav-information">Webbsidans info</a>
+              </li>
+              </ul>
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="../index.html">Kundvy</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+    </nav>
+    <div class="container">
+        <h1 id="greeting" style="margin-top:70px">Välkommen Admin!</h1>
+        <h4 class="mt-5">Antal ordrar</h4>
+
+        <div class="col-sm-12">
+            <table class="table table-success table-striped mb-5" style="width: 30%;">
+              <tbody id="orders">
+                <tr>
+                    <th scope="row">Väntar på behandling</th>
+                    <td style="text-align: center;">25</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Under behandling</th>
+                    <td style="text-align: center;">25</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Plockning pågår</th>
+                    <td style="text-align: center;">25</td>
+                  </tr> 
+                  <tr>
+                    <th scope="row">Redo att skickas</th>
+                    <td style="text-align: center;">25</td>
+                  </tr> 
+                  <tr>
+                    <th scope="row">Skickad</th>
+                    <td style="text-align: center;">25</td>
+                  </tr> 
+                </tbody>
+            </table>
+            <h4>Slut i lagret</h4>
+            <table class="table table-info table-striped" style="width: 80%;">
+                <thead>
+                  <tr>
+                    <th scope="col">Artikelnummer</th>
+                    <th scope="col">Produktnamn</th>
+                    <th scope="col">Tillverkare</th>
+                    <th scope="col">Pris</th>
+                  </tr>
+                </thead>
+                <tbody id="products">
+                    <tr>
+                        <td>12345</td>
+                        <td>Mjölk</td>
+                        <td>Arla</td>
+                        <td>20 kr</td>
+                    </tr>
+                    </tbody>
+              </table>
+                  </div>
+      
+    </div>
+    
+  </body>
+</html>

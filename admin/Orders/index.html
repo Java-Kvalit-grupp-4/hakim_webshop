@@ -4,216 +4,463 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../styles/bootstrap.css">
-    <link rel="stylesheet" type="text/css" media="all" href="../../styles/daterangpicker-bs3.css" />
 
-    <title>Admin-orders</title>
+    <link rel="stylesheet" href="../../styles/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+      href="../../styles/daterangpicker-bs3.css"
+    />
+    <link rel="stylesheet" href="../../styles/style.css" />
+    <link rel="stylesheet" href="admin-customer.css" />
+    <title>Admin-custumer</title>
   </head>
+
   <body>
     <nav>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top ">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand" href="../Navbar/index.html" id="nav-home">ADMIN</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <a class="navbar-brand" href="../index.html" id="nav-home"
+            >ADMIN</a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <form class="d-flex mx-3">
-                <select class="form-select form-select-sm mx-22" aria-label=".form-select-sm example">
-                  <option selected></option>
-                  <option value="1">Produktkatalog</option>
-                  <option value="2">Orderkatalog</option>
-                  <option value="3">Kundkatalog</option>
-                </select>
-                <input class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light mx-2" type="submit">Search</button>
-              </form>
+            <form class="d-flex mx-3">
+              <select
+                class="form-select form-select-sm mx-22"
+                aria-label=".form-select-sm example"
+              >
+                <option selected disabled>Välj...</option>
+                <option value="1">Produktkatalog</option>
+                <option value="2">Orderkatalog</option>
+                <option value="3">Kundkatalog</option>
+              </select>
+              <input
+                class="form-control mx-2"
+                type="search"
+                placeholder="Sök"
+                aria-label="Sök"
+              />
+              <button class="btn btn-outline-light mx-2" type="submit">
+                Sök
+              </button>
+            </form>
 
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="../Products/index.html" id="nav-products">Produkter</a>
+                <a
+                  class="nav-link"
+                  href="../Products/index.html"
+                  id="nav-products"
+                  >Produkter</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.html" id="nav-orders"> Ordrar</a>
+                <a class="nav-link" href="index.html" id="nav-orders">
+                  Ordrar</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../Customer/index.html" id="nav-customer">Kunder</a>
+                <a class="nav-link" href="../Customer/index.html" id="nav-customer"
+                  >Kunder</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../VIP/index.html" id="nav-vip">VIP</a>
+                <a class="nav-link" href="../VIP/index.html" id="nav-vip"
+                  >VIP</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../Information/index.html" id="nav-information">Webbsidans info</a>
+                <a
+                  class="nav-link"
+                  href="../Information/index.html"
+                  id="nav-information"
+                  >Webbsidans info</a
+                >
               </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Kundvy</a>
+              </li>
+
               </ul>
               <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="../../index.html">Kund vy</a>
+                  <a class="nav-link" href="../../index.html">Kundvy</a>
                 </li>
               </ul>
+
+
           </div>
         </div>
       </nav>
     </nav>
-    <div class="container p-4">
-      <div class="row">
-        <div class="header col-lg-6 col-md-12">
-          <h2>Orderlista</h2>
-        </div>
-        <div class="price col-lg-3 col-md-6">
-          <p>Pris</p>
-        </div>
-        <div class="order-nr col-lg-3 col-md-6">
-          <p>Order-nr</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3 col-md-4">
-          <div class="datepicker">
-            <form class="form-horizontal">
-              <fieldset>
-                <div class="control-group">
-                  <div class="controls">
-                    <div class="input-group input-group-prepend">
-                      <span class="input-group-text"
-                        ><svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          fill="currentColor"
-                          class="bi bi-calendar3"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"
-                          />
-                          <path
-                            d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
-                          /></svg></span
-                      ><input
-                        type="text"
-                        style="width: 200px"
-                        name="reservation"
-                        id="reservation"
-                        class="form-control"
-                        value="04/01/2021 - 04/30/2021"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Order Status
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Obehandlad</a>
-              <a class="dropdown-item" href="#">Plockas</a>
-              <a class="dropdown-item" href="#">Leverarad</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <form class="form-inline my-2 my-lg-0 d-flex">
-            <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search">
-            <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
-          </form>
-        </div>
-        <div class="col-lg-3">
-          <form class="form-inline my-1 my-lg-0  d-flex">
-            <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search">
 
-            <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
-          </form>
+    <div
+      class="nav nav-tabs justify-content-center bg-secondary"
+      id="nav-tab"
+      role="tablist"
+    >
+      <button
+        class="nav-link active"
+        id="nav-profile-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-profile"
+        type="button"
+        role="tab"
+        aria-controls="nav-profile"
+        aria-selected="false"
+      >
+        Orderkatalog
+      </button>
+      <button
+        class="nav-link"
+        id="nav-contact-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-contact"
+        type="button"
+        role="tab"
+        aria-controls="nav-contact"
+        aria-selected="false"
+      >
+        Order
+      </button>
+    </div>
+
+    <div class="tab-content" id="nav-tabContent">
+      <div
+        class="tab-pane fade show active"
+        id="nav-profile"
+        role="tabpanel"
+        aria-labelledby="nav-profile-tab"
+      >
+        <div class="container p-4">
+            <div class="row">
+                <div class="header col-lg-6 col-md-12">
+                    <h2>Orderlista</h2>
+                </div>
+                <div class="price col-lg-3 col-md-6">
+                <p>Pris</p>
+                </div>
+                <div class="order-nr col-lg-3 col-md-6">
+                <p>Order-nr</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <div class="datepicker">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div class="input-group input-group-prepend">
+                                            <span class="input-group-text"
+                                            ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            fill="currentColor"
+                                            class="bi bi-calendar3"
+                                            viewBox="0 0 16 16"
+                                            >
+                                            <path
+                                            d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"
+                                            />
+                                            <path
+                                            d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                                            /></svg></span
+                                            ><input
+                                            type="text"
+                                            style="width: 200px"
+                                            name="reservation"
+                                            id="reservation"
+                                            class="form-control"
+                                            value="04/01/2021 - 04/30/2021"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Order Status
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Obehandlad</a>
+                            <a class="dropdown-item" href="#">Plockas</a>
+                            <a class="dropdown-item" href="#">Leverarad</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <form class="form-inline my-2 my-lg-0 d-flex">
+                        <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search">
+                        <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
+                    </form>
+                </div>
+                <div class="col-lg-3">
+                    <form class="form-inline my-1 my-lg-0  d-flex">
+                        <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search">
+                        <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="container"> 
+            <table class="table table-secondary ">
+                <thead>
+                    <tr>
+                        <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
+                        <th scope="col" class="pb-3 ps-md-5">Kundnummer</th>
+                        <th scope="col" class="pb-3 ">Datum </th>
+                        <th scope="col" class="pb-3">Totalt</th>
+                        <th scope="col" class="pb-3">Orderstatus</th>
+                        <th scope="col" class="pb-3">Betalstatus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+                        <td>2021-01-20</td>
+                        <td>135 kr</td>
+                        <td>Levererad</td>
+                        <td>Mottagen</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
+                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+                        <td>2021-02-13</td>
+                        <td>453 kr</td>
+                        <td>Levererad</td>
+                        <td>Mottagen</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="ps-md-5"> <a href="#">1234-4569</a></th>
+                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+                        <td>2021-03-26</td>
+                        <td>321 kr</td>
+                        <td>Skickad</td>
+                        <td>Väntar på betalning</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="ps-md-5"><a href="#">1234-4510</a> </th>
+                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+                        <td>2021-02-13</td>
+                        <td>453 kr</td>
+                        <td>Levererad</td>
+                        <td>Mottagen</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="ps-md-5"> <a href="#">1234-4511</a></th>
+                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+                        <td>2021-03-26</td>
+                        <td>321 kr</td>
+                        <td>Skickad</td>
+                        <td>Väntar på betalning</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="ps-md-5"><a href="#">1234-4512</a> </th>
+                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+                        <td>2021-02-13</td>
+                        <td>453 kr</td>
+                        <td>Levererad</td>
+                        <td>Mottagen</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="ps-md-5"> <a href="#">1234-4513</a></th>
+                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+                        <td>2021-03-26</td>
+                        <td>321 kr</td>
+                        <td>Skickad</td>
+                        <td>Väntar på betalning</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="container"> 
-      <table class="table table-secondary ">
-        <thead>
-          <tr>
-            <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
-            <th scope="col" class="pb-3 ps-md-5">Kundnummer</th>
-            <th scope="col" class="pb-3 ">Datum </th>
-            <th scope="col" class="pb-3">Totalt</th>
-            <th scope="col" class="pb-3">Orderstatus</th>
-            <th scope="col" class="pb-3">Betalstatus</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-            <td>2021-01-20</td>
-            <td>135 kr</td>
-            <td>Levererad</td>
-            <td>Mottagen</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-            <td>2021-02-13</td>
-            <td>453 kr</td>
-            <td>Levererad</td>
-            <td>Mottagen</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"> <a href="#">1234-4569</a></th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-            <td>2021-03-26</td>
-            <td>321 kr</td>
-            <td>Skickad</td>
-            <td>Väntar på betalning</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4510</a> </th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-            <td>2021-02-13</td>
-            <td>453 kr</td>
-            <td>Levererad</td>
-            <td>Mottagen</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"> <a href="#">1234-4511</a></th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-            <td>2021-03-26</td>
-            <td>321 kr</td>
-            <td>Skickad</td>
-            <td>Väntar på betalning</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"><a href="#">1234-4512</a> </th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-            <td>2021-02-13</td>
-            <td>453 kr</td>
-            <td>Levererad</td>
-            <td>Mottagen</td>
-          </tr>
-          <tr>
-            <th scope="row" class="ps-md-5"> <a href="#">1234-4513</a></th>
-            <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-            <td>2021-03-26</td>
-            <td>321 kr</td>
-            <td>Skickad</td>
-            <td>Väntar på betalning</td>
-          </tr>
-        </tbody>
-      </table>
+    <div
+        class="tab-pane fade"
+        id="nav-contact"
+        role="tabpanel"
+        aria-labelledby="nav-contact-tab"
+    >
+    <div class="container row">
+        <div class="container col-3 pb-5">
+            <div class="container col-12 pb-5">
+                <div class="customer-info mt-5">
+                    <div class="mb-5">
+                        <h2>Kundinformation</h2>
+                    </div>
+                    <form>
+                        <div class="col-lg-12 mb-3">
+                        <label for="my-info-first-name" class="form-label">Förnamn</label>
+                        <input type="text" class="form-control" placeholder="Förnamn" aria-label="Förnamn"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">Efternamn</label>
+                            <input type="text" class="form-control " placeholder="Efternamn" aria-label="Efternamn"
+                         id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">Adress</label>
+                            <input type="text" class="form-control" placeholder="Adress" aria-label="Adress"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">Postort</label>
+                            <input type="text" class="form-control " placeholder="Postort" aria-label="Postort"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">Postnummer</label>
+                            <input type="text" class="form-control" placeholder="Postnummer" aria-label="Postnummer"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">E-post</label>
+                            <input type="text" class="form-control" placeholder="E-post" aria-label="E-post"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="my-info-first-name" class="form-label">Telefonnummer</label>
+                            <input type="text" class="form-control" placeholder="Telefonnummer" aria-label="Telefonnummer"
+                            id="my-info-first-name">
+                        </div>
+                        <div class="col mb-3 mt-4">
+                            <button type="submit" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container col-9 pb-5">
+            <div class="container col-12">
+                <div class="customer-info mt-5">
+                    <div class="mb-5">
+                      <h2>Produkter i ordern</h2>
+                    </div>
+                    <div class="container"> 
+                        <table class="table table-secondary ">
+                          <thead>
+                            <tr>
+                              <th scope="col" class="pb-3 ps-md-5">Artikel-nr</th>
+                              <th scope="col" class="pb-3 ps-md-5">Produktnamn</th>
+                              <th scope="col" class="pb-3 ">Antal </th>
+                              <th scope="col" class="pb-3">á pris</th>
+                              <th scope="col" class="pb-3">Total pris</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+                              <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
+                              <td>5</td>
+                              <td>50 kr</td>
+                              <td>250</td>
+                            </tr>
+                            <tr>
+                              <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
+                              <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
+                              <td>5</td>
+                              <td>100 kr</td>
+                              <td>500</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
+                                <td>5</td>
+                                <td>50 kr</td>
+                                <td>250</td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
+                                <td>5</td>
+                                <td>100 kr</td>
+                                <td>500</td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
+                                <td>5</td>
+                                <td>50 kr</td>
+                                <td>250</td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
+                                <td>5</td>
+                                <td>100 kr</td>
+                                <td>500</td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
+                                <td>5</td>
+                                <td>50 kr</td>
+                                <td>250</td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
+                                <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
+                                <td>5</td>
+                                <td>100 kr</td>
+                                <td>500</td>
+                              </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                </div>
+                  <div class= "countainer text-end pe-4">
+                      <p>Total Summa: 1000kr</p>
+                  </div>
+            </div>
+            <div class="container col-12 pt-3 ps-5">
+                <h2>Kommentar på ordern</h2>
+            </div>
+            <div class="container col-12 ps-5">
+                <textarea name="" id="" cols="100" rows="10" placeholder="Skriv kommentar här..."></textarea>
+            </div>
+        </div>
     </div>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        </div>
+    
+
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
     <script type="text/javascript" src="../../js/moment.js"></script>
     <script type="text/javascript" src="../../js/daterangpicker.js"></script>
     <script type="text/javascript">
-      $(document).ready(function() {
-         $('#reservation').daterangepicker(null, function(start, end, label) {
-           console.log(start.toISOString(), end.toISOString(), label);
-         });
+      $(document).ready(function () {
+        $("#reservation").daterangepicker(null, function (start, end, label) {
+          console.log(start.toISOString(), end.toISOString(), label);
+        });
       });
-      </script>
+    </script>
   </body>
 </html>

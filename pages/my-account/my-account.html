@@ -12,7 +12,7 @@
   <title>my-orders</title>
 </head>
 
-<body>
+<body id = "myAccountPage">
 <nav class="navbar navbar-expand-md navbar-light fixed-top">
   <div class="row">
     <div class="col-md-3">
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="col-1">
-      <a href="../login/index.html" class="btn btn-outline-primary">Logga in</a>
+      <a type="button" class="btn btn-outline-primary" id= "login-btn" href="../../index.html" >Logga ut</a>
     </div>
     <div class="col-1">
       <div class="dropdown">
@@ -328,9 +328,21 @@
     </div>
   </footer>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
     crossorigin="anonymous"></script>
+  
+  <script>
+
+    $("#login-btn").click(function(){
+      sessionStorage.removeItem("customer")
+    })
+    
+  </script>
 
 </body>
 

@@ -2,7 +2,7 @@
 $(document).ready(run)
 
 function run() {
-    load()
+    getCart()
     getLoggedInCustomer()
 
     /**
@@ -25,18 +25,9 @@ function run() {
     $('#gridCheck').click(e => e.target.checked ? getAddressInfo() : clearAddressInfo())
     $('#send-order-btn').click(validateInput)
 
-
-    function load() {
-        let cartTestUrl = '../../TestData/test_data_cart.JSON'
-        fetch(cartTestUrl)
-          .then((response) => response.json())
-          .then((data) => renderCart(data))
-          .catch((error) => console.error(error));
-
-          /** 
-           * let data = getCartFromLocalStorage()
-           * renderCart(data)
-           */
+    function getCart() {
+            let data = getCartFromLocalStorage()
+            renderCart(data)
     }
 
     /**
@@ -58,7 +49,7 @@ function run() {
     $.each(data, (index, e) => {
         cart.append(`
         <div class="row pt-2 line-item-border">
-            <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${e.productNummer}</p></div>
+            <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${e.productNr}</p></div>
             <div class="col col-xs-2 col-lg-4 cart-line-item"><p>${e.title}</p></div>
             <div class="col col-xs-1 col-lg-1 cart-line-item"><p class="line-item-total-quantity">${e.inCart}</p></div>
             <div class="col col-xs-2 col-lg-2 cart-line-item"><p>${e.price.toFixed(2)}</p></div>
@@ -69,7 +60,7 @@ function run() {
 
     let totalPrice = 0;
     $.each($('.line-item-total-price'),(index, e) => totalPrice += parseFloat(e.innerText))
-    $('#cart-total-price').text(totalPrice);
+    $('#cart-total-price').text(totalPrice.toFixed(2));
 
     let totalInCart = 0;
     $.each($('.line-item-total-quantity'),(index, e) => totalInCart += parseInt(e.innerText))
@@ -94,7 +85,6 @@ function run() {
      * @param {Array} data customers from the databas
      */
     function renderCustomerInfo(data) {
-
         /**
          * remove this when testing is over
          * cause the loggedInUser is allready saved 
@@ -165,33 +155,6 @@ function run() {
     }
 
     /**
-    * Take a function to test for from validate.js,
-    * and a input field to test value from
-    * changes the border of the inputfield according 
-    * to if it passes(green border) or not(red border)
-    * @param {function} toTestFor 
-    * @param {jQuery inputfield} input 
-    * @returns false or current bool value from input
-    */
-    function checkForInput(toTestFor, input, bool) {
-       if(toTestFor(input.val()) && input.val() != '') {
-           input.css("border", "3px solid #34F458") 
-           return bool
-       }else {
-           input.css("border", "3px solid #F90A0A")
-           return false
-       }
-    }
-
-    /**
-     * Resets the border to the orignal color
-     * @param {jQuery inputfield} inputField 
-     */
-     function resetBorder(inputField) {
-        inputField.css("border", "1px solid #ced4da")
-    }
-
-    /**
      * Validates the inputfields and changes color of the 
      * border of the inputfield according to the answer
      * true(green)/false(red) and gives the correct message
@@ -204,7 +167,7 @@ function run() {
         bool = checkForInput(testForOnlyText, firstName, bool)
         bool = checkForInput(testForOnlyText, lastName, bool)
         bool = checkForInput(testForEmail, email, bool)
-        bool = checkForInput(testForPhoneNumber,phone, bool)
+        bool = checkForInput(testForNumbersOnly,phone, bool)
         bool = checkForInput(testForAddress, address, bool)
         bool = checkForInput(testForZipCode, zip, bool)
         bool = checkForInput(testForOnlyText, city,bool)
@@ -218,9 +181,9 @@ function run() {
                     title: "Tack för din order!",
                     text: `
                     \nLeverans adress
-                    \n${address2.val()}
-                    \n${city2.val()}
-                    \n${zip2.val()}`,
+                    \n${address.val()}
+                    \n${city.val()}
+                    \n${zip.val()}`,
                     icon: "success",
                     button: "Ok",
                   });
@@ -229,9 +192,9 @@ function run() {
                     title: "Tack för din order!",
                     text: `
                     \nLeverans adress
-                    \n${address.val()}
-                    \n${city.val()}
-                    \n${zip.val()}`,
+                    \n${address2.val()}
+                    \n${city2.val()}
+                    \n${zip2.val()}`,
                     icon: "success",
                     button: "Ok",
                   });
@@ -239,6 +202,8 @@ function run() {
               clearAllInputFields()
                     // todo logga beställningar med överstående adress
                     // tömma localStorage från varukorg och rendera tom varukorg för kund
+            localStorage.clear()
+            renderCart()
         }else{
             swal({
                 title: "Ops, något gick fel!",
