@@ -6,7 +6,6 @@
   box-sizing: border-box;
 }
 
-
 /* Global styles */
 a {
   text-decoration: none;
@@ -21,10 +20,19 @@ button {
 
 nav {
   min-height: 10vh;
-  display: flex;
+  /* display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: center; */
   background-color: rgb(201, 201, 201);
+}
+
+img.nav-image {
+  height: 90px;
+  width: auto;
+}
+
+.product-search {
+  width: 15rem;
 }
 
 nav #links a {
@@ -40,6 +48,9 @@ footer a {
   color: white;
 }
 
-#navbar-margin{
+#navbar-margin {
   margin-top: 15vh;
+}
+.shop-body {
+  margin-top: 20rem;
 }
