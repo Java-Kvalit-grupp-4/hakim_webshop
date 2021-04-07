@@ -13,7 +13,7 @@ let whichPage = $("#login-page");
     $(document).ready(load)
 
     function load() {
-      fetch("./TestData/test_data_products_v1.2.JSON")
+        fetch("./TestData/test_data_products_v1.2.JSON")
         .then((response) => response.json())
         .then((data) => render(data))
         .catch((error) => console.error(error));
@@ -23,6 +23,9 @@ let whichPage = $("#login-page");
       let customer = sessionStorage.getItem("customer") || "";
       if(customer.length>0){
         loginButton1.text("Logga ut");
+        $('#myAccountDropdown').show()
+      }else{
+        $('#myAccountDropdown').hide()
       }
       products = data;
 
@@ -149,6 +152,7 @@ $("#login-btn").on("click", function() {
   }
   else{
       sessionStorage.removeItem("customer")
+      $('#myAccountDropdown').hide()
       $(this).text("Logga in")
   }
 });
@@ -213,6 +217,7 @@ function checkUsernameAndPassword(){
                 else{
                     console.log("Du är inloggad som VIP kund")
                 }
+                $('#myAccountDropdown').show()
             }
             else{
                 console.log("Du är inloggad som admin")

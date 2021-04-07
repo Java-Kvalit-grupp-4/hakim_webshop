@@ -2,6 +2,7 @@
 $(document).ready(run)
 
 function run() {
+    
     getCart()
     getLoggedInCustomer()
 
@@ -90,9 +91,10 @@ function run() {
          * cause the loggedInUser is allready saved 
          * in localstorage when the customer loggs in
          */
-        localStorage.setItem('loggedInUser', JSON.stringify(data[0]))
+        //localStorage.setItem('loggedInUser', JSON.stringify(data[0]))
  
-        let loggedInCustomer =  JSON.parse(localStorage.getItem('loggedInUser'))
+        //let loggedInCustomer =  JSON.parse(localStorage.getItem('loggedInUser'))
+        let loggedInCustomer =  JSON.parse(sessionStorage.getItem('customer'))
 
         firstName.val(loggedInCustomer.first_name);
         lastName.val(loggedInCustomer.last_name);
