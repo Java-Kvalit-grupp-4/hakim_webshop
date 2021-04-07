@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/bootstrap.css" />
     <link rel="stylesheet" href="./styles/register.css" />
+    <link rel="stylesheet" href="./styles/cart-pop-up.css">
     <title>Hakim's Livs homepage</title>
   </head>
 
@@ -95,11 +96,12 @@
                 type="button"
                 id="cartDropdown"
                 data-bs-toggle="modal"
+                data-bs-target="#cart-pop-up"
                 aria-expanded="false"
               >
                 Varukorg&nbsp;&nbsp;<span
                   class="badge badge-pill bg-danger"
-                  id="cart-label-2"
+                  id="total-items-in-cart"
                   style="display: inline"
                   >2</span
                 >
@@ -111,7 +113,7 @@
     </nav>
 
     <!-- navbar end -->
-
+    <div class="container-fluid">
     <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
       <div class="col-sm-2">
         <div class="list-group">
@@ -149,6 +151,7 @@
         <img src="https://picsum.photos/300/1000" alt="" />
       </div>
     </div>
+  </div>
 
     <footer class="bg-dark text-center text-lg-start">
       <div class="container p-4 justify-content-center">
@@ -471,6 +474,57 @@
       </div>
     </div>
 
+    <!-- cart modal -->
+    <div 
+    class="modal fade" 
+    id="cart-pop-up"
+    data-bs-backdrop="static" 
+    data-bs-keyboard="false" 
+    tabindex="-1" 
+    aria-labelledby="staticBackdropLabel" 
+    aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" style="min-width: 1000px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Varukorg</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+      </div>
+      <!--modal-header ends-->
+      <div class="modal-body">
+        <table class="table table-secondary">
+          <thead>
+            <tr class="table-default">
+              <th scope="col">Papperskorg</th>
+              <th scope="col">Produkt</th>
+              <th scope="col"></th>
+              <th scope="col">á pris</th>
+              <th scope="col"></th>
+              <th scope="col">Antal</th>
+              <th scope="col"></th>
+              <th scope="col">Totalt</th>
+            </tr>
+          </thead>
+          <tbody id="productsInCart"></tbody>
+        </table>
+      </div>
+      <!--modal-body ends-->
+      <div class="modal-footer">
+        <p>Totalt pris</p>
+        <p id="cartTotalPrice"></p>
+        <button type="button" class="btn btn-secondary" id="clear">Rensa varukorg</button>
+        <a href="./pages/checkout/">
+          <button type="button" class="btn btn-primary">Till kassan</button>
+          </a>
+      </div>
+      <!--modal-footer ends-->
+    </div>
+    <!--modal-content ends-->
+  </div>
+  <!--modal-dialog ends-->
+</div>
+<!-- cart modal ends -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
@@ -488,5 +542,6 @@
     <script src="../../js/validate.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/homepage.js"></script>
+    <script src="./js/cart-pop-up.js"></script>
   </body>
 </html>
