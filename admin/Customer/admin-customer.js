@@ -28,20 +28,18 @@ function showCustomers(customerArr){
         let personalNumber = e.social_security_number;
         let firstNr = personalNumber.substring(0,6);
         let lastNr = personalNumber.substring(6);
-
-    
         $("#customerTable").append(`
-        <tr>
-        <th scope="row"><a href="#nav-contact" class="customer-tab">${e.id}</a></th>
-        <td>${e.first_name}</td>
-        <td>${e.last_name}</td>
-        <td>${firstNr}-${lastNr}</td>
-        <td>${e.email}</td>
-        <td>${getNumberOfOrders(e.id)}</td>
-        <td>${getTotalPriceOfOrders(e.id).toFixed(2)} kr</td>
-        <td><i class="bi ${isVip}"></i></td>
-        </tr>
-        `
+            <tr>
+                <th scope="row"><a href="#" class="customer-tab">${e.id}</a></th>
+                <td>${e.first_name}</td>
+                <td>${e.last_name}</td>
+                <td>${firstNr}-${lastNr}</td>
+                <td><a href="mailto:${e.email}">${e.email}</a></td>
+                <td>${getNumberOfOrders(e.id)}</td>
+                <td>${getTotalPriceOfOrders(e.id).toFixed(2)} kr</td>
+                <td><i class="bi ${isVip}"></i></td>
+            </tr>
+            `
         )})
 }
 
@@ -63,6 +61,8 @@ function saveCustomer(id){
             $("#customer-street").val(e.adress)
             $("#customer-city").val(e.city.name)
             $("#customer-zip").val(e.city.zipcode)
+            showOrders(e.id);
+
         }
     })
 }
@@ -81,7 +81,7 @@ function getTotalPriceOfOrders(id){
     let sum = 0;
     orders.forEach(e => {
         if(e.user.id==id){
-            sum += e.total_cost;
+            sum += e.totalCost;
         }
     })
     return sum;
@@ -113,5 +113,28 @@ function filterSearch(){
         //case 'Födelsedag':
     }
 };
+
+function showOrders(id){
+    orders.forEach(e => {
+        if(e.user.id == id){
+            let isPaid = "Obetalad";
+            if(e.isPaid){
+                isPaid ="Betalad"
+            }
+            $("#orderTable").append(`
+                <tr>
+                    <th scope="row" class="col-3">
+                    <a href="#">${e.orderId}</a>
+                    </th>
+                    <td class="col-2">${e.status.type}</td>
+                    <td class="col-2">${isPaid}</td>
+                    <td class="col-3">2021-03-13</td>
+                    <td class="col-2">${e.totalCost}</td>
+                </tr>`
+            )
+        }
+    })
+    
+}
 
     
