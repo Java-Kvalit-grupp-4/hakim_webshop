@@ -39,6 +39,8 @@ function renderCart(){
             </tr>`
     });
 
+    $('#cartTotalPrice').text(JSON.parse(localStorage.getItem('cartTotalPrice')).toFixed(2))
+
     $.each($('.trashcan-center'), function(index, e){
       e.addEventListener('click', e => {
         console.log(e.target)
@@ -50,42 +52,56 @@ function renderCart(){
 }
 
 function addProduct(product){
-    //uppdatera antalet
     let cartTemp = JSON.parse(localStorage.getItem("cart"));
-    console.log("funkar detta?")
-    console.log(cartTemp)
-    console.log(product)
     cartTemp.forEach(element => {
       if (element.productNr == product){
-        console.log("inne i if")
         element.inCart += 1
+        saveTotalPrice(element)
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
     updateCartQuantity()
+    $('#cartTotalPrice').text(JSON.parse(localStorage.getItem('cartTotalPrice')).toFixed(2))
 }
 
 function removeProduct(product) {
-    //uppdatera antalet
     let cartTemp = JSON.parse(localStorage.getItem("cart"));
-    console.log("funkar detta?")
-    console.log(cartTemp)
-    console.log(product)
     cartTemp.forEach(element => {
       if (element.productNr == product){
-        if (element.inCart !== 0){
-        console.log("inne i if")
+        if (element.inCart !== 1){
         element.inCart -= 1
+        removeFromTotalPrice(element)
         }
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
     updateCartQuantity()
+    $('#cartTotalPrice').text(JSON.parse(localStorage.getItem('cartTotalPrice')).toFixed(2))
+    
     }
+
+ /**
+  * Take an object and add price to totalprice
+  * @param {object} product 
+  */
+function addToTotalPrice(product) {
+  let totalPrice = JSON.parse(localStorage.getItem('cartTotalPrice'))
+  totalPrice += product.price
+  localStorage.setItem('cartTotalPrice', JSON.stringify(totalPrice))
+  
+}
+
+/**
+  * Take an object and remove price to totalprice
+  * @param {object} product 
+  */
+function removeFromTotalPrice(product) {
+  let totalPrice = JSON.parse(localStorage.getItem('cartTotalPrice'))
+  totalPrice -= product.price
+  localStorage.setItem('cartTotalPrice', JSON.stringify(totalPrice))
+}
 
     function updateCartQuantity(){
       let cartTemp = JSON.parse(localStorage.getItem("cart"));
-      console.log("utanför foreach, update")
       cartTemp.forEach(element => {
-        console.log("inne i foreach, update")
         document.querySelector(`.quantity${element.productNr}`).textContent = element.inCart
         document.querySelector(`.price${element.productNr}`).textContent = (element.price * element.inCart).toFixed(2)
       }); 

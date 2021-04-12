@@ -75,3 +75,11 @@
 svg {
   pointer-events: none;
 }
+
+.total-price-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.total-price-container p {
+  margin: 0rem 1rem;
+}
