@@ -75,6 +75,7 @@ function loadProducts() {
     });
 
     $("#choose").click(function () {
+      
       $("#column div input").replaceWith(function () {
         return `
         <input class="form-check-input me-3" type="checkbox" value="">`
@@ -98,7 +99,10 @@ function loadProducts() {
           }
         });
       });
-      alert("Produkten är vald. Gå till Produktsida.")
+      $("#tab-product-site").tab("show");
+    });
+    $("#new").click(function () {
+      $("#tab-product-site").tab("show");
     });
   }
 }
