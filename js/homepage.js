@@ -118,7 +118,7 @@ function getProducts(list) {
             if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
               document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent -= 1;
               }
-            }
+            
           })
         })
       })
