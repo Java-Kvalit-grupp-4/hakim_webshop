@@ -4,15 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../styles/style.css" />
     <link rel="stylesheet" href="../../styles/bootstrap.css" />
+    <link rel="stylesheet" href="../../styles/style.css" />
     <link rel="stylesheet" href="style-info.css" />
     <title>Admin-Information</title>
   </head>
 
   <body>
     <nav>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+        id="navbar"
+      >
         <div class="container-fluid">
           <a class="navbar-brand" href="../index.html" id="nav-home">ADMIN</a>
           <button
@@ -26,7 +29,10 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div
+            class="collapse navbar-collapse mt-4 mt-lg-0"
+            id="navbarSupportedContent"
+          >
             <form class="d-flex mx-3">
               <select
                 class="form-select form-select-sm mx-22"
@@ -93,82 +99,105 @@
 
     <div class="container mt-4 mb-5">
       <div class="row">
-        <div class="col-lg-3 me-5">
+        <div class="col-lg-5 col-xl-5 ms-lg-5 me-lg-3">
           <h4 class="mt-3 mb-4">Öppettider</h4>
           <form>
-            <label for="opening-hours" class="form-label"
-              >Öppettider (fritext)</label
-            >
-            <textarea class="form-control" id="opening-hours" rows="5">
+            <div class="row">
+              <label for="opening-hours" class="form-label "
+                >Öppettider (fritext)</label
+              >
+              <textarea class="form-control" id="opening-hours" rows="5">
             Måndag-torsdag: 08:00-21:00
             Fredag: 08:00-19:00
             Lördag: 10:00-19:00
             Söndag: 10:00-18:00
           </textarea
-            >
-
-            <label for="deviating-hours" class="form-label mt-2"
-              >Avvikande öppetider</label
-            >
-            <textarea class="form-control" id="deviating-hours" rows="5">
-            </textarea>
-            <button class="btn btn-secondary mt-3" id="btnOpeningHours">
-              Spara öppettider
-            </button>
+              >
+            </div>
+            <div class="row">
+              <label for="deviating-hours" class="form-label my-3"
+                >Avvikande öppetider</label
+              >
+              <textarea class="form-control" id="deviating-hours" rows="5">
+              </textarea>
+            </div>
+            <div class="row">
+              <button class="btn btn-secondary mt-3" id="btnOpeningHours">
+                Spara öppettider
+              </button>
+            </div>
           </form>
           <form>
-            <h4 class="my-4">Kontaktuppgifter till butiken</h4>
+            <div class="row">
+              <h4 class="my-4">Kontaktuppgifter till butiken</h4>
 
-            <label for="info-address" class="form-label">Gatuadress</label>
-            <input type="text" class="form-control" id="info-address" />
-            <label for="info-zip" class="form-label">Postnummer</label>
-            <input type="text" class="form-control" id="info-zip" />
-            <label for="info-city" class="form-label">Ort</label>
-            <input type="text" class="form-control" id="info-city" />
-            <label for="info-telefon" class="form-label">Telefonnummer</label>
-            <input type="text" class="form-control" id="info-telefon" />
-            <label for="info-email" class="form-label">Email</label>
-            <input type="text" class="form-control" id="email" />
-            <button class="btn btn-secondary mt-3" id="btnContact">
-              Spara kontaktuppgifter
-            </button>
+              <label for="info-address" class="form-label">Gatuadress</label>
+              <input type="text" class="form-control" id="info-address" />
+              <label for="info-zip" class="form-label">Postnummer</label>
+              <input type="text" class="form-control" id="info-zip" />
+              <label for="info-city" class="form-label">Postort</label>
+              <input type="text" class="form-control" id="info-city" />
+              <label for="info-phone" class="form-label">Telefonnummer</label>
+              <input type="text" class="form-control" id="info-phone" />
+              <label for="info-email" class="form-label">Email</label>
+              <input type="text" class="form-control mb-2" id="info-email" />
+              <button class="btn btn-secondary mt-3" id="btnContact">
+                Spara kontaktuppgifter
+              </button>
+            </div>
           </form>
         </div>
         <!--slutar col-->
         <!--slutar form-check-->
 
-        <div class="col-lg-3"></div>
         <!--slutar col-->
-        <div class="col-lg-5">
-          <h4 class="mt-4 mb-4">Beskrivning av Hakim Livs</h4>
+        <div class="col-lg-5 col-xl-6">
+          <div class="row">
+            <h4 class="mt-3 mb-5">Beskrivning av Hakim Livs</h4>
 
-          <textarea
-            class="form-control mb-3"
-            id="descripion"
-            rows="10"
-          ></textarea>
-          <button class="btn btn-secondary" id="btnDescription">
-            Spara ändringar
-          </button>
-          <label for="img" class="form-label d-flex justify-content-start mt-5"
-            >Bild</label
-          >
-          <img src="https://picsum.photos/300" alt="img" />
+            <textarea
+              class="form-control mt-2"
+              id="description"
+              rows="13"
+            ></textarea>
+          <!-- </div>
+          <div class="row"> -->
+            <button class="btn btn-secondary mt-3" id="btnDescription">
+              Spara ändringar
+            </button>
+          </div>
 
-          <input class="my-4" type="file" accept=".jpg,.jpeg,.png,.gif" />
-          <button
-            class="btn btn-secondary d-flex justify-content-start mt-3"
-            id="btnPicture"
-          >
-            Ladda upp
-          </button>
+          <div class="row ">
+            <h4 class="mt-4 mt-lg-4 mb-5">Bild</h4>
+            <div class="container ">
+              <img src="" alt="img" id="about-image" />
+            </div>
+            <div class="input-group mb-3 mt-5">
+              <input
+                type="file"
+                accept=".jpg,.jpeg,.png,.gif"
+                class="form-control"
+                id="inputGroupFile02"
+              />
+              <button class="btn btn-secondary" id="btnPicture">
+                Ladda upp
+              </button>
+              <!-- <label class="input-group-text" for="inputGroupFile02"
+                >Ladda upp</label
+              > -->
+            </div>
+          </div>
         </div>
         <!--slutar col-->
       </div>
       <!--slutar row-->
     </div>
     <!--slutar container-->
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../../js/admin-information.js"></script>
   </body>
