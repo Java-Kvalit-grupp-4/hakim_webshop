@@ -91,87 +91,76 @@
       </nav>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container mt-4 mb-5">
       <div class="row">
-        <div class="col-sm-3 me-5">
-          <h5>Öppetider</h5>
-          <label for="open" class="form-label mt-3">Öppnar</label>
-          <input type="text" class="form-control" id="open" />
-          <label for="close" class="form-label mt-2">Stänger</label>
-          <input type="text" class="form-control" id="close" />
-          <label for="deviating" class="form-label mt-2"
-            >Avvikande öppetider</label
-          >
-          <textarea class="form-control" id="deviating" rows="5"></textarea>
-          <label for="contact" class="form-label fs-5 mt-5"
-            >Kontaktuppgifter till butiken</label
-          >
-          <label for="address" class="form-label">Adress</label>
-          <input type="text" class="form-control" id="address" />
-          <label for="post" class="form-label">Postnummer</label>
-          <input type="text" class="form-control" id="post" />
-          <label for="city" class="form-label">Ort</label>
-          <input type="text" class="form-control" id="city" />
-          <label for="telefon" class="form-label">Telefonnummer</label>
-          <input type="text" class="form-control" id="telefon" />
-          <label for="email" class="form-label">Email</label>
-          <input type="text" class="form-control" id="email" />
+        <div class="col-lg-3 me-5">
+          <h4 class="mt-3 mb-4">Öppettider</h4>
+          <form>
+            <label for="opening-hours" class="form-label"
+              >Öppettider (fritext)</label
+            >
+            <textarea class="form-control" id="opening-hours" rows="5">
+            Måndag-torsdag: 08:00-21:00
+            Fredag: 08:00-19:00
+            Lördag: 10:00-19:00
+            Söndag: 10:00-18:00
+          </textarea
+            >
+
+            <label for="deviating-hours" class="form-label mt-2"
+              >Avvikande öppetider</label
+            >
+            <textarea class="form-control" id="deviating-hours" rows="5">
+            </textarea>
+            <button class="btn btn-secondary mt-3" id="btnOpeningHours">
+              Spara öppettider
+            </button>
+          </form>
+          <form>
+            <h4 class="my-4">Kontaktuppgifter till butiken</h4>
+
+            <label for="info-address" class="form-label">Gatuadress</label>
+            <input type="text" class="form-control" id="info-address" />
+            <label for="info-zip" class="form-label">Postnummer</label>
+            <input type="text" class="form-control" id="info-zip" />
+            <label for="info-city" class="form-label">Ort</label>
+            <input type="text" class="form-control" id="info-city" />
+            <label for="info-telefon" class="form-label">Telefonnummer</label>
+            <input type="text" class="form-control" id="info-telefon" />
+            <label for="info-email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" />
+            <button class="btn btn-secondary mt-3" id="btnContact">
+              Spara kontaktuppgifter
+            </button>
+          </form>
         </div>
         <!--slutar col-->
-        <div class="col-sm-3">
-          <label for="dayz" class="form-label fs-5 mb-4">Dagar</label>
-          <div class="form-check mb-2">
-            <input
-              class="form-check-input me-3"
-              type="checkbox"
-              value=""
-              id="weekday"
-            />
-            <label class="form-check-label" for="weekday">Vardagar</label>
-          </div>
-          <!--slutar form-check-->
-          <div class="form-check mb-2">
-            <input
-              class="form-check-input me-3"
-              type="checkbox"
-              value=""
-              id="saturday"
-            />
-            <label class="form-check-label" for="saturday">Lördag</label>
-          </div>
-          <!--slutar form-check-->
-          <div class="form-check mb-5">
-            <input
-              class="form-check-input me-3"
-              type="checkbox"
-              value=""
-              id="sunday"
-            />
-            <label class="form-check-label" for="sunday">Söndag</label>
-          </div>
-          <!--slutar form-check-->
-          <button id="btnOpeningHours">Spara ändringar</button>
-          <button id="btnContact" style="margin-top: 532px">
-            Spara ändringar
-          </button>
-        </div>
+        <!--slutar form-check-->
+
+        <div class="col-lg-3"></div>
         <!--slutar col-->
-        <div class="col-sm-5">
-          <label for="describing" class="form-label fs-5"
-            >Beskrivning av Hakim Livs</label
-          >
+        <div class="col-lg-5">
+          <h4 class="mt-4 mb-4">Beskrivning av Hakim Livs</h4>
+
           <textarea
             class="form-control mb-3"
             id="descripion"
             rows="10"
           ></textarea>
-          <button id="btnDescription">Spara ändringar</button>
+          <button class="btn btn-secondary" id="btnDescription">
+            Spara ändringar
+          </button>
           <label for="img" class="form-label d-flex justify-content-start mt-5"
             >Bild</label
           >
           <img src="https://picsum.photos/300" alt="img" />
-          <button class="d-flex justify-content-start mt-3" id="btnPicture">
-            Ladda up
+
+          <input class="my-4" type="file" accept=".jpg,.jpeg,.png,.gif" />
+          <button
+            class="btn btn-secondary d-flex justify-content-start mt-3"
+            id="btnPicture"
+          >
+            Ladda upp
           </button>
         </div>
         <!--slutar col-->
