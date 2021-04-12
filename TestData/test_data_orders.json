@@ -18,7 +18,7 @@
         "zipcode": "12345"
       }
     },
-    "orderTimestamp": 1,
+    "orderTimestamp": "2021-03-14",
     "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
     "totalCost": 86,
     "isPaid": true,
