@@ -6,7 +6,6 @@
 
 $('form').submit(false)
 
-
 let firstName = $('#my-info-first-name'),
 lastName = $('#my-info-last-name'),
 email = $('#my-info-email'),
@@ -25,7 +24,6 @@ PHONE_NUMBER_ERROR_MSG = $('#PHONE_NUMBER_ERROR_MSG'),
 ADDRESS_ERROR_MSG = $('#ADDRESS_ERROR_MSG'),
 ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
 CITY_ERROR_MSG = $('#CITY_ERROR_MSG')
-
 
 
 /**
