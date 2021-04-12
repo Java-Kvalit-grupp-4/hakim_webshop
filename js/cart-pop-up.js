@@ -41,22 +41,39 @@ function renderCart(){
 
     $('#cartTotalPrice').text(JSON.parse(localStorage.getItem('cartTotalPrice')).toFixed(2))
 
-    $.each($('.trashcan-center'), function(index, e){
-      e.addEventListener('click', e => {
-        console.log(e.target)
-        let removed = cart.filter(product => product.productNr !== e.target.id)
-        localStorage.setItem("cart", JSON.stringify(removed))
-        renderCart()
+    $.each($('.trashcan-center'), function(index, el){
+      el.addEventListener('click', e => {
+        swal({
+          title: "Warning",
+          text: "Vill du verklingen ta bort denna produkt från varukorgen?",
+          icon: "warning",
+          dangerMode: true,
+          buttons: ["Ja", "Nej"],
+        })
+        .then((willDelete) => {
+          if (!willDelete) {
+
+            swal("Produkten är borttagen", {
+              icon: "success",
+            })
+            renderCart()
+          } else {
+            swal("Produkten ej borttagen från varukorgen");
+          }
+        })
+        
+        
       })
     })
 }
+
 
 function addProduct(product){
     let cartTemp = JSON.parse(localStorage.getItem("cart"));
     cartTemp.forEach(element => {
       if (element.productNr == product){
         element.inCart += 1
-        saveTotalPrice(element)
+        addToTotalPrice(element)
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
     updateCartQuantity()
@@ -95,6 +112,7 @@ function addToTotalPrice(product) {
   */
 function removeFromTotalPrice(product) {
   let totalPrice = JSON.parse(localStorage.getItem('cartTotalPrice'))
+  console.log(product.inCart);
   totalPrice -= product.price
   localStorage.setItem('cartTotalPrice', JSON.stringify(totalPrice))
 }
