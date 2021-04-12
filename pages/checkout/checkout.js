@@ -95,13 +95,15 @@ function run() {
  
         //let loggedInCustomer =  JSON.parse(localStorage.getItem('loggedInUser'))
         let loggedInCustomer =  JSON.parse(sessionStorage.getItem('customer'))
+        let zipCode = `${loggedInCustomer.city.zipcode.substring(0,3)} ${loggedInCustomer.city.zipcode.substring(3)}`
+        let phoneNumber = `${loggedInCustomer.phone_number.substring(0,3)}-${loggedInCustomer.phone_number.substring(3,6)} ${loggedInCustomer.phone_number.substring(6,8)} ${loggedInCustomer.phone_number.substring(8)}`
 
         firstName.val(loggedInCustomer.first_name);
         lastName.val(loggedInCustomer.last_name);
         email.val(loggedInCustomer.email);
-        phone.val(loggedInCustomer.phone_number);
+        phone.val(phoneNumber);
         address.val(loggedInCustomer.adress);
-        zip.val(loggedInCustomer.city.zipcode);
+        zip.val(zipCode);
         city.val(loggedInCustomer.city.name);
     }
 
