@@ -1,6 +1,6 @@
 let orders = [];
 
-/* $(function () {
+ /* $(function () {
   fetch("../../TestData/test_data_orders.json")
     .then((response) => response.json())
     .then((response) => (orders = response))
@@ -22,7 +22,32 @@ function renderOrders(orders) {
   });
   console.log(output);
   $("#order-output").append(output);
-} */
+}  */
+
+/* $(function () {
+  fetch("../../TestData/test_data_orders.json")
+    .then((response) => response.json())
+    .then((response) => renderOrders(response))
+});
+
+function renderOrders(response) {
+  orders = response
+  let output = ""; 
+  orders.forEach((element) => {
+    const paidString = element.isPaid ? "Mottagen" : "Väntar på betalning";
+    output += `
+      <tr>
+          <th scope="row" class="ps-md-5"><a href="#">${element.orderId}</a> </th>
+          <th scope="row" class="ps-md-5"><a href="#">${element.user.id}</a> </th>
+          <td>${element.orderTimestamp}</td>
+          <td>${element.totalCost} kr</td>
+          <td>${element.status.type}</td>
+          <td>${paidString}</td>
+      </tr>
+      `
+  });
+  $('#orders-container').append(output);
+}  */
 
 $(document).ready(() => {
 
@@ -30,13 +55,12 @@ $(document).ready(() => {
    * Cacha variabels
    */
   let orderContainer = $('#orders-container')
+  let urlToOrders = "../../TestData/test_data_orders.json"
 
-  let urlToOrders = "../../TestData/test_data_orders.json";
-
-/**
- * Get All Orders from url
- */
-$.getJSON(urlToOrders, (response) => {
+  /**
+   * Renders response from url
+   */
+ $.getJSON(urlToOrders, (response) => {
   $.each(response, (index, element) => {
     orderContainer.append(`
         <tr>
@@ -51,4 +75,6 @@ $.getJSON(urlToOrders, (response) => {
     )
   })
 })
-})
+})  
+
+
