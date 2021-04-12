@@ -29,13 +29,13 @@ function renderCart(){
               </svg> </td>
                 <td scope="row">${element.title}</td>
                 <td scope="row"><img class="cart-thumbnail" src="${element.image} alt="Product picture"</td>
-                <td scope="row">${element.price}</td>
+                <td scope="row">${element.price.toFixed(2)} kr</td>
                 <div>
                 <td><button type="button" class="shadow-button" onclick="removeProduct(${element.productNr})">-</td>    
                 <td id="quantityInCart"><div class="quantity${element.productNr}">${element.inCart}</div></td>
                     <td><button type="button" class="shadow-button" onclick="addProduct(${element.productNr})">+</td>
                 </div>
-                <td id="${element.productNr}" class="price${element.productNr}">${(element.price * element.inCart).toFixed(2)}</td>
+                <td id="${element.productNr}" class="price${element.productNr}">${(element.price * element.inCart).toFixed(2)} kr</td>
             </tr>`
     });
 
