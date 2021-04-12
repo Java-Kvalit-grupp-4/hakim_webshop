@@ -53,8 +53,8 @@ function run() {
             <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${e.productNr}</p></div>
             <div class="col col-xs-2 col-lg-4 cart-line-item"><p>${e.title}</p></div>
             <div class="col col-xs-1 col-lg-1 cart-line-item"><p class="line-item-total-quantity">${e.inCart}</p></div>
-            <div class="col col-xs-2 col-lg-2 cart-line-item"><p>${e.price.toFixed(2)}</p></div>
-            <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(e.price * e.inCart).toFixed(2)}</p></div>
+            <div class="col col-xs-2 col-lg-2 cart-line-item"><p>${e.price.toFixed(2)} kr</p></div>
+            <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(e.price * e.inCart).toFixed(2)} kr</p></div>
         </div>
         `)
     })
