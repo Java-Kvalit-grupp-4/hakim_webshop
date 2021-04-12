@@ -1,15 +1,15 @@
 [
   {
-    "order_id": 1,
+    "orderId": 1,
     "user": {
       "id": "001",
-      "first_name": "Kalle",
-      "last_name": "Anka",
-      "phone_number": "0701234567",
+      "firstName": "Kalle",
+      "lastName": "Anka",
+      "phoneNumber": "0701234567",
       "email": "kalle@anka.se",
       "adress": "Ankeborgsstigen 31",
       "password": "KalleAnka1",
-      "social_security_number": "5511220331",
+      "socialSecurityNumber": "5511220331",
       "admin": "false",
       "vip": "false",
       "city": {
@@ -19,69 +19,69 @@
       }
     },
     "order_timestamp": 1,
-    "customer_comment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
-    "total_cost": 86,
-    "is_payed": true,
+    "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
+    "totalCost": 86,
+    "isPaid": true,
     "status": {
-      "status_id": 4,
-      "status_timestamp": "2021-01-20 09:05:03",
+      "statusId": 4,
+      "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },
     "change": [
       {
-        "change_id": 1,
+        "changeId": 1,
         "change_date": "2021-01-20 09:10:41",
         "description": "1 Havregryn tillagd"
       }
     ],
-    "line_items": [
+    "lineItems": [
       {
-        "line_item_id": 1,
+        "lineItemId": 1,
         "product": {
           "id": 1,
           "productNr": "32410001",
           "title": "Havregryn",
           "description": "Gott till kokosbollar och havregrynsgröt",
           "brand": "Axa",
-          "wieght/volym": "750",
+          "weight/volume": "750",
           "image": "https://picsum.photos/500?random=1",
           "price": 12,
           "category": "Skafferi"
         },
-        "order_id": 1,
+        "orderId": 1,
         "quantity": 3,
-        "line_cost": 36
+        "lineCost": 36
       },
       {
-        "line_item_id": 2,
+        "lineItemId": 2,
         "product": {
           "id": 2,
           "productNr": "32410002",
           "title": "Soltorkade tomater",
           "description": "Finaste soltorkade tomaterna från spanien",
           "brand": "Santa maria",
-          "wieght/volym": "280",
+          "weight/volume": "280",
           "image": "https://picsum.photos/500?random=2",
           "price": 25,
           "category": "Skafferi"
         },
-        "order_id": 1,
+        "orderId": 1,
         "quantity": 2,
-        "line_cost": 50
+        "lineCost": 50
       }
     ]
   },
   {
-    "order_id": 2,
+    "orderId": 2,
     "user": {
       "id": "001",
-      "first_name": "Kalle",
-      "last_name": "Anka",
-      "phone_number": "0701234567",
+      "firstName": "Kalle",
+      "lastName": "Anka",
+      "phoneNumber": "0701234567",
       "email": "kalle@anka.se",
       "adress": "Ankeborgsstigen 31",
       "password": "KalleAnka1",
-      "social_security_number": "5511220331",
+      "socialSecurityNumber": "5511220331",
       "admin": "false",
       "vip": "false",
       "city": {
@@ -91,69 +91,69 @@
       }
     },
     "order_timestamp": 1,
-    "customer_comment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
-    "total_cost": 86,
-    "is_payed": true,
+    "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
+    "totalCost": 86,
+    "isPaid": true,
     "status": {
-      "status_id": 4,
-      "status_timestamp": "2021-01-20 09:05:03",
+      "statusId": 4,
+      "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },
     "change": [
       {
-        "change_id": 1,
+        "changeId": 1,
         "change_date": "2021-01-20 09:10:41",
         "description": "1 Havregryn tillagd"
       }
     ],
-    "line_items": [
+    "lineItems": [
       {
-        "line_item_id": 1,
+        "lineItemId": 1,
         "product": {
           "id": 1,
           "productNr": "32410001",
           "title": "Havregryn",
           "description": "Gott till kokosbollar och havregrynsgröt",
           "brand": "Axa",
-          "wieght/volym": "750",
+          "weight/volume": "750",
           "image": "https://picsum.photos/500?random=1",
           "price": 12,
           "category": "Skafferi"
         },
-        "order_id": 2,
+        "orderId": 2,
         "quantity": 3,
-        "line_cost": 36
+        "lineCost": 36
       },
       {
-        "line_item_id": 2,
+        "lineItemId": 2,
         "product": {
           "id": 2,
           "productNr": "32410002",
           "title": "Soltorkade tomater",
           "description": "Finaste soltorkade tomaterna från spanien",
           "brand": "Santa maria",
-          "wieght/volym": "280",
+          "weight/volume": "280",
           "image": "https://picsum.photos/500?random=2",
           "price": 25,
           "category": "Skafferi"
         },
-        "order_id": 2,
+        "orderId": 2,
         "quantity": 2,
-        "line_cost": 50
+        "lineCost": 50
       }
     ]
   },
   {
-    "order_id": 3,
+    "orderId": 3,
     "user": {
       "id": "001",
-      "first_name": "Kalle",
-      "last_name": "Anka",
-      "phone_number": "0701234567",
+      "firstName": "Kalle",
+      "lastName": "Anka",
+      "phoneNumber": "0701234567",
       "email": "kalle@anka.se",
       "adress": "Ankeborgsstigen 31",
       "password": "KalleAnka1",
-      "social_security_number": "5511220331",
+      "socialSecurityNumber": "5511220331",
       "admin": "false",
       "vip": "false",
       "city": {
@@ -163,69 +163,69 @@
       }
     },
     "order_timestamp": 1,
-    "customer_comment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
-    "total_cost": 86,
-    "is_payed": true,
+    "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
+    "totalCost": 86,
+    "isPaid": true,
     "status": {
-      "status_id": 4,
-      "status_timestamp": "2021-01-20 09:05:03",
+      "statusId": 4,
+      "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },
     "change": [
       {
-        "change_id": 1,
+        "changeId": 1,
         "change_date": "2021-01-20 09:10:41",
         "description": "1 Havregryn tillagd"
       }
     ],
-    "line_items": [
+    "lineItems": [
       {
-        "line_item_id": 1,
+        "lineItemId": 1,
         "product": {
           "id": 1,
           "productNr": "32410001",
           "title": "Havregryn",
           "description": "Gott till kokosbollar och havregrynsgröt",
           "brand": "Axa",
-          "wieght/volym": "750",
+          "weight/volume": "750",
           "image": "https://picsum.photos/500?random=1",
           "price": 12,
           "category": "Skafferi"
         },
-        "order_id": 3,
+        "orderId": 3,
         "quantity": 3,
-        "line_cost": 36
+        "lineCost": 36
       },
       {
-        "line_item_id": 2,
+        "lineItemId": 2,
         "product": {
           "id": 2,
           "productNr": "32410002",
           "title": "Soltorkade tomater",
           "description": "Finaste soltorkade tomaterna från spanien",
           "brand": "Santa maria",
-          "wieght/volym": "280",
+          "weight/volume": "280",
           "image": "https://picsum.photos/500?random=2",
           "price": 25,
           "category": "Skafferi"
         },
-        "order_id": 3,
+        "orderId": 3,
         "quantity": 2,
-        "line_cost": 50
+        "lineCost": 50
       }
     ]
   },
   {
-    "order_id": 4,
+    "orderId": 4,
     "user": {
       "id": "001",
-      "first_name": "Kalle",
-      "last_name": "Anka",
-      "phone_number": "0701234567",
+      "firstName": "Kalle",
+      "lastName": "Anka",
+      "phoneNumber": "0701234567",
       "email": "kalle@anka.se",
       "adress": "Ankeborgsstigen 31",
       "password": "KalleAnka1",
-      "social_security_number": "5511220331",
+      "socialSecurityNumber": "5511220331",
       "admin": "false",
       "vip": "false",
       "city": {
@@ -235,55 +235,55 @@
       }
     },
     "order_timestamp": 1,
-    "customer_comment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
-    "total_cost": 86,
-    "is_payed": true,
+    "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
+    "totalCost": 86,
+    "isPaid": true,
     "status": {
-      "status_id": 4,
-      "status_timestamp": "2021-01-20 09:05:03",
+      "statusId": 4,
+      "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },
     "change": [
       {
-        "change_id": 4,
+        "changeId": 4,
         "change_date": "2021-01-20 09:10:41",
         "description": "1 Havregryn tillagd"
       }
     ],
-    "line_items": [
+    "lineItems": [
       {
-        "line_item_id": 1,
+        "lineItemId": 1,
         "product": {
           "id": 1,
           "productNr": "32410001",
           "title": "Havregryn",
           "description": "Gott till kokosbollar och havregrynsgröt",
           "brand": "Axa",
-          "wieght/volym": "750",
+          "weight/volume": "750",
           "image": "https://picsum.photos/500?random=1",
           "price": 12,
           "category": "Skafferi"
         },
-        "order_id": 4,
+        "orderId": 4,
         "quantity": 3,
-        "line_cost": 36
+        "lineCost": 36
       },
       {
-        "line_item_id": 2,
+        "lineItemId": 2,
         "product": {
           "id": 2,
           "productNr": "32410002",
           "title": "Soltorkade tomater",
           "description": "Finaste soltorkade tomaterna från spanien",
           "brand": "Santa maria",
-          "wieght/volym": "280",
+          "weight/volume": "280",
           "image": "https://picsum.photos/500?random=2",
           "price": 25,
           "category": "Skafferi"
         },
-        "order_id": 4,
+        "orderId": 4,
         "quantity": 2,
-        "line_cost": 50
+        "lineCost": 50
       }
     ]
   }
