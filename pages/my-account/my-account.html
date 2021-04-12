@@ -225,56 +225,61 @@
             <div class="mb-5">
               <h2>Kundinformation</h2>
             </div>
-            <form>
+            <form >
               <div class="row gx-5">
                 <div class="col-lg-6 mb-3">
                   <label for="my-info-first-name" class="form-label">Förnamn</label>
-                  <input type="text" class="form-control" placeholder="Förnamn" aria-label="Förnamn"
+                  <input type="text" class="form-control" placeholder="Förnamn" aria-label="Förnamn" required name="firstName" maxlength="50"
                     id="my-info-first-name">
+                    <div id="FIRSTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
                 </div>
                 <div class="col mb-3">
-                  <label for="my-info-first-name" class="form-label">Efternamn</label>
-                  <input type="text" class="form-control " placeholder="Efternamn" aria-label="Efternamn"
-                    id="my-info-first-name">
+                  <label for="my-info-last-name" class="form-label">Efternamn</label>
+                  <input type="text" class="form-control " placeholder="Efternamn" aria-label="Efternamn" required name="lastName" maxlength="50"
+                    id="my-info-last-name">
+                    <div id="LASTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
+                </div>
+              </div>
+              <div class="row gx-5 ">
+                <div class="col mb-3">
+                  <label for="my-info-email-name" class="form-label">E-post</label>
+                  <input type="text" class="form-control" placeholder="E-post" aria-label="E-post" required name="email" maxlength="325"
+                    id="my-info-email">
+                    <div id="EMAIL_ERROR_MSG" class="error-msg">Felaktig email</div>
+                </div>
+                <div class="col-lg-6 mb-3">
+                  <label for="my-info-phone_number" class="form-label">Telefonnummer</label>
+                  <input type="text" class="form-control" placeholder="Telefonnummer" aria-label="Telefonnummer" required name="phoneNumber" maxlength="20"
+                    id="my-info-phone-number">
+                    <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">Felaktig telefonnummer</div>
                 </div>
               </div>
               <div class="row gx-5 ">
                 <div class="col-lg-6 mb-3">
-                  <label for="my-info-first-name" class="form-label">Adress</label>
-                  <input type="text" class="form-control" placeholder="Adress" aria-label="Adress"
-                    id="my-info-first-name">
+                  <label for="my-info-address" class="form-label">Gatuadress</label>
+                  <input type="text" class="form-control" placeholder="Gatuadress" aria-label="Adress" required name="address" maxlength="50"
+                    id="my-info-address">
+                    <div id="ADDRESS_ERROR_MSG" class="error-msg">Felaktig adress, adress skall innehålla Gatunamn samt nummer</div>
                 </div>
-                <div class="col mb-3">
-                  <label for="my-info-first-name" class="form-label">Postort</label>
-                  <input type="text" class="form-control " placeholder="Postort" aria-label="Postort"
-                    id="my-info-first-name">
-                </div>
-              </div>
-              <div class="row gx-5 ">
                 <div class="col-lg-6 mb-3">
-                  <label for="my-info-first-name" class="form-label">Postnummer</label>
-                  <input type="text" class="form-control" placeholder="Postnummer" aria-label="Postnummer"
-                    id="my-info-first-name">
-                </div>
-                <div class="col mb-3">
-                  <label for="my-info-first-name" class="form-label">E-post</label>
-                  <input type="text" class="form-control" placeholder="E-post" aria-label="E-post"
-                    id="my-info-first-name">
+                  <label for="my-info-zipCode" class="form-label">Postnummer</label>
+                  <input type="text" class="form-control" placeholder="Postnummer" aria-label="Postnummer" required name="zipCode" maxlength="6"
+                    id="my-info-zipCode">
+                    <div id="ZIPCODE_ERROR_MSG" class="error-msg">Felaktigt postnummer, måste matas in t.ex "123 45"</div>
                 </div>
               </div>
               <div class="row gx-5">
-                <div class="col-lg-6 mb-3">
-                  <label for="my-info-first-name" class="form-label">Telefonnummer</label>
-                  <input type="text" class="form-control" placeholder="Telefonnummer" aria-label="Telefonnummer"
-                    id="my-info-first-name">
+                <div class="col mb-3">
+                  <label for="my-info-city" class="form-label">Postort</label>
+                  <input type="text" class="form-control " placeholder="Postort" aria-label="Postort" required name="city" maxlength="50"
+                    id="my-info-city">
+                    <div id="CITY_ERROR_MSG" class="error-msg">Felaktig ort, ort skall innehålla bara bokstäver</div>
                 </div>
                 <div class="col mb-3 mt-4">
-                  <button type="submit" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
+                  <button type="" id="submit" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
                 </div>
               </div>
               <div class="row mb-5 ">
-
-
             </div>
           </div>
           </form>
@@ -288,24 +293,24 @@
                 <div class="col-lg-6 mb-3">
                   <label for="my-info-first-name" class="form-label">Gammalt lösenord</label>
                   <input type="text" class="form-control" placeholder="Gammalt lösenord" aria-label="Gammalt lösenord"
-                    id="my-info-first-name">
+                    id="my-info-old-password">
                 </div>
                 </div>
                 <div class="row gx-5">
                 <div class="col-lg-6 mb-3">
                   <label for="my-info-first-name" class="form-label">Nytt lösenord</label>
                   <input type="text" class="form-control" placeholder="Nytt lösenord" aria-label="Nytt lösenord"
-                    id="my-info-first-name">
+                    id="my-info-new-password">
                 </div>
                 </div>
                 <div class="row gx-5 mb-5">
                 <div class="col-lg-6 mb-3">
                   <label for="my-info-first-name" class="form-label">Bekräfta lösenord</label>
                   <input type="text" class="form-control" placeholder="Bekräfta nytt lösenord" aria-label="Bekräfta nytt lösenord"
-                    id="my-info-first-name">
+                    id="my-info-re-new-password">
                 </div>
                 <div class="col mb-3 mt-4">
-                  <button type="submit" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
+                  <button type="" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
                 </div>
                 
                 </div>
@@ -323,9 +328,6 @@
 
 
   </div>
-
-
-
 
   </div>
 
@@ -398,6 +400,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
     crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../../js/validate.js"></script>
   <script src="../../js/my-account.js"></script>
 </body>
 
