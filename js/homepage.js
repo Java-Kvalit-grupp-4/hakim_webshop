@@ -76,10 +76,10 @@ function getProducts(list) {
               <h4 class="card-subtitle mb-4 text-muted">${element.price} kr</h4>
               <h5 class="card-text pb-4 px-3">${element.description}</h5>
               <div class="align-self-end" style="margin-top: auto; margin-left: auto; margin-right: auto">
-                  <button type="button" class="btn btn-outline-dark add1btn d-inline me-1" >-</button>
-                  <div id="amount" class="d-inline">1</div>
+                  <button type="button" class="btn btn-outline-dark reduce1btn d-inline me-1" >-</button>
+                  <div id="amount" class="d-inline amount${element.productNr}">1</div>
                   <button type="button" class="btn btn-outline-dark add1btn d-inline ms-1">+</button>
-                  <button id="btn1" type="button" class="btn btn-lg btn-block btn-outline-dark align-self ms-5 add-product-to-cart" style="margin-top: auto">Lägg till varukorg</button></p>
+                  <button id="btn1" type="button" class="btn btn-lg btn-block btn-outline-dark align-self ms-5 add-product-to-cart" style="margin-top: auto">Lägg till</button></p>
               </div>
             </div>
           </div>
@@ -87,6 +87,7 @@ function getProducts(list) {
         );
       });
 
+      //Måste lägga till att den även tar amount när den lägger till varukorgen
       $.each($('.add-product-to-cart'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
@@ -99,7 +100,31 @@ function getProducts(list) {
           })
         })
       })
+      //Denna metod lägger för närvarande till en etta istället för +1
+      $.each($('.add1btn'),function( index, value ) {
+        value.addEventListener('click',(e) => {
+          products.forEach(product => {
+            if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
+              document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent += 1;
+            }
+          })
+        })
+      })
+      //Metoden fungerar men behöver en spärr vid 1 så den inte kan bli 0
+      $.each($('.reduce1btn'),function( index, value ) {
+        value.addEventListener('click',(e) => {
+          if(`.amount${e.target.parentElement.parentElement.parentElement.id}`)
+          products.forEach(product => {
+            if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
+              document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent -= 1;
+              }
+            }
+          })
+        })
+      })
 }
+
+
 
 /**
  * Checks if product is in cart and increment quantity by 1, 
