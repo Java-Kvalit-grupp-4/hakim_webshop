@@ -18,7 +18,7 @@
         "zipcode": "12345"
       }
     },
-    "order_timestamp": 1,
+    "orderTimestamp": 1,
     "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
     "totalCost": 86,
     "isPaid": true,
@@ -90,7 +90,7 @@
         "zipcode": "12345"
       }
     },
-    "order_timestamp": 1,
+    "orderTimestamp": 1,
     "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
     "totalCost": 86,
     "isPaid": true,
@@ -162,7 +162,7 @@
         "zipcode": "12345"
       }
     },
-    "order_timestamp": 1,
+    "orderTimestamp": 1,
     "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
     "totalCost": 86,
     "isPaid": true,
@@ -234,7 +234,7 @@
         "zipcode": "12345"
       }
     },
-    "order_timestamp": 1,
+    "orderTimestamp": 1,
     "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
     "totalCost": 86,
     "isPaid": true,
