@@ -102,6 +102,12 @@ function loadProducts() {
       $("#tab-product-site").tab("show");
     });
     $("#new").click(function () {
+      $("#title").val("");
+      $("#description").val("");
+      $("#imge").val("");
+      $("#price").val("");
+      $("#lager").val("");
+      $("input").prop("checked", false);
       $("#tab-product-site").tab("show");
     });
   }
