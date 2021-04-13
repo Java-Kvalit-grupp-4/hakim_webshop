@@ -148,8 +148,8 @@ function removeFromTotalPrice(product) {
   */
 
   $("#clear").click(function () {
-    console.log("rensa")
     localStorage.clear()
+    document.getElementById("cartTotalPrice").innerHTML = ''
     document.getElementById("productsInCart").innerHTML = ''
   });
   
