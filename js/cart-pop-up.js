@@ -69,36 +69,39 @@ function renderCart(){
 
 
 function addProduct(product){
+  let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
     let cartTemp = JSON.parse(localStorage.getItem("cart"));
     cartTemp.forEach(element => {
       if (element.productNr == product){
         if(element.inCart<99){
           element.inCart += 1
           addToTotalPrice(element)
-          let temp =Number(document.getElementById("total-items-in-cart").innerHTML) 
-          temp += 1
-          document.getElementById("total-items-in-cart").innerHTML = temp
+          cartQuantity += 1
+          document.getElementById("total-items-in-cart").innerHTML=cartQuantity
         }
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
     updateCartQuantity()
     $('#cartTotalPrice').text(JSON.parse(localStorage.getItem('cartTotalPrice')).toFixed(2))
+    localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity))
 }
 
 function removeProduct(product) {
+    let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
     let cartTemp = JSON.parse(localStorage.getItem("cart"));
     cartTemp.forEach(element => {
       if (element.productNr == product){
         if (element.inCart !== 1){
         element.inCart -= 1
         removeFromTotalPrice(element)
-        document.getElementById("total-items-in-cart").innerHTML -= 1
+        cartQuantity -= 1
+        document.getElementById("total-items-in-cart").innerHTML = cartQuantity
         }
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
     updateCartQuantity()
     $('#cartTotalPrice').text(JSON.parse(localStorage.getItem('cartTotalPrice')).toFixed(2))
-    
+    localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity))
     }
 
  /**
