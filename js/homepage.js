@@ -87,25 +87,36 @@ function getProducts(list) {
         );
       });
 
-      //Måste lägga till att den även tar amount när den lägger till varukorgen
       $.each($('.add-product-to-cart'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
             if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
+              product.inCart =Number (document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent); //Ger denna rätt antal i varukorgen?
+              console.log(product.inCart);
               saveProductToCart(product)
               saveTotalPrice(product)
               updateTotalCartUI()
               renderCart()
+
             }
           })
         })
       })
-      //Denna metod lägger för närvarande till en etta istället för +1
+      
       $.each($('.add1btn'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
             if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
-              document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent += 1;
+
+              let currentValue= Number(document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent) +1;
+              if(currentValue<99){
+                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = currentValue;
+              }
+              else{
+                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = 99;
+                //Varning att det är för många
+              }
+              
             }
           })
         })
@@ -113,12 +124,19 @@ function getProducts(list) {
       //Metoden fungerar men behöver en spärr vid 1 så den inte kan bli 0
       $.each($('.reduce1btn'),function( index, value ) {
         value.addEventListener('click',(e) => {
-          if(`.amount${e.target.parentElement.parentElement.parentElement.id}`)
           products.forEach(product => {
             if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
-              document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent -= 1;
+
+              let currentValue= Number(document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent) -1;
+              if(currentValue>1){
+                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = currentValue;
               }
-            
+              else{
+                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = 1;
+                //Varning att det är för få
+              }
+              
+            }
           })
         })
       })
@@ -139,17 +157,17 @@ function saveProductToCart(product) {
     let productToFind = cart.find(e => e.productNr == product.productNr)
     let index = cart.findIndex(e => e.productNr == product.productNr)
     if(productToFind == undefined){
-      product.inCart = 1
+      product.inCart = product.inCart
       cartQuantity += 1
       cart.push(product)
     }else{
       console.log(index);
-      cart[index].inCart += 1
+      cart[index].inCart += product.inCart
       cartQuantity += 1
     }
   }else{
     cart = [] 
-    product.inCart = 1
+    product.inCart = product.inCart
     cartQuantity = 1
     cart.push(product)
   }
