@@ -177,7 +177,7 @@
                 <option value="2">Vip-kunder</option>
                 <option value="3">Total ordersumma över:</option>
                 <option value="4">Totalt antal ordrar över:</option>
-                <option value="5">Födelsedag</option>
+
               </select>
 
               <input
@@ -316,7 +316,7 @@
                 </div>
               </div>
               <div class="row">
-                <h3>Top 5 mest köpta produkter</h3>
+               <!-- <h3>Top 5 mest köpta produkter</h3>
                 <div class="mb-3 col">
                   <table class="table table-secondary">
                     <thead>
@@ -354,7 +354,7 @@
                       </tr>
                     </tbody>
                   </table>
-                </div>
+                </div>-->
               </div>
             </div>
             <div class="container col-12 col-xl-7 order-container ms-xl-5 mb-5">
@@ -373,22 +373,10 @@
                   <tbody class="text-center" id="orderTable">
                   </tbody>
                 </table>
-                <table class="table table-secondary table-foot">
+                <table class="table table-foot">
                   <tfoot class="text-center">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <th class="text-end">Total summa:</th>
-                    <td>2160 kr</td>
+                    <th class="text-start" colspan="4">Total summa:</th>
+                    <td id = "totalCost" class="text-end"></td>
                   </tfoot>
                 </table>
               </div>
@@ -425,37 +413,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../js/moment.js"></script>
     <script type="text/javascript" src="../../js/daterangpicker.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        let startDate = null;
-        let endDate = null;
-
-        $("#reservation").daterangepicker(null, function (start, end, label) {
-    
-          startDate = new Date(start.toISOString())
-          endDate = new Date(end.toISOString())
-          testDate = new Date("2021-04-10T22:00:00.000Z")
-
-          if(startDate.getDate() < testDate.getDate() && 
-              endDate.getDate() > testDate.getDate()) {
-                console.log('Works');
-                // if works code goes here
-          }else{
-            swal("Inga kunders ordrar mellan denna datum")
-            console.log('Not works');
-            // if not works code goes here
-          }
-        });
-
-        
-      });
-
-
-
-      
-
-      
-    </script>
+    <script type="text/javascript"></script>
     <script src="admin-customer.js"></script>
   </body>
 </html>
