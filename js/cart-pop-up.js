@@ -149,6 +149,7 @@ function removeFromTotalPrice(product) {
 
   $("#clear").click(function () {
     localStorage.clear()
+    document.getElementById("total-items-in-cart").innerHTML = '0'
     document.getElementById("cartTotalPrice").innerHTML = ''
     document.getElementById("productsInCart").innerHTML = ''
   });
