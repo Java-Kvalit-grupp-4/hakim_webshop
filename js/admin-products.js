@@ -28,7 +28,6 @@ function loadProducts() {
       );
     });
 
-
     $("#select option").on("click", function () {
       let optionId = $(this).attr("id");
       let list = [];
@@ -45,16 +44,8 @@ function loadProducts() {
       })
     });
 
-    uniqueCategories.forEach(element => {
-      $("#column").append(`
-          <div id="${element}" class="form-check">
-                      <input class="form-check-input me-3" type="checkbox" value="" id="${element}">
-                      <label class="form-check-label" for="cat1">${element}</label>
-                  </div>
-          `)
-    });
-
-    $("#inputSave").click(function () {
+   
+/*     $("#inputSave").click(function () {
       let input = $("#categoryInput").val();
       $("#column").append(`
           <div id="${input}" class="form-check">
@@ -66,28 +57,37 @@ function loadProducts() {
       uniqueCategories.push(input);
       $("#categoryInput").val("");
     });
+ */
+    
 
     let productId = "";
-    let cat = "";
     $("#products").on("click", "tr", function () {
       $(this).addClass("highlight").siblings().removeClass("highlight");
       productId = $(this).attr("id");
     });
 
+
     $("#choose").click(function () {
-      
-      $("#column div input").replaceWith(function () {
-        return `
-        <input class="form-check-input me-3" type="checkbox" value="">`
-      })
-      products.forEach(element => {
+
+      $("#column").empty();
+
+        products.forEach(element => {
         if (element.id == productId) {
           $("#title").val(element.title);
           $("#description").val(element.description);
           $("#imge").val(element.image);
           $("#price").val(element.price);
           $("#lager").val(element.amount);
-        }
+          uniqueCategories.forEach(element => {
+            $("#column").append(`
+                <div id="${element}" class="form-check">
+                            <input class="form-check-input me-3" type="checkbox" value="" id="${element}">
+                            <label class="form-check-label" for="cat1">${element}</label>
+                        </div>
+                `)
+          });
+          }
+          
         $("#column div").filter(function () {
           if (element.id == productId && element.category == $(this).attr("id")) {
             $(this).replaceWith(function () {
@@ -97,10 +97,14 @@ function loadProducts() {
            </div>`
             })
           }
+           
         });
-      });
+        });
+      
       $("#tab-product-site").tab("show");
+      
     });
+
     $("#new").click(function () {
       $("#title").val("");
       $("#description").val("");
