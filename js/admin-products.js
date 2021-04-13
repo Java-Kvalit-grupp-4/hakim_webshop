@@ -45,7 +45,7 @@ function loadProducts() {
     });
 
    
-/*     $("#inputSave").click(function () {
+     $("#inputSave").click(function () {
       let input = $("#categoryInput").val();
       $("#column").append(`
           <div id="${input}" class="form-check">
@@ -57,7 +57,7 @@ function loadProducts() {
       uniqueCategories.push(input);
       $("#categoryInput").val("");
     });
- */
+ 
     
 
     let productId = "";
