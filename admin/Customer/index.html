@@ -422,14 +422,39 @@
       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../js/moment.js"></script>
     <script type="text/javascript" src="../../js/daterangpicker.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
+        let startDate = null;
+        let endDate = null;
+
         $("#reservation").daterangepicker(null, function (start, end, label) {
-          console.log(start.toISOString(), end.toISOString(), label);
+    
+          startDate = new Date(start.toISOString())
+          endDate = new Date(end.toISOString())
+          testDate = new Date("2021-04-10T22:00:00.000Z")
+
+          if(startDate.getDate() < testDate.getDate() && 
+              endDate.getDate() > testDate.getDate()) {
+                console.log('Works');
+                // if works code goes here
+          }else{
+            swal("Inga kunders ordrar mellan denna datum")
+            console.log('Not works');
+            // if not works code goes here
+          }
         });
+
+        
       });
+
+
+
+      
+
+      
     </script>
     <script src="admin-customer.js"></script>
   </body>
