@@ -181,7 +181,6 @@ function saveProductToCart(product) {
  * @param {object} product 
  */
 function saveTotalPrice(product) {
-  console.log(product);
   let totalPrice = JSON.parse(localStorage.getItem('cartTotalPrice'))
   totalPrice != null ? localStorage.setItem('cartTotalPrice', totalPrice + product.price) : localStorage.setItem('cartTotalPrice', product.price);
 }
