@@ -114,14 +114,13 @@ function getProducts(list) {
               }
               else{
                 document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = 99;
-                //Varning att det är för många
+                //TODO: Varning att det är för många
               }
               
             }
           })
         })
       })
-      //Metoden fungerar men behöver en spärr vid 1 så den inte kan bli 0
       $.each($('.reduce1btn'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
@@ -133,7 +132,7 @@ function getProducts(list) {
               }
               else{
                 document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = 1;
-                //Varning att det är för få
+                //TODO: Varning att det är för få?
               }
               
             }
@@ -141,8 +140,6 @@ function getProducts(list) {
         })
       })
 }
-
-
 
 /**
  * Checks if product is in cart and increment quantity by 1, 
@@ -152,23 +149,24 @@ function getProducts(list) {
 function saveProductToCart(product) {
   let cart = JSON.parse(localStorage.getItem('cart'))
   let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
+  let tempQuantityToAdd = Number(product.inCart)
 
   if(cart != null){
     let productToFind = cart.find(e => e.productNr == product.productNr)
     let index = cart.findIndex(e => e.productNr == product.productNr)
     if(productToFind == undefined){
       product.inCart = product.inCart
-      cartQuantity += 1
+      cartQuantity += tempQuantityToAdd
       cart.push(product)
     }else{
       console.log(index);
       cart[index].inCart += product.inCart
-      cartQuantity += 1
+      cartQuantity += tempQuantityToAdd
     }
   }else{
     cart = [] 
     product.inCart = product.inCart
-    cartQuantity = 1
+    cartQuantity = tempQuantityToAdd
     cart.push(product)
   }
   
