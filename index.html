@@ -498,7 +498,7 @@
               <th scope="col">Papperskorg</th>
               <th scope="col">Produkt</th>
               <th scope="col"></th>
-              <th scope="col">á pris</th>
+              <th scope="col">pris</th>
               <th scope="col"></th>
               <th scope="col">Antal</th>
               <th scope="col"></th>
@@ -507,11 +507,13 @@
           </thead>
           <tbody id="productsInCart"></tbody>
         </table>
+        <hr>
+        <div class="total-price-container"><p>Totalt pris: </p>
+          <p id="cartTotalPrice"></p></div>
       </div>
       <!--modal-body ends-->
       <div class="modal-footer">
-        <p>Totalt pris</p>
-        <p id="cartTotalPrice"></p>
+        
         <button type="button" class="btn btn-secondary" id="clear">Rensa varukorg</button>
         <a href="./pages/checkout/">
           <button type="button" class="btn btn-primary">Till kassan</button>
@@ -538,6 +540,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="./js/cart-pop-up.js"></script>
     <script src="../../js/validate.js"></script>
     <script src="./js/register.js"></script>

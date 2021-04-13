@@ -5,7 +5,7 @@
         "title": "Havregryn",
         "description": "Gott till kokosbollar och havregrynsgröt",
         "brand": "Axa",
-        "wieght/volym": "750",
+        "weight/volume": "750",
         "image": "https:\/\/picsum.photos\/500?random=1",
         "price": 12,
         "category": "Skafferi"
@@ -16,7 +16,7 @@
         "title": "Soltorkade tomater",
         "description": "Finaste soltorkade tomaterna från spanien",
         "brand": "Santa maria",
-        "wieght/volym": "280",
+        "weight/volume": "280",
         "image": "https:\/\/picsum.photos\/500?random=2",
         "price": 25,
         "category": "Skafferi"
@@ -27,7 +27,7 @@
         "title": "Saffran pistiller",
         "description": "Pestiller från saffransblomman, torkade",
         "brand": "Persiskt",
-        "wieght/volym": "20 gram",
+        "weight/volume": "20 gram",
         "image": "https:\/\/picsum.photos\/500?random=3",
         "price": 399,
         "category": "Skafferi"
@@ -38,7 +38,7 @@
         "title": "Senap stark",
         "description": "Stark senap, gul",
         "brand": "Hultsberg",
-        "wieght/volym": "500 gram",
+        "weight/volume": "500 gram",
         "image": "https:\/\/picsum.photos\/500?random=4",
         "price": 15,
         "category": "Skafferi"
@@ -49,7 +49,7 @@
         "title": "Dressing Italiensk",
         "description": "God klassisk Italiensk salladsdressing",
         "brand": "Felix",
-        "wieght/volym": "370",
+        "weight/volume": "370",
         "image": "https:\/\/picsum.photos\/500?random=5",
         "price": 15,
         "category": "Skafferi"
@@ -60,7 +60,7 @@
         "title": "Coca-cola Zero",
         "description": "Cola zero, god och utan socker",
         "brand": "Coca-Cola",
-        "wieght/volym": "20 x 330 ml",
+        "weight/volume": "20 x 330 ml",
         "image": "https:\/\/picsum.photos\/500?random=6",
         "price": 99,
         "category": "Drycker"
@@ -71,7 +71,7 @@
         "title": "Ginger ale",
         "description": "God smak, algom med bubblor",
         "brand": "Fever-Tree",
-        "wieght/volym": "200 ml",
+        "weight/volume": "200 ml",
         "image": "https:\/\/picsum.photos\/500?random=7",
         "price": 12,
         "category": "Drycker"
@@ -91,7 +91,7 @@
         "title": "Sojamjölk",
         "description": "Laktosfri sojamjölk speciellt framtaget för att ha i kaffet",
         "brand": "Alpro",
-        "wieght/volym": "1000 ml",
+        "weight/volume": "1000 ml",
         "image": "https:\/\/picsum.photos\/500?random=9",
         "price": 19,
         "category": "Drycker"
@@ -102,7 +102,7 @@
         "title": "Saft bara bär hallon",
         "description": "Bobs hallonsaft - 100 procent från bär och frukt. Innehåller inget konserveringsmedel",
         "brand": "Bob",
-        "wieght/volym": "500 ml",
+        "weight/volume": "500 ml",
         "image": "https:\/\/picsum.photos\/500?random=10",
         "price": 20,
         "category": "Drycker"
@@ -113,7 +113,7 @@
         "title": "Linschips",
         "description": "Räfflade för extra krispighet med grillad lök och en nypa peppar.",
         "brand": "Olw",
-        "wieght/volym": "90 gram",
+        "weight/volume": "90 gram",
         "image": "https:\/\/picsum.photos\/500?random=11",
         "price": 12,
         "category": "Snacks & godis"
@@ -124,7 +124,7 @@
         "title": "Valnötter",
         "description": "Valnötter från Exotic Snacks.",
         "brand": "Exotic Snacks",
-        "wieght/volym": "250 gram",
+        "weight/volume": "250 gram",
         "image": "https:\/\/picsum.photos\/500?random=12",
         "price": 29,
         "category": "Snacks & godis"
@@ -135,7 +135,7 @@
         "title": "Hundra Härliga Praliner",
         "description": "800 g sorterade italienska praliner.",
         "brand": "Royal Confect",
-        "wieght/volym": "800 gram",
+        "weight/volume": "800 gram",
         "image": "https:\/\/picsum.photos\/500?random=13",
         "price": 99,
         "category": "Snacks & godis"
@@ -146,7 +146,7 @@
         "title": "Stora Nappar Cola Skum ",
         "description": "Stora godisnappar med skum och smak av läsken cola",
         "brand": "Haribo",
-        "wieght/volym": "170 gram",
+        "weight/volume": "170 gram",
         "image": "https:\/\/picsum.photos\/500?random=14",
         "price": 14,
         "category": "Snacks & godis"
@@ -157,7 +157,7 @@
         "title": "Russin",
         "description": "Torkade russin från klassiska Sun Maid.",
         "brand": "Sun Maid",
-        "wieght/volym": "500 gram",
+        "weight/volume": "500 gram",
         "image": "https:\/\/picsum.photos\/500?random=15",
         "price": 20,
         "category": "Snacks & godis"
@@ -168,7 +168,7 @@
         "title": "Tandkräm White System",
         "description": "Pepsodent White System är en tandkräm som är utvecklad speciellt för att ta bort missfärgningar på tandemaljen.",
         "brand": "Pepsodent",
-        "wieght/volym": "75 ml",
+        "weight/volume": "75 ml",
         "image": "https:\/\/picsum.photos\/500?random=16",
         "price": 9,
         "category": "Hygien & apotek"
@@ -179,7 +179,7 @@
         "title": "Blooming Color Shampoo",
         "description": "Håll liv i ditt färgade hår. Vårt vegan-certifierade schampo med naturligt murumurusmör från Amazonas och doft med etiskt odlad bulgarisk ros återfuktar ditt hår och får det att se livfullt ut.",
         "brand": "Love Beauty & Planet",
-        "wieght/volym": "400 ml",
+        "weight/volume": "400 ml",
         "image": "https:\/\/picsum.photos\/500?random=17",
         "price": 39,
         "category": "Hygien & apotek"
@@ -190,7 +190,7 @@
         "title": "Roll-On Deodorant Gold",
         "description": "Roll-on deodorant med 48 timmars antiperspirerande skydd.",
         "brand": "Axe",
-        "wieght/volym": "50 ml",
+        "weight/volume": "50 ml",
         "image": "https:\/\/picsum.photos\/500?random=18",
         "price": 15,
         "category": "Hygien & apotek"
@@ -201,7 +201,7 @@
         "title": "Resorb Balance Svartvinbär 10 påsar",
         "description": "Resorb® Balance är en kolhydrat-elektrolytdryck i pulverform som förbättrar vattenupptaget vid fysisk aktivitet.",
         "brand": "Nestlé",
-        "wieght/volym": "10 x 9 gram",
+        "weight/volume": "10 x 9 gram",
         "image": "https:\/\/picsum.photos\/500?random=19",
         "price": 49,
         "category": "Hygien & apotek"
@@ -212,7 +212,7 @@
         "title": "Tvål Yoghurt Aloe Vera",
         "description": "Flytande tvål från Barnängen med doft av yoghurt & aloe vera.",
         "brand": "Barnängen",
-        "wieght/volym": "250 ml",
+        "weight/volume": "250 ml",
         "image": "https:\/\/picsum.photos\/500?random=20",
         "price": 15,
         "category": "Hygien & apotek"
