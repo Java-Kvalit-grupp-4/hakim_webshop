@@ -75,6 +75,9 @@ function addProduct(product){
         if(element.inCart<99){
           element.inCart += 1
           addToTotalPrice(element)
+          let temp =Number(document.getElementById("total-items-in-cart").innerHTML) 
+          temp += 1
+          document.getElementById("total-items-in-cart").innerHTML = temp
         }
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
@@ -89,6 +92,7 @@ function removeProduct(product) {
         if (element.inCart !== 1){
         element.inCart -= 1
         removeFromTotalPrice(element)
+        document.getElementById("total-items-in-cart").innerHTML -= 1
         }
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
@@ -122,8 +126,8 @@ function removeFromTotalPrice(product) {
     function updateCartQuantity(){
       let cartTemp = JSON.parse(localStorage.getItem("cart"));
       cartTemp.forEach(element => {
-        document.querySelector(`.quantity${element.productNr}`).textContent = element.inCart
-        document.querySelector(`.price${element.productNr}`).textContent = (element.price * element.inCart).toFixed(2)
+        document.querySelector(`.quantity${element.productNr}`).textContent = element.inCart;
+        document.querySelector(`.price${element.productNr}`).textContent = (element.price * element.inCart).toFixed(2);
       }); 
     }
 
