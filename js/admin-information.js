@@ -1,9 +1,5 @@
 $(function () {
-  console.log("Script is linked");
-  addListenerToMenu();
-  function addListenerToMenu() {
-  }
-
+ 
   fetch("../../TestData/test_data_admin_info.json")
     .then((response) => response.json())
     .then((response) => renderInformation(response))
