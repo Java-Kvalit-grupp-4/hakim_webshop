@@ -72,8 +72,10 @@ function addProduct(product){
     let cartTemp = JSON.parse(localStorage.getItem("cart"));
     cartTemp.forEach(element => {
       if (element.productNr == product){
-        element.inCart += 1
-        addToTotalPrice(element)
+        if(element.inCart<99){
+          element.inCart += 1
+          addToTotalPrice(element)
+        }
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
     updateCartQuantity()
