@@ -1,4 +1,5 @@
 
+
 /**
  * Cache variables 
  * 
@@ -15,7 +16,8 @@ city = $('#my-info-city'),
 zipCode = $('#my-info-zipCode'),
 oldPassword = $('#my-info-old-password'),
 newPassword = $('#my-info-new-password'),
-confirmPassword = $('#my-info-re-new-password')
+confirmPassword = $('#my-info-re-new-password'),
+customer = JSON.parse(sessionStorage.getItem('customer'))
 
 let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
 LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
@@ -23,7 +25,10 @@ EMAIL_ERROR_MSG = $('#EMAIL_ERROR_MSG'),
 PHONE_NUMBER_ERROR_MSG = $('#PHONE_NUMBER_ERROR_MSG'),
 ADDRESS_ERROR_MSG = $('#ADDRESS_ERROR_MSG'),
 ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
-CITY_ERROR_MSG = $('#CITY_ERROR_MSG')
+CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
+WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
+NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
+NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
 
 
 /**
@@ -63,16 +68,30 @@ $('#submit').click( () => {
   }
 })
 
+$('#change-password-btn').click(() => {
+  checkPasswordChange()
+})
+
 
   /**
    * Functions
    */
 
+  function checkIfLoggedIn() {
+    let customer = JSON.parse(sessionStorage.getItem('customer'))
+    if(customer == undefined){
+      $(document).load('./')
+    }
+
+  }
+
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
 
-     firstName.val(customer.firstName)
-     lastName.val(customer.lastName)
+// ändra variablenamn på first_name och last_name phone_number
+
+     firstName.val(customer.first_name)
+     lastName.val(customer.last_name)
      email.val(customer.email)
      phoneNumber.val(customer.phone_number)
      address.val(customer.adress)
@@ -100,6 +119,9 @@ $('#submit').click( () => {
     ADDRESS_ERROR_MSG.hide()
     ZIPCODE_ERROR_MSG.hide()
     CITY_ERROR_MSG.hide()
+    NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide()
+    NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide()
+    WRONNG_PASSWORD_ERROR_MSG.hide()
   }
 
   function validateForm() {
@@ -116,10 +138,27 @@ $('#submit').click( () => {
     return bool
   }
 
+  function checkPasswordChange() {
+    console.log(customer)
+    
+    if(oldPassword.val() !== customer){
+      NEW_PASSWORD_NOT_MATCH_ERROR_MSG.show()
+    }
+    if(newPassword.val() === oldPassword.val()){
+      NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.show()
+    }
+    if(newPassword.val() !== confirmPassword.val()){
+      WRONNG_PASSWORD_ERROR_MSG.show()
+    }
+  }
+
 
   /**
    * Page loaded
    */
-
-  hideAllErrorMsgs()
-  fillInputFieldsWithLoggedIn()
+  $(document).ready(() => {
+    checkIfLoggedIn()
+    hideAllErrorMsgs()
+    fillInputFieldsWithLoggedIn()
+  })
+  

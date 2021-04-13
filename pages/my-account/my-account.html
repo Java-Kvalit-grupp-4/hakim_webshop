@@ -292,25 +292,28 @@
                 <div class="row gx-5">
                 <div class="col-lg-6 mb-3">
                   <label for="my-info-first-name" class="form-label">Gammalt lösenord</label>
-                  <input type="text" class="form-control" placeholder="Gammalt lösenord" aria-label="Gammalt lösenord"
+                  <input type="text" class="form-control" placeholder="Gammalt lösenord" aria-label="Gammalt lösenord" minlength="6" maxlength="50"
                     id="my-info-old-password">
+                    <div id="WRONG_PASSWORD_ERROR_MSG" class="error-msg">Felaktigt lösenord</div>
                 </div>
                 </div>
                 <div class="row gx-5">
                 <div class="col-lg-6 mb-3">
                   <label for="my-info-first-name" class="form-label">Nytt lösenord</label>
-                  <input type="text" class="form-control" placeholder="Nytt lösenord" aria-label="Nytt lösenord"
+                  <input type="text" class="form-control" placeholder="Nytt lösenord" aria-label="Nytt lösenord" minlength="6" maxlength="50"
                     id="my-info-new-password">
+                    <div id="NEW_PASSWORD_NOT_MATCH_ERROR_MSG" class="error-msg">Lösenorden matchar inte</div>
+                    <div id="NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG" class="error-msg">Du har redan detta lösenord</div>
                 </div>
                 </div>
                 <div class="row gx-5 mb-5">
                 <div class="col-lg-6 mb-3">
                   <label for="my-info-first-name" class="form-label">Bekräfta lösenord</label>
-                  <input type="text" class="form-control" placeholder="Bekräfta nytt lösenord" aria-label="Bekräfta nytt lösenord"
+                  <input type="text" class="form-control" placeholder="Bekräfta nytt lösenord" aria-label="Bekräfta nytt lösenord" minlength="6" maxlength="50"
                     id="my-info-re-new-password">
                 </div>
                 <div class="col mb-3 mt-4">
-                  <button type="" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
+                  <button type="" class="btn btn-secondary save-button" id="change-password-btn" style="width: 100px;">Spara</button>
                 </div>
                 
                 </div>
