@@ -7,6 +7,7 @@ let loginbutton2 = $('#login-button');
 let wrongEmail = $('#wrong-email')
 let wrongPassword = $('#wrong-password')
 let personsFile = "../../TestData/testdata_persons.json";
+personsFile = "http://localhost:8080/users/users"
 let loginModal = $('#login-modal');
 let whichPage = $("#login-page");
 
@@ -215,8 +216,8 @@ function checkUsernameAndPassword(){
           loginButton1.text("Logga ut");
           loginModal.modal("hide");
             let customer = JSON.parse(sessionStorage.getItem("customer"))
-            if(customer.admin=="false"){
-                if(customer.vip == "false"){
+            if(!customer.isAdmin){
+                if(!customer.isVip){
                     console.log("Du är inloggad som vanlig kund")
                 }
                 else{

@@ -90,13 +90,13 @@ $('#change-password-btn').click(() => {
 
 // ändra variablenamn på first_name och last_name phone_number
 
-     firstName.val(customer.first_name)
-     lastName.val(customer.last_name)
+     firstName.val(customer.firstName)
+     lastName.val(customer.lastName)
      email.val(customer.email)
-     phoneNumber.val(customer.phone_number)
-     address.val(customer.adress)
-     city.val(customer.city.name)
-     zipCode.val(customer.city.zipcode)
+     phoneNumber.val(customer.phoneNumber)
+     address.val(customer.streetAddress)
+     city.val(customer.city.cityName)
+     zipCode.val(customer.zipCode)
 
 
   }
@@ -140,15 +140,23 @@ $('#change-password-btn').click(() => {
 
   function checkPasswordChange() {
     console.log(customer)
+    console.log(customer.password);
+    console.log(oldPassword.val());
     
-    if(oldPassword.val() !== customer){
-      NEW_PASSWORD_NOT_MATCH_ERROR_MSG.show()
-    }
+    if(oldPassword.val() !== customer.password){
+      WRONNG_PASSWORD_ERROR_MSG.show()
+    }else{
+      WRONNG_PASSWORD_ERROR_MSG.hide()
+    } 
     if(newPassword.val() === oldPassword.val()){
       NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.show()
+    }else {
+      NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide()
     }
     if(newPassword.val() !== confirmPassword.val()){
-      WRONNG_PASSWORD_ERROR_MSG.show()
+      NEW_PASSWORD_NOT_MATCH_ERROR_MSG.show()
+    }else {
+      NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide()
     }
   }
 
