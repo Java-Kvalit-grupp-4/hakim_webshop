@@ -66,17 +66,21 @@ function openCustomerTab(){
     };
 
 function saveCustomer(id){
-    customers.forEach(e => {
-        if(e.id==id){
-            sessionStorage.setItem("choosedCustomer", JSON.stringify(e));
-            $("#customer-first-name").val(e.first_name)
-            $("#customer-last-name").val(e.last_name)
-            $("#customer-email").val( e.email)
-            $("#customer-phone").val(e.phone_number)
-            $("#customer-street").val(e.adress)
-            $("#customer-city").val(e.city.name)
-            $("#customer-zip").val(e.city.zipcode)
-            showOrders(e.id);
+    customers.forEach(customer => {
+        
+        if(customer.id==id){
+            let phoneNumber = `${customer.phone_number.substring(0,3)}-${customer.phone_number.substring(3,6)} ${customer.phone_number.substring(6,8)} ${customer.phone_number.substring(8)}`
+            sessionStorage.setItem("choosedCustomer", JSON.stringify(customer));
+            let zipCode = `${customer.city.zipcode.substring(0,3)} ${customer.city.zipcode.substring(3)}`
+            
+            $("#customer-first-name").val(customer.first_name)
+            $("#customer-last-name").val(customer.last_name)
+            $("#customer-email").val( customer.email)
+            $("#customer-phone").val(phoneNumber)
+            $("#customer-street").val(customer.adress)
+            $("#customer-city").val(customer.city.name)
+            $("#customer-zip").val( zipCode)
+            showOrders(customer.id);
 
         }
     })
