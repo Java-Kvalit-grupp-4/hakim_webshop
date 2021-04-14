@@ -20,6 +20,7 @@ let whichPage = $("#login-page");
     }
 
     function render(data) {
+      let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
       let customer = sessionStorage.getItem("customer") || "";
       if(customer.length>0){
         loginButton1.text("Logga ut");
@@ -42,6 +43,7 @@ let whichPage = $("#login-page");
       $("#sidomeny").append(`
           <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4" style="background-color:wheat ;">${element}</button>`
       );
+      document.getElementById("total-items-in-cart").innerHTML = cartQuantity
     });
 
     $("#sidomeny button").on("click", function () {
@@ -76,10 +78,10 @@ function getProducts(list) {
               <h4 class="card-subtitle mb-4 text-muted">${element.price} kr</h4>
               <h5 class="card-text pb-4 px-3">${element.description}</h5>
               <div class="align-self-end" style="margin-top: auto; margin-left: auto; margin-right: auto">
-                  <button type="button" class="btn btn-outline-dark add1btn d-inline me-1" >-</button>
-                  <div id="amount" class="d-inline">1</div>
+                  <button type="button" class="btn btn-outline-dark reduce1btn d-inline me-1" >-</button>
+                  <div id="amount" class="d-inline amount${element.productNr}">1</div>
                   <button type="button" class="btn btn-outline-dark add1btn d-inline ms-1">+</button>
-                  <button id="btn1" type="button" class="btn btn-lg btn-block btn-outline-dark align-self ms-5 add-product-to-cart" style="margin-top: auto">Lägg till varukorg</button></p>
+                  <button id="btn1" type="button" class="btn btn-lg btn-block btn-outline-dark align-self ms-5 add-product-to-cart" style="margin-top: auto">Lägg till</button></p>
               </div>
             </div>
           </div>
@@ -91,10 +93,50 @@ function getProducts(list) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
             if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
+              product.inCart =Number (document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent); //Ger denna rätt antal i varukorgen?
+              console.log(product.inCart);
               saveProductToCart(product)
               saveTotalPrice(product)
               updateTotalCartUI()
               renderCart()
+
+            }
+          })
+        })
+      })
+      
+      $.each($('.add1btn'),function( index, value ) {
+        value.addEventListener('click',(e) => {
+          products.forEach(product => {
+            if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
+
+              let currentValue= Number(document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent) +1;
+              if(currentValue<99){
+                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = currentValue;
+              }
+              else{
+                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = 99;
+                //TODO: Varning att det är för många
+              }
+              
+            }
+          })
+        })
+      })
+      $.each($('.reduce1btn'),function( index, value ) {
+        value.addEventListener('click',(e) => {
+          products.forEach(product => {
+            if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
+
+              let currentValue= Number(document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent) -1;
+              if(currentValue>1){
+                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = currentValue;
+              }
+              else{
+                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = 1;
+                //TODO: Varning att det är för få?
+              }
+              
             }
           })
         })
@@ -109,23 +151,24 @@ function getProducts(list) {
 function saveProductToCart(product) {
   let cart = JSON.parse(localStorage.getItem('cart'))
   let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
+  let tempQuantityToAdd = Number(product.inCart)
 
   if(cart != null){
     let productToFind = cart.find(e => e.productNr == product.productNr)
     let index = cart.findIndex(e => e.productNr == product.productNr)
     if(productToFind == undefined){
-      product.inCart = 1
-      cartQuantity += 1
+      product.inCart = product.inCart
+      cartQuantity += tempQuantityToAdd
       cart.push(product)
     }else{
       console.log(index);
-      cart[index].inCart += 1
-      cartQuantity += 1
+      cart[index].inCart += product.inCart
+      cartQuantity += tempQuantityToAdd
     }
   }else{
     cart = [] 
-    product.inCart = 1
-    cartQuantity = 1
+    product.inCart = product.inCart
+    cartQuantity = tempQuantityToAdd
     cart.push(product)
   }
   
@@ -140,8 +183,9 @@ function saveProductToCart(product) {
  * @param {object} product 
  */
 function saveTotalPrice(product) {
+  console.log(product);
   let totalPrice = JSON.parse(localStorage.getItem('cartTotalPrice'))
-  totalPrice != null ? localStorage.setItem('cartTotalPrice', totalPrice + product.price) : localStorage.setItem('cartTotalPrice', product.price);
+  totalPrice != null ? localStorage.setItem('cartTotalPrice', totalPrice + (product.price*product.inCart)) : localStorage.setItem('cartTotalPrice', (product.price*product.inCart));
 }
 
 function updateTotalCartUI(){
