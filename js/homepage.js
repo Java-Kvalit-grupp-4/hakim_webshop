@@ -20,6 +20,7 @@ let whichPage = $("#login-page");
     }
 
     function render(data) {
+      let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
       let customer = sessionStorage.getItem("customer") || "";
       if(customer.length>0){
         loginButton1.text("Logga ut");
@@ -42,6 +43,7 @@ let whichPage = $("#login-page");
       $("#sidomeny").append(`
           <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4" style="background-color:wheat ;">${element}</button>`
       );
+      document.getElementById("total-items-in-cart").innerHTML = cartQuantity
     });
 
     $("#sidomeny button").on("click", function () {
