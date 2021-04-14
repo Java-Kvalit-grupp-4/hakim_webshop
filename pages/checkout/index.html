@@ -104,9 +104,9 @@
               >
                 Varukorg&nbsp;&nbsp;<span
                   class="badge badge-pill bg-danger"
-                  id="cart-label-2"
+                  id="total-items-in-cart"
                   style="display: inline"
-                  >2</span
+                  >" "</span
                 >
               </button>
             </li>
@@ -132,7 +132,7 @@
                   <div class="col col-xs-3 col-lg-3 cart-title"><h6>Artikelnr</h6></div>
                   <div class="col col-xs-2 col-lg-4 cart-title"><h6>Produkt</h6></div>
                   <div class="col col-xs-1 col-lg-1 cart-title"><h6>Antal</h6></div>
-                  <div class="col col-xs-2 col-lg-2 cart-title"><h6>á pris</h6></div>
+                  <div class="col col-xs-2 col-lg-2 cart-title"><h6>Pris</h6></div>
                   <div class="col col-xs-2 col-lg-2 cart-title"><h6>Total pris</h6></div>
                 </div>
                 <!-- line item -->
@@ -155,35 +155,36 @@
             <div class="row">            
             <div class="col-lg-5 mt-5 mb-5">
               <div class="row g-3">
-                <h3>Kund information</h3>
+                <h3>Kundinformation</h3>
                 <div class="col-md-6">
                   <label for="firstName" class="form-label">Förnamn</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Förnamn" maxlength="30" required>
+                  <input type="text" class="form-control" id="firstName" placeholder="Förnamn" maxlength="30" required readonly>
                 </div>
                 <div class="col-md-6">
                   <label for="lastName" class="form-label">Efternamn</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="Efternamn" maxlength="40" required>
+                  <input type="text" class="form-control" id="lastName" placeholder="Efternamn" maxlength="40" required readonly>
                 </div>
                 <div class="col-md-6">
                   <label for="email" class="form-label">E-post</label>
-                  <input type="email" class="form-control" id="email" placeholder="E-post" maxlength="325" required>
+                  <input type="email" class="form-control" id="email" placeholder="E-post" maxlength="325" required readonly>
                 </div>
                 <div class="col-md-6">
                   <label for="phone" class="form-label">Telefonnummer</label>
-                  <input type="text" class="form-control" id="phone" placeholder="Telefonnummer" maxlength="20" required>
+                  <input type="text" class="form-control" id="phone" placeholder="Telefonnummer" maxlength="20" required readonly>
                 </div>
-                <div class="col-8">
-                  <label for="inputAddress" class="form-label">Adress</label>
-                  <input type="text" class="form-control" id="address" placeholder="Adress" maxlength="50" required>
+                <div class="col-10">
+                  <label for="inputAddress" class="form-label">Gatuadress</label>
+                  <input type="text" class="form-control" id="address" placeholder="Gatuadress" maxlength="50" required readonly>
+                </div>
+                <div class="col-md-4">
+                  <label for="inputZip" class="form-label">Postnummer</label>
+                  <input type="text" class="form-control" id="zip"  placeholder="Postnr" maxlength="5" required readonly>
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Ort</label>
-                  <input type="text" class="form-control" id="city" placeholder="Ort" maxlength="25" required>
+                  <input type="text" class="form-control" id="city" placeholder="Ort" maxlength="25" required readonly>
                 </div>
-                <div class="col-md-3">
-                  <label for="inputZip" class="form-label">Postnummer</label>
-                  <input type="text" class="form-control" id="zip"  placeholder="Postnr" maxlength="5" required>
-                </div>
+                
                 <div class="col-md-12 mt-5">
                   <h3>Leveransadress</h3> 
                 </div>
@@ -195,18 +196,19 @@
                     </label>
                   </div>
                 </div>
-                <div class="col-8">
-                  <label for="inputAddress" class="form-label">Adress</label>
-                  <input type="text" class="form-control" id="address2" placeholder="Adress" maxlength="50" required>
+                <div class="col-10">
+                  <label for="inputAddress" class="form-label">Gatuadress</label>
+                  <input type="text" class="form-control" id="address2" placeholder="Gatuadress" maxlength="50" required>
+                </div>
+                <div class="col-md-4">
+                  <label for="inputZip" class="form-label">Postnummer</label>
+                  <input type="text" class="form-control" id="zip2" placeholder="Postnr" maxlength="5" required>
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Ort</label>
                   <input type="text" class="form-control" id="city2" placeholder="Ort" maxlength="25" required>
                 </div>
-                <div class="col-md-3">
-                  <label for="inputZip" class="form-label">Postnummer</label>
-                  <input type="text" class="form-control" id="zip2" placeholder="Postnr" maxlength="5" required>
-                </div>
+                
                 <div class="col-12">
                   <button id="send-order-btn" type="" class="btn btn-primary">Skicka beställning</button>
                 </div>
