@@ -15,11 +15,13 @@ $(document).ready(load)
     function load() {
         const productsUrl = './TestData/test_data_products_v1.2.JSON'
        // const productsUrl = 'http://localhost:8080/products'
-
-        fetch(productsUrl)
-        .then((response) => response.json())
-        .then((data) => render(data))
-        .catch((error) => console.error(error));
+       axios.get(productsUrl)
+       .then(response => {
+         render(response.data)
+       })
+       .catch(err => {
+         alert(err)
+       })
     }
 
     function render(data) {
@@ -282,6 +284,7 @@ $('#login-button').click(() => {
       .then(() => {
         swal('Användare skapad!','Vänligen logga in', 'success')
           .then($('#registerForm').modal('hide'))
+          .then(clearRegristrationForm)
       })
       .catch(() => {
         swal('Något fick fel!','Vänligen försök igen', 'warning')
@@ -310,6 +313,7 @@ function resetsInputBorders() {
   resetBorder(firstName)
   resetBorder(lastName)
   resetBorder(regristrationEmail)
+  resetBorder(newPassword)
   resetBorder(phoneNumber)
   resetBorder(address)
   resetBorder(zipCode)
@@ -333,7 +337,6 @@ function validateForm() {
 }
 
 function checkPassword(bool) {
-  
   if(newPassword.val() !== confirmPassword.val()){
     NEW_PASSWORD_NOT_MATCH_ERROR_MSG.show()
     return false;
@@ -341,6 +344,21 @@ function checkPassword(bool) {
     NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide()
     return bool;
   }
+}
+
+function clearRegristrationForm() {
+firstName.val('')
+ lastName.val('')
+ regristrationEmail.val('')
+ phoneNumber.val('')
+ address.val('')
+ city.val('')
+ zipCode.val('')
+ newPassword.val('')
+ confirmPassword.val('')
+ year.val('')
+ month.val('')
+ day.val('')
 }
 
 
