@@ -139,9 +139,6 @@ $('#change-password-btn').click(() => {
   }
 
   function checkPasswordChange() {
-    console.log(customer)
-    console.log(customer.password);
-    console.log(oldPassword.val());
     
     if(oldPassword.val() !== customer.password){
       WRONNG_PASSWORD_ERROR_MSG.show()

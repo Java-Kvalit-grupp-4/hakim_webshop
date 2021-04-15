@@ -54,3 +54,7 @@ footer a {
 .shop-body {
   margin-top: 20rem;
 }
+
+.error-msg{
+  color: #F90A0A;
+}
