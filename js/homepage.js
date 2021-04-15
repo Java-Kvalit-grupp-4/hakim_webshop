@@ -1,14 +1,50 @@
 let products = [];
 let password = $('#login-password');
 let email =$('#login-email');
-let loginButton1 = $('#login-btn');
+let navLoginBtn = $('#login-btn');
 let loginbutton2 = $('#login-button');
 let wrongEmail = $('#wrong-email')
 let wrongPassword = $('#wrong-password')
-let personsFile = "../../TestData/testdata_persons.json";
-personsFile = "http://localhost:8080/users/users"
-//let loginModal = $('#login-modal');
 let whichPage = $("#login-page");
+
+let emailToCheck = $('#login-email'),
+passwordToCheck = $('#login-password'),
+loginModal = $('#login-modal'),
+myAccountMenu = $('#myAccountDropdown')
+
+const addUserUrl = "http://localhost:8080/users/add"
+
+/**
+ * Eventlistener
+ */
+
+ $("#newCust-button").click(() => {
+  $("#registerForm").modal("show")
+ })
+
+ $("#show-password-button").click(function(){
+  if($(this).text()=="Visa"){
+    $(this).text("Dölj")
+    password.attr("type", "text");
+  }
+  else{
+    $(this).text("Visa")
+    password.attr("type", "password");   
+  }
+ })
+
+ $("#login-btn").click(function() {
+  if($(this).text()=="Logga in"){
+      $("#login-modal").modal("show");
+  }
+  else{
+      sessionStorage.removeItem("customer")
+      $('#myAccountDropdown').hide()
+      $(this).text("Logga in")
+  }
+})
+
+$('form').submit(false)
 
 $(document).ready(load)
 
@@ -27,7 +63,7 @@ $(document).ready(load)
     function render(data) {
       let customer = sessionStorage.getItem("customer") || "";
       if(customer.length>0){
-        loginButton1.text("Logga ut");
+        navLoginBtn.text("Logga ut");
         $('#myAccountDropdown').show()
       }else{
         $('#myAccountDropdown').hide()
@@ -153,50 +189,7 @@ function updateTotalCartUI(){
   $('#total-items-in-cart').text(JSON.parse(localStorage.getItem("cartQuantity")))
 }
 
-/**
- * Eventlistener
- */
- $("#newCust-button").click(() => {
-  $("#registerForm").modal("show")
- })
-
- $("#show-password-button").click(function(){
-  if($(this).text()=="Visa"){
-    $(this).text("Dölj")
-    password.attr("type", "text");
-  }
-  else{
-    $(this).text("Visa")
-    password.attr("type", "password");   
-  }
- })
-
- $("#login-btn").click(function() {
-  if($(this).text()=="Logga in"){
-      $("#login-modal").modal("show");
-  }
-  else{
-      sessionStorage.removeItem("customer")
-      $('#myAccountDropdown').hide()
-      $(this).text("Logga in")
-  }
-})
-  
-
-/**
- * Login 
- */
-
-/**
- * Cache varibles
- */
-
-let emailToCheck = $('#login-email'),
-passwordToCheck = $('#login-password'),
-loginModal = $('#login-modal'),
-navLoginBtn = $('#login-btn'),
-myAccountMenu = $('#myAccountDropdown')
-
+//------------------------------------- login ----------------------------------\\
 
 $('#login-button').click(() => {
   let url = `http://localhost:8080/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
@@ -219,17 +212,8 @@ $('#login-button').click(() => {
     })
 })
 
-/**
- * Regristration inputfield
- */
- $('form').submit(false)
-
-/**
- * Cache variables 
- * 
- */
-
- const addUserUrl = "http://localhost:8080/users/add" 
+//---------------------------------- Regristration ---------------------------------\\
+ 
 
  let firstName = $('#register-first-name'),
  lastName = $('#register-last-name'),
