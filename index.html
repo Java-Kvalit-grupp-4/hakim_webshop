@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/bootstrap.css" />
     <link rel="stylesheet" href="./styles/register.css" />
     <link rel="stylesheet" href="./styles/cart-pop-up.css">
+    <link rel="stylesheet" href="./style-homepage.css">
     <title>Hakim's Livs homepage</title>
   </head>
 
@@ -144,7 +145,36 @@
           </div>
         </div>
 
-        <div class="row my-5" id="products"></div>
+        <div class="row my-5" id="products">
+            <div id="${element.productNr}"class="product-card">
+              <div>
+                <div class="img-container">
+                  <img src="https://assets.icanet.se/t_product_large_2x_v1,f_auto/7318690173946.jpg" alt="img" class="product-card-img">
+                </div>
+                <div class="product-card-text">
+                  <h3 class="card-title">Laxfilé</h3>
+                  <h5 class="card-price">199 kr/kg</h5>
+                  <p class="card-text">Mer info om produkten</p>
+                  <div class="add-subtract-container">
+                      <div class="subtract-btn">
+                        <div>-</div>
+                      </div>
+                      <div  class="quantity">
+                        <input type="text" class="amount" maxlength="2" value="1">
+                      </div>
+                      <div class="add-btn">
+                        <div>+</div>
+                      </div>
+                  </div>
+                  <div class="add-product-to-cart-container">
+                    <button class="add-product-to-cart" style="margin-top: 5%">Köp</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- products ends -->
+        </div>
       </div>
 
       <div class="col-sm-2">
@@ -526,6 +556,61 @@
   <!--modal-dialog ends-->
 </div>
 <!-- cart modal ends -->
+
+<!-- product-card-pop-up-modal-->
+<div class="modal fade" id="product-card-modal">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0 p-lg-3">
+        <h4 class="pl-xl-10 product-modal-title">Produktinformation</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row" >
+            <div class="col-xl-6">
+              <img class="img-fluid rounded mx-auto d-block" src="https://assets.icanet.se/t_product_large_2x_v1,f_auto/7318690173946.jpg" alt="product-image">
+            </div>
+            <div class="col-xl-6">
+              <div class="row">
+                <div class="col-12">
+                  <h1 class="text-lg-start display-3">Laxfilé</h1>
+                </div>
+                <div class="col-12 mt-5">
+                  <h3>Beskrivning:</h3>
+                </div>
+                <div class="col-12">
+                <p >ICA Laxfilé Fryst är perfekta att ha i frysen för att snabbt plocka fram till en god middag. Lax är en perfekt start på en god middag, och kan varieras i evigheter. Stek den och servera med pressad potatis och brynt smör eller ugnsstek med sötstark sås och strössla på sesamfrön, så har du fått två helt olika slags rätter.. Det finns minst tusen till.</p>
+              </div>
+              
+              <div class="col-12">
+                <h3>Ingredienser</h3>
+              </div>
+              <div class="col-12">
+                <p >Ingredienser: LAXFILÉ* i bit (Salmo salar). *Odlad i Norge.</p>
+              </div>
+              <div class="col-12 mt-3">
+                <h4>Näringsvärde per 100 g</h4>
+              </div>
+              <div class="col-12">
+                <p>Energi (kcal) 220 kcal, Energi (kJ) 900 kJ, Fett 16 g, Varav mättat fett 3 g, Varav enkelomättat fett 0 g, Varav fleromättat fett 0 g, Kolhydrater 0 g, Varav socker 0 g, Protein 19 g, Salt 0.1 g</p>
+              </div>
+              </div>
+              
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer border-0">
+        <dic class="container-fluid">
+          <div class="row align-items-center text-center" >
+            <div class="col-12">
+              <button  type="button" class="btn-close display-8" data-bs-dismiss="modal"></button>
+            </div>
+          </div>
+        </dic>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
