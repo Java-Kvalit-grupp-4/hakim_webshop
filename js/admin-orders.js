@@ -1,6 +1,6 @@
 let orders = [];
 
-  $(function () {
+$(function () {
   fetch("../../TestData/test_data_orders.json")
     .then((response) => response.json())
     .then((response) => (orders = response))
@@ -11,7 +11,7 @@ function renderOrders(orders) {
   orders.forEach((element) => {
     const paidString = element.isPaid ? "Mottagen" : "Väntar på betalning";
     $("#orders-container").append(`<tr>
-          <th scope="row" class="ps-md-5"><a href="#">${element.orderId}</a> </th>
+          <th scope="row" class="ps-md-5 "><a href="#">${element.orderId}</a> </th>
           <th scope="row" class="ps-md-5"><a href="#">${element.user.id}</a> </th>
           <td>${element.orderTimestamp}</td>
           <td>${element.totalCost} kr</td>
@@ -19,14 +19,18 @@ function renderOrders(orders) {
           <td>${paidString}</td>
       </tr>`);
   });
-}  
+}
 
-$(document).on('click', '.order-tab', openOrderTab);
+$(document).on("click", ".order-tab", openOrderTab);
 
-function openOrderTab(){
-    saveCustomer($(this).text());
-    $("#nav-contact-tab").tab('show');
-    };
+function openOrderTab() {
+  saveChosenOrder(Number($(this).text()));
+  $("#nav-contact").tab("show");
+}
+
+function saveChosenOrder(id) {
+      sessionStorage.setItem("chosenOrder", id);
+}
 
 /* $(function () {
   fetch("../../TestData/test_data_orders.json")
@@ -79,6 +83,4 @@ function renderOrders(response) {
 //     )
 //   })
 // })
-// })  
-
-
+// })
