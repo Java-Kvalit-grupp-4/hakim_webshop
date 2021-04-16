@@ -61,8 +61,6 @@ function renderCart(){
             swal("Produkten ej borttagen från varukorgen");
           }
         })
-        
-        
       })
     })
 }
