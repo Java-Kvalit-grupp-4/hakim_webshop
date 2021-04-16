@@ -5,6 +5,7 @@ let customerFile = "../../TestData/testdata_persons.json";
 let ordersFile = "../../TestData/test_data_orders.json";
 let startDate = null;
 let endDate = null;
+let sendTo = "localhost:8080/customers/add"
 
 $.getJSON(ordersFile, function(response) {
     console.log(response);
@@ -191,6 +192,28 @@ $(document).on('click', '#nav-profile-tab', function(){
     $("#customer-city").val("")
     $("#customer-zip").val("")
 
+})
+
+$(document).on('click', '#saveChangesBtn', function(){
+    let firstName= $("#customer-first-name").val()
+    let lastName = $("#customer-last-name").val()
+    let email = $("#customer-email").val()
+    let phone = $("#customer-phone").val()
+    let street = $("#customer-street").val()
+    let city = $("#customer-city").val()
+    let zipcode = $("#customer-zip").val()
+
+    console.log(firstName + " " + lastName)
+
+
+    let customerChanges = `
+    "firstName": ${firstName}, 
+    "lastName": ¨${lastName}, 
+    "phoneNumber": ${phone}, 
+    "email": ${email}, 
+    "streetAdress": ${street}, 
+    "city":${city}, 
+    "zipCode" : ${zipcode} `
 })
 
 
