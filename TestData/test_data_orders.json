@@ -1,8 +1,9 @@
 [
   {
-    "orderId": 1,
+    "id": 1,
     "user": {
-      "id": "001",
+      "id": 1,
+      "customerNumber": "38690",
       "firstName": "Kalle",
       "lastName": "Anka",
       "phoneNumber": "0701234567",
@@ -18,15 +19,57 @@
         "zipcode": "12345"
       }
     },
-    "orderTimestamp": "2021-03-14",
-    "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
+    "lineItems": [
+      {
+        "id": 1,
+        "product": {
+          "id": 1,
+          "sku": "32410001",
+          "title": "Havregryn",
+          "description": "Gott till kokosbollar och havregrynsgröt",
+          "brand": {
+            "id": 2,
+            "brand": "axa"
+          },
+          "image": "https://picsum.photos/500?random=1",
+          "price": 12,
+          "categories": [
+            {
+              "id": 1,
+              "category": "Skafferi"
+            }
+          ]
+        },
+        "orderId": 1,
+        "quantity": 3,
+        "itemPrice": 12
+      },
+      {
+        "id": 2,
+        "product": {
+          "id": 2,
+          "sku": "32410002",
+          "title": "Soltorkade tomater",
+          "description": "Finaste soltorkade tomaterna från spanien",
+          "brand": {
+            "id": 3,
+            "brand": "Santa maria"
+          },
+          "image": "https://picsum.photos/500?random=2",
+          "price": 25,
+          "categories": [
+            {
+              "id": 1,
+              "category": "Skafferi"
+            }
+          ]
+        },
+        "orderId": 1,
+        "quantity": 2,
+        "itemPrice": 25
+      }
+    ],
     "totalCost": 86,
-    "isPaid": true,
-    "status": {
-      "statusId": 4,
-      "statusTimestamp": "2021-01-20 09:05:03",
-      "type": "Skickad"
-    },
     "change": [
       {
         "changeId": 1,
@@ -34,47 +77,21 @@
         "description": "1 Havregryn tillagd"
       }
     ],
-    "lineItems": [
-      {
-        "lineItemId": 1,
-        "product": {
-          "id": 1,
-          "productNr": "32410001",
-          "title": "Havregryn",
-          "description": "Gott till kokosbollar och havregrynsgröt",
-          "brand": "Axa",
-          "weight/volume": "750",
-          "image": "https://picsum.photos/500?random=1",
-          "price": 12,
-          "category": "Skafferi"
-        },
-        "orderId": 1,
-        "quantity": 3,
-        "lineCost": 36
-      },
-      {
-        "lineItemId": 2,
-        "product": {
-          "id": 2,
-          "productNr": "32410002",
-          "title": "Soltorkade tomater",
-          "description": "Finaste soltorkade tomaterna från spanien",
-          "brand": "Santa maria",
-          "weight/volume": "280",
-          "image": "https://picsum.photos/500?random=2",
-          "price": 25,
-          "category": "Skafferi"
-        },
-        "orderId": 1,
-        "quantity": 2,
-        "lineCost": 50
-      }
-    ]
+    "customerComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
+    "status": {
+      "statusId": 4,
+      "statusTimestamp": "2021-01-20 09:05:03",
+      "type": "Skickad"
+    },
+    "isPaid": true,
+    "orderTimestamp": "2021-03-14"
   },
+
   {
-    "orderId": 2,
+    "id": 2,
     "user": {
-      "id": "001",
+      "id": 2,
+      "customerNumber": "3864",
       "firstName": "Kalle",
       "lastName": "Anka",
       "phoneNumber": "0701234567",
@@ -108,45 +125,61 @@
     ],
     "lineItems": [
       {
-        "lineItemId": 1,
+        "id": 1,
         "product": {
           "id": 1,
-          "productNr": "32410001",
+          "sku": "32410001",
           "title": "Havregryn",
           "description": "Gott till kokosbollar och havregrynsgröt",
-          "brand": "Axa",
-          "weight/volume": "750",
+          "brand": {
+            "id": 2,
+            "brand": "axa"
+          },
           "image": "https://picsum.photos/500?random=1",
           "price": 12,
-          "category": "Skafferi"
+          "categories": [
+            {
+              "id": 1,
+              "category": "Skafferi"
+            }
+          ]
         },
         "orderId": 2,
         "quantity": 3,
-        "lineCost": 36
+        "itemPrice": 12
       },
       {
-        "lineItemId": 2,
+        "id": 2,
         "product": {
           "id": 2,
-          "productNr": "32410002",
+          "sku": "32410002",
           "title": "Soltorkade tomater",
           "description": "Finaste soltorkade tomaterna från spanien",
-          "brand": "Santa maria",
+          "brand": {
+            "id": 3,
+            "brand": "Santa maria"
+          },
           "weight/volume": "280",
           "image": "https://picsum.photos/500?random=2",
           "price": 25,
-          "category": "Skafferi"
+          "categories": [
+            {
+              "id": 1,
+              "category": "Skafferi"
+            }
+          ]
         },
         "orderId": 2,
         "quantity": 2,
-        "lineCost": 50
+        "itemPrice": 25
       }
     ]
   },
   {
-    "orderId": 3,
+    "id": 3,
     "user": {
-      "id": "001",
+      "id": 3,
+      "customerNumber": "386952",
       "firstName": "Kalle",
       "lastName": "Anka",
       "phoneNumber": "0701234567",
@@ -180,45 +213,61 @@
     ],
     "lineItems": [
       {
-        "lineItemId": 1,
+        "id": 1,
         "product": {
           "id": 1,
-          "productNr": "32410001",
+          "sku": "32410001",
           "title": "Havregryn",
           "description": "Gott till kokosbollar och havregrynsgröt",
-          "brand": "Axa",
-          "weight/volume": "750",
+          "brand": {
+            "id": 2,
+            "brand": "axa"
+          },
           "image": "https://picsum.photos/500?random=1",
           "price": 12,
-          "category": "Skafferi"
+          "categories": [
+            {
+              "id": 1,
+              "category": "Skafferi"
+            }
+          ]
         },
         "orderId": 3,
         "quantity": 3,
-        "lineCost": 36
+        "itemPrice": 12
       },
       {
-        "lineItemId": 2,
+        "id": 2,
         "product": {
           "id": 2,
-          "productNr": "32410002",
+          "sku": "32410002",
           "title": "Soltorkade tomater",
           "description": "Finaste soltorkade tomaterna från spanien",
-          "brand": "Santa maria",
+          "brand": {
+            "id": 3,
+            "brand": "Santa maria"
+          },
           "weight/volume": "280",
           "image": "https://picsum.photos/500?random=2",
           "price": 25,
-          "category": "Skafferi"
+          "categories": [
+            {
+              "id": 1,
+              "category": "Skafferi"
+            }
+          ]
         },
         "orderId": 3,
         "quantity": 2,
-        "lineCost": 50
+        "itemPrice": 25
       }
     ]
   },
   {
-    "orderId": 4,
+    "id": 4,
     "user": {
-      "id": "001",
+      "id": 4,
+      "customerNumber": "38291",
       "firstName": "Kalle",
       "lastName": "Anka",
       "phoneNumber": "0701234567",
@@ -252,38 +301,52 @@
     ],
     "lineItems": [
       {
-        "lineItemId": 1,
+        "id": 1,
         "product": {
           "id": 1,
-          "productNr": "32410001",
+          "sku": "32410001",
           "title": "Havregryn",
           "description": "Gott till kokosbollar och havregrynsgröt",
-          "brand": "Axa",
-          "weight/volume": "750",
+          "brand": {
+            "id": 2,
+            "brand": "axa"
+          },
           "image": "https://picsum.photos/500?random=1",
           "price": 12,
-          "category": "Skafferi"
+          "categories": [
+            {"id": 1,
+              "category": "Skafferi"
+            }
+          ]
         },
         "orderId": 4,
         "quantity": 3,
-        "lineCost": 36
+        "itemPrice": 12
       },
       {
-        "lineItemId": 2,
+        "id": 2,
         "product": {
           "id": 2,
-          "productNr": "32410002",
+          "sku": "32410002",
           "title": "Soltorkade tomater",
           "description": "Finaste soltorkade tomaterna från spanien",
-          "brand": "Santa maria",
+          "brand": {
+            "id": 3,
+            "brand": "Santa maria"
+          },
           "weight/volume": "280",
           "image": "https://picsum.photos/500?random=2",
           "price": 25,
-          "category": "Skafferi"
+          "categories": [
+            {
+              "id": 1,
+              "category": "Skafferi"
+            }
+          ]
         },
         "orderId": 4,
         "quantity": 2,
-        "lineCost": 50
+        "itemPrice": 25
       }
     ]
   }

@@ -8,28 +8,62 @@ $(function () {
 });
 
 function renderOrders(orders) {
-  orders.forEach((element) => {
-    const paidString = element.isPaid ? "Mottagen" : "Väntar på betalning";
-    $("#orders-container").append(`<tr>
-          <th scope="row" class="ps-md-5 "><a href="#">${element.orderId}</a> </th>
-          <th scope="row" class="ps-md-5"><a href="#">${element.user.id}</a> </th>
-          <td>${element.orderTimestamp}</td>
-          <td>${element.totalCost} kr</td>
-          <td>${element.status.type}</td>
-          <td>${paidString}</td>
+  orders.forEach((order) => {
+    const paymentStatusString = order.isPaid
+      ? "Mottagen"
+      : "Väntar på betalning";
+    $("#orders-container").append(`
+      <tr>
+          <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${order.id}</a> </th>
+          <th scope="row" class="ps-md-5"><a href="#" class="customer-tab">${order.user.customerNumber}</a> </th>
+          <td>${order.orderTimestamp}</td>
+          <td>${order.totalCost} kr</td>
+          <td>${order.status.type}</td>
+          <td>${paymentStatusString}</td>
       </tr>`);
   });
 }
 
-$(document).on("click", ".order-tab", openOrderTab);
+$(document).on("click", ".order-number-link", openOrderTab);
 
 function openOrderTab() {
   saveChosenOrder(Number($(this).text()));
-  $("#nav-contact").tab("show");
+  renderLineItems();
+  $("#navbar-order-tab").tab("show");
 }
 
 function saveChosenOrder(id) {
-      sessionStorage.setItem("chosenOrder", id);
+  sessionStorage.setItem("chosenOrder", id);
+}
+
+function renderLineItems() {
+  console.log("rendering");
+  let order;
+  let chosenId = Number(sessionStorage.getItem("chosenOrder"));
+  let totalCost = 0;
+  console.log(chosenId);
+  $("#product-container").html("")
+  orders.forEach((order) => {
+    if (order.id == chosenId) {
+      console.log(order);
+      order.lineItems.forEach((lineItem) => {
+        totalCost += Number(lineItem.itemPrice) * Number(lineItem.quantity);
+        $("#product-container").append(`
+        <tr>
+          <th scope="row" class="ps-md-5">
+            <a href="#" class="product-number-link">${lineItem.product.sku}</a>
+          </th>
+          <th scope="row" class="ps-md-5">
+            <a href="#">${lineItem.product.title}</a>
+          </th>
+          <td>${lineItem.quantity}</td>
+          <td>${lineItem.itemPrice} kr</td>
+          <td>${Number(lineItem.itemPrice) * Number(lineItem.quantity)} kr</td>
+        </tr>`);
+      });
+    }
+  });
+  $("#order-total-cost").html(`Total Summa: ${totalCost}kr`)
 }
 
 /* $(function () {
