@@ -202,6 +202,8 @@ $('#login-button').click(() => {
         passwordToCheck.val('')
       }else {
         sessionStorage.setItem('customer', JSON.stringify(response.data))
+
+        // check if admin
         loginModal.modal('hide')
         navLoginBtn.text('Logga ut')
         myAccountMenu.show()
@@ -344,10 +346,6 @@ firstName.val('')
  month.val('')
  day.val('')
 }
-
-
-
-
 
 hideAllErrorMsgs()
 
