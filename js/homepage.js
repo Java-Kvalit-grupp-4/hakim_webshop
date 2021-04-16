@@ -193,6 +193,21 @@ function getProducts(list) {
           })
         })
       })
+
+      //------------------------------- product-card-modal ----------------------------------\\
+
+      $.each($('.card-text'),function(index,value) {
+        value.addEventListener('click', () => {
+          $('#product-card-modal').modal('show')
+        })
+      })
+
+      $.each($('.product-card-img'),function(index,value) {
+        value.addEventListener('click', () => {
+          $('#product-card-modal').modal('show')
+        })
+      })
+
 }
 
 /**
@@ -411,15 +426,7 @@ hideAllErrorMsgs()
 
 
 
-//------------------------------- product-card-modal ----------------------------------\\
 
-$('.card-text').click(() => {
-  $('#product-card-modal').modal('show')
-})
-
-$('.product-card-img').click(() => {
-  $('#product-card-modal').modal('show')
-})
 
 
 
