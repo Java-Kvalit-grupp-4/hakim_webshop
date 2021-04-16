@@ -109,6 +109,7 @@ $(document).ready(load)
  * @param {Array} list of product 
  */
 function getProducts(list) {
+  $("#products").empty()
     list.forEach(element => {
         $("#products").append(`
         <div class="product-card">
@@ -144,7 +145,6 @@ function getProducts(list) {
       $.each($('.add-product-to-cart'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
-            console.log(e.target.parentElement.parentElement.parentElement.id);
             if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
               product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value) //Ger denna rätt antal i varukorgen?
               e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1

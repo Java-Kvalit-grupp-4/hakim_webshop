@@ -7,25 +7,28 @@
 }
 
 body{
-  background: #644bff;
   padding: 0 20px;
 }
 
 ::selection{
   color: #fff;
   background: #664AFF;
+
 }
 
 .wrapper{
   max-width: 450px;
-  margin: 150px auto;
+  margin: auto;
+  overflow: visible;
 }
 
 .wrapper .search-input{
   background: #fff;
-  width: 100%;
+  width: 30%;
+  position: fixed;
+  left: 35%;
+  top: 2vh;
   border-radius: 5px;
-  position: relative;
   box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
 }
 
@@ -85,4 +88,14 @@ body{
   font-size: 20px;
   color: #644bff;
   cursor: pointer;
+}
+
+.selected {
+  background:#efefef;
+}
+
+li.selected {background:yellow}
+
+.ö{
+  color: black;
 }

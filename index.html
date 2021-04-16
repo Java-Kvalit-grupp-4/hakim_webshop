@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/register.css" />
     <link rel="stylesheet" href="./styles/cart-pop-up.css">
     <link rel="stylesheet" href="./style-homepage.css">
+    <link rel="stylesheet" href="./styles/searchbar.css">
     <title>Hakim's Livs homepage</title>
   </head>
 
@@ -39,7 +40,16 @@
         >
           <div class="container col-md-6 mt-3">
             <div class="input-group mb-3 me-5">
-              <input
+              <div class="wrapper">
+                <div class="search-input">
+                  <input type="text" placeholder="Sök produkt..." maxlength="40">
+                  <div class="autocom-box">
+                    <!-- here list are inserted from javascript -->
+                  </div>
+                  <div class="icon"><i class="bi bi-search"></i></div>
+                </div>
+              </div>
+              <!-- <input
                 type="text"
                 class="form-control product-search"
                 placeholder="Sök produkt"
@@ -53,7 +63,7 @@
                 style="width: 5rem"
               >
                 Sök
-              </button>
+              </button> -->
             </div>
           </div>
 
@@ -113,8 +123,10 @@
       </div>
     </nav>
 
+    
+
     <!-- navbar end -->
-    <div class="container-fluid">
+    <div class="container-fluid ">
     <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
       <div class="col-sm-2">
         <div class="list-group">
@@ -177,6 +189,12 @@
         </div>
       </div>
     </div>
+
+    <div id="status1" class="ö"></div>
+    <div id="status2" class="ö"></div>
+    <div id="status3" class="ö"></div>
+    <div id="status4" class="ö"></div>
+    <div id="status5" class="ö"></div>
   
 
     <footer class="bg-dark text-center text-lg-start">
@@ -638,10 +656,12 @@
     ></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script src="./js/cart-pop-up.js"></script>
     <script src="./js/validate.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/homepage.js"></script>
+    <script src="./js/searchBar.js"></script>
     
   </body>
 </html>
