@@ -1,5 +1,5 @@
 .product-card {
-    max-width: 25vh;
+    max-width: 23vh;
     margin: auto;
     border: 1px solid rgba(0, 0, 0, 0.089);
     border-radius: 2px;
@@ -156,6 +156,8 @@
         font-size: 1.6rem;
     }
 }
+
+/* add breakpoint 840px */
 
 
 
