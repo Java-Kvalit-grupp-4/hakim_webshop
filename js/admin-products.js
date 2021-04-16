@@ -4,7 +4,7 @@ let products = [];
 let categories = [];
 
 function loadProducts() {
-  fetch("../../TestData/test_data_v.1.0.JSON")
+  fetch("../../TestData/test_data_products_v1.2.JSON")
     .then((response) => response.json())
     .then((data) => render(data))
     .catch((error) => console.error(error));
@@ -12,22 +12,35 @@ function loadProducts() {
   function render(data) {
     products = data;
 
+    /**
+     * Add "lager status" to every product
+     */
     products.forEach(obj => {
       Object.assign(obj, { amount: 15 });
     })
 
+    
     products.forEach(element => {
       categories.push(element.category)
     });
 
+    /**
+     * Delete duplicates from the array of categories
+     */
     let uniqueCategories = [...new Set(categories)];
 
+    /**
+     * Dynamically add categories to choose into form-select 
+     */
     uniqueCategories.forEach(element => {
       $("#select").append(`
         <option id="${element}" value="${element}">${element}</option>`
       );
     });
 
+/**
+ * Add products that belong to the celected category
+ */
     $("#select option").on("click", function () {
       let optionId = $(this).attr("id");
       let list = [];
@@ -44,8 +57,10 @@ function loadProducts() {
       })
     });
 
-   
-     $("#inputSave").click(function () {
+/**
+ * Add new category to the list of existed categories on product site 
+ */
+    $("#inputSave").click(function () {
       let input = $("#categoryInput").val();
       $("#column").append(`
           <div id="${input}" class="form-check">
@@ -57,25 +72,32 @@ function loadProducts() {
       uniqueCategories.push(input);
       $("#categoryInput").val("");
     });
- 
-    
 
+
+/**
+ * Highlight chosen product in the table and select its id
+ */
     let productId = "";
     $("#products").on("click", "tr", function () {
       $(this).addClass("highlight").siblings().removeClass("highlight");
       productId = $(this).attr("id");
     });
 
-
+/**
+ * Select product's info and add it to the form on product site
+ * Make check-boxes of the available categories and add property "checked" to the one corresponding the product's category
+ */
     $("#choose").click(function () {
 
       $("#column").empty();
 
-        products.forEach(element => {
+      products.forEach(element => {
         if (element.id == productId) {
           $("#title").val(element.title);
+          $("#brand").val(element.brand);
           $("#description").val(element.description);
           $("#imge").val(element.image);
+          $("#weight").val($(element).attr("weight/volume"));
           $("#price").val(element.price);
           $("#lager").val(element.amount);
           uniqueCategories.forEach(element => {
@@ -86,8 +108,8 @@ function loadProducts() {
                         </div>
                 `)
           });
-          }
-          
+        }
+
         $("#column div").filter(function () {
           if (element.id == productId && element.category == $(this).attr("id")) {
             $(this).replaceWith(function () {
@@ -97,23 +119,56 @@ function loadProducts() {
            </div>`
             })
           }
-           
+
         });
-        });
-      
+      });
+
       $("#tab-product-site").tab("show");
-      
+
     });
 
+    /**
+     * Empty form to add new product
+     */
     $("#new").click(function () {
       $("#title").val("");
+      $("#brand").val("");
       $("#description").val("");
       $("#imge").val("");
+      $("#weight").val("");
       $("#price").val("");
       $("#lager").val("");
       $("input").prop("checked", false);
       $("#tab-product-site").tab("show");
     });
+
+    /**
+     * Make object of selected product 
+     */
+    $("#saveChanges").click(function () {
+      let cat = []
+      $("#column div").children().each(function () {
+        if ($(this).is(":checked")) {
+          let element = $(this).attr("id");
+          cat.push(element)
+        }
+      })
+
+      let productObject = {
+        sku: productId,
+        description: $("#description").val(),
+        image: $("#img").val(),
+        is_available: true,
+        price: $("#price").val(),
+        quantity: $("#lager").val(),
+        title: $("#title").val(),
+        brand: $("#brand").val(),
+        tags: $("#tags").val(),
+        categories: cat
+      };
+      console.log(productObject)
+    });
+
   }
 }
 
@@ -126,10 +181,10 @@ function showProducts(l) {
     let round = parseInt(element.price).toFixed(2);
     $("#products").append(
       `<tr id="${element.id}">
-            <td>${element.id}</td>
+            <td>${element.productNr}</td>
             <td ><h5 >${element.title}</h5></td>
-            <td ><h5 >Hakim</h5></td>
-            <td>${round} kr</td>
+            <td ><h5 >${element.brand}</h5></td>
+            <td>${element.price} kr</td>
             <td> ${element.amount}</td>
             </tr>`
     )
