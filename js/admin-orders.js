@@ -21,6 +21,13 @@ function renderOrders(orders) {
   });
 }  
 
+$(document).on('click', '.order-tab', openOrderTab);
+
+function openOrderTab(){
+    saveCustomer($(this).text());
+    $("#nav-contact-tab").tab('show');
+    };
+
 /* $(function () {
   fetch("../../TestData/test_data_orders.json")
     .then((response) => response.json())
