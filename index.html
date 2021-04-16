@@ -483,46 +483,60 @@
     tabindex="-1" 
     aria-labelledby="staticBackdropLabel" 
     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" style="min-width: 1000px;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Varukorg</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-      </div>
-      <!--modal-header ends-->
-      <div class="modal-body">
-        <table class="table table-secondary">
-          <thead>
-            <tr class="table-default">
-              <th scope="col">Papperskorg</th>
-              <th scope="col">Produkt</th>
-              <th scope="col"></th>
-              <th scope="col">Pris</th>
-              <th scope="col"></th>
-              <th scope="col">Antal</th>
-              <th scope="col"></th>
-              <th scope="col">Totalt</th>
-            </tr>
-          </thead>
-          <tbody id="productsInCart"></tbody>
-        </table>
-        <hr>
-        <div class="total-price-container"><p>Totalt pris: </p>
-          <p id="cartTotalPrice"></p></div>
-      </div>
-      <!--modal-body ends-->
-      <div class="modal-footer">
-        
-        <button type="button" class="btn btn-secondary" id="clear">Rensa varukorg</button>
-        <a href="./pages/checkout/">
-          <button type="button" class="btn btn-primary">Till kassan</button>
-          </a>
-      </div>
-      <!--modal-footer ends-->
-    </div>
-    <!--modal-content ends-->
-  </div>
+       <div
+          class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalLabel">Din varukorg</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                <div class="row border-bottom text-center">
+                  <div class="col-1"><i class="bi bi-trash-fill"></i></div>
+                  <div class="col-4 col-md-5 text-start"><h5>Produkt</h5></div>
+                  <div class="col-2"><h5>Pris</h5></div>
+                  <div class="col-3 col-md-2"><h5>Antal</h5></div>
+                  <div class="col-2"><h5>Totalt</h5></div>
+                </div>
+              </div>
+              <div class="list-group">
+                <div id="cartOutput">
+                
+                </div>
+              </div>
+            </div>
+            <div class="container total-price-row">
+              <div class="row px-3">
+                <div class="col-7 col-sm-8"></div>
+                <div class="col-3 col-sm-2 text-center">
+                  <h5 class="total-price">Totalt:</h5>
+                </div>
+                <div class="col-2 text-center" id="priceOutput">549.75€</div>
+              </div>
+            </div>
+            <div class="modal-footer smaller">
+              <button
+                type="button"
+                class="btn btn-outline-secondary me-xs-2 me-lg-4 btn-sm"
+              >
+                Töm varukorgen
+              </button>
+              <a href="./pages/checkout/">
+                <button type="button" class="btn btn-primary btn-sm">
+                  Gå till kassan
+                </button></a
+              >
+            </div>
+          </div>
+        </div>
+ 
   <!--modal-dialog ends-->
 </div>
 <!-- cart modal ends -->

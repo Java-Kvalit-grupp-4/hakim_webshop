@@ -13,12 +13,13 @@
 }
 
 .cart-thumbnail {
-    padding: 0.25rem;
+    padding: 0.05rem;
     background-color: #fff;
-    border: 1px solid #dee2e6;
+    border: 1px solid #94c2f0;
     border-radius: 0.25rem;
-    max-width: 10%;
+    max-width: 90%;
     height: auto;
+    margin-top: -3px;
 }
 
 .center-table{
