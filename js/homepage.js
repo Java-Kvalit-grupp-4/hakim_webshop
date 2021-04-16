@@ -160,7 +160,7 @@ function getProducts(list) {
 
       $.each($('.amount'), function(index, value) {
         value.addEventListener('focusout', (e) => {
-          if(e.target.value == 0){
+          if(e.target.value == 0 || isNaN(e.target.value)){
             e.target.value = 1
           }
         })
