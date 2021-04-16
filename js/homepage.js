@@ -12,6 +12,8 @@ passwordToCheck = $('#login-password'),
 loginModal = $('#login-modal'),
 myAccountMenu = $('#myAccountDropdown')
 
+let adminvy = $('#admin-vy-link')
+
 const addUserUrl = "http://localhost:8080/users/add"
 
 /**
@@ -41,12 +43,24 @@ const addUserUrl = "http://localhost:8080/users/add"
       sessionStorage.removeItem("customer")
       $('#myAccountDropdown').hide()
       $(this).text("Logga in")
+      adminvy.hide()
   }
 })
 
 $('form').submit(false)
 
-$(document).ready(load)
+
+$(document).ready(() => {
+  load()
+  let loggedIn = sessionStorage.getItem('customer')
+  if(loggedIn == undefined){
+    adminvy.hide()
+  }else {
+    if(loggedIn.isAdmin){
+      adminvy.show()
+    }
+  }
+})
 
     function load() {
         const productsUrl = './TestData/test_data_products_v1.2.JSON'
