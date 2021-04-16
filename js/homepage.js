@@ -121,55 +121,70 @@ $(document).ready(load)
 function getProducts(list) {
     list.forEach(element => {
         $("#products").append(`
-        <div class="col-sm-3 pb-5">
-          <div id="${element.productNr}"class="card text-center h-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)">
-            <img src="${element.image}" alt="img" class="card-img-top pt-5 ps-5 pe-5">
-            <div class="card-body d-flex flex-column">
-              <h3 class="card-title" style="font-weight: bold;">${element.title}</h3>
-              <h4 class="card-subtitle mb-4 text-muted">${element.price} kr</h4>
-              <h5 class="card-text pb-4 px-3">${element.description}</h5>
-              <div class="align-self-end" style="margin-top: auto; margin-left: auto; margin-right: auto">
-                  <button type="button" class="btn btn-outline-dark reduce1btn d-inline me-1" >-</button>
-                  <div id="amount" class="d-inline amount${element.productNr}">1</div>
-                  <button type="button" class="btn btn-outline-dark add1btn d-inline ms-1">+</button>
-                  <button id="btn1" type="button" class="btn btn-lg btn-block btn-outline-dark align-self ms-5 add-product-to-cart" style="margin-top: auto">Lägg till</button></p>
+        <div class="product-card">
+              <div id="${element.productNr}">
+                <div class="img-container">
+                  <img src="${element.image}" alt="img" class="product-card-img">
+                </div>
+                <div class="product-card-text">
+                  <h3 class="card-title">${element.title}</h3>
+                  <h5 class="card-price">${element.price} kr</h5>
+                  <p id="${element.description}"class="card-text">Mer info om produkten</p>
+                  <div class="add-subtract-container">
+                      <div class="subtract-btn">
+                        <div class="reduce1btn">-</div>
+                      </div>
+                      <div  class="quantity">
+                        <input type="text" maxlength="2" value="1" class="amount${element.productNr} amount">
+                      </div>
+                      <div class="add-btn">
+                        <div class="add1btn">+</div>
+                      </div>
+                  </div>
+                  <div class="add-product-to-cart-container">
+                    <button class="add-product-to-cart" style="margin-top: 5%">Köp</button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>`
+            </div>  
+        `
         );
       });
 
       $.each($('.add-product-to-cart'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
+            console.log(e.target.parentElement.parentElement.parentElement.id);
             if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
-              product.inCart =Number (document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent); //Ger denna rätt antal i varukorgen?
-              console.log(product.inCart);
+              product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value) //Ger denna rätt antal i varukorgen?
+              e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
               saveProductToCart(product)
               saveTotalPrice(product)
               updateTotalCartUI()
               renderCart()
-
             }
           })
+        })
+      })
+
+      $.each($('.amount'), function(index, value) {
+        value.addEventListener('focusout', (e) => {
+          if(e.target.value == 0 || isNaN(e.target.value)){
+            e.target.value = 1
+          }
         })
       })
       
       $.each($('.add1btn'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
-            if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
-
-              let currentValue= Number(document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent) +1;
+            console.log();
+            if(product.productNr === e.target.parentElement.parentElement.parentElement.parentElement.id){
+              console.log(e.target.parentElement.parentElement.children[1].children[0].value);
+              let currentValue= Number(e.target.parentElement.parentElement.children[1].children[0].value) +1;
               if(currentValue<99){
-                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = currentValue;
-              }
-              else{
-                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = 99;
-                //TODO: Varning att det är för många
-              }
-              
+                e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
+              }              
             }
           })
         })
@@ -177,21 +192,31 @@ function getProducts(list) {
       $.each($('.reduce1btn'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
-            if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
-
-              let currentValue= Number(document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent) -1;
-              if(currentValue>1){
-                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = currentValue;
-              }
-              else{
-                document.querySelector(`.amount${e.target.parentElement.parentElement.parentElement.id}`).textContent = 1;
-                //TODO: Varning att det är för få?
-              }
-              
+            if(product.productNr === e.target.parentElement.parentElement.parentElement.parentElement.id){
+              console.log(e.target.parentElement.parentElement.children[1].children[0].value);
+              let currentValue= Number(e.target.parentElement.parentElement.children[1].children[0].value) -1;
+              if(currentValue>=1){
+                e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
+              }         
             }
           })
         })
       })
+
+      //------------------------------- product-card-modal ----------------------------------\\
+
+      $.each($('.card-text'),function(index,value) {
+        value.addEventListener('click', () => {
+          $('#product-card-modal').modal('show')
+        })
+      })
+
+      $.each($('.product-card-img'),function(index,value) {
+        value.addEventListener('click', () => {
+          $('#product-card-modal').modal('show')
+        })
+      })
+
 }
 
 /**
@@ -406,6 +431,10 @@ firstName.val('')
 }
 
 hideAllErrorMsgs()
+
+
+
+
 
 
 
