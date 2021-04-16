@@ -146,9 +146,8 @@ function getProducts(list) {
           products.forEach(product => {
             console.log(e.target.parentElement.parentElement.parentElement.id);
             if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
-              console.log(e.target.parentElement.parentElement.children[3].children[1].children[0].value);
               product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value) //Ger denna rätt antal i varukorgen?
-              console.log(product.inCart);
+              e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
               saveProductToCart(product)
               saveTotalPrice(product)
               updateTotalCartUI()
