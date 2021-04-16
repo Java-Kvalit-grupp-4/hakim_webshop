@@ -84,9 +84,19 @@ $(document).ready(load)
       $("#sidomeny").append(`
           <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4" style="background-color:wheat ;">${element}</button>`
       );
-      document.getElementById("total-items-in-cart").innerHTML = cartQuantity
+      console.log(cartQuantity)
+     
+      
     });
+    document.getElementById("total-items-in-cart").innerHTML = cartQuantity
+    if(cartQuantity <=0 || cartQuantity==null){
+      document.getElementById("cartDropdown").disabled = true
 
+      
+    }else{
+      document.getElementById("cartDropdown").disabled = false
+
+    }
     $("#sidomeny button").on("click", function () {
       let btnId = $(this).attr("id");
       let list = [];
