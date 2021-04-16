@@ -7,18 +7,20 @@
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/bootstrap.css" />
     <link rel="stylesheet" href="./styles/register.css" />
-    <link rel="stylesheet" href="./styles/cart-pop-up.css">
+    <link rel="stylesheet" href="./styles/cart-pop-up.css" />
     <title>Hakim's Livs homepage</title>
   </head>
 
   <body id="login-page">
-
     <!-- navbar (prototype) -->
-  
+
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand " href="index.html"
-          ><img src="logo.png" class="img-fluid nav-image " style=" margin-left: -0.5rem;"
+        <a class="navbar-brand" href="index.html"
+          ><img
+            src="logo.png"
+            class="img-fluid nav-image"
+            style="margin-left: -0.5rem"
         /></a>
         <button
           class="navbar-toggler"
@@ -114,44 +116,44 @@
 
     <!-- navbar end -->
     <div class="container-fluid">
-    <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
-      <div class="col-sm-2">
-        <div class="list-group">
-          <div class="list-group" id="sidomeny">
-            <button
-              id="all"
-              type="button"
-              class="list-group-item list-group-item-action fs-4"
-              style="background-color: sandybrown"
-            >
-              Alla produkter
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-8">
-        <div class="card w-100 text-white">
-          <img
-            src="https://picsum.photos/1000/300"
-            class="card-img-top"
-            alt="image"
-          />
-          <div class="card-img-overlay">
-            <h1 class="card-title" style="text-align: end; text-align: end">
-              Veckans vara
-            </h1>
+      <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
+        <div class="col-sm-2">
+          <div class="list-group">
+            <div class="list-group" id="sidomeny">
+              <button
+                id="all"
+                type="button"
+                class="list-group-item list-group-item-action fs-4"
+                style="background-color: sandybrown"
+              >
+                Alla produkter
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="row my-5" id="products"></div>
-      </div>
+        <div class="col-sm-8">
+          <div class="card w-100 text-white">
+            <img
+              src="https://picsum.photos/1000/300"
+              class="card-img-top"
+              alt="image"
+            />
+            <div class="card-img-overlay">
+              <h1 class="card-title" style="text-align: end; text-align: end">
+                Veckans vara
+              </h1>
+            </div>
+          </div>
 
-      <div class="col-sm-2">
-        <img src="https://picsum.photos/300/1000" alt="" />
+          <div class="row my-5" id="products"></div>
+        </div>
+
+        <div class="col-sm-2">
+          <img src="https://picsum.photos/300/1000" alt="" />
+        </div>
       </div>
     </div>
-  </div>
 
     <footer class="bg-dark text-center text-lg-start">
       <div class="container p-4 justify-content-center">
@@ -474,72 +476,72 @@
       </div>
     </div>
 
-    <!-- cart modal -->
-    <div 
-    class="modal fade" 
-    id="cart-pop-up"
-    data-bs-backdrop="static" 
-    data-bs-keyboard="false" 
-    tabindex="-1" 
-    aria-labelledby="staticBackdropLabel" 
-    aria-hidden="true">
-       <div
-          class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
-        >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalLabel">Din varukorg</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <div class="container">
-                <div class="row border-bottom text-center">
-                  <div class="col-1"><i class="bi bi-trash-fill"></i></div>
-                  <div class="col-4 col-md-5 text-start"><h5>Produkt</h5></div>
-                  <div class="col-2"><h5>Pris</h5></div>
-                  <div class="col-3 col-md-2"><h5>Antal</h5></div>
-                  <div class="col-2"><h5>Totalt</h5></div>
-                </div>
-              </div>
-              <div class="list-group">
-                <div id="cartOutput">
-                
-                </div>
+    <!-- Cart modal -->
+    <div
+      class="modal fade"
+      id="cart-pop-up"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Din varukorg</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row border-bottom text-center">
+                <div class="col-1"><i class="bi bi-trash-fill"></i></div>
+                <div class="col-4 col-md-5 text-start"><h5>Produkt</h5></div>
+                <div class="col-2"><h5>Pris</h5></div>
+                <div class="col-3 col-md-2"><h5>Antal</h5></div>
+                <div class="col-2"><h5>Totalt</h5></div>
               </div>
             </div>
-            <div class="container total-price-row">
-              <div class="row px-3">
-                <div class="col-7 col-sm-8"></div>
-                <div class="col-3 col-sm-2 text-center">
-                  <h5 class="total-price">Totalt:</h5>
-                </div>
-                <div class="col-2 text-center" id="priceOutput">549.75€</div>
-              </div>
-            </div>
-            <div class="modal-footer smaller">
-              <button
-                type="button"
-                class="btn btn-outline-secondary me-xs-2 me-lg-4 btn-sm"
-              >
-                Töm varukorgen
-              </button>
-              <a href="./pages/checkout/">
-                <button type="button" class="btn btn-primary btn-sm">
-                  Gå till kassan
-                </button></a
-              >
+            <div class="list-group">
+              <div id="cartOutput"></div>
             </div>
           </div>
+          <div class="container total-price-row">
+            <div class="row px-3">
+              <div class="col-7 col-sm-8"></div>
+              <div class="col-3 col-sm-2 text-center">
+                <h5 class="total-price">Totalt:</h5>
+              </div>
+              <div class="col-2 text-center" id="priceOutput">549.75€</div>
+            </div>
+          </div>
+          <div class="modal-footer smaller">
+            <button
+              type="button"
+              class="btn btn-outline-secondary me-xs-2 me-lg-4 btn-sm"
+              id="clear"
+            >
+              Töm varukorgen
+            </button>
+            <a href="./pages/checkout/">
+              <button type="button" class="btn btn-primary btn-sm">
+                Gå till kassan
+              </button></a
+            >
+          </div>
         </div>
- 
-  <!--modal-dialog ends-->
-</div>
-<!-- cart modal ends -->
+      </div>
+
+      <!--modal-dialog ends-->
+    </div>
+    <!-- cart modal ends -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
@@ -559,6 +561,5 @@
     <script src="../../js/validate.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/homepage.js"></script>
-    
   </body>
 </html>
