@@ -63,9 +63,7 @@ function renderCart() {
                         <i class="bi bi-dash-circle remove-button" id="${
                           element.productNr
                         }"></i>
-                        <span class="border text-center px-lg-2 quantity" id="${
-                          element.productNr
-                        }"
+                        <span class="border text-center px-lg-2 quantity" id="${element.productNr}"
                           >${element.inCart}</span
                         >
                         <i
@@ -82,15 +80,20 @@ function renderCart() {
 
   $("#cartOutput").html(output);
   $(".remove-button").on("click", function (e) {
-    console.log(+e.target.id);
     removeProduct(+e.target.id);
+  });
+
+
+  $(".increase-button").on("click", function (e) {
+    console.log(+e.target.id);
+    addProduct(+e.target.id);
   });
 
   $("#priceOutput").text(
     JSON.parse(localStorage.getItem("cartTotalPrice")).toFixed(2)
   );
 
-  $.each($(".trashcan-center"), function (index, el) {
+  $.each($(".trash-button"), function (index, el) {
     el.addEventListener("click", (e) => {
       swal({
         title: "Warning",
@@ -168,11 +171,8 @@ function removeFromTotalPrice(product) {
 function updateCartQuantity() {
   let cartTemp = JSON.parse(localStorage.getItem("cart"));
   cartTemp.forEach((element) => {
-    document.querySelector(`.quantity${element.productNr}`).textContent =
-      element.inCart;
-    document.querySelector(`.price${element.productNr}`).textContent = (
-      element.price * element.inCart
-    ).toFixed(2);
+    $(`#${element.productNr}.quantity`).text(element.inCart);
+    $(`#${element.productNr}.line-price`).text((element.price * element.inCart).toFixed(2));
   });
 }
 
