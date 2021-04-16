@@ -22,10 +22,12 @@ function renderCart(){
   if(cartQuantity <=0 || cartQuantity==null){
     document.getElementById("cartDropdown").disabled = true
     document.getElementById("checkout-btn").disabled = true
+    document.getElementById("to-checkout-link").href = '#';
     
   }else{
     document.getElementById("cartDropdown").disabled = false
     document.getElementById("checkout-btn").disabled = false
+    document.getElementById("to-checkout-link").href = './pages/checkout/';
 
   }
     let cart = JSON.parse(localStorage.getItem("cart"))
@@ -177,12 +179,13 @@ function removeFromTotalPrice(product) {
     if(cartQuantity <=0 || cartQuantity==null){
       document.getElementById("cartDropdown").disabled = true
       document.getElementById("checkout-btn").disabled = true
-      //document.getElementById("to-checkout-link").innerHTML = "./pages/checkout/"
+      document.getElementById("to-checkout-link").href = '#';
       
     }else{
       document.getElementById("cartDropdown").disabled = false
       document.getElementById("checkout-btn").disabled = false
-      //document.getElementById("to-checkout-link").innerHTML = "./pages/checkout/"
+      document.getElementById("to-checkout-link").href = './pages/checkout/';
+  
     }
   });
   
