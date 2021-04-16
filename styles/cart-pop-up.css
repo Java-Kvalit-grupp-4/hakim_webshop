@@ -83,3 +83,61 @@ svg {
 .total-price-container p {
   margin: 0rem 1rem;
 }
+@media (max-width: 991px) {
+  .full-width {
+    width: 100%;
+  }
+  .card-body .card-title,
+  .card-body .card-price,
+  .card-body .card-text {
+    font-size: 0.9em;
+  }
+  .card-body #open-cart {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-self: end;
+    margin-top: -100px;
+  }
+  .modal-body {
+    width: 100%;
+    font-size: 0.9em;
+  }
+  .modal-body h5 {
+    font-size: 1em;
+  }
+  .modal-body div.smaller {
+    font-size: 0.8em;
+    margin-top: 3px;
+  }
+  #cart-symbol-2 {
+    display: none;
+  }
+  .total-price-row {
+    font-size: 0.7em;
+  }
+  .total-price-row h5 {
+        font-size: 1.2em;
+  }
+  .line-price {
+    margin-right: 0.0.1em
+  }
+  .quantity {
+        font-size: 1.2em;
+        padding-left: 0.1em;
+        padding-right: 0.1em;
+  }
+  .remove-button {
+    font-size: 1.3em;
+  }
+  .increase-button {
+    font-size: 1.3em;
+  }
+  .qty-label {
+    margin-top:-2px
+  }
+}
+.cart-row {
+  align-content: center;
+  justify-content: center;
+}
