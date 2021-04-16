@@ -203,10 +203,14 @@ $('#login-button').click(() => {
       }else {
         sessionStorage.setItem('customer', JSON.stringify(response.data))
 
-        // check if admin
-        loginModal.modal('hide')
-        navLoginBtn.text('Logga ut')
-        myAccountMenu.show()
+        if(response.data.isAdmin == true){
+          location.replace("admin/index.html")
+        }else{
+          loginModal.modal('hide')
+          navLoginBtn.text('Logga ut')
+          myAccountMenu.show()
+        }
+        
       } 
     })
     .catch(err => {
