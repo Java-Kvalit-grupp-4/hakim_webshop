@@ -96,8 +96,8 @@ function renderCart() {
   $.each($(".trash-button"), function (index, el) {
     el.addEventListener("click", (e) => {
       swal({
-        title: "Warning",
-        text: "Vill du verklingen ta bort denna produkt från varukorgen?",
+        title: "Är du säker?",
+        text: "Vill du verklingen ta bort produkten från varukorgen?",
         icon: "warning",
         dangerMode: true,
         buttons: ["Ja", "Nej"],
@@ -108,44 +108,84 @@ function renderCart() {
           });
           renderCart();
         } else {
-          swal("Produkten ej borttagen från varukorgen");
+          swal("Borttagning avbruten");
         }
       });
     });
   });
 }
 
-function addProduct(product) {
-  let cartTemp = JSON.parse(localStorage.getItem("cart"));
-  cartTemp.forEach((element) => {
-    if (element.productNr == product) {
-      element.inCart += 1;
-      addToTotalPrice(element);
-    }
-  });
-  localStorage.setItem("cart", JSON.stringify(cartTemp));
-  updateCartQuantity();
-  $("#priceOutput").text(
-    JSON.parse(localStorage.getItem("cartTotalPrice")).toFixed(2)
-  );
+// function addProduct(product) {
+//   let cartTemp = JSON.parse(localStorage.getItem("cart"));
+//   cartTemp.forEach((element) => {
+//     if (element.productNr == product) {
+//       element.inCart += 1;
+//       addToTotalPrice(element);
+//     }
+//   });
+//   localStorage.setItem("cart", JSON.stringify(cartTemp));
+//   updateCartQuantity();
+//   $("#priceOutput").text(
+//     JSON.parse(localStorage.getItem("cartTotalPrice")).toFixed(2)
+//   );
+// }
+
+// function removeProduct(product) {
+//   let cartTemp = JSON.parse(localStorage.getItem("cart"));
+//   cartTemp.forEach((element) => {
+//     if (element.productNr == product) {
+//       if (element.inCart !== 1) {
+//         element.inCart -= 1;
+//         removeFromTotalPrice(element);
+//       }
+//       localStorage.setItem("cart", JSON.stringify(cartTemp));
+//       updateCartQuantity();
+//       $("#priceOutput").text(
+//         JSON.parse(localStorage.getItem("cartTotalPrice")).toFixed(2)
+//       );
+//     }
+//   })
+// }
+
+function addProduct(product){
+  let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
+    let cartTemp = JSON.parse(localStorage.getItem("cart"));
+    cartTemp.forEach(element => {
+      if (element.productNr == product){
+        if(element.inCart<99){
+          element.inCart += 1
+          addToTotalPrice(element)
+          cartQuantity += 1
+          document.getElementById("total-items-in-cart").innerHTML=cartQuantity
+        }
+      }})
+    localStorage.setItem("cart", JSON.stringify(cartTemp));
+    updateCartQuantity()
+    $("#priceOutput").text(
+      JSON.parse(localStorage.getItem("cartTotalPrice")).toFixed(2)
+    );
+    localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity))
 }
 
 function removeProduct(product) {
-  let cartTemp = JSON.parse(localStorage.getItem("cart"));
-  cartTemp.forEach((element) => {
-    if (element.productNr == product) {
-      if (element.inCart !== 1) {
-        element.inCart -= 1;
-        removeFromTotalPrice(element);
-      }
+    let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
+    let cartTemp = JSON.parse(localStorage.getItem("cart"));
+    cartTemp.forEach(element => {
+      if (element.productNr == product){
+        if (element.inCart !== 1){
+        element.inCart -= 1
+        removeFromTotalPrice(element)
+        cartQuantity -= 1
+        document.getElementById("total-items-in-cart").innerHTML = cartQuantity
+        }
+      }})
+    localStorage.setItem("cart", JSON.stringify(cartTemp));
+    updateCartQuantity()
+    $('#priceOutput').text(JSON.parse(localStorage.getItem('cartTotalPrice')).toFixed(2))
+    localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity))
     }
-  });
-  localStorage.setItem("cart", JSON.stringify(cartTemp));
-  updateCartQuantity();
-  $("#priceOutput").text(
-    JSON.parse(localStorage.getItem("cartTotalPrice")).toFixed(2)
-  );
-}
+  
+  
 
 /**
  * Take an object and add price to totalprice
@@ -198,8 +238,23 @@ function updateCartQuantity() {
   }
   */
 
-$("#clear").click(function () {
-  console.log("rensa");
-  localStorage.clear();
-  document.getElementById("productsInCart").innerHTML = "";
-});
+  $("#clear").click(function () {
+    localStorage.clear()
+    document.getElementById("total-items-in-cart").innerHTML = '0'
+    document.getElementById("priceOutput").innerHTML = ''
+    document.getElementById("cartOutput").innerHTML = "";
+    let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
+    if(cartQuantity <=0 || cartQuantity==null){
+      document.getElementById("cartDropdown").disabled = true
+      document.getElementById("checkout-btn").disabled = true
+      document.getElementById("to-checkout-link").href = '#';
+      
+    }else{
+      document.getElementById("cartDropdown").disabled = false
+      document.getElementById("checkout-btn").disabled = false
+      document.getElementById("to-checkout-link").href = './pages/checkout/';
+  
+    }
+  });
+
+
