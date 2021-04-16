@@ -69,30 +69,39 @@ function renderCart(){
 
 
 function addProduct(product){
+  let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
     let cartTemp = JSON.parse(localStorage.getItem("cart"));
     cartTemp.forEach(element => {
       if (element.productNr == product){
-        element.inCart += 1
-        addToTotalPrice(element)
+        if(element.inCart<99){
+          element.inCart += 1
+          addToTotalPrice(element)
+          cartQuantity += 1
+          document.getElementById("total-items-in-cart").innerHTML=cartQuantity
+        }
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
     updateCartQuantity()
     $('#cartTotalPrice').text(JSON.parse(localStorage.getItem('cartTotalPrice')).toFixed(2))
+    localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity))
 }
 
 function removeProduct(product) {
+    let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
     let cartTemp = JSON.parse(localStorage.getItem("cart"));
     cartTemp.forEach(element => {
       if (element.productNr == product){
         if (element.inCart !== 1){
         element.inCart -= 1
         removeFromTotalPrice(element)
+        cartQuantity -= 1
+        document.getElementById("total-items-in-cart").innerHTML = cartQuantity
         }
       }})
     localStorage.setItem("cart", JSON.stringify(cartTemp));
     updateCartQuantity()
     $('#cartTotalPrice').text(JSON.parse(localStorage.getItem('cartTotalPrice')).toFixed(2))
-    
+    localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity))
     }
 
  /**
@@ -120,8 +129,8 @@ function removeFromTotalPrice(product) {
     function updateCartQuantity(){
       let cartTemp = JSON.parse(localStorage.getItem("cart"));
       cartTemp.forEach(element => {
-        document.querySelector(`.quantity${element.productNr}`).textContent = element.inCart
-        document.querySelector(`.price${element.productNr}`).textContent = (element.price * element.inCart).toFixed(2)
+        document.querySelector(`.quantity${element.productNr}`).textContent = element.inCart;
+        document.querySelector(`.price${element.productNr}`).textContent = (element.price * element.inCart).toFixed(2);
       }); 
     }
 
@@ -148,8 +157,9 @@ function removeFromTotalPrice(product) {
   */
 
   $("#clear").click(function () {
-    console.log("rensa")
     localStorage.clear()
+    document.getElementById("total-items-in-cart").innerHTML = '0'
+    document.getElementById("cartTotalPrice").innerHTML = ''
     document.getElementById("productsInCart").innerHTML = ''
   });
   

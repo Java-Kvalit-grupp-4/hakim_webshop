@@ -66,6 +66,8 @@ function run() {
     let totalInCart = 0;
     $.each($('.line-item-total-quantity'),(index, e) => totalInCart += parseInt(e.innerText))
     $('#cart-total-quantity').text(totalInCart);
+    let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
+    document.getElementById("total-items-in-cart").innerHTML = cartQuantity
     }
 
     /**
