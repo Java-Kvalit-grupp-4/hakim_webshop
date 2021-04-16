@@ -167,6 +167,7 @@ function loadProducts() {
         categories: cat
       };
       console.log(productObject)
+      alert("Produkten har sparats")
     });
 
   }
