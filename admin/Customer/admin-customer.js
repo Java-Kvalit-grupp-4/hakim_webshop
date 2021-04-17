@@ -70,6 +70,8 @@ function showCustomers(customerArr){
         let personalNumber = e.socialSecurityNumber;
         let firstNr = personalNumber.substring(0,6);
         let lastNr = personalNumber.substring(6);
+        let customerOrders = e.customerOrders;
+        let totalPrice = getTotalPriceOfOrders(customerOrders);
 
         //<td>${e.customerOrders.length}</td>   Kod för antalet ordrar
         //<td>${getTotalPriceOfOrders(customerOrders).toFixed(2)} kr</td>   Kod för totala summan av alla ordrar
@@ -81,8 +83,8 @@ function showCustomers(customerArr){
                 <td>${e.lastName}</td>
                 <td>${firstNr}-${lastNr}</td>
                 <td><a href="mailto:${e.email}">${e.email}</a></td>
-                <td>4</td>
-                <td>599,00 kr</td>
+                <td>${customerOrders.length}</td>
+                <td>${totalPrice.toFixed(2)} kr</td>
                 <td><i class="bi ${isVip}"></i></td>
             </tr>
             `
@@ -264,4 +266,4 @@ $(document).on('click', '#saveChangesBtn', function(){
 
         
 
-    
+     
