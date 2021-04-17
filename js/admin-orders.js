@@ -1,4 +1,5 @@
 let orders = [];
+let activeOrder;
 
 $(function () {
   fetch("../../TestData/test_data_orders.json")
@@ -29,6 +30,7 @@ $(document).on("click", ".order-number-link", openOrderTab);
 function openOrderTab() {
   saveChosenOrder(Number($(this).text()));
   renderLineItems();
+  populateUserData();
   $("#navbar-order-tab").tab("show");
 }
 
@@ -38,13 +40,14 @@ function saveChosenOrder(id) {
 
 function renderLineItems() {
   console.log("rendering");
-  let order;
+  // let order;
   let chosenId = Number(sessionStorage.getItem("chosenOrder"));
   let totalCost = 0;
   console.log(chosenId);
   $("#product-container").html("")
   orders.forEach((order) => {
     if (order.id == chosenId) {
+      activeOrder = order;
       console.log(order);
       order.lineItems.forEach((lineItem) => {
         totalCost += Number(lineItem.itemPrice) * Number(lineItem.quantity);
@@ -64,6 +67,12 @@ function renderLineItems() {
     }
   });
   $("#order-total-cost").html(`Total Summa: ${totalCost}kr`)
+}
+
+function populateUserData() {
+  console.log("user data");
+  console.log(activeOrder.user.firstName);
+  $("#my-info-first-name-label").html(`$(activeOrder.user.firstName)`);
 }
 
 /* $(function () {
