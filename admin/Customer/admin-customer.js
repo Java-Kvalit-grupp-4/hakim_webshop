@@ -1,64 +1,93 @@
 let customers = [];
 let orders = [];
 let choosedCustomer = "";
-let customerFile = "../../TestData/testdata_persons.json";
-let ordersFile = "../../TestData/test_data_orders.json";
+let getAllCustomers = "http://localhost:8080/users";
+let updateUser = "http://localhost:8080/users/updateUser2";
+
 let startDate = null;
 let endDate = null;
 let sendTo = "localhost:8080/customers/add"
 
-$.getJSON(ordersFile, function(response) {
-    console.log(response);
-    orders = response;
+$(document).ready(load)
+
+$(document).on('click', '.customer-tab', openCustomerTab);
+
+$(document).on('click', '#search-btn', filterSearch);
+
+$(document).on('click', '#updateBtn', updateCustomer);
+
+$(document).on('focus', '#search-select', function(){
+    $("#input").val("");
 })
 
-$.getJSON(customerFile, function(response) {
-    console.log(response);
-    customers = response;
-    showCustomers(customers);
+$(document).on('click', '#nav-profile-tab', function(){
+    $("#orderTable").empty();
+    $("#customer-first-name").val("")
+    $("#customer-last-name").val("")
+    $("#customer-email").val("")
+    $("#customer-phone").val("")
+    $("#customer-street").val("")
+    $("#customer-city").val("")
+    $("#customer-zip").val("")
+    load();
 })
 
-$(document).ready(function(){
+function load(){
     $("#reservation").daterangepicker(null, function (start, end, label) {
         startDate = new Date(start.toISOString())
         endDate = new Date(end.toISOString())
     })
-})
+    axios.get(getAllCustomers)
+        .then((response) =>{
+            console.log(response.data)
+            if(response.status ===200){
+                showCustomers(response.data) 
+                customers = response.data   
+            }
+            else{
+                swal("Något gick fel vid uppladdning av kunder")
+            }
+        })
+        .catch(err =>{
+            alert("Server fel!" + err)
+        })
+}
 
 function showCustomers(customerArr){
-
+    $("#customerTable").empty();
     if(customerArr.length==0){
         swal("Hittade inga kunder på denna sökning")
     }
     customerArr.forEach(e => {
         let isVip = "";
-        if(e.vip=="true"){
+        if(e.isVip=== true){
             console.log("ÄR VIP")
             isVip = "bi-check2"
         }
         else{
             isVip = "bi-x"
         }
-        let personalNumber = e.social_security_number;
+        let personalNumber = e.socialSecurityNumber;
         let firstNr = personalNumber.substring(0,6);
         let lastNr = personalNumber.substring(6);
+
+        //<td>${e.customerOrders.length}</td>   Kod för antalet ordrar
+        //<td>${getTotalPriceOfOrders(customerOrders).toFixed(2)} kr</td>   Kod för totala summan av alla ordrar
     
         $("#customerTable").append(`
             <tr>
-                <th scope="row"><a href="#" class="customer-tab">${e.id}</a></th>
-                <td>${e.first_name}</td>
-                <td>${e.last_name}</td>
+                <th scope="row"><a href="#" class="customer-tab">${e.customerNumber}</a></th>
+                <td>${e.firstName}</td>
+                <td>${e.lastName}</td>
                 <td>${firstNr}-${lastNr}</td>
                 <td><a href="mailto:${e.email}">${e.email}</a></td>
-                <td>${getNumberOfOrders(e.id, orders)}</td>
-                <td>${getTotalPriceOfOrders(e.id, orders).toFixed(2)} kr</td>
+                <td>4</td>
+                <td>599,00 kr</td>
                 <td><i class="bi ${isVip}"></i></td>
             </tr>
             `
         )})
 }
-
-$(document).on('click', '.customer-tab', openCustomerTab);
 
 function openCustomerTab(){
     $("#orderTable").empty();
@@ -66,28 +95,30 @@ function openCustomerTab(){
     $("#nav-contact-tab").tab('show');
     };
 
-function saveCustomer(id){
+function saveCustomer(customerNumber){
     customers.forEach(customer => {
+        console.log("Telefon " + customer.phoneNumber)
+        console.log("postadress " + customer.zipCode)
         
-        if(customer.id==id){
-            let phoneNumber = `${customer.phone_number.substring(0,3)}-${customer.phone_number.substring(3,6)} ${customer.phone_number.substring(6,8)} ${customer.phone_number.substring(8)}`
-            sessionStorage.setItem("choosedCustomer", JSON.stringify(customer));
-            let zipCode = `${customer.city.zipcode.substring(0,3)} ${customer.city.zipcode.substring(3)}`
+        if(customer.customerNumber==customerNumber){
             
-            $("#customer-first-name").val(customer.first_name)
-            $("#customer-last-name").val(customer.last_name)
+            let phoneNumber = `${customer.phoneNumber.substring(0,3)}-${customer.phoneNumber.substring(3,6)} ${customer.phoneNumber.substring(6,8)} ${customer.phoneNumber.substring(8)}`
+            sessionStorage.setItem("choosedCustomer", JSON.stringify(customer));
+            let zipCode = `${customer.zipCode.substring(0,3)} ${customer.zipCode.substring(3)}`
+            
+            $("#customer-first-name").val(customer.firstName)
+            $("#customer-last-name").val(customer.lastName)
             $("#customer-email").val( customer.email)
             $("#customer-phone").val(phoneNumber)
-            $("#customer-street").val(customer.adress)
-            $("#customer-city").val(customer.city.name)
+            $("#customer-street").val(customer.streetAddress)
+            $("#customer-city").val(customer.city.cityName)
             $("#customer-zip").val( zipCode)
-            showOrders(customer.id);
-
+            showOrders(customer.customerOrders);
         }
     })
 }
 
-function getNumberOfOrders(id, orderArr){
+/*function getNumberOfOrders(id, orderArr){
     let sum = 0;
     orderArr.forEach(e => {
         if(e.user.id==id){
@@ -95,19 +126,15 @@ function getNumberOfOrders(id, orderArr){
         }
     })
     return sum;
-}
+}*/
 
-function getTotalPriceOfOrders(id, orderArr){
+function getTotalPriceOfOrders(orderArr){
     let sum = 0;
     orderArr.forEach(e => {
-        if(e.user.id==id){
-            sum += e.totalCost;
-        }
+        sum += e.totalCost;
     })
     return sum;
 }
-
-$(document).on('click', '#search-btn', filterSearch);
 
 function filterSearch(){
     let tempOrders = [];
@@ -149,50 +176,66 @@ function filterSearch(){
     }
 };
 
-function showOrders(id){
+function showOrders(customerOrders){
     let sum = 0;
-    orders.forEach(e => {
-        if(e.user.id == id){
-            sum += e.totalCost;
-            let dateFromOrder = new Date(e.orderTimestamp);
+    customerOrders.forEach(orders => {
+            sum += orders.totalCost;
+            let dateFromOrder = new Date(orders.orderTimestamp);
             let orderDate = dateFromOrder.toISOString().substring(0,10);
             console.log(orderDate)
            
             let isPaid = "Obetalad";
-            if(e.isPaid){
+            if(orders.isPaid){
                 isPaid ="Betalad"
             }
             $("#orderTable").append(`
                 <tr>
                     <th scope="row" class="col-3">
-                    <a href="#">${e.orderId}</a>
-                    <td class="col-2">${e.status.type}</td>
+                    <a href="#">${orders.orderId}</a>
+                    <td class="col-2">${orders.status.type}</td>
                     <td class="col-2">${isPaid}</td>
                     <td class="col-3">${orderDate}</td>
-                    <td class="col-2">${e.totalCost.toFixed(2)} kr</td>
+                    <td class="col-2">${orders.totalCost.toFixed(2)} kr</td>
                 </tr>`
             )
-        }
     })
-    $("#totalCost").text(sum.toFixed(2) + " kr");
-    
+    $("#totalCost").text(sum.toFixed(2) + " kr");    
 }
 
-$(document).on('focus', '#search-select', function(){
-    $("#input").val("");
-})
+function updateCustomer(){
+    let phoneNumber = $("#customer-phone").val()
+    phoneNumber = phoneNumber.replace("-", "");
+    phoneNumber = phoneNumber.replaceAll(" ", "");
+    let zipCode = $("#customer-zip").val();
+    zipCode = zipCode.replaceAll(" ", "");
 
-$(document).on('click', '#nav-profile-tab', function(){
-    $("#orderTable").empty();
-    $("#customer-first-name").val("")
-    $("#customer-last-name").val("")
-    $("#customer-email").val("")
-    $("#customer-phone").val("")
-    $("#customer-street").val("")
-    $("#customer-city").val("")
-    $("#customer-zip").val("")
+    console.log(phoneNumber)
+    console.log(zipCode)
 
-})
+    const data = {
+        "firstName" : $("#customer-first-name").val(),
+        "lastName" : $("#customer-last-name").val(),
+        "email" : $("#customer-email").val(),
+        "phone" : phoneNumber,
+        "street" : $("#customer-street").val(),
+        "city": 
+            {
+            "cityName": $("#customer-city").val()
+            },
+        "zipCode" : zipCode,
+        "comment" : $("#commentTextField").val()
+    }
+
+    axios.post(updateUser, data)
+        .then(() => {
+            swal('Kunden är uppdaterad!')
+        })
+        .catch(() => {
+            swal('Något gick fel!','Vänligen försök igen', 'warning')
+        })
+}
+
+
 
 $(document).on('click', '#saveChangesBtn', function(){
     let firstName= $("#customer-first-name").val()
