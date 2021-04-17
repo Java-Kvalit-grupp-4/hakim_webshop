@@ -12,9 +12,11 @@ passwordToCheck = $('#login-password'),
 loginModal = $('#login-modal'),
 myAccountMenu = $('#myAccountDropdown')
 
-let adminvy = $('#admin-vy-link')
+let adminview = $('#admin-view-link')
 
-const addUserUrl = "http://localhost:8080/users/add"
+//const addUserUrl = "http://localhost:8080/users/add"
+const addUserUrl = "https://hakimlogintest.herokuapp.com/users/add"
+
 
 /**
  * Eventlistener
