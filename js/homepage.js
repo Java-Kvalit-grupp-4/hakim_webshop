@@ -45,7 +45,7 @@ const addUserUrl = "https://hakimlogintest.herokuapp.com/users/add"
       sessionStorage.removeItem("customer")
       $('#myAccountDropdown').hide()
       $(this).text("Logga in")
-      adminvy.hide()
+      adminview.hide()
   }
 })
 
@@ -56,10 +56,10 @@ $(document).ready(() => {
   load()
   let loggedIn = sessionStorage.getItem('customer')
   if(loggedIn == undefined){
-    adminvy.hide()
+    adminview.hide()
   }else {
     if(loggedIn.isAdmin){
-      adminvy.show()
+      adminview.show()
     }
   }
 })

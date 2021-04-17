@@ -7,10 +7,11 @@ let linkTag = searchWrapper.querySelector("a");
 let webLink;
 
 let allProductsurl = `http://localhost:8080/products`
+allProductsurl = './TestData/test_data_products_v1.2.JSON'
 let searchWords = []
 
 
-function getProducts2() {
+function getProductsFromDataBase() {
     axios.get(allProductsurl)
     .then(response => {
         getSearchWords(response.data)
@@ -33,7 +34,7 @@ function getSearchWords(data) {
     });
 }
 
-getProducts2()
+getProductsFromDataBase()
 
 let index;
 
