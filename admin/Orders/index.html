@@ -14,7 +14,7 @@
     />
     <link rel="stylesheet" href="../../styles/style.css" />
     <link rel="stylesheet" href="../Customer/admin-customer.css" />
-    <title>Admin-custumer</title>
+    <title>Admin-ordrar</title>
     
   </head>
 
@@ -223,7 +223,7 @@
                     <tr>
                         <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
                         <th scope="col" class="pb-3 ps-md-5">Kundnummer</th>
-                        <th scope="col" class="pb-3 ">Datum </th>
+                        <th scope="col" class="pb-3 ">Datum</th>
                         <th scope="col" class="pb-3">Totalt</th>
                         <th scope="col" class="pb-3">Orderstatus</th>
                         <th scope="col" class="pb-3">Betalstatus</th>
@@ -257,42 +257,43 @@
                     </div>
                     <form>
                         <div class="col-lg-12 mb-3">
-                        <label for="my-info-first-name" class="form-label" id="my-info-first-name-label">Förnamn</label>
+                        <label for="customer-first-name" class="form-label">Förnamn</label>
                         <input type="text" class="form-control" placeholder="Förnamn" aria-label="Förnamn"
-                            id="my-info-first-name">
+                            id="customer-first-name">
                         </div>
                         <div class="col-lg-12 mb-3">
-                            <label for="my-info-last-name" class="form-label">Efternamn</label>
+                            <label for="customer-last-name" class="form-label">Efternamn</label>
                             <input type="text" class="form-control " placeholder="Efternamn" aria-label="Efternamn"
-                         id="my-info-last-name">
+                         id="customer-last-name">
                         </div>
                         <div class="col-lg-12 mb-3">
-                            <label for="my-info-street-adress" class="form-label">Adress</label>
-                            <input type="text" class="form-control" placeholder="Adress" aria-label="Adress"
-                            id="my-info-street-adress">
+                            <label for="customer-street-address" class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Address" aria-label="Address"
+                            id="customer-street-address">
                         </div>
                         <div class="col-lg-12 mb-3">
-                          <label for="my-info-zipcode" class="form-label">Postnummer</label>
+                          <label for="customer-zipcode" class="form-label">Postnummer</label>
                           <input type="text" class="form-control" placeholder="Postnummer" aria-label="Postnummer"
-                          id="my-info-zipcode">
+                          id="customer-zipcode">
                       </div>
                         <div class="col-lg-12 mb-3">
-                            <label for="my-info-city" class="form-label">Postort</label>
+                            <label for="customer-city" class="form-label">Postort</label>
                             <input type="text" class="form-control " placeholder="Postort" aria-label="Postort"
-                            id="my-info-city">
+                            id="customer-city">
                         </div>
                         <div class="col-lg-12 mb-3">
-                            <label for="my-info-email" class="form-label">E-post</label>
+                            <label for="customer-email" class="form-label">E-post</label>
                             <input type="text" class="form-control" placeholder="E-post" aria-label="E-post"
-                            id="my-info-email">
+                            id="customer-email">
                         </div>
                         <div class="col-lg-12 mb-3">
-                            <label for="my-info-phone-number" class="form-label">Telefonnummer</label>
+                            <label for="customer-phone-number" class="form-label">Telefonnummer</label>
                             <input type="text" class="form-control" placeholder="Telefonnummer" aria-label="Telefonnummer"
-                            id="my-info-phone-number">
+                            id="customer-phone-number">
                         </div>
                         <div class="col mb-3 mt-4">
-                            <button type="submit" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
+                            <button type="submit" class="btn btn-secondary save-button" style="width: 100px;" 
+                            id="save-customer-data-btn">Spara</button>
                         </div>
                     </form>
                 </div>
@@ -329,8 +330,10 @@
             </div>
             <div class="container col-12 ps-5">
                 <textarea name="" id="" cols="100" rows="10" placeholder="Skriv kommentar här..."></textarea>
+                <div class="container text-end"><button type="submit" class="btn btn-secondary save-button" style="width: 100px;" 
+              id="save-order-comment-btn">Spara</button>
             </div>
-        </div>
+            </div>
     </div>
         </div>
     

@@ -8,15 +8,15 @@
       "lastName": "Anka",
       "phoneNumber": "0701234567",
       "email": "kalle@anka.se",
-      "adress": "Ankeborgsstigen 31",
+      "streetAddress": "Ankeborgsstigen 31",
       "password": "KalleAnka1",
       "socialSecurityNumber": "5511220331",
       "admin": "false",
       "vip": "false",
+      "zipcode": "12345",
       "city": {
         "id": "1",
-        "name": "Ankeborg",
-        "zipcode": "12345"
+        "name": "Ankeborg"
       }
     },
     "lineItems": [
@@ -70,7 +70,7 @@
       }
     ],
     "totalCost": 86,
-    "change": [
+    "changes": [
       {
         "changeId": 1,
         "changeDate": "2021-01-20 09:10:41",
@@ -96,15 +96,15 @@
       "lastName": "Anka",
       "phoneNumber": "0701234567",
       "email": "kalle@anka.se",
-      "adress": "Ankeborgsstigen 31",
+      "streetAddress": "Ankeborgsstigen 31",
       "password": "KalleAnka1",
       "socialSecurityNumber": "5511220331",
       "admin": "false",
       "vip": "false",
+      "zipcode": "12345",
       "city": {
         "id": "1",
-        "name": "Ankeborg",
-        "zipcode": "12345"
+        "name": "Ankeborg"
       }
     },
     "orderTimestamp": 1,
@@ -116,7 +116,7 @@
       "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },
-    "change": [
+    "changes": [
       {
         "changeId": 1,
         "changeDate": "2021-01-20 09:10:41",
@@ -184,15 +184,15 @@
       "lastName": "Anka",
       "phoneNumber": "0701234567",
       "email": "kalle@anka.se",
-      "adress": "Ankeborgsstigen 31",
+      "streetAddress": "Ankeborgsstigen 31",
       "password": "KalleAnka1",
       "socialSecurityNumber": "5511220331",
       "admin": "false",
       "vip": "false",
+      "zipcode": "12345",
       "city": {
         "id": "1",
-        "name": "Ankeborg",
-        "zipcode": "12345"
+        "name": "Ankeborg"
       }
     },
     "orderTimestamp": 1,
@@ -204,7 +204,7 @@
       "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },
-    "change": [
+    "changes": [
       {
         "changeId": 1,
         "changeDate": "2021-01-20 09:10:41",
@@ -272,15 +272,15 @@
       "lastName": "Anka",
       "phoneNumber": "0701234567",
       "email": "kalle@anka.se",
-      "adress": "Ankeborgsstigen 31",
+      "streetAddress": "Ankeborgsstigen 31",
       "password": "KalleAnka1",
       "socialSecurityNumber": "5511220331",
       "admin": "false",
       "vip": "false",
+      "zipcode": "12345",
       "city": {
         "id": "1",
-        "name": "Ankeborg",
-        "zipcode": "12345"
+        "name": "Ankeborg"
       }
     },
     "orderTimestamp": 1,
@@ -292,7 +292,7 @@
       "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },
-    "change": [
+    "changes": [
       {
         "changeId": 4,
         "changeDate": "2021-01-20 09:10:41",

@@ -30,7 +30,7 @@ $(document).on("click", ".order-number-link", openOrderTab);
 function openOrderTab() {
   saveChosenOrder(Number($(this).text()));
   renderLineItems();
-  populateUserData();
+  renderUserData();
   $("#navbar-order-tab").tab("show");
 }
 
@@ -44,7 +44,7 @@ function renderLineItems() {
   let chosenId = Number(sessionStorage.getItem("chosenOrder"));
   let totalCost = 0;
   console.log(chosenId);
-  $("#product-container").html("")
+  $("#product-container").html("");
   orders.forEach((order) => {
     if (order.id == chosenId) {
       activeOrder = order;
@@ -66,13 +66,19 @@ function renderLineItems() {
       });
     }
   });
-  $("#order-total-cost").html(`Total Summa: ${totalCost}kr`)
+  $("#order-total-cost").html(`Total Summa: ${totalCost}kr`);
 }
 
-function populateUserData() {
+function renderUserData() {
   console.log("user data");
   console.log(activeOrder.user.firstName);
-  $("#my-info-first-name-label").html(`$(activeOrder.user.firstName)`);
+  $("#customer-first-name").val(activeOrder.user.firstName);
+  $("#customer-last-name").val(activeOrder.user.lastName);
+  $("#customer-street-address").val(activeOrder.user.streetAddress);
+  $("#customer-zipcode").val(activeOrder.user.zipcode);
+  $("#customer-city").val(activeOrder.user.city.name);
+  $("#customer-email").val(activeOrder.user.email);
+  $("#customer-phone-number").val(activeOrder.user.phoneNumber);
 }
 
 /* $(function () {
