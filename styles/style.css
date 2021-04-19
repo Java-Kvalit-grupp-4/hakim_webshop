@@ -19,7 +19,8 @@ button {
 /* Nav-bar styles */
 
 nav {
-  min-height: 10vh;
+  height: 10vh;
+  
   /* display: flex;
   justify-content: space-around;
   align-items: center; */
@@ -53,4 +54,8 @@ footer a {
 }
 .shop-body {
   margin-top: 20rem;
+}
+
+.error-msg{
+  color: #F90A0A;
 }
