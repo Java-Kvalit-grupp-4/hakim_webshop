@@ -12,7 +12,7 @@ passwordToCheck = $('#login-password'),
 loginModal = $('#login-modal'),
 myAccountMenu = $('#myAccountDropdown')
 
-const addUserUrl = "http://localhost:8080/users/add"
+const addUserUrl = "https://hakimlivs.herokuapp.com//users/add"
 
 /**
  * Eventlistener
