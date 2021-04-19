@@ -12,7 +12,11 @@ passwordToCheck = $('#login-password'),
 loginModal = $('#login-modal'),
 myAccountMenu = $('#myAccountDropdown')
 
-const addUserUrl = "http://localhost:8080/users/add"
+let adminview = $('#admin-view-link')
+
+//const addUserUrl = "http://localhost:8080/users/add"
+const addUserUrl = "https://hakimlogintest.herokuapp.com/users/add"
+
 
 /**
  * Eventlistener
@@ -41,26 +45,38 @@ const addUserUrl = "http://localhost:8080/users/add"
       sessionStorage.removeItem("customer")
       $('#myAccountDropdown').hide()
       $(this).text("Logga in")
+      adminview.hide()
   }
 })
 
 $('form').submit(false)
 
-$(document).ready(load)
+
+$(document).ready(() => {
+  load()
+  let loggedIn = sessionStorage.getItem('customer')
+  if(loggedIn == undefined){
+    adminview.hide()
+  }else {
+    if(loggedIn.isAdmin){
+      adminview.show()
+    }
+  }
+})
 
     function load() {
         const productsUrl = './TestData/test_data_products_v1.2.JSON'
        // const productsUrl = 'http://localhost:8080/products'
        axios.get(productsUrl)
        .then(response => {
-         render(response.data)
+         renderCategories(response.data)
        })
        .catch(err => {
          alert(err)
        })
     }
 
-    function render(data) {
+    function renderCategories(data) {
       let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
       let customer = sessionStorage.getItem("customer") || "";
       if(customer.length>0){
@@ -71,7 +87,7 @@ $(document).ready(load)
       }
       products = data;
 
-      getProducts(products);
+      renderProducts(products);
      
       let categories = [];
       products.forEach(element => {
@@ -104,11 +120,11 @@ $(document).ready(load)
         if (element.category == btnId) {
           list.push(element);
           $("#products").empty();
-            getProducts(list);
+            renderProducts(list);
         }
         if(btnId === "all"){
           $("#products").empty();
-          getProducts(products);
+          renderProducts(products);
         }
       });
 
@@ -118,7 +134,8 @@ $(document).ready(load)
  * Render products to UI and adds functions to add-to-cart button
  * @param {Array} list of product 
  */
-function getProducts(list) {
+function renderProducts(list) {
+  $("#products").empty()
     list.forEach(element => {
         $("#products").append(`
         <div class="product-card">
@@ -154,7 +171,6 @@ function getProducts(list) {
       $.each($('.add-product-to-cart'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
-            console.log(e.target.parentElement.parentElement.parentElement.id);
             if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
               product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value) //Ger denna rätt antal i varukorgen?
               e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
