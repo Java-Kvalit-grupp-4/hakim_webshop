@@ -69,14 +69,14 @@ $(document).ready(() => {
        // const productsUrl = 'http://localhost:8080/products'
        axios.get(productsUrl)
        .then(response => {
-         render(response.data)
+         renderCategories(response.data)
        })
        .catch(err => {
          alert(err)
        })
     }
 
-    function render(data) {
+    function renderCategories(data) {
       let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
       let customer = sessionStorage.getItem("customer") || "";
       if(customer.length>0){
@@ -87,7 +87,7 @@ $(document).ready(() => {
       }
       products = data;
 
-      getProducts(products);
+      renderProducts(products);
      
       let categories = [];
       products.forEach(element => {
@@ -110,11 +110,11 @@ $(document).ready(() => {
         if (element.category == btnId) {
           list.push(element);
           $("#products").empty();
-            getProducts(list);
+            renderProducts(list);
         }
         if(btnId === "all"){
           $("#products").empty();
-          getProducts(products);
+          renderProducts(products);
         }
       });
 
@@ -124,7 +124,7 @@ $(document).ready(() => {
  * Render products to UI and adds functions to add-to-cart button
  * @param {Array} list of product 
  */
-function getProducts(list) {
+function renderProducts(list) {
   $("#products").empty()
     list.forEach(element => {
         $("#products").append(`

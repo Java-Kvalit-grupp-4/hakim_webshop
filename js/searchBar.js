@@ -1,4 +1,3 @@
-
 const searchWrapper = $('.search-input') 
 const searchField =  $('#search-field') 
 const suggBox = $('.autocom-box')
@@ -61,12 +60,12 @@ function createSearchWords(products) {
     let searchStringToSplit
 
     products.forEach(product => {
-        searchStringToSplit = `${product.title} ${product.description}`
+        searchStringToSplit += `${product.title} ${product.description}`
         product.categories.forEach(category => {
             searchStringToSplit += ` ${category.category}`
         })
         product.tags.forEach(tag => {
-            searchStringToSplit += ` ${tag.tagName}`
+            searchStringToSplit += ` ${tag.tagName} `
         }) 
     })
     
@@ -119,8 +118,9 @@ function sendDataToServer(searchWord) {
     let productMatchWordUrl = `http://localhost:8080/products/searchProducts?searchWord=${searchWord}`
     axios.get(productMatchWordUrl)
     .then(response => {
-        getProducts(response.data)
+        renderProducts(response.data)
         // rendera producterna du sökt efter med response.data
+        // fixa detta
     })
     .catch(err => alert(err))
 }
