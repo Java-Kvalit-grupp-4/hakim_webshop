@@ -70,15 +70,14 @@ function renderCart(){
             })
             //Ta bort varan ur lokal storage
             console.log(el)
-            cart.forEach(element => {
+            cart.forEach((element, index) => {
               console.log(element.id)
               if(element.productNr == el.id) {
-                console.log("hittar produkt att ta bort")
- 
+                cart.splice(index, index + 1)
                 localStorage.setItem('cart', JSON.stringify(cart))
               }
             });
-
+            
             renderCart()
           } else {
             swal("Produkten ej borttagen från varukorgen");
