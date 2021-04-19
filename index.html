@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/bootstrap.css" />
     <link rel="stylesheet" href="./styles/register.css" />
     <link rel="stylesheet" href="./styles/cart-pop-up.css" />
-    <link rel="stylesheet" href="./style-homepage.css" />
+    
+    <link rel="stylesheet" href="./styles/style.css" /><link rel="stylesheet" href="./style-homepage.css" />
     <title>Hakim's Livs homepage</title>
   </head>
 
@@ -36,11 +36,11 @@
         </button>
         <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
         <div
-          class="d-lg-flex justify-content-evenly collapse navbar-collapse"
+          class="d-lg-flex justify-content-lg-evenly collapse navbar-collapse"
           id="navbarTogglerDemo02"
         >
-          <div class="container col-md-6 mt-3">
-            <div class="input-group mb-3 me-5">
+          <div class="container col-lg-6 mt-3">
+            <div class="input-group mb-3 me-0 me-lg-5">
               <input
                 type="text"
                 class="form-control product-search"
@@ -59,8 +59,8 @@
             </div>
           </div>
 
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item me-4">
+          <ul class="navbar-nav mb-2 mb-lg-0 text-start text-sm-end">
+            <li class="nav-item me-lg-4 mb-2 mb-lg-0  ">
               <a
                 type="button nav-link"
                 class="btn btn-outline-secondary text-dark"
@@ -68,7 +68,7 @@
                 >Logga in</a
               >
             </li>
-            <li class="nav-item me-4">
+            <li class="nav-item me-4 ">
               <div class="dropdown">
                 <button
                   class="btn btn-secondary dropdown-toggle"
@@ -93,7 +93,7 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
               <button
                 class="btn btn-secondary"
                 type="button"
@@ -118,22 +118,22 @@
     <!-- navbar end -->
     <div class="container-fluid">
       <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
-        <div class="col-sm-2">
-          <div class="list-group">
-            <div class="list-group" id="sidomeny">
-              <button
-                id="all"
-                type="button"
-                class="list-group-item list-group-item-action fs-4"
-                style="background-color: sandybrown"
-              >
-                Alla produkter
-              </button>
-            </div>
+        <div class="col-sm-4 col-lg-3 col-xl-2" id="sidebar">
+          <!-- <div class="list-group"> -->
+          <div class="list-group" id="sidomeny">
+            <button
+              id="all"
+              type="button"
+              class="list-group-item list-group-item-action fs-4"
+              style="background-color: sandybrown"
+            >
+              Alla produkter
+            </button>
           </div>
+          <!-- </div> -->
         </div>
 
-        <div class="col-sm-8">
+        <div class="col-sm-8 col-xl-9" id="display-body">
           <div class="card w-100 text-white">
             <img
               src="https://picsum.photos/1000/300"
