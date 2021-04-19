@@ -20,7 +20,7 @@ const addUserUrl = "https://hakimlogintest.herokuapp.com/users/add"
 
 /**
  * Eventlistener
- */
+ */C:
 
  $("#newCust-button").click(() => {
   $("#registerForm").modal("show")
