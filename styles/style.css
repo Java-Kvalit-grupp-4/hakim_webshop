@@ -19,7 +19,8 @@ button {
 /* Nav-bar styles */
 
 nav {
-  min-height: 10vh;
+  height: 10vh;
+  
   /* display: flex;
   justify-content: space-around;
   align-items: center; */

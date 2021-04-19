@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/bootstrap.css" />
     <link rel="stylesheet" href="./styles/register.css" />
-    <link rel="stylesheet" href="./styles/cart-pop-up.css" />
-    
-    <link rel="stylesheet" href="./styles/style.css" /><link rel="stylesheet" href="./style-homepage.css" />
+    <link rel="stylesheet" href="./styles/cart-pop-up.css">
+    <link rel="stylesheet" href="./styles/homepage.css">
+    <link rel="stylesheet" href="./styles/searchbar.css">
     <title>Hakim's Livs homepage</title>
   </head>
 
@@ -39,9 +39,20 @@
           class="d-lg-flex justify-content-lg-evenly collapse navbar-collapse"
           id="navbarTogglerDemo02"
         >
-          <div class="container col-lg-6 mt-3">
+          <div class="container col-md-6 mt-3">
             <div class="input-group mb-3 me-0 me-lg-5">
-              <input
+              <!-- searchfield -->
+              <div class="wrapper">
+                <div class="search-input">
+                  <input id="search-field"type="text" placeholder="Sök produkt..." maxlength="40">
+                  <div class="autocom-box">
+                    <!-- here list are inserted from javascript -->
+                  </div>
+                  <div class="icon"><i class="bi bi-search"></i></div>
+                </div>
+              </div>
+              <!-- searchfield ends -->
+              <!-- <input
                 type="text"
                 class="form-control product-search"
                 placeholder="Sök produkt"
@@ -55,7 +66,7 @@
                 style="width: 5rem"
               >
                 Sök
-              </button>
+              </button> -->
             </div>
           </div>
 
@@ -110,10 +121,15 @@
                 >
               </button>
             </li>
-          </ul>
+            <li class="nav-item">
+              <a id="admin-view-link"class="nav-link" href="./admin/">Adminvy</a>
+            </li>
+          </ul>          
         </div>
       </div>
     </nav>
+
+    
 
     <!-- navbar end -->
     <div class="container-fluid">
@@ -712,9 +728,12 @@
     ></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script src="./js/cart-pop-up.js"></script>
     <script src="./js/validate.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/homepage.js"></script>
+    <script src="./js/searchBar.js"></script>
+    
   </body>
 </html>
