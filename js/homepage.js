@@ -13,6 +13,11 @@ loginModal = $('#login-modal'),
 myAccountMenu = $('#myAccountDropdown')
 
 const addUserUrl = "https://hakimlivs.herokuapp.com//users/add"
+let adminview = $('#admin-view-link')
+
+//const addUserUrl = "http://localhost:8080/users/add"
+
+
 
 /**
  * Eventlistener
@@ -41,26 +46,38 @@ const addUserUrl = "https://hakimlivs.herokuapp.com//users/add"
       sessionStorage.removeItem("customer")
       $('#myAccountDropdown').hide()
       $(this).text("Logga in")
+      adminview.hide()
   }
 })
 
 $('form').submit(false)
 
-$(document).ready(load)
+
+$(document).ready(() => {
+  load()
+  let loggedIn = sessionStorage.getItem('customer')
+  if(loggedIn == undefined){
+    adminview.hide()
+  }else {
+    if(loggedIn.isAdmin){
+      adminview.show()
+    }
+  }
+})
 
     function load() {
         const productsUrl = './TestData/test_data_products_v1.2.JSON'
        // const productsUrl = 'http://localhost:8080/products'
        axios.get(productsUrl)
        .then(response => {
-         render(response.data)
+         renderCategories(response.data)
        })
        .catch(err => {
          alert(err)
        })
     }
 
-    function render(data) {
+    function renderCategories(data) {
       let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
       let customer = sessionStorage.getItem("customer") || "";
       if(customer.length>0){
@@ -71,7 +88,7 @@ $(document).ready(load)
       }
       products = data;
 
-      getProducts(products);
+      renderProducts(products);
      
       let categories = [];
       products.forEach(element => {
@@ -84,9 +101,9 @@ $(document).ready(load)
       $("#sidomeny").append(`
           <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4" style="background-color:wheat ;">${element}</button>`
       );
-      document.getElementById("total-items-in-cart").innerHTML = cartQuantity
     });
-
+    $("#total-items-in-cart").text(cartQuantity);
+    setCartAvailability();
     $("#sidomeny button").on("click", function () {
       let btnId = $(this).attr("id");
       let list = [];
@@ -94,11 +111,11 @@ $(document).ready(load)
         if (element.category == btnId) {
           list.push(element);
           $("#products").empty();
-            getProducts(list);
+            renderProducts(list);
         }
         if(btnId === "all"){
           $("#products").empty();
-          getProducts(products);
+          renderProducts(products);
         }
       });
 
@@ -108,7 +125,7 @@ $(document).ready(load)
  * Render products to UI and adds functions to add-to-cart button
  * @param {Array} list of product 
  */
-function getProducts(list) {
+function renderProducts(list) {
   $("#products").empty()
     list.forEach(element => {
         $("#products").append(`
@@ -142,6 +159,10 @@ function getProducts(list) {
         );
       });
 
+      $("#cartDropdown").on("click", function(){
+        renderCart();
+      })
+
       $.each($('.add-product-to-cart'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
@@ -151,7 +172,7 @@ function getProducts(list) {
               saveProductToCart(product)
               saveTotalPrice(product)
               updateTotalCartUI()
-              renderCart()
+              setCartAvailability();
             }
           })
         })

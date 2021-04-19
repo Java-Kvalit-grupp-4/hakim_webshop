@@ -1,38 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-body{
+body {
   padding: 0 20px;
 }
 
-::selection{
+::selection {
   color: #fff;
-  background: #664AFF;
-
+  background: #664aff;
 }
 
-.wrapper{
+.wrapper {
   max-width: 450px;
   margin: auto;
   overflow: visible;
+  z-index: 1000;
 }
 
-.wrapper .search-input{
+.wrapper .search-input {
   background: #fff;
   width: 30%;
   position: fixed;
   left: 35%;
-  top: 2vh;
+  top: 3vh;
   border-radius: 5px;
-  box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+  box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
 }
 
-.search-input input{
+.search-input input {
   height: 55px;
   width: 100%;
   outline: none;
@@ -40,14 +40,14 @@ body{
   border-radius: 5px;
   padding: 0 60px 0 20px;
   font-size: 18px;
-  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-.search-input.active input{
+.search-input.active input {
   border-radius: 5px 5px 0 0;
 }
 
-.search-input .autocom-box{
+.search-input .autocom-box {
   padding: 0;
   opacity: 0;
   pointer-events: none;
@@ -55,13 +55,13 @@ body{
   overflow-y: auto;
 }
 
-.search-input.active .autocom-box{
+.search-input.active .autocom-box {
   padding: 10px 8px;
   opacity: 1;
   pointer-events: auto;
 }
 
-.autocom-box li{
+.autocom-box li {
   list-style: none;
   padding: 8px 12px;
   display: none;
@@ -70,14 +70,14 @@ body{
   border-radius: 3px;
 }
 
-.search-input.active .autocom-box li{
+.search-input.active .autocom-box li {
   display: block;
 }
-.autocom-box li:hover{
+.autocom-box li:hover {
   background: #efefef;
 }
 
-.search-input .icon{
+.search-input .icon {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -91,10 +91,63 @@ body{
 }
 
 .selected {
-  background:#efefef;
+  background: #efefef;
 }
 
-li.selected {background:yellow}
+@media (max-width: 734px) {
+  .wrapper .search-input {
+    width: 50%;
+    left: 50%;
+    font-size: 1rem;
+    transform: translate(-50%, 0%);
+  }
+  .search-input input {
+    height: 40px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 60px 0 20px;
+    font-size: 16px;
+  }
+  .search-input .icon {
+    right: 5px;
+    top: -5px;
+    height: 55px;
+    width: 55px;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 600px) {
+  .wrapper .search-input {
+    width: 30%;
+    left: 50%;
+    transform: translate(-50%, 25%);
+  }
+  .search-input input {
+    height: 40px;
+    width: 100%;
+  }
+  .search-input .icon {
+    right: 5px;
+    top: -5px;
+    height: 55px;
+    width: 55px;
+  }
+  @media (max-width: 991px) {
+    .wrapper .search-input {
+      width: 30%;
+      left: 70%;
+      transform: translate(-50%, 25%);
+    }
+  }
+}
+
+@media (max-width: 599px) {
+    .wrapper .search-input {
+      top: 115px;
+    }
+  }
 
 @media (max-width: 734px){
   .wrapper .search-input {
@@ -119,6 +172,10 @@ li.selected {background:yellow}
     width: 55px;
   }
   
+  @media(max-width:374px) {
+  .wrapper .search-input {
+      margin-left: 10%;
+    }
 }
 
 @media screen and (max-width: 1024px) and (min-width: 735px){
@@ -140,4 +197,4 @@ li.selected {background:yellow}
   }
 
 }
-
+}

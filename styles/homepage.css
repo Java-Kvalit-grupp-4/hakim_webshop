@@ -66,6 +66,7 @@
 
 .subtract-btn div,.add-btn div {
   background-color: #bdbdbd;
+  width: 1.5em;
   border: none;
   border-radius: 3px;
   color: black;
@@ -75,14 +76,19 @@
   display: inline-block;
   cursor: pointer;
   font-size: 1.4rem;
+  font-weight: bold;
   transition: all 0.1s ease-out;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
   text-decoration:none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
     
 }
 .subtract-btn div:hover,.add-btn div:hover {
     background-color: #4747479c;
 }
+
 
 .add-product-to-cart-container{
     padding-bottom: 1rem;
@@ -130,6 +136,16 @@
     
 }
 
+#admin-view-link{
+    color: rgb(24, 24, 24);
+}
+#admin-view-link:hover{
+    color: rgba(24, 24, 24, 0.39);
+}
+
+
+
+
 @media (max-width: 576px) {
     .product-card {
         max-width: 80%;
@@ -146,7 +162,8 @@
         width: 80%;       
     }
     .subtract-btn div,.add-btn div {
-        padding: 2.5px 10px;
+        padding: 2.5px 12px;
+
       }
     .add-product-to-cart{
         padding: 3px 25px;
