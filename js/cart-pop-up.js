@@ -20,7 +20,7 @@ function makeArrayFromData(data) {
 function renderCart() {
   let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
   let cart = JSON.parse(localStorage.getItem("cart"));
-  
+
   if (cart != null) {
     let output = "";
 
@@ -88,17 +88,20 @@ function renderCart() {
           if (!willDelete) {
             swal("Produkten är borttagen", {
               icon: "success",
-            })
+            });
             //Ta bort varan ur lokal storage
             cart.forEach((element, index) => {
-              if(element.productNr == el.id) {
-                cartQuantity-=element.inCart;
+              if (element.productNr == el.id) {
+                cartQuantity -= element.inCart;
                 updateTotalPrice(element);
 
                 cart.splice(index, 1);
-                localStorage.setItem('cart', JSON.stringify(cart));
-                localStorage.setItem("cartQuantity", JSON.stringify(cartQuantity));
-                $("#total-items-in-cart").text(cartQuantity)
+                localStorage.setItem("cart", JSON.stringify(cart));
+                localStorage.setItem(
+                  "cartQuantity",
+                  JSON.stringify(cartQuantity)
+                );
+                $("#total-items-in-cart").text(cartQuantity);
                 updateCartQuantity();
                 setCartAvailability();
               }
@@ -112,12 +115,12 @@ function renderCart() {
     });
   }
 }
-function updateTotalPrice(product){
+function updateTotalPrice(product) {
   let totalPrice = JSON.parse(localStorage.getItem("cartTotalPrice"));
-  totalPrice -= product.price*product.inCart;
+  totalPrice -= product.price * product.inCart;
 
   localStorage.setItem("cartTotalPrice", JSON.stringify(totalPrice));
-};
+}
 
 function addProduct(product) {
   let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
