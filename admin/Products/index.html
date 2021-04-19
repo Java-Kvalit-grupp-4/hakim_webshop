@@ -7,14 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../styles/bootstrap.css">
     <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../Products/style-admin-products.css">
     <title>Admin-hemskärm</title>
-    <style>
-        .highlight{
-            background-color: burlywood;
-        }
-        
-    </style>
-    </style>
 </head>
 
 <body>
@@ -102,6 +96,10 @@
                 <div class="d-flex justify-content-center mt-5">
                     <button id="choose">Välj</button>
                 </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <button id="new">Skapa ny produkt</button>
+                </div>
+
             </div>
 
         </div>
@@ -113,41 +111,48 @@
                     <div class="col-sm-3 me-5">
                         <label for="titleInput" class="form-label">Titel</label>
                         <input type="text" class="form-control mb-3" id="title">
+                        <label for="brandInput" class="form-label">Brand</label>
+                        <input type="text" class="form-control mb-3" id="brand">
                         <label for="descriptionInput" class="form-label">Beskrivning</label>
                         <textarea class="form-control mb-3" id="description" rows="8"></textarea>
+
+                    </div>
+                    <div class="col-sm-3 me-5">
+                        <label for="weightInput" class="form-label">Vikt/Volym</label>
+                        <input type="text" class="form-control mb-3" id="weight">
+                        <label for="priceInput" class="form-label">Pris</label>
+                        <input type="text" class="form-control mb-3" id="price">
+                        <label for="lagerInput" class="form-label">Lagerstatus</label>
+                        <input type="text" class="form-control mb-3" id="lager">
+                        <label for="lagerInput" class="form-label">Tags</label>
+                        <input type="text" class="form-control mb-3" id="tags">
+
 
                     </div>
 
                     <div class="col-sm-3">
                         <label for="imageInput" class="form-label">Bild</label>
-                        <img id="image" src="https://picsum.photos/300" alt="img">
+                        <img id="img" src="https://picsum.photos/300" alt="img">
 
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-3 me-5" id="column">
-                            <label for="priceInput" class="form-label">Pris</label>
-                            <input type="text" class="form-control" id="price">
+                        <div class="col-sm-3 me-4" id="column">
                             <label for="category" class="form-label mt-3">Kategori</label>
-
                         </div>
-                        <div class="col-sm-3">
-                            <label for="lagerInput" class="form-label">Lagerstatus</label>
-                            <input type="text" class="form-control" id="lager">
 
-                        </div>
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 me-5">
                                 <label for="categoryInput" class="form-label mt-3">Ny kategori</label>
                                 <div class="input-group mb-3">
                                     <input id="categoryInput" type="text" class="form-control" placeholder=""
                                         aria-label="New category" aria-describedby="category-input">
                                     <button class="btn btn-outline-secondary" type="button"
-                                        id="inputSave">Spara</button>
+                                        id="inputSave">Spara ny kategori</button>
                                 </div>
                             </div>
-                            <div class="col-sm-3 mt-5 ms-5 d-flex justify-content-center">
-                                <button>Spara ändringar</button>
+                            <div class="col-sm-3 mt-5" style="margin-left: 340px;">
+                                <button id="saveChanges">Spara ändringar</button>
                             </div>
 
                         </div>

@@ -130,6 +130,16 @@
     
 }
 
+#admin-view-link{
+    color: rgb(24, 24, 24);
+}
+#admin-view-link:hover{
+    color: rgba(24, 24, 24, 0.39);
+}
+
+
+
+
 @media (max-width: 576px) {
     .product-card {
         max-width: 80%;
