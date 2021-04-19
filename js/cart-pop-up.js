@@ -18,6 +18,18 @@ function makeArrayFromData(data) {
 }
 
 function renderCart(){
+  let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
+  if(cartQuantity <=0 || cartQuantity==null){
+    document.getElementById("cartDropdown").disabled = true
+    document.getElementById("checkout-btn").disabled = true
+    document.getElementById("to-checkout-link").href = '#';
+    
+  }else{
+    document.getElementById("cartDropdown").disabled = false
+    document.getElementById("checkout-btn").disabled = false
+    document.getElementById("to-checkout-link").href = './pages/checkout/';
+
+  }
     let cart = JSON.parse(localStorage.getItem("cart"))
     document.getElementById("productsInCart").innerHTML = ''
     
@@ -127,10 +139,12 @@ function removeFromTotalPrice(product) {
 }
 
     function updateCartQuantity(){
+      
       let cartTemp = JSON.parse(localStorage.getItem("cart"));
       cartTemp.forEach(element => {
         document.querySelector(`.quantity${element.productNr}`).textContent = element.inCart;
         document.querySelector(`.price${element.productNr}`).textContent = (element.price * element.inCart).toFixed(2);
+
       }); 
     }
 
@@ -161,5 +175,17 @@ function removeFromTotalPrice(product) {
     document.getElementById("total-items-in-cart").innerHTML = '0'
     document.getElementById("cartTotalPrice").innerHTML = ''
     document.getElementById("productsInCart").innerHTML = ''
+    let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
+    if(cartQuantity <=0 || cartQuantity==null){
+      document.getElementById("cartDropdown").disabled = true
+      document.getElementById("checkout-btn").disabled = true
+      document.getElementById("to-checkout-link").href = '#';
+      
+    }else{
+      document.getElementById("cartDropdown").disabled = false
+      document.getElementById("checkout-btn").disabled = false
+      document.getElementById("to-checkout-link").href = './pages/checkout/';
+  
+    }
   });
   

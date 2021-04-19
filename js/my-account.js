@@ -44,24 +44,36 @@ $('#submit').click( () => {
     swal("Informationen har sparats", "", "success")
     resetsInputBorders()
     
-    console.log('Sending to database')
-    let data = {
-      "firstName": firstName.val(), 
-      "lastName": lastName.val(), 
-      "phoneNumber": phoneNumber.val(), 
-      "email": email.val(), 
-      "adress": address.val(), 
-      "password": newPassword.val(),
-      "social_security_number": null, 
-      "admin": "false",
-      "vip": "false",
-      "city":
-        {
-          "name": city.val(),
-          "zipcode": zipCode.val()
-        }
-    }
+    let url = `localhost:8080/users/updateUser?
+    firstName=${firstName.val()}&
+    lastName=${lastName.val()}&
+    phoneNumber=${phoneNumber.val()}&
+    email=${email.val()}&
+    streetAddress=${address.val()}&
+    zipCode=${zipCode.val()}&
+    cityName=${city.val()}`
 
+    axios.get(url)
+    .then(response => {
+      if(response.status !== 200){
+        swal('Fel email eller lösenord', '', 'warning')
+        emailToCheck.val('')
+        passwordToCheck.val('')
+      }else {
+        sessionStorage.setItem('customer', JSON.stringify(response.data))
+        if(response.data.isAdmin == true){
+          location.replace("admin/index.html")
+        }else{
+          loginModal.modal('hide')
+          navLoginBtn.text('Logga ut')
+          myAccountMenu.show()
+        }
+        
+      } 
+    })
+    .catch(err => {
+      alert('Server fel!')
+    })
     console.log(data)
 
     // send data object to backend for uppdateing customer
@@ -87,8 +99,6 @@ $('#change-password-btn').click(() => {
 
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
-
-// ändra variablenamn på first_name och last_name phone_number
 
      firstName.val(customer.firstName)
      lastName.val(customer.lastName)
