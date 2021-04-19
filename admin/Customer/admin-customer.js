@@ -6,7 +6,6 @@ let updateUser = "http://localhost:8080/users/updateUser2";
 
 let startDate = null;
 let endDate = null;
-let sendTo = "localhost:8080/customers/add"
 
 $(document).ready(load)
 
@@ -163,16 +162,29 @@ function filterSearch(){
             showCustomers(customers);
             break;
         case 'Vip-kunder':
-            showCustomers(customers.filter(e => e.vip=="true"));   
+            showCustomers(customers.filter(customer => customer.isVip==true));   
             break;
         case 'Total ordersumma över:':
             if(input!=""){
-                showCustomers(customers.filter(e => getTotalPriceOfOrders(e.id, tempOrders)>input));
+                showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders.filter(order => 
+                    {let date = new Date(order.orderTimestamp)
+                        date>=startDate && date<=endDate
+                    })
+                )>input));
+            }
+            else{
+                showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders)>input));
             }
             break;
         case 'Totalt antal ordrar över:':
             if(input!=""){
-                showCustomers(customers.filter(e => getNumberOfOrders(e.id, tempOrders)>input));
+                showCustomers(customers.filter(customer =>customer.customerOrders.filter(order => 
+                    {let date = new Date(order.orderTimestamp)
+                        date>=startDate && date<=endDate
+                    }).length>input));
+            }
+            else{
+                showCustomers(customers.filter(customer => customer.customerOrders.length>input));
             }
             break;
     }
@@ -239,31 +251,7 @@ function updateCustomer(){
 
 
 
-$(document).on('click', '#saveChangesBtn', function(){
-    let firstName= $("#customer-first-name").val()
-    let lastName = $("#customer-last-name").val()
-    let email = $("#customer-email").val()
-    let phone = $("#customer-phone").val()
-    let street = $("#customer-street").val()
-    let city = $("#customer-city").val()
-    let zipcode = $("#customer-zip").val()
-
-    console.log(firstName + " " + lastName)
-
-
-    let customerChanges = `
-    "firstName": ${firstName}, 
-    "lastName": ¨${lastName}, 
-    "phoneNumber": ${phone}, 
-    "email": ${email}, 
-    "streetAdress": ${street}, 
-    "city":${city}, 
-    "zipCode" : ${zipcode} `
-})
-
-
-
 
         
 
-     
+    
