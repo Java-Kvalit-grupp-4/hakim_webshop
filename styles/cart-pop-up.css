@@ -142,3 +142,13 @@ svg {
   align-content: center;
   justify-content: center;
 }
+
+.decrease-button {
+  cursor:pointer
+}
+.increase-button {
+  cursor:pointer
+}
+.trash-button {
+  cursor:pointer
+}
