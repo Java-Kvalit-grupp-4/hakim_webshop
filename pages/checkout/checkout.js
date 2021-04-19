@@ -2,7 +2,10 @@
 $(document).ready(run)
 
 function run() {
-    
+    let customer = JSON.parse(sessionStorage.getItem('customer'))
+    if(customer==null || customer== undefined){
+        window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
+    }
     getCart()
     getLoggedInCustomer()
 
