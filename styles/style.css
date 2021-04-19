@@ -19,7 +19,7 @@ button {
 /* Nav-bar styles */
 
 nav {
-  height: 10vh;
+  min-height: 10vh;
   
   /* display: flex;
   justify-content: space-around;
@@ -59,3 +59,4 @@ footer a {
 .error-msg{
   color: #F90A0A;
 }
+
