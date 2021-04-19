@@ -6,16 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/bootstrap.css" />
     <link rel="stylesheet" href="./styles/register.css" />
-    <link rel="stylesheet" href="./styles/cart-pop-up.css">
-    <link rel="stylesheet" href="./styles/homepage.css">
-    <link rel="stylesheet" href="./styles/searchbar.css">
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/cart-pop-up.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/homepage.css" />
+    <link rel="stylesheet" href="./styles/searchbar.css" />
+
     <title>Hakim's Livs homepage</title>
   </head>
 
   <body id="login-page">
     <!-- navbar (prototype) -->
 
+    
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"
@@ -24,6 +26,20 @@
             class="img-fluid nav-image"
             style="margin-left: -0.5rem"
         /></a>
+            <div class="wrapper">
+      <div class="search-input">
+        <input
+          id="search-field"
+          type="text"
+          placeholder="Sök produkt..."
+          maxlength="40"
+        />
+        <div class="autocom-box">
+          <!-- here list are inserted from javascript -->
+        </div>
+        <div class="icon"><i class="bi bi-search"></i></div>
+      </div>
+    </div>
         <button
           class="navbar-toggler"
           type="button"
@@ -43,15 +59,7 @@
           <div class="container col-md-6 mt-3">
             <div class="input-group mb-3 me-0 me-lg-5">
               <!-- searchfield -->
-              <div class="wrapper">
-                <div class="search-input">
-                  <input id="search-field"type="text" placeholder="Sök produkt..." maxlength="40">
-                  <div class="autocom-box">
-                    <!-- here list are inserted from javascript -->
-                  </div>
-                  <div class="icon"><i class="bi bi-search"></i></div>
-                </div>
-              </div>
+
               <!-- searchfield ends -->
               <!-- <input
                 type="text"
@@ -72,7 +80,7 @@
           </div>
 
           <ul class="navbar-nav mb-2 mb-lg-0 text-start text-sm-end">
-            <li class="nav-item me-lg-4 mb-2 mb-lg-0  ">
+            <li class="nav-item me-lg-4 mb-2 mb-lg-0">
               <a
                 type="button nav-link"
                 class="btn btn-outline-secondary text-dark"
@@ -80,7 +88,7 @@
                 >Logga in</a
               >
             </li>
-            <li class="nav-item me-4 ">
+            <li class="nav-item me-4">
               <div class="dropdown">
                 <button
                   class="btn btn-secondary dropdown-toggle"
@@ -105,7 +113,7 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-item ">
+            <li class="nav-item">
               <button
                 class="btn btn-secondary"
                 type="button"
@@ -123,14 +131,15 @@
               </button>
             </li>
             <li class="nav-item">
-              <a id="admin-view-link"class="nav-link" href="./admin/">Adminvy</a>
+              <a id="admin-view-link" class="nav-link" href="./admin/"
+                >Adminvy</a
+              >
             </li>
-          </ul>          
+          </ul>
         </div>
       </div>
     </nav>
 
-    
 
     <!-- navbar end -->
     <div class="container-fluid">
@@ -735,6 +744,5 @@
     <script src="./js/register.js"></script>
     <script src="./js/homepage.js"></script>
     <script src="./js/searchBar.js"></script>
-    
   </body>
 </html>
