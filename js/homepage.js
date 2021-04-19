@@ -100,9 +100,6 @@ $(document).ready(() => {
       $("#sidomeny").append(`
           <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4" style="background-color:wheat ;">${element}</button>`
       );
-      console.log(cartQuantity)
-     
-      
     });
     $("#total-items-in-cart").text(cartQuantity);
     setCartAvailability();

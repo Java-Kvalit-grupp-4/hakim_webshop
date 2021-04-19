@@ -18,6 +18,7 @@ function makeArrayFromData(data) {
 }
 
 function renderCart() {
+  let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
   let cart = JSON.parse(localStorage.getItem("cart"));
   
   if (cart != null) {
@@ -89,16 +90,19 @@ function renderCart() {
               icon: "success",
             })
             //Ta bort varan ur lokal storage
-            console.log(el)
             cart.forEach((element, index) => {
-              console.log(element.id)
               if(element.productNr == el.id) {
-                cart.splice(index, index + 1)
-                localStorage.setItem('cart', JSON.stringify(cart))
+                cartQuantity-=element.inCart;
+
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                localStorage.setItem("cartQuantity", JSON.stringify(cartQuantity));
+                $("#total-items-in-cart").text(cartQuantity)
+                updateCartQuantity();
+                setCartAvailability();
               }
             });
-            
-            renderCart()
+            renderCart();
           } else {
             swal("Borttagning avbruten");
           }
@@ -190,6 +194,7 @@ function setCartAvailability() {
   if (cartQuantity <= 0 || cartQuantity == null) {
     $("#cartDropdown").attr("disabled", true);
     $("#checkout-button").attr("disabled", true);
+    hideCart();
   } else {
     $("#cartDropdown").attr("disabled", false);
     $("#checkout-button").attr("disabled", false);
