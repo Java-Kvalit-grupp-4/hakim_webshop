@@ -68,6 +68,17 @@ function renderCart(){
             swal("Produkten är borttagen", {
               icon: "success",
             })
+            //Ta bort varan ur lokal storage
+            console.log(el)
+            cart.forEach(element => {
+              console.log(element.id)
+              if(element.productNr == el.id) {
+                console.log("hittar produkt att ta bort")
+ 
+                localStorage.setItem('cart', JSON.stringify(cart))
+              }
+            });
+
             renderCart()
           } else {
             swal("Produkten ej borttagen från varukorgen");
