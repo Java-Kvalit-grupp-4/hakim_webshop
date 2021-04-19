@@ -117,6 +117,13 @@
     <!--slutar row-->
   </div>
   <!--slutar container-->
+  <script>
+    let customer = JSON.parse(sessionStorage.getItem('customer'))
+    console.log(customer)
+      if(customer==null || customer== undefined || customer.isAdmin==false){
+        window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
+      }
+</script>
 </body>
 
 </html>
