@@ -65,16 +65,16 @@ $(function () {
   sortPriceAscending(products);
   sortPriceDecending(products);
 
-  $("#name-ascending").click(() => {
+  $("#name-ascending").on("click", function(){
     sortNamesAscending()
    })
-   $("#name-descending").click(() => {
+   $("#name-descending").on("click", function() {
     sortNamesDecending()
    })
-   $("#price-ascending").click(() => {
+   $("#price-ascending").on("click", function() {
     sortPriceAscending()
    })
-   $("#price-descending").click(() => {
+   $("#price-descending").on("click", function() {
     sortPriceDecending()
    })
 
