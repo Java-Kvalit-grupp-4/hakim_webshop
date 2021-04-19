@@ -25,7 +25,7 @@
     "status": {
       "statusId": 4,
       "statusTimestamp": "2021-01-20 09:05:03",
-      "type": "Skickad"
+      "type": "Plockning pågår"
     },
     "change": [
       {
@@ -97,7 +97,7 @@
     "status": {
       "statusId": 4,
       "statusTimestamp": "2021-01-20 09:05:03",
-      "type": "Skickad"
+      "type": "Redo att skickas"
     },
     "change": [
       {
@@ -241,7 +241,7 @@
     "status": {
       "statusId": 4,
       "statusTimestamp": "2021-01-20 09:05:03",
-      "type": "Skickad"
+      "type": "Väntar på behandling"
     },
     "change": [
       {
