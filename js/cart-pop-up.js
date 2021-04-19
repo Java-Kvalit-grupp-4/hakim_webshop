@@ -93,6 +93,7 @@ function renderCart() {
             cart.forEach((element, index) => {
               if(element.productNr == el.id) {
                 cartQuantity-=element.inCart;
+                updateTotalPrice(element);
 
                 cart.splice(index, 1);
                 localStorage.setItem('cart', JSON.stringify(cart));
@@ -111,6 +112,12 @@ function renderCart() {
     });
   }
 }
+function updateTotalPrice(product){
+  let totalPrice = JSON.parse(localStorage.getItem("cartTotalPrice"));
+  totalPrice -= product.price*product.inCart;
+
+  localStorage.setItem("cartTotalPrice", JSON.stringify(totalPrice));
+};
 
 function addProduct(product) {
   let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
