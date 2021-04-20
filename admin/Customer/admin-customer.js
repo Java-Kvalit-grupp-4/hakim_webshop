@@ -2,7 +2,7 @@ let customers = [];
 let orders = [];
 let choosedCustomer = "";
 let getAllCustomers = "http://localhost:8080/users";
-let updateUser = "http://localhost:8080/users/updateUser2";
+let updateUser = "http://localhost:8080/users/adminUpdateUser";
 
 let startDate = null;
 let endDate = null;
@@ -217,10 +217,9 @@ function showOrders(customerOrders){
 }
 
 function updateCustomer(){
-    let phoneNumber = $("#customer-phone").val()
-    phoneNumber = phoneNumber.replace("-", "");
+    let phoneNumber = phoneNumber.val()
     phoneNumber = phoneNumber.replaceAll(" ", "");
-    let zipCode = $("#customer-zip").val();
+    let zipCode = zipCode.val();
     zipCode = zipCode.replaceAll(" ", "");
 
     console.log(phoneNumber)
@@ -239,6 +238,14 @@ function updateCustomer(){
         "zipCode" : zipCode,
         "comment" : $("#commentTextField").val()
     }
+
+    updateUser += `firstName=${firstName.val()}&
+    lastName=${lastName.val()}&
+    phoneNumber=${phoneNumber.val()}&
+    email=${email.val()}&
+    streetAddress=${address.val()}&
+    zipCode=${zipCode.val()}&
+    cityName=${city.val()}`
 
     axios.post(updateUser, data)
         .then(() => {
