@@ -14,8 +14,8 @@ myAccountMenu = $('#myAccountDropdown')
 
 let adminview = $('#admin-view-link')
 
-//const addUserUrl = "http://localhost:8080/users/add"
-const addUserUrl = "https://hakimlogintest.herokuapp.com/users/add"
+const addUserUrl = "http://localhost:8080/users/add"
+//const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 
 
 /**
@@ -86,7 +86,7 @@ $(document).ready(() => {
         $('#myAccountDropdown').hide()
       }
       products = data;
-
+      localStorage.setItem('categoryList', JSON.stringify(products));
       renderProducts(products);
      
       let categories = [];
@@ -111,10 +111,12 @@ $(document).ready(() => {
           list.push(element);
           $("#products").empty();
             renderProducts(list);
+            localStorage.setItem('categoryList', JSON.stringify(list));
         }
         if(btnId === "all"){
           $("#products").empty();
           renderProducts(products);
+          localStorage.setItem('categoryList', JSON.stringify(list));
         }
       });
 
@@ -281,7 +283,7 @@ function updateTotalCartUI(){
 //------------------------------------- login ----------------------------------\\
 
 $('#login-button').click(() => {
-  let url = `http://localhost:8080/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
+  let url = `localhost:8080/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
 
   axios.get(url)
     .then((response) => {
