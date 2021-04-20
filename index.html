@@ -17,7 +17,6 @@
   <body id="login-page">
     <!-- navbar (prototype) -->
 
-    
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"
@@ -26,20 +25,20 @@
             class="img-fluid nav-image"
             style="margin-left: -0.5rem"
         /></a>
-            <div class="wrapper">
-      <div class="search-input">
-        <input
-          id="search-field"
-          type="text"
-          placeholder="Sök produkt..."
-          maxlength="40"
-        />
-        <div class="autocom-box">
-          <!-- here list are inserted from javascript -->
+        <div class="wrapper">
+          <div class="search-input">
+            <input
+              id="search-field"
+              type="text"
+              placeholder="Sök produkt..."
+              maxlength="40"
+            />
+            <div class="autocom-box">
+              <!-- here list are inserted from javascript -->
+            </div>
+            <div class="icon"><i class="bi bi-search"></i></div>
+          </div>
         </div>
-        <div class="icon"><i class="bi bi-search"></i></div>
-      </div>
-    </div>
         <button
           class="navbar-toggler"
           type="button"
@@ -140,7 +139,6 @@
       </div>
     </nav>
 
-
     <!-- navbar end -->
     <div class="container-fluid">
       <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
@@ -173,7 +171,53 @@
             </div>
           </div>
 
-          <div class="row my-5" id="products">
+          <div class="dropdown text-end mt-3">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenu2"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Sortera efter
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li>
+                <button class="dropdown-item" type="button" id="name-ascending">
+                  A-Ö
+                </button>
+              </li>
+              <li>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  id="name-descending"
+                >
+                  Ö-A
+                </button>
+              </li>
+              <li>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  id="price-ascending"
+                >
+                  Pris: Stigande
+                </button>
+              </li>
+              <li>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  id="price-descending"
+                >
+                  Pris: Fallande
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="row mt-3 mb-5" id="products">
             <!-- <div id="${element.productNr}"class="product-card">
               <div>
                 <div class="img-container">
@@ -744,5 +788,6 @@
     <script src="./js/register.js"></script>
     <script src="./js/homepage.js"></script>
     <script src="./js/searchBar.js"></script>
+    <script src="./js/sortingAlgorithm.js"></script>
   </body>
 </html>
