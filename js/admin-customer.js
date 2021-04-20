@@ -99,8 +99,6 @@ function showCustomers(customerArr){
         let customerOrders = e.customerOrders;
         let totalPrice = getTotalPriceOfOrders(customerOrders);
 
-        //<td>${e.customerOrders.length}</td>   Kod för antalet ordrar
-        //<td>${getTotalPriceOfOrders(customerOrders).toFixed(2)} kr</td>   Kod för totala summan av alla ordrar
     
         $("#customerTable").append(`
             <tr>
@@ -130,31 +128,21 @@ function saveCustomer(customerNumber){
         
         if(customer.customerNumber==customerNumber){
             
-            let phoneNumber = `${customer.phoneNumber.substring(0,3)} ${customer.phoneNumber.substring(3,6)} ${customer.phoneNumber.substring(6,8)} ${customer.phoneNumber.substring(8)}`
+            let newPhoneNumber = `${customer.phoneNumber.substring(0,3)} ${customer.phoneNumber.substring(3,6)} ${customer.phoneNumber.substring(6,8)} ${customer.phoneNumber.substring(8)}`
             sessionStorage.setItem("choosedCustomer", JSON.stringify(customer));
-            let zipCode = `${customer.zipCode.substring(0,3)} ${customer.zipCode.substring(3)}`
+            let newZipCode = `${customer.zipCode.substring(0,3)} ${customer.zipCode.substring(3)}`
             
-            $("#customer-first-name").val(customer.firstName)
-            $("#customer-last-name").val(customer.lastName)
-            $("#customer-email").val( customer.email)
-            $("#customer-phone").val(phoneNumber)
-            $("#customer-street").val(customer.streetAddress)
-            $("#customer-city").val(customer.city.cityName)
-            $("#customer-zip").val( zipCode)
+            firstName.val(customer.firstName)
+            lastName.val(customer.lastName)
+            email.val( customer.email)
+            phoneNumber.val(newPhoneNumber)
+            address.val(customer.streetAddress)
+            city.val(customer.city.cityName)
+            zipCode.val( newZipCode)
             showOrders(customer.customerOrders);
         }
     })
 }
-
-/*function getNumberOfOrders(id, orderArr){
-    let sum = 0;
-    orderArr.forEach(e => {
-        if(e.user.id==id){
-            sum++;
-        }
-    })
-    return sum;
-}*/
 
 function getTotalPriceOfOrders(orderArr){
     let sum = 0;
@@ -244,36 +232,24 @@ function showOrders(customerOrders){
 }
 
 function updateCustomer(){
-    let phoneNumber = phoneNumber.val()
-
-    phoneNumber = phoneNumber.replaceAll(" ", "");
-    let zipCode = zipCode.val();
-    zipCode = zipCode.replaceAll(" ", "");
-
-    console.log(phoneNumber)
-    console.log(zipCode)
+    let newPhoneNumber = phoneNumber.val().replaceAll(" ", "");
+    console.log("Telefon " + newPhoneNumber)
+    let newZipCode = zipCode.val().replaceAll(" ", "");
+    console.log("Zip " + newZipCode)
 
     const data = {
-        "firstName" : $("#customer-first-name").val(),
-        "lastName" : $("#customer-last-name").val(),
-        "email" : $("#customer-email").val(),
-        "phone" : phoneNumber,
-        "street" : $("#customer-street").val(),
+        "firstName" : $(firstName).val(),
+        "lastName" : $(lastName).val(),
+        "email" : $(email).val(),
+        "phoneNumber" : newPhoneNumber,
+        "streetAddress" : $(address).val(),
         "city": 
             {
-            "cityName": $("#customer-city").val()
+            "cityName": $(city).val()
             },
-        "zipCode" : zipCode,
+        "zipCode" : newZipCode,
         "comment" : $("#commentTextField").val()
     }
-
-    updateUser += `firstName=${firstName.val()}&
-    lastName=${lastName.val()}&
-    phoneNumber=${phoneNumber.val()}&
-    email=${email.val()}&
-    streetAddress=${address.val()}&
-    zipCode=${zipCode.val()}&
-    cityName=${city.val()}`
 
     axios.post(updateUser, data)
         .then(() => {
