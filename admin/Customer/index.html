@@ -227,14 +227,14 @@
               <div class="row">
                 <div class="mb-2 col">
                   <label for="customer-first-name" class="form-label"
-                    >Förnamn</label
-                  >
+                    >Förnamn</label>
                   <input
                     type="text"
                     class="form-control form-control-sm"
                     id="customer-first-name"
-                    placeholder="Förnamn"
+                    placeholder="Förnamn" maxlength="50"
                   />
+                  <div id="FIRSTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
                 </div>
               </div>
               <div class="row">
@@ -248,6 +248,7 @@
                     id="customer-last-name"
                     placeholder="Efternamn"
                   />
+                  <div id="LASTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
                 </div>
               </div>
               <div class="row">
@@ -259,6 +260,7 @@
                     id="customer-email"
                     placeholder="E-post"
                   />
+                  <div id="EMAIL_ERROR_MSG" class="error-msg">Felaktig email</div>
                 </div>
               </div>
               <div class="row">
@@ -272,17 +274,19 @@
                     id="customer-phone"
                     placeholder="Telefonnummer"
                   />
+                  <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">Felaktig telefonnummer</div>
                 </div>
               </div>
               <div class="row">
                 <div class="mb-2 col">
-                  <label for="customer-street" class="form-label">Adress</label>
+                  <label for="customer-street" class="form-label">Gatuadress</label>
                   <input
                     type="text"
                     class="form-control form-control-sm"
                     id="customer-street"
                     placeholder="Adress"
                   />
+                  <div id="ADDRESS_ERROR_MSG" class="error-msg">Felaktig adress, adress skall innehålla Gatunamn samt nummer</div>
                 </div>
               </div>
               <div class="row">
@@ -294,6 +298,7 @@
                     id="customer-city"
                     placeholder="Postort"
                   />
+                  <div id="CITY_ERROR_MSG" class="error-msg">Felaktig ort, ort skall innehålla bara bokstäver</div>
                 </div>
               </div>
               <div class="row">
@@ -307,6 +312,7 @@
                     id="customer-zip"
                     placeholder="Postnummer"
                   />
+                  <div id="ZIPCODE_ERROR_MSG" class="error-msg">Felaktigt postnummer, måste matas in t.ex "123 45"</div>
                 </div>
               </div>
               <div class="row">
@@ -416,6 +422,7 @@
     <script type="text/javascript" src="../../js/moment.js"></script>
     <script type="text/javascript" src="../../js/daterangpicker.js"></script>
     <script type="text/javascript"></script>
-    <script src="admin-customer.js"></script>
+    <script src="../../js/validate.js"></script>
+    <script src="../../js/admin-customer.js"></script>
   </body>
 </html>

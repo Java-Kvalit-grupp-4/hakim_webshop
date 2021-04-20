@@ -1,11 +1,37 @@
+/**
+ * Cache variables 
+ * 
+ */
 let customers = [];
 let orders = [];
 let choosedCustomer = "";
 let getAllCustomers = "http://localhost:8080/users";
 let updateUser = "http://localhost:8080/users/adminUpdateUser";
 
+
 let startDate = null;
 let endDate = null;
+let firstName = $('#customer-first-name'),
+    lastName = $('#customer-last-name'),
+    email = $('#customer-email'),
+    phoneNumber = $('#customer-phone'),
+    address = $('#customer-street'),
+    city = $('#customer-city'),
+    zipCode = $('#customer-zip')
+
+
+ let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
+    LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
+    EMAIL_ERROR_MSG = $('#EMAIL_ERROR_MSG'),
+    PHONE_NUMBER_ERROR_MSG = $('#PHONE_NUMBER_ERROR_MSG'),
+    ADDRESS_ERROR_MSG = $('#ADDRESS_ERROR_MSG'),
+    ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
+    CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
+    WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
+    NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
+    NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
+
+$('form').submit(false)
 
 $(document).ready(load)
 
@@ -21,17 +47,18 @@ $(document).on('focus', '#search-select', function(){
 
 $(document).on('click', '#nav-profile-tab', function(){
     $("#orderTable").empty();
-    $("#customer-first-name").val("")
-    $("#customer-last-name").val("")
-    $("#customer-email").val("")
-    $("#customer-phone").val("")
-    $("#customer-street").val("")
-    $("#customer-city").val("")
-    $("#customer-zip").val("")
+    firstName.val("")
+    lastName.val("")
+    email.val("")
+    phoneNumber.val("")
+    address.val("")
+    city.val("")
+    zipCode.val("")
     load();
 })
 
 function load(){
+    hideAllErrorMsgs()
     $("#reservation").daterangepicker(null, function (start, end, label) {
         startDate = new Date(start.toISOString())
         endDate = new Date(end.toISOString())
@@ -44,7 +71,7 @@ function load(){
                 customers = response.data   
             }
             else{
-                swal("Något gick fel vid uppladdning av kunder")
+                swal("Något gick fel vid inläsning av kunder")
             }
         })
         .catch(err =>{
@@ -103,7 +130,7 @@ function saveCustomer(customerNumber){
         
         if(customer.customerNumber==customerNumber){
             
-            let phoneNumber = `${customer.phoneNumber.substring(0,3)}-${customer.phoneNumber.substring(3,6)} ${customer.phoneNumber.substring(6,8)} ${customer.phoneNumber.substring(8)}`
+            let phoneNumber = `${customer.phoneNumber.substring(0,3)} ${customer.phoneNumber.substring(3,6)} ${customer.phoneNumber.substring(6,8)} ${customer.phoneNumber.substring(8)}`
             sessionStorage.setItem("choosedCustomer", JSON.stringify(customer));
             let zipCode = `${customer.zipCode.substring(0,3)} ${customer.zipCode.substring(3)}`
             
@@ -218,6 +245,7 @@ function showOrders(customerOrders){
 
 function updateCustomer(){
     let phoneNumber = phoneNumber.val()
+
     phoneNumber = phoneNumber.replaceAll(" ", "");
     let zipCode = zipCode.val();
     zipCode = zipCode.replaceAll(" ", "");
@@ -254,7 +282,43 @@ function updateCustomer(){
         .catch(() => {
             swal('Något gick fel!','Vänligen försök igen', 'warning')
         })
-}
+    }
+
+
+function validateForm() {
+    let bool = true
+
+    bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
+    bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
+    bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
+    bool = checkForInput(testForNumbersOnly,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
+    bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
+    bool = checkForInput(testForZipCode, zipCode, bool,ZIPCODE_ERROR_MSG)
+    bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
+    
+    return bool
+  }
+
+  function hideAllErrorMsgs() {
+    FIRSTNAME_ERROR_MSG.hide()
+    LASTNAME_ERROR_MSG.hide()
+    EMAIL_ERROR_MSG.hide()
+    PHONE_NUMBER_ERROR_MSG.hide()
+    ADDRESS_ERROR_MSG.hide()
+    ZIPCODE_ERROR_MSG.hide()
+    CITY_ERROR_MSG.hide()
+   
+  }
+  
+  function resetsInputBorders() {
+    resetBorder(firstName)
+    resetBorder(lastName)
+    resetBorder(email)
+    resetBorder(phoneNumber)
+    resetBorder(address)
+    resetBorder(zipCode)
+    resetBorder(city)
+  }
 
 
 
