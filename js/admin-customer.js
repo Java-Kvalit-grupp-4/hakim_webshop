@@ -97,8 +97,6 @@ function showCustomers(customerArr){
         let customerOrders = e.customerOrders;
         let totalPrice = getTotalPriceOfOrders(customerOrders);
 
-        //<td>${e.customerOrders.length}</td>   Kod för antalet ordrar
-        //<td>${getTotalPriceOfOrders(customerOrders).toFixed(2)} kr</td>   Kod för totala summan av alla ordrar
     
         $("#customerTable").append(`
             <tr>
@@ -144,15 +142,6 @@ function saveCustomer(customerNumber){
     })
 }
 
-/*function getNumberOfOrders(id, orderArr){
-    let sum = 0;
-    orderArr.forEach(e => {
-        if(e.user.id==id){
-            sum++;
-        }
-    })
-    return sum;
-}*/
 
 function getTotalPriceOfOrders(orderArr){
     let sum = 0;
