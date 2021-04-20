@@ -23,8 +23,6 @@ $(function () {
   
   const sortPriceDecending = (listOfProducts) => { return listOfProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))}
 
- 
-
   $("#name-ascending").click(() => { renderProducts(sortNamesAscending(JSON.parse(localStorage.getItem('categoryList')))) })
 
   $("#name-descending").click(() => { renderProducts(sortNamesDecending(JSON.parse(localStorage.getItem('categoryList')))) })
