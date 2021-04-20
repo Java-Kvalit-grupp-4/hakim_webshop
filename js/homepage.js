@@ -15,7 +15,7 @@ myAccountMenu = $('#myAccountDropdown')
 let adminview = $('#admin-view-link')
 
 //const addUserUrl = "http://localhost:8080/users/add"
-const addUserUrl = "https://hakimlogintest.herokuapp.com/users/add"
+const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 
 
 /**
@@ -281,10 +281,12 @@ function updateTotalCartUI(){
 //------------------------------------- login ----------------------------------\\
 
 $('#login-button').click(() => {
-  let url = `http://localhost:8080/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
+  console.log('hej');
+  let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
 
   axios.get(url)
     .then((response) => {
+      console.log(response);
       if(response.status !== 200){
         swal('Fel email eller lösenord', '', 'warning')
         emailToCheck.val('')
@@ -355,7 +357,7 @@ $('#login-button').click(() => {
       "zipCode": zipCode.val(),
       "city":
         {
-          "cityName": city.val()
+          "name": city.val()
         }
     }
 

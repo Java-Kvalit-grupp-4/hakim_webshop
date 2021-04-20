@@ -4,6 +4,7 @@ const suggBox = $('.autocom-box')
 const searchIcon = $('.icon')  
 
 let allProductsUrl = `http://localhost:8080/products`
+//allProductsUrl = './TestData/test_data_products_v1.2.JSON'
 let searchWords = []
 
 /**
@@ -45,19 +46,21 @@ searchField.keyup((e)=>{
 function getProductsFromDataBase() {
     axios.get(allProductsUrl)
     .then(response => {
-        createSearchWords(response.data) // use this if you fetching from database -> response.data
+        console.log(typeof response.data);
+        createSearchWords(response) // use this if you fetching from database -> response.data
     })
-    .catch(err => alert(err))
+    //.catch(err => alert('här' + err))
 }
 
 /**
  * Take an array of products, gets the product title,
  * product categories, product tags, and the product 
  * discription and puts in an array
- * @param {array} products 
+ * @param {Array} products 
  */
 function createSearchWords(products) {
-    let searchStringToSplit
+    console.log(products);
+    let searchStringToSplit = '';
 
     products.forEach(product => {
         searchStringToSplit += `${product.title} ${product.description}`

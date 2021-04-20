@@ -3,9 +3,6 @@ $(document).ready(run)
 
 function run() {
     
-    getCart()
-    getLoggedInCustomer()
-
     /**
      * Cache variables
      */
@@ -20,6 +17,16 @@ function run() {
         city2 = $('#city2'),
         zip2 = $('#zip2');
 
+        let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
+            LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
+            EMAIL_ERROR_MSG = $('#EMAIL_ERROR_MSG'),
+            PHONE_NUMBER_ERROR_MSG = $('#PHONE_NUMBER_ERROR_MSG'),
+            ADDRESS_ERROR_MSG = $('#ADDRESS_ERROR_MSG'),
+            ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
+            CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
+            WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
+            NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
+            NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
     /**
      * Eventlistiners
      */
@@ -71,31 +78,12 @@ function run() {
     }
 
     /**
-     * Gets all customers from database
-     */
-     function getLoggedInCustomer(){
-        let cartTestUrl = '../../TestData/testdata_persons.JSON'
-        fetch(cartTestUrl)
-          .then((response) => response.json())
-          .then((data) => renderCustomerInfo(data))
-          .catch((error) => console.error(error));
-
-    }
-
-    /**
      * Checks witch customer that is logged in
      * and render that data to the UI
      * @param {Array} data customers from the databas
      */
-    function renderCustomerInfo(data) {
-        /**
-         * remove this when testing is over
-         * cause the loggedInUser is allready saved 
-         * in localstorage when the customer loggs in
-         */
-        //localStorage.setItem('loggedInUser', JSON.stringify(data[0]))
- 
-        //let loggedInCustomer =  JSON.parse(localStorage.getItem('loggedInUser'))
+    function renderCustomerInfo() {
+        
         let loggedInCustomer =  JSON.parse(sessionStorage.getItem('customer'))
         let zipCode = `${loggedInCustomer.zipCode.substring(0,3)} ${loggedInCustomer.zipCode.substring(3)}`
         let phoneNumber = `${loggedInCustomer.phoneNumber.substring(0,3)}-${loggedInCustomer.phoneNumber.substring(3,6)} ${loggedInCustomer.phoneNumber.substring(6,8)} ${loggedInCustomer.phoneNumber.substring(8)}`
@@ -106,7 +94,7 @@ function run() {
         phone.val(phoneNumber);
         address.val(loggedInCustomer.streetAddress);
         zip.val(zipCode);
-        city.val(loggedInCustomer.city.cityName);
+        city.val(loggedInCustomer.city.name);
     }
 
     /**
@@ -219,6 +207,9 @@ function run() {
               }) 
         }
     }
+
+    getCart()
+    renderCustomerInfo()
 }
 
 
