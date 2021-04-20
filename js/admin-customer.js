@@ -6,7 +6,9 @@ let customers = [];
 let orders = [];
 let choosedCustomer = "";
 let getAllCustomers = "http://localhost:8080/users";
-let updateUser = "http://localhost:8080/users/updateUser2";
+let updateUser = "http://localhost:8080/users/adminUpdateUser";
+
+
 let startDate = null;
 let endDate = null;
 let firstName = $('#customer-first-name'),
@@ -126,17 +128,17 @@ function saveCustomer(customerNumber){
         
         if(customer.customerNumber==customerNumber){
             
-            let phoneNumber = `${customer.phoneNumber.substring(0,3)} ${customer.phoneNumber.substring(3,6)} ${customer.phoneNumber.substring(6,8)} ${customer.phoneNumber.substring(8)}`
+            let newPhoneNumber = `${customer.phoneNumber.substring(0,3)} ${customer.phoneNumber.substring(3,6)} ${customer.phoneNumber.substring(6,8)} ${customer.phoneNumber.substring(8)}`
             sessionStorage.setItem("choosedCustomer", JSON.stringify(customer));
-            let zipCode = `${customer.zipCode.substring(0,3)} ${customer.zipCode.substring(3)}`
+            let newZipCode = `${customer.zipCode.substring(0,3)} ${customer.zipCode.substring(3)}`
             
-            $("#customer-first-name").val(customer.firstName)
-            $("#customer-last-name").val(customer.lastName)
-            $("#customer-email").val( customer.email)
-            $("#customer-phone").val(phoneNumber)
-            $("#customer-street").val(customer.streetAddress)
-            $("#customer-city").val(customer.city.cityName)
-            $("#customer-zip").val( zipCode)
+            firstName.val(customer.firstName)
+            lastName.val(customer.lastName)
+            email.val( customer.email)
+            phoneNumber.val(newPhoneNumber)
+            address.val(customer.streetAddress)
+            city.val(customer.city.cityName)
+            zipCode.val( newZipCode)
             showOrders(customer.customerOrders);
         }
     })
@@ -231,27 +233,22 @@ function showOrders(customerOrders){
 }
 
 function updateCustomer(){
-    if(validateForm()) {
-    let phoneNumber = $("#customer-phone").val()
-    phoneNumber = phoneNumber.replace("-", "");
-    phoneNumber = phoneNumber.replaceAll(" ", "");
-    let zipCode = $("#customer-zip").val();
-    zipCode = zipCode.replaceAll(" ", "");
-
-    console.log(phoneNumber)
-    console.log(zipCode)
+    let newPhoneNumber = phoneNumber.val().replaceAll(" ", "");
+    console.log("Telefon " + newPhoneNumber)
+    let newZipCode = zipCode.val().replaceAll(" ", "");
+    console.log("Zip " + newZipCode)
 
     const data = {
-        "firstName" : $("#customer-first-name").val(),
-        "lastName" : $("#customer-last-name").val(),
-        "email" : $("#customer-email").val(),
-        "phone" : phoneNumber,
-        "street" : $("#customer-street").val(),
+        "firstName" : $(firstName).val(),
+        "lastName" : $(lastName).val(),
+        "email" : $(email).val(),
+        "phoneNumber" : newPhoneNumber,
+        "streetAddress" : $(address).val(),
         "city": 
             {
-            "cityName": $("#customer-city").val()
+            "cityName": $(city).val()
             },
-        "zipCode" : zipCode,
+        "zipCode" : newZipCode,
         "comment" : $("#commentTextField").val()
     }
 
@@ -263,7 +260,7 @@ function updateCustomer(){
             swal('Något gick fel!','Vänligen försök igen', 'warning')
         })
     }
-}
+
 
 function validateForm() {
     let bool = true
