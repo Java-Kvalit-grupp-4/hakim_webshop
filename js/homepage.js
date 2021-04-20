@@ -16,11 +16,12 @@ let adminview = $('#admin-view-link')
 
 //const addUserUrl = "http://localhost:8080/users/add"
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
+//const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 
 
 /**
  * Eventlistener
- */
+ */C:
 
  $("#newCust-button").click(() => {
   $("#registerForm").modal("show")
@@ -86,7 +87,7 @@ $(document).ready(() => {
         $('#myAccountDropdown').hide()
       }
       products = data;
-
+      localStorage.setItem('categoryList', JSON.stringify(products));
       renderProducts(products);
      
       let categories = [];
@@ -111,10 +112,12 @@ $(document).ready(() => {
           list.push(element);
           $("#products").empty();
             renderProducts(list);
+            localStorage.setItem('categoryList', JSON.stringify(list));
         }
         if(btnId === "all"){
           $("#products").empty();
           renderProducts(products);
+          localStorage.setItem('categoryList', JSON.stringify(list));
         }
       });
 

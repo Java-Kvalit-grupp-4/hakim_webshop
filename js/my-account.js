@@ -51,7 +51,7 @@ $('#submit').click( () => {
     email=${email.val()}&
     streetAddress=${address.val()}&
     zipCode=${zipCode.val()}&
-    cityName=${city.val()}`
+    name=${city.val()}`
 
     axios.get(url)
     .then(response => {
