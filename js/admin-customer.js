@@ -266,6 +266,7 @@ function updateCustomer(){
             swal('Kunden är uppdaterad!')
         })
         .catch(() => {
+            
             swal('Något gick fel!','Vänligen försök igen', 'warning')
         })
     }
