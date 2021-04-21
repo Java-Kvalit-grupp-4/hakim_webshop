@@ -18,7 +18,6 @@ let adminview = $('#admin-view-link')
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 //const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 
-
 /**
  * Eventlistener
  */C:

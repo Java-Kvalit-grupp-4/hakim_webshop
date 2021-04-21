@@ -24,10 +24,10 @@ function run() {
             ADDRESS_ERROR_MSG = $('#ADDRESS_ERROR_MSG'),
             ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
             CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
-            WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
-            NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
-            NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
-    /**
+            ADDRESS_ERROR_MSG_2 = $('#ADDRESS_ERROR_MSG_2'),
+            ZIPCODE_ERROR_MSG_2 = $('#ZIPCODE_ERROR_MSG_2'),
+            CITY_ERROR_MSG_2 = $('#CITY_ERROR_MSG_2'),
+     /**
      * Eventlistiners
      */
     $('#gridCheck').click(e => e.target.checked ? getAddressInfo() : clearAddressInfo())
@@ -158,16 +158,16 @@ function run() {
         // for testing under here
         let bool = true
 
-        bool = checkForInput(testForOnlyText, firstName, bool)
-        bool = checkForInput(testForOnlyText, lastName, bool)
-        bool = checkForInput(testForEmail, email, bool)
-        bool = checkForInput(testForNumbersOnly,phone, bool)
-        bool = checkForInput(testForAddress, address, bool)
-        bool = checkForInput(testForZipCode, zip, bool)
-        bool = checkForInput(testForOnlyText, city,bool)
-        bool = checkForInput(testForAddress, address2, bool)
-        bool = checkForInput(testForZipCode, zip2, bool)
-        bool = checkForInput(testForOnlyText, city2,bool)
+        bool = checkForInput(testForOnlyText, firstName, bool,FIRSTNAME_ERROR_MSG)
+        bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
+        bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
+        bool = checkForInput(testForPhoneNumber,phone, bool,PHONE_NUMBER_ERROR_MSG)
+        bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
+        bool = checkForInput(testForZipCode, zip, bool,ZIPCODE_ERROR_MSG)
+        bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
+        bool = checkForInput(testForAddress, address2, bool,ADDRESS_ERROR_MSG_2)
+        bool = checkForInput(testForZipCode, zip2, bool,ZIPCODE_ERROR_MSG_2)
+        bool = checkForInput(testForOnlyText, city2,bool, CITY_ERROR_MSG_2)
                 
         if(bool) {
             if($("#gridCheck")[0].checked){

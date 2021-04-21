@@ -3,9 +3,12 @@ const searchField =  $('#search-field')
 const suggBox = $('.autocom-box')
 const searchIcon = $('.icon')  
 
-let allProductsUrl = `http://localhost:8080/products`
-//allProductsUrl = './TestData/test_data_products_v1.2.JSON'
+//let allProductsUrl = `http://localhost:8080/products`
+let allProductsUrl = './TestData/test_data_products_v1.2.JSON'
 let searchWords = []
+
+// for testdata
+let productsTestData = []
 
 /**
  * Eventlisteners
@@ -46,11 +49,23 @@ searchField.keyup((e)=>{
 function getProductsFromDataBase() {
     axios.get(allProductsUrl)
     .then(response => {
-        console.log(typeof response.data);
         createSearchWords(response) // use this if you fetching from database -> response.data
     })
     //.catch(err => alert('här' + err))
 }
+
+// to test testdata for live under
+function createSearchWords(products) {
+    let arr = Array(products.data)
+    let searchStringToSplit = '';
+    productsTestData = arr[0]
+    arr[0].forEach(product => {
+        searchStringToSplit += `${product.title} ${product.description} ${product.category}`
+    })
+    searchWords = searchStringToSplit.split(' ')
+} 
+
+
 
 /**
  * Take an array of products, gets the product title,
@@ -58,8 +73,9 @@ function getProductsFromDataBase() {
  * discription and puts in an array
  * @param {Array} products 
  */
-function createSearchWords(products) {
-    console.log(products);
+/* function createSearchWords(products) {
+    console.log(products.data);
+    console.log(typeof products.data);
     let searchStringToSplit = '';
 
     products.forEach(product => {
@@ -73,7 +89,7 @@ function createSearchWords(products) {
     })
     
     searchWords = searchStringToSplit.split(' ')
-}
+} */
 
 /**
  * Gets the text from the selected element
@@ -118,14 +134,41 @@ function showSuggestions(list){
  */
 
 function sendDataToServer(searchWord) {
-    let productMatchWordUrl = `http://localhost:8080/products/searchProducts?searchWord=${searchWord}`
-    axios.get(productMatchWordUrl)
+
+    //for live version
+    //let productMatchWordUrl = `http://localhost:8080/products/searchProducts?searchWord=${searchWord}`
+
+    //To test testdata
+    productMatchWordUrl = searchWord
+    productToRenderFromTestData(productMatchWordUrl)
+
+    // for live
+    /* axios.get(productMatchWordUrl)
     .then(response => {
+        
         renderProducts(response.data)
         // rendera producterna du sökt efter med response.data
-        // fixa detta
     })
-    .catch(err => alert(err))
+    .catch(err => alert(err)) */
+}
+
+function productToRenderFromTestData(searchWord) {
+    console.log(searchWord);
+    let temp = []
+    productsTestData.forEach(product => {
+        
+        if(product.title.includes(searchWord)){
+            temp.push(product)
+        }
+        if(product.description.includes(searchWord)){
+            temp.push(product)
+        }
+        if(product.category.includes(searchWord)){
+            temp.push(product)
+        }
+    })
+    renderProducts(temp)
+
 }
 
 
