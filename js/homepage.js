@@ -119,7 +119,7 @@ $(document).ready(() => {
             if(categoryName === "all"){
               $("#products").empty();
               renderProducts(products);
-              localStorage.setItem('categoryList', JSON.stringify(selectedCategoryList));
+              localStorage.setItem('categoryList', JSON.stringify(products));
             }else{
               let currentProduct = product
               product.categories.forEach(category => {
