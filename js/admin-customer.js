@@ -27,7 +27,8 @@ let firstName = $('#customer-first-name'),
     CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
     WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
     NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
-    NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
+    NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG'),
+    INPUT_ERROR_MSG = ("#INPUT_ERROR_MSG")
 
 $('form').submit(false)
 
@@ -190,27 +191,33 @@ function filterSearch(){
             showCustomers(customers.filter(customer => customer.isVip==true));   
             break;
         case 'Total ordersumma över:':
-            if(startDate!=null && endDate!=null){
-                showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders.filter(order => 
-                    {let date = new Date(order.orderTimestamp)
-                        date>=startDate && date<=endDate
-                    })
-                )>input));
-            }
-            else{
-                showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders)>input));
+            if(validateInput()){
+                resetsInputBorders()
+                if(startDate!=null && endDate!=null){
+                    showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders.filter(order => 
+                        {let date = new Date(order.orderTimestamp)
+                            date>=startDate && date<=endDate
+                        })
+                    )>input));
+                }
+            
+                else{
+                    showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders)>input));
+                }
             }
             break;
             case 'Totalt antal ordrar över:':
-            if(startDate!=null && endDate!=null){
-                showCustomers(customers.filter(customer =>customer.customerOrders.filter(order => 
-                    {let date = new Date(order.orderTimestamp)
-                        date>=startDate && date<=endDate
-                    }).length>input));
-            }
-            else{
-                showCustomers(customers.filter(customer => isCustomerOrdersNull(customer.customerOrders)>input));
-            }
+                if(validateInput()){
+                    if(startDate!=null && endDate!=null){
+                        showCustomers(customers.filter(customer =>customer.customerOrders.filter(order => 
+                            {let date = new Date(order.orderTimestamp)
+                                date>=startDate && date<=endDate
+                            }).length>input));
+                    }
+                    else{
+                        showCustomers(customers.filter(customer => isCustomerOrdersNull(customer.customerOrders)>input));
+                    }
+                }
             break;
     }
 };
@@ -242,33 +249,36 @@ function showOrders(customerOrders){
 }
 
 function updateCustomer(){
-    let newPhoneNumber = phoneNumber.val().replaceAll(" ", "");
-    console.log("Telefon " + newPhoneNumber)
-    let newZipCode = zipCode.val().replaceAll(" ", "");
-    console.log("Zip " + newZipCode)
+    if(validateForm()){
+        resetsInputBorders()
+        let newPhoneNumber = phoneNumber.val().replaceAll(" ", "");
+        console.log("Telefon " + newPhoneNumber)
+        let newZipCode = zipCode.val().replaceAll(" ", "");
+        console.log("Zip " + newZipCode)
 
-    const data = {
-        "firstName" : $(firstName).val(),
-        "lastName" : $(lastName).val(),
-        "email" : $(email).val(),
-        "phoneNumber" : newPhoneNumber,
-        "streetAddress" : $(address).val(),
-        "city": 
-            {
-            "cityName": $(city).val()
-            },
-        "zipCode" : newZipCode,
-        "comment" : $("#commentTextField").val()
-    }
+        const data = {
+            "firstName" : $(firstName).val(),
+            "lastName" : $(lastName).val(),
+            "email" : $(email).val(),
+            "phoneNumber" : newPhoneNumber,
+            "streetAddress" : $(address).val(),
+            "city": 
+                {
+                "cityName": $(city).val()
+                },
+            "zipCode" : newZipCode,
+            "comment" : $("#commentTextField").val()
+        }
 
-    axios.post(updateUser, data)
-        .then(() => {
-            swal('Kunden är uppdaterad!')
-        })
-        .catch(() => {
-            
-            swal('Något gick fel!','Vänligen försök igen', 'warning')
-        })
+        axios.post(updateUser, data)
+            .then(() => {
+                swal('Kunden är uppdaterad!')
+            })
+            .catch(() => {
+                
+                swal('Något gick fel!','Vänligen försök igen', 'warning')
+            })
+        }
     }
 
 
@@ -284,6 +294,12 @@ function validateForm() {
     bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
     
     return bool
+  }
+
+  function validateInput(){
+      let bool = true;
+      bool = checkForInput(testForDecimalNumbers, $$("#input"),bool,INPUT_ERROR_MSG)
+      return bool;
   }
 
   function hideAllErrorMsgs() {
@@ -305,6 +321,7 @@ function validateForm() {
     resetBorder(address)
     resetBorder(zipCode)
     resetBorder(city)
+    resetBorder($("#input"))
   }
 
 

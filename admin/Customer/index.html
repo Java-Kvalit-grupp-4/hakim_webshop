@@ -186,6 +186,7 @@
                 aria-label="Text input with dropdown button"
                 id = "input"
               />
+              <div id="INPUT_ERROR_MSG" class="error-msg"></div>
             </div>
 
             <div class="d-grid p-0 col-11 col-md-1 m-auto mt-3 mt-lg-0">
@@ -275,7 +276,7 @@
                     class="form-control form-control-sm"
                     id="customer-phone"
                     placeholder="Telefonnummer"
-                    maxlength="10"
+                    maxlength="20"
                   />
                   <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">Felaktig telefonnummer</div>
                 </div>
@@ -288,6 +289,7 @@
                     class="form-control form-control-sm"
                     id="customer-street"
                     placeholder="Adress"
+                    maxlength="50"
                   />
                   <div id="ADDRESS_ERROR_MSG" class="error-msg">Felaktig adress, adress skall innehålla Gatunamn samt nummer</div>
                 </div>
