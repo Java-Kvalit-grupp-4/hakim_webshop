@@ -174,7 +174,7 @@
       >
         <div class="container mt-5">
           <div class="row gx-5">
-            <div class="col-lg-6 ">
+            <div class="col-lg-6">
               <label for="titleInput" class="form-label">Produktnamn</label>
               <input type="text" class="form-control mb-3" id="title" />
               <label for="brandInput" class="form-label">Tillverkare</label>
@@ -210,8 +210,8 @@
               <label for="category" class="form-label mt-3">Kategori</label>
               <div class="col" id="column"></div>
             </div>
-           
-            <div class="col-lg-6 ">
+
+            <div class="col-lg-6 mt-4 mt-lg-0">
               <label for="weightInput" class="form-label">Artikelnummer</label>
               <input type="text" class="form-control mb-3" id="sku" />
               <label for="priceInput" class="form-label">Pris</label>
@@ -219,12 +219,33 @@
               <label for="lagerInput" class="form-label">Lagerstatus</label>
               <input type="text" class="form-control mb-3" id="lager" />
               <div class="col">
-              <label for="img" class="form-label">Bild</label></div>
-              <img id="img" src="https://picsum.photos/300" alt="img" />
+                <label for="img" class="form-label">Produktbild</label>
+              </div>
+              <div class="container text-center">
+              <img id="img" src="https://picsum.photos/300" alt="img" /></div>
+              <div class="col text-end mt-5">
+              <button class="btn btn-secondary mt-3" id="removeImageButton">
+                Ta bort uppladdad bild
+              </button></div>
+              <div class="input-group mb-3 mt-5">
+                <input
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.gif"
+                  class="form-control"
+                  id="fileUpload"
+                />
+                <button class="btn btn-secondary" id="uploadButton">
+                  Ladda upp
+                </button>
+                <!-- <label class="input-group-text" for="inputGroupFile02"
+                >Ladda upp</label
+              > -->
+              </div>
               <div class="col">
-              <label for="tagInput" class="form-label mt-3"
-                >Lägg till söktagg</label
-              ></div>
+                <label for="tagInput" class="form-label mt-3"
+                  >Lägg till söktagg</label
+                >
+              </div>
               <div class="input-group mb-3">
                 <input
                   id="tagInput"
