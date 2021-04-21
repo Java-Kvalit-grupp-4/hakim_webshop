@@ -13,7 +13,7 @@ function loadProducts() {
         render(products)
       }
       else {
-        alert("Något gick fel vid uppladdning av kunder")
+        alert("Något gick fel vid inläsning av produkter")
       }
     })
     .catch(err => {
