@@ -229,9 +229,10 @@ function showOrders(customerOrders){
     let sum = 0;
     customerOrders.forEach(orders => {
             sum += orders.totalCost;
-            let dateFromOrder = new Date(orders.orderTimestamp);
+            let dateFromOrder = new Date(orders.timeStamp);
             let orderDate = dateFromOrder.toISOString().substring(0,10);
             console.log(orderDate)
+            let orderNumber = (orders.id +"").substring(0,6)
            
             let isPaid = "Obetalad";
             if(orders.isPaid){
@@ -240,8 +241,8 @@ function showOrders(customerOrders){
             $("#orderTable").append(`
                 <tr>
                     <th scope="row" class="col-3">
-                    <a href="#">${orders.orderId}</a>
-                    <td class="col-2">${orders.status.type}</td>
+                    <a href="#">${orderNumber}</a>
+                    <td class="col-2">${orders.orderStatus.type}</td>
                     <td class="col-2">${isPaid}</td>
                     <td class="col-3">${orderDate}</td>
                     <td class="col-2">${orders.totalCost.toFixed(2)} kr</td>
