@@ -2,9 +2,11 @@
 $(document).ready(run)
 
 function run() {
+    
     let customer = JSON.parse(sessionStorage.getItem('customer'))
     if(customer==null || customer== undefined){
-        window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
+        // comment this if you wanna go to checkout without being logged in
+        window.location.href = "../../"
     }
     getCart()
     getLoggedInCustomer()
@@ -21,13 +23,30 @@ function run() {
         city = $('#city'),
         address2 = $('#address2'),
         city2 = $('#city2'),
-        zip2 = $('#zip2');
+        zip2 = $('#zip2'),
+        orderComment = $('#order-comment')
 
-    /**
+        let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
+            LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
+            EMAIL_ERROR_MSG = $('#EMAIL_ERROR_MSG'),
+            PHONE_NUMBER_ERROR_MSG = $('#PHONE_NUMBER_ERROR_MSG'),
+            ADDRESS_ERROR_MSG = $('#ADDRESS_ERROR_MSG'),
+            ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
+            CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
+            ADDRESS_ERROR_MSG_2 = $('#ADDRESS_ERROR_MSG_2'),
+            ZIPCODE_ERROR_MSG_2 = $('#ZIPCODE_ERROR_MSG_2'),
+            CITY_ERROR_MSG_2 = $('#CITY_ERROR_MSG_2')
+     /**
      * Eventlistiners
      */
     $('#gridCheck').click(e => e.target.checked ? getAddressInfo() : clearAddressInfo())
     $('#send-order-btn').click(validateInput)
+
+
+    ADDRESS_ERROR_MSG_2.hide()
+    ZIPCODE_ERROR_MSG_2.hide()
+    CITY_ERROR_MSG_2.hide()
+
 
     function getCart() {
             let data = getCartFromLocalStorage()
@@ -74,31 +93,12 @@ function run() {
     }
 
     /**
-     * Gets all customers from database
-     */
-     function getLoggedInCustomer(){
-        let cartTestUrl = '../../TestData/testdata_persons.JSON'
-        fetch(cartTestUrl)
-          .then((response) => response.json())
-          .then((data) => renderCustomerInfo(data))
-          .catch((error) => console.error(error));
-
-    }
-
-    /**
      * Checks witch customer that is logged in
      * and render that data to the UI
      * @param {Array} data customers from the databas
      */
-    function renderCustomerInfo(data) {
-        /**
-         * remove this when testing is over
-         * cause the loggedInUser is allready saved 
-         * in localstorage when the customer loggs in
-         */
-        //localStorage.setItem('loggedInUser', JSON.stringify(data[0]))
- 
-        //let loggedInCustomer =  JSON.parse(localStorage.getItem('loggedInUser'))
+    function renderCustomerInfo() {
+        
         let loggedInCustomer =  JSON.parse(sessionStorage.getItem('customer'))
         let zipCode = `${loggedInCustomer.zipCode.substring(0,3)} ${loggedInCustomer.zipCode.substring(3)}`
         let phoneNumber = `${loggedInCustomer.phoneNumber.substring(0,3)}-${loggedInCustomer.phoneNumber.substring(3,6)} ${loggedInCustomer.phoneNumber.substring(6,8)} ${loggedInCustomer.phoneNumber.substring(8)}`
@@ -109,7 +109,7 @@ function run() {
         phone.val(phoneNumber);
         address.val(loggedInCustomer.streetAddress);
         zip.val(zipCode);
-        city.val(loggedInCustomer.city.cityName);
+        city.val(loggedInCustomer.city.name);
     }
 
     /**
@@ -173,30 +173,71 @@ function run() {
         // for testing under here
         let bool = true
 
-        bool = checkForInput(testForOnlyText, firstName, bool)
-        bool = checkForInput(testForOnlyText, lastName, bool)
-        bool = checkForInput(testForEmail, email, bool)
-        bool = checkForInput(testForNumbersOnly,phone, bool)
-        bool = checkForInput(testForAddress, address, bool)
-        bool = checkForInput(testForZipCode, zip, bool)
-        bool = checkForInput(testForOnlyText, city,bool)
-        bool = checkForInput(testForAddress, address2, bool)
-        bool = checkForInput(testForZipCode, zip2, bool)
-        bool = checkForInput(testForOnlyText, city2,bool)
+        bool = checkForInput(testForOnlyText, firstName, bool,FIRSTNAME_ERROR_MSG)
+        bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
+        bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
+        bool = checkForInput(testForPhoneNumber,phone, bool,PHONE_NUMBER_ERROR_MSG)
+        bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
+        bool = checkForInput(testForZipCode, zip, bool,ZIPCODE_ERROR_MSG)
+        bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
+        bool = checkForInput(testForAddress, address2, bool,ADDRESS_ERROR_MSG_2)
+        bool = checkForInput(testForZipCode, zip2, bool,ZIPCODE_ERROR_MSG_2)
+        bool = checkForInput(testForOnlyText, city2,bool, CITY_ERROR_MSG_2)
                 
         if(bool) {
             if($("#gridCheck")[0].checked){
-                swal({
-                    title: "Tack för din order!",
-                    text: `
-                    \nLeverans adress
-                    \n${address.val()}
-                    \n${city.val()}
-                    \n${zip.val()}`,
-                    icon: "success",
-                    button: "Ok",
-                  });
+
+                console.log(makeOrderObject())
+                sendOrderToServer(makeOrderObject())
+                localStorage.clear()
+                clearAllInputFields()
+                renderCart()
             }else{
+                swal({
+                    title: "Ops, något gick fel!",
+                    text: "Alla fält måste vara ifyllda korrekt",
+                    icon: "warning",
+                    button: "Ok",
+                  }) 
+            }
+        }
+
+    
+
+    
+    }
+
+    getCart()
+    renderCustomerInfo()
+
+    function makeOrderObject(){
+        let cart = JSON.parse(localStorage.getItem('cart'))
+        let orderCommentInput = ""
+        orderCommentInput = orderComment.val()
+        
+        let orderObject = {
+            "appUser": {
+              "email": email.val()
+              },
+            "orderComment": orderCommentInput,
+            "totalCost": $('#cart-total-price').val(),
+            "isPaid": false,
+            "orderStatus": {
+              "type": "ohanterad"
+            },
+            "lineItems": cart
+          }
+    
+        return orderObject
+    }
+
+    function sendOrderToServer(orderObject){
+         const url = 'https://hakimlivs.herokuapp.com/customerOrder/add'
+        //const url = 'https://hakimlogintest.herokuapp.com/customerOrder/add'
+
+        axios.post(url,orderObject)
+        .then(response => {
+            if(response.status == 200){
                 swal({
                     title: "Tack för din order!",
                     text: `
@@ -206,22 +247,9 @@ function run() {
                     \n${zip2.val()}`,
                     icon: "success",
                     button: "Ok",
-                  });
+                  })
             }
-              clearAllInputFields()
-                    // todo logga beställningar med överstående adress
-                    // tömma localStorage från varukorg och rendera tom varukorg för kund
-            localStorage.clear()
-            renderCart()
-        }else{
-            swal({
-                title: "Ops, något gick fel!",
-                text: "Alla fält måste vara ifyllda korrekt",
-                icon: "warning",
-                button: "Ok",
-              }) 
-        }
+            
+        })
     }
 }
-
-

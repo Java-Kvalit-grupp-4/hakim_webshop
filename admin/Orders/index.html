@@ -13,8 +13,8 @@
       href="../../styles/daterangpicker-bs3.css"
     />
     <link rel="stylesheet" href="../../styles/style.css" />
-    <link rel="stylesheet" href="admin-customer.css" />
-    <title>Admin-custumer</title>
+    <link rel="stylesheet" href="../Customer/admin-customer.css" />
+    <title>Admin-ordrar</title>
     
   </head>
 
@@ -122,7 +122,7 @@
       </button>
       <button
         class="nav-link"
-        id="nav-contact-tab"
+        id="navbar-order-tab"
         data-bs-toggle="tab"
         data-bs-target="#nav-contact"
         type="button"
@@ -223,69 +223,21 @@
                     <tr>
                         <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
                         <th scope="col" class="pb-3 ps-md-5">Kundnummer</th>
-                        <th scope="col" class="pb-3 ">Datum </th>
+                        <th scope="col" class="pb-3 ">Datum</th>
                         <th scope="col" class="pb-3">Totalt</th>
                         <th scope="col" class="pb-3">Orderstatus</th>
                         <th scope="col" class="pb-3">Betalstatus</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
+                <tbody id="orders-container">
+                    <!-- <tr>
                         <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
                         <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
                         <td>2021-01-20</td>
                         <td>135 kr</td>
                         <td>Levererad</td>
                         <td>Mottagen</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
-                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-                        <td>2021-02-13</td>
-                        <td>453 kr</td>
-                        <td>Levererad</td>
-                        <td>Mottagen</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="ps-md-5"> <a href="#">1234-4569</a></th>
-                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-                        <td>2021-03-26</td>
-                        <td>321 kr</td>
-                        <td>Skickad</td>
-                        <td>Väntar på betalning</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="ps-md-5"><a href="#">1234-4510</a> </th>
-                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-                        <td>2021-02-13</td>
-                        <td>453 kr</td>
-                        <td>Levererad</td>
-                        <td>Mottagen</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="ps-md-5"> <a href="#">1234-4511</a></th>
-                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-                        <td>2021-03-26</td>
-                        <td>321 kr</td>
-                        <td>Skickad</td>
-                        <td>Väntar på betalning</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="ps-md-5"><a href="#">1234-4512</a> </th>
-                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-                        <td>2021-02-13</td>
-                        <td>453 kr</td>
-                        <td>Levererad</td>
-                        <td>Mottagen</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="ps-md-5"> <a href="#">1234-4513</a></th>
-                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-                        <td>2021-03-26</td>
-                        <td>321 kr</td>
-                        <td>Skickad</td>
-                        <td>Väntar på betalning</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -305,42 +257,43 @@
                     </div>
                     <form>
                         <div class="col-lg-12 mb-3">
-                        <label for="my-info-first-name" class="form-label">Förnamn</label>
+                        <label for="customer-first-name" class="form-label">Förnamn</label>
                         <input type="text" class="form-control" placeholder="Förnamn" aria-label="Förnamn"
-                            id="my-info-first-name">
+                            id="customer-first-name">
                         </div>
                         <div class="col-lg-12 mb-3">
-                            <label for="my-info-first-name" class="form-label">Efternamn</label>
+                            <label for="customer-last-name" class="form-label">Efternamn</label>
                             <input type="text" class="form-control " placeholder="Efternamn" aria-label="Efternamn"
-                         id="my-info-first-name">
+                         id="customer-last-name">
                         </div>
                         <div class="col-lg-12 mb-3">
-                            <label for="my-info-first-name" class="form-label">Adress</label>
-                            <input type="text" class="form-control" placeholder="Adress" aria-label="Adress"
-                            id="my-info-first-name">
+                            <label for="customer-street-address" class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Address" aria-label="Address"
+                            id="customer-street-address">
                         </div>
                         <div class="col-lg-12 mb-3">
-                            <label for="my-info-first-name" class="form-label">Postort</label>
+                          <label for="customer-zipcode" class="form-label">Postnummer</label>
+                          <input type="text" class="form-control" placeholder="Postnummer" aria-label="Postnummer"
+                          id="customer-zipcode">
+                      </div>
+                        <div class="col-lg-12 mb-3">
+                            <label for="customer-city" class="form-label">Postort</label>
                             <input type="text" class="form-control " placeholder="Postort" aria-label="Postort"
-                            id="my-info-first-name">
+                            id="customer-city">
                         </div>
                         <div class="col-lg-12 mb-3">
-                            <label for="my-info-first-name" class="form-label">Postnummer</label>
-                            <input type="text" class="form-control" placeholder="Postnummer" aria-label="Postnummer"
-                            id="my-info-first-name">
-                        </div>
-                        <div class="col-lg-12 mb-3">
-                            <label for="my-info-first-name" class="form-label">E-post</label>
+                            <label for="customer-email" class="form-label">E-post</label>
                             <input type="text" class="form-control" placeholder="E-post" aria-label="E-post"
-                            id="my-info-first-name">
+                            id="customer-email">
                         </div>
                         <div class="col-lg-12 mb-3">
-                            <label for="my-info-first-name" class="form-label">Telefonnummer</label>
+                            <label for="customer-phone-number" class="form-label">Telefonnummer</label>
                             <input type="text" class="form-control" placeholder="Telefonnummer" aria-label="Telefonnummer"
-                            id="my-info-first-name">
+                            id="customer-phone-number">
                         </div>
                         <div class="col mb-3 mt-4">
-                            <button type="submit" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
+                            <button type="submit" class="btn btn-secondary save-button" style="width: 100px;" 
+                            id="save-customer-data-btn">Spara</button>
                         </div>
                     </form>
                 </div>
@@ -359,72 +312,16 @@
                               <th scope="col" class="pb-3 ps-md-5">Artikel-nr</th>
                               <th scope="col" class="pb-3 ps-md-5">Produktnamn</th>
                               <th scope="col" class="pb-3 ">Antal </th>
-                              <th scope="col" class="pb-3">á pris</th>
-                              <th scope="col" class="pb-3">Total pris</th>
+                              <th scope="col" class="pb-3">Styckpris</th>
+                              <th scope="col" class="pb-3">Totalt pris</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr>
-                              <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
-                              <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
-                              <td>5</td>
-                              <td>50 kr</td>
-                              <td>250</td>
-                            </tr>
-                            <tr>
-                              <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
-                              <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
-                              <td>5</td>
-                              <td>100 kr</td>
-                              <td>500</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
-                                <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
-                                <td>5</td>
-                                <td>50 kr</td>
-                                <td>250</td>
-                              </tr>
-                              <tr>
-                                <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
-                                <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
-                                <td>5</td>
-                                <td>100 kr</td>
-                                <td>500</td>
-                              </tr>
-                              <tr>
-                                <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
-                                <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
-                                <td>5</td>
-                                <td>50 kr</td>
-                                <td>250</td>
-                              </tr>
-                              <tr>
-                                <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
-                                <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
-                                <td>5</td>
-                                <td>100 kr</td>
-                                <td>500</td>
-                              </tr>
-                              <tr>
-                                <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
-                                <th scope="row" class="ps-md-5"><a href="#">Godis i massor</a> </th>
-                                <td>5</td>
-                                <td>50 kr</td>
-                                <td>250</td>
-                              </tr>
-                              <tr>
-                                <th scope="row" class="ps-md-5"><a href="#">1234-4568</a> </th>
-                                <th scope="row" class="ps-md-5"><a href="#">Det är ju påsk</a> </th>
-                                <td>5</td>
-                                <td>100 kr</td>
-                                <td>500</td>
-                              </tr>
+                          <tbody id="product-container">
                           </tbody>
                         </table>
                       </div>
                 </div>
-                  <div class= "countainer text-end pe-4">
+                  <div class= "countainer text-end pe-4" id="order-total-cost">
                       <p>Total Summa: 1000kr</p>
                   </div>
             </div>
@@ -433,8 +330,10 @@
             </div>
             <div class="container col-12 ps-5">
                 <textarea name="" id="" cols="100" rows="10" placeholder="Skriv kommentar här..."></textarea>
+                <div class="container text-end"><button type="submit" class="btn btn-secondary save-button" style="width: 100px;" 
+              id="save-order-comment-btn">Spara</button>
             </div>
-        </div>
+            </div>
     </div>
         </div>
         <script>
@@ -464,5 +363,6 @@
         });
       });
     </script>
+    <script src="../../js/admin-orders.js"></script>
   </body>
 </html>

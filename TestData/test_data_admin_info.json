@@ -1,0 +1,12 @@
+{
+  "information_id": 1,
+  "image": "https://picsum.photos/id/1062/200/300",
+  "opening_hours": "Måndag-Fredag: 08:00-20:00/Lördag: 10:00-19:00/Söndag: 10:00-18:00",
+  "deviating_hours": "Nyårsdagen: Stängt/Midsommarafton: 10:00-14:00/Midsommardagen: Stängt/Julafton: 10:00-14:00/Juldagen: Stängt/Nyårsafton: 10:00-16:00",
+  "street_address": "Kungsgatan 1",
+  "zip_code": "111 43",
+  "city": "Stockholm",
+  "phone_number": "076-666 66 66",
+  "email": "hakimlivs@gmail.com",
+  "about_hakim": "Här ska det komma en text om Hakim så småningom, men just nu kör vi lite lorem ipsum/Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam inventore obcaecati odio eius quaerat corporis porro perspiciatis reiciendis, recusandae ab fugit veniam hic unde tempora, id laborum placeat! Sint, deserunt?"
+}

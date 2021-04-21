@@ -151,6 +151,13 @@
             </div>
             <div class="col-lg-5"></div>
             <!-- cart ends-->
+            <!-- order comment -->
+            <div class="row">
+              <div class="col-12 sm-10 mt-5" >
+                <h2 class="mb-3">Orderkommentar</h2>
+                <textarea name="order-comment" id="order-comment" cols="40" rows="5" placeholder="Order kommentar"></textarea>
+              </div>
+            </div>
             <!-- form starts-->
             <div class="row">            
             <div class="col-lg-5 mt-5 mb-5">
@@ -159,32 +166,54 @@
                 <div class="col-md-6">
                   <label for="firstName" class="form-label">Förnamn</label>
                   <input type="text" class="form-control" id="firstName" placeholder="Förnamn" maxlength="30" required readonly>
+                  <div id="FIRSTNAME_ERROR_MSG" class="error-msg">
+                    Förnamn måste bestå av endast bokstäver, max 50 tecken
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="lastName" class="form-label">Efternamn</label>
                   <input type="text" class="form-control" id="lastName" placeholder="Efternamn" maxlength="40" required readonly>
+                  <div id="LASTNAME_ERROR_MSG" class="error-msg">
+                    Förnamn måste bestå av endast bokstäver, max 50 tecken
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="email" class="form-label">E-post</label>
                   <input type="email" class="form-control" id="email" placeholder="E-post" maxlength="325" required readonly>
+                  <div id="EMAIL_ERROR_MSG" class="error-msg">
+                    Felaktig email
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="phone" class="form-label">Telefonnummer</label>
                   <input type="text" class="form-control" id="phone" placeholder="Telefonnummer" maxlength="20" required readonly>
+                  <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">
+                    Felaktig telefonnummer
+                  </div>
                 </div>
                 <div class="col-10">
                   <label for="inputAddress" class="form-label">Gatuadress</label>
                   <input type="text" class="form-control" id="address" placeholder="Gatuadress" maxlength="50" required readonly>
+                  <div id="ADDRESS_ERROR_MSG" class="error-msg">
+                    Felaktig adress, adress skall innehålla Gatunamn samt nummer
+                  </div>
                 </div>
                 <div class="col-md-4">
                   <label for="inputZip" class="form-label">Postnummer</label>
                   <input type="text" class="form-control" id="zip"  placeholder="Postnr" maxlength="5" required readonly>
+                  <div id="ZIPCODE_ERROR_MSG" class="error-msg">
+                    Felaktigt postnummer, måste matas in t.ex "123 45"
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Ort</label>
                   <input type="text" class="form-control" id="city" placeholder="Ort" maxlength="25" required readonly>
+                  <div id="CITY_ERROR_MSG" class="error-msg">
+                    Felaktig ort, ort skall innehålla bara bokstäver
+                  </div>
                 </div>
                 
+              
                 <div class="col-md-12 mt-5">
                   <h3>Leveransadress</h3> 
                 </div>
@@ -199,14 +228,23 @@
                 <div class="col-10">
                   <label for="inputAddress" class="form-label">Gatuadress</label>
                   <input type="text" class="form-control" id="address2" placeholder="Gatuadress" maxlength="50" required>
+                  <div id="ADDRESS_ERROR_MSG_2" class="error-msg">
+                    Felaktig adress, adress skall innehålla Gatunamn samt nummer
+                  </div>
                 </div>
                 <div class="col-md-4">
                   <label for="inputZip" class="form-label">Postnummer</label>
                   <input type="text" class="form-control" id="zip2" placeholder="Postnr" maxlength="5" required>
+                  <div id="ZIPCODE_ERROR_MSG_2" class="error-msg">
+                    Felaktigt postnummer, måste matas in t.ex "123 45"
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Ort</label>
                   <input type="text" class="form-control" id="city2" placeholder="Ort" maxlength="25" required>
+                  <div id="CITY_ERROR_MSG_2" class="error-msg">
+                    Felaktig ort, ort skall innehålla bara bokstäver
+                  </div>
                 </div>
                 
                 <div class="col-12">
@@ -226,49 +264,55 @@
       <div class="container p-4 justify-content-center">
         <div class="row">
           <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-            <h5 class="text-uppercase">Kontakt</h5>
+            <h5 class="text-uppercase mb-3">Kontakt</h5>
+
             <ul class="list-unstyled mb-3">
               <li>
-                <a href="#!" class="text-light"><p>070-6666666</p></a>
+                <p id="phone"></p></a>
               </li>
               <li>
-                <a href="mailto:hakimlivs@gmail.com"><p>hakimlivs@gmail.com</p></a>
+                <a href="mailto:hakimlivs@gmail.com"
+                  ><p>hakimlivs@gmail.com</p></a
+                >
               </li>
-              <li>
-                <a href="https://www.google.com/maps/search/Kungsgatan+65,+Stockholm+3/@59.3332978,18.0530605,17z/data=!3m1!4b1" class="text-light" target="_blank"><p>Kungsgatan 65, Stockholm 3</p></a>
+              <li id="address-footer">
+                <a
+                  href="https://www.google.com/maps/search/Kungsgatan+65,+Stockholm+3/@59.3332978,18.0530605,17z/data=!3m1!4b1"
+                  class="text-light"
+                  target="_blank"
+                  ><div id="">Kungsgatan 65, Stockholm 3</div></a
+                >
               </li>
             </ul>
           </div>
 
           <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-0">Om Hakim Livs</h5>
+            <h5 class="text-uppercase mb-3">Om Hakim Livs</h5>
             <ul class="list-unstyled mb-3">
               <li>
-                <a href="../about/" class="text-light"><p>Om oss</p></a>
+                <a href="./" class="text-light"><p>Om oss</p></a>
               </li>
             </ul>
           </div>
           <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-0">Öppettider</h5>
+            <h5 class="text-uppercase mb-3">Öppettider</h5>
+
             <ul class="list-unstyled">
               <li>
-                <a href="#!" class="text-light"><p>Vardagar 08:00-20:00</p></a>
+                <div id="openingHours"></div>
               </li>
+
               <li>
-                <a href="#!" class="text-light"><p>Lördagar 09:00-19:00</p></a>
-              </li>
-              <li>
-                <a href="#!" class="text-light"><p>Söndagar 10:00-18:00</p></a>
-              </li>
-              <li>
-                <a href="./pages/about/" class="text-light"
-                  >Se avvikande öppetider</a
+                <a href="#deviating" class="text-light"
+                  ><p>Se avvikande öppetider</p></a
                 >
               </li>
             </ul>
           </div>
         </div>
       </div>
+    </footer>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
@@ -279,7 +323,7 @@
       <script src="../../js/homepage.js"></script>
      <script src="../../js/validate.js"></script>
       <script src="./checkout.js"></script>
-    </footer>
+    
 
   </body>
 </html>

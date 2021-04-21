@@ -115,7 +115,7 @@ function testForPhoneNumber(input) {
     * @param {jQuery inputfield} input 
     * @returns false or current bool value from input
     */
- function checkForInput(toTestFor, input, bool,ERROR_MSG) {
+ function checkForInput(toTestFor, input, bool, ERROR_MSG) {
     let testInput = input.val().trim()
     if(toTestFor(testInput) && testInput != '') {
         input.css("border", "3px solid #34F458") 
