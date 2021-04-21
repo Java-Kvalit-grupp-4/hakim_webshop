@@ -4,24 +4,41 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/bootstrap.css" />
     <link rel="stylesheet" href="./styles/register.css" />
-    <link rel="stylesheet" href="./styles/cart-pop-up.css">
-    <link rel="stylesheet" href="./styles/homepage.css">
-    <link rel="stylesheet" href="./styles/searchbar.css">
+    <link rel="stylesheet" href="./styles/cart-pop-up.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/homepage.css" />
+    <link rel="stylesheet" href="./styles/searchbar.css" />
+
     <title>Hakim's Livs homepage</title>
   </head>
 
   <body id="login-page">
-
     <!-- navbar (prototype) -->
-  
+
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand " href="index.html"
-          ><img src="logo.png" class="img-fluid nav-image " style=" margin-left: -0.5rem;"
+        <a class="navbar-brand" href="index.html"
+          ><img
+            src="logo.png"
+            class="img-fluid nav-image"
+            style="margin-left: -0.5rem"
         /></a>
+        <div class="wrapper">
+          <div class="search-input">
+            <input
+              id="search-field"
+              type="text"
+              placeholder="Sök produkt..."
+              maxlength="40"
+            />
+            <div class="autocom-box">
+              <!-- here list are inserted from javascript -->
+            </div>
+            <div class="icon"><i class="bi bi-search"></i></div>
+          </div>
+        </div>
         <button
           class="navbar-toggler"
           type="button"
@@ -35,21 +52,13 @@
         </button>
         <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
         <div
-          class="d-flex justify-content-evenly collapse navbar-collapse"
+          class="d-lg-flex justify-content-lg-evenly collapse navbar-collapse"
           id="navbarTogglerDemo02"
         >
           <div class="container col-md-6 mt-3">
-            <div class="input-group mb-3 me-5">
+            <div class="input-group mb-3 me-0 me-lg-5">
               <!-- searchfield -->
-              <div class="wrapper">
-                <div class="search-input">
-                  <input id="search-field"type="text" placeholder="Sök produkt..." maxlength="40">
-                  <div class="autocom-box">
-                    <!-- here list are inserted from javascript -->
-                  </div>
-                  <div class="icon"><i class="bi bi-search"></i></div>
-                </div>
-              </div>
+
               <!-- searchfield ends -->
               <!-- <input
                 type="text"
@@ -69,8 +78,8 @@
             </div>
           </div>
 
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item me-4">
+          <ul class="navbar-nav mb-2 mb-lg-0 text-start text-sm-end">
+            <li class="nav-item me-lg-4 mb-2 mb-lg-0">
               <a
                 type="button nav-link"
                 class="btn btn-outline-secondary text-dark"
@@ -121,20 +130,20 @@
               </button>
             </li>
             <li class="nav-item">
-              <a id="admin-view-link"class="nav-link" href="./admin/">Adminvy</a>
+              <a id="admin-view-link" class="nav-link" href="./admin/"
+                >Adminvy</a
+              >
             </li>
-          </ul>          
+          </ul>
         </div>
       </div>
     </nav>
 
-    
-
     <!-- navbar end -->
-    <div class="container-fluid ">
-    <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
-      <div class="col-sm-2">
-        <div class="list-group">
+    <div class="container-fluid">
+      <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
+        <div class="col-sm-4 col-lg-3 col-xl-2" id="sidebar">
+          <!-- <div class="list-group"> -->
           <div class="list-group" id="sidomeny">
             <button
               id="all"
@@ -145,24 +154,70 @@
               Alla produkter
             </button>
           </div>
+          <!-- </div> -->
         </div>
-      </div>
 
-      <div class="col-sm-8">
-        <div class="card w-100 text-white">
-          <img
-            src="https://picsum.photos/1000/300"
-            class="card-img-top"
-            alt="image"
-          />
-          <div class="card-img-overlay">
-            <h1 class="card-title" style="text-align: end; text-align: end">
-              Veckans vara
-            </h1>
+        <div class="col-sm-8 col-xl-9" id="display-body">
+          <div class="card w-100 text-white">
+            <img
+              src="https://picsum.photos/1000/300"
+              class="card-img-top"
+              alt="image"
+            />
+            <div class="card-img-overlay">
+              <h1 class="card-title" style="text-align: end; text-align: end">
+                Veckans vara
+              </h1>
+            </div>
           </div>
-        </div>
 
-        <div class="row my-5" id="products">
+          <div class="dropdown text-end mt-3">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenu2"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Sortera efter
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li>
+                <button class="dropdown-item" type="button" id="name-ascending">
+                  A-Ö
+                </button>
+              </li>
+              <li>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  id="name-descending"
+                >
+                  Ö-A
+                </button>
+              </li>
+              <li>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  id="price-ascending"
+                >
+                  Pris: Stigande
+                </button>
+              </li>
+              <li>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  id="price-descending"
+                >
+                  Pris: Fallande
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="row mt-3 mb-5" id="products">
             <!-- <div id="${element.productNr}"class="product-card">
               <div>
                 <div class="img-container">
@@ -193,7 +248,7 @@
           <!-- products ends -->
         </div>
       </div>
-    </div>  
+    </div>
 
     <footer class="bg-dark text-center text-lg-start">
       <div class="container p-4 justify-content-center">
@@ -267,8 +322,12 @@
         <div class="modal-content">
           <div class="modal-header border-0">
             <h4 class="modal-title mx-auto">Logga in</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-            </button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body m-3">
             <form class="g-3 mt-3">
@@ -325,7 +384,7 @@
       </div>
     </div>
 
-    <!-- Register-Modal -->
+    <!-- Customer registration modal -->
     <div
       class="modal fade"
       id="registerForm"
@@ -348,7 +407,12 @@
           <div class="modal-body">
             <!-- Registration Form -->
             <div class="container mt-3">
-              <form id="registration-Form" class="row g-3" method="POST" action="http://localhost:8080/users/add">
+              <form
+                id="registration-Form"
+                class="row g-3"
+                method="POST"
+                action="http://localhost:8080/users/add"
+              >
                 <div class="col-md-6 form-floating mb-3">
                   <input
                     type="text"
@@ -361,7 +425,9 @@
                   <label for="register-first-name" class="form-label text-muted"
                     >Förnamn</label
                   >
-                  <div id="FIRSTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
+                  <div id="FIRSTNAME_ERROR_MSG" class="error-msg">
+                    Förnamn måste bestå av endast bokstäver, max 50 tecken
+                  </div>
                 </div>
                 <div class="col-md-6 form-floating mb-3">
                   <input
@@ -374,7 +440,9 @@
                   <label for="register-last-name" class="form-label text-muted"
                     >Efternamn</label
                   >
-                  <div id="LASTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
+                  <div id="LASTNAME_ERROR_MSG" class="error-msg">
+                    Förnamn måste bestå av endast bokstäver, max 50 tecken
+                  </div>
                 </div>
                 <div class="col-md-6 form-floating mb-3">
                   <input
@@ -388,7 +456,9 @@
                   <label for="register-email" class="form-label text-muted"
                     >E-post</label
                   >
-                  <div id="EMAIL_ERROR_MSG" class="error-msg">Felaktig email</div>
+                  <div id="EMAIL_ERROR_MSG" class="error-msg">
+                    Felaktig email
+                  </div>
                 </div>
                 <div class="col-md-6 form-floating mb-3">
                   <input
@@ -403,7 +473,9 @@
                     class="form-label text-muted"
                     >Telefonnummer</label
                   >
-                  <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">Felaktig telefonnummer</div>
+                  <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">
+                    Felaktig telefonnummer
+                  </div>
                 </div>
                 <div class="col-md-6 form-floating mb-3">
                   <input
@@ -416,7 +488,9 @@
                   <label for="register-password" class="form-label text-muted"
                     >Välj lösenord</label
                   >
-                  <div id="WRONG_PASSWORD_ERROR_MSG" class="error-msg">Felaktigt lösenord</div>
+                  <div id="WRONG_PASSWORD_ERROR_MSG" class="error-msg">
+                    Felaktigt lösenord
+                  </div>
                 </div>
                 <div class="col-md-6 form-floating mb-3">
                   <input
@@ -430,8 +504,15 @@
                     class="form-label text-muted"
                     >Bekräfta lösenord</label
                   >
-                  <div id="NEW_PASSWORD_NOT_MATCH_ERROR_MSG" class="error-msg">Lösenorden matchar inte</div>
-                  <div id="NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG" class="error-msg">Du har redan detta lösenord</div>
+                  <div id="NEW_PASSWORD_NOT_MATCH_ERROR_MSG" class="error-msg">
+                    Lösenorden matchar inte
+                  </div>
+                  <div
+                    id="NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG"
+                    class="error-msg"
+                  >
+                    Du har redan detta lösenord
+                  </div>
                 </div>
                 <div class="col-12 form-floating mb-3">
                   <input
@@ -444,7 +525,9 @@
                   <label for="register-street" class="form-label text-muted"
                     >Gatuadress</label
                   >
-                  <div id="ADDRESS_ERROR_MSG" class="error-msg">Felaktig adress, adress skall innehålla Gatunamn samt nummer</div>
+                  <div id="ADDRESS_ERROR_MSG" class="error-msg">
+                    Felaktig adress, adress skall innehålla Gatunamn samt nummer
+                  </div>
                 </div>
 
                 <div class="col-md-8 form-floating mb-3">
@@ -459,7 +542,9 @@
                   <label for="register-city" class="form-label text-muted"
                     >Postort</label
                   >
-                  <div id="CITY_ERROR_MSG" class="error-msg">Felaktig ort, ort skall innehålla bara bokstäver</div>
+                  <div id="CITY_ERROR_MSG" class="error-msg">
+                    Felaktig ort, ort skall innehålla bara bokstäver
+                  </div>
                 </div>
 
                 <div class="col-md-4 form-floating mb-3">
@@ -473,7 +558,9 @@
                   <label for="register-zip" class="form-label text-muted"
                     >Postnummer</label
                   >
-                  <div id="ZIPCODE_ERROR_MSG" class="error-msg">Felaktigt postnummer, måste matas in t.ex "123 45"</div>
+                  <div id="ZIPCODE_ERROR_MSG" class="error-msg">
+                    Felaktigt postnummer, måste matas in t.ex "123 45"
+                  </div>
                 </div>
 
                 <div class="col-md-4">
@@ -531,113 +618,154 @@
       </div>
     </div>
 
-    <!-- cart modal -->
-    <div 
-    class="modal fade" 
-    id="cart-pop-up"
-    data-bs-backdrop="static" 
-    data-bs-keyboard="false" 
-    tabindex="-1" 
-    aria-labelledby="staticBackdropLabel" 
-    aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" style="min-width: 1000px;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Varukorg</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-      </div>
-      <!--modal-header ends-->
-      <div class="modal-body">
-        <table class="table table-secondary">
-          <thead>
-            <tr class="table-default">
-              <th scope="col">Papperskorg</th>
-              <th scope="col">Produkt</th>
-              <th scope="col"></th>
-              <th scope="col">pris</th>
-              <th scope="col"></th>
-              <th scope="col">Antal</th>
-              <th scope="col"></th>
-              <th scope="col">Totalt</th>
-            </tr>
-          </thead>
-          <tbody id="productsInCart"></tbody>
-        </table>
-        <hr>
-        <div class="total-price-container"><p>Totalt pris: </p>
-          <p id="cartTotalPrice"></p></div>
-      </div>
-      <!--modal-body ends-->
-      <div class="modal-footer">
-        
-        <button type="button" class="btn btn-secondary" id="clear">Rensa varukorg</button>
-        <a id = "to-checkout-link" href="./pages/checkout/">
-          <button type="button" class="btn btn-primary" id="checkout-btn">Till kassan</button>
-          </a>
-      </div>
-      <!--modal-footer ends-->
-    </div>
-    <!--modal-content ends-->
-  </div>
-  <!--modal-dialog ends-->
-</div>
-<!-- cart modal ends -->
-
-<!-- product-card-pop-up-modal-->
-<div class="modal fade" id="product-card-modal">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header border-0 p-lg-3">
-        <h4 class="pl-xl-10 product-modal-title">Produktinformation</h4>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row" >
-            <div class="col-xl-6">
-              <img class="img-fluid rounded mx-auto d-block" src="https://assets.icanet.se/t_product_large_2x_v1,f_auto/7318690173946.jpg" alt="product-image">
+    <!-- Cart modal -->
+    <div
+      class="modal fade m-0"
+      id="cart-pop-up"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+      style="padding-right: 0"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Din varukorg</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row border-bottom text-center">
+                <div class="col-1"><i class="bi bi-trash-fill"></i></div>
+                <div class="col-4 col-md-5 text-start"><h5>Produkt</h5></div>
+                <div class="col-2"><h5>Pris</h5></div>
+                <div class="col-3 col-md-2"><h5>Antal</h5></div>
+                <div class="col-2"><h5>Totalt</h5></div>
+              </div>
             </div>
-            <div class="col-xl-6">
+            <div class="list-group">
+              <div id="cartOutput"></div>
+            </div>
+          </div>
+          <div class="container total-price-row">
+            <div class="row px-3">
+              <div class="col-7 col-sm-8"></div>
+              <div class="col-3 col-sm-2 text-center">
+                <h5 class="total-price">Totalt:</h5>
+              </div>
+              <div class="col-2 text-center" id="priceOutput">549.75€</div>
+            </div>
+          </div>
+          <div class="modal-footer smaller">
+            <button
+              type="button"
+              class="btn btn-outline-secondary me-xs-2 me-lg-4 btn-sm"
+              id="clear"
+            >
+              Töm varukorgen
+            </button>
+            <a href="./pages/checkout/">
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                id="checkout-button"
+              >
+                Gå till kassan
+              </button></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- cart modal ends -->
+
+    <!-- product-card-pop-up-modal-->
+    <div class="modal fade" id="product-card-modal">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0 p-lg-3">
+            <h4 class="pl-xl-10 product-modal-title">Produktinformation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
               <div class="row">
-                <div class="col-12">
-                  <h1 class="text-lg-start display-3">Laxfilé</h1>
+                <div class="col-xl-6">
+                  <img
+                    class="img-fluid rounded mx-auto d-block"
+                    src="https://assets.icanet.se/t_product_large_2x_v1,f_auto/7318690173946.jpg"
+                    alt="product-image"
+                  />
                 </div>
-                <div class="col-12 mt-5">
-                  <h3>Beskrivning:</h3>
+                <div class="col-xl-6">
+                  <div class="row">
+                    <div class="col-12">
+                      <h1 class="text-lg-start display-3">Laxfilé</h1>
+                    </div>
+                    <div class="col-12 mt-5">
+                      <h3>Beskrivning:</h3>
+                    </div>
+                    <div class="col-12">
+                      <p>
+                        ICA Laxfilé Fryst är perfekta att ha i frysen för att
+                        snabbt plocka fram till en god middag. Lax är en perfekt
+                        start på en god middag, och kan varieras i evigheter.
+                        Stek den och servera med pressad potatis och brynt smör
+                        eller ugnsstek med sötstark sås och strössla på
+                        sesamfrön, så har du fått två helt olika slags rätter..
+                        Det finns minst tusen till.
+                      </p>
+                    </div>
+
+                    <div class="col-12">
+                      <h3>Ingredienser</h3>
+                    </div>
+                    <div class="col-12">
+                      <p>
+                        Ingredienser: LAXFILÉ* i bit (Salmo salar). *Odlad i
+                        Norge.
+                      </p>
+                    </div>
+                    <div class="col-12 mt-3">
+                      <h4>Näringsvärde per 100 g</h4>
+                    </div>
+                    <div class="col-12">
+                      <p>
+                        Energi (kcal) 220 kcal, Energi (kJ) 900 kJ, Fett 16 g,
+                        Varav mättat fett 3 g, Varav enkelomättat fett 0 g,
+                        Varav fleromättat fett 0 g, Kolhydrater 0 g, Varav
+                        socker 0 g, Protein 19 g, Salt 0.1 g
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-12">
-                <p >ICA Laxfilé Fryst är perfekta att ha i frysen för att snabbt plocka fram till en god middag. Lax är en perfekt start på en god middag, och kan varieras i evigheter. Stek den och servera med pressad potatis och brynt smör eller ugnsstek med sötstark sås och strössla på sesamfrön, så har du fått två helt olika slags rätter.. Det finns minst tusen till.</p>
               </div>
-              
-              <div class="col-12">
-                <h3>Ingredienser</h3>
-              </div>
-              <div class="col-12">
-                <p >Ingredienser: LAXFILÉ* i bit (Salmo salar). *Odlad i Norge.</p>
-              </div>
-              <div class="col-12 mt-3">
-                <h4>Näringsvärde per 100 g</h4>
-              </div>
-              <div class="col-12">
-                <p>Energi (kcal) 220 kcal, Energi (kJ) 900 kJ, Fett 16 g, Varav mättat fett 3 g, Varav enkelomättat fett 0 g, Varav fleromättat fett 0 g, Kolhydrater 0 g, Varav socker 0 g, Protein 19 g, Salt 0.1 g</p>
-              </div>
-              </div>
-              
+            </div>
+            <div class="modal-footer border-0">
+              <dic class="container-fluid">
+                <div class="row align-items-center text-center">
+                  <div class="col-12">
+                    <button
+                      type="button"
+                      class="btn-close display-8"
+                      data-bs-dismiss="modal"
+                    ></button>
+                  </div>
+                </div>
+              </dic>
             </div>
           </div>
-      </div>
-      <div class="modal-footer border-0">
-        <dic class="container-fluid">
-          <div class="row align-items-center text-center" >
-            <div class="col-12">
-              <button  type="button" class="btn-close display-8" data-bs-dismiss="modal"></button>
-            </div>
-          </div>
-        </dic>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -660,6 +788,6 @@
     <script src="./js/register.js"></script>
     <script src="./js/homepage.js"></script>
     <script src="./js/searchBar.js"></script>
-    
+    <script src="./js/sortingAlgorithm.js"></script>
   </body>
 </html>
