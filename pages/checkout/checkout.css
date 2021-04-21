@@ -6,6 +6,12 @@ html {
   section {
     min-height: 90vh;
   }
+
+  textarea{
+    resize: none;
+    outline:none;
+    padding: 0.2rem;
+  }
   
   .cart-title {
     border-bottom: 3px solid var(--border-cl);

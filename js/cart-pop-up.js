@@ -3,11 +3,6 @@ let cart = [];
 $(document).ready(load);
 
 function load() {
-  /* let cartTestUrl = '../../TestData/test_data_cart.JSON'
-    fetch(cartTestUrl)
-      .then((response) => response.json())
-      .then((data) => makeArrayFromData(data))
-      .catch((error) => console.error(error)); */
 
   renderCart();
 }
@@ -68,7 +63,6 @@ function renderCart() {
     });
 
     $(".increase-button").on("click", function (e) {
-      console.log(+e.target.id);
       addProduct(+e.target.id);
     });
 
@@ -110,6 +104,7 @@ function renderCart() {
           } else {
             swal("Borttagning avbruten");
           }
+
         });
       });
     });
@@ -180,7 +175,6 @@ function addToTotalPrice(product) {
  */
 function removeFromTotalPrice(product) {
   let totalPrice = JSON.parse(localStorage.getItem("cartTotalPrice"));
-  console.log(product.inCart);
   totalPrice -= product.price;
   localStorage.setItem("cartTotalPrice", JSON.stringify(totalPrice));
 }
