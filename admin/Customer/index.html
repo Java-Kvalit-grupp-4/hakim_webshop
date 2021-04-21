@@ -199,7 +199,6 @@
                   <th scope="col" class="pb-3">Kundnummer</th>
                   <th scope="col" class="pb-3">Förnamn</th>
                   <th scope="col" class="pb-3">Efternamn</th>
-                  <th scope="col" class="pb-3">Personnummer</th>
                   <th scope="col" class="pb-3">E-post</th>
                   <th scope="col" class="pb-3">Antal ordrar</th>
                   <th scope="col" class="pb-3">Orderbelopp</th>
@@ -232,7 +231,8 @@
                     type="text"
                     class="form-control form-control-sm"
                     id="customer-first-name"
-                    placeholder="Förnamn" maxlength="50"
+                    placeholder="Förnamn" 
+                    maxlength="50"
                   />
                   <div id="FIRSTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
                 </div>
@@ -247,6 +247,7 @@
                     class="form-control form-control-sm"
                     id="customer-last-name"
                     placeholder="Efternamn"
+                    maxlength="50"
                   />
                   <div id="LASTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
                 </div>
@@ -274,6 +275,7 @@
                     class="form-control form-control-sm"
                     id="customer-phone"
                     placeholder="Telefonnummer"
+                    maxlength="10"
                   />
                   <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">Felaktig telefonnummer</div>
                 </div>
@@ -298,6 +300,7 @@
                     class="form-control form-control-sm"
                     id="customer-city"
                     placeholder="Postort"
+                    maxlength="50"
                   />
                   <div id="CITY_ERROR_MSG" class="error-msg">Felaktig ort, ort skall innehålla bara bokstäver</div>
                 </div>
@@ -306,12 +309,14 @@
                 <div class="mb-5 col">
                   <label for="customer-zip" class="form-label"
                     >Postnummer</label
+                    
                   >
                   <input
                     type="text"
                     class="form-control form-control-sm"
                     id="customer-zip"
                     placeholder="Postnummer"
+                    maxlength="6"
                   />
                   <div id="ZIPCODE_ERROR_MSG" class="error-msg">Felaktigt postnummer, måste matas in t.ex "123 45"</div>
                 </div>
