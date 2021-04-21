@@ -24,7 +24,7 @@ function renderCart() {
                     <div class="row border py-3 text-center smaller cart-row">
                       <div class="col-1">
                         <i class="bi bi-trash-fill trash-button" id="${
-                          element.productNr
+                          element.sku
                         }"></i>
                       </div>
                       <div class="col-4 col-md-5 col-lg-4 text-start">
@@ -38,20 +38,20 @@ function renderCart() {
                       <div class="col-2">${element.price.toFixed(2)}</div>
                       <div class="col-3 col-md-2 qty-label">
                         <i class="bi bi-dash-circle decrease-button" id="${
-                          element.productNr
+                          element.sku
                         }"></i>
                         <span class="border text-center px-lg-2 quantity" id="${
-                          element.productNr
+                          element.sku
                         }"
                           >${element.inCart}</span
                         >
                         <i
                           class="bi bi-plus-circle-fill increase-button"
-                          id="${element.productNr}"
+                          id="${element.sku}"
                         ></i>
                       </div>
                       <div class="col-2 line-price " id="${
-                        element.productNr
+                        element.sku
                       }">${(element.price * element.inCart).toFixed(2)}</div>
                     </div>
                   </div>`;
@@ -85,7 +85,7 @@ function renderCart() {
             });
             //Ta bort varan ur lokal storage
             cart.forEach((element, index) => {
-              if (element.productNr == el.id) {
+              if (element.sku == el.id) {
                 cartQuantity -= element.inCart;
                 updateTotalPrice(element);
 
@@ -121,7 +121,7 @@ function addProduct(product) {
   let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
   let cartTemp = JSON.parse(localStorage.getItem("cart"));
   cartTemp.forEach((element) => {
-    if (element.productNr == product) {
+    if (element.sku == product) {
       if (element.inCart < 99) {
         element.inCart += 1;
         addToTotalPrice(element);
@@ -142,7 +142,7 @@ function removeProduct(product) {
   let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
   let cartTemp = JSON.parse(localStorage.getItem("cart"));
   cartTemp.forEach((element) => {
-    if (element.productNr == product) {
+    if (element.sku == product) {
       if (element.inCart !== 1) {
         element.inCart -= 1;
         removeFromTotalPrice(element);
@@ -182,8 +182,8 @@ function removeFromTotalPrice(product) {
 function updateCartQuantity() {
   let cartTemp = JSON.parse(localStorage.getItem("cart"));
   cartTemp.forEach((element) => {
-    $(`#${element.productNr}.quantity`).text(element.inCart);
-    $(`#${element.productNr}.line-price`).text(
+    $(`#${element.sku}.quantity`).text(element.inCart);
+    $(`#${element.sku}.line-price`).text(
       (element.price * element.inCart).toFixed(2)
     );
   });

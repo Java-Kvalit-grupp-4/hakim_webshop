@@ -259,8 +259,8 @@ function saveProductToCart(product) {
   let tempQuantityToAdd = Number(product.inCart)
 
   if(cart != null){
-    let productToFind = cart.find(e => e.productNr == product.productNr)
-    let index = cart.findIndex(e => e.productNr == product.productNr)
+    let productToFind = cart.find(e => e.sku == product.sku)
+    let index = cart.findIndex(e => e.sku == product.sku)
     if(productToFind == undefined){
       product.inCart = product.inCart
       cartQuantity += tempQuantityToAdd
