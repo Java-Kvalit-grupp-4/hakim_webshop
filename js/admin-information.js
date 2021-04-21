@@ -6,10 +6,13 @@ let informationObject = new Object();
 const chosenImageName = "Hakim.jpg";
 
 $(function () {
-  fetch(heroku)
-    .then((response) => response.json())
-    .then((response) => renderInformation(response))
-    .catch((error) => console.error(error));
+  loadPage();
+  function loadPage() {
+    fetch(heroku)
+      .then((response) => response.json())
+      .then((response) => renderInformation(response))
+      .catch((error) => console.error(error));
+  }
 
   function renderInformation(response) {
     informationObject = {
@@ -63,22 +66,16 @@ $(function () {
   });
 
   $("#btnOpeningHours").on("click", function () {
-    
     let data = getInformationFromFields();
-    console.log(data);
-    
+
     axios
-      .post("https://hakimlivs.herokuapp.com/information/update", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post("https://hakimlivs.herokuapp.com/information/update", data)
       .then(() => {
         swal(
           "Informationen har uppdaterats",
           "Uppladdningen lyckades",
           "success"
-        );
+        ).then(() => loadPage());
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -179,6 +176,9 @@ $(function () {
       email: email,
       aboutInfo: aboutInfo,
       imageUrl: chosenImageName,
+      city: {
+        name: city,
+      },
     };
     return informationObject;
   }

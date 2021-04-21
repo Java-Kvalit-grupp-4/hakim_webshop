@@ -355,7 +355,7 @@ $('#login-button').click(() => {
       "zipCode": zipCode.val(),
       "city":
         {
-          "cityName": city.val()
+          "name": city.val()
         }
     }
 
