@@ -144,7 +144,7 @@ function sendDataToServer(searchWord) {
     // for live
     axios.get(productMatchWordUrl)
     .then(response => {
-        
+        localStorage.setItem('categoryList', JSON.stringify(response.data));
         renderProducts(response.data)
         // rendera producterna du sökt efter med response.data
     })
