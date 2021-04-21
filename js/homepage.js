@@ -119,7 +119,7 @@ $(document).ready(() => {
             if(categoryName === "all"){
               $("#products").empty();
               renderProducts(products);
-              localStorage.setItem('categoryList', JSON.stringify(selectedCategoryList));
+              localStorage.setItem('categoryList', JSON.stringify(products));
             }else{
               let currentProduct = product
               product.categories.forEach(category => {
@@ -153,7 +153,7 @@ function renderProducts(list) {
                 </div>
                 <div class="product-card-text">
                   <h3 class="card-title">${element.title}</h3>
-                  <h5 class="card-price">${element.price} kr</h5>
+                  <h5 class="card-price">${element.price.toFixed(2)} kr</h5>
                   <p id="${element.description}"class="card-text">Mer info om produkten</p>
                   <div class="add-subtract-container">
                       <div class="subtract-btn">
@@ -259,8 +259,8 @@ function saveProductToCart(product) {
   let tempQuantityToAdd = Number(product.inCart)
 
   if(cart != null){
-    let productToFind = cart.find(e => e.productNr == product.productNr)
-    let index = cart.findIndex(e => e.productNr == product.productNr)
+    let productToFind = cart.find(e => e.sku == product.sku)
+    let index = cart.findIndex(e => e.sku == product.sku)
     if(productToFind == undefined){
       product.inCart = product.inCart
       cartQuantity += tempQuantityToAdd
