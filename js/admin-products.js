@@ -17,12 +17,12 @@ function loadProducts() {
       }
     })
     .catch(err => {
-      alert("Server fel!" + err)
+      alert("Serverfel! " + err)
     })
 
   function render(products) {
-
     
+
     products.forEach(element => {
       for (let i = 0; i < element.categories.length; i++) {
         let obj = element.categories[i]
@@ -49,8 +49,8 @@ function loadProducts() {
     /**
      * Add products that belong to the celected category
      */
-    $("#select option").on("click", function () {
-      let optionId = $(this).attr("id");
+    $("#select").on("change", function () {
+      let optionId = $(this).val();
       let list = [];
       products.forEach(element => {
         for (let i = 0; i < element.categories.length; i++) {
