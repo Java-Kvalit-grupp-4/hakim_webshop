@@ -35,7 +35,7 @@ function renderCart() {
                         <img class="cart-thumbnail "
                     src="${element.image} alt="${element.title}-bild">
                       </div>
-                      <div class="col-2">${element.price}</div>
+                      <div class="col-2">${element.price.toFixed(2)}</div>
                       <div class="col-3 col-md-2 qty-label">
                         <i class="bi bi-dash-circle decrease-button" id="${
                           element.productNr

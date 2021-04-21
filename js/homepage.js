@@ -153,7 +153,7 @@ function renderProducts(list) {
                 </div>
                 <div class="product-card-text">
                   <h3 class="card-title">${element.title}</h3>
-                  <h5 class="card-price">${element.price} kr</h5>
+                  <h5 class="card-price">${element.price.toFixed(2)} kr</h5>
                   <p id="${element.description}"class="card-text">Mer info om produkten</p>
                   <div class="add-subtract-container">
                       <div class="subtract-btn">
