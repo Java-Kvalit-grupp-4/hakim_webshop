@@ -27,8 +27,8 @@ let firstName = $('#customer-first-name'),
     CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
     WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
     NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
-    NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG'),
-    INPUT_ERROR_MSG = ("#INPUT_ERROR_MSG")
+    NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
+    //INPUT_ERROR_MSG = ("#INPUT_ERROR_MSG")
 
 $('form').submit(false)
 
@@ -97,7 +97,7 @@ function showCustomers(customerArr){
         
         if(e.customerOrders!=null){
             customerOrders = e.customerOrders.length
-            totalPrice = getTotalPriceOfOrders(customerOrders);
+            totalPrice = getTotalPriceOfOrders(e.customerOrders);
         }
         else{
             customerOrders = 0;
@@ -165,6 +165,7 @@ function isCustomerOrdersNull(orderArr){
 function getTotalPriceOfOrders(orderArr){
     if(orderArr!=null){
         let sum = 0;
+        console.log(typeof orderArr)
         orderArr.forEach(e => {
             sum += e.totalCost;
         })
@@ -191,7 +192,7 @@ function filterSearch(){
             showCustomers(customers.filter(customer => customer.isVip==true));   
             break;
         case 'Total ordersumma över:':
-            if(validateInput()){
+           // if(validateInput()){
                 resetsInputBorders()
                 if(startDate!=null && endDate!=null){
                     showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders.filter(order => 
@@ -204,10 +205,10 @@ function filterSearch(){
                 else{
                     showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders)>input));
                 }
-            }
+            //}
             break;
             case 'Totalt antal ordrar över:':
-                if(validateInput()){
+                //if(validateInput()){
                     if(startDate!=null && endDate!=null){
                         showCustomers(customers.filter(customer =>customer.customerOrders.filter(order => 
                             {let date = new Date(order.orderTimestamp)
@@ -217,9 +218,11 @@ function filterSearch(){
                     else{
                         showCustomers(customers.filter(customer => isCustomerOrdersNull(customer.customerOrders)>input));
                     }
-                }
+                //}
             break;
     }
+    startDate=null;
+    endDate=null;
 };
 
 function showOrders(customerOrders){
@@ -245,7 +248,8 @@ function showOrders(customerOrders){
                 </tr>`
             )
     })
-    $("#totalCost").text(sum.toFixed(2) + " kr");    
+    $("#totalCost").text(sum.toFixed(2) + " kr");
+        
 }
 
 function updateCustomer(){
@@ -297,11 +301,11 @@ function validateForm() {
     return bool
   }
 
-  function validateInput(){
+  /*function validateInput(){
       let bool = true;
-      bool = checkForInput(testForDecimalNumbers, $$("#input"),bool,INPUT_ERROR_MSG)
+      bool = checkForInput(testForDecimalNumbers, $("#input"),bool,INPUT_ERROR_MSG)
       return bool;
-  }
+  }*/
 
   function hideAllErrorMsgs() {
     FIRSTNAME_ERROR_MSG.hide()
