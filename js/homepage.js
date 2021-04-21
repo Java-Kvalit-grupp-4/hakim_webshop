@@ -185,17 +185,22 @@ function renderProducts(list) {
           products.forEach(product => {
           
             if(product.sku == e.target.parentElement.parentElement.parentElement.id){
-              product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value)
-              e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
-              let isToMany = false
-              isToMany = saveProductToCart(product)
-              
-              if(isToMany==false){
-                saveTotalPrice(product)
-                updateTotalCartUI()
-                setCartAvailability();
-              }
 
+
+              product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value)
+              if(product.inCart<1){
+                swal('Minsta tillåtet antal är 1', '', 'warning')
+              }else{
+                e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
+                let isToMany = false
+                isToMany = saveProductToCart(product)
+                
+                if(isToMany==false){
+                  saveTotalPrice(product)
+                  updateTotalCartUI()
+                  setCartAvailability();
+                }
+              }
             }
           })
         })
