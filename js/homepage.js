@@ -185,13 +185,17 @@ function renderProducts(list) {
           products.forEach(product => {
           
             if(product.sku == e.target.parentElement.parentElement.parentElement.id){
-
-              product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value) //Ger denna rätt antal i varukorgen?
+              product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value)
               e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
-              saveProductToCart(product)
-              saveTotalPrice(product)
-              updateTotalCartUI()
-              setCartAvailability();
+              let isToMany = false
+              isToMany = saveProductToCart(product)
+              
+              if(isToMany==false){
+                saveTotalPrice(product)
+                updateTotalCartUI()
+                setCartAvailability();
+              }
+
             }
           })
         })
@@ -267,8 +271,14 @@ function saveProductToCart(product) {
       cart.push(product)
     }else{
       
-      cart[index].inCart += product.inCart
-      cartQuantity += tempQuantityToAdd
+      if(cart[index].inCart + product.inCart>=100){
+        swal('Maxantalet för en vara är 99', '', 'warning')
+        return true
+      }else{
+        cart[index].inCart += product.inCart
+        cartQuantity += tempQuantityToAdd
+      }
+
     }
   }else{
     cart = [] 
@@ -280,6 +290,7 @@ function saveProductToCart(product) {
   localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity))
   localStorage.setItem('cart', JSON.stringify(cart))
   $("#cart-counter").text(cartQuantity)
+  return false
 }
 
 /**
