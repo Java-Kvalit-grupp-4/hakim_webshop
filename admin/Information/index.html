@@ -198,10 +198,24 @@
       <!--slutar row-->
       <div class="container text-output"></div>
     </div>
+<<<<<<< HEAD
+    <!--slutar row-->
+  </div>
+  <!--slutar container-->
+  <script>
+    let customer = JSON.parse(sessionStorage.getItem('customer'))
+    console.log(customer)
+      if(customer==null || customer== undefined || customer.isAdmin==false){
+        window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
+      }
+</script>
+</body>
+=======
     <!--slutar container-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
+>>>>>>> 168b364133c4f45aecc8ce05d11d192c0876b636
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
