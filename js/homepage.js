@@ -88,11 +88,6 @@ $(document).ready(() => {
       }
       products = data;
 
-      
-      // plocka ut alla categorier från produkterna 
-
-
-
       localStorage.setItem('categoryList', JSON.stringify(products));
       renderProducts(products);
      
@@ -103,6 +98,8 @@ $(document).ready(() => {
           categories.push(category.name)
         })
       })
+
+      console.log(categories);
 
       /* products.forEach(element => {
         categories.push(element.category)
@@ -120,23 +117,34 @@ $(document).ready(() => {
       setCartAvailability();
 
       $("#sidomeny button").on("click", function () {
-        let btnId = $(this).attr("id");
-        let list = [];
+        let categoryName = $(this).attr("id");
+        let selectedCategoryList = [];
 
-          products.forEach(element => {
+          products.forEach(product => {
             
-            if (element.category == btnId) {
-              list.push(element);
-              $("#products").empty();
-                renderProducts(list);
-                localStorage.setItem('categoryList', JSON.stringify(list));
-            }
-
-            if(btnId === "all"){
+            if(categoryName === "all"){
               $("#products").empty();
               renderProducts(products);
-              localStorage.setItem('categoryList', JSON.stringify(list));
+              localStorage.setItem('categoryList', JSON.stringify(selectedCategoryList));
+            }else{
+              let currentProduct = product
+              product.categories.forEach(category => {
+                
+                if (category.name == categoryName) {
+                  console.log(category.name);
+                  selectedCategoryList.push(currentProduct);
+                  $("#products").empty();
+                    renderProducts(selectedCategoryList);
+                    localStorage.setItem('categoryList', JSON.stringify(selectedCategoryList));
+                }
+              })
             }
+
+            
+
+            
+
+            
         });
 
       });
