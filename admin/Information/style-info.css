@@ -6,3 +6,6 @@
 #description {
     margin-bottom: -1.5px;
 }
+img {
+    max-width: 100%;
+}
