@@ -1,5 +1,14 @@
 
+
+nav {
+    margin-bottom: 10rem;
+}
+
+img {
+    max-width: 100%;
+}
 #about{
+    margin-top: 10rem;
     min-height: 90vh;
     width: 100%;
 }
@@ -31,7 +40,6 @@
 }
 .title{
     margin-bottom: 2rem;
-    font-size: 3rem;
 }
 
 @media (max-width: 454px) {
