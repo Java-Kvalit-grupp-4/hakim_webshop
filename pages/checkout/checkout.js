@@ -15,7 +15,8 @@ function run() {
         city = $('#city'),
         address2 = $('#address2'),
         city2 = $('#city2'),
-        zip2 = $('#zip2');
+        zip2 = $('#zip2'),
+        orderComment = $('#order-comment')
 
         let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
             LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
@@ -26,12 +27,18 @@ function run() {
             CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
             ADDRESS_ERROR_MSG_2 = $('#ADDRESS_ERROR_MSG_2'),
             ZIPCODE_ERROR_MSG_2 = $('#ZIPCODE_ERROR_MSG_2'),
-            CITY_ERROR_MSG_2 = $('#CITY_ERROR_MSG_2'),
+            CITY_ERROR_MSG_2 = $('#CITY_ERROR_MSG_2')
      /**
      * Eventlistiners
      */
     $('#gridCheck').click(e => e.target.checked ? getAddressInfo() : clearAddressInfo())
     $('#send-order-btn').click(validateInput)
+
+
+    ADDRESS_ERROR_MSG_2.hide()
+    ZIPCODE_ERROR_MSG_2.hide()
+    CITY_ERROR_MSG_2.hide()
+
 
     function getCart() {
             let data = getCartFromLocalStorage()
@@ -85,6 +92,7 @@ function run() {
     function renderCustomerInfo() {
         
         let loggedInCustomer =  JSON.parse(sessionStorage.getItem('customer'))
+        console.log(loggedInCustomer);
         let zipCode = `${loggedInCustomer.zipCode.substring(0,3)} ${loggedInCustomer.zipCode.substring(3)}`
         let phoneNumber = `${loggedInCustomer.phoneNumber.substring(0,3)}-${loggedInCustomer.phoneNumber.substring(3,6)} ${loggedInCustomer.phoneNumber.substring(6,8)} ${loggedInCustomer.phoneNumber.substring(8)}`
         
@@ -171,17 +179,58 @@ function run() {
                 
         if(bool) {
             if($("#gridCheck")[0].checked){
-                swal({
-                    title: "Tack för din order!",
-                    text: `
-                    \nLeverans adress
-                    \n${address.val()}
-                    \n${city.val()}
-                    \n${zip.val()}`,
-                    icon: "success",
-                    button: "Ok",
-                  });
+
+                console.log(makeOrderObject())
+                sendOrderToServer(makeOrderObject())
+                localStorage.clear()
+                clearAllInputFields()
+                renderCart()
             }else{
+                swal({
+                    title: "Ops, något gick fel!",
+                    text: "Alla fält måste vara ifyllda korrekt",
+                    icon: "warning",
+                    button: "Ok",
+                  }) 
+            }
+        }
+
+    
+
+    
+    }
+
+    getCart()
+    renderCustomerInfo()
+
+    function makeOrderObject(){
+        let cart = JSON.parse(localStorage.getItem('cart'))
+        let orderCommentInput = ""
+        orderCommentInput = orderComment.val()
+        
+        let orderObject = {
+            "appUser": {
+              "email": email.val()
+              },
+            "orderComment": orderCommentInput,
+            "totalCost": $('#cart-total-price').val(),
+            "isPaid": false,
+            "orderStatus": {
+              "type": "ohanterad"
+            },
+            "lineItems": cart
+          }
+    
+        return orderObject
+    }
+
+    function sendOrderToServer(orderObject){
+         const url = 'https://hakimlivs.herokuapp.com/customerOrder/add'
+        //const url = 'https://hakimlogintest.herokuapp.com/customerOrder/add'
+
+        axios.post(url,orderObject)
+        .then(response => {
+            if(response.status == 200){
                 swal({
                     title: "Tack för din order!",
                     text: `
@@ -191,25 +240,9 @@ function run() {
                     \n${zip2.val()}`,
                     icon: "success",
                     button: "Ok",
-                  });
+                  })
             }
-              clearAllInputFields()
-                    // todo logga beställningar med överstående adress
-                    // tömma localStorage från varukorg och rendera tom varukorg för kund
-            localStorage.clear()
-            renderCart()
-        }else{
-            swal({
-                title: "Ops, något gick fel!",
-                text: "Alla fält måste vara ifyllda korrekt",
-                icon: "warning",
-                button: "Ok",
-              }) 
-        }
+            
+        })
     }
-
-    getCart()
-    renderCustomerInfo()
 }
-
-

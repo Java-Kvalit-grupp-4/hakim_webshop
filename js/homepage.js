@@ -73,7 +73,7 @@ $(document).ready(() => {
        })
        .catch(err => {
          alert(err)
-       })
+       }) 
     }
 
     function renderCategories(data) {
@@ -283,7 +283,6 @@ function updateTotalCartUI(){
 //------------------------------------- login ----------------------------------\\
 
 $('#login-button').click(() => {
-  console.log('hej');
   let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
 
   axios.get(url)
