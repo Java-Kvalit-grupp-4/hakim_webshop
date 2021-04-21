@@ -151,6 +151,13 @@
             </div>
             <div class="col-lg-5"></div>
             <!-- cart ends-->
+            <!-- order comment -->
+            <div class="row">
+              <div class="col-12 sm-10 mt-5" >
+                <h2 class="mb-3">Orderkommentar</h2>
+                <textarea name="order-comment" id="order-comment" cols="40" rows="5" placeholder="Order kommentar"></textarea>
+              </div>
+            </div>
             <!-- form starts-->
             <div class="row">            
             <div class="col-lg-5 mt-5 mb-5">
@@ -159,32 +166,54 @@
                 <div class="col-md-6">
                   <label for="firstName" class="form-label">Förnamn</label>
                   <input type="text" class="form-control" id="firstName" placeholder="Förnamn" maxlength="30" required readonly>
+                  <div id="FIRSTNAME_ERROR_MSG" class="error-msg">
+                    Förnamn måste bestå av endast bokstäver, max 50 tecken
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="lastName" class="form-label">Efternamn</label>
                   <input type="text" class="form-control" id="lastName" placeholder="Efternamn" maxlength="40" required readonly>
+                  <div id="LASTNAME_ERROR_MSG" class="error-msg">
+                    Förnamn måste bestå av endast bokstäver, max 50 tecken
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="email" class="form-label">E-post</label>
                   <input type="email" class="form-control" id="email" placeholder="E-post" maxlength="325" required readonly>
+                  <div id="EMAIL_ERROR_MSG" class="error-msg">
+                    Felaktig email
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="phone" class="form-label">Telefonnummer</label>
                   <input type="text" class="form-control" id="phone" placeholder="Telefonnummer" maxlength="20" required readonly>
+                  <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">
+                    Felaktig telefonnummer
+                  </div>
                 </div>
                 <div class="col-10">
                   <label for="inputAddress" class="form-label">Gatuadress</label>
                   <input type="text" class="form-control" id="address" placeholder="Gatuadress" maxlength="50" required readonly>
+                  <div id="ADDRESS_ERROR_MSG" class="error-msg">
+                    Felaktig adress, adress skall innehålla Gatunamn samt nummer
+                  </div>
                 </div>
                 <div class="col-md-4">
                   <label for="inputZip" class="form-label">Postnummer</label>
                   <input type="text" class="form-control" id="zip"  placeholder="Postnr" maxlength="5" required readonly>
+                  <div id="ZIPCODE_ERROR_MSG" class="error-msg">
+                    Felaktigt postnummer, måste matas in t.ex "123 45"
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Ort</label>
                   <input type="text" class="form-control" id="city" placeholder="Ort" maxlength="25" required readonly>
+                  <div id="CITY_ERROR_MSG" class="error-msg">
+                    Felaktig ort, ort skall innehålla bara bokstäver
+                  </div>
                 </div>
                 
+              
                 <div class="col-md-12 mt-5">
                   <h3>Leveransadress</h3> 
                 </div>
@@ -199,14 +228,23 @@
                 <div class="col-10">
                   <label for="inputAddress" class="form-label">Gatuadress</label>
                   <input type="text" class="form-control" id="address2" placeholder="Gatuadress" maxlength="50" required>
+                  <div id="ADDRESS_ERROR_MSG_2" class="error-msg">
+                    Felaktig adress, adress skall innehålla Gatunamn samt nummer
+                  </div>
                 </div>
                 <div class="col-md-4">
                   <label for="inputZip" class="form-label">Postnummer</label>
                   <input type="text" class="form-control" id="zip2" placeholder="Postnr" maxlength="5" required>
+                  <div id="ZIPCODE_ERROR_MSG_2" class="error-msg">
+                    Felaktigt postnummer, måste matas in t.ex "123 45"
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Ort</label>
                   <input type="text" class="form-control" id="city2" placeholder="Ort" maxlength="25" required>
+                  <div id="CITY_ERROR_MSG_2" class="error-msg">
+                    Felaktig ort, ort skall innehålla bara bokstäver
+                  </div>
                 </div>
                 
                 <div class="col-12">
@@ -269,6 +307,7 @@
           </div>
         </div>
       </div>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
