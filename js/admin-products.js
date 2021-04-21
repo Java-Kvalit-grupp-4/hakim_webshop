@@ -5,7 +5,7 @@ let categories = []
 let uniqueCategories = []
 
 function loadProducts() {
-  axios.get("http://localhost:8080/products")
+  axios.get("http://hakimlivs.herokuapp.com/products/")
     .then((response) => {
       console.log(response.data)
       if (response.status === 200) {
@@ -185,13 +185,13 @@ function loadProducts() {
         console.log(productObject)
       alert("Produkten har sparats")
         
-      axios.post("http://localhost:8080/products/add",  productObject  )
+     /*  axios.post("http://localhost:8080/products/add",  productObject  )
         .then(() => {
           console.log("Done!")
         })
         .catch(() => {
           alert('Något fick fel!','Vänligen försök igen', 'warning')
-        })
+        }) */
       });
 
   }
