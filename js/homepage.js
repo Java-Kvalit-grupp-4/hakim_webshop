@@ -26,6 +26,13 @@ const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
   $("#registerForm").modal("show")
  })
 
+ $("#checkout-button").click(function() {
+  let customer = JSON.parse(sessionStorage.getItem('customer'))
+  if(customer==null || customer== undefined){
+    swal("Du måste vara inloggad för att lägga beställning", "", "warning")
+  }
+})
+
  $("#show-password-button").click(function(){
   if($(this).text()=="Visa"){
     $(this).text("Dölj")
@@ -40,11 +47,13 @@ const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
  $("#login-btn").click(function() {
   if($(this).text()=="Logga in"){
       $("#login-modal").modal("show");
+      $('#checkOutLink').attr("href", "./pages/checkout/")
   }
   else{
       sessionStorage.removeItem("customer")
       $('#myAccountDropdown').hide()
       $(this).text("Logga in")
+      $('#checkOutLink').attr("href", "#")
       adminview.hide()
   }
 })
@@ -143,6 +152,7 @@ $(document).ready(() => {
  */
 function renderProducts(list) {
   $("#products").empty()
+  
 
     list.forEach(element => {
         $("#products").append(`
@@ -333,6 +343,7 @@ $('#login-button').click(() => {
           loginModal.modal('hide')
           navLoginBtn.text('Logga ut')
           myAccountMenu.show()
+          //$('#checkOutLink').attr("href", "./pages/checkout/")
         }
         
       } 
@@ -404,6 +415,7 @@ $('#login-button').click(() => {
         swal('Något fick fel!','Vänligen försök igen', 'warning')
       })
   }
+
 })
 
 /**

@@ -5,6 +5,7 @@ $(document).ready(load);
 function load() {
 
   renderCart();
+  
 }
 
 function makeArrayFromData(data) {
@@ -15,6 +16,7 @@ function makeArrayFromData(data) {
 function renderCart() {
   let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
   let cart = JSON.parse(localStorage.getItem("cart"));
+  
 
   if (cart != null) {
     let output = "";
@@ -204,6 +206,8 @@ function setCartAvailability() {
     $("#checkout-button").attr("disabled", false);
   }
 }
+
+
 
 $("#clear").click(function () {
   swal({
