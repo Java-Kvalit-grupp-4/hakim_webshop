@@ -88,7 +88,6 @@ $(document).ready(() => {
       }
       products = data;
 
-      console.log(products);
       localStorage.setItem('categoryList', JSON.stringify(products));
       renderProducts(products);
      
@@ -99,12 +98,6 @@ $(document).ready(() => {
           categories.push(category.name)
         })
       })
-
-     
-
-      /* products.forEach(element => {
-        categories.push(element.category)
-      }); */
 
       let uniqueCategories = [...new Set(categories)];
 
@@ -132,7 +125,6 @@ $(document).ready(() => {
               product.categories.forEach(category => {
                 
                 if (category.name == categoryName) {
-                 
                   selectedCategoryList.push(currentProduct);
                   $("#products").empty();
                     renderProducts(selectedCategoryList);
@@ -141,11 +133,6 @@ $(document).ready(() => {
               })
             }
 
-            
-
-            
-
-            
         });
 
       });

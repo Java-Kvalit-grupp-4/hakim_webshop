@@ -2,14 +2,8 @@ const searchWrapper = $('.search-input')
 const searchField =  $('#search-field') 
 const suggBox = $('.autocom-box')
 const searchIcon = $('.icon')  
-
-//let allProductsUrl = `http://localhost:8080/products`
-//let allProductsUrl = './TestData/test_data_products_v1.2.JSON'
 const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
 let searchWords = []
-
-// for testdata
-let productsTestData = []
 
 /**
  * Eventlisteners
@@ -54,19 +48,6 @@ function getProductsFromDataBase() {
     })
     //.catch(err => alert('här' + err))
 }
-
-// to test testdata for live under
-/* function createSearchWords(products) {
-    let arr = Array(products.data)
-    let searchStringToSplit = '';
-    productsTestData = arr[0]
-    arr[0].forEach(product => {
-        searchStringToSplit += `${product.title} ${product.description} ${product.category}`
-    })
-    searchWords = searchStringToSplit.split(' ')
-}  */
-
-
 
 /**
  * Take an array of products, gets the product title,
@@ -134,41 +115,14 @@ function showSuggestions(list){
 
 function sendDataToServer(searchWord) {
     
-    //for live version
     let productMatchWordUrl = `https://hakimlivs.herokuapp.com/products/searchProducts?searchWord=${searchWord}`
 
-    //To test testdata
-    //productMatchWordUrl = searchWord
-    //productToRenderFromTestData(productMatchWordUrl)
-
-    // for live
     axios.get(productMatchWordUrl)
     .then(response => {
         localStorage.setItem('categoryList', JSON.stringify(response.data));
         renderProducts(response.data)
-        // rendera producterna du sökt efter med response.data
     })
     .catch(err => alert(err))
 }
-
-/* function productToRenderFromTestData(searchWord) {
-    console.log(searchWord);
-    let temp = []
-    productsTestData.forEach(product => {
-        
-        if(product.title.includes(searchWord)){
-            temp.push(product)
-        }
-        if(product.description.includes(searchWord)){
-            temp.push(product)
-        }
-        if(product.category.includes(searchWord)){
-            temp.push(product)
-        }
-    })
-    renderProducts(temp)
-
-} */
-
 
 getProductsFromDataBase()

@@ -92,7 +92,6 @@ function run() {
     function renderCustomerInfo() {
         
         let loggedInCustomer =  JSON.parse(sessionStorage.getItem('customer'))
-        console.log(loggedInCustomer);
         let zipCode = `${loggedInCustomer.zipCode.substring(0,3)} ${loggedInCustomer.zipCode.substring(3)}`
         let phoneNumber = `${loggedInCustomer.phoneNumber.substring(0,3)}-${loggedInCustomer.phoneNumber.substring(3,6)} ${loggedInCustomer.phoneNumber.substring(6,8)} ${loggedInCustomer.phoneNumber.substring(8)}`
         
