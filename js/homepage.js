@@ -15,12 +15,12 @@ myAccountMenu = $('#myAccountDropdown')
 let adminview = $('#admin-view-link')
 
 //const addUserUrl = "http://localhost:8080/users/add"
-const addUserUrl = "https://hakimlogintest.herokuapp.com/users/add"
+const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 
 
 /**
  * Eventlistener
- */
+ */C:
 
  $("#newCust-button").click(() => {
   $("#registerForm").modal("show")
@@ -65,8 +65,9 @@ $(document).ready(() => {
 })
 
     function load() {
-        const productsUrl = './TestData/test_data_products_v1.2.JSON'
-       // const productsUrl = 'http://localhost:8080/products'
+        //const productsUrl = './TestData/test_data_products_v1.2.JSON'
+        //const productsUrl = 'http://localhost:8080/products'
+        const productsUrl = 'http://hakimlivs.herokuapp.com/products'
        axios.get(productsUrl)
        .then(response => {
          renderCategories(response.data)
@@ -86,7 +87,7 @@ $(document).ready(() => {
         $('#myAccountDropdown').hide()
       }
       products = data;
-
+      localStorage.setItem('categoryList', JSON.stringify(products));
       renderProducts(products);
      
       let categories = [];
@@ -100,19 +101,9 @@ $(document).ready(() => {
       $("#sidomeny").append(`
           <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4" style="background-color:wheat ;">${element}</button>`
       );
-      console.log(cartQuantity)
-     
-      
     });
-    document.getElementById("total-items-in-cart").innerHTML = cartQuantity
-    if(cartQuantity <=0 || cartQuantity==null){
-      document.getElementById("cartDropdown").disabled = true
-
-      
-    }else{
-      document.getElementById("cartDropdown").disabled = false
-
-    }
+    $("#total-items-in-cart").text(cartQuantity);
+    setCartAvailability();
     $("#sidomeny button").on("click", function () {
       let btnId = $(this).attr("id");
       let list = [];
@@ -121,10 +112,12 @@ $(document).ready(() => {
           list.push(element);
           $("#products").empty();
             renderProducts(list);
+            localStorage.setItem('categoryList', JSON.stringify(list));
         }
         if(btnId === "all"){
           $("#products").empty();
           renderProducts(products);
+          localStorage.setItem('categoryList', JSON.stringify(list));
         }
       });
 
@@ -168,6 +161,10 @@ function renderProducts(list) {
         );
       });
 
+      $("#cartDropdown").on("click", function(){
+        renderCart();
+      })
+
       $.each($('.add-product-to-cart'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
@@ -177,7 +174,7 @@ function renderProducts(list) {
               saveProductToCart(product)
               saveTotalPrice(product)
               updateTotalCartUI()
-              renderCart()
+              setCartAvailability();
             }
           })
         })
@@ -287,7 +284,7 @@ function updateTotalCartUI(){
 //------------------------------------- login ----------------------------------\\
 
 $('#login-button').click(() => {
-  let url = `http://localhost:8080/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
+  let url = `localhost:8080/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
 
   axios.get(url)
     .then((response) => {
