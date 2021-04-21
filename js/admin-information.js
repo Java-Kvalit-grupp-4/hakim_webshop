@@ -65,7 +65,7 @@ $(function () {
     uploadImage();
   });
 
-  $("#btnOpeningHours").on("click", function () {
+  $(".save-button").on("click", function () {
     let data = getInformationFromFields();
 
     axios
