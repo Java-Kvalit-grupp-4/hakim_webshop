@@ -199,7 +199,6 @@
                   <th scope="col" class="pb-3">Kundnummer</th>
                   <th scope="col" class="pb-3">Förnamn</th>
                   <th scope="col" class="pb-3">Efternamn</th>
-                  <th scope="col" class="pb-3">Personnummer</th>
                   <th scope="col" class="pb-3">E-post</th>
                   <th scope="col" class="pb-3">Antal ordrar</th>
                   <th scope="col" class="pb-3">Orderbelopp</th>
@@ -232,7 +231,8 @@
                     type="text"
                     class="form-control form-control-sm"
                     id="customer-first-name"
-                    placeholder="Förnamn" maxlength="50"
+                    placeholder="Förnamn" 
+                    maxlength="50"
                   />
                   <div id="FIRSTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
                 </div>
@@ -247,6 +247,7 @@
                     class="form-control form-control-sm"
                     id="customer-last-name"
                     placeholder="Efternamn"
+                    maxlength="50"
                   />
                   <div id="LASTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
                 </div>
@@ -274,6 +275,7 @@
                     class="form-control form-control-sm"
                     id="customer-phone"
                     placeholder="Telefonnummer"
+                    maxlength="10"
                   />
                   <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">Felaktig telefonnummer</div>
                 </div>
@@ -298,6 +300,7 @@
                     class="form-control form-control-sm"
                     id="customer-city"
                     placeholder="Postort"
+                    maxlength="50"
                   />
                   <div id="CITY_ERROR_MSG" class="error-msg">Felaktig ort, ort skall innehålla bara bokstäver</div>
                 </div>
@@ -306,12 +309,14 @@
                 <div class="mb-5 col">
                   <label for="customer-zip" class="form-label"
                     >Postnummer</label
+                    
                   >
                   <input
                     type="text"
                     class="form-control form-control-sm"
                     id="customer-zip"
                     placeholder="Postnummer"
+                    maxlength="6"
                   />
                   <div id="ZIPCODE_ERROR_MSG" class="error-msg">Felaktigt postnummer, måste matas in t.ex "123 45"</div>
                 </div>
@@ -325,45 +330,6 @@
               </div>
             </form>
               <div class="row">
-               <!-- <h3>Top 5 mest köpta produkter</h3>
-                <div class="mb-3 col">
-                  <table class="table table-secondary">
-                    <thead>
-                      <tr>
-                        <th scope="col">SKU</th>
-                        <th scope="col">Produktnamn</th>
-                        <th scope="col">Antal</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1234-456</th>
-                        <td>Gevalia Kaffe</td>
-                        <td>890</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">1234-654</th>
-                        <td>Löfbergs Kaffe</td>
-                        <td>840</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">1234-564</th>
-                        <td>Arvid Nordqvist Kaffe</td>
-                        <td>800</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4561-231</th>
-                        <td>Zoega's Kaffe</td>
-                        <td>740</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4561-324</th>
-                        <td>Marabou Mjölkchoklad</td>
-                        <td>500</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>-->
               </div>
             </div>
             <div class="container col-12 col-xl-7 order-container ms-xl-5 mb-5">

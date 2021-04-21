@@ -5,9 +5,8 @@
 let customers = [];
 let orders = [];
 let choosedCustomer = "";
-let getAllCustomers = "http://localhost:8080/users";
-let updateUser = "http://localhost:8080/users/adminUpdateUser";
-
+let getAllCustomers = "https://hakimlivs.herokuapp.com/users";
+let updateUser = "https://hakimlivs.herokuapp.com/users/adminUpdateUser";
 
 let startDate = null;
 let endDate = null;
@@ -18,7 +17,6 @@ let firstName = $('#customer-first-name'),
     address = $('#customer-street'),
     city = $('#customer-city'),
     zipCode = $('#customer-zip')
-
 
  let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
     LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
@@ -93,21 +91,25 @@ function showCustomers(customerArr){
         else{
             isVip = "bi-x"
         }
-        let personalNumber = e.socialSecurityNumber;
-        let firstNr = personalNumber.substring(0,6);
-        let lastNr = personalNumber.substring(6);
-        let customerOrders = e.customerOrders;
-        let totalPrice = getTotalPriceOfOrders(customerOrders);
-
+        let customerOrders;
+        let totalPrice; 
+        
+        if(e.customerOrders!=null){
+            customerOrders = e.customerOrders.length
+            totalPrice = getTotalPriceOfOrders(customerOrders);
+        }
+        else{
+            customerOrders = 0;
+            totalPrice =0;
+        }   
     
         $("#customerTable").append(`
             <tr>
                 <th scope="row"><a href="#" class="customer-tab">${e.customerNumber}</a></th>
                 <td>${e.firstName}</td>
                 <td>${e.lastName}</td>
-                <td>${firstNr}-${lastNr}</td>
                 <td><a href="mailto:${e.email}">${e.email}</a></td>
-                <td>${customerOrders.length}</td>
+                <td>${customerOrders}</td>
                 <td>${totalPrice.toFixed(2)} kr</td>
                 <td><i class="bi ${isVip}"></i></td>
             </tr>
@@ -127,49 +129,57 @@ function saveCustomer(customerNumber){
         console.log("postadress " + customer.zipCode)
         
         if(customer.customerNumber==customerNumber){
-            
+            let newZipCode = "";
             let newPhoneNumber = `${customer.phoneNumber.substring(0,3)} ${customer.phoneNumber.substring(3,6)} ${customer.phoneNumber.substring(6,8)} ${customer.phoneNumber.substring(8)}`
             sessionStorage.setItem("choosedCustomer", JSON.stringify(customer));
-            let newZipCode = `${customer.zipCode.substring(0,3)} ${customer.zipCode.substring(3)}`
+
+            if(customer.zipCode!=null){
+                newZipCode = `${customer.zipCode.substring(0,3)} ${customer.zipCode.substring(3)}`
+            }
             
             firstName.val(customer.firstName)
             lastName.val(customer.lastName)
             email.val( customer.email)
             phoneNumber.val(newPhoneNumber)
             address.val(customer.streetAddress)
-            city.val(customer.city.cityName)
+            city.val(customer.city.name)
             zipCode.val( newZipCode)
-            showOrders(customer.customerOrders);
+            if(isCustomerOrdersNull(customer.customerOrders)>0){
+                showOrders(customer.customerOrders);
+            } 
         }
     })
 }
 
+function isCustomerOrdersNull(orderArr){
+    if(orderArr!=null){
+        return orderArr.length;
+    }
+    else{
+        return 0;
+    }
+}
+
+
 function getTotalPriceOfOrders(orderArr){
-    let sum = 0;
-    orderArr.forEach(e => {
-        sum += e.totalCost;
-    })
-    return sum;
+    if(orderArr!=null){
+        let sum = 0;
+        orderArr.forEach(e => {
+            sum += e.totalCost;
+        })
+        return sum;
+    }
+    else{
+        return 0;
+    }
 }
 
 function filterSearch(){
-    let tempOrders = [];
+    //let tempOrders = [];
     let filter = $("#search-select option:selected").text();
     let input = $("#input").val();
   
     console.log(startDate, endDate);
-
-    if(startDate!=null && endDate!=null){
-        orders.forEach(e => {
-            let date = new Date(e.orderTimestamp);
-            if(date>=startDate && date<=endDate){
-                tempOrders.push(e);
-            }
-        });
-    }
-    else{
-        tempOrders=orders
-    };
         
     $("#customerTable").empty();
     switch (filter) {
@@ -180,7 +190,7 @@ function filterSearch(){
             showCustomers(customers.filter(customer => customer.isVip==true));   
             break;
         case 'Total ordersumma över:':
-            if(input!=""){
+            if(startDate!=null && endDate!=null){
                 showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders.filter(order => 
                     {let date = new Date(order.orderTimestamp)
                         date>=startDate && date<=endDate
@@ -191,15 +201,15 @@ function filterSearch(){
                 showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders)>input));
             }
             break;
-        case 'Totalt antal ordrar över:':
-            if(input!=""){
+            case 'Totalt antal ordrar över:':
+            if(startDate!=null && endDate!=null){
                 showCustomers(customers.filter(customer =>customer.customerOrders.filter(order => 
                     {let date = new Date(order.orderTimestamp)
                         date>=startDate && date<=endDate
                     }).length>input));
             }
             else{
-                showCustomers(customers.filter(customer => customer.customerOrders.length>input));
+                showCustomers(customers.filter(customer => isCustomerOrdersNull(customer.customerOrders)>input));
             }
             break;
     }
@@ -256,6 +266,7 @@ function updateCustomer(){
             swal('Kunden är uppdaterad!')
         })
         .catch(() => {
+            
             swal('Något gick fel!','Vänligen försök igen', 'warning')
         })
     }
