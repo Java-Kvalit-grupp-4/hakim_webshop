@@ -256,7 +256,7 @@ function updateCustomer(){
         let newZipCode = zipCode.val().replaceAll(" ", "");
         console.log("Zip " + newZipCode)
 
-        const data = {
+        let data = {
             "firstName" : $(firstName).val(),
             "lastName" : $(lastName).val(),
             "email" : $(email).val(),
@@ -264,11 +264,12 @@ function updateCustomer(){
             "streetAddress" : $(address).val(),
             "city": 
                 {
-                "cityName": $(city).val()
+                "name": $(city).val()
                 },
             "zipCode" : newZipCode,
             "comment" : $("#commentTextField").val()
         }
+
 
         axios.post(updateUser, data)
             .then(() => {
