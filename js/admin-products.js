@@ -1,59 +1,76 @@
 $(document).ready(loadProducts);
 
-let products = [];
-let categories = [];
+let products = []
+let categories = []
+let uniqueCategories = []
 
 function loadProducts() {
-  fetch("../../TestData/test_data_v.1.0.JSON")
-    .then((response) => response.json())
-    .then((data) => render(data))
-    .catch((error) => console.error(error));
-
-  function render(data) {
-    products = data;
-
-    products.forEach(obj => {
-      Object.assign(obj, { amount: 15 });
+  axios.get("http://hakimlivs.herokuapp.com/products/")
+    .then((response) => {
+      console.log(response.data)
+      if (response.status === 200) {
+        products = response.data
+        render(products)
+      }
+      else {
+        alert("Något gick fel vid uppladdning av kunder")
+      }
+    })
+    .catch(err => {
+      alert("Server fel!" + err)
     })
 
+  function render(products) {
+
+    
     products.forEach(element => {
-      categories.push(element.category)
+      for (let i = 0; i < element.categories.length; i++) {
+        let obj = element.categories[i]
+        categories.push(obj.name)
+      }
     });
 
-    let uniqueCategories = [...new Set(categories)];
+    /**
+ * Delete duplicates from the array of categories
+ */
+    uniqueCategories = [...new Set(categories)];
 
+    /**
+     * Dynamically add categories to choose into form-select 
+     */
     uniqueCategories.forEach(element => {
       $("#select").append(`
         <option id="${element}" value="${element}">${element}</option>`
       );
     });
 
+    showCategories()
 
+    /**
+     * Add products that belong to the celected category
+     */
     $("#select option").on("click", function () {
       let optionId = $(this).attr("id");
       let list = [];
       products.forEach(element => {
-        if (element.category === optionId) {
-          $("#products").empty();
-          list.push(element);
-          showProducts(list);
-        }
-        if (optionId === "all") {
-          $("#products").empty();
-          showProducts(products);
-        }
-      })
+        for (let i = 0; i < element.categories.length; i++) {
+          let obj = element.categories[i]
+          if (obj.name === optionId) {
+            $("#products").empty();
+            list.push(element);
+            showProducts(list);
+          }
+          if (optionId === "all") {
+            $("#products").empty();
+            showProducts(products);
+          }
+        };
+      });
     });
 
-    uniqueCategories.forEach(element => {
-      $("#column").append(`
-          <div id="${element}" class="form-check">
-                      <input class="form-check-input me-3" type="checkbox" value="" id="${element}">
-                      <label class="form-check-label" for="cat1">${element}</label>
-                  </div>
-          `)
-    });
-
+    /**
+     * Add new category to the list of existed categories on product site 
+     */
     $("#inputSave").click(function () {
       let input = $("#categoryInput").val();
       $("#column").append(`
@@ -67,39 +84,116 @@ function loadProducts() {
       $("#categoryInput").val("");
     });
 
+
+    /**
+     * Highlight chosen product in the table and select its id
+     */
     let productId = "";
-    let cat = "";
     $("#products").on("click", "tr", function () {
       $(this).addClass("highlight").siblings().removeClass("highlight");
       productId = $(this).attr("id");
     });
 
+    /**
+     * Select product's info and add it to the form on product site
+     * Make check-boxes of the available categories and add property "checked" to the one corresponding the product's category
+     */
     $("#choose").click(function () {
-      $("#column div input").replaceWith(function () {
-        return `
-        <input class="form-check-input me-3" type="checkbox" value="">`
-      })
+
+      $("#column").empty();
+
       products.forEach(element => {
-        if (element.id == productId) {
+        if (element.sku == productId) {
           $("#title").val(element.title);
+          $("#brand").val(element.brand.name);
           $("#description").val(element.description);
           $("#imge").val(element.image);
+          $("#sku").val(element.sku);
           $("#price").val(element.price);
-          $("#lager").val(element.amount);
+          $("#lager").val(element.quantity);
+          showCategories()
         }
+
         $("#column div").filter(function () {
-          if (element.id == productId && element.category == $(this).attr("id")) {
+          for (let i = 0; i < element.categories.length; i++) {
+            let obj = element.categories[i]
+          
+          if (element.sku == productId && obj.name == $(this).attr("id")) {
             $(this).replaceWith(function () {
               return `<div class="form-check">
-               <input class="form-check-input me-3" type="checkbox" value="" id="${element.category}" checked>
-               <label class="form-check-label" for="cat1">${element.category}</label>
+               <input class="form-check-input me-3" type="checkbox" value="" id="${obj.name}" checked>
+               <label class="form-check-label" for="cat1">${obj.name}</label>
            </div>`
             })
-          }
+            }
+          };
+
         });
       });
-      alert("Produkten är vald. Gå till Produktsida.")
+
+      $("#tab-product-site").tab("show");
+
     });
+
+    /**
+     * Empty form to add new product
+     */
+    $("#new").click(function () {
+      $("#title").val("");
+      $("#brand").val("");
+      $("#description").val("");
+      $("#imge").val("");
+      $("#sku").val("");
+      $("#price").val("");
+      $("#lager").val("");
+      $("input").prop("checked", false);
+      
+      $("#tab-product-site").tab("show");
+    });
+
+    /**
+     * Make object of selected product 
+     */
+    $("#saveChanges").click(function () {
+      
+      let cat = []
+      $("#column div").children().each(function () {
+        if ($(this).is(":checked")) {
+          let element = $(this).attr("id");
+          cat.push(element)
+        }
+      })
+
+          let productObject = {
+            "sku": $("#sku").val(),
+            "description": $("#description").val(),
+            "image": $("#img").val(),
+            "is_available": true,
+            "price": $("#price").val(),
+            "quantity": $("#lager").val(),
+            "title": $("#title").val(),
+            "brand": {
+              "name": $("#brand").val()
+            },
+            "tags": $("#tags").val(),
+            
+            "categories": [{
+              "name" : cat[0]
+              }]
+          };
+
+        console.log(productObject)
+      alert("Produkten har sparats")
+        
+     /*  axios.post("http://localhost:8080/products/add",  productObject  )
+        .then(() => {
+          console.log("Done!")
+        })
+        .catch(() => {
+          alert('Något fick fel!','Vänligen försök igen', 'warning')
+        }) */
+      });
+
   }
 }
 
@@ -109,17 +203,28 @@ function loadProducts() {
 */
 function showProducts(l) {
   l.forEach(element => {
-    let round = parseInt(element.price).toFixed(2);
     $("#products").append(
-      `<tr id="${element.id}">
-            <td>${element.id}</td>
+      `<tr id="${element.sku}">
+            <td>${element.sku}</td>
             <td ><h5 >${element.title}</h5></td>
-            <td ><h5 >Hakim</h5></td>
-            <td>${round} kr</td>
-            <td> ${element.amount}</td>
+            <td ><h5 >${element.brand.name}</h5></td>
+            <td>${element.price} kr</td>
+            <td> ${element.quantity}</td>
             </tr>`
     )
   });
+}
+
+function showCategories() {
+  uniqueCategories.forEach(element => {
+    $("#column").append(`
+        <div id="${element}" class="form-check">
+                    <input class="form-check-input me-3" type="checkbox" value="" id="${element}">
+                    <label class="form-check-label" for="cat1">${element}</label>
+                </div>
+        `)
+  });
+
 }
 
 

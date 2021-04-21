@@ -9,6 +9,11 @@ html {
 .save-button {
     margin-top: 0.5rem;
 }
+
+.error-msg{
+    color: #F90A0A;
+}
+
 @media(max-width: 768px) {
 
     .table {
