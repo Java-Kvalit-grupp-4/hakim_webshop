@@ -183,23 +183,30 @@ function renderProducts(list) {
       $.each($('.add-product-to-cart'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
-            
+
             if(product.sku == e.target.parentElement.parentElement.parentElement.id){
-              let temp = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value);
             
+              let temp =  Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value)
               if(product.inCart + temp > 99){
+                console.log("inne i if-sats" + product.inCart)
                 swal('Du kan bara lägga till 99 av samma produkt', '', 'warning')
               }
-              else{
-            
+              else if (product.inCart < 1){
+                console.log("inne i else if" + product.inCart)
+                swal('Du kan inte lägga till negativt antal produkter', '', 'warning')
+              }
+              else {
               product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value) //Ger denna rätt antal i varukorgen?
               e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
+              console.log("före if-sats" + product.inCart)
+              
+              
               saveProductToCart(product)
               saveTotalPrice(product)
               updateTotalCartUI()
               setCartAvailability();
             }
-          }
+            }
           })
         })
       })
