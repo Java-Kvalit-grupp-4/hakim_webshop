@@ -88,6 +88,7 @@ $(document).ready(() => {
       }
       products = data;
 
+      console.log(products);
       localStorage.setItem('categoryList', JSON.stringify(products));
       renderProducts(products);
      
@@ -99,7 +100,7 @@ $(document).ready(() => {
         })
       })
 
-      console.log(categories);
+     
 
       /* products.forEach(element => {
         categories.push(element.category)
@@ -131,7 +132,7 @@ $(document).ready(() => {
               product.categories.forEach(category => {
                 
                 if (category.name == categoryName) {
-                  console.log(category.name);
+                 
                   selectedCategoryList.push(currentProduct);
                   $("#products").empty();
                     renderProducts(selectedCategoryList);
@@ -155,10 +156,11 @@ $(document).ready(() => {
  */
 function renderProducts(list) {
   $("#products").empty()
+
     list.forEach(element => {
         $("#products").append(`
         <div class="product-card">
-              <div id="${element.productNr}">
+              <div id="${element.sku}">
                 <div class="img-container">
                   <img src="${element.image}" alt="img" class="product-card-img">
                 </div>
@@ -171,7 +173,7 @@ function renderProducts(list) {
                         <div class="reduce1btn">-</div>
                       </div>
                       <div  class="quantity">
-                        <input type="text" maxlength="2" value="1" class="amount${element.productNr} amount">
+                        <input type="text" maxlength="2" value="1" class="amount${element.sku} amount">
                       </div>
                       <div class="add-btn">
                         <div class="add1btn">+</div>
@@ -194,7 +196,9 @@ function renderProducts(list) {
       $.each($('.add-product-to-cart'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
-            if(product.productNr === e.target.parentElement.parentElement.parentElement.id){
+          
+            if(product.sku == e.target.parentElement.parentElement.parentElement.id){
+
               product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value) //Ger denna rätt antal i varukorgen?
               e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
               saveProductToCart(product)
@@ -217,9 +221,8 @@ function renderProducts(list) {
       $.each($('.add1btn'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
-            console.log();
-            if(product.productNr === e.target.parentElement.parentElement.parentElement.parentElement.id){
-              console.log(e.target.parentElement.parentElement.children[1].children[0].value);
+          
+            if(product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id){
               let currentValue= Number(e.target.parentElement.parentElement.children[1].children[0].value) +1;
               if(currentValue<99){
                 e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
@@ -231,8 +234,8 @@ function renderProducts(list) {
       $.each($('.reduce1btn'),function( index, value ) {
         value.addEventListener('click',(e) => {
           products.forEach(product => {
-            if(product.productNr === e.target.parentElement.parentElement.parentElement.parentElement.id){
-              console.log(e.target.parentElement.parentElement.children[1].children[0].value);
+            if(product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id){
+             
               let currentValue= Number(e.target.parentElement.parentElement.children[1].children[0].value) -1;
               if(currentValue>=1){
                 e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
@@ -276,7 +279,7 @@ function saveProductToCart(product) {
       cartQuantity += tempQuantityToAdd
       cart.push(product)
     }else{
-      console.log(index);
+      
       cart[index].inCart += product.inCart
       cartQuantity += tempQuantityToAdd
     }
@@ -298,7 +301,6 @@ function saveProductToCart(product) {
  * @param {object} product 
  */
 function saveTotalPrice(product) {
-  console.log(product);
   let totalPrice = JSON.parse(localStorage.getItem('cartTotalPrice'))
   totalPrice != null ? localStorage.setItem('cartTotalPrice', totalPrice + (product.price*product.inCart)) : localStorage.setItem('cartTotalPrice', (product.price*product.inCart));
 }
@@ -314,7 +316,7 @@ $('#login-button').click(() => {
 
   axios.get(url)
     .then((response) => {
-      console.log(response);
+  
       if(response.status !== 200){
         swal('Fel email eller lösenord', '', 'warning')
         emailToCheck.val('')

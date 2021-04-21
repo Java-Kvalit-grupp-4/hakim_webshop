@@ -75,8 +75,6 @@ function getProductsFromDataBase() {
  * @param {Array} products 
  */
 function createSearchWords(products) {
-    console.log(products);
-    console.log(typeof products);
     let searchStringToSplit = '';
 
     products.forEach(product => {
