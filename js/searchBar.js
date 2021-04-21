@@ -4,7 +4,8 @@ const suggBox = $('.autocom-box')
 const searchIcon = $('.icon')  
 
 //let allProductsUrl = `http://localhost:8080/products`
-let allProductsUrl = './TestData/test_data_products_v1.2.JSON'
+//let allProductsUrl = './TestData/test_data_products_v1.2.JSON'
+const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
 let searchWords = []
 
 // for testdata
@@ -49,13 +50,13 @@ searchField.keyup((e)=>{
 function getProductsFromDataBase() {
     axios.get(allProductsUrl)
     .then(response => {
-        createSearchWords(response) // use this if you fetching from database -> response.data
+        createSearchWords(response.data) // use this if you fetching from database -> response.data
     })
     //.catch(err => alert('här' + err))
 }
 
 // to test testdata for live under
-function createSearchWords(products) {
+/* function createSearchWords(products) {
     let arr = Array(products.data)
     let searchStringToSplit = '';
     productsTestData = arr[0]
@@ -63,7 +64,7 @@ function createSearchWords(products) {
         searchStringToSplit += `${product.title} ${product.description} ${product.category}`
     })
     searchWords = searchStringToSplit.split(' ')
-} 
+}  */
 
 
 
@@ -73,9 +74,9 @@ function createSearchWords(products) {
  * discription and puts in an array
  * @param {Array} products 
  */
-/* function createSearchWords(products) {
-    console.log(products.data);
-    console.log(typeof products.data);
+function createSearchWords(products) {
+    console.log(products);
+    console.log(typeof products);
     let searchStringToSplit = '';
 
     products.forEach(product => {
@@ -89,7 +90,7 @@ function createSearchWords(products) {
     })
     
     searchWords = searchStringToSplit.split(' ')
-} */
+}
 
 /**
  * Gets the text from the selected element
@@ -134,25 +135,25 @@ function showSuggestions(list){
  */
 
 function sendDataToServer(searchWord) {
-
+    
     //for live version
-    //let productMatchWordUrl = `http://localhost:8080/products/searchProducts?searchWord=${searchWord}`
+    let productMatchWordUrl = `https://hakimlivs.herokuapp.com/products/searchProducts?searchWord=${searchWord}`
 
     //To test testdata
-    productMatchWordUrl = searchWord
-    productToRenderFromTestData(productMatchWordUrl)
+    //productMatchWordUrl = searchWord
+    //productToRenderFromTestData(productMatchWordUrl)
 
     // for live
-    /* axios.get(productMatchWordUrl)
+    axios.get(productMatchWordUrl)
     .then(response => {
         
         renderProducts(response.data)
         // rendera producterna du sökt efter med response.data
     })
-    .catch(err => alert(err)) */
+    .catch(err => alert(err))
 }
 
-function productToRenderFromTestData(searchWord) {
+/* function productToRenderFromTestData(searchWord) {
     console.log(searchWord);
     let temp = []
     productsTestData.forEach(product => {
@@ -169,7 +170,7 @@ function productToRenderFromTestData(searchWord) {
     })
     renderProducts(temp)
 
-}
+} */
 
 
 getProductsFromDataBase()

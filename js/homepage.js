@@ -87,41 +87,59 @@ $(document).ready(() => {
         $('#myAccountDropdown').hide()
       }
       products = data;
+
+      
+      // plocka ut alla categorier från produkterna 
+
+
+
       localStorage.setItem('categoryList', JSON.stringify(products));
       renderProducts(products);
      
       let categories = [];
-      products.forEach(element => {
+
+      products.forEach(product => {
+        product.categories.forEach(category => {
+          categories.push(category.name)
+        })
+      })
+
+      /* products.forEach(element => {
         categories.push(element.category)
-      });
+      }); */
 
       let uniqueCategories = [...new Set(categories)];
 
       uniqueCategories.forEach(element => {
-      $("#sidomeny").append(`
-          <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4" style="background-color:wheat ;">${element}</button>`
-      );
-    });
-    $("#total-items-in-cart").text(cartQuantity);
-    setCartAvailability();
-    $("#sidomeny button").on("click", function () {
-      let btnId = $(this).attr("id");
-      let list = [];
-      products.forEach(element => {
-        if (element.category == btnId) {
-          list.push(element);
-          $("#products").empty();
-            renderProducts(list);
-            localStorage.setItem('categoryList', JSON.stringify(list));
-        }
-        if(btnId === "all"){
-          $("#products").empty();
-          renderProducts(products);
-          localStorage.setItem('categoryList', JSON.stringify(list));
-        }
+              $("#sidomeny").append(`
+                  <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4" style="background-color:wheat ;">${element}</button>`
+              );
       });
 
-    });
+      $("#total-items-in-cart").text(cartQuantity);
+      setCartAvailability();
+
+      $("#sidomeny button").on("click", function () {
+        let btnId = $(this).attr("id");
+        let list = [];
+
+          products.forEach(element => {
+            
+            if (element.category == btnId) {
+              list.push(element);
+              $("#products").empty();
+                renderProducts(list);
+                localStorage.setItem('categoryList', JSON.stringify(list));
+            }
+
+            if(btnId === "all"){
+              $("#products").empty();
+              renderProducts(products);
+              localStorage.setItem('categoryList', JSON.stringify(list));
+            }
+        });
+
+      });
 }
 /**
  * Render products to UI and adds functions to add-to-cart button
