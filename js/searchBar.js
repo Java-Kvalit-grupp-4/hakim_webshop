@@ -2,8 +2,7 @@ const searchWrapper = $('.search-input')
 const searchField =  $('#search-field') 
 const suggBox = $('.autocom-box')
 const searchIcon = $('.icon')  
-
-let allProductsUrl = `http://localhost:8080/products`
+const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
 let searchWords = []
 
 /**
@@ -47,17 +46,17 @@ function getProductsFromDataBase() {
     .then(response => {
         createSearchWords(response.data) // use this if you fetching from database -> response.data
     })
-    .catch(err => alert(err))
+    //.catch(err => alert('här' + err))
 }
 
 /**
  * Take an array of products, gets the product title,
  * product categories, product tags, and the product 
  * discription and puts in an array
- * @param {array} products 
+ * @param {Array} products 
  */
 function createSearchWords(products) {
-    let searchStringToSplit
+    let searchStringToSplit = '';
 
     products.forEach(product => {
         searchStringToSplit += `${product.title} ${product.description}`
@@ -115,15 +114,15 @@ function showSuggestions(list){
  */
 
 function sendDataToServer(searchWord) {
-    let productMatchWordUrl = `http://localhost:8080/products/searchProducts?searchWord=${searchWord}`
+    
+    let productMatchWordUrl = `https://hakimlivs.herokuapp.com/products/searchProducts?searchWord=${searchWord}`
+
     axios.get(productMatchWordUrl)
     .then(response => {
+        localStorage.setItem('categoryList', JSON.stringify(response.data));
         renderProducts(response.data)
-        // rendera producterna du sökt efter med response.data
-        // fixa detta
     })
     .catch(err => alert(err))
 }
-
 
 getProductsFromDataBase()

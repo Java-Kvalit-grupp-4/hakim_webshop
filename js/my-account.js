@@ -51,7 +51,7 @@ $('#submit').click( () => {
     email=${email.val()}&
     streetAddress=${address.val()}&
     zipCode=${zipCode.val()}&
-    cityName=${city.val()}`
+    name=${city.val()}`
 
     axios.get(url)
     .then(response => {
@@ -100,15 +100,14 @@ $('#change-password-btn').click(() => {
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
 
+    console.table(customer);
      firstName.val(customer.firstName)
      lastName.val(customer.lastName)
      email.val(customer.email)
      phoneNumber.val(customer.phoneNumber)
      address.val(customer.streetAddress)
-     city.val(customer.city.cityName)
+     city.val(customer.city.name)
      zipCode.val(customer.zipCode)
-
-
   }
 
   function resetsInputBorders() {
