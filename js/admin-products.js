@@ -5,7 +5,7 @@ let categories = []
 let uniqueCategories = []
 
 function loadProducts() {
-  axios.get("http://hakimlivs.herokuapp.com/products/")
+  axios.get("https://hakimlivs.herokuapp.com/products/")
     .then((response) => {
       console.log(response.data)
       if (response.status === 200) {
