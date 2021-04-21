@@ -65,8 +65,9 @@ $(document).ready(() => {
 })
 
     function load() {
-        const productsUrl = './TestData/test_data_products_v1.2.JSON'
-       // const productsUrl = 'http://localhost:8080/products'
+        //const productsUrl = './TestData/test_data_products_v1.2.JSON'
+        //const productsUrl = 'http://localhost:8080/products'
+        const productsUrl = 'http://hakimlivs.herokuapp.com/products'
        axios.get(productsUrl)
        .then(response => {
          renderCategories(response.data)
