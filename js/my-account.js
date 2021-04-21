@@ -100,6 +100,7 @@ $('#change-password-btn').click(() => {
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
 
+    console.table(customer);
      firstName.val(customer.firstName)
      lastName.val(customer.lastName)
      email.val(customer.email)
@@ -107,8 +108,6 @@ $('#change-password-btn').click(() => {
      address.val(customer.streetAddress)
      city.val(customer.city.name)
      zipCode.val(customer.zipCode)
-
-
   }
 
   function resetsInputBorders() {
