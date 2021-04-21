@@ -21,30 +21,27 @@ function loadProducts() {
     })
 
   function render(products) {
-    
-
-    products.forEach(element => {
+    products.forEach((element) => {
       for (let i = 0; i < element.categories.length; i++) {
-        let obj = element.categories[i]
-        categories.push(obj.name)
+        let obj = element.categories[i];
+        categories.push(obj.name);
       }
     });
 
     /**
- * Delete duplicates from the array of categories
- */
+     * Delete duplicates from the array of categories
+     */
     uniqueCategories = [...new Set(categories)];
 
     /**
-     * Dynamically add categories to choose into form-select 
+     * Dynamically add categories to choose into form-select
      */
-    uniqueCategories.forEach(element => {
+    uniqueCategories.forEach((element) => {
       $("#select").append(`
-        <option id="${element}" value="${element}">${element}</option>`
-      );
+        <option id="${element}" value="${element}">${element}</option>`);
     });
 
-    showCategories()
+    showCategories();
 
     /**
      * Add products that belong to the celected category
@@ -52,9 +49,9 @@ function loadProducts() {
     $("#select").on("change", function () {
       let optionId = $(this).val();
       let list = [];
-      products.forEach(element => {
+      products.forEach((element) => {
         for (let i = 0; i < element.categories.length; i++) {
-          let obj = element.categories[i]
+          let obj = element.categories[i];
           if (obj.name === optionId) {
             $("#products").empty();
             list.push(element);
@@ -64,12 +61,29 @@ function loadProducts() {
             $("#products").empty();
             showProducts(products);
           }
-        };
+        }
       });
     });
 
     /**
-     * Add new category to the list of existed categories on product site 
+     * Add new category to the list of existed categories on product site
+     */
+    $("#tagSave").click(function () {
+      
+      let input = $("#tagInput").val();
+      console.log(input);
+      $("#tagColumn").append(`
+          <div id="${input}" class="form-check">
+                      <input checked class="form-check-input me-3" type="checkbox" value="" id="${input}">
+                      <label class="form-check-label" for="cat1">${input}</label>
+                  </div>
+          `);
+
+      $("#tagSave").val("");
+    });
+
+    /**
+     * Add new category to the list of existed categories on product site
      */
     $("#inputSave").click(function () {
       let input = $("#categoryInput").val();
@@ -83,7 +97,6 @@ function loadProducts() {
       uniqueCategories.push(input);
       $("#categoryInput").val("");
     });
-
 
     /**
      * Highlight chosen product in the table and select its id
@@ -99,10 +112,9 @@ function loadProducts() {
      * Make check-boxes of the available categories and add property "checked" to the one corresponding the product's category
      */
     $("#choose").click(function () {
-
       $("#column").empty();
 
-      products.forEach(element => {
+      products.forEach((element) => {
         if (element.sku == productId) {
           $("#title").val(element.title);
           $("#brand").val(element.brand.name);
@@ -111,28 +123,26 @@ function loadProducts() {
           $("#sku").val(element.sku);
           $("#price").val(element.price);
           $("#lager").val(element.quantity);
-          showCategories()
+          showCategories();
         }
 
         $("#column div").filter(function () {
           for (let i = 0; i < element.categories.length; i++) {
-            let obj = element.categories[i]
-          
-          if (element.sku == productId && obj.name == $(this).attr("id")) {
-            $(this).replaceWith(function () {
-              return `<div class="form-check">
-               <input class="form-check-input me-3" type="checkbox" value="" id="${obj.name}" checked>
-               <label class="form-check-label" for="cat1">${obj.name}</label>
-           </div>`
-            })
-            }
-          };
+            let obj = element.categories[i];
 
+            if (element.sku == productId && obj.name == $(this).attr("id")) {
+              $(this).replaceWith(function () {
+                return `<div class="form-check">
+               <input class="form-check-input " type="checkbox" value="" id="${obj.name}" checked>
+               <label class="form-check-label" for="cat1">${obj.name}</label>
+           </div>`;
+              });
+            }
+          }
         });
       });
 
       $("#tab-product-site").tab("show");
-
     });
 
     /**
@@ -147,53 +157,56 @@ function loadProducts() {
       $("#price").val("");
       $("#lager").val("");
       $("input").prop("checked", false);
-      
+
       $("#tab-product-site").tab("show");
     });
 
     /**
-     * Make object of selected product 
+     * Make object of selected product
      */
     $("#saveChanges").click(function () {
-      
-      let cat = []
-      $("#column div").children().each(function () {
-        if ($(this).is(":checked")) {
-          let element = $(this).attr("id");
-          cat.push(element)
-        }
-      })
+      let cat = [];
+      $("#column div")
+        .children()
+        .each(function () {
+          if ($(this).is(":checked")) {
+            let element = $(this).attr("id");
+            cat.push(element);
+          }
+        });
+      let productCategory = [];
+      cat.forEach((element) => {
+        productCategory.push({ name: element });
+      });
+      console.log(productCategory);
 
-          let productObject = {
-            "sku": $("#sku").val(),
-            "description": $("#description").val(),
-            "image": $("#img").val(),
-            "is_available": true,
-            "price": $("#price").val(),
-            "quantity": $("#lager").val(),
-            "title": $("#title").val(),
-            "brand": {
-              "name": $("#brand").val()
-            },
-            "tags": $("#tags").val(),
-            
-            "categories": [{
-              "name" : cat[0]
-              }]
-          };
+      let productObject = {
+        sku: $("#sku").val(),
+        description: $("#description").val(),
+        image: $("#img").val(),
+        isAvailable: true,
+        price: $("#price").val(),
+        quantity: $("#lager").val(),
+        title: $("#title").val(),
+        brand: {
+          name: $("#brand").val(),
+        },
+        tags: $("#tags").val(),
 
-        console.log(productObject)
-      alert("Produkten har sparats")
-        
-     /*  axios.post("http://localhost:8080/products/add",  productObject  )
+        categories: productCategory,
+      };
+
+      console.log(productObject);
+      alert("Produkten har sparats");
+
+      /*  axios.post("http://localhost:8080/products/add",  productObject  )
         .then(() => {
           console.log("Done!")
         })
         .catch(() => {
           alert('Något fick fel!','Vänligen försök igen', 'warning')
         }) */
-      });
-
+    });
   }
 }
 
