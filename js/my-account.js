@@ -169,7 +169,7 @@ $('#change-password-btn').click(() => {
     }
 
     if(bool){
-      UpdatePassword(newPassword);
+      updatePassword(newPassword);
     }
   }
 
