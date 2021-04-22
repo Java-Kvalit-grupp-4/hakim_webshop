@@ -28,7 +28,8 @@ ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
 CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
 WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
 NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
-NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
+NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG'),
+PASSWORD_NOT_VALIDATET_MSG = $('#PASSWORD_NOT_VALIDATET_MSG')
 
 
 /**
@@ -41,7 +42,6 @@ $("#login-btn").click(function(){
 
 $('#submit').click( () => { 
   if(validateForm()) {
-    swal("Informationen har sparats", "", "success")
     resetsInputBorders()
     
     let url = `https://hakimlivs.herokuapp.com/users/update/user/info?firstName=${firstName.val()}&lastName=${lastName.val()}&phoneNumber=${phoneNumber.val()}&email=${email.val()}&streetAddress=${address.val()}&zipCode=${zipCode.val()}&name=${city.val()}`
@@ -54,6 +54,7 @@ $('#submit').click( () => {
         passwordToCheck.val('')
       }else {
         sessionStorage.setItem('customer', JSON.stringify(response.data))
+        swal("Informationen har sparats", "", "success")
         if(response.data.isAdmin == true){
           location.replace("admin/index.html")
         }else{
@@ -65,7 +66,7 @@ $('#submit').click( () => {
       } 
     })
     .catch(err => {
-      alert('Server fel!')
+      swal("Något gick fel försök igen", `${err}`, "warning")
     })
 
     // send data object to backend for uppdateing customer
@@ -123,6 +124,7 @@ $('#change-password-btn').click(() => {
     NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide()
     NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide()
     WRONNG_PASSWORD_ERROR_MSG.hide()
+    PASSWORD_NOT_VALIDATET_MSG.hide()
   }
 
   function validateForm() {
@@ -140,22 +142,50 @@ $('#change-password-btn').click(() => {
   }
 
   function checkPasswordChange() {
-    
+
+    let bool = true
+
     if(oldPassword.val() !== customer.password){
       WRONNG_PASSWORD_ERROR_MSG.show()
+      bool = false
     }else{
       WRONNG_PASSWORD_ERROR_MSG.hide()
     } 
     if(newPassword.val() === oldPassword.val()){
       NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.show()
+      bool = false
     }else {
       NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide()
     }
     if(newPassword.val() !== confirmPassword.val()){
       NEW_PASSWORD_NOT_MATCH_ERROR_MSG.show()
+      bool = false
     }else {
       NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide()
     }
+
+    if(bool){
+      bool = checkForInput(testForPassword, newPassword, bool, PASSWORD_NOT_VALIDATET_MSG)
+    }
+
+    if(bool){
+      UpdatePassword(newPassword);
+    }
+  }
+
+  const updatePassword = (newPassword) => {
+
+    let url = `https://hakimlivs.herokuapp.com/users/update/password?email=${email.val()}&newPassword=${newPassword.val()}`
+
+    axios.get(url)
+    .then(respone => {
+      if(respone.status == 200){
+        swal("Informationen har sparats", "", "success")
+      }
+    })
+    .catch(err => {
+      swal("Något gick fel försök igen", `${err}`, "warning")
+    })
   }
 
 
