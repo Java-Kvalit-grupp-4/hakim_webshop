@@ -30,6 +30,8 @@ const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
   let customer = JSON.parse(sessionStorage.getItem('customer'))
   if(customer==null || customer== undefined){
     swal("Du måste vara inloggad för att lägga beställning", "", "warning")
+  }else{
+    $('#checkOutLink').attr("href", "./pages/checkout/")
   }
 })
 
@@ -68,6 +70,7 @@ $(document).ready(() => {
     adminview.hide()
   }else {
     if(loggedIn.isAdmin){
+      $('#checkOutLink').attr("href", "./pages/checkout/")
       adminview.show()
     }
   }
@@ -340,10 +343,11 @@ $('#login-button').click(() => {
         if(response.data.isAdmin == true){
           location.replace("admin/index.html")
         }else{
+          
           loginModal.modal('hide')
           navLoginBtn.text('Logga ut')
           myAccountMenu.show()
-          //$('#checkOutLink').attr("href", "./pages/checkout/")
+          
         }
         
       } 
