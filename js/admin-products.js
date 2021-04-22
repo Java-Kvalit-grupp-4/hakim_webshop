@@ -1,24 +1,25 @@
 $(document).ready(loadProducts);
 
-let products = []
-let categories = []
-let uniqueCategories = []
+let products = [];
+let categories = [];
+let uniqueCategories = [];
+let tags = [];
 
 function loadProducts() {
-  axios.get("https://hakimlivs.herokuapp.com/products/")
+  axios
+    .get("https://hakimlivs.herokuapp.com/products/")
     .then((response) => {
-      console.log(response.data)
+      console.log(response.data);
       if (response.status === 200) {
-        products = response.data
-        render(products)
-      }
-      else {
-        alert("Något gick fel vid inläsning av produkter")
+        products = response.data;
+        render(products);
+      } else {
+        alert("Något gick fel vid inläsning av produkter");
       }
     })
-    .catch(err => {
-      alert("Serverfel! " + err)
-    })
+    .catch((err) => {
+      alert("Serverfel! " + err);
+    });
 
   function render(products) {
     products.forEach((element) => {
@@ -69,15 +70,16 @@ function loadProducts() {
      * Add new category to the list of existed categories on product site
      */
     $("#tagSave").click(function () {
-      
       let input = $("#tagInput").val();
       console.log(input);
       $("#tagColumn").append(`
           <div id="${input}" class="form-check">
-                      <input checked class="form-check-input me-3" type="checkbox" value="" id="${input}">
-                      <label class="form-check-label" for="cat1">${input}</label>
+                      <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${input}" onchange="removeIfUnchecked(${input})">
+                      <label class="form-check-label" for="${input}">${input}</label>
                   </div>
           `);
+
+      tags.push(input);
 
       $("#tagSave").val("");
     });
@@ -132,8 +134,8 @@ function loadProducts() {
 
             if (element.sku == productId && obj.name == $(this).attr("id")) {
               $(this).replaceWith(function () {
-                return `<div class="form-check">
-               <input class="form-check-input " type="checkbox" value="" id="${obj.name}" checked>
+                return `<div class="form-check ">
+               <input class="form-check-input tag" type="checkbox" value="" id="${obj.name}" checked>
                <label class="form-check-label" for="cat1">${obj.name}</label>
            </div>`;
               });
@@ -145,6 +147,9 @@ function loadProducts() {
       $("#tab-product-site").tab("show");
     });
 
+    $("input:checkbox").on("change", function (e) {
+      console.log("Klick");
+    });
     /**
      * Empty form to add new product
      */
@@ -211,11 +216,11 @@ function loadProducts() {
 }
 
 /**
-* Generates a table with products
-* @param {Array} l - Webshop products to be displayed on the page  
-*/
+ * Generates a table with products
+ * @param {Array} l - Webshop products to be displayed on the page
+ */
 function showProducts(l) {
-  l.forEach(element => {
+  l.forEach((element) => {
     $("#products").append(
       `<tr id="${element.sku}">
             <td>${element.sku}</td>
@@ -224,24 +229,23 @@ function showProducts(l) {
             <td>${element.price} kr</td>
             <td> ${element.quantity}</td>
             </tr>`
-    )
+    );
   });
 }
 
 function showCategories() {
-  uniqueCategories.forEach(element => {
+  uniqueCategories.forEach((element) => {
     $("#column").append(`
         <div id="${element}" class="form-check">
                     <input class="form-check-input me-3" type="checkbox" value="" id="${element}">
                     <label class="form-check-label" for="cat1">${element}</label>
                 </div>
-        `)
+        `);
   });
-
 }
 
-
-
-
-
-
+function removeIfUnchecked(value) {
+  let v = $(this).children;
+  console.log(v);
+  console.log(value);
+}
