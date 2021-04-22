@@ -9,7 +9,6 @@ function run() {
         window.location.href = "../../"
     }
     getCart()
-    getLoggedInCustomer()
 
     /**
      * Cache variables
