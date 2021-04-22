@@ -44,14 +44,7 @@ $('#submit').click( () => {
     swal("Informationen har sparats", "", "success")
     resetsInputBorders()
     
-    let url = `localhost:8080/users/updateUser?
-    firstName=${firstName.val()}&
-    lastName=${lastName.val()}&
-    phoneNumber=${phoneNumber.val()}&
-    email=${email.val()}&
-    streetAddress=${address.val()}&
-    zipCode=${zipCode.val()}&
-    name=${city.val()}`
+    let url = `https://hakimlivs.herokuapp.com/users/update/user/info?firstName=${firstName.val()}&lastName=${lastName.val()}&phoneNumber=${phoneNumber.val()}&email=${email.val()}&streetAddress=${address.val()}&zipCode=${zipCode.val()}&name=${city.val()}`
 
     axios.get(url)
     .then(response => {
@@ -74,7 +67,6 @@ $('#submit').click( () => {
     .catch(err => {
       alert('Server fel!')
     })
-    console.log(data)
 
     // send data object to backend for uppdateing customer
   }
