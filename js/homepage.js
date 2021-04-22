@@ -230,7 +230,7 @@ function renderProducts(list) {
           
             if(product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id){
               let currentValue= Number(e.target.parentElement.parentElement.children[1].children[0].value) +1;
-              if(currentValue<99){
+              if(currentValue<100){
                 e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
               }              
             }
