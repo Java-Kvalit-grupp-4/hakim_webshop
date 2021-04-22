@@ -67,7 +67,7 @@ function loadProducts() {
     });
 
     /**
-     * Add new category to the list of existed categories on product site
+     * Add new tags to the list of tags on selected product
      */
     $("#tagSave").click(function () {
       let input = $("#tagInput").val();
@@ -196,7 +196,7 @@ function loadProducts() {
         brand: {
           name: $("#brand").val(),
         },
-        tags: $("#tags").val(),
+        tags: tags,
 
         categories: productCategory,
       };
