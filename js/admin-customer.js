@@ -28,6 +28,7 @@ let firstName = $('#customer-first-name'),
     WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
     NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
     NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
+    //INPUT_ERROR_MSG = ("#INPUT_ERROR_MSG")
 
 $('form').submit(false)
 
@@ -96,7 +97,7 @@ function showCustomers(customerArr){
         
         if(e.customerOrders!=null){
             customerOrders = e.customerOrders.length
-            totalPrice = getTotalPriceOfOrders(customerOrders);
+            totalPrice = getTotalPriceOfOrders(e.customerOrders);
         }
         else{
             customerOrders = 0;
@@ -164,6 +165,7 @@ function isCustomerOrdersNull(orderArr){
 function getTotalPriceOfOrders(orderArr){
     if(orderArr!=null){
         let sum = 0;
+        console.log(typeof orderArr)
         orderArr.forEach(e => {
             sum += e.totalCost;
         })
@@ -190,38 +192,47 @@ function filterSearch(){
             showCustomers(customers.filter(customer => customer.isVip==true));   
             break;
         case 'Total ordersumma över:':
-            if(startDate!=null && endDate!=null){
-                showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders.filter(order => 
-                    {let date = new Date(order.orderTimestamp)
-                        date>=startDate && date<=endDate
-                    })
-                )>input));
-            }
-            else{
-                showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders)>input));
-            }
+           // if(validateInput()){
+                resetsInputBorders()
+                if(startDate!=null && endDate!=null){
+                    showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders.filter(order => 
+                        {let date = new Date(order.orderTimestamp)
+                            date>=startDate && date<=endDate
+                        })
+                    )>input));
+                }
+            
+                else{
+                    showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders)>input));
+                }
+            //}
             break;
             case 'Totalt antal ordrar över:':
-            if(startDate!=null && endDate!=null){
-                showCustomers(customers.filter(customer =>customer.customerOrders.filter(order => 
-                    {let date = new Date(order.orderTimestamp)
-                        date>=startDate && date<=endDate
-                    }).length>input));
-            }
-            else{
-                showCustomers(customers.filter(customer => isCustomerOrdersNull(customer.customerOrders)>input));
-            }
+                //if(validateInput()){
+                    if(startDate!=null && endDate!=null){
+                        showCustomers(customers.filter(customer =>customer.customerOrders.filter(order => 
+                            {let date = new Date(order.orderTimestamp)
+                                date>=startDate && date<=endDate
+                            }).length>input));
+                    }
+                    else{
+                        showCustomers(customers.filter(customer => isCustomerOrdersNull(customer.customerOrders)>input));
+                    }
+                //}
             break;
     }
+    startDate=null;
+    endDate=null;
 };
 
 function showOrders(customerOrders){
     let sum = 0;
     customerOrders.forEach(orders => {
             sum += orders.totalCost;
-            let dateFromOrder = new Date(orders.orderTimestamp);
+            let dateFromOrder = new Date(orders.timeStamp);
             let orderDate = dateFromOrder.toISOString().substring(0,10);
             console.log(orderDate)
+            let orderNumber = (orders.id +"").substring(0,6)
            
             let isPaid = "Obetalad";
             if(orders.isPaid){
@@ -230,45 +241,50 @@ function showOrders(customerOrders){
             $("#orderTable").append(`
                 <tr>
                     <th scope="row" class="col-3">
-                    <a href="#">${orders.orderId}</a>
-                    <td class="col-2">${orders.status.type}</td>
+                    <a href="#">${orderNumber}</a>
+                    <td class="col-2">${orders.orderStatus.type}</td>
                     <td class="col-2">${isPaid}</td>
                     <td class="col-3">${orderDate}</td>
                     <td class="col-2">${orders.totalCost.toFixed(2)} kr</td>
                 </tr>`
             )
     })
-    $("#totalCost").text(sum.toFixed(2) + " kr");    
+    $("#totalCost").text(sum.toFixed(2) + " kr");
+        
 }
 
 function updateCustomer(){
-    let newPhoneNumber = phoneNumber.val().replaceAll(" ", "");
-    console.log("Telefon " + newPhoneNumber)
-    let newZipCode = zipCode.val().replaceAll(" ", "");
-    console.log("Zip " + newZipCode)
+    if(validateForm()){
+        resetsInputBorders()
+        let newPhoneNumber = phoneNumber.val().replaceAll(" ", "");
+        console.log("Telefon " + newPhoneNumber)
+        let newZipCode = zipCode.val().replaceAll(" ", "");
+        console.log("Zip " + newZipCode)
 
-    let data = {
-        "firstName" : $(firstName).val(),
-        "lastName" : $(lastName).val(),
-        "email" : $(email).val(),
-        "phoneNumber" : newPhoneNumber,
-        "streetAddress" : $(address).val(),
-        "city": 
-            {
-            "name": $(city).val()
-            },
-        "zipCode" : newZipCode,
-        "comment" : $("#commentTextField").val()
-    }
+        let data = {
+            "firstName" : $(firstName).val(),
+            "lastName" : $(lastName).val(),
+            "email" : $(email).val(),
+            "phoneNumber" : newPhoneNumber,
+            "streetAddress" : $(address).val(),
+            "city": 
+                {
+                "name": $(city).val()
+                },
+            "zipCode" : newZipCode,
+            "comment" : $("#commentTextField").val()
+        }
 
-    axios.post(updateUser, data)
-        .then(() => {
-            swal('Kunden är uppdaterad!')
-        })
-        .catch(() => {
-            
-            swal('Något gick fel!','Vänligen försök igen', 'warning')
-        })
+
+        axios.post(updateUser, data)
+            .then(() => {
+                swal('Kunden är uppdaterad!')
+            })
+            .catch(() => {
+                
+                swal('Något gick fel!','Vänligen försök igen', 'warning')
+            })
+        }
     }
 
 
@@ -285,6 +301,12 @@ function validateForm() {
     
     return bool
   }
+
+  /*function validateInput(){
+      let bool = true;
+      bool = checkForInput(testForDecimalNumbers, $("#input"),bool,INPUT_ERROR_MSG)
+      return bool;
+  }*/
 
   function hideAllErrorMsgs() {
     FIRSTNAME_ERROR_MSG.hide()
@@ -305,6 +327,7 @@ function validateForm() {
     resetBorder(address)
     resetBorder(zipCode)
     resetBorder(city)
+    resetBorder($("#input"))
   }
 
 
