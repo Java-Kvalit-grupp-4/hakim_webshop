@@ -203,11 +203,13 @@ function renderProducts(list) {
               product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value)
               if(product.inCart<1){
                 swal('Minsta tillåtet antal är 1', '', 'warning')
+              }else if(product.inCart.toString().includes(".")){
+                swal('Du måste ange heltal', '', 'warning')
               }else{
                 e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
                 let isToMany = false
                 isToMany = saveProductToCart(product)
-                
+              
                 if(isToMany==false){
                   saveTotalPrice(product)
                   updateTotalCartUI()
