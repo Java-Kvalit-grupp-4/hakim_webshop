@@ -1,4 +1,8 @@
 
+$(document).ready(() => {
+  checkIfLoggedIn()
+  hideAllErrorMsgs()
+})
 
 /**
  * Cache variables 
@@ -44,32 +48,41 @@ $('#submit').click( () => {
   if(validateForm()) {
     resetsInputBorders()
     
-    let url = `https://hakimlivs.herokuapp.com/users/update/user/info?firstName=${firstName.val()}&lastName=${lastName.val()}&phoneNumber=${phoneNumber.val()}&email=${email.val()}&streetAddress=${address.val()}&zipCode=${zipCode.val()}&name=${city.val()}`
+    //let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
+    //let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
+    let updateUserInfo = `http://localhost:8080/users/update/user/info`
 
-    axios.get(url)
-    .then(response => {
-      if(response.status !== 200){
-        swal('Fel email eller lösenord', '', 'warning')
-        emailToCheck.val('')
-        passwordToCheck.val('')
-      }else {
-        sessionStorage.setItem('customer', JSON.stringify(response.data))
-        swal("Informationen har sparats", "", "success")
-        if(response.data.isAdmin == true){
-          location.replace("admin/index.html")
-        }else{
-          loginModal.modal('hide')
-          navLoginBtn.text('Logga ut')
-          myAccountMenu.show()
+    // create object to update
+    let updateInfo = {
+      "firstName": firstName.val().trim(), 
+      "lastName": lastName.val().trim(), 
+      "phoneNumber": formatPhoneNumberForDB(phoneNumber.val().trim()), 
+      "email": email.val().trim(),    
+      "streetAddress": address.val(),
+      "zipCode": formatZipForDB(zipCode.val().trim()),
+      "city":
+        {
+          "name": city.val().trim()	
         }
-        
+    }
+
+    // sending update object to server
+    axios.post(updateUserInfo,updateInfo)
+    .then(response => {
+
+      if(response.status == 200){
+        console.log(response);
+
+        // setting the updated customer to sessionStorage
+        sessionStorage.setItem('customer', JSON.stringify(response.data))
+        swal("Din kundinformation har updaterats", "", "success")
+      }else {
+        swal('Något gick fel försök igen', '', 'warning')
       } 
     })
     .catch(err => {
       swal("Något gick fel försök igen", `${err}`, "warning")
     })
-
-    // send data object to backend for uppdateing customer
   }
 })
 
@@ -93,14 +106,16 @@ $('#change-password-btn').click(() => {
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
 
-    console.table(customer);
+    let formattedZipCode =formatZipCode(customer.zipCode)
+    let formattedPhoneNumber = formatPhoneNumber(customer.phoneNumber)
+
      firstName.val(customer.firstName)
      lastName.val(customer.lastName)
      email.val(customer.email)
-     phoneNumber.val(customer.phoneNumber)
+     phoneNumber.val(formattedPhoneNumber)
      address.val(customer.streetAddress)
      city.val(customer.city.name)
-     zipCode.val(customer.zipCode)
+     zipCode.val(formattedZipCode)
   }
 
   function resetsInputBorders() {
@@ -133,7 +148,7 @@ $('#change-password-btn').click(() => {
     bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
     bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
     bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
-    bool = checkForInput(testForNumbersOnly,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
+    bool = checkForInput(testForPhoneNumber,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
     bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
     bool = checkForInput(testForZipCode, zipCode, bool,ZIPCODE_ERROR_MSG)
     bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
@@ -175,12 +190,29 @@ $('#change-password-btn').click(() => {
 
   const updatePassword = (newPassword) => {
 
-    let url = `https://hakimlivs.herokuapp.com/users/update/password?email=${email.val()}&newPassword=${newPassword.val()}`
+    //let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
+    //let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
+    let updatePasswordUrl = `http://localhost:8080/users/update/password`
 
-    axios.get(url)
+    let updatePassword = {
+      "email": email.val().trim(),
+      "password": newPassword.val().trim()
+    }
+
+    axios.post(updatePasswordUrl,updatePassword)
     .then(respone => {
+      console.log(respone);
       if(respone.status == 200){
-        swal("Informationen har sparats", "", "success")
+        swal("Nytt lösenord sparat", "", "success")
+
+        // setting the updated customer to sessionStorage
+        sessionStorage.setItem('customer', JSON.stringify(respone.data))
+
+        resetBorder(oldPassword)
+        resetBorder(newPassword)
+        resetBorder(confirmPassword)
+      
+
       }
     })
     .catch(err => {
@@ -188,13 +220,6 @@ $('#change-password-btn').click(() => {
     })
   }
 
+  fillInputFieldsWithLoggedIn()
 
-  /**
-   * Page loaded
-   */
-  $(document).ready(() => {
-    checkIfLoggedIn()
-    hideAllErrorMsgs()
-    fillInputFieldsWithLoggedIn()
-  })
   
