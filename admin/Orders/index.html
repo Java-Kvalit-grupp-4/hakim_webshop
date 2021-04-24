@@ -14,6 +14,7 @@
     />
     <link rel="stylesheet" href="../../styles/style.css" />
     <link rel="stylesheet" href="../Customer/admin-customer.css" />
+    <link rel="stylesheet" href="../Orders/admin-orders.css">
     <title>Admin-ordrar</title>
     
   </head>
@@ -219,13 +220,13 @@
             </div>
         </div>
         <div class="container"> 
-            <table class="table table-secondary ">
+            <table class="table table-secondary table-responsive table-sm table-hover">
                 <thead>
                     <tr>
-                        <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
-                        <th scope="col" class="pb-3 ps-md-5">Kundnummer</th>
-                        <th scope="col" class="pb-3 ">Datum</th>
-                        <th scope="col" class="pb-3">Totalt kr</th>
+                        <th scope="col" class="pb-3 ps-md-5 col-2">Ordernr</th>
+                        <th scope="col" class="pb-3 ps-md-5">Kundnr</th>
+                        <th scope="col" class="pb-3">Datum</th>
+                        <th scope="col" class="pb-3">Totalt <small>kr</small> </th>
                         <th scope="col" class="pb-3">Orderstatus</th>
                         <th scope="col" class="pb-3">Betalstatus</th>
                     </tr>
@@ -249,9 +250,9 @@
         role="tabpanel"
         aria-labelledby="nav-contact-tab"
     >
-    <div class="container row">
-        <div class="container col-3 pb-5">
-            <div class="container col-12 pb-5">
+    <div class="row order-body gx-0 gx-lg-3">
+        <div class="container col-lg-3 pb-5 order-last">
+            <div class="container col-12 px-3 pb-5 ">
                 <div class="customer-info mt-5">
                     <div class="mb-5">
                         <h2>Kundinformation</h2>
@@ -300,38 +301,49 @@
                 </div>
             </div>
         </div>
-        <div class="container col-9 pb-5">
-            <div class="container col-12">
-                <div class="customer-info mt-5">
+        <div class="container col col-lg-9 pb-5 pe-0">
+            <div class="container col">
+                <div class="customer-info mt-5 container ms-xl-4 px-1 px-lg-0">
                     <div class="mb-5">
                       <h2>Produkter i ordern</h2>
                     </div>
-                    <div class="container"> 
-                        <table class="table table-secondary ">
+                    
+                        <table class="table table-secondary table-responsive table-smaller small-headings ">
                           <thead>
                             <tr>
-                              <th scope="col" class="pb-3 ps-md-5">Artikelnr</th>
+                              <th scope="col-2" class="pb-3 ps-md-5">Artikelnr</th>
                               <th scope="col" class="pb-3 ps-md-5">Produktnamn</th>
                               <th scope="col" class="pb-3 ">Antal </th>
-                              <th scope="col" class="pb-3">Pris kr</th>
-                              <th scope="col" class="pb-3">Totalt kr</th>
+                              <th scope="col" class="pb-3">Pris <small>kr</small></th>
+                              <th scope="col" class="pb-3">Totalt <small>kr</small></th>
                             </tr>
                           </thead>
                           <tbody id="product-container">
                           </tbody>
                         </table>
-                      </div>
+                      
                 </div>
-                  <div class= "countainer text-end pe-4" id="order-total-cost">
-                      <p>Total Summa: 1000kr</p>
+                  <div class= "container text-end pe-4" id="order-total-cost">
+                      <p>Totalt: 1000</p>
                   </div>
+
+                  <div class="text mb-2 px-3 ms-xl-4 col-lg-6">Orderstatus
+                  <select class="form-select " aria-label="Orderstatus">
+  <option selected disabled>Orderstatus</option>
+  <option value="Obehandlad">Väntar på behandling</option>
+  <option value="2">Plockning pågår</option>
+  <option value="3">Skickad</option>
+  <option value="4">Avbeställd</option></div>
+</select>
             </div>
-            <div class="container col-12 pt-3 ps-5">
+
+
+            <div class="container col-12 pt-3 ps-3 ps-lg-5">
                 <h2>Kommentar på ordern</h2>
             </div>
-            <div class="container col-12 ps-5">
-                <textarea name="" id="" cols="100" rows="10" placeholder="Skriv kommentar här..."></textarea>
-                <div class="container text-end"><button type="submit" class="btn btn-secondary save-button" style="width: 100px;" 
+            <div class="container col  px-3 ps-lg-5 pe-lg-0">
+                <textarea class="form-control" name="" id=""  rows="10" placeholder="Skriv kommentar här..." style="height: 300px"></textarea>
+                <div class="container text-end mt-5"><button type="submit" class="btn btn-secondary save-button" style="width: 100px;" 
               id="save-order-comment-btn">Spara</button>
             </div>
             </div>
