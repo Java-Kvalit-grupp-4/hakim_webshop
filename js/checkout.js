@@ -104,7 +104,7 @@ function renderCustomerInfo() {
         console.log(makeOrderObject())
             sendOrderToServer(makeOrderObject())
             localStorage.clear()
-            clearAllInputFields()
+            
             renderCart()
     }else{
         swal({
@@ -194,6 +194,7 @@ function sendOrderToServer(orderObject){
                icon: "success",
                button: "Ok",
              })
+             clearAllInputFields()
        }
        
    })
