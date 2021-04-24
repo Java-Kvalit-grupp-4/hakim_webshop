@@ -149,18 +149,30 @@ function renderProducts(list) {
         <div class="product-card">
               <div id="${element.sku}">
                 <div class="img-container">
-                  <img src="${element.image}" alt="img" class="product-card-img">
+                  <img src="${
+                    element.image
+                  }" alt="img" class="product-card-img">
                 </div>
                 <div class="product-card-text">
                   <h3 class="card-title">${element.title}</h3>
-                  <h5 class="card-price">${element.price.toFixed(2)} kr</h5>
-                  <p id="${element.description}"class="card-text">Mer info om produkten</p>
+                  <h5 class="card-price">${element.price.toLocaleString(
+                    "sv-SE",
+                    {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }
+                  )} kr</h5>
+                  <p id="${
+                    element.description
+                  }"class="card-text">Mer info om produkten</p>
                   <div class="add-subtract-container">
                       <div class="subtract-btn">
                         <div class="reduce1btn">-</div>
                       </div>
                       <div  class="quantity">
-                        <input type="text" maxlength="2" value="1" class="amount${element.sku} amount">
+                        <input type="text" maxlength="2" value="1" class="amount${
+                          element.sku
+                        } amount">
                       </div>
                       <div class="add-btn">
                         <div class="add1btn">+</div>
@@ -172,8 +184,7 @@ function renderProducts(list) {
                 </div>
               </div>
             </div>  
-        `
-        );
+        `);
       });
 
       $("#cartDropdown").on("click", function(){
