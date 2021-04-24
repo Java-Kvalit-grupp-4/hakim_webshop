@@ -15,10 +15,17 @@ function renderOrders(orders) {
       : "Väntar på betalning";
     $("#orders-container").append(`
       <tr>
-          <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${order.id}</a> </th>
-          <th scope="row" class="ps-md-5"><a href="#" class="customer-tab">${order.user.customerNumber}</a> </th>
+          <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${
+            order.id
+          }</a> </th>
+          <th scope="row" class="ps-md-5"><a href="#" class="customer-tab">${
+            order.user.customerNumber
+          }</a> </th>
           <td>${order.orderTimestamp}</td>
-          <td>${order.totalCost} kr</td>
+          <td>${order.totalCost.toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })} </td>
           <td>${order.status.type}</td>
           <td>${paymentStatusString}</td>
       </tr>`);
