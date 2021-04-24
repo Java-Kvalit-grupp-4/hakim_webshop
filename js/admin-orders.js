@@ -67,13 +67,26 @@ function renderLineItems() {
             <a href="#">${lineItem.product.title}</a>
           </th>
           <td>${lineItem.quantity}</td>
-          <td>${lineItem.itemPrice} kr</td>
-          <td>${Number(lineItem.itemPrice) * Number(lineItem.quantity)} kr</td>
+          <td>${lineItem.itemPrice.toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td>
+          <td>${(
+            Number(lineItem.itemPrice) * Number(lineItem.quantity)
+          ).toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td>
         </tr>`);
       });
     }
   });
-  $("#order-total-cost").html(`Total Summa: ${totalCost}kr`);
+  $("#order-total-cost").html(
+    `Totalt: ${totalCost.toLocaleString("sv-SE", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}`
+  );
 }
 
 function renderUserData() {
