@@ -97,11 +97,11 @@ function renderCustomerInfo() {
     bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
     bool = checkForInput(testForPhoneNumber,phone, bool,PHONE_NUMBER_ERROR_MSG)
     bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
-    bool = checkForInput(testForZipCode, zip, bool,ZIPCODE_ERROR_MSG)
+    //bool = checkForInput(testForZipCode, zip, bool,ZIPCODE_ERROR_MSG)
     bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
             
     if(bool) {
-        console.log(makeOrderObject())
+            console.log(makeOrderObject())
             sendOrderToServer(makeOrderObject())
             localStorage.clear()
             
@@ -139,19 +139,32 @@ function renderCustomerInfo() {
 
 function makeOrderObject(){
     let cart = JSON.parse(localStorage.getItem('cart'))
-    let orderCommentInput =  orderComment.val('')
+    let orderCommentInput =  orderComment.text()
+    let lineItems = []
+
+    // create lineItems for database
+    $.each(cart, (index, e) => {
+        let lineItem = {
+            "product": {
+                "sku": e.sku
+             },
+            "quantity": e.inCart,
+            "itemPrice": (e.price * e.inCart).toFixed(2)
+        }
+        lineItems.push(lineItem)
+    })
     
     let orderObject = {
         "appUser": {
           "email": email.val()
           },
         "orderComment": orderCommentInput,
-        "totalCost": $('#cart-total-price').val(),
+        "totalCost": parseFloat($('#cart-total-price').text()),
         "isPaid": false,
         "orderStatus": {
           "type": "ohanterad"
         },
-        "lineItems": cart
+        "lineItems": lineItems
       }
 
     return orderObject
@@ -159,31 +172,14 @@ function makeOrderObject(){
 
 function sendOrderToServer(orderObject){
     //const url = 'https://hakimlivs.herokuapp.com/customerOrder/add'
-   //const url = 'https://hakimlogintest.herokuapp.com/customerOrder/add'
-   const url = 'http://localhost:8080/customerOrder/add'
+   const url = 'https://hakimlogintest.herokuapp.com/customerOrder/add'
+   //const url = 'http://localhost:8080/customerOrder/add'
 
-   axios.post(url,{
-    "appUser": {
-      "email": "test@email.com"
-      },
-    "orderComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
-    "totalCost": 86,
-    "isPaid": false,
-    "orderStatus": {
-      "type": "avbeställd"
-    },
-    "lineItems": [
-        {
-            "product": {
-                "sku": 20211041
-             },
-            "quantity": 3,
-            "itemPrice": 36
-        }
-    ]
-  })
+   console.log(orderObject);
+   axios.post(url,orderObject)
    .then(response => {
        if(response.status == 200){
+           console.log(response);
            swal({
                title: "Tack för din order!",
                text: `
@@ -198,6 +194,7 @@ function sendOrderToServer(orderObject){
        }
        
    })
+   .catch(err => console.log('>> error from server: ' + err))
 }
 
 })
