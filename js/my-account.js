@@ -49,8 +49,8 @@ $('#submit').click( () => {
     resetsInputBorders()
     
     //let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
-    //let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
-    let updateUserInfo = `http://localhost:8080/users/update/user/info`
+    let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
+    //let updateUserInfo = `http://localhost:8080/users/update/user/info`
 
     // create object to update
     let updateInfo = {
@@ -108,6 +108,7 @@ $('#change-password-btn').click(() => {
 
     let formattedZipCode =formatZipCode(customer.zipCode)
     let formattedPhoneNumber = formatPhoneNumber(customer.phoneNumber)
+    console.log(customer);
 
      firstName.val(customer.firstName)
      lastName.val(customer.lastName)
@@ -191,8 +192,8 @@ $('#change-password-btn').click(() => {
   const updatePassword = (newPassword) => {
 
     //let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
-    //let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
-    let updatePasswordUrl = `http://localhost:8080/users/update/password`
+    let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
+    //let updatePasswordUrl = `http://localhost:8080/users/update/password`
 
     let updatePassword = {
       "email": email.val().trim(),
