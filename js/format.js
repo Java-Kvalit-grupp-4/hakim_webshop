@@ -24,7 +24,7 @@ const formatPhoneNumber = (phoneNumber) => {
 
   // format string to uppercase
 
-  const formatFirstLetterToUpperCase = (cityName) => {return cityName.charAt(0).toUpperCase() + cityName.slice(1)}
+  const formatFirstLetterToUpperCase = (string) => {return string.charAt(0).toUpperCase() + string.slice(1)}
 
 
 
