@@ -212,8 +212,6 @@ $('#change-password-btn').click(() => {
         resetBorder(oldPassword)
         resetBorder(newPassword)
         resetBorder(confirmPassword)
-      
-
       }
     })
     .catch(err => {
