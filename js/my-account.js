@@ -1,8 +1,4 @@
 
-$(document).ready(() => {
-  checkIfLoggedIn()
-  hideAllErrorMsgs()
-})
 
 /**
  * Cache variables 
@@ -32,8 +28,7 @@ ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
 CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
 WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
 NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
-NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG'),
-PASSWORD_NOT_VALIDATET_MSG = $('#PASSWORD_NOT_VALIDATET_MSG')
+NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
 
 
 /**
@@ -46,6 +41,7 @@ $("#login-btn").click(function(){
 
 $('#submit').click( () => { 
   if(validateForm()) {
+    
     resetsInputBorders()
     
     //let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
@@ -66,22 +62,15 @@ $('#submit').click( () => {
         }
     }
 
-    // sending update object to server
     axios.post(updateUserInfo,updateInfo)
     .then(response => {
-
       if(response.status == 200){
-        console.log(response);
-
-        // setting the updated customer to sessionStorage
+        swal("Informationen har sparats", "", "success")
         sessionStorage.setItem('customer', JSON.stringify(response.data))
-        swal("Din kundinformation har updaterats", "", "success")
-      }else {
-        swal('Något gick fel försök igen', '', 'warning')
-      } 
+      }  
     })
     .catch(err => {
-      swal("Något gick fel försök igen", `${err}`, "warning")
+      swal("Informationen har ej sparats", "Vänligen försök igen", "warning")
     })
   }
 })
@@ -140,7 +129,6 @@ $('#change-password-btn').click(() => {
     NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide()
     NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide()
     WRONNG_PASSWORD_ERROR_MSG.hide()
-    PASSWORD_NOT_VALIDATET_MSG.hide()
   }
 
   function validateForm() {
@@ -149,7 +137,7 @@ $('#change-password-btn').click(() => {
     bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
     bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
     bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
-    bool = checkForInput(testForPhoneNumber,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
+    bool = checkForInput(testForNumbersOnly,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
     bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
     bool = checkForInput(testForZipCode, zipCode, bool,ZIPCODE_ERROR_MSG)
     bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
@@ -158,34 +146,21 @@ $('#change-password-btn').click(() => {
   }
 
   function checkPasswordChange() {
-
-    let bool = true
-
+    
     if(oldPassword.val() !== customer.password){
       WRONNG_PASSWORD_ERROR_MSG.show()
-      bool = false
     }else{
       WRONNG_PASSWORD_ERROR_MSG.hide()
     } 
     if(newPassword.val() === oldPassword.val()){
       NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.show()
-      bool = false
     }else {
       NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide()
     }
     if(newPassword.val() !== confirmPassword.val()){
       NEW_PASSWORD_NOT_MATCH_ERROR_MSG.show()
-      bool = false
     }else {
       NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide()
-    }
-
-    if(bool){
-      bool = checkForInput(testForPassword, newPassword, bool, PASSWORD_NOT_VALIDATET_MSG)
-    }
-
-    if(bool){
-      updatePassword(newPassword);
     }
   }
 
@@ -221,4 +196,12 @@ $('#change-password-btn').click(() => {
 
   fillInputFieldsWithLoggedIn()
 
+  /**
+   * Page loaded
+   */
+  $(document).ready(() => {
+    checkIfLoggedIn()
+    hideAllErrorMsgs()
+    fillInputFieldsWithLoggedIn()
+  })
   
