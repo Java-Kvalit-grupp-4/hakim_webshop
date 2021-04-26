@@ -1,53 +1,48 @@
 $(document).ready(() => {
-  let customer = JSON.parse(sessionStorage.getItem("customer"));
-  if (customer == null || customer == undefined) {
-    // comment this if you wanna go to checkout without being logged in
-    window.location.href = "../../";
-  }
-  getCart();
+    
 
-  /**
-   * Cache variables
-   */
-  let firstName = $("#firstName"),
-    lastName = $("#lastName"),
-    email = $("#email"),
-    phone = $("#phone"),
-    address = $("#address"),
-    zip = $("#zip"),
-    city = $("#city"),
-    orderComment = $("#order-comment");
+    /**
+     * Cache variables
+     */
+ let firstName = $('#firstName'),
+ lastName = $('#lastName'),
+ email = $('#email'),
+ phone = $('#phone'),
+ address = $('#address'),
+ zip = $('#zip'),
+ city = $('#city'),
+ orderComment = $('#order-comment')
 
-  let FIRSTNAME_ERROR_MSG = $("#FIRSTNAME_ERROR_MSG"),
-    LASTNAME_ERROR_MSG = $("#LASTNAME_ERROR_MSG"),
-    EMAIL_ERROR_MSG = $("#EMAIL_ERROR_MSG"),
-    PHONE_NUMBER_ERROR_MSG = $("#PHONE_NUMBER_ERROR_MSG"),
-    ADDRESS_ERROR_MSG = $("#ADDRESS_ERROR_MSG"),
-    ZIPCODE_ERROR_MSG = $("#ZIPCODE_ERROR_MSG"),
-    CITY_ERROR_MSG = $("#CITY_ERROR_MSG");
+ let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
+            LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
+            EMAIL_ERROR_MSG = $('#EMAIL_ERROR_MSG'),
+            PHONE_NUMBER_ERROR_MSG = $('#PHONE_NUMBER_ERROR_MSG'),
+            ADDRESS_ERROR_MSG = $('#ADDRESS_ERROR_MSG'),
+            ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
+            CITY_ERROR_MSG = $('#CITY_ERROR_MSG')
 
-  /**
-   *  Eventlistiners
-   */
-  $("#send-order-btn").click(validateInput);
+ /**    
+  *  Eventlistiners
+  */
+ $('#send-order-btn').click(validateInput)
+    
+    let customer = JSON.parse(sessionStorage.getItem('customer'))
+    if(customer==null || customer== undefined){
+        // comment this if you wanna go to checkout without being logged in
+        //window.location.href = "../../"
+    }
+    renderCart()
+    renderCustomerInfo()
+   
 
-  let customer = JSON.parse(sessionStorage.getItem("customer"));
-  if (customer == null || customer == undefined) {
-    // comment this if you wanna go to checkout without being logged in
-    //window.location.href = "../../"
-  }
-  renderCart();
-  renderCustomerInfo();
-
-  /**
-   * Render data from array to the UI
-   * @param {Array} data array of products
-   */
-
-  function renderCart() {
-    let cartData = JSON.parse(localStorage.getItem("cart"));
-    let cart = $("#cart-container");
-    cart.html("");
+    /**
+     * Render data from array to the UI
+     * @param {Array} data array of products
+     */
+ function renderCart() {
+    let cartData = JSON.parse(localStorage.getItem('cart'))
+    let cart = $('#cart-container')
+    cart.html('')
     $.each(cartData, (index, e) => {
       cart.append(`
         <div class="row pt-2 line-item-border">
@@ -176,6 +171,7 @@ function renderCustomerInfo() {
   zip.val(formatZipCode(loggedInCustomer.zipCode));
   city.val(formatFirstLetterToUpperCase(loggedInCustomer.city.name));
 }
+renderCustomerInfo()
 
 /**
  * Validates the inputfields and changes color of the

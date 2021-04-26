@@ -142,22 +142,31 @@ $('#change-password-btn').click(() => {
   }
 
   function checkPasswordChange() {
+    let bool = true
     
     if(oldPassword.val() !== customer.password){
       WRONNG_PASSWORD_ERROR_MSG.show()
+      bool = false
     }else{
       WRONNG_PASSWORD_ERROR_MSG.hide()
     } 
     if(newPassword.val() === oldPassword.val()){
       NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.show()
+      bool = false
     }else {
       NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide()
     }
     if(newPassword.val() !== confirmPassword.val()){
       NEW_PASSWORD_NOT_MATCH_ERROR_MSG.show()
+      bool = false
     }else {
       NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide()
     }
+
+    if(bool) {
+      updatePassword(newPassword)
+    }
+
   }
 
   const updatePassword = (newPassword) => {
