@@ -9,9 +9,9 @@ $(function () {
 
   function renderInformation(response) {
     let oh = response[0].openingHours.replaceAll("/", "<br>");
-    console.log(oh);
 
-    console.log(response);
+
+
 
     let zipCode = response[0].zipCode;
     let city = response[0].city.name;
@@ -30,7 +30,7 @@ $(function () {
         ${zipCode} ${city}</div>
       </a>`;
 
-    console.log(addressOutput);
+
     $("#address-footer").html(addressOutput);
 
     $("#phone").text(phoneNumber);
