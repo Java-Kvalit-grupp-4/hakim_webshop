@@ -18,6 +18,7 @@ let firstName = $('#customer-first-name'),
     address = $('#customer-street'),
     city = $('#customer-city'),
     zipCode = $('#customer-zip')
+    customerComment = $("#customer-comments")
 
  let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
     LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
@@ -54,6 +55,7 @@ $(document).on('click', '#nav-profile-tab', function(){
     address.val("")
     city.val("")
     zipCode.val("")
+    customerComment.val("")
     load();
 })
 
@@ -79,7 +81,7 @@ function load(){
         })
 }
 
-function getAllOrders(email){
+/*function getAllOrders(email){
     //sessionStorage.removeItem('customerOrders')
     console.log(getCustomerOrder+email)
     axios.get(getCustomerOrder+email)
@@ -87,7 +89,7 @@ function getAllOrders(email){
             if(response.status ===200){ 
                 console.log(response.data) 
                 return response.data
-                //sessionStorage.setItem('customerOrders', JSON.stringify(response.data))
+                sessionStorage.setItem('customerOrders', JSON.stringify(response.data))
             }
             else{
                 swal("Något gick fel vid inläsning av kunder")
@@ -97,7 +99,7 @@ function getAllOrders(email){
             alert("Server fel!" + err)
         })
 
-}
+}*/
 
 function showCustomers(customerArr){
     $("#customerTable").empty();
@@ -174,17 +176,28 @@ function saveCustomer(customerNumber){
             if(customer.zipCode!=null){
                 newZipCode = `${customer.zipCode.substring(0,3)} ${customer.zipCode.substring(3)}`
             }
-            
-            firstName.val(customer.firstName)
-            lastName.val(customer.lastName)
-            email.val( customer.email)
-            phoneNumber.val(newPhoneNumber)
-            address.val(customer.streetAddress)
-            city.val(customer.city.name)
-            zipCode.val( newZipCode)
-            if(isCustomerOrdersNull(customer.customerOrders)>0){
-                showOrders(customer.customerOrders);
-            } 
+            axios.get(getCustomerOrder+customer.email)
+                .then((response) =>{
+                if(response.status ===200){ 
+                    console.log(response.data) 
+                    //sessionStorage.setItem('customerOrders', JSON.stringify(response.data))
+                    firstName.val(customer.firstName)
+                    lastName.val(customer.lastName)
+                    email.val( customer.email)
+                    phoneNumber.val(newPhoneNumber)
+                    address.val(customer.streetAddress)
+                    city.val(customer.city.name)
+                    zipCode.val( newZipCode)
+                    customerComment.val(customer.comment)
+                    showOrders(response.data);
+                }
+                else{
+                    swal("Något gick fel vid inläsning av kunder")
+                }
+            })
+            .catch(err =>{
+                alert("Server fel!" + err)
+            })                       
         }
     })
 }
@@ -263,13 +276,13 @@ function filterSearch(){
 
 function showOrders(customerOrders){
     let sum = 0;
-    customerOrders.forEach(orders => {
+    if(customerOrders!=null){
+        customerOrders.forEach(orders => {
             sum += orders.totalCost;
             let dateFromOrder = new Date(orders.timeStamp);
             let orderDate = dateFromOrder.toISOString().substring(0,10);
             console.log(orderDate)
-            let orderNumber = (orders.id +"").substring(0,6)
-           
+        
             let isPaid = "Obetalad";
             if(orders.isPaid){
                 isPaid ="Betalad"
@@ -277,14 +290,15 @@ function showOrders(customerOrders){
             $("#orderTable").append(`
                 <tr>
                     <th scope="row" class="col-3">
-                    <a href="#">${orderNumber}</a>
+                    <a href="#">${orders.orderNumber}</a>
                     <td class="col-2">${orders.orderStatus.type}</td>
                     <td class="col-2">${isPaid}</td>
                     <td class="col-3">${orderDate}</td>
                     <td class="col-2">${orders.totalCost.toFixed(2)} kr</td>
                 </tr>`
             )
-    })
+        })
+    }
     $("#totalCost").text(sum.toFixed(2) + " kr");
         
 }
@@ -308,7 +322,7 @@ function updateCustomer(){
                 "name": $(city).val()
                 },
             "zipCode" : newZipCode,
-            "comment" : $("#commentTextField").val()
+            "comment" : $("#customer-comments").val()
         }
 
 
