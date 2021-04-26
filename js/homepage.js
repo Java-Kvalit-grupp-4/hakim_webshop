@@ -393,7 +393,7 @@ $("#login-button").click(() => {
       }
     })
     .catch((err) => {
-      alert("Server fel!");
+      alert("Serverfel!");
     });
 });
 
@@ -457,7 +457,7 @@ $("#confirm-account").click(() => {
       })
       .catch((err) => {
         if(err.response.status == 400){
-          swal("E-post finns redan", "De finns redan ett konto registrerat med denna e-post,\n väligen logga in eller använd en annan e-post", "warning");
+          swal("E-post registrerad", "Det finns redan ett konto registrerat med denna e-post,\n vänligen logga in eller använd en annan e-post", "warning");
         }else{
           swal("Något fick fel!", "Vänligen försök igen", "warning");
         }
