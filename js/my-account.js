@@ -95,16 +95,12 @@ $('#change-password-btn').click(() => {
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
 
-    
-    
-    console.log(customer);
-
-     firstName.val(customer.firstName)
-     lastName.val(customer.lastName)
+     firstName.val(formatFirstLetterToUpperCase(customer.firstName))
+     lastName.val(formatFirstLetterToUpperCase(customer.lastName))
      email.val(customer.email)
      phoneNumber.val(formatPhoneNumber(customer.phoneNumber))
-     address.val(customer.streetAddress)
-     city.val(customer.city.name)
+     address.val(formatFirstLetterToUpperCase(customer.streetAddress))
+     city.val(formatFirstLetterToUpperCase(customer.city.name))
      zipCode.val(formatZipCode(customer.zipCode))
   }
 
