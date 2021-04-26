@@ -16,8 +16,9 @@ function testForOnlyText(input) {
  * @returns true or false
  */
 function testForZipCode(input) {
+    let test = input.replace(/\D/g,'')
     let pattern = /\d{3}[ ]?\d{2}/;
-    return testForSqlInjections(input) ? false : pattern.test(input)
+    return testForSqlInjections(test) ? false : pattern.test(test)
 }
 /**
  * Takes input as a String and checks if 
@@ -73,7 +74,7 @@ function testForDecimalNumbers(input) {
  * @returns true or false
  */
 function testForPhoneNumber(input) {
-    let test = input.replace(" ", "")
+    let test = input.replace(/\D/g,'')
     let pattern =  /^[(]{0,1}[0-9]{2,4}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{2,6}$/; 
     return testForSqlInjections(test) ? false : pattern.test(test)
 }

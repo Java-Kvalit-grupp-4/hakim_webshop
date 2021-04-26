@@ -13,7 +13,7 @@ const formatPhoneNumber = (phoneNumber) => {
     return formatPhoneNumber
   }
 
-  const formatPhoneNumberForDB = (phoneNumber) => { return phoneNumber.replace(/\s/, '')}
+  const formatPhoneNumberForDB = (phoneNumber) => { return phoneNumber.replace(/\D/g,'')}
 
  
   // format zipcodes
