@@ -30,6 +30,8 @@ WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
 NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
 NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
 
+let findAllOrdersURL = ""
+
 
 /**
  * Eventlisteners
@@ -44,8 +46,8 @@ $('#submit').click( () => {
     
     resetsInputBorders()
     
-    //let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
-    let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
+    let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
+    //let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
     //let updateUserInfo = `http://localhost:8080/users/update/user/info`
 
     // create object to update
@@ -79,6 +81,8 @@ $('#change-password-btn').click(() => {
   checkPasswordChange()
 })
 
+$(document).on('click', '.orderNumber', showOrder);
+
 
   /**
    * Functions
@@ -94,14 +98,88 @@ $('#change-password-btn').click(() => {
 
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
-
-     firstName.val(formatFirstLetterToUpperCase(customer.firstName))
-     lastName.val(formatFirstLetterToUpperCase(customer.lastName))
+    firstName.val(customer.firstName)
+     //firstName.val(formatFirstLetterToUpperCasec)
+     lastName.val(customer.lastName)
+     //lastName.val(formatFirstLetterToUpperCase(customer.lastName))
      email.val(customer.email)
-     phoneNumber.val(formatPhoneNumber(customer.phoneNumber))
-     address.val(formatFirstLetterToUpperCase(customer.streetAddress))
-     city.val(formatFirstLetterToUpperCase(customer.city.name))
-     zipCode.val(formatZipCode(customer.zipCode))
+     phoneNumber.val(customer.phoneNumber)
+     //phoneNumber.val(formatPhoneNumber(customer.phoneNumber))
+     address.val(customer.streetAddress)
+     //address.val(formatFirstLetterToUpperCase(customer.streetAddress))
+     city.val(customer.city.name)
+     //city.val(formatFirstLetterToUpperCase(customer.city.name))
+     zipCode.val(customer.zipCode)
+     //zipCode.val(formatZipCode(customer.zipCode))
+  }
+
+  function fillOrderTable(){
+    
+    console.log(JSON.parse(sessionStorage.getItem('customer')).email)
+    /*axios.get(findAllOrdersURL + "/email=" + )
+        .then((response) =>{
+            console.log(response.data)
+            if(response.status ===200){
+                showCustomers(response.data) 
+                customers = response.data   
+            }
+            else{
+                swal("Något gick fel vid inläsning av kunder")
+            }
+        })
+        .catch(err =>{
+            alert("Server fel!" + err)
+        })
+    let customerOrders = 
+    */
+    
+      let sum = 0;
+      customerOrders.forEach(orders => {
+              sum += orders.totalCost;
+              let dateFromOrder = new Date(orders.timeStamp);
+              let orderDate = dateFromOrder.toISOString().substring(0,10);
+              console.log(orderDate)
+              let orderNumber = (orders.id +"").substring(0,6)
+             
+              let isPaid = "Obetalad";
+              if(orders.isPaid){
+                  isPaid ="Betalad"
+              }
+              $("#orderTable").append(`
+                <tr>
+                  <th scope="row" class="ps-md-5 orderNumber"> <a href="#show-selected-order" >${orderNumber}</a></th>
+                  <td>${orderDate} </td>
+                  <td>${orders.totalCost.toFixed(2)} kr</td>
+                  <td>${orders.orderStatus.type}</td>
+                  <td>${isPaid}</td>
+                </tr>`
+              )
+      })
+
+  }
+
+  function showOrder(){
+    $("#orderIncludes").empty()
+    let orderNumber = $(this).text()
+    $("#selected-order-number").html("Order " + orderNumber)
+    let customerOrders = JSON.parse(sessionStorage.getItem('customer')).customerOrders
+    customerOrders.forEach(order => {
+      if((order.id+"").startsWith(orderNumber)){
+        let totalQty = 0;
+        order.lineItems.forEach(lineItem => {
+          totalQty+=lineItem.quantity
+          $("#orderIncludes").append`
+          <tr>
+              <td class="ps-md-5">${lineItem.product.title}</td>
+              <td>${lineItem.product.price}</td>
+              <td>${lineItem.quantity}<</td>
+              <td class="text-center">${lineItem.price}</td>
+            </tr>`
+        })
+        $("#totalQuantity").html(totalQty)
+        $("#totalPrice").html(order.totalCost.toFixed(2))
+      }
+    })
   }
 
   function resetsInputBorders() {
@@ -162,8 +240,8 @@ $('#change-password-btn').click(() => {
 
   const updatePassword = (newPassword) => {
 
-    //let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
-    let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
+    let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
+    //let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
     //let updatePasswordUrl = `http://localhost:8080/users/update/password`
 
     let updatePassword = {
@@ -199,5 +277,6 @@ $('#change-password-btn').click(() => {
     checkIfLoggedIn()
     hideAllErrorMsgs()
     fillInputFieldsWithLoggedIn()
+    fillOrderTable()
   })
   
