@@ -226,7 +226,10 @@ function showProducts(l) {
             <td>${element.sku}</td>
             <td >${element.title}</td>
             <td >${element.brand.name}</td>
-            <td>${element.price} kr</td>
+            <td>${element.price.toLocaleString("sv-SE", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })} kr</td>
             <td> ${element.quantity}</td>
             </tr>`
     );
