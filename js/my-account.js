@@ -115,7 +115,7 @@ $('#change-password-btn').click(() => {
      phoneNumber.val(formattedPhoneNumber)
      address.val(customer.streetAddress)
      city.val(customer.city.name)
-     zipCode.val(formattedZipCode)
+     zipCode.val(formatZipCode(customer.zipCode))
   }
 
   function resetsInputBorders() {

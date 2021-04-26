@@ -9,7 +9,7 @@ const formatPhoneNumber = (phoneNumber) => {
     if(phoneNumber.charAt(1) == 7){
       formatPhoneNumber = `${phoneNumber.substring(0,3)}-${phoneNumber.substring(3,6)} ${phoneNumber.substring(6,8)} ${phoneNumber.substring(8)}`
     }
-  
+    
     return formatPhoneNumber
   }
 
