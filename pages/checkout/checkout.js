@@ -181,8 +181,8 @@ function makeOrderObject(){
 }
 
 function sendOrderToServer(orderObject){
-    //const url = 'https://hakimlivs.herokuapp.com/customerOrder/add'
-   const url = 'https://hakimlogintest.herokuapp.com/customerOrder/add'
+    const url = 'https://hakimlivs.herokuapp.com/customerOrder/add'
+   //const url = 'https://hakimlogintest.herokuapp.com/customerOrder/add'
    //const url = 'http://localhost:8080/customerOrder/add'
 
    console.log(orderObject);

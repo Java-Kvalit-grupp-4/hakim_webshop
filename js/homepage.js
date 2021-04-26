@@ -79,8 +79,8 @@ $(document).ready(() => {
     function load() {
     
         //const productsUrl = 'http://localhost:8080/products'
-        //const productsUrl = 'https://hakimlivs.herokuapp.com/products'
-        const productsUrl = 'https://hakimlogintest.herokuapp.com/products'
+        const productsUrl = 'https://hakimlivs.herokuapp.com/products'
+        //const productsUrl = 'https://hakimlogintest.herokuapp.com/products'
         
        axios.get(productsUrl)
        .then(response => {
@@ -332,8 +332,8 @@ function updateTotalCartUI(){
 //------------------------------------- login ----------------------------------\\
 
 $('#login-button').click(() => {
-  //let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
-  let url = `https://hakimlogintest.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
+  let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
+  //let url = `https://hakimlogintest.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
   
 
   axios.get(url)
