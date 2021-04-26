@@ -1,78 +1,55 @@
+$(document).ready(() => {
+  let customer = JSON.parse(sessionStorage.getItem("customer"));
+  if (customer == null || customer == undefined) {
+    // comment this if you wanna go to checkout without being logged in
+    window.location.href = "../../";
+  }
+  getCart();
 
-$(document).ready(run)
+  /**
+   * Cache variables
+   */
+  let firstName = $("#firstName"),
+    lastName = $("#lastName"),
+    email = $("#email"),
+    phone = $("#phone"),
+    address = $("#address"),
+    zip = $("#zip"),
+    city = $("#city"),
+    orderComment = $("#order-comment");
 
-function run() {
-    
-    let customer = JSON.parse(sessionStorage.getItem('customer'))
-    if(customer==null || customer== undefined){
-        // comment this if you wanna go to checkout without being logged in
-        window.location.href = "../../"
-        
-        
-    }
-    getCart()
+  let FIRSTNAME_ERROR_MSG = $("#FIRSTNAME_ERROR_MSG"),
+    LASTNAME_ERROR_MSG = $("#LASTNAME_ERROR_MSG"),
+    EMAIL_ERROR_MSG = $("#EMAIL_ERROR_MSG"),
+    PHONE_NUMBER_ERROR_MSG = $("#PHONE_NUMBER_ERROR_MSG"),
+    ADDRESS_ERROR_MSG = $("#ADDRESS_ERROR_MSG"),
+    ZIPCODE_ERROR_MSG = $("#ZIPCODE_ERROR_MSG"),
+    CITY_ERROR_MSG = $("#CITY_ERROR_MSG");
 
-    /**
-     * Cache variables
-     */
-    let firstName = $('#firstName'),
-        lastName = $('#lastName'),
-        email = $('#email'),
-        phone = $('#phone'),
-        address = $('#address'),
-        zip = $('#zip'),
-        city = $('#city'),
-        address2 = $('#address2'),
-        city2 = $('#city2'),
-        zip2 = $('#zip2'),
-        orderComment = $('#order-comment')
+  /**
+   *  Eventlistiners
+   */
+  $("#send-order-btn").click(validateInput);
 
-        let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
-            LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
-            EMAIL_ERROR_MSG = $('#EMAIL_ERROR_MSG'),
-            PHONE_NUMBER_ERROR_MSG = $('#PHONE_NUMBER_ERROR_MSG'),
-            ADDRESS_ERROR_MSG = $('#ADDRESS_ERROR_MSG'),
-            ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
-            CITY_ERROR_MSG = $('#CITY_ERROR_MSG'),
-            ADDRESS_ERROR_MSG_2 = $('#ADDRESS_ERROR_MSG_2'),
-            ZIPCODE_ERROR_MSG_2 = $('#ZIPCODE_ERROR_MSG_2'),
-            CITY_ERROR_MSG_2 = $('#CITY_ERROR_MSG_2')
-     /**
-     * Eventlistiners
-     */
-    $('#gridCheck').click(e => e.target.checked ? getAddressInfo() : clearAddressInfo())
-    $('#send-order-btn').click(validateInput)
+  let customer = JSON.parse(sessionStorage.getItem("customer"));
+  if (customer == null || customer == undefined) {
+    // comment this if you wanna go to checkout without being logged in
+    //window.location.href = "../../"
+  }
+  renderCart();
+  renderCustomerInfo();
 
+  /**
+   * Render data from array to the UI
+   * @param {Array} data array of products
+   */
 
-    ADDRESS_ERROR_MSG_2.hide()
-    ZIPCODE_ERROR_MSG_2.hide()
-    CITY_ERROR_MSG_2.hide()
-
-
-    function getCart() {
-            let data = getCartFromLocalStorage()
-            renderCart(data)
-    }
-
-    /**
-     * Loads products in cart form localstorage 
-     * @returns array
-     */
-    function getCartFromLocalStorage(){
-        let cart = JSON.parse(localStorage.getItem('cart'))
-        return cart;
-    }
-
-    /**
-     * Render data from array to the UI
-     * @param {Array} data array of products
-     */
-    function renderCart(data) {
-        console.log(data);
-    let cart = $('#cart-container')
-    cart.html('')
-    $.each(data, (index, e) => {
-        cart.append(`
+  function renderCart() {
+    let cartData = JSON.parse(localStorage.getItem("cart"));
+    let cart = $("#cart-container");
+    cart.html("");
+    $.each(cartData, (index, e) => {
+      cart.append(`
         <div class="row pt-2 line-item-border">
             <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${
               e.sku
@@ -98,9 +75,8 @@ function run() {
             })}</p></div>
         </div>
         `);
-    })
+    });
 
-    
     $("#cart-total-price").text(
       JSON.parse(localStorage.getItem("cartTotalPrice")).toLocaleString(
         "sv-SE",
@@ -112,170 +88,220 @@ function run() {
     );
 
     let totalInCart = 0;
-    $.each($('.line-item-total-quantity'),(index, e) => totalInCart += parseInt(e.innerText))
-    $('#cart-total-quantity').text(totalInCart);
-    let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
-    document.getElementById("total-items-in-cart").innerHTML = cartQuantity
-    }
+    $.each(
+      $(".line-item-total-quantity"),
+      (index, e) => (totalInCart += parseInt(e.innerText))
+    );
+    $("#cart-total-quantity").text(totalInCart);
+    let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
+    document.getElementById("total-items-in-cart").innerHTML = cartQuantity;
+  }
 
-    /**
-     * Checks witch customer that is logged in
-     * and render that data to the UI
-     * @param {Array} data customers from the databas
-     */
-    function renderCustomerInfo() {
-        
-        let loggedInCustomer =  JSON.parse(sessionStorage.getItem('customer'))
-        let zipCode = `${loggedInCustomer.zipCode.substring(0,3)} ${loggedInCustomer.zipCode.substring(3)}`
-        let phoneNumber = `${loggedInCustomer.phoneNumber.substring(0,3)}-${loggedInCustomer.phoneNumber.substring(3,6)} ${loggedInCustomer.phoneNumber.substring(6,8)} ${loggedInCustomer.phoneNumber.substring(8)}`
-        
-        firstName.val(loggedInCustomer.firstName);
-        lastName.val(loggedInCustomer.lastName);
-        email.val(loggedInCustomer.email);
-        phone.val(phoneNumber);
-        address.val(loggedInCustomer.streetAddress);
-        zip.val(zipCode);
-        city.val(loggedInCustomer.city.name);
-    }
+  /**
+   * Checks witch customer that is logged in
+   * and render that data to the UI
+   * @param {Array} data customers from the databas
+   */
+  function renderCustomerInfo() {
+    let loggedInCustomer = JSON.parse(sessionStorage.getItem("customer"));
+    let zipCode = `${loggedInCustomer.zipCode.substring(
+      0,
+      3
+    )} ${loggedInCustomer.zipCode.substring(3)}`;
+    let phoneNumber = `${loggedInCustomer.phoneNumber.substring(
+      0,
+      3
+    )}-${loggedInCustomer.phoneNumber.substring(
+      3,
+      6
+    )} ${loggedInCustomer.phoneNumber.substring(
+      6,
+      8
+    )} ${loggedInCustomer.phoneNumber.substring(8)}`;
 
-    /**
-     * Set values for second address fields
-     */
-    function getAddressInfo(){
-        address2.val(address.val());
-        zip2.val(zip.val());
-        city2.val(city.val());
-    }
+    firstName.val(loggedInCustomer.firstName);
+    lastName.val(loggedInCustomer.lastName);
+    email.val(loggedInCustomer.email);
+    phone.val(phoneNumber);
+    address.val(loggedInCustomer.streetAddress);
+    zip.val(zipCode);
+    city.val(loggedInCustomer.city.name);
+  }
 
-    /**
-     * Clear values for second address fields
-     */
-    function clearAddressInfo(){
-        address2.val('')
-        zip2.val('')
-        city2.val('')
+  /**
+   * Set values for second address fields
+   */
+  function getAddressInfo() {
+    address2.val(address.val());
+    zip2.val(zip.val());
+    city2.val(city.val());
+  }
 
-        resetBorder(address2)
-        resetBorder(zip2)
-        resetBorder(city2)
-    }
+  /**
+   * Clear values for second address fields
+   */
+  function clearAddressInfo() {
+    address2.val("");
+    zip2.val("");
+    city2.val("");
 
-    /**
-     * Resets all inputfields and checkbox
-     */
-    function clearAllInputFields() {
-        firstName.val('')
-        lastName.val('')
-        email.val('')
-        phone.val('')
-        address.val('')
-        zip.val('')
-        city.val('')
-        address2.val('')
-        city2.val('')
-        zip2.val('')
+    resetBorder(address2);
+    resetBorder(zip2);
+    resetBorder(city2);
+  }
 
-        resetBorder(firstName)
-        resetBorder(lastName)
-        resetBorder(email)
-        resetBorder(phone)
-        resetBorder(address)
-        resetBorder(zip)
-        resetBorder(city)
-        resetBorder(address2)
-        resetBorder(city2)
-        resetBorder(zip2)
+  let totalInCart = 0;
+  $.each(
+    $(".line-item-total-quantity"),
+    (index, e) => (totalInCart += parseInt(e.innerText))
+  );
+  $("#cart-total-quantity").text(totalInCart);
+  let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
+  document.getElementById("total-items-in-cart").innerHTML = cartQuantity;
+});
 
-        $("#gridCheck")[0].checked = null
-    }
+/**
+ * Checks witch customer that is logged in
+ * and render that data to the UI
+ * @param {Array} data customers from the databas
+ */
+function renderCustomerInfo() {
+  let loggedInCustomer = JSON.parse(sessionStorage.getItem("customer"));
 
-    /**
-     * Validates the inputfields and changes color of the 
-     * border of the inputfield according to the answer
-     * true(green)/false(red) and gives the correct message
-     * to the user
-     */
-    function validateInput () {    
-        // for testing under here
-        let bool = true
+  firstName.val(formatFirstLetterToUpperCase(loggedInCustomer.firstName));
+  lastName.val(formatFirstLetterToUpperCase(loggedInCustomer.lastName));
+  email.val(loggedInCustomer.email);
+  phone.val(formatPhoneNumber(loggedInCustomer.phoneNumber));
+  address.val(formatFirstLetterToUpperCase(loggedInCustomer.streetAddress));
+  zip.val(formatZipCode(loggedInCustomer.zipCode));
+  city.val(formatFirstLetterToUpperCase(loggedInCustomer.city.name));
+}
 
-        bool = checkForInput(testForOnlyText, firstName, bool,FIRSTNAME_ERROR_MSG)
-        bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
-        bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
-        bool = checkForInput(testForPhoneNumber,phone, bool,PHONE_NUMBER_ERROR_MSG)
-        bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
-        bool = checkForInput(testForZipCode, zip, bool,ZIPCODE_ERROR_MSG)
-        bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
-        bool = checkForInput(testForAddress, address2, bool,ADDRESS_ERROR_MSG_2)
-        bool = checkForInput(testForZipCode, zip2, bool,ZIPCODE_ERROR_MSG_2)
-        bool = checkForInput(testForOnlyText, city2,bool, CITY_ERROR_MSG_2)
-                
-        if(bool) {
-            if($("#gridCheck")[0].checked){
+/**
+ * Validates the inputfields and changes color of the
+ * border of the inputfield according to the answer
+ * true(green)/false(red) and gives the correct message
+ * to the user
+ */
+function validateInput() {
+  let bool = true;
 
-                console.log(makeOrderObject())
-                sendOrderToServer(makeOrderObject())
-                localStorage.clear()
-                clearAllInputFields()
-                renderCart()
-            }else{
-                swal({
-                    title: "Ops, något gick fel!",
-                    text: "Alla fält måste vara ifyllda korrekt",
-                    icon: "warning",
-                    button: "Ok",
-                  }) 
-            }
-        }
+  bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG);
+  bool = checkForInput(testForOnlyText, lastName, bool, LASTNAME_ERROR_MSG);
+  bool = checkForInput(testForEmail, email, bool, EMAIL_ERROR_MSG);
+  bool = checkForInput(testForPhoneNumber, phone, bool, PHONE_NUMBER_ERROR_MSG);
+  bool = checkForInput(testForAddress, address, bool, ADDRESS_ERROR_MSG);
+  //bool = checkForInput(testForZipCode, zip, bool,ZIPCODE_ERROR_MSG)
+  bool = checkForInput(testForOnlyText, city, bool, CITY_ERROR_MSG);
 
-    
+  if (bool) {
+    console.log(makeOrderObject());
+    sendOrderToServer(makeOrderObject());
+    localStorage.clear();
 
-    
-    }
+    renderCart();
+  } else {
+    swal({
+      title: "Ops, något gick fel!",
+      text: "Alla fält måste vara ifyllda korrekt",
+      icon: "warning",
+      button: "Ok",
+    });
+  }
+}
 
-    getCart()
-    renderCustomerInfo()
+/**
+ * Resets all inputfields and checkbox
+ */
+function clearAllInputFields() {
+  firstName.val("");
+  lastName.val("");
+  email.val("");
+  phone.val("");
+  address.val("");
+  zip.val("");
+  city.val("");
 
-    function makeOrderObject(){
-        let cart = JSON.parse(localStorage.getItem('cart'))
-        let orderCommentInput = ""
-        orderCommentInput = orderComment.val()
-        
-        let orderObject = {
-            "appUser": {
-              "email": email.val()
-              },
-            "orderComment": orderCommentInput,
-            "totalCost": $('#cart-total-price').val(),
-            "isPaid": false,
-            "orderStatus": {
-              "type": "ohanterad"
-            },
-            "lineItems": cart
-          }
-    
-        return orderObject
-    }
+  resetBorder(firstName);
+  resetBorder(lastName);
+  resetBorder(email);
+  resetBorder(phone);
+  resetBorder(address);
+  resetBorder(zip);
+  resetBorder(city);
+}
 
-    function sendOrderToServer(orderObject){
-         const url = 'https://hakimlivs.herokuapp.com/customerOrder/add'
-        //const url = 'https://hakimlogintest.herokuapp.com/customerOrder/add'
+function makeOrderObject() {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  let orderCommentInput = orderComment.text();
+  let lineItems = [];
 
-        axios.post(url,orderObject)
-        .then(response => {
-            if(response.status == 200){
-                swal({
-                    title: "Tack för din order!",
-                    text: `
+  // create lineItems for database
+  $.each(cart, (index, e) => {
+    let lineItem = {
+      product: {
+        sku: e.sku,
+      },
+      quantity: e.inCart,
+      itemPrice: (e.price * e.inCart).toFixed(2),
+    };
+    lineItems.push(lineItem);
+  });
+
+  let orderObject = {
+    appUser: {
+      email: email.val(),
+    },
+    orderComment: orderCommentInput,
+    totalCost: parseFloat($("#cart-total-price").text()),
+    isPaid: false,
+    orderStatus: {
+      type: "ohanterad",
+    },
+    lineItems: lineItems,
+  };
+
+  return orderObject;
+}
+
+function sendOrderToServer(orderObject) {
+  const url = 'https://hakimlivs.herokuapp.com/customerOrder/add'
+//   const url = "https://hakimlogintest.herokuapp.com/customerOrder/add";
+  //const url = 'http://localhost:8080/customerOrder/add'
+
+  console.log(orderObject);
+  axios
+    .post(url, orderObject)
+    .then((response) => {
+      if (response.status == 200) {
+        console.log(response);
+        swal({
+          title: "Tack för din order!",
+          text: `
+               \nLeverans adress
+               \n${address.val()}
+               \n${city.val()}
+               \n${zip.val()}`,
+          icon: "success",
+          button: "Ok",
+        });
+        clearAllInputFields();
+      }
+    })
+    .catch((err) => console.log(">> error from server: " + err));
+}
+
+axios.post(url, orderObject).then((response) => {
+  if (response.status == 200) {
+    swal({
+      title: "Tack för din order!",
+      text: `
                     \nLeveransadress
                     \n${address2.val()}
                     \n${city2.val()}
                     \n${zip2.val()}`,
-                    icon: "success",
-                    button: "Ok",
-                  })
-            }
-            
-        })
-    }
-}
+      icon: "success",
+      button: "Ok",
+    });
+  }
+});
