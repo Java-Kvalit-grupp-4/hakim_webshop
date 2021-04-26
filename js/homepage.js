@@ -17,7 +17,8 @@ let adminview = $('#admin-view-link')
 //const addUserUrl = "http://localhost:8080/users/add"
 
 
-const addUserUrl = `https://hakimlivs.herokuapp.com/users/add`
+//const addUserUrl = `https://hakimlivs.herokuapp.com/users/add`
+const addUserUrl = `https://hakimlogintest.herokuapp.com/users/add`
 
 //const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 

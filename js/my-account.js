@@ -106,17 +106,17 @@ $('#change-password-btn').click(() => {
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
 
-    let formattedZipCode =formatZipCode(customer.zipCode)
-    let formattedPhoneNumber = formatPhoneNumber(customer.phoneNumber)
+    
+    
     console.log(customer);
 
      firstName.val(customer.firstName)
      lastName.val(customer.lastName)
      email.val(customer.email)
-     phoneNumber.val(formattedPhoneNumber)
+     phoneNumber.val(formatPhoneNumber(customer.phoneNumber))
      address.val(customer.streetAddress)
      city.val(customer.city.name)
-     zipCode.val(formattedZipCode)
+     zipCode.val(formatZipCode(customer.zipCode))
   }
 
   function resetsInputBorders() {
