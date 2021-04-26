@@ -41,7 +41,7 @@
           ]
         },
         "orderId": 1,
-        "quantity": 3,
+        "quantity": 45,
         "itemPrice": 12
       },
       {
@@ -65,11 +65,11 @@
           ]
         },
         "orderId": 1,
-        "quantity": 2,
+        "quantity": 45,
         "itemPrice": 25
       }
     ],
-    "totalCost": 4846.30,
+    "totalCost": 1665,
     "changes": [
       {
         "changeId": 1,
