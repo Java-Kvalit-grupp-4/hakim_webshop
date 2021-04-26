@@ -15,10 +15,7 @@ myAccountMenu = $('#myAccountDropdown')
 let adminview = $('#admin-view-link')
 
 //const addUserUrl = "http://localhost:8080/users/add"
-
-
-const addUserUrl = `https://hakimlivs.herokuapp.com/users/add`
-
+const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 //const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 
 /**
@@ -82,7 +79,7 @@ $(document).ready(() => {
     function load() {
         //const productsUrl = './TestData/test_data_products_v1.2.JSON'
         //const productsUrl = 'http://localhost:8080/products'
-        const productsUrl = 'https://hakimlivs.herokuapp.com/products'
+        const productsUrl = 'http://hakimlivs.herokuapp.com/products'
        axios.get(productsUrl)
        .then(response => {
          renderCategories(response.data)
@@ -334,7 +331,6 @@ function updateTotalCartUI(){
 
 $('#login-button').click(() => {
   let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
-  //let url = `https://hakimlogintest.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`
 
   axios.get(url)
     .then((response) => {
