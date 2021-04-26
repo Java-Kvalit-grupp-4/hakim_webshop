@@ -9,7 +9,7 @@ $(document).ready(() => {
         
         
     }
-    getCart()
+    //getCart() Vad gör denna?? Hittar den inte någon stanns och man får en syntax error pga den
 
     /**
      * Cache variables
@@ -36,7 +36,7 @@ $(document).ready(() => {
   */
  $('#send-order-btn').click(validateInput)
     
-    let customer = JSON.parse(sessionStorage.getItem('customer'))
+    //let customer = JSON.parse(sessionStorage.getItem('customer'))
     if(customer==null || customer== undefined){
         // comment this if you wanna go to checkout without being logged in
         //window.location.href = "../../"
@@ -116,6 +116,12 @@ function renderCustomerInfo() {
             localStorage.clear()
             
             renderCart()
+            swal({
+                title: "Din beställning har lagts",
+                text: "Tack för att du handlar hos Hakim Livs",
+                icon: "success",
+                button: "Ok",
+              }) 
     }else{
         swal({
             title: "Ops, något gick fel!",
