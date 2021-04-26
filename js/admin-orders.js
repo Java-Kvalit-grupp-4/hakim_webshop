@@ -15,10 +15,17 @@ function renderOrders(orders) {
       : "Väntar på betalning";
     $("#orders-container").append(`
       <tr>
-          <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${order.id}</a> </th>
-          <th scope="row" class="ps-md-5"><a href="#" class="customer-tab">${order.user.customerNumber}</a> </th>
+          <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${
+            order.id
+          }</a> </th>
+          <th scope="row" class="ps-md-5"><a href="#" class="customer-tab">${
+            order.user.customerNumber
+          }</a> </th>
           <td>${order.orderTimestamp}</td>
-          <td>${order.totalCost} kr</td>
+          <td>${order.totalCost.toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })} </td>
           <td>${order.status.type}</td>
           <td>${paymentStatusString}</td>
       </tr>`);
@@ -60,13 +67,26 @@ function renderLineItems() {
             <a href="#">${lineItem.product.title}</a>
           </th>
           <td>${lineItem.quantity}</td>
-          <td>${lineItem.itemPrice} kr</td>
-          <td>${Number(lineItem.itemPrice) * Number(lineItem.quantity)} kr</td>
+          <td>${lineItem.itemPrice.toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td>
+          <td>${(
+            Number(lineItem.itemPrice) * Number(lineItem.quantity)
+          ).toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td>
         </tr>`);
       });
     }
   });
-  $("#order-total-cost").html(`Total Summa: ${totalCost}kr`);
+  $("#order-total-cost").html(
+    `Totalt: ${totalCost.toLocaleString("sv-SE", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}`
+  );
 }
 
 function renderUserData() {

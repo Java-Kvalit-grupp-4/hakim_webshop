@@ -81,26 +81,6 @@ function load(){
         })
 }
 
-/*function getAllOrders(email){
-    //sessionStorage.removeItem('customerOrders')
-    console.log(getCustomerOrder+email)
-    axios.get(getCustomerOrder+email)
-        .then((response) =>{
-            if(response.status ===200){ 
-                console.log(response.data) 
-                return response.data
-                sessionStorage.setItem('customerOrders', JSON.stringify(response.data))
-            }
-            else{
-                swal("Något gick fel vid inläsning av kunder")
-            }
-        })
-        .catch(err =>{
-            alert("Server fel!" + err)
-        })
-
-}*/
-
 function showCustomers(customerArr){
     $("#customerTable").empty();
     if(customerArr.length==0){
@@ -294,12 +274,22 @@ function showOrders(customerOrders){
                     <td class="col-2">${orders.orderStatus.type}</td>
                     <td class="col-2">${isPaid}</td>
                     <td class="col-3">${orderDate}</td>
-                    <td class="col-2">${orders.totalCost.toFixed(2)} kr</td>
-                </tr>`
-            )
+                    <td class="col-2">${orders.totalCost.toLocaleString(
+                        "sv-SE",
+                        {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        }
+                      )}</td>
+                  </tr>`);
         })
     }
-    $("#totalCost").text(sum.toFixed(2) + " kr");
+    $("#totalCost").text(
+      sum.toLocaleString("sv-SE", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }) + " "
+    );
         
 }
 

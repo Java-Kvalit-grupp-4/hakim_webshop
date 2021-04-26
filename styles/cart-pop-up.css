@@ -101,11 +101,12 @@ svg {
     margin-top: -100px;
   }
   .modal-body {
+    padding:1em 0.5em;
     width: 100%;
     font-size: 0.9em;
   }
   .modal-body h5 {
-    font-size: 1em;
+    font-size: 0.804em;
   }
   .modal-body div.smaller {
     font-size: 0.8em;
