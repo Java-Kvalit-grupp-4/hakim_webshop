@@ -11,7 +11,6 @@ function run() {
         
     }
     getCart()
-    getLoggedInCustomer()
 
     /**
      * Cache variables
