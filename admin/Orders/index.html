@@ -397,16 +397,25 @@
               <div class="container text-end pe-4" id="order-total-cost">
                 <p>Totalt: 1000</p>
               </div>
-
-              <div class="text mb-2 px-3 ms-xl-4 col-lg-6">
-                Orderstatus
-                <select class="form-select" aria-label="Orderstatus">
-                  <option selected disabled>Orderstatus</option>
-                  <option value="Obehandlad">Väntar på behandling</option>
-                  <option value="2">Plockning pågår</option>
-                  <option value="3">Skickad</option>
-                  <option value="4">Avbeställd</option>
-                </select>
+              <div class="row">
+                <div class="text mb-2 px-3 ms-xl-4 col-lg-6">
+                  Orderstatus
+                  <select class="form-select" aria-label="Orderstatus">
+                    <option selected disabled>Orderstatus</option>
+                    <option value="Obehandlad">Väntar på behandling</option>
+                    <option value="2">Plockning pågår</option>
+                    <option value="3">Skickad</option>
+                    <option value="4">Avbeställd</option>
+                  </select>
+                </div>
+                <div class="text mb-2 px-3 ms-xl-4 col-lg-5">
+                  Betalstatus
+                  <select class="form-select" aria-label="Orderstatus">
+                    <option selected disabled>Betalstatus</option>
+                    <option value="isPaid">Betald</option>
+                    <option value="isUnpaid">Obetald</option>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -437,7 +446,7 @@
         </div>
       </div>
     </div>
-    <script>
+    <!-- <script>
       let customer = JSON.parse(sessionStorage.getItem("customer"));
       console.log(customer);
       if (
@@ -447,7 +456,7 @@
       ) {
         window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html";
       }
-    </script>
+    </script> -->
 
     <script
       type="text/javascript"
