@@ -71,7 +71,7 @@ footer a {
     height: 6vh;
   }
 
-  nav .navbar-toggler {
+  nav #mobileMenu {
     margin-top: -9.8rem;
 
   }
@@ -79,21 +79,21 @@ footer a {
 }
 
 @media(max-width:546px) {
-  nav .navbar-toggler {
+  nav #mobileMenu {
     margin-top: -13.3rem;
     margin-left:89%
   }
 }
 
 @media(max-width:500px) {
-  nav .navbar-toggler {
+  nav #mobileMenu {
     margin-top: -13.3rem;
     margin-left:85%
   }
 }
 
 @media(max-width:374px) {
-  nav .navbar-toggler {
+  nav #mobileMenu {
     margin-top: -3.6rem;
     margin-left:2%;
     z-index: 1001;
