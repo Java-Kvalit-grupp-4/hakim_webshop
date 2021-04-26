@@ -455,8 +455,12 @@ $("#confirm-account").click(() => {
           .then($("#registerForm").modal("hide"))
           .then(clearRegristrationForm);
       })
-      .catch(() => {
-        swal("Något fick fel!", "Vänligen försök igen", "warning");
+      .catch((err) => {
+        if(err.response.status == 400){
+          swal("E-post finns redan", "De finns redan ett konto registrerat med denna e-post,\n väligen logga in eller använd en annan e-post", "warning");
+        }else{
+          swal("Något fick fel!", "Vänligen försök igen", "warning");
+        }
       });
   }
 
