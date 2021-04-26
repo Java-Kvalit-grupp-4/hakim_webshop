@@ -1,13 +1,6 @@
 
 $(document).ready(() => {
-
     
-    let customer = JSON.parse(sessionStorage.getItem('customer'))
-    if(customer==null || customer== undefined){
-        // comment this if you wanna go to checkout without being logged in
-        window.location.href = "../../"
-    }
-    getCart()
 
     /**
      * Cache variables
@@ -41,6 +34,7 @@ $(document).ready(() => {
     }
     renderCart()
     renderCustomerInfo()
+   
 
     /**
      * Render data from array to the UI
@@ -90,6 +84,7 @@ function renderCustomerInfo() {
     zip.val(formatZipCode(loggedInCustomer.zipCode))
     city.val(formatFirstLetterToUpperCase(loggedInCustomer.city.name))
 }
+renderCustomerInfo()
 
 /**
      * Validates the inputfields and changes color of the 
