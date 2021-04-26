@@ -26,15 +26,6 @@ const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
   $("#registerForm").modal("show")
  })
 
- $("#checkout-button").click(function() {
-  let customer = JSON.parse(sessionStorage.getItem('customer'))
-  if(customer==null || customer== undefined){
-    swal("Du måste vara inloggad för att lägga beställning", "", "warning")
-  }else{
-    $('#checkOutLink').attr("href", "./pages/checkout/")
-  }
-})
-
  $("#show-password-button").click(function(){
   if($(this).text()=="Visa"){
     $(this).text("Dölj")
@@ -49,13 +40,11 @@ const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
  $("#login-btn").click(function() {
   if($(this).text()=="Logga in"){
       $("#login-modal").modal("show");
-      $('#checkOutLink').attr("href", "./pages/checkout/")
   }
   else{
       sessionStorage.removeItem("customer")
       $('#myAccountDropdown').hide()
       $(this).text("Logga in")
-      $('#checkOutLink').attr("href", "#")
       adminview.hide()
   }
 })
@@ -70,7 +59,6 @@ $(document).ready(() => {
     adminview.hide()
   }else {
     if(loggedIn.isAdmin){
-      $('#checkOutLink').attr("href", "./pages/checkout/")
       adminview.show()
     }
   }
@@ -155,7 +143,6 @@ $(document).ready(() => {
  */
 function renderProducts(list) {
   $("#products").empty()
-  
 
     list.forEach(element => {
         $("#products").append(`
@@ -199,23 +186,12 @@ function renderProducts(list) {
           
             if(product.sku == e.target.parentElement.parentElement.parentElement.id){
 
-
-              product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value)
-              if(product.inCart<1){
-                swal('Minsta tillåtet antal är 1', '', 'warning')
-              }else if(product.inCart.toString().includes(".")){
-                swal('Du måste ange heltal', '', 'warning')
-              }else{
-                e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
-                let isToMany = false
-                isToMany = saveProductToCart(product)
-              
-                if(isToMany==false){
-                  saveTotalPrice(product)
-                  updateTotalCartUI()
-                  setCartAvailability();
-                }
-              }
+              product.inCart = Number(e.target.parentElement.parentElement.children[3].children[1].children[0].value) //Ger denna rätt antal i varukorgen?
+              e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1
+              saveProductToCart(product)
+              saveTotalPrice(product)
+              updateTotalCartUI()
+              setCartAvailability();
             }
           })
         })
@@ -235,7 +211,7 @@ function renderProducts(list) {
           
             if(product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id){
               let currentValue= Number(e.target.parentElement.parentElement.children[1].children[0].value) +1;
-              if(currentValue<100){
+              if(currentValue<99){
                 e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
               }              
             }
@@ -291,14 +267,8 @@ function saveProductToCart(product) {
       cart.push(product)
     }else{
       
-      if(cart[index].inCart + product.inCart>=100){
-        swal('Maxantalet för en vara är 99', '', 'warning')
-        return true
-      }else{
-        cart[index].inCart += product.inCart
-        cartQuantity += tempQuantityToAdd
-      }
-
+      cart[index].inCart += product.inCart
+      cartQuantity += tempQuantityToAdd
     }
   }else{
     cart = [] 
@@ -310,7 +280,6 @@ function saveProductToCart(product) {
   localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity))
   localStorage.setItem('cart', JSON.stringify(cart))
   $("#cart-counter").text(cartQuantity)
-  return false
 }
 
 /**
@@ -345,11 +314,9 @@ $('#login-button').click(() => {
         if(response.data.isAdmin == true){
           location.replace("admin/index.html")
         }else{
-          
           loginModal.modal('hide')
           navLoginBtn.text('Logga ut')
           myAccountMenu.show()
-          
         }
         
       } 
@@ -421,7 +388,6 @@ $('#login-button').click(() => {
         swal('Något fick fel!','Vänligen försök igen', 'warning')
       })
   }
-
 })
 
 /**

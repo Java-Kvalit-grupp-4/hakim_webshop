@@ -7,8 +7,6 @@ function run() {
     if(customer==null || customer== undefined){
         // comment this if you wanna go to checkout without being logged in
         window.location.href = "../../"
-        
-        
     }
     getCart()
     getLoggedInCustomer()
