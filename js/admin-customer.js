@@ -7,6 +7,7 @@ let orders = [];
 let choosedCustomer = "";
 let getAllCustomers = "https://hakimlivs.herokuapp.com/users";
 let updateUser = "https://hakimlivs.herokuapp.com/users/adminUpdateUser";
+let getCustomerOrder = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email=";
 
 let startDate = null;
 let endDate = null;
@@ -78,44 +79,80 @@ function load(){
         })
 }
 
+function getAllOrders(email){
+    //sessionStorage.removeItem('customerOrders')
+    console.log(getCustomerOrder+email)
+    axios.get(getCustomerOrder+email)
+        .then((response) =>{
+            if(response.status ===200){ 
+                console.log(response.data) 
+                return response.data
+                //sessionStorage.setItem('customerOrders', JSON.stringify(response.data))
+            }
+            else{
+                swal("Något gick fel vid inläsning av kunder")
+            }
+        })
+        .catch(err =>{
+            alert("Server fel!" + err)
+        })
+
+}
+
 function showCustomers(customerArr){
     $("#customerTable").empty();
     if(customerArr.length==0){
         swal("Hittade inga kunder på denna sökning")
     }
-    customerArr.forEach(e => {
+    customerArr.forEach(customer => {
         let isVip = "";
-        if(e.isVip=== true){
+        if(customer.isVip=== true){
             console.log("ÄR VIP")
             isVip = "bi-check2"
         }
         else{
             isVip = "bi-x"
         }
-        let customerOrders;
-        let totalPrice; 
-        
-        if(e.customerOrders!=null){
-            customerOrders = e.customerOrders.length
-            totalPrice = getTotalPriceOfOrders(e.customerOrders);
-        }
-        else{
-            customerOrders = 0;
-            totalPrice =0;
-        }   
-    
-        $("#customerTable").append(`
-            <tr>
-                <th scope="row"><a href="#" class="customer-tab">${e.customerNumber}</a></th>
-                <td>${e.firstName}</td>
-                <td>${e.lastName}</td>
-                <td><a href="mailto:${e.email}">${e.email}</a></td>
-                <td>${customerOrders}</td>
-                <td>${totalPrice.toFixed(2)} kr</td>
-                <td><i class="bi ${isVip}"></i></td>
-            </tr>
-            `
-        )})
+
+        axios.get(getCustomerOrder+customer.email)
+        .then((response) =>{
+            if(response.status ===200){ 
+                let numberOfOrders;
+                let totalPrice; 
+                let customerOrders = response.data
+                
+                if(customerOrders!=null){
+                    numberOfOrders = customerOrders.length
+                    totalPrice = getTotalPriceOfOrders(customerOrders);
+                }
+                else{
+                    numberOfOrders = 0;
+                    totalPrice =0;
+                }   
+            
+            
+                $("#customerTable").append(`
+                    <tr>
+                        <th scope="row"><a href="#" class="customer-tab">${customer.customerNumber}</a></th>
+                        <td>${customer.firstName}</td>
+                        <td>${customer.lastName}</td>
+                        <td><a href="mailto:${customer.email}">${customer.email}</a></td>
+                        <td>${numberOfOrders}</td>
+                        <td>${totalPrice.toFixed(2)} kr</td>
+                        <td><i class="bi ${isVip}"></i></td>
+                    </tr>
+                    `
+                )
+                
+            }
+            else{
+                swal("Något gick fel vid inläsning av kunder")
+            }
+        })
+        .catch(err =>{
+            alert("Server fel!" + err)
+        })
+    })
 }
 
 function openCustomerTab(){
@@ -165,7 +202,6 @@ function isCustomerOrdersNull(orderArr){
 function getTotalPriceOfOrders(orderArr){
     if(orderArr!=null){
         let sum = 0;
-        console.log(typeof orderArr)
         orderArr.forEach(e => {
             sum += e.totalCost;
         })
