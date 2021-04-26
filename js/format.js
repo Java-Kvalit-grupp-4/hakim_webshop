@@ -20,7 +20,7 @@ const formatPhoneNumber = (phoneNumber) => {
 
   const formatZipCode = (zipCode) => {return `${zipCode.substring(0,3)} ${zipCode.substring(3)}`}
 
-  const formatZipForDB = (zipCode) => { return zipCode.replace(/\s/, '') }
+  const formatZipForDB = (zipCode) => { return zipCode.replace(/\D/g,'') }
 
   // format string to uppercase
 
