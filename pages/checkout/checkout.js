@@ -1,48 +1,47 @@
+/**
+ * Cache variables
+ */
+(firstName = $("#firstName")),
+  (lastName = $("#lastName")),
+  (email = $("#email")),
+  (phone = $("#phone")),
+  (address = $("#address")),
+  (zip = $("#zip")),
+  (city = $("#city")),
+  (orderComment = $("#order-comment"));
+
 $(document).ready(() => {
-    
+  let FIRSTNAME_ERROR_MSG = $("#FIRSTNAME_ERROR_MSG"),
+    LASTNAME_ERROR_MSG = $("#LASTNAME_ERROR_MSG"),
+    EMAIL_ERROR_MSG = $("#EMAIL_ERROR_MSG"),
+    PHONE_NUMBER_ERROR_MSG = $("#PHONE_NUMBER_ERROR_MSG"),
+    ADDRESS_ERROR_MSG = $("#ADDRESS_ERROR_MSG"),
+    ZIPCODE_ERROR_MSG = $("#ZIPCODE_ERROR_MSG"),
+    CITY_ERROR_MSG = $("#CITY_ERROR_MSG");
 
-    /**
-     * Cache variables
-     */
- let firstName = $('#firstName'),
- lastName = $('#lastName'),
- email = $('#email'),
- phone = $('#phone'),
- address = $('#address'),
- zip = $('#zip'),
- city = $('#city'),
- orderComment = $('#order-comment')
+  /**
+   *  Eventlistiners
+   */
+  $("#send-order-btn").click(function () {
+    sendOrderToServer(makeOrderObject());
+  });
 
- let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
-            LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
-            EMAIL_ERROR_MSG = $('#EMAIL_ERROR_MSG'),
-            PHONE_NUMBER_ERROR_MSG = $('#PHONE_NUMBER_ERROR_MSG'),
-            ADDRESS_ERROR_MSG = $('#ADDRESS_ERROR_MSG'),
-            ZIPCODE_ERROR_MSG = $('#ZIPCODE_ERROR_MSG'),
-            CITY_ERROR_MSG = $('#CITY_ERROR_MSG')
+  let customer = JSON.parse(sessionStorage.getItem("customer"));
+  if (customer == null || customer == undefined) {
+    // comment this if you wanna go to checkout without being logged in
+    //window.location.href = "../../"
+  }
+  renderCart();
+  renderCustomerInfo();
 
- /**    
-  *  Eventlistiners
-  */
- $('#send-order-btn').click(validateInput)
-    
-    let customer = JSON.parse(sessionStorage.getItem('customer'))
-    if(customer==null || customer== undefined){
-        // comment this if you wanna go to checkout without being logged in
-        //window.location.href = "../../"
-    }
-    renderCart()
-    renderCustomerInfo()
-   
-
-    /**
-     * Render data from array to the UI
-     * @param {Array} data array of products
-     */
- function renderCart() {
-    let cartData = JSON.parse(localStorage.getItem('cart'))
-    let cart = $('#cart-container')
-    cart.html('')
+  /**
+   * Render data from array to the UI
+   * @param {Array} data array of products
+   */
+  function renderCart() {
+    let cartData = JSON.parse(localStorage.getItem("cart"));
+    let cart = $("#cart-container");
+    cart.html("");
     $.each(cartData, (index, e) => {
       cart.append(`
         <div class="row pt-2 line-item-border">
@@ -171,7 +170,7 @@ function renderCustomerInfo() {
   zip.val(formatZipCode(loggedInCustomer.zipCode));
   city.val(formatFirstLetterToUpperCase(loggedInCustomer.city.name));
 }
-renderCustomerInfo()
+renderCustomerInfo();
 
 /**
  * Validates the inputfields and changes color of the
@@ -261,8 +260,8 @@ function makeOrderObject() {
 }
 
 function sendOrderToServer(orderObject) {
-  const url = 'https://hakimlivs.herokuapp.com/customerOrder/add'
-//   const url = "https://hakimlogintest.herokuapp.com/customerOrder/add";
+  const url = "https://hakimlivs.herokuapp.com/customerOrder/add";
+  //   const url = "https://hakimlogintest.herokuapp.com/customerOrder/add";
   //const url = 'http://localhost:8080/customerOrder/add'
 
   console.log(orderObject);
@@ -271,33 +270,23 @@ function sendOrderToServer(orderObject) {
     .then((response) => {
       if (response.status == 200) {
         console.log(response);
+
         swal({
           title: "Tack för din order!",
           text: `
-               \nLeverans adress
+               \nLeveransadress
                \n${address.val()}
                \n${city.val()}
                \n${zip.val()}`,
           icon: "success",
           button: "Ok",
+        }).then(() => {
+          clearAllInputFields();
+          localStorage.clear();
+          renderCart();
+          window.location.href = "../../index.html";
         });
-        clearAllInputFields();
       }
     })
     .catch((err) => console.log(">> error from server: " + err));
 }
-
-axios.post(url, orderObject).then((response) => {
-  if (response.status == 200) {
-    swal({
-      title: "Tack för din order!",
-      text: `
-                    \nLeveransadress
-                    \n${address2.val()}
-                    \n${city2.val()}
-                    \n${zip2.val()}`,
-      icon: "success",
-      button: "Ok",
-    });
-  }
-});
