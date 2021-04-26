@@ -20,6 +20,7 @@ const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
 
 /**
  * Eventlistener
+
  */ C: $("#newCust-button").click(() => {
   $("#registerForm").modal("show");
 });
@@ -30,8 +31,10 @@ $("#checkout-button").click(function () {
     swal("Du måste vara inloggad för att lägga beställning", "", "warning");
   } else {
     $("#checkOutLink").attr("href", "./pages/checkout/");
+
   }
 });
+
 
 $("#show-password-button").click(function () {
   if ($(this).text() == "Visa") {
@@ -53,12 +56,14 @@ $("#login-btn").click(function () {
     $(this).text("Logga in");
     $("#checkOutLink").attr("href", "#");
     adminview.hide();
+
   }
 });
 
 $("form").submit(false);
 
 $(document).ready(() => {
+
   load();
   let loggedIn = sessionStorage.getItem("customer");
   if (loggedIn == undefined) {
@@ -70,6 +75,7 @@ $(document).ready(() => {
     }
   }
 });
+
 
 function load() {
   //const productsUrl = './TestData/test_data_products_v1.2.JSON'
@@ -149,7 +155,9 @@ function renderCategories(data) {
  * @param {Array} list of product
  */
 function renderProducts(list) {
+
   $("#products").empty();
+
 
   list.forEach((element) => {
     $("#products").append(`
@@ -191,6 +199,7 @@ function renderProducts(list) {
                 </div>
               </div>
             </div>  
+
         `);
   });
 
@@ -221,12 +230,15 @@ function renderProducts(list) {
               saveTotalPrice(product);
               updateTotalCartUI();
               setCartAvailability();
+
             }
           }
+
         }
       });
     });
   });
+
 
   $.each($(".amount"), function (index, value) {
     value.addEventListener("focusout", (e) => {
@@ -294,6 +306,7 @@ function renderProducts(list) {
  * @param {Object} product
  */
 function saveProductToCart(product) {
+
   let cart = JSON.parse(localStorage.getItem("cart"));
   let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
   let tempQuantityToAdd = Number(product.inCart);
@@ -313,6 +326,7 @@ function saveProductToCart(product) {
         cart[index].inCart += product.inCart;
         cartQuantity += tempQuantityToAdd;
       }
+
     }
   } else {
     cart = [];
@@ -321,10 +335,12 @@ function saveProductToCart(product) {
     cart.push(product);
   }
 
+
   localStorage.setItem("cartQuantity", JSON.stringify(cartQuantity));
   localStorage.setItem("cart", JSON.stringify(cart));
   $("#cart-counter").text(cartQuantity);
   return false;
+
 }
 
 /**
@@ -350,12 +366,15 @@ function updateTotalCartUI() {
 
 //------------------------------------- login ----------------------------------\\
 
+
 $("#login-button").click(() => {
   let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+
 
   axios
     .get(url)
     .then((response) => {
+
       if (response.status !== 200) {
         swal("Fel email eller lösenord", "", "warning");
         emailToCheck.val("");
@@ -369,6 +388,7 @@ $("#login-button").click(() => {
           loginModal.modal("hide");
           navLoginBtn.text("Logga ut");
           myAccountMenu.show();
+
         }
       }
     })
@@ -439,7 +459,9 @@ $("#confirm-account").click(() => {
         swal("Något fick fel!", "Vänligen försök igen", "warning");
       });
   }
+
 });
+
 
 /**
  * Functions
