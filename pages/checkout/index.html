@@ -132,8 +132,8 @@
                   <div class="col col-xs-3 col-lg-3 cart-title"><h6>Artikelnr</h6></div>
                   <div class="col col-xs-2 col-lg-4 cart-title"><h6>Produkt</h6></div>
                   <div class="col col-xs-1 col-lg-1 cart-title"><h6>Antal</h6></div>
-                  <div class="col col-xs-2 col-lg-2 cart-title"><h6>Pris</h6></div>
-                  <div class="col col-xs-2 col-lg-2 cart-title"><h6>Total pris</h6></div>
+                  <div class="col col-xs-2 col-lg-2 cart-title"><h6>Pris kr</h6></div>
+                  <div class="col col-xs-2 col-lg-2 cart-title"><h6>Totalt kr</h6></div>
                 </div>
                 <!-- line item -->
                 <div id="cart-container"></i></div>
@@ -142,9 +142,9 @@
                 <!-- line item -->
                 <div class="row pt-2 cart-footer">
                   <div class="col col-xs-3 col-lg-3 cart-line-item"></div>
-                  <div class="col col-xs-2 col-lg-4 cart-line-item"><h6 class="cart-line-item">Totalt antal varor:</h6></div>
+                  <div class="col col-xs-2 col-lg-4 cart-line-item"><h6 class="cart-line-item">Totalt antal:</h6></div>
                   <div id="checkout-cart-quantity"class="col col-xs-1 col-lg-1 cart-line-item"><p id="cart-total-quantity">0</p></div>
-                  <div class="col col-xs-2 col-lg-2 cart-line-item"><h6 class="cart-line-item">Totalt pris:</h6></div>
+                  <div class="col col-xs-2 col-lg-2 cart-line-item"><h6 class="cart-line-item">Totalt:</h6></div>
                   <div id="checkout-cart-total-price" class="col col-xs-2 col-lg-2 cart-line-item"><p id="cart-total-price">00.00</p></div>
                 </div>
               </div>
@@ -155,7 +155,7 @@
             <div class="row">
               <div class="col-12 sm-10 mt-5" >
                 <h2 class="mb-3">Orderkommentar</h2>
-                <textarea name="order-comment" id="order-comment" cols="40" rows="5" placeholder="Order kommentar"></textarea>
+                <textarea name="order-comment" id="order-comment" cols="40" rows="5" placeholder="Orderkommentar"></textarea>
               </div>
             </div>
             <!-- form starts-->
@@ -320,6 +320,7 @@
       ></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="../../js/cart-pop-up.js"></script>
       <script src="../../js/homepage.js"></script>
      <script src="../../js/validate.js"></script>
       <script src="./checkout.js"></script>

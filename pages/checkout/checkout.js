@@ -11,7 +11,6 @@ function run() {
         
     }
     getCart()
-    getLoggedInCustomer()
 
     /**
      * Cache variables
@@ -69,23 +68,48 @@ function run() {
      * @param {Array} data array of products
      */
     function renderCart(data) {
+        console.log(data);
     let cart = $('#cart-container')
     cart.html('')
     $.each(data, (index, e) => {
         cart.append(`
         <div class="row pt-2 line-item-border">
-            <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${e.productNr}</p></div>
-            <div class="col col-xs-2 col-lg-4 cart-line-item"><p>${e.title}</p></div>
-            <div class="col col-xs-1 col-lg-1 cart-line-item"><p class="line-item-total-quantity">${e.inCart}</p></div>
-            <div class="col col-xs-2 col-lg-2 cart-line-item"><p>${e.price.toFixed(2)} kr</p></div>
-            <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(e.price * e.inCart).toFixed(2)} kr</p></div>
+            <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${
+              e.sku
+            }</p></div>
+            <div class="col col-xs-2 col-lg-4 cart-line-item"><p>${
+              e.title
+            }</p></div>
+            <div class="col col-xs-1 col-lg-1 cart-line-item"><p class="line-item-total-quantity">${
+              e.inCart
+            }</p></div>
+            <div class="col col-xs-2 col-lg-2 cart-line-item"><p>${e.price.toLocaleString(
+              "sv-SE",
+              {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }
+            )}</p></div>
+            <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(
+              e.price * e.inCart
+            ).toLocaleString("sv-SE", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}</p></div>
         </div>
-        `)
+        `);
     })
 
-    let totalPrice = 0;
-    $.each($('.line-item-total-price'),(index, e) => totalPrice += parseFloat(e.innerText))
-    $('#cart-total-price').text(totalPrice.toFixed(2));
+    
+    $("#cart-total-price").text(
+      JSON.parse(localStorage.getItem("cartTotalPrice")).toLocaleString(
+        "sv-SE",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }
+      )
+    );
 
     let totalInCart = 0;
     $.each($('.line-item-total-quantity'),(index, e) => totalInCart += parseInt(e.innerText))
@@ -243,7 +267,7 @@ function run() {
                 swal({
                     title: "Tack för din order!",
                     text: `
-                    \nLeverans adress
+                    \nLeveransadress
                     \n${address2.val()}
                     \n${city2.val()}
                     \n${zip2.val()}`,
