@@ -26,7 +26,7 @@ body {
   background: #fff;
   width: 30%;
   position: fixed;
-  left: 35%;
+  left: 27%;
   top: 3vh;
   border-radius: 5px;
   box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
@@ -118,11 +118,12 @@ body {
   }
 }
 
-@media screen and (max-width: 1024px) and (min-width: 600px) {
+@media screen and (max-width: 1199px) and (min-width: 600px) {
+  
   .wrapper .search-input {
-    width: 30%;
-    left: 50%;
-    transform: translate(-50%, 25%);
+    width: 50%;
+    left: 60%;
+    transform: translateX(-50%);
   }
   .search-input input {
     height: 40px;
@@ -134,11 +135,11 @@ body {
     height: 55px;
     width: 55px;
   }
-  @media (max-width: 991px) {
+  @media (max-width: 900px) {
     .wrapper .search-input {
       width: 30%;
       left: 70%;
-      transform: translate(-50%, 25%);
+      transform: translateX(-50%);
     }
   }
 }

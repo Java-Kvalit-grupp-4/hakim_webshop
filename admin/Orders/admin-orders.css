@@ -1,0 +1,12 @@
+.order-body {
+    max-width: 100vw;
+}
+.order-last {
+    max-width: 100vw;
+}
+
+@media (max-width: 424px) {
+    table th, td {
+        font-size: 0.75em;
+    }
+}
