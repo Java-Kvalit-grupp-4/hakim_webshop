@@ -47,7 +47,9 @@ $('#submit').click( () => {
     resetsInputBorders()
     
     let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
-    //let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
+
+    // let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
+
     //let updateUserInfo = `http://localhost:8080/users/update/user/info`
 
     // create object to update
@@ -214,7 +216,7 @@ $(document).on('click', '.orderNumber', showOrder);
     bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
     bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
     bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
-    bool = checkForInput(testForNumbersOnly,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
+    bool = checkForInput(testForPhoneNumber,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
     bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
     bool = checkForInput(testForZipCode, zipCode, bool,ZIPCODE_ERROR_MSG)
     bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
@@ -223,28 +225,39 @@ $(document).on('click', '.orderNumber', showOrder);
   }
 
   function checkPasswordChange() {
+    let bool = true
     
     if(oldPassword.val() !== customer.password){
       WRONNG_PASSWORD_ERROR_MSG.show()
+      bool = false
     }else{
       WRONNG_PASSWORD_ERROR_MSG.hide()
     } 
     if(newPassword.val() === oldPassword.val()){
       NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.show()
+      bool = false
     }else {
       NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide()
     }
     if(newPassword.val() !== confirmPassword.val()){
       NEW_PASSWORD_NOT_MATCH_ERROR_MSG.show()
+      bool = false
     }else {
       NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide()
     }
+
+    if(bool) {
+      updatePassword(newPassword)
+    }
+
   }
 
   const updatePassword = (newPassword) => {
 
     let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
-    //let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
+
+    // let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
+
     //let updatePasswordUrl = `http://localhost:8080/users/update/password`
 
     let updatePassword = {
