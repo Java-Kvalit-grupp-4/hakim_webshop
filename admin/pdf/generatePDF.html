@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate PDF</title>
+    <link rel="stylesheet" href="pdf.css" media="all" />
+</head>
+<body>
+    <button id="generate-pdf">PDF</button>
+
+    <div id="pdf">
+        <header class="clearfix">
+            <div id="logo">
+                <img src="./logo.png"/>
+            </div>
+            <h1>Faktura</h1>
+            <div id="customer" class="clearfix">
+                <div>
+                    <span>Ordernummer:</span>
+                </div>
+                <div>
+                    <span>Kundnamn:</span>
+                </div>
+                <div>
+                    <span>Leveransadress:</span>
+                </div>
+                <div>
+                    <span>Email:</span>
+                </div>
+            </div>
+            <div id="project">
+                <div>
+                    <span>Fakturanummer:</span>
+                </div>
+                <div>
+                    <span>Fakturadatum:</span>
+                </div>
+                <div>
+                    <span>Leveransdatum:</span>
+                </div>
+                <div>
+                    <span>Betalningsvillkor</span>
+                    30 dagar
+                </div>
+                <div>
+                    <span>Förfallodatum:</span>
+                </div>
+                <div>
+                    <span>Dröjsmålsränta:</span>
+                    7,5%
+                </div>
+            </div>
+        </header>
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="product">Artikelnummer</th>
+                        <th class="desc">Produktnamn</th>
+                        <th>Pris kr</th>
+                        <th>Antal</th>
+                        <th>Totalt kr</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div id="line-items">
+                        <tr>
+                            <td class="product"></td>
+                            <td class="desc"></td>
+                            <td class="unit"></td>
+                            <td class="qty"></td>
+                            <td class="total"></td>
+                        </tr>
+                    </div>
+                    <tr>
+                        <td colspan="4" class="grand total">Summa</td>
+                        <td class="grand total"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Frakt</td>
+                        <td class="total">49 kr</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Moms 12%</td>
+                        <td class="total"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="grand total">Totalsumma</td>
+                        <td class="grand total"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+        <footer>
+            <div id="company" class="clearfix">
+                <div>
+                    <span>Hakim Livs</span>
+                </div>
+                <div>
+                    <span>Kungsgatan 65</span>
+                </div>
+                <div>
+                    <span>116 42 Stockholm</span>
+                </div>
+                <div>
+                    <span>+46 70 861 31 89</span>
+                </div>
+                <div>
+                    <span>hakimlivs@gmail.com</span>
+                </div>
+                <br>
+            </div>
+            <div id="company-bank">Bankgiro:
+                <span>1234-5678</span>
+                <div>Godkänd för F-skatt</div>
+            </div>
+        </footer>
+    </div>
+
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"
+    integrity="sha512-w3u9q/DeneCSwUDjhiMNibTRh/1i/gScBVp2imNVAMCt6cUHIw6xzhzcPFIaL3Q1EbI2l+nu17q2aLJJLo4ZYg=="
+    crossorigin="anonymous">
+    </script>
+    
+    <script src="html2pdf.bundle.min.js"></script>
+</body>
+</html>
