@@ -133,8 +133,8 @@ $('#change-password-btn').click(() => {
     let bool = true
 
     console.log(myAccountPhoneNumber.val());
-    bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
-    bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
+    bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG)
+    bool = checkForInput(testForName, lastName, bool,LASTNAME_ERROR_MSG)
     bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
     bool = checkForInput(testForPhoneNumber,myAccountPhoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
     bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
