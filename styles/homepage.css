@@ -1,3 +1,11 @@
+#login-page {
+    padding:0;
+    
+}
+footer {
+    max-width: 100vw;
+}
+
 .product-card {
     max-width: 23vh;
     margin: auto;
