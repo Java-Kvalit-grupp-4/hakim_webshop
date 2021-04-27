@@ -148,34 +148,13 @@
               <th scope="col" class="pb-3">Betalstatus</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row" class="ps-md-5"><a href="#">2341-4567</a> </th>
-              <td>2021-01-20</td>
-              <td>135 kr</td>
-              <td>Levererad</td>
-              <td>Mottagen</td>
-            </tr>
-            <tr>
-              <th scope="row" class="ps-md-5"><a href="#">2341-4581</a> </th>
-              <td>2021-02-13</td>
-              <td>453 kr</td>
-              <td>Levererad</td>
-              <td>Mottagen</td>
-            </tr>
-            <tr>
-              <th scope="row" class="ps-md-5"> <a href="#">2341-9867</a></th>
-              <td>2021-03-26</td>
-              <td>321 kr</td>
-              <td>Skickad</td>
-              <td>Väntar på betalning</td>
-            </tr>
+          <tbody id="orderTable">
           </tbody>
         </table>
 
       </div>
       <div class="container mt-5 col-xl-10">
-        <h2 id="selected-order-number">Order 2341-4567</h2>
+        <h2 id="selected-order-number">Order</h2>
       </div>
       <div class="container my-5 py-3 col-xl-10" id="show-selected-order">
         <table class="table table-secondary">
@@ -187,32 +166,13 @@
               <th scope="col" class="pb-3 text-center">Totalt</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td class="ps-md-5">Kaffe - Gevalia</td>
-              <td>36 kr</td>
-              <td>2</td>
-              <td class="text-center">72 kr</td>
-            </tr>
-            <tr>
-              <td class="ps-md-5">Dasspapper - Serla</td>
-              <td>79 kr</td>
-              <td>1</td>
-              <td class="text-center">79 kr</td>
-            </tr>
-            <tr>
-              <td class="ps-md-5">Kaffe - Gevalia</td>
-              <td>36 kr</td>
-              <td>2</td>
-              <td class="text-center">72 kr</td>
-
-            </tr>
+          <tbody id="orderIncludes">
           </tbody>
           <tfoot>
             <td></td>
             <td></td>
-            <th scope="row">4</th>
-            <td class="text-center">135 kr</td>
+            <th scope="row" id="totalQuantity"></th>
+            <td class="text-center" id="totalPrice"></td>
           </tfoot>
         </table>
 
