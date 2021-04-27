@@ -366,7 +366,7 @@ $('#login-button').click(() => {
       } 
     })
     .catch(err => {
-      alert('Server fel!')
+      alert('Serverfel!')
     })
 })
 
