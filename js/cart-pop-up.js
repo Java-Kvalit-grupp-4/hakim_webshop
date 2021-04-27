@@ -37,7 +37,13 @@ function renderCart() {
                         <img class="cart-thumbnail "
                     src="${element.image} alt="${element.title}-bild">
                       </div>
-                      <div class="col-2">${element.price.toFixed(2)}</div>
+                      <div class="col-2">${element.price.toLocaleString(
+                        "sv-SE",
+                        {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        }
+                      )}</div>
                       <div class="col-3 col-md-2 qty-label">
                         <i class="bi bi-dash-circle decrease-button" id="${
                           element.sku
@@ -52,9 +58,12 @@ function renderCart() {
                           id="${element.sku}"
                         ></i>
                       </div>
-                      <div class="col-2 line-price " id="${
-                        element.sku
-                      }">${(element.price * element.inCart).toFixed(2)}</div>
+                      <div class="col-2 line-price " id="${element.sku}">${(
+        element.price * element.inCart
+      ).toLocaleString("sv-SE", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })}</div>
                     </div>
                   </div>`;
     });
@@ -69,7 +78,13 @@ function renderCart() {
     });
 
     $("#priceOutput").text(
-      JSON.parse(localStorage.getItem("cartTotalPrice")).toFixed(2)
+      JSON.parse(localStorage.getItem("cartTotalPrice")).toLocaleString(
+        "sv-SE",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }
+      )
     );
 
     $.each($(".trash-button"), function (index, el) {
@@ -135,7 +150,13 @@ function addProduct(product) {
   localStorage.setItem("cart", JSON.stringify(cartTemp));
   updateCartQuantity();
   $("#priceOutput").text(
-    JSON.parse(localStorage.getItem("cartTotalPrice")).toFixed(2)
+    JSON.parse(localStorage.getItem("cartTotalPrice")).toLocaleString(
+      "sv-SE",
+      {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }
+    )
   );
   localStorage.setItem("cartQuantity", JSON.stringify(cartQuantity));
 }
@@ -156,7 +177,13 @@ function removeProduct(product) {
   localStorage.setItem("cart", JSON.stringify(cartTemp));
   updateCartQuantity();
   $("#priceOutput").text(
-    JSON.parse(localStorage.getItem("cartTotalPrice")).toFixed(2)
+    JSON.parse(localStorage.getItem("cartTotalPrice")).toLocaleString(
+      "sv-SE",
+      {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }
+    )
   );
   localStorage.setItem("cartQuantity", JSON.stringify(cartQuantity));
 }
@@ -186,7 +213,10 @@ function updateCartQuantity() {
   cartTemp.forEach((element) => {
     $(`#${element.sku}.quantity`).text(element.inCart);
     $(`#${element.sku}.line-price`).text(
-      (element.price * element.inCart).toFixed(2)
+      (element.price * element.inCart).toLocaleString("sv-SE", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
     );
   });
 }
