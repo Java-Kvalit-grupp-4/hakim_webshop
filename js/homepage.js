@@ -14,6 +14,8 @@ let emailToCheck = $("#login-email"),
 
 let adminview = $("#admin-view-link");
 
+let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/?email='
+
 //const addUserUrl = "http://localhost:8080/users/add"
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
 //const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
@@ -30,6 +32,14 @@ $("#checkout-button").click(function () {
   if (customer == null || customer == undefined) {
     swal("Du måste vara inloggad för att lägga beställning", "", "warning");
   } else {
+    axios
+    .get(getCustomerUrl+customer.email)
+    .then((response) => {
+      sessionStorage.setItem("customer", JSON.stringify(response.data));
+    })
+    .catch((err) => {
+      alert(err);
+    });
     $("#checkOutLink").attr("href", "./pages/checkout/");
 
   }

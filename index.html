@@ -17,7 +17,7 @@
   <body id="login-page">
     <!-- navbar (prototype) -->
 
-    <nav class="navbar navbar-expand-xl navbar-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"
           ><img
@@ -40,7 +40,6 @@
           </div>
         </div>
         <button
-          id="mobileMenu"
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -53,11 +52,11 @@
         </button>
         <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
         <div
-          class="d-xl-flex justify-content-xl-end collapse navbar-collapse "
+          class="d-lg-flex justify-content-lg-evenly collapse navbar-collapse"
           id="navbarTogglerDemo02"
         >
-          <!-- <div class="container col-md-6 mt-3"> -->
-            <!-- <div class="input-group mb-3 me-0 me-xl-5"> -->
+          <div class="container col-md-6 mt-3">
+            <div class="input-group mb-3 me-0 me-lg-5">
               <!-- searchfield -->
 
               <!-- searchfield ends -->
@@ -76,11 +75,11 @@
               >
                 Sök
               </button> -->
-            <!-- </div> -->
-          <!-- </div> -->
+            </div>
+          </div>
 
-          <ul class="navbar-nav mb-2 mb-xl-0 text-start text-sm-end">
-            <li class="nav-item me-xl-4 mb-3 mb-xl-0">
+          <ul class="navbar-nav mb-2 mb-lg-0 text-start text-sm-end">
+            <li class="nav-item me-lg-4 mb-2 mb-lg-0">
               <a
                 type="button nav-link"
                 class="btn btn-outline-secondary text-dark"
@@ -88,7 +87,7 @@
                 >Logga in</a
               >
             </li>
-            <li class="nav-item me-xl-4">
+            <li class="nav-item me-4">
               <div class="dropdown">
                 <button
                   class="btn btn-secondary dropdown-toggle"
@@ -113,7 +112,7 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-item mt-3 mt-xl-0">
+            <li class="nav-item">
               <button
                 class="btn btn-secondary"
                 type="button"
@@ -130,7 +129,7 @@
                 >
               </button>
             </li>
-            <li class="nav-item mt-2 mt-xl-0">
+            <li class="nav-item">
               <a id="admin-view-link" class="nav-link" href="./admin/"
                 >Adminvy</a
               >
@@ -634,10 +633,10 @@
             <div class="container">
               <div class="row border-bottom text-center">
                 <div class="col-1"><i class="bi bi-trash-fill"></i></div>
-                <div class="col-4 col-md-5 text-start pt-1 pt-lg-0"><h5>Produkt</h5></div>
-                <div class="col-2 pt-1 pt-lg-0"><h5>Pris <small>kr</small></h5></div>
-                <div class="col-2 col-md-2 pt-1 pt-lg-0 text-end"><h5>Antal</h5></div>
-                <div class="col-3 col-md-2 pt-1 pt-lg-0 text-end"><h5>Totalt <small>kr</small></h5></div>
+                <div class="col-4 col-md-5 text-start"><h5>Produkt</h5></div>
+                <div class="col-2"><h5>Pris</h5></div>
+                <div class="col-3 col-md-2"><h5>Antal</h5></div>
+                <div class="col-2"><h5>Totalt</h5></div>
               </div>
             </div>
             <div class="list-group">
@@ -661,9 +660,7 @@
             >
               Töm varukorgen
             </button>
-
-            <a id="checkOutLink">
-
+            <a href="#" id="checkOutLink">
               <button
                 type="button"
                 class="btn btn-primary btn-sm"
