@@ -9,6 +9,18 @@ function testForOnlyText(input) {
     let pattern = /^[a-zA-ZåäöÅÄÖ\-]*$/;
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
+
+/**
+ *  Takes input as String and checks for only characters
+ *  capital, lowercase and hyphen allowed
+ * @param {String} input to test 
+ * @returns true or false
+ */
+
+ function testForName(input) {
+    let pattern = /^[a-zA-ZåäöÅÄÖ\-\s\´\'\ñ\á\é\í\ó\ú]*$/;
+    return testForSqlInjections(input) ? false : pattern.test(input)
+}
 /**
  * Takes input as String and checks for 5 numbers
  * (swedish standard for zip codes)

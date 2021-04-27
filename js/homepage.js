@@ -498,8 +498,8 @@ function resetsInputBorders() {
 function validateForm() {
   let bool = true;
 
-  bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG);
-  bool = checkForInput(testForOnlyText, lastName, bool, LASTNAME_ERROR_MSG);
+  bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG);
+  bool = checkForInput(testForName, lastName, bool, LASTNAME_ERROR_MSG);
   bool = checkForInput(testForEmail, regristrationEmail, bool, EMAIL_ERROR_MSG);
   bool = checkForInput(
     testForNumbersOnly,
