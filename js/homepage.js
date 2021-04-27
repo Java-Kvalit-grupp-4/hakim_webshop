@@ -410,6 +410,8 @@ $("#login-button").click(() => {
 });
 
 //---------------------------------- Regristration ---------------------------------\\
+ 
+ 
 
 let firstName = $("#register-first-name"),
   lastName = $("#register-last-name"),
@@ -440,6 +442,47 @@ let FIRSTNAME_ERROR_MSG = $("#FIRSTNAME_ERROR_MSG"),
 /**
  * Eventlistener
  */
+
+ firstName.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
+});
+
+lastName.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForOnlyText, lastName, bool, LASTNAME_ERROR_MSG)
+});
+
+regristrationEmail.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForEmail, regristrationEmail, bool,EMAIL_ERROR_MSG)
+});
+
+phoneNumber.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForNumbersOnly,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
+});
+
+address.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
+});
+
+zipCode.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForZipCode, zipCode, bool,ZIPCODE_ERROR_MSG)
+});
+
+city.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
+});
+
+newPassword.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForPassword, newPassword, bool, WRONNG_PASSWORD_ERROR_MSG)
+});
+
 
 $("#confirm-account").click(() => {
   if (validateForm()) {
