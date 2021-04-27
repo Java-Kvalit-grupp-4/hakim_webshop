@@ -17,6 +17,10 @@ function testForOnlyText(input) {
  */
 function testForZipCode(input) {
     let test = input.replaceAll(' ', '')
+    console.log(test.length);
+    if(test.length == 6){
+        return false
+    }
     let pattern = /\d{3}[ ]?\d{2}/;
     return testForSqlInjections(test) ? false : pattern.test(test)
 }
