@@ -80,7 +80,7 @@ $(document).ready(() => {
 function load() {
   //const productsUrl = './TestData/test_data_products_v1.2.JSON'
   //const productsUrl = 'http://localhost:8080/products'
-  const productsUrl = "http://hakimlivs.herokuapp.com/products";
+  const productsUrl = "https://hakimlivs.herokuapp.com/products";
 
   axios
     .get(productsUrl)
@@ -177,6 +177,7 @@ function renderProducts(list) {
                       maximumFractionDigits: 2,
                     }
                   )} kr</h5>
+                  <p id="" class="card-comp-price">jfr-pris 60 kr/l</p>
                   <p id="${
                     element.description
                   }"class="card-text">Mer info om produkten</p>
@@ -287,14 +288,32 @@ function renderProducts(list) {
 
   //------------------------------- product-card-modal ----------------------------------\\
 
+  const renderProductPopUpModal = (element) => {
+    console.log('in here');
+    let imgSrc = element.children[0].children[0].src
+    let title = element.children[1].children[0].innerText
+    let desc = element.children[1].children[3].id
+    let price = element.children[1].children[1].innerText
+    let compPrice = element.children[1].children[2].innerText
+    $('#product-pop-up-img').attr("src", imgSrc)
+    $('#product-pop-up-title').text(title)
+    $('#product-pop-up-unit').text('250 ml')
+    $('#product-pop-up-desc').text(desc)
+    $('#product-pop-up-price').text(price)
+    $('#product-pop-up-comp-price').text(compPrice)
+
+  }
+
   $.each($(".card-text"), function (index, value) {
     value.addEventListener("click", () => {
+      renderProductPopUpModal(value.parentElement.parentElement)
       $("#product-card-modal").modal("show");
     });
   });
 
   $.each($(".product-card-img"), function (index, value) {
     value.addEventListener("click", () => {
+      renderProductPopUpModal(value.parentElement.parentElement)
       $("#product-card-modal").modal("show");
     });
   });
