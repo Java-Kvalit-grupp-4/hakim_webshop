@@ -433,12 +433,12 @@ let FIRSTNAME_ERROR_MSG = $("#FIRSTNAME_ERROR_MSG"),
 
  firstName.focusout(()=>{
   let bool = true
-  bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
+  bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG)
 });
 
 lastName.focusout(()=>{
   let bool = true
-  bool = checkForInput(testForOnlyText, lastName, bool, LASTNAME_ERROR_MSG)
+  bool = checkForInput(testForName, lastName, bool, LASTNAME_ERROR_MSG)
 });
 
 regristrationEmail.focusout(()=>{
