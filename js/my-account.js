@@ -30,6 +30,8 @@ WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
 NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
 NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
 
+let findAllOrdersURL = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email="
+let customerOrders=[];
 
 /**
  * Eventlisteners
@@ -81,6 +83,8 @@ $('#change-password-btn').click(() => {
   checkPasswordChange()
 })
 
+$(document).on('click', '.orderNumber', showOrder);
+
 
   /**
    * Functions
@@ -96,7 +100,6 @@ $('#change-password-btn').click(() => {
 
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
-
      firstName.val(formatFirstLetterToUpperCase(customer.firstName))
      lastName.val(formatFirstLetterToUpperCase(customer.lastName))
      email.val(customer.email)
@@ -104,6 +107,78 @@ $('#change-password-btn').click(() => {
      address.val(formatFirstLetterToUpperCase(customer.streetAddress))
      city.val(formatFirstLetterToUpperCase(customer.city.name))
      zipCode.val(formatZipCode(customer.zipCode))
+  }
+
+  function getAllOrders(){
+    let email = JSON.parse(sessionStorage.getItem('customer')).email
+    axios.get(findAllOrdersURL+ email)
+        .then((response) =>{
+            if(response.status ===200){
+              customerOrders = response.data  
+              fillOrderTable(response.data)
+            }
+            else{
+                swal("Något gick fel vid inläsning av ordrar")
+            }
+        })
+        .catch(err =>{
+            alert("Serverfel!" + err)
+        })
+  }
+
+  function fillOrderTable(customerOrders){
+      console.log(customerOrders)
+      if(customerOrders!=null){
+        sessionStorage.setItem("customerOrders",JSON.stringify(customerOrders));
+      
+        customerOrders.forEach(orders => {
+                let dateFromOrder = new Date(orders.timeStamp);
+                let orderDate = dateFromOrder.toISOString().substring(0,10);
+                console.log(orderDate)
+                //let orderNumber = (orders.id +"").substring(0,6)
+              
+                let isPaid = "Obetalad";
+                if(orders.isPaid){
+                    isPaid ="Betalad"
+                }
+                $("#orderTable").append(`
+                  <tr>
+                    <th scope="row" class="ps-md-5 orderNumber"> <a href="#show-selected-order" >${orders.orderNumber}</a></th>
+                    <td>${orderDate} </td>
+                    <td>${orders.totalCost.toFixed(2)}</td>
+                    <td>${orders.orderStatus.type}</td>
+                    <td>${isPaid}</td>
+                  </tr>`
+                )
+        })
+    }
+  }
+
+  function showOrder(){
+    $("#orderIncludes").empty()
+    let orderNumber = $(this).text()
+    $("#selected-order-number").html("Order " + orderNumber)
+
+    let customerOrders = JSON.parse(sessionStorage.getItem('customerOrders'))
+
+    customerOrders.forEach(order => {
+      if(order.orderNumber == orderNumber){
+        let totalQty = 0;
+        order.lineItems.forEach(lineItem => {
+          totalQty+=lineItem.quantity
+          $("#orderIncludes").append(`
+          <tr>
+              <td class="ps-md-5">${lineItem.product.title}</td>
+              <td>${lineItem.product.price.toFixed(2)}</td>
+              <td>${lineItem.quantity}</td>
+              <td class="text-center">${lineItem.itemPrice.toFixed(2)}</td>
+            </tr>`
+          )
+        })
+        $("#totalQuantity").html(totalQty)
+        $("#totalPrice").html(order.totalCost.toFixed(2))
+      }
+    })
   }
 
   function resetsInputBorders() {
@@ -213,5 +288,6 @@ $('#change-password-btn').click(() => {
     checkIfLoggedIn()
     hideAllErrorMsgs()
     fillInputFieldsWithLoggedIn()
+    getAllOrders()
   })
   
