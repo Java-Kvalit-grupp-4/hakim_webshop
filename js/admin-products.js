@@ -22,6 +22,9 @@ function loadProducts() {
     });
 
   function render(products) {
+
+  //  $("#isProductHidden").prop("checked", false);
+
     products.forEach((element) => {
       for (let i = 0; i < element.categories.length; i++) {
         let obj = element.categories[i];
@@ -109,12 +112,17 @@ function loadProducts() {
       productId = $(this).attr("id");
     });
 
+    let sku = "";
+
     /**
      * Select product's info and add it to the form on product site
      * Make check-boxes of the available categories and add property "checked" to the one corresponding the product's category
      */
     $("#choose").click(function () {
       $("#column").empty();
+      $("#tagColumn").empty();
+      $("#tagInput").val("");
+      
 
       products.forEach((element) => {
         if (element.sku == productId) {
@@ -122,10 +130,11 @@ function loadProducts() {
           $("#brand").val(element.brand.name);
           $("#description").val(element.description);
           $("#imge").val(element.image);
-          $("#sku").val(element.sku);
           $("#price").val(element.price);
           $("#lager").val(element.quantity);
           showCategories();
+          showTags(element);
+          sku = element.sku;
         }
 
         $("#column div").filter(function () {
@@ -147,27 +156,8 @@ function loadProducts() {
       $("#tab-product-site").tab("show");
     });
 
-    $("input:checkbox").on("change", function (e) {
-      console.log("Klick");
-    });
     /**
-     * Empty form to add new product
-     */
-    $("#new").click(function () {
-      $("#title").val("");
-      $("#brand").val("");
-      $("#description").val("");
-      $("#imge").val("");
-      $("#sku").val("");
-      $("#price").val("");
-      $("#lager").val("");
-      $("input").prop("checked", false);
-
-      $("#tab-product-site").tab("show");
-    });
-
-    /**
-     * Make object of selected product
+     * Make object of selected product and post it
      */
     $("#saveChanges").click(function () {
       let cat = [];
@@ -185,11 +175,18 @@ function loadProducts() {
       });
       console.log(productCategory);
 
+      let isAvailable = true;
+
+      if ($("#isProductHidden").is(":checked")) {
+        isAvailable = false;
+      }
+     
+
       let productObject = {
-        sku: $("#sku").val(),
+        sku: sku,
         description: $("#description").val(),
         image: $("#img").val(),
-        isAvailable: true,
+        isAvailable: isAvailable,
         price: $("#price").val(),
         quantity: $("#lager").val(),
         title: $("#title").val(),
@@ -204,13 +201,29 @@ function loadProducts() {
       console.log(productObject);
       alert("Produkten har sparats");
 
-      /*  axios.post("http://localhost:8080/products/add",  productObject  )
+        axios.post("https://hakimlivs.herokuapp.com/products/upsertProduct",  productObject  )
         .then(() => {
           console.log("Done!")
         })
         .catch(() => {
           alert('Något fick fel!','Vänligen försök igen', 'warning')
-        }) */
+        })
+      
+      /**
+     * Empty form to add new product
+     */
+    $("#new").click(function () {
+      $("#title").val("");
+      $("#brand").val("");
+      $("#description").val("");
+      $("#imge").val("");
+      $("#sku").val("");
+      $("#price").val("");
+      $("#lager").val("");
+      $("input").prop("checked", false);
+
+      $("#tab-product-site").tab("show");
+    });
     });
   }
 }
@@ -242,6 +255,20 @@ function showCategories() {
                 </div>
         `);
   });
+}
+
+function showTags(element) {
+  let tags = element.tags;
+  console.log(tags);
+  tags.forEach(e => {
+    console.log(e.name);
+  $("#tagColumn").append(`
+          <div id="${e.name}" class="form-check">
+                      <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${e.name}" onchange="removeIfUnchecked(${e.name})">
+                      <label class="form-check-label" for="${e.name}">${e.name}</label>
+                  </div>
+          `);
+        })
 }
 
 function removeIfUnchecked(value) {
