@@ -100,19 +100,13 @@ $(document).on('click', '.orderNumber', showOrder);
 
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
-    firstName.val(customer.firstName)
-     //firstName.val(formatFirstLetterToUpperCasec)
-     lastName.val(customer.lastName)
-     //lastName.val(formatFirstLetterToUpperCase(customer.lastName))
+     firstName.val(formatFirstLetterToUpperCase(customer.firstName))
+     lastName.val(formatFirstLetterToUpperCase(customer.lastName))
      email.val(customer.email)
-     phoneNumber.val(customer.phoneNumber)
-     //phoneNumber.val(formatPhoneNumber(customer.phoneNumber))
-     address.val(customer.streetAddress)
-     //address.val(formatFirstLetterToUpperCase(customer.streetAddress))
-     city.val(customer.city.name)
-     //city.val(formatFirstLetterToUpperCase(customer.city.name))
-     zipCode.val(customer.zipCode)
-     //zipCode.val(formatZipCode(customer.zipCode))
+     phoneNumber.val(formatPhoneNumber(customer.phoneNumber))
+     address.val(formatFirstLetterToUpperCase(customer.streetAddress))
+     city.val(formatFirstLetterToUpperCase(customer.city.name))
+     zipCode.val(formatZipCode(customer.zipCode))
   }
 
   function getAllOrders(){
@@ -128,7 +122,7 @@ $(document).on('click', '.orderNumber', showOrder);
             }
         })
         .catch(err =>{
-            alert("Server fel!" + err)
+            alert("Serverfel!" + err)
         })
   }
 
