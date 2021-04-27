@@ -1,21 +1,24 @@
-let password = $('#login-password');
-let email =$('#login-email');
-let navLoginBtn = $('#login-btn');
-let loginbutton2 = $('#login-button');
-let wrongEmail = $('#wrong-email')
-let wrongPassword = $('#wrong-password')
+let password = $("#login-password");
+let email = $("#login-email");
+let navLoginBtn = $("#login-btn");
+let loginbutton2 = $("#login-button");
+let wrongEmail = $("#wrong-email");
+let wrongPassword = $("#wrong-password");
 let whichPage = $("#login-page");
+let cartButton = $("#cartDropdown");
+let cartNumber = $("#total-items-in-cart");
 
-let emailToCheck = $('#login-email'),
-passwordToCheck = $('#login-password'),
-loginModal = $('#login-modal')
-
+let emailToCheck = $("#login-email"),
+  passwordToCheck = $("#login-password"),
+  loginModal = $("#login-modal");
 
 let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
 
 $(function () {
-  $("#total-items-in-cart").text(cartQuantity);
+  setCartButtonAvailability();
+  cartNumber.text(cartQuantity);
+  addShowOrHidePasswordOnButton();
 
   $("#newCust-button").click(() => {
     $("#registerForm").modal("show");
@@ -28,29 +31,38 @@ $(function () {
     }
   });
 
-
-  $("#show-password-button").click(function () {
-    if ($(this).text() == "Visa") {
-      $(this).text("Dölj");
-      password.attr("type", "text");
-    } else {
-      $(this).text("Visa");
-      password.attr("type", "password");
-    }
-  });
-
-  $("#login-btn").click(function () {
-    if ($(this).text() == "Logga in") {
-      $("#login-modal").modal("show");
-    } else {
-      sessionStorage.removeItem("customer");
-      $("#myAccountDropdown").hide();
-      $(this).text("Logga in");
-      adminview.hide();
-    }
-  });
+  setAvailableButtonsInNavbar();
 
   $("form").submit(false);
+
+  //------------------------------------- login ----------------------------------\\
+
+  $("#login-button").click(() => {
+    let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status !== 200) {
+          swal("Fel email eller lösenord", "", "warning");
+          emailToCheck.val("");
+          passwordToCheck.val("");
+        } else {
+          sessionStorage.setItem("customer", JSON.stringify(response.data));
+
+          if (response.data.isAdmin == true) {
+            location.replace("../../admin/index.html");
+          } else {
+            loginModal.modal("hide");
+            navLoginBtn.text("Logga ut");
+            myAccountMenu.show();
+          }
+        }
+      })
+      .catch((err) => {
+        alert("Serverfel!");
+      });
+  });
 
   //---------------------------------- Regristration ---------------------------------\\
 
@@ -119,6 +131,42 @@ $(function () {
   /**
    * Functions
    */
+
+  function setAvailableButtonsInNavbar() {
+    $("#login-btn").click(function () {
+      if ($(this).text() == "Logga in") {
+        $("#login-modal").modal("show");
+      } else {
+        sessionStorage.removeItem("customer");
+        $("#myAccountDropdown").hide();
+        $(this).text("Logga in");
+        adminview.hide();
+      }
+    });
+  }
+
+  function addShowOrHidePasswordOnButton() {
+    $("#show-password-button").click(function () {
+      if ($(this).text() == "Visa") {
+        $(this).text("Dölj");
+        password.attr("type", "text");
+      } else {
+        $(this).text("Visa");
+        password.attr("type", "password");
+      }
+    });
+  }
+
+  function setCartButtonAvailability() {
+    let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
+    if (cartQuantity <= 0 || cartQuantity == null) {
+      cartButton.attr("disabled", true);
+      cartNumber.hide();
+    } else {
+      cartButton.attr("disabled", false);
+      cartNumber.show();
+    }
+  }
 
   function hideAllErrorMsgs() {
     FIRSTNAME_ERROR_MSG.hide();
