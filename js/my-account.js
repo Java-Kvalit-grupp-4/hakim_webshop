@@ -10,7 +10,7 @@ $('form').submit(false)
 let firstName = $('#my-info-first-name'),
 lastName = $('#my-info-last-name'),
 email = $('#my-info-email'),
-phoneNumber = $('#my-info-phone-number'),
+myAccountPhoneNumber = $('#my-info-phone-number'),
 address = $('#my-info-address'),
 city = $('#my-info-city'),
 zipCode = $('#my-info-zipCode'),
@@ -40,7 +40,7 @@ $("#login-btn").click(function(){
   })
 
 $('#submit').click( () => { 
-  if(validateForm()) {
+  if(validateFormMyAccount()) {
     
     resetsInputBorders()
     
@@ -54,7 +54,7 @@ $('#submit').click( () => {
     let updateInfo = {
       "firstName": firstName.val().trim(), 
       "lastName": lastName.val().trim(), 
-      "phoneNumber": formatPhoneNumberForDB(phoneNumber.val().trim()), 
+      "phoneNumber": formatPhoneNumberForDB(myAccountPhoneNumber.val().trim()), 
       "email": email.val().trim(),    
       "streetAddress": address.val(),
       "zipCode": formatZipForDB(zipCode.val().trim()),
@@ -100,7 +100,7 @@ $('#change-password-btn').click(() => {
      firstName.val(formatFirstLetterToUpperCase(customer.firstName))
      lastName.val(formatFirstLetterToUpperCase(customer.lastName))
      email.val(customer.email)
-     phoneNumber.val(formatPhoneNumber(customer.phoneNumber))
+     myAccountPhoneNumber.val(formatPhoneNumber(customer.phoneNumber))
      address.val(formatFirstLetterToUpperCase(customer.streetAddress))
      city.val(formatFirstLetterToUpperCase(customer.city.name))
      zipCode.val(formatZipCode(customer.zipCode))
@@ -110,7 +110,7 @@ $('#change-password-btn').click(() => {
     resetBorder(firstName)
     resetBorder(lastName)
     resetBorder(email)
-    resetBorder(phoneNumber)
+    resetBorder(myAccountPhoneNumber)
     resetBorder(address)
     resetBorder(zipCode)
     resetBorder(city)
@@ -129,13 +129,14 @@ $('#change-password-btn').click(() => {
     WRONNG_PASSWORD_ERROR_MSG.hide()
   }
 
-  function validateForm() {
+  function validateFormMyAccount() {
     let bool = true
 
+    console.log(myAccountPhoneNumber.val());
     bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
     bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
     bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
-    bool = checkForInput(testForPhoneNumber,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
+    bool = checkForInput(testForPhoneNumber,myAccountPhoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
     bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
     bool = checkForInput(testForZipCode, zipCode, bool,ZIPCODE_ERROR_MSG)
     bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
