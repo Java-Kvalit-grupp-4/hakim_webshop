@@ -1,7 +1,7 @@
 let cartButton = $("#cartDropdown");
 let cartNumber = $("#total-items-in-cart");
 let adminview = $("#admin-view-link");
-let loggedIn = sessionStorage.getItem("customer");
+let loggedIn = JSON.parse(sessionStorage.getItem("customer"));
 let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
 
 $(function () {
