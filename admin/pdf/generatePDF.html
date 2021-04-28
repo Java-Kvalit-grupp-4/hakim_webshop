@@ -21,13 +21,20 @@
                     <span>Ordernummer:</span>
                 </div>
                 <div>
-                    <span>Kundnamn:</span>
+                    <span>Kundnamn:
+                        <div id="fullName"></div>
+                    </span>
                 </div>
                 <div>
-                    <span>Leveransadress:</span>
+                    <span>Leveransadress:
+                        <div id="adress"></div>
+                        <div id="zip"><div id="city"></div></div>
+                    </span>
                 </div>
                 <div>
-                    <span>Email:</span>
+                    <span>Email:
+                        <div id="email"></div>
+                    </span>
                 </div>
             </div>
             <div id="project">
@@ -57,14 +64,15 @@
             <table>
                 <thead>
                     <tr>
-                        <th class="product">Artikelnummer</th>
-                        <th class="desc">Produktnamn</th>
+                        <th>Artikelnummer</th>
+                        <th>Produktnamn</th>
                         <th>Pris kr</th>
                         <th>Antal</th>
                         <th>Totalt kr</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <div id="order-container"></div>
                     <div id="line-items">
                         <tr>
                             <td class="product"></td>
@@ -76,7 +84,7 @@
                     </div>
                     <tr>
                         <td colspan="4" class="grand total">Summa</td>
-                        <td class="grand total"></td>
+                        <td class="grand total" id="order-total-price"></td>
                     </tr>
                     <tr>
                         <td colspan="4">Frakt</td>
@@ -84,7 +92,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">Moms 12%</td>
-                        <td class="total"></td>
+                        <td class="total" id="vat"></td>
                     </tr>
                     <tr>
                         <td colspan="4" class="grand total">Totalsumma</td>
