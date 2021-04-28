@@ -87,13 +87,21 @@ $(document).ready(() => {
         $('#myAccountDropdown').hide()
       }
       products = data;
+      let availableProducts = [];
+      products.forEach(element => {
+        if (element.isAvailable == true) {
+          availableProducts.push(element)
+        }
+      });
+      console.log(availableProducts);
 
-      localStorage.setItem('categoryList', JSON.stringify(products));
-      renderProducts(products);
+
+      localStorage.setItem('categoryList', JSON.stringify(availableProducts));
+      renderProducts(availableProducts);
      
       let categories = [];
 
-      products.forEach(product => {
+      availableProducts.forEach(product => {
         product.categories.forEach(category => {
           categories.push(category.name)
         })
@@ -114,12 +122,12 @@ $(document).ready(() => {
         let categoryName = $(this).attr("id");
         let selectedCategoryList = [];
 
-          products.forEach(product => {
+        availableProducts.forEach(product => {
             
             if(categoryName === "all"){
               $("#products").empty();
-              renderProducts(products);
-              localStorage.setItem('categoryList', JSON.stringify(products));
+              renderProducts(availableProducts);
+              localStorage.setItem('categoryList', JSON.stringify(availableProducts));
             }else{
               let currentProduct = product
               product.categories.forEach(category => {
@@ -182,7 +190,7 @@ function renderProducts(list) {
 
       $.each($('.add-product-to-cart'),function( index, value ) {
         value.addEventListener('click',(e) => {
-          products.forEach(product => {
+          availableProducts.forEach(product => {
           
             if(product.sku == e.target.parentElement.parentElement.parentElement.id){
 
@@ -207,7 +215,7 @@ function renderProducts(list) {
       
       $.each($('.add1btn'),function( index, value ) {
         value.addEventListener('click',(e) => {
-          products.forEach(product => {
+          availableProducts.forEach(product => {
           
             if(product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id){
               let currentValue= Number(e.target.parentElement.parentElement.children[1].children[0].value) +1;
@@ -220,7 +228,7 @@ function renderProducts(list) {
       })
       $.each($('.reduce1btn'),function( index, value ) {
         value.addEventListener('click',(e) => {
-          products.forEach(product => {
+          availableProducts.forEach(product => {
             if(product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id){
              
               let currentValue= Number(e.target.parentElement.parentElement.children[1].children[0].value) -1;
