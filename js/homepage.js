@@ -269,7 +269,7 @@ function renderProducts(list) {
 
     $.each($(".add-product-to-cart"), function (index, value) {
         value.addEventListener("click", (e) => {
-            availableProducts.forEach((product) => {
+            products.forEach((product) => {
                 if (
                     product.sku == e.target.parentElement.parentElement.parentElement.id
                 ) {
