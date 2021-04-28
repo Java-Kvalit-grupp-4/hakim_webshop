@@ -20,7 +20,7 @@
 
   <body>
     <nav>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <nav class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="../index.html" id="nav-home">ADMIN</a>
           <button
@@ -35,7 +35,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex mx-3">
+            <form class="d-flex mx-lg-3 my-5 my-xl-0">
               <select
                 class="form-select form-select-sm mx-22"
                 aria-label=".form-select-sm example"
@@ -57,17 +57,14 @@
               </button>
             </form>
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="../Products/index.html"
-                  id="nav-products"
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+              <li class="nav-item ">
+                <a class="nav-link" href="index.html" id="nav-products"
                   >Produkter</a
                 >
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="index.html" id="nav-orders">
+              <li class="nav-item ">
+                <a class="nav-link" href="../Orders/index.html" id="nav-orders">
                   Ordrar</a
                 >
               </li>
@@ -194,8 +191,8 @@
             <div class="col-12 col-md-5 col-lg-4 my-3 mt-md-0">
               <select class="form-select" aria-label="Orderstatus">
                 <option selected disabled>Orderstatus</option>
-                <option value="1">Obehandlad</option>
-                <option value="2">Plockas</option>
+                <option value="1">Ohanterad</option>
+                <option value="2">Plockning pågår</option>
                 <option value="3">Skickad</option>
                 <option value="4">Avbeställd</option>
               </select>
@@ -406,16 +403,25 @@
               <div class="container text-end pe-4" id="order-total-cost">
                 <p>Totalt: </p>
               </div>
-
-              <div class="text mb-2 px-3 ms-xl-4 col-lg-6">
-                Orderstatus
-                <select class="form-select" aria-label="Orderstatus">
-                  <option selected disabled>Orderstatus</option>
-                  <option value="Obehandlad">Väntar på behandling</option>
-                  <option value="2">Plockning pågår</option>
-                  <option value="3">Skickad</option>
-                  <option value="4">Avbeställd</option>
-                </select>
+              <div class="row">
+                <div class="text mb-2 px-3 ms-xl-4 col-lg-6">
+                  Orderstatus
+                  <select class="form-select" aria-label="Orderstatus">
+                    <option selected disabled>Orderstatus</option>
+                    <option value="Obehandlad">Väntar på behandling</option>
+                    <option value="2">Plockning pågår</option>
+                    <option value="3">Skickad</option>
+                    <option value="4">Avbeställd</option>
+                  </select>
+                </div>
+                <div class="text mb-2 px-3 ms-xl-4 col-lg-5">
+                  Betalstatus
+                  <select class="form-select" aria-label="Orderstatus">
+                    <option selected disabled>Betalstatus</option>
+                    <option value="isPaid">Betald</option>
+                    <option value="isUnpaid">Obetald</option>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -446,7 +452,7 @@
         </div>
       </div>
     </div>
-    <script>
+    <!-- <script>
       let customer = JSON.parse(sessionStorage.getItem("customer"));
       console.log(customer);
       if (
@@ -456,7 +462,7 @@
       ) {
         window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html";
       }
-    </script>
+    </script> -->
 
     <script
       type="text/javascript"
