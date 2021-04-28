@@ -47,9 +47,7 @@ $('#submit').click( () => {
     resetsInputBorders()
     
     let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
-
     // let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
-
     //let updateUserInfo = `http://localhost:8080/users/update/user/info`
 
     // create object to update
@@ -213,7 +211,6 @@ $(document).ready(() => {
   function validateFormMyAccount() {
     let bool = true
 
-    console.log(myAccountPhoneNumber.val());
     bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG)
     bool = checkForInput(testForName, lastName, bool,LASTNAME_ERROR_MSG)
     bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
@@ -256,9 +253,7 @@ $(document).ready(() => {
   const updatePassword = (newPassword) => {
 
     let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
-
     // let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
-
     //let updatePasswordUrl = `http://localhost:8080/users/update/password`
 
     let updatePassword = {
