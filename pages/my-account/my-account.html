@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../../styles/style.css" />
+    <link rel="stylesheet" href="my-account.css" />
+    <link rel="stylesheet" href="../../styles/cart-pop-up.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../../styles/style.css" />
-  <link rel="stylesheet" href="my-account.css">
-  <title>Mina sidor</title>
-</head>
+    <title>Mina sidor</title>
+  </head>
 
-<body id = "myAccountPage">
-  <!-- navbar (prototype) -->
-  
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <body id="myAccountPage">
+    <!-- navbar (prototype) -->
+
+    <nav class="navbar navbar-expand-xl navbar-light fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand " href="../../index.html"
-          ><img src="../../logo.png" class="img-fluid nav-image " style=" margin-left: -0.5rem;"
+        <a class="navbar-brand" href="/index.html"
+          ><img
+            src="../../logo.png"
+            class="img-fluid nav-image"
+            style="margin-left: -0.5rem"
+            alt="Hakim Livs logga"
         /></a>
         <button
+          id="mobileMenu"
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -33,50 +43,50 @@
         </button>
         <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
         <div
-          class="d-flex justify-content-evenly collapse navbar-collapse"
+          class="d-xl-flex justify-content-xl-end collapse navbar-collapse"
           id="navbarTogglerDemo02"
         >
-          <div class="container col-md-6 mt-3">
-            <div class="input-group mb-3 me-5">
-              <input
-                type="text"
-                class="form-control product-search"
-                placeholder="Sök produkt"
-                aria-label="Sök"
-                aria-describedby="search-button"
-              />
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                id="search-button"
-                style="width: 5rem"
-              >
-                Sök
-              </button>
-            </div>
-          </div>
+          <!-- <div class="container col-md-6 mt-3"> -->
+          <!-- <div class="input-group mb-3 me-0 me-xl-5"> -->
+          <!-- searchfield -->
 
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item me-4">
+          <!-- searchfield ends -->
+          <!-- <input
+              type="text"
+              class="form-control product-search"
+              placeholder="Sök produkt"
+              aria-label="Sök"
+              aria-describedby="search-button"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="search-button"
+              style="width: 5rem"
+            >
+              Sök
+            </button> -->
+          <!-- </div> -->
+          <!-- </div> -->
+
+          <ul class="navbar-nav mb-2 mb-xl-0 text-start text-sm-end">
+            <li class="nav-item me-xl-4 mb-3 mb-xl-0">
               <a
                 type="button nav-link"
                 class="btn btn-outline-secondary text-dark"
                 id="login-btn"
-                href="../../"
                 >Logga ut</a
               >
             </li>
-            <li class="nav-item me-4">
+            <li class="nav-item me-xl-4">
               <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
+                <a
+                  href="../my-account/my-account.html"
+                  type="button nav-link"
+                  class="btn btn-secondary text-dark"
                   id="myAccountDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  >Mina sidor</a
                 >
-                  Mina sidor
-                </button>
                 <ul class="dropdown-menu" aria-labelledby="myAccountDropdown">
                   <li>
                     <a
@@ -86,26 +96,32 @@
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="../my-account/my-account.html">Se tidigare ordrar</a>
+                    <a class="dropdown-item" href="#">Se tidigare ordrar</a>
                   </li>
                 </ul>
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mt-3 mt-xl-0">
               <button
                 class="btn btn-secondary"
                 type="button"
                 id="cartDropdown"
                 data-bs-toggle="modal"
+                data-bs-target="#cart-pop-up"
                 aria-expanded="false"
               >
                 Varukorg&nbsp;&nbsp;<span
                   class="badge badge-pill bg-danger"
-                  id="cart-label-2"
+                  id="total-items-in-cart"
                   style="display: inline"
-                  >2</span
+                  >0</span
                 >
               </button>
+            </li>
+            <li class="nav-item mt-2 mt-xl-0">
+              <a id="admin-view-link" class="nav-link" href="../../admin/"
+                >Adminvy</a
+              >
             </li>
           </ul>
         </div>
@@ -113,228 +129,461 @@
     </nav>
 
     <!-- navbar end -->
-  <div class="tab-menu">
-  <ul class="nav nav-tabs justify-content-center bg-secondary" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="my-orders-tab" data-bs-toggle="tab" data-bs-target="#my-orders" type="button"
-        role="tab" aria-controls="my-orders" aria-selected="true">
-        Mina ordrar
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-        role="tab" aria-controls="profile" aria-selected="false">
-        Min information
-      </button>
-    </li>
-  </ul>
-</div>
 
-  <div class="tab-content">
-    <div class="tab-pane" id="my-orders" role="tabpanel" aria-labelledby="my-orders-tab">
-
-
-      <div class="container mt-5 col-xl-10">
-        <h2>Mina ordrar</h2>
-      </div>
-      <div class="container mt-5  py-3 col-xl-10">
-        <table class="table table-secondary ">
-          <thead>
-            <tr>
-              <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
-              <th scope="col" class="pb-3 ">Datum </th>
-              <th scope="col" class="pb-3">Totalt</th>
-              <th scope="col" class="pb-3">Orderstatus</th>
-              <th scope="col" class="pb-3">Betalstatus</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" class="ps-md-5"><a href="#">2341-4567</a> </th>
-              <td>2021-01-20</td>
-              <td>135 kr</td>
-              <td>Levererad</td>
-              <td>Mottagen</td>
-            </tr>
-            <tr>
-              <th scope="row" class="ps-md-5"><a href="#">2341-4581</a> </th>
-              <td>2021-02-13</td>
-              <td>453 kr</td>
-              <td>Levererad</td>
-              <td>Mottagen</td>
-            </tr>
-            <tr>
-              <th scope="row" class="ps-md-5"> <a href="#">2341-9867</a></th>
-              <td>2021-03-26</td>
-              <td>321 kr</td>
-              <td>Skickad</td>
-              <td>Väntar på betalning</td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
-      <div class="container mt-5 col-xl-10">
-        <h2 id="selected-order-number">Order 2341-4567</h2>
-      </div>
-      <div class="container my-5 py-3 col-xl-10" id="show-selected-order">
-        <table class="table table-secondary">
-          <thead>
-            <tr>
-              <th scope="col" class="pb-3 ps-md-5">Produkt</th>
-              <th scope="col" class="pb-3">Pris</th>
-              <th scope="col" class="pb-3">Antal</th>
-              <th scope="col" class="pb-3 text-center">Totalt</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="ps-md-5">Kaffe - Gevalia</td>
-              <td>36 kr</td>
-              <td>2</td>
-              <td class="text-center">72 kr</td>
-            </tr>
-            <tr>
-              <td class="ps-md-5">Dasspapper - Serla</td>
-              <td>79 kr</td>
-              <td>1</td>
-              <td class="text-center">79 kr</td>
-            </tr>
-            <tr>
-              <td class="ps-md-5">Kaffe - Gevalia</td>
-              <td>36 kr</td>
-              <td>2</td>
-              <td class="text-center">72 kr</td>
-
-            </tr>
-          </tbody>
-          <tfoot>
-            <td></td>
-            <td></td>
-            <th scope="row">4</th>
-            <td class="text-center">135 kr</td>
-          </tfoot>
-        </table>
-
-      </div>
+    <!-- Tab menu starts here -->
+    <div class="tab-menu">
+      <ul
+        class="nav nav-tabs justify-content-center bg-secondary"
+        id="myTab"
+        role="tablist"
+      >
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="my-orders-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#my-orders"
+            type="button"
+            role="tab"
+            aria-controls="my-orders"
+            aria-selected="true"
+          >
+            Mina ordrar
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#profile"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+          >
+            Min information
+          </button>
+        </li>
+      </ul>
     </div>
-    <div class="tab-pane active " id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <div class="container pb-5">
-        <div class="container col-8">
-          <div class="customer-info mt-5">
-            <div class="mb-5">
-              <h2>Kundinformation</h2>
-            </div>
-            <form >
-              <div class="row gx-5">
-                <div class="col-lg-6 mb-3">
-                  <label for="my-info-first-name" class="form-label">Förnamn</label>
-                  <input type="text" class="form-control" placeholder="Förnamn" aria-label="Förnamn" required name="firstName" maxlength="50"
-                    id="my-info-first-name">
-                    <div id="FIRSTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
-                </div>
-                <div class="col mb-3">
-                  <label for="my-info-last-name" class="form-label">Efternamn</label>
-                  <input type="text" class="form-control " placeholder="Efternamn" aria-label="Efternamn" required name="lastName" maxlength="50"
-                    id="my-info-last-name">
-                    <div id="LASTNAME_ERROR_MSG" class="error-msg">Förnamn måste bestå av endast bokstäver, max 50 tecken</div>
-                </div>
-              </div>
-              <div class="row gx-5 ">
-                <div class="col mb-3">
-                  <label for="my-info-email-name" class="form-label">E-post</label>
-                  <input type="text" class="form-control" placeholder="E-post" aria-label="E-post" required name="email" maxlength="325" readonly
-                    id="my-info-email">
-                    <div id="EMAIL_ERROR_MSG" class="error-msg">Felaktig email</div>
-                </div>
-                <div class="col-lg-6 mb-3">
-                  <label for="my-info-phone_number" class="form-label">Telefonnummer</label>
-                  <input type="text" class="form-control" placeholder="Telefonnummer" aria-label="Telefonnummer" required name="phoneNumber" maxlength="20"
-                    id="my-info-phone-number">
-                    <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">Felaktig telefonnummer</div>
-                </div>
-              </div>
-              <div class="row gx-5 ">
-                <div class="col-lg-6 mb-3">
-                  <label for="my-info-address" class="form-label">Gatuadress</label>
-                  <input type="text" class="form-control" placeholder="Gatuadress" aria-label="Adress" required name="address" maxlength="50"
-                    id="my-info-address">
-                    <div id="ADDRESS_ERROR_MSG" class="error-msg">Felaktig adress, adress skall innehålla Gatunamn samt nummer</div>
-                </div>
-                <div class="col-lg-6 mb-3">
-                  <label for="my-info-zipCode" class="form-label">Postnummer</label>
-                  <input type="text" class="form-control" placeholder="Postnummer" aria-label="Postnummer" required name="zipCode" maxlength="6"
-                    id="my-info-zipCode">
-                    <div id="ZIPCODE_ERROR_MSG" class="error-msg">Felaktigt postnummer, måste matas in t.ex "123 45"</div>
-                </div>
-              </div>
-              <div class="row gx-5">
-                <div class="col mb-3">
-                  <label for="my-info-city" class="form-label">Postort</label>
-                  <input type="text" class="form-control " placeholder="Postort" aria-label="Postort" required name="city" maxlength="50"
-                    id="my-info-city">
-                    <div id="CITY_ERROR_MSG" class="error-msg">Felaktig ort, ort skall innehålla bara bokstäver</div>
-                </div>
-                <div class="col mb-3 mt-4">
-                  <button type="" id="submit" class="btn btn-secondary save-button" style="width: 100px;">Spara</button>
-                </div>
-              </div>
-              <div class="row mb-5 ">
-            </div>
-          </div>
-          </form>
+    <!-- Tab menu ends here -->
 
-            <div class="change-password mt-5">
-              <div class="mb-5 ">
-                <h2>Ändra Lösenord</h2>
+    <!-- Tab My Orders starts here -->
+    <div class="tab-content">
+      <div
+        class="tab-pane"
+        id="my-orders"
+        role="tabpanel"
+        aria-labelledby="my-orders-tab"
+      >
+        <div class="container mt-5 col-xl-10">
+          <h2>Mina ordrar</h2>
+        </div>
+        <div class="container mt-5 py-3 col-xl-10">
+          <table class="table table-secondary">
+            <thead>
+              <tr>
+                <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
+                <th scope="col" class="pb-3">Datum</th>
+                <th scope="col" class="pb-3">Totalt</th>
+                <th scope="col" class="pb-3">Orderstatus</th>
+                <th scope="col" class="pb-3">Betalstatus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="ps-md-5"><a href="#">2341-4567</a></th>
+                <td>2021-01-20</td>
+                <td>135 kr</td>
+                <td>Levererad</td>
+                <td>Mottagen</td>
+              </tr>
+              <tr>
+                <th scope="row" class="ps-md-5"><a href="#">2341-4581</a></th>
+                <td>2021-02-13</td>
+                <td>453 kr</td>
+                <td>Levererad</td>
+                <td>Mottagen</td>
+              </tr>
+              <tr>
+                <th scope="row" class="ps-md-5"><a href="#">2341-9867</a></th>
+                <td>2021-03-26</td>
+                <td>321 kr</td>
+                <td>Skickad</td>
+                <td>Väntar på betalning</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="container mt-5 col-xl-10">
+          <h2 id="selected-order-number">Order 2341-4567</h2>
+        </div>
+        <div class="container my-5 py-3 col-xl-10" id="show-selected-order">
+          <table class="table table-secondary">
+            <thead>
+              <tr>
+                <th scope="col" class="pb-3 ps-md-5">Produkt</th>
+                <th scope="col" class="pb-3">Pris</th>
+                <th scope="col" class="pb-3">Antal</th>
+                <th scope="col" class="pb-3 text-center">Totalt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ps-md-5">Kaffe - Gevalia</td>
+                <td>36 kr</td>
+                <td>2</td>
+                <td class="text-center">72 kr</td>
+              </tr>
+              <tr>
+                <td class="ps-md-5">Dasspapper - Serla</td>
+                <td>79 kr</td>
+                <td>1</td>
+                <td class="text-center">79 kr</td>
+              </tr>
+              <tr>
+                <td class="ps-md-5">Kaffe - Gevalia</td>
+                <td>36 kr</td>
+                <td>2</td>
+                <td class="text-center">72 kr</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <td></td>
+              <td></td>
+              <th scope="row">4</th>
+              <td class="text-center">135 kr</td>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <!-- Tab my orders ends here -->
+
+      <!-- Tab my information starts here -->
+      <div
+        class="tab-pane active"
+        id="profile"
+        role="tabpanel"
+        aria-labelledby="profile-tab"
+      >
+        <div class="container pb-5">
+          <div class="container col-8">
+            <div class="customer-info mt-5">
+              <div class="mb-5">
+                <h2>Kundinformation</h2>
               </div>
               <form>
                 <div class="row gx-5">
-                <div class="col-lg-6 mb-3">
-                  <label for="my-info-first-name" class="form-label">Gammalt lösenord</label>
-                  <input type="text" class="form-control" placeholder="Gammalt lösenord" aria-label="Gammalt lösenord" minlength="6" maxlength="50"
-                    id="my-info-old-password">
-                    <div id="WRONG_PASSWORD_ERROR_MSG" class="error-msg">Felaktigt lösenord</div>
-                </div>
+                  <div class="col-lg-6 mb-3">
+                    <label for="my-info-first-name" class="form-label"
+                      >Förnamn</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Förnamn"
+                      aria-label="Förnamn"
+                      required
+                      name="firstName"
+                      maxlength="50"
+                      id="my-info-first-name"
+                    />
+                    <div id="FIRSTNAME_ERROR_MSG" class="error-msg">
+                      Förnamn måste bestå av endast bokstäver, max 50 tecken
+                    </div>
+                  </div>
+                  <div class="col mb-3">
+                    <label for="my-info-last-name" class="form-label"
+                      >Efternamn</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Efternamn"
+                      aria-label="Efternamn"
+                      required
+                      name="lastName"
+                      maxlength="50"
+                      id="my-info-last-name"
+                    />
+                    <div id="LASTNAME_ERROR_MSG" class="error-msg">
+                      Förnamn måste bestå av endast bokstäver, max 50 tecken
+                    </div>
+                  </div>
                 </div>
                 <div class="row gx-5">
-                <div class="col-lg-6 mb-3">
-                  <label for="my-info-first-name" class="form-label">Nytt lösenord</label>
-                  <input type="text" class="form-control" placeholder="Nytt lösenord" aria-label="Nytt lösenord" minlength="6" maxlength="50"
-                    id="my-info-new-password">
-                    <div id="NEW_PASSWORD_NOT_MATCH_ERROR_MSG" class="error-msg">Lösenorden matchar inte</div>
-                    <div id="NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG" class="error-msg">Du har redan detta lösenord</div>
+                  <div class="col mb-3">
+                    <label for="my-info-email" class="form-label">E-post</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="E-post"
+                      aria-label="E-post"
+                      required
+                      name="email"
+                      maxlength="325"
+                      readonly
+                      id="my-info-email"
+                    />
+                    <div id="EMAIL_ERROR_MSG" class="error-msg">
+                      Felaktig email
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label for="my-info-phone-number" class="form-label"
+                      >Telefonnummer</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Telefonnummer"
+                      aria-label="Telefonnummer"
+                      required
+                      name="phoneNumber"
+                      maxlength="20"
+                      id="my-info-phone-number"
+                    />
+                    <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">
+                      Felaktig telefonnummer
+                    </div>
+                  </div>
                 </div>
+                <div class="row gx-5">
+                  <div class="col-lg-6 mb-3">
+                    <label for="my-info-address" class="form-label"
+                      >Gatuadress</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Gatuadress"
+                      aria-label="Adress"
+                      required
+                      name="address"
+                      maxlength="50"
+                      id="my-info-address"
+                    />
+                    <div id="ADDRESS_ERROR_MSG" class="error-msg">
+                      Felaktig adress, adress skall innehålla Gatunamn samt
+                      nummer
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label for="my-info-zipCode" class="form-label"
+                      >Postnummer</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Postnummer"
+                      aria-label="Postnummer"
+                      required
+                      name="zipCode"
+                      maxlength="6"
+                      id="my-info-zipCode"
+                    />
+                    <div id="ZIPCODE_ERROR_MSG" class="error-msg">
+                      Felaktigt postnummer, måste matas in t.ex "123 45"
+                    </div>
+                  </div>
                 </div>
-                <div class="row gx-5 mb-5">
-                <div class="col-lg-6 mb-3">
-                  <label for="my-info-first-name" class="form-label">Bekräfta lösenord</label>
-                  <input type="text" class="form-control" placeholder="Bekräfta nytt lösenord" aria-label="Bekräfta nytt lösenord" minlength="6" maxlength="50"
-                    id="my-info-re-new-password">
+                <div class="row gx-5">
+                  <div class="col mb-3">
+                    <label for="my-info-city" class="form-label">Postort</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Postort"
+                      aria-label="Postort"
+                      required
+                      name="city"
+                      maxlength="50"
+                      id="my-info-city"
+                    />
+                    <div id="CITY_ERROR_MSG" class="error-msg">
+                      Felaktig ort, ort skall innehålla bara bokstäver
+                    </div>
+                  </div>
+                  <div class="col mb-3 mt-4">
+                    <button
+                      type="button"
+                      id="submit"
+                      class="btn btn-secondary save-button"
+                      style="width: 100px"
+                    >
+                      Spara
+                    </button>
+                  </div>
                 </div>
-                <div class="col mb-3 mt-4">
-                  <button type="" class="btn btn-secondary save-button" id="change-password-btn" style="width: 100px;">Spara</button>
+                <div class="row mb-5"></div>
+              </form>
+
+              <div class="change-password mt-5">
+                <div class="mb-5">
+                  <h2>Ändra Lösenord</h2>
                 </div>
-                
-                </div>
-                </div>
+                <form>
+                  <div class="row gx-5">
+                    <div class="col-lg-6 mb-3">
+                      <label for="my-info-first-name" class="form-label"
+                        >Gammalt lösenord</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Gammalt lösenord"
+                        aria-label="Gammalt lösenord"
+                        minlength="6"
+                        maxlength="50"
+                        id="my-info-old-password"
+                      />
+                      <div id="WRONG_PASSWORD_ERROR_MSG" class="error-msg">
+                        Felaktigt lösenord
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row gx-5">
+                    <div class="col-lg-6 mb-3">
+                      <label for="my-info-first-name" class="form-label"
+                        >Nytt lösenord</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Nytt lösenord"
+                        aria-label="Nytt lösenord"
+                        minlength="6"
+                        maxlength="50"
+                        id="my-info-new-password"
+                      />
+                      <div
+                        id="NEW_PASSWORD_NOT_MATCH_ERROR_MSG"
+                        class="error-msg"
+                      >
+                        Lösenorden matchar inte
+                      </div>
+                      <div
+                        id="NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG"
+                        class="error-msg"
+                      >
+                        Du har redan detta lösenord
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row gx-5 mb-5">
+                    <div class="col-lg-6 mb-3">
+                      <label for="my-info-first-name" class="form-label"
+                        >Bekräfta lösenord</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Bekräfta nytt lösenord"
+                        aria-label="Bekräfta nytt lösenord"
+                        minlength="6"
+                        maxlength="50"
+                        id="my-info-re-new-password"
+                      />
+                    </div>
+                    <div class="col mb-3 mt-4">
+                      <button
+                        type=""
+                        class="btn btn-secondary save-button"
+                        id="change-password-btn"
+                        style="width: 100px"
+                      >
+                        Spara
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-          </form>
         </div>
       </div>
     </div>
-  </div>
-  </div>
-  </div>
-  </div>
 
+    <!-- Cart modal -->
+    <div
+      class="modal fade m-0"
+      id="cart-pop-up"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+      style="padding-right: 0"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Din varukorg</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row border-bottom text-center">
+                <div class="col-1"><i class="bi bi-trash-fill"></i></div>
+                <div class="col-4 col-md-5 text-start pt-1 pt-lg-0">
+                  <h5>Produkt</h5>
+                </div>
+                <div class="col-2 pt-1 pt-lg-0">
+                  <h5>Pris <small>kr</small></h5>
+                </div>
+                <div class="col-2 col-md-2 pt-1 pt-lg-0 text-end text-md-center">
+                  <h5>Antal</h5>
+                </div>
+                <div class="col-3 col-md-2 pt-1 pt-lg-0 text-end  text-md-center">
+                  <h5>Totalt <small>kr</small></h5>
+                </div>
+              </div>
+            </div>
+            <div class="list-group">
+              <div id="cartOutput"></div>
+            </div>
+          </div>
+          <div class="container total-price-row">
+            <div class="row px-3">
+              <div class="col-7 col-sm-8"></div>
+              <div class="col-3 col-sm-2 text-center">
+                <h5 class="total-price">Totalt:</h5>
+              </div>
+              <div class="col-2 text-center" id="priceOutput"></div>
+            </div>
+          </div>
+          <div class="modal-footer smaller">
+            <button
+              type="button"
+              class="btn btn-outline-secondary me-xs-2 me-lg-4 btn-sm"
+              id="clear"
+            >
+              Töm varukorgen
+            </button>
+            <a href="#" id="checkOutLink">
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                id="checkout-button"
+              >
+                Gå till kassan
+              </button></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- cart modal ends -->
 
-  </div>
-
-  </div>
-
-  <footer class="bg-dark text-center text-lg-start">
+    <footer class="bg-dark text-center text-lg-start">
       <div class="container p-4 justify-content-center">
         <div class="row">
           <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
@@ -342,7 +591,7 @@
 
             <ul class="list-unstyled mb-3">
               <li>
-                <p id="phone"></p></a>
+                <p id="phone"></p>
               </li>
               <li>
                 <a href="mailto:hakimlivs@gmail.com"
@@ -354,8 +603,9 @@
                   href="https://www.google.com/maps/search/Kungsgatan+65,+Stockholm+3/@59.3332978,18.0530605,17z/data=!3m1!4b1"
                   class="text-light"
                   target="_blank"
-                  ><div id="">Kungsgatan 65, Stockholm 3</div></a
                 >
+                  <div id="">Kungsgatan 65, Stockholm 3</div>
+                </a>
               </li>
             </ul>
           </div>
@@ -387,16 +637,23 @@
       </div>
     </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../js/validate.js"></script>
-  <script src="../../js/my-account.js"></script>
-  <script src="../../js/footer.js"></script>
-</body>
-
+    <script src="../../js/my-account.js"></script>
+    <script src="../../js/footer.js"></script>
+    <script src="../../js/navbar-my-account.js"></script>
+    <script src="../../js/cart-pop-up.js"></script>
+  </body>
 </html>
