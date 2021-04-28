@@ -78,6 +78,10 @@ $("#login-btn").click(function () {
     }
 });
 
+$("#myAccountDropdown").click(function(){
+  let customer = JSON.parse(sessionStorage.getItem("customer"));
+  fetchCustomerInfo(customer, "pages/my-account/my-account.html")
+})
 
 $("form").submit(false);
 
