@@ -1,3 +1,7 @@
+#products{
+    min-height: 90vh;
+}
+
 .product-card {
     max-width: 23vh;
     margin: auto;
