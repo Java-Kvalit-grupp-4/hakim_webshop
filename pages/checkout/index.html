@@ -21,10 +21,15 @@
   
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand " href="../../index.html"
-          ><img src="../../logo.png" class="img-fluid nav-image " style=" margin-left: -0.5rem;"
+        <a class="navbar-brand" href="/index.html"
+          ><img
+            src="../../logo.png"
+            class="img-fluid nav-image"
+            style="margin-left: -0.5rem"
+            alt="Hakim Livs logga"
         /></a>
         <button
+          id="mobileMenu"
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -37,49 +42,43 @@
         </button>
         <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
         <div
-          class="d-flex justify-content-evenly collapse navbar-collapse"
+          class="d-xl-flex justify-content-lg-end collapse navbar-collapse"
           id="navbarTogglerDemo02"
         >
-          <div class="container col-md-6 mt-3">
-            <div class="input-group mb-3 me-5">
-              <input
-                type="text"
-                class="form-control product-search"
-                placeholder="Sök produkt"
-                aria-label="Sök"
-                aria-describedby="search-button"
-              />
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                id="search-button"
-                style="width: 5rem"
-              >
-                Sök
-              </button>
-            </div>
-          </div>
+          <!-- <div class="container col-md-6 mt-3"> -->
+          <!-- <div class="input-group mb-3 me-0 me-xl-5"> -->
+          <!-- searchfield -->
 
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item me-4">
-              <a
-                type="button nav-link"
-                class="btn btn-outline-secondary text-dark"
-                id="login-btn"
-                >Logga in</a
-              >
-            </li>
-            <li class="nav-item me-4">
+          <!-- searchfield ends -->
+          <!-- <input
+              type="text"
+              class="form-control product-search"
+              placeholder="Sök produkt"
+              aria-label="Sök"
+              aria-describedby="search-button"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="search-button"
+              style="width: 5rem"
+            >
+              Sök
+            </button> -->
+          <!-- </div> -->
+          <!-- </div> -->
+
+          <ul class="navbar-nav mb-2 mb-lg-0 text-start text-sm-end">
+            
+            <li class="nav-item me-lg-4">
               <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
+                <a
+                  href="../my-account/my-account.html"
+                  type="button nav-link"
+                  class="btn btn-secondary text-dark"
                   id="myAccountDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  >Mina sidor</a
                 >
-                  Mina sidor
-                </button>
                 <ul class="dropdown-menu" aria-labelledby="myAccountDropdown">
                   <li>
                     <a
@@ -89,26 +88,25 @@
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="../my-account/my-account.html">Se tidigare ordrar</a>
+                    <a class="dropdown-item" href="#">Se tidigare ordrar</a>
                   </li>
                 </ul>
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mt-3 mt-lg-0">
               <button
-                class="btn btn-secondary"
+                class="btn btn-outline-secondary"
                 type="button"
                 id="cartDropdown"
-                data-bs-toggle="modal"
-                aria-expanded="false"
+                
               >
-                Varukorg&nbsp;&nbsp;<span
-                  class="badge badge-pill bg-danger"
-                  id="total-items-in-cart"
-                  style="display: inline"
-                  >" "</span
-                >
+                Tillbaka
               </button>
+            </li>
+            <li class="nav-item mt-2 mt-lg-0">
+              <a id="admin-view-link" class="nav-link" href="../../admin/"
+                >Adminvy</a
+              >
             </li>
           </ul>
         </div>
@@ -116,6 +114,8 @@
     </nav>
 
     <!-- navbar end -->
+
+   
     
 
     <div id="navbar-margin"></div>
