@@ -26,6 +26,12 @@ textarea {
   border-top: 1px solid var(--border-cl);
 }
 
+@media(max-width: 599px) {
+  #mobileMenu {
+    margin-top: 0rem !important;
+  }
+}
+
 @media (max-width: 540px) {
   .cart h1 {
     text-align: center;
@@ -40,6 +46,7 @@ textarea {
     margin-top: -6rem !important;
   }
 }
+
 
 @media (max-width: 374px) {
   
