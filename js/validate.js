@@ -9,6 +9,18 @@ function testForOnlyText(input) {
     let pattern = /^[a-zA-ZåäöÅÄÖ\-]*$/;
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
+
+/**
+ *  Takes input as String and checks for only characters
+ *  capital, lowercase and hyphen allowed
+ * @param {String} input to test 
+ * @returns true or false
+ */
+
+ function testForName(input) {
+    let pattern = /^[a-zA-ZåäöÅÄÖ\-\s\´\'\ñ\á\é\í\ó\ú]*$/;
+    return testForSqlInjections(input) ? false : pattern.test(input)
+}
 /**
  * Takes input as String and checks for 5 numbers
  * (swedish standard for zip codes)
@@ -16,7 +28,11 @@ function testForOnlyText(input) {
  * @returns true or false
  */
 function testForZipCode(input) {
-    let test = input.replace(/\D/g,'')
+    let test = input.replaceAll(' ', '')
+    console.log(test.length);
+    if(test.length == 6){
+        return false
+    }
     let pattern = /\d{3}[ ]?\d{2}/;
     return testForSqlInjections(test) ? false : pattern.test(test)
 }
@@ -74,7 +90,7 @@ function testForDecimalNumbers(input) {
  * @returns true or false
  */
 function testForPhoneNumber(input) {
-    let test = input.replace(/\D/g,'')
+    let test = input.replaceAll(' ','')
     let pattern =  /^[(]{0,1}[0-9]{2,4}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{2,6}$/; 
     return testForSqlInjections(test) ? false : pattern.test(test)
 }
