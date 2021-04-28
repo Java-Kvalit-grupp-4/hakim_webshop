@@ -50,6 +50,22 @@ img {
   }
 }
 
+@media(max-width: 546px) {
+  #mobileMenu {
+    margin-top: -6.2rem !important;
+  }
+}
+@media (max-width: 374px) {
+  
+  #mobileMenu {
+    margin-top: -0.5rem !important;
+  }
+  
+  #login-btn {
+    margin-top: 1rem;
+  }
+}
+
 @media (max-width: 454px) {
     #about {
         width: 100%;
