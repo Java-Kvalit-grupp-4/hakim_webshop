@@ -215,8 +215,9 @@ function renderProducts(list) {
         if (
           product.sku == e.target.parentElement.parentElement.parentElement.id
         ) {
+          console.log(e.target.parentElement.parentElement.children[4]);
           product.inCart = Number(
-            e.target.parentElement.parentElement.children[3].children[1]
+            e.target.parentElement.parentElement.children[4].children[1]
               .children[0].value
           );
           if (product.inCart < 1) {
@@ -224,7 +225,7 @@ function renderProducts(list) {
           } else if (product.inCart.toString().includes(".")) {
             swal("Du måste ange heltal", "", "warning");
           } else {
-            e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1;
+            e.target.parentElement.parentElement.children[4].children[1].children[0].value = 1;
             let isToMany = false;
             isToMany = saveProductToCart(product);
 
