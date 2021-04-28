@@ -522,7 +522,7 @@ function renderProducts(list) {
             let data = {
                 firstName: firstName.val(),
                 lastName: lastName.val(),
-                phoneNumber: phoneNumber.val(),
+                phoneNumber: phoneNumber.val().replaceAll(' ','').replaceAll('-',''),
                 email: regristrationEmail.val(),
                 streetAddress: address.val(),
                 password: newPassword.val(),
