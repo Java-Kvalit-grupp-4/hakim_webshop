@@ -92,7 +92,6 @@ function load() {
         });
 }
 
-
 function renderCategories(data) {
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
     let customer = sessionStorage.getItem("customer") || "";
