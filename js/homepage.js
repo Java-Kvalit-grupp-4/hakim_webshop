@@ -16,7 +16,6 @@ let adminview = $("#admin-view-link");
 
 //const addUserUrl = "http://localhost:8080/users/add"
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
-//const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 
 /**
  * Eventlistener
@@ -92,33 +91,6 @@ function load() {
             alert(err);
         });
 }
-
-
-
-$("#sidomeny button").on("click", function () {
-    let categoryName = $(this).attr("id");
-    let selectedCategoryList = [];
-
-    availableProducts.forEach(product => {
-
-        if (categoryName === "all") {
-            $("#products").empty();
-            renderProducts(availableProducts);
-            localStorage.setItem('categoryList', JSON.stringify(availableProducts));
-        } else {
-            let currentProduct = product
-            product.categories.forEach(category => {
-
-                if (category.name == categoryName) {
-                    selectedCategoryList.push(currentProduct);
-                    $("#products").empty();
-                    renderProducts(selectedCategoryList);
-                    localStorage.setItem('categoryList', JSON.stringify(selectedCategoryList));
-                }
-            })
-        }
-    })
-});
 
 
 function renderCategories(data) {
