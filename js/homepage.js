@@ -134,7 +134,7 @@ function renderCategories(data) {
 
   let categories = [];
   
-    let availableProducts = [];
+  let availableProducts = [];
     products.forEach(element => {
         if (element.isAvailable == true) {
             availableProducts.push(element)
@@ -196,7 +196,7 @@ function renderProducts(list) {
 
     $("#products").empty();
 
-
+  // render all products to website
   list.forEach((element) => {
     $("#products").append(`
     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
@@ -243,25 +243,25 @@ function renderProducts(list) {
         `);
   });
 
+  // add on click function to cartdropdown
   $("#cartDropdown").on("click", function () {
     renderCart();
   });
 
+  // add function to "köp" btn
   $.each($(".add-product-to-cart"), function (index, value) {
     value.addEventListener("click", (e) => {
       products.forEach((product) => {
-        if (
-          product.sku == e.target.parentElement.parentElement.parentElement.id
-        ) {
-          console.log(e.target.parentElement.parentElement.children[4]);
-          product.inCart = Number(
-            e.target.parentElement.parentElement.children[4].children[1]
-              .children[0].value
-          );
+
+        if (product.sku == e.target.parentElement.parentElement.parentElement.id) {
+          product.inCart = Number(e.target.parentElement.parentElement.children[4].children[1].children[0].value);
+
           if (product.inCart < 1) {
             swal("Minsta tillåtet antal är 1", "", "warning");
+
           } else if (product.inCart.toString().includes(".")) {
             swal("Du måste ange heltal", "", "warning");
+
           } else {
             e.target.parentElement.parentElement.children[4].children[1].children[0].value = 1;
             let isToMany = false;
@@ -271,87 +271,51 @@ function renderProducts(list) {
               saveTotalPrice(product);
               updateTotalCartUI();
               setCartAvailability();
-
             }
           }
-
         }
       });
-    });
+    }); 
+  })
 
+    $.each($('.amount'), function (index, value) {
+      value.addEventListener('focusout', (e) => {
+          if (e.target.value == 0 || isNaN(e.target.value)) {
+              e.target.value = 1
+          }
+      })
+    })
 
-    $("#cartDropdown").on("click", function () {
-        renderCart();
-    });
+     $.each($('.add1btn'), function (index, value) {
+        value.addEventListener('click', (e) => {
+            products.forEach(product => {
 
-    $.each($(".add-product-to-cart"), function (index, value) {
-        value.addEventListener("click", (e) => {
-            products.forEach((product) => {
-                if (
-                    product.sku == e.target.parentElement.parentElement.parentElement.id
-                ) {
-                    product.inCart = Number(
-                        e.target.parentElement.parentElement.children[3].children[1]
-                            .children[0].value
-                    );
-                    if (product.inCart < 1) {
-                        swal("Minsta tillåtet antal är 1", "", "warning");
-                    } else if (product.inCart.toString().includes(".")) {
-                        swal("Du måste ange heltal", "", "warning");
-                    } else {
-                        e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1;
-                        let isToMany = false;
-                        isToMany = saveProductToCart(product);
+                if (product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id) {
+                    let currentValue = Number(e.target.parentElement.parentElement.children[1].children[0].value) + 1;
 
-                        if (isToMany == false) {
-                            saveTotalPrice(product);
-                            updateTotalCartUI();
-                            setCartAvailability();
-
-                            $.each($('.amount'), function (index, value) {
-                                value.addEventListener('focusout', (e) => {
-                                    if (e.target.value == 0 || isNaN(e.target.value)) {
-                                        e.target.value = 1
-                                    }
-                                })
-                            })
-
-                            
-
-                            $.each($('.add1btn'), function (index, value) {
-                                value.addEventListener('click', (e) => {
-                                    availableProducts.forEach(product => {
-
-                                        if (product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id) {
-                                            let currentValue = Number(e.target.parentElement.parentElement.children[1].children[0].value) + 1;
-                                            if (currentValue < 100) {
-                                                e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
-                                            }
-                                        }
-                                    })
-                                })
-                            })
-                            
-                            $.each($('.reduce1btn'), function (index, value) {
-                                value.addEventListener('click', (e) => {
-                                    availableProducts.forEach(product => {
-                                        if (product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id) {
-
-                                            let currentValue = Number(e.target.parentElement.parentElement.children[1].children[0].value) - 1;
-                                            if (currentValue >= 1) {
-                                                e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
-                                            }
-                                        }
-                                    })
-
-                                })
-                            });
-                        };
-                    };
+                    if (currentValue < 100) {
+                        e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
+                    }
                 }
             })
         })
-    });
+    })
+  
+    $.each($('.reduce1btn'), function (index, value) {
+        value.addEventListener('click', (e) => {
+            products.forEach(product => {
+
+                if (product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id) {
+                    let currentValue = Number(e.target.parentElement.parentElement.children[1].children[0].value) - 1;
+
+                    if (currentValue >= 1) {
+                        e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
+                    }
+                }
+            })
+        })
+     });
+}
                 
 
 
@@ -384,7 +348,7 @@ function renderProducts(list) {
       $("#product-card-modal").modal("show");
     });
   });
-});
+
 
         //------------------------------- product-card-modal ----------------------------------\\
 
@@ -399,7 +363,7 @@ function renderProducts(list) {
                 $("#product-card-modal").modal("show");
             });
         });
-    }
+    
 
     /**
      * Checks if product is in cart and increment quantity by 1,
