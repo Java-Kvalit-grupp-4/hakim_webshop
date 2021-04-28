@@ -101,6 +101,8 @@ function renderCategories(data) {
         $("#myAccountDropdown").hide();
     }
     products = data;
+    // create searchwords for searchbar
+    createSearchWords(products)
 
   let categories = [];
   
