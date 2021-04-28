@@ -249,7 +249,7 @@ function run() {
             "totalCost": $('#cart-total-price').val(),
             "isPaid": false,
             "orderStatus": {
-              "type": "ohanterad"
+              "type": "Ohanterad"
             },
             "lineItems": cart
           }
