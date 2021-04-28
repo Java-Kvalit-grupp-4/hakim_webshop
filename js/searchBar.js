@@ -57,14 +57,15 @@ function getProductsFromDataBase() {
  */
 function createSearchWords(products) {
     let searchStringToSplit = '';
-
+    console.log(products);
     products.forEach(product => {
+        
         searchStringToSplit += `${product.title} `
         product.categories.forEach(category => {
-            searchStringToSplit += ` ${category.category}`
+            searchStringToSplit += `${category.name} `
         })
         product.tags.forEach(tag => {
-            searchStringToSplit += ` ${tag.tagName} `
+            searchStringToSplit += `${tag.name} `
         }) 
     })
     
@@ -119,6 +120,8 @@ function sendDataToServer(searchWord) {
 
     axios.get(productMatchWordUrl)
     .then(response => {
+        console.log(response.data);
+        localStorage.removeItem('categoryList')
         localStorage.setItem('categoryList', JSON.stringify(response.data));
         renderProducts(response.data)
     })
