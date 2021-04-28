@@ -91,34 +91,6 @@ function load() {
     });
 }
 
-
-
-$("#sidomeny button").on("click", function () {
-    let categoryName = $(this).attr("id");
-    let selectedCategoryList = [];
-
-    availableProducts.forEach(product => {
-
-        if (categoryName === "all") {
-            $("#products").empty();
-            renderProducts(availableProducts);
-            localStorage.setItem('categoryList', JSON.stringify(availableProducts));
-        } else {
-            let currentProduct = product
-            product.categories.forEach(category => {
-
-                if (category.name == categoryName) {
-                    selectedCategoryList.push(currentProduct);
-                    $("#products").empty();
-                    renderProducts(selectedCategoryList);
-                    localStorage.setItem('categoryList', JSON.stringify(selectedCategoryList));
-                }
-            })
-        }
-    })
-});
-
-
 function renderCategories(data) {
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
     let customer = sessionStorage.getItem("customer") || "";
