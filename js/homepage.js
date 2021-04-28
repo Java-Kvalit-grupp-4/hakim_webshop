@@ -6,6 +6,7 @@ let loginbutton2 = $('#login-button');
 let wrongEmail = $('#wrong-email')
 let wrongPassword = $('#wrong-password')
 let whichPage = $("#login-page");
+const totalItemsInCart = $("#total-items-in-cart");
 
 let emailToCheck = $('#login-email'),
 passwordToCheck = $('#login-password'),
@@ -64,16 +65,10 @@ $('form').submit(false)
 
 
 $(document).ready(() => {
-  load()
-  let loggedIn = sessionStorage.getItem('customer')
-  if(loggedIn == undefined){
-    adminview.hide()
-  }else {
-    if(loggedIn.isAdmin){
-      $('#checkOutLink').attr("href", "./pages/checkout/")
-      adminview.show()
-    }
-  }
+  totalItemsInCart.hide();
+  hideOrShowAdminView();
+  load();
+
 })
 
     function load() {
@@ -91,6 +86,9 @@ $(document).ready(() => {
 
     function renderCategories(data) {
       let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
+      if(cartQuantity != null || cartQuantity>0) {
+        totalItemsInCart.show();
+      }
       let customer = sessionStorage.getItem("customer") || "";
       if(customer.length>0){
         navLoginBtn.text("Logga ut");
@@ -119,7 +117,7 @@ $(document).ready(() => {
               );
       });
 
-      $("#total-items-in-cart").text(cartQuantity);
+      totalItemsInCart.text(cartQuantity);
       setCartAvailability();
 
       $("#sidomeny button").on("click", function () {
@@ -335,7 +333,22 @@ function saveTotalPrice(product) {
 }
 
 function updateTotalCartUI(){
+  $("#total-items-in-cart").show();
   $('#total-items-in-cart').text(JSON.parse(localStorage.getItem("cartQuantity")))
+}
+
+function hideOrShowAdminView() {
+  adminview.hide();
+  let loggedIn = JSON.parse(sessionStorage.getItem("customer"));
+  console.log(loggedIn);
+  if (loggedIn == undefined) {
+    adminview.hide();
+  } else {
+    if (loggedIn.isAdmin) {
+      $("#checkOutLink").attr("href", "./pages/checkout/");
+      adminview.show();
+    }
+  }
 }
 
 //------------------------------------- login ----------------------------------\\
