@@ -50,6 +50,7 @@
                 type="search"
                 placeholder="Sök"
                 aria-label="Sök"
+                maxlength="50"
               />
               <button class="btn btn-outline-light mx-2" type="submit">
                 Sök
@@ -76,7 +77,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../VIP/index.html" id="nav-vip"
+                <a class="nav-link" href="../VIP/index.html" id="nav-vip" hidden
                   >VIP</a
                 >
               </li>
@@ -262,6 +263,7 @@
                     id="customer-email"
                     placeholder="E-post"
                     readonly
+                    maxlength="325"
                   />
                   <div id="EMAIL_ERROR_MSG" class="error-msg">Felaktig email</div>
                 </div>
@@ -377,13 +379,13 @@
         </div>
       </div>
     </div>
-    <script>
+    <!-- <script>
           let customer = JSON.parse(sessionStorage.getItem('customer'))
           console.log(customer)
             if(customer==null || customer== undefined || customer.isAdmin==false){
               window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
             }
-    </script>
+    </script> -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       type="text/javascript"
