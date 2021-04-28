@@ -60,36 +60,6 @@ $("#login-btn").click(function () {
     }
 });
 
-function renderCategories(data) {
-    let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity'))
-    let customer = sessionStorage.getItem("customer") || "";
-    if (customer.length > 0) {
-        navLoginBtn.text("Logga ut");
-        $('#myAccountDropdown').show()
-    } else {
-        $('#myAccountDropdown').hide()
-    }
-    products = data;
-    let availableProducts = [];
-    products.forEach(element => {
-        if (element.isAvailable == true) {
-            availableProducts.push(element)
-        }
-    });
-    console.log(availableProducts);
-
-
-    localStorage.setItem('categoryList', JSON.stringify(availableProducts));
-    renderProducts(availableProducts);
-
-    let categories = [];
-
-    availableProducts.forEach(product => {
-        product.categories.forEach(category => {
-            categories.push(category.name)
-        })
-    })
-}
 
 $("form").submit(false);
 
@@ -123,8 +93,7 @@ function load() {
         });
 }
 
-$("#total-items-in-cart").text(cartQuantity);
-setCartAvailability();
+
 
 $("#sidomeny button").on("click", function () {
     let categoryName = $(this).attr("id");
@@ -163,17 +132,26 @@ function renderCategories(data) {
     }
     products = data;
 
-    localStorage.setItem("categoryList", JSON.stringify(products));
-    renderProducts(products);
-
-    let categories = [];
-
-    products.forEach((product) => {
-        product.categories.forEach((category) => {
-            categories.push(category.name);
-        });
+  let categories = [];
+  
+    let availableProducts = [];
+    products.forEach(element => {
+        if (element.isAvailable == true) {
+            availableProducts.push(element)
+        }
     });
+    console.log(availableProducts);
 
+
+    localStorage.setItem('categoryList', JSON.stringify(availableProducts));
+    renderProducts(availableProducts);
+
+    availableProducts.forEach(product => {
+        product.categories.forEach(category => {
+            categories.push(category.name)
+        })
+    })
+   
     let uniqueCategories = [...new Set(categories)];
 
     uniqueCategories.forEach((element) => {
@@ -188,7 +166,7 @@ function renderCategories(data) {
         let categoryName = $(this).attr("id");
         let selectedCategoryList = [];
 
-        products.forEach((product) => {
+        availableProducts.forEach((product) => {
             if (categoryName === "all") {
                 $("#products").empty();
                 renderProducts(products);
