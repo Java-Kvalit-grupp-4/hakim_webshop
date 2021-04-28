@@ -85,18 +85,24 @@ $('#change-password-btn').click(() => {
 
 $(document).on('click', '.orderNumber', showOrder);
 
+$(document).ready(() => {
+  hideAllErrorMsgs()
+  fillInputFieldsWithLoggedIn()
+  getAllOrders()
+})
 
   /**
    * Functions
    */
 
   function checkIfLoggedIn() {
-    let customer = JSON.parse(sessionStorage.getItem('customer'))
-    if(customer == undefined){
-      $(document).load('./')
+    let customer = JSON.parse(sessionStorage.getItem("customer"));
+    if (customer == null || customer == undefined) {
+      window.location.href = "../../"
     }
 
   }
+  checkIfLoggedIn()
 
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
@@ -281,13 +287,6 @@ $(document).on('click', '.orderNumber', showOrder);
 
   fillInputFieldsWithLoggedIn()
 
-  /**
-   * Page loaded
-   */
-  $(document).ready(() => {
-    checkIfLoggedIn()
-    hideAllErrorMsgs()
-    fillInputFieldsWithLoggedIn()
-    getAllOrders()
-  })
+ 
+  
   
