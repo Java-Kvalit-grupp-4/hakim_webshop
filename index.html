@@ -324,6 +324,7 @@
                   class="form-control"
                   id="login-email"
                   placeholder="E-post"
+                  max="325"
                 />
                 <label for="login-email" class="form-label text-muted"
                   >E-post</label
@@ -336,6 +337,7 @@
                     class="form-control"
                     id="login-password"
                     placeholder="Lösenord"
+                    maxlength="50"
                   />
                   <label for="login-password" class="form-label text-muted"
                     >Lösenord</label
@@ -349,9 +351,9 @@
                   </button>
                 </div>
               </div>
-              <div class="smaller-text d-flex">
+              <!--<div class="smaller-text d-flex">
                 <div><a href="#">Glömt ditt lösenord?</a></div>
-              </div>
+              </div>-->
             </form>
           </div>
           <div class="modal-footer border-0 mx-auto">
@@ -408,6 +410,7 @@
                     placeholder="Förnamn"
                     required
                     name="firstName"
+                    maxlength="50"
                   />
                   <label for="register-first-name" class="form-label text-muted"
                     >Förnamn</label
@@ -423,6 +426,7 @@
                     id="register-last-name"
                     placeholder="Efternamn"
                     name="lastName"
+                    maxlength="50"
                   />
                   <label for="register-last-name" class="form-label text-muted"
                     >Efternamn</label
@@ -439,6 +443,7 @@
                     placeholder="E-post"
                     required
                     name="email"
+                    maxlength="325"
                   />
                   <label for="register-email" class="form-label text-muted"
                     >E-post</label
@@ -454,6 +459,7 @@
                     id="register-phone-number"
                     placeholder="Telefonnummer"
                     name="phoneNumber"
+                    maxlength="20"
                   />
                   <label
                     for="register-phone-number"
@@ -471,6 +477,7 @@
                     id="register-password"
                     placeholder="Efternamn"
                     name="password"
+                    maxlength="50"
                   />
                   <label for="register-password" class="form-label text-muted"
                     >Välj lösenord</label
@@ -485,6 +492,7 @@
                     class="form-control"
                     id="register-confirm-password"
                     placeholder="Efternamn"
+                    maxlength="50"
                   />
                   <label
                     for="register-confirm-password"
@@ -508,6 +516,7 @@
                     id="register-street"
                     placeholder="Efternamn"
                     name="streetAddress"
+                    maxlength="50"
                   />
                   <label for="register-street" class="form-label text-muted"
                     >Gatuadress</label
@@ -523,7 +532,7 @@
                     class="form-control"
                     id="register-city"
                     placeholder="Efternamn"
-                    maxlength="6"
+                    maxlength="50"
                     name="city"
                   />
                   <label for="register-city" class="form-label text-muted"
@@ -541,6 +550,7 @@
                     id="register-zip"
                     placeholder="Efternamn"
                     name="zipCode"
+                    maxlength="6"
                   />
                   <label for="register-zip" class="form-label text-muted"
                     >Postnummer</label
@@ -549,6 +559,8 @@
                     Felaktigt postnummer, måste matas in t.ex "123 45"
                   </div>
                 </div>
+
+                
 
                 <div class="col-md-4">
                   <label for="register-year" class="form-label"
@@ -660,7 +672,9 @@
             >
               Töm varukorgen
             </button>
-            <a href="#" id="checkOutLink">
+
+            <a id="checkOutLink">
+
               <button
                 type="button"
                 class="btn btn-primary btn-sm"
@@ -769,7 +783,7 @@
     ></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+    <script src="./js/format.js"></script>
     <script src="./js/cart-pop-up.js"></script>
     <script src="./js/validate.js"></script>
     <script src="./js/register.js"></script>

@@ -50,6 +50,7 @@
                 type="search"
                 placeholder="Sök"
                 aria-label="Sök"
+                maxlength="50"
               />
               <button class="btn btn-outline-light mx-2" type="submit">
                 Sök
@@ -76,7 +77,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../VIP/index.html" id="nav-vip"
+                <a class="nav-link" href="../VIP/index.html" id="nav-vip" hidden
                   >VIP</a
                 >
               </li>
@@ -190,8 +191,8 @@
             <div class="col-12 col-md-5 col-lg-4 my-3 mt-md-0">
               <select class="form-select" aria-label="Orderstatus">
                 <option selected disabled>Orderstatus</option>
-                <option value="1">Obehandlad</option>
-                <option value="2">Plockas</option>
+                <option value="1">Ohanterad</option>
+                <option value="2">Plockning pågår</option>
                 <option value="3">Skickad</option>
                 <option value="4">Avbeställd</option>
               </select>
@@ -219,6 +220,7 @@
                   type="search"
                   placeholder="Sök"
                   aria-label="Search"
+                  maxlength="50"
                 />
                 <button class="btn btn-secondary" type="button">Sök</button>
               </div>
@@ -281,6 +283,7 @@
                       placeholder="Förnamn"
                       aria-label="Förnamn"
                       id="customer-first-name"
+                      maxlength="50"
                     />
                   </div>
                   <div class="col-lg-12 mb-3">
@@ -293,6 +296,7 @@
                       placeholder="Efternamn"
                       aria-label="Efternamn"
                       id="customer-last-name"
+                      maxlength="50"
                     />
                   </div>
                   <div class="col-lg-12 mb-3">
@@ -305,6 +309,7 @@
                       placeholder="Address"
                       aria-label="Address"
                       id="customer-street-address"
+                      maxlength="50"
                     />
                   </div>
                   <div class="col-lg-12 mb-3">
@@ -317,6 +322,7 @@
                       placeholder="Postnummer"
                       aria-label="Postnummer"
                       id="customer-zipcode"
+                      maxlength="6"
                     />
                   </div>
                   <div class="col-lg-12 mb-3">
@@ -329,6 +335,7 @@
                       placeholder="Postort"
                       aria-label="Postort"
                       id="customer-city"
+                      maxlength="50"
                     />
                   </div>
                   <div class="col-lg-12 mb-3">
@@ -341,6 +348,7 @@
                       placeholder="E-post"
                       aria-label="E-post"
                       id="customer-email"
+                      maxlength="325"
                     />
                   </div>
                   <div class="col-lg-12 mb-3">
@@ -353,6 +361,7 @@
                       placeholder="Telefonnummer"
                       aria-label="Telefonnummer"
                       id="customer-phone-number"
+                      maxlength="20"
                     />
                   </div>
                   <div class="col mb-3 mt-4">

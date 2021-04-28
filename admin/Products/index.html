@@ -42,6 +42,7 @@
                 type="search"
                 placeholder="Sök"
                 aria-label="Sök"
+                maxlength="50"
               />
               <button class="btn btn-outline-light mx-2" type="submit">
                 Sök
@@ -175,10 +176,14 @@
         <div class="container mt-5">
           <div class="row gx-0 gx-lg-5">
             <div class="col-lg-6">
+              <div class="form-check mb-4">
+                <input class="form-check-input me-3" type="checkbox" value="" id="isProductHidden">
+                <label class="form-check-label" for="isProductHidden">Dölj produkten</label>
+            </div>
               <label for="titleInput" class="form-label">Produktnamn</label>
-              <input type="text" class="form-control mb-3" id="title" />
+              <input type="text" class="form-control mb-3" id="title" maxlength="50"/>
               <label for="brandInput" class="form-label">Tillverkare</label>
-              <input type="text" class="form-control mb-3" id="brand" />
+              <input type="text" class="form-control mb-3" id="brand" maxlength="50"/>
               <label for="descriptionInput" class="form-label"
                 >Beskrivning</label
               >
@@ -186,6 +191,7 @@
                 class="form-control mb-3"
                 id="description"
                 rows="8"
+                maxlength="500"
               ></textarea>
               <label for="categoryInput" class="form-label mt-3"
                 >Ny kategori</label
@@ -198,6 +204,7 @@
                   placeholder=""
                   aria-label="New category"
                   aria-describedby="category-input"
+                  maxlength="50"
                 />
                 <button
                   class="btn btn-outline-secondary"
@@ -212,12 +219,14 @@
             </div>
 
             <div class="col-lg-6 mt-4 mt-lg-0">
+
               <label for="weightInput" class="form-label">Artikelnummer</label>
-              <input type="text" class="form-control mb-3" id="sku" />
+              <input type="text" class="form-control mb-3" id="sku" maxlength="50" />
+
               <label for="priceInput" class="form-label">Pris</label>
-              <input type="text" class="form-control mb-3" id="price" />
+              <input type="text" class="form-control mb-3" id="price" maxlength="50"/>
               <label for="lagerInput" class="form-label">Lagerstatus</label>
-              <input type="text" class="form-control mb-3" id="lager" />
+              <input type="text" class="form-control mb-3" id="lager" maxlength="5"/>
               <div class="col">
                 <label for="img" class="form-label">Produktbild</label>
               </div>
@@ -233,6 +242,7 @@
                   accept=".jpg,.jpeg,.png,.gif"
                   class="form-control"
                   id="fileUpload"
+                  maxlength="50"
                 />
                 <button class="btn btn-secondary" id="uploadButton">
                   Ladda upp
@@ -254,6 +264,7 @@
                   placeholder=""
                   aria-label="New tag"
                   aria-describedby="tag-input"
+                  maxlength="50"
                 />
                 <button
                   class="btn btn-outline-secondary"
