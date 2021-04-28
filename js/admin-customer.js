@@ -8,6 +8,7 @@ let choosedCustomer = "";
 let getAllCustomers = "https://hakimlivs.herokuapp.com/users";
 let updateUser = "https://hakimlivs.herokuapp.com/users/adminUpdateUser";
 let getCustomerOrder = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email=";
+let getAllOrders =  "https://hakimlivs.herokuapp.com/customerOrder/orders"
 
 let startDate = null;
 let endDate = null;
@@ -73,7 +74,7 @@ function load(){
                 customers = response.data   
             }
             else{
-                swal("Något gick fel vid inläsning av kunder")
+                swal("Något gick fel vid inläsning av kunder", "warning")
             }
         })
         .catch(err =>{
@@ -84,7 +85,7 @@ function load(){
 function showCustomers(customerArr){
     $("#customerTable").empty();
     if(customerArr.length==0){
-        swal("Hittade inga kunder på denna sökning")
+        swal({title: "Hittade inga kunder på denna sökning", icon: "info"})
     }
     customerArr.forEach(customer => {
         let isVip = "";
@@ -182,7 +183,7 @@ function saveCustomer(customerNumber){
     })
 }
 
-function isCustomerOrdersNull(orderArr){
+function customerOrderLength(orderArr){
     if(orderArr!=null){
         return orderArr.length;
     }
@@ -221,33 +222,54 @@ function filterSearch(){
             showCustomers(customers.filter(customer => customer.isVip==true));   
             break;
         case 'Total ordersumma över:':
-           // if(validateInput()){
+            if(input!="" && input!=NaN){
                 resetsInputBorders()
-                if(startDate!=null && endDate!=null){
-                    showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders.filter(order => 
-                        {let date = new Date(order.orderTimestamp)
-                            date>=startDate && date<=endDate
+                axios.get(getAllOrders)
+                    .then((response) =>{
+                        let filterCustomers = [];
+                        let filterOrders = response.data
+                        console.log(filterOrders)
+                        if(startDate!=null && endDate!=null){
+                            filterOrders.stream()
+                                .forEach(order => {let date = new Date(order.orderTimestamp)})
+                                .filter(date>=startDate && date<=endDate)    
+                            }
+                        console.log(filterOrders)
+                        customers.forEach(customer =>{
+                            if(getTotalPriceOfOrders(filterOrders.filter(order => order.appUser.customerNumber==customer.customerNumber))>input){
+                                filterCustomers.push(customer)
+                            }
                         })
-                    )>input));
-                }
-            
-                else{
-                    showCustomers(customers.filter(customer => getTotalPriceOfOrders(customer.customerOrders)>input));
-                }
-            //}
+                        showCustomers(filterCustomers)
+                    })
+            }
+            else{
+                swal("Fel input!", "Du måste skriva in totalsumma","warning" )
+            }
             break;
             case 'Totalt antal ordrar över:':
-                //if(validateInput()){
-                    if(startDate!=null && endDate!=null){
-                        showCustomers(customers.filter(customer =>customer.customerOrders.filter(order => 
-                            {let date = new Date(order.orderTimestamp)
-                                date>=startDate && date<=endDate
-                            }).length>input));
-                    }
-                    else{
-                        showCustomers(customers.filter(customer => isCustomerOrdersNull(customer.customerOrders)>input));
-                    }
-                //}
+                if(input!="" && input!=NaN){
+                    resetsInputBorders()
+                    axios.get(getAllOrders)
+                        .then((response) =>{
+                            let filterCustomers = [];
+                            let filterOrders = response.data
+                            if(startDate!=null && endDate!=null){
+                                filterOrders.stream()
+                                    .forEach(order => {let date = new Date(order.orderTimestamp)})
+                                    .filter(date>=startDate && date<=endDate)    
+                                }
+                            customers.forEach(customer =>{
+                                if(customerOrderLength(filterOrders.filter(order => order.appUser.customerNumber==customer.customerNumber))>input){
+                                    filterCustomers.push(customer)
+                                }
+                            })
+                            showCustomers(filterCustomers)
+                        })
+                }
+                else{
+                    swal("Fel input", "Du måste skriva in totalt antal ordrar","warning" )
+                }
             break;
     }
     startDate=null;
@@ -318,7 +340,7 @@ function updateCustomer(){
 
         axios.post(updateUser, data)
             .then(() => {
-                swal('Kunden är uppdaterad!')
+                swal({title: 'Kunden är uppdaterad!', icon: 'success'})
             })
             .catch(() => {
                 
