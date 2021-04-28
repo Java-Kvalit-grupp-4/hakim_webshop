@@ -6,6 +6,7 @@ let loginbutton2 = $("#login-button");
 let wrongEmail = $("#wrong-email");
 let wrongPassword = $("#wrong-password");
 let whichPage = $("#login-page");
+const totalItemsInCart = $("#total-items-in-cart");
 
 let emailToCheck = $("#login-email"),
     passwordToCheck = $("#login-password"),
@@ -63,36 +64,31 @@ $("#login-btn").click(function () {
 $("form").submit(false);
 
 $(document).ready(() => {
+  totalItemsInCart.hide();
+  hideOrShowAdminView();
+  load();
 
-    load();
-    let loggedIn = sessionStorage.getItem("customer");
-    if (loggedIn == undefined) {
-        adminview.hide();
-    } else {
-        if (loggedIn.isAdmin) {
-            $("#checkOutLink").attr("href", "./pages/checkout/");
-            adminview.show();
-        }
+})
+
+    function load() {
+        //const productsUrl = './TestData/test_data_products_v1.2.JSON'
+        //const productsUrl = 'http://localhost:8080/products'
+        const productsUrl = 'http://hakimlivs.herokuapp.com/products'
+       axios.get(productsUrl)
+       .then(response => {
+         renderCategories(response.data)
+       })
+       .catch(err => {
+         alert(err)
+       }) 
     }
-});
 
-
-function load() {
-  //const productsUrl = './TestData/test_data_products_v1.2.JSON'
-  //const productsUrl = 'http://localhost:8080/products'
-  const productsUrl = "https://hakimlivs.herokuapp.com/products";
-
-  axios.get(productsUrl)
-    .then((response) => {
-      renderCategories(response.data);
-    })
-    .catch((err) => {
-      alert(err);
-    });
-}
 
 function renderCategories(data) {
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
+    if(cartQuantity != null || cartQuantity>0) {
+        totalItemsInCart.show();
+      }
     let customer = sessionStorage.getItem("customer") || "";
     if (customer.length > 0) {
         navLoginBtn.text("Logga ut");
@@ -165,7 +161,6 @@ function renderCategories(data) {
  * @param {Array} list of product
  */
 function renderProducts(list) {
-
     $("#products").empty();
 
   // add product to website  
@@ -384,14 +379,27 @@ function renderProducts(list) {
             : localStorage.setItem("cartTotalPrice", product.price * product.inCart);
     }
 
-    function updateTotalCartUI() {
-        $("#total-items-in-cart").text(
-            JSON.parse(localStorage.getItem("cartQuantity"))
-        );
+
+function updateTotalCartUI(){
+  $("#total-items-in-cart").show();
+  $('#total-items-in-cart').text(JSON.parse(localStorage.getItem("cartQuantity")))
+}
+
+
+function hideOrShowAdminView() {
+  adminview.hide();
+  let loggedIn = JSON.parse(sessionStorage.getItem("customer"));
+    if (loggedIn == undefined) {
+    adminview.hide();
+  } else {
+    if (loggedIn.isAdmin) {
+      $("#checkOutLink").attr("href", "./pages/checkout/");
+      adminview.show();
     }
+  }
+}
 
 //------------------------------------- login ----------------------------------\\
-
 
     $("#login-button").click(() => {
         let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
@@ -408,6 +416,7 @@ function renderProducts(list) {
                     if (response.data.isAdmin == true) {
                         location.replace("admin/index.html");
                     } else {
+
                         loginModal.modal("hide");
                         navLoginBtn.text("Logga ut");
                         myAccountMenu.show();

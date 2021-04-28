@@ -21,3 +21,27 @@ html {
     }
     
 }
+@media(max-width: 599px) {
+  #mobileMenu {
+    margin-top: 0rem !important;
+  }
+}
+
+@media(max-width: 546px) {
+  #mobileMenu {
+    margin-top: -6.2rem !important;
+  }
+}
+
+@media (max-width: 374px) {
+  
+  #mobileMenu {
+    margin-top: -0.5rem !important;
+  }
+  #myTab {
+    margin-top: 9.22rem;
+  }
+  #login-btn {
+    margin-top: 1rem;
+  }
+}
