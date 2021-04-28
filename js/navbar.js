@@ -35,6 +35,9 @@ $(function () {
 
   $("form").submit(false);
 
+  navLoginBtn.on("click", function () {
+    loginModal.show();
+  });
   //------------------------------------- login ----------------------------------\\
 
   $("#login-button").click(() => {
@@ -133,14 +136,17 @@ $(function () {
    */
 
   function setAvailableButtonsInNavbar() {
-    $("#login-btn").click(function () {
+    $("#login-btn").on("click", function () {
       if ($(this).text() == "Logga in") {
         $("#login-modal").modal("show");
       } else {
+        
         sessionStorage.removeItem("customer");
         $("#myAccountDropdown").hide();
         $(this).text("Logga in");
-        adminview.hide();
+        /*This inelegantly solves a bug where all action listeners
+        stopped working after logging out*/
+        window.location.href = "index.html";
       }
     });
   }
