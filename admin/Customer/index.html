@@ -50,7 +50,6 @@
                 type="search"
                 placeholder="Sök"
                 aria-label="Sök"
-                maxlength="50"
               />
               <button class="btn btn-outline-light mx-2" type="submit">
                 Sök
@@ -263,7 +262,6 @@
                     id="customer-email"
                     placeholder="E-post"
                     readonly
-                    maxlength="325"
                   />
                   <div id="EMAIL_ERROR_MSG" class="error-msg">Felaktig email</div>
                 </div>
@@ -310,7 +308,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="mb-5 col">
+                <div class="mb-2 col">
                   <label for="customer-zip" class="form-label"
                     >Postnummer</label
                     
@@ -325,15 +323,29 @@
                   <div id="ZIPCODE_ERROR_MSG" class="error-msg">Felaktigt postnummer, måste matas in t.ex "123 45"</div>
                 </div>
               </div>
+             
+            </form>
+              <div class="row">
+                <div class="col mb-2">
+                  <h2 class="my-3">Kommentar om kund</h2>
+                  <div class="mb-3 form-floating">
+                    <textarea
+                      class="form-control"
+                      id="customer-comments"
+                      style="height: 16rem"
+                    ></textarea
+                    ><label for="customer-comments" class="form-label" id = "commentTextField"
+                      >Skriv meddelande...</label
+                    >
+                  </div>
+                </div>
+              </div>
               <div class="row">
                 <div class="mb-4 col">
                   <button class="btn-secondary btn" type="submit" id="updateBtn">
                     Spara ändringar
                   </button>
                 </div>
-              </div>
-            </form>
-              <div class="row">
               </div>
             </div>
             <div class="container col-12 col-xl-7 order-container ms-xl-5 mb-5">
@@ -359,7 +371,7 @@
                   </tfoot>
                 </table>
               </div>
-              <div class="row">
+              <!--<div class="row">
                 <div class="col mb-5">
                   <h2 class="my-5">Kommentar om kund</h2>
                   <div class="mb-3 form-floating">
@@ -373,19 +385,19 @@
                     >
                   </div>
                 </div>
-              </div>
+              </div>-->
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- <script>
+    <script>
           let customer = JSON.parse(sessionStorage.getItem('customer'))
           console.log(customer)
             if(customer==null || customer== undefined || customer.isAdmin==false){
               window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
             }
-    </script> -->
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       type="text/javascript"
