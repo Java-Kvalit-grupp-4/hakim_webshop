@@ -3,9 +3,7 @@ let cart = [];
 $(document).ready(load);
 
 function load() {
-
   renderCart();
-  
 }
 
 function makeArrayFromData(data) {
@@ -127,6 +125,7 @@ function renderCart() {
     });
   }
 }
+
 function updateTotalPrice(product) {
   let totalPrice = JSON.parse(localStorage.getItem("cartTotalPrice"));
   totalPrice -= product.price * product.inCart;

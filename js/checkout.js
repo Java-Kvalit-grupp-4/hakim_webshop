@@ -1,7 +1,7 @@
 /**
  * Cache variables
  */
-(firstName = $("#firstName")),
+  (firstName = $("#firstName")),
   (lastName = $("#lastName")),
   (email = $("#email")),
   (phone = $("#phone")),
@@ -11,13 +11,6 @@
   (orderComment = $("#order-comment"));
 
 $(document).ready(() => {
-  let FIRSTNAME_ERROR_MSG = $("#FIRSTNAME_ERROR_MSG"),
-    LASTNAME_ERROR_MSG = $("#LASTNAME_ERROR_MSG"),
-    EMAIL_ERROR_MSG = $("#EMAIL_ERROR_MSG"),
-    PHONE_NUMBER_ERROR_MSG = $("#PHONE_NUMBER_ERROR_MSG"),
-    ADDRESS_ERROR_MSG = $("#ADDRESS_ERROR_MSG"),
-    ZIPCODE_ERROR_MSG = $("#ZIPCODE_ERROR_MSG"),
-    CITY_ERROR_MSG = $("#CITY_ERROR_MSG");
 
   /**
    *  Eventlistiners
@@ -28,8 +21,7 @@ $(document).ready(() => {
 
   let customer = JSON.parse(sessionStorage.getItem("customer"));
   if (customer == null || customer == undefined) {
-    // comment this if you wanna go to checkout without being logged in
-    //window.location.href = "../../"
+    window.location.href = "../../"
   }
   renderCart();
   renderCustomerInfo();
@@ -82,76 +74,12 @@ $(document).ready(() => {
     );
 
     let totalInCart = 0;
-    $.each(
-      $(".line-item-total-quantity"),
-      (index, e) => (totalInCart += parseInt(e.innerText))
-    );
+    $.each($(".line-item-total-quantity"),(index, e) => (totalInCart += parseInt(e.innerText)));
     $("#cart-total-quantity").text(totalInCart);
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
     document.getElementById("total-items-in-cart").innerHTML = cartQuantity;
-  }
+   }
 
-  /**
-   * Checks witch customer that is logged in
-   * and render that data to the UI
-   * @param {Array} data customers from the databas
-   */
-  function renderCustomerInfo() {
-    let loggedInCustomer = JSON.parse(sessionStorage.getItem("customer"));
-    let zipCode = `${loggedInCustomer.zipCode.substring(
-      0,
-      3
-    )} ${loggedInCustomer.zipCode.substring(3)}`;
-    let phoneNumber = `${loggedInCustomer.phoneNumber.substring(
-      0,
-      3
-    )}-${loggedInCustomer.phoneNumber.substring(
-      3,
-      6
-    )} ${loggedInCustomer.phoneNumber.substring(
-      6,
-      8
-    )} ${loggedInCustomer.phoneNumber.substring(8)}`;
-
-    firstName.val(loggedInCustomer.firstName);
-    lastName.val(loggedInCustomer.lastName);
-    email.val(loggedInCustomer.email);
-    phone.val(phoneNumber);
-    address.val(loggedInCustomer.streetAddress);
-    zip.val(zipCode);
-    city.val(loggedInCustomer.city.name);
-  }
-
-  /**
-   * Set values for second address fields
-   */
-  function getAddressInfo() {
-    address2.val(address.val());
-    zip2.val(zip.val());
-    city2.val(city.val());
-  }
-
-  /**
-   * Clear values for second address fields
-   */
-  function clearAddressInfo() {
-    address2.val("");
-    zip2.val("");
-    city2.val("");
-
-    resetBorder(address2);
-    resetBorder(zip2);
-    resetBorder(city2);
-  }
-
-  let totalInCart = 0;
-  $.each(
-    $(".line-item-total-quantity"),
-    (index, e) => (totalInCart += parseInt(e.innerText))
-  );
-  $("#cart-total-quantity").text(totalInCart);
-  let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
-  document.getElementById("total-items-in-cart").innerHTML = cartQuantity;
 });
 
 /**
@@ -171,39 +99,6 @@ function renderCustomerInfo() {
   city.val(formatFirstLetterToUpperCase(loggedInCustomer.city.name));
 }
 renderCustomerInfo();
-
-/**
- * Validates the inputfields and changes color of the
- * border of the inputfield according to the answer
- * true(green)/false(red) and gives the correct message
- * to the user
- */
-function validateInput() {
-  let bool = true;
-
-  bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG);
-  bool = checkForInput(testForOnlyText, lastName, bool, LASTNAME_ERROR_MSG);
-  bool = checkForInput(testForEmail, email, bool, EMAIL_ERROR_MSG);
-  bool = checkForInput(testForPhoneNumber, phone, bool, PHONE_NUMBER_ERROR_MSG);
-  bool = checkForInput(testForAddress, address, bool, ADDRESS_ERROR_MSG);
-  //bool = checkForInput(testForZipCode, zip, bool,ZIPCODE_ERROR_MSG)
-  bool = checkForInput(testForOnlyText, city, bool, CITY_ERROR_MSG);
-
-  if (bool) {
-    console.log(makeOrderObject());
-    sendOrderToServer(makeOrderObject());
-    localStorage.clear();
-
-    renderCart();
-  } else {
-    swal({
-      title: "Ops, något gick fel!",
-      text: "Alla fält måste vara ifyllda korrekt",
-      icon: "warning",
-      button: "Ok",
-    });
-  }
-}
 
 /**
  * Resets all inputfields and checkbox
@@ -261,12 +156,10 @@ function makeOrderObject() {
 
 function sendOrderToServer(orderObject) {
   const url = "https://hakimlivs.herokuapp.com/customerOrder/add";
-  //   const url = "https://hakimlogintest.herokuapp.com/customerOrder/add";
+  // const url = "https://hakimlogintest.herokuapp.com/customerOrder/add";
   //const url = 'http://localhost:8080/customerOrder/add'
 
-  console.log(orderObject);
-  axios
-    .post(url, orderObject)
+  axios.post(url, orderObject)
     .then((response) => {
       if (response.status == 200) {
         console.log(response);

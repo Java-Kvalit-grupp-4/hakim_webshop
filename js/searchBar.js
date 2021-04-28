@@ -59,7 +59,6 @@ function createSearchWords(products) {
     let searchStringToSplit = '';
     console.log(products);
     products.forEach(product => {
-        
         searchStringToSplit += `${product.title} `
         product.categories.forEach(category => {
             searchStringToSplit += `${category.name} `

@@ -10,7 +10,7 @@ $('form').submit(false)
 let firstName = $('#my-info-first-name'),
 lastName = $('#my-info-last-name'),
 email = $('#my-info-email'),
-phoneNumber = $('#my-info-phone-number'),
+myAccountPhoneNumber = $('#my-info-phone-number'),
 address = $('#my-info-address'),
 city = $('#my-info-city'),
 zipCode = $('#my-info-zipCode'),
@@ -30,6 +30,8 @@ WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
 NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
 NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
 
+let findAllOrdersURL = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email="
+let customerOrders=[];
 
 /**
  * Eventlisteners
@@ -40,21 +42,19 @@ $("#login-btn").click(function(){
   })
 
 $('#submit').click( () => { 
-  if(validateForm()) {
+  if(validateFormMyAccount()) {
     
     resetsInputBorders()
     
     let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
-
     // let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
-
     //let updateUserInfo = `http://localhost:8080/users/update/user/info`
 
     // create object to update
     let updateInfo = {
       "firstName": firstName.val().trim(), 
       "lastName": lastName.val().trim(), 
-      "phoneNumber": formatPhoneNumberForDB(phoneNumber.val().trim()), 
+      "phoneNumber": formatPhoneNumberForDB(myAccountPhoneNumber.val().trim()), 
       "email": email.val().trim(),    
       "streetAddress": address.val(),
       "zipCode": formatZipForDB(zipCode.val().trim()),
@@ -81,36 +81,115 @@ $('#change-password-btn').click(() => {
   checkPasswordChange()
 })
 
+$(document).on('click', '.orderNumber', showOrder);
+
+$(document).ready(() => {
+  hideAllErrorMsgs()
+  fillInputFieldsWithLoggedIn()
+  getAllOrders()
+})
 
   /**
    * Functions
    */
 
   function checkIfLoggedIn() {
-    let customer = JSON.parse(sessionStorage.getItem('customer'))
-    if(customer == undefined){
-      $(document).load('./')
+    let customer = JSON.parse(sessionStorage.getItem("customer"));
+    if (customer == null || customer == undefined) {
+      window.location.href = "../../"
     }
 
   }
+  checkIfLoggedIn()
 
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
-
      firstName.val(formatFirstLetterToUpperCase(customer.firstName))
      lastName.val(formatFirstLetterToUpperCase(customer.lastName))
      email.val(customer.email)
-     phoneNumber.val(formatPhoneNumber(customer.phoneNumber))
+     myAccountPhoneNumber.val(formatPhoneNumber(customer.phoneNumber))
      address.val(formatFirstLetterToUpperCase(customer.streetAddress))
      city.val(formatFirstLetterToUpperCase(customer.city.name))
      zipCode.val(formatZipCode(customer.zipCode))
+  }
+
+  function getAllOrders(){
+    let email = JSON.parse(sessionStorage.getItem('customer')).email
+    axios.get(findAllOrdersURL+ email)
+        .then((response) =>{
+            if(response.status ===200){
+              customerOrders = response.data  
+              fillOrderTable(response.data)
+            }
+            else{
+                swal("Något gick fel vid inläsning av ordrar")
+            }
+        })
+        .catch(err =>{
+            alert("Serverfel!" + err)
+        })
+  }
+
+  function fillOrderTable(customerOrders){
+      console.log(customerOrders)
+      if(customerOrders!=null){
+        sessionStorage.setItem("customerOrders",JSON.stringify(customerOrders));
+      
+        customerOrders.forEach(orders => {
+                let dateFromOrder = new Date(orders.timeStamp);
+                let orderDate = dateFromOrder.toISOString().substring(0,10);
+                console.log(orderDate)
+                //let orderNumber = (orders.id +"").substring(0,6)
+              
+                let isPaid = "Obetalad";
+                if(orders.isPaid){
+                    isPaid ="Betalad"
+                }
+                $("#orderTable").append(`
+                  <tr>
+                    <th scope="row" class="ps-md-5 orderNumber"> <a href="#show-selected-order" >${orders.orderNumber}</a></th>
+                    <td>${orderDate} </td>
+                    <td>${orders.totalCost.toFixed(2)}</td>
+                    <td>${orders.orderStatus.type}</td>
+                    <td>${isPaid}</td>
+                  </tr>`
+                )
+        })
+    }
+  }
+
+  function showOrder(){
+    $("#orderIncludes").empty()
+    let orderNumber = $(this).text()
+    $("#selected-order-number").html("Order " + orderNumber)
+
+    let customerOrders = JSON.parse(sessionStorage.getItem('customerOrders'))
+
+    customerOrders.forEach(order => {
+      if(order.orderNumber == orderNumber){
+        let totalQty = 0;
+        order.lineItems.forEach(lineItem => {
+          totalQty+=lineItem.quantity
+          $("#orderIncludes").append(`
+          <tr>
+              <td class="ps-md-5">${lineItem.product.title}</td>
+              <td>${lineItem.product.price.toFixed(2)}</td>
+              <td>${lineItem.quantity}</td>
+              <td class="text-center">${lineItem.itemPrice.toFixed(2)}</td>
+            </tr>`
+          )
+        })
+        $("#totalQuantity").html(totalQty)
+        $("#totalPrice").html(order.totalCost.toFixed(2))
+      }
+    })
   }
 
   function resetsInputBorders() {
     resetBorder(firstName)
     resetBorder(lastName)
     resetBorder(email)
-    resetBorder(phoneNumber)
+    resetBorder(myAccountPhoneNumber)
     resetBorder(address)
     resetBorder(zipCode)
     resetBorder(city)
@@ -129,13 +208,13 @@ $('#change-password-btn').click(() => {
     WRONNG_PASSWORD_ERROR_MSG.hide()
   }
 
-  function validateForm() {
+  function validateFormMyAccount() {
     let bool = true
 
-    bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
-    bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
+    bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG)
+    bool = checkForInput(testForName, lastName, bool,LASTNAME_ERROR_MSG)
     bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
-    bool = checkForInput(testForPhoneNumber,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
+    bool = checkForInput(testForPhoneNumber,myAccountPhoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
     bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
     bool = checkForInput(testForZipCode, zipCode, bool,ZIPCODE_ERROR_MSG)
     bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
@@ -174,9 +253,7 @@ $('#change-password-btn').click(() => {
   const updatePassword = (newPassword) => {
 
     let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
-
     // let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
-
     //let updatePasswordUrl = `http://localhost:8080/users/update/password`
 
     let updatePassword = {
@@ -205,12 +282,6 @@ $('#change-password-btn').click(() => {
 
   fillInputFieldsWithLoggedIn()
 
-  /**
-   * Page loaded
-   */
-  $(document).ready(() => {
-    checkIfLoggedIn()
-    hideAllErrorMsgs()
-    fillInputFieldsWithLoggedIn()
-  })
+ 
+  
   
