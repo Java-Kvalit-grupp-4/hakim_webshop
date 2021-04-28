@@ -43,6 +43,11 @@ img {
 .title{
     margin-bottom: 2rem;
 }
+@media(max-width: 599px) {
+  #mobileMenu {
+    margin-top: 0rem !important;
+  }
+}
 
 @media (max-width: 454px) {
     #about {
