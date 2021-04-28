@@ -79,18 +79,18 @@ $(document).ready(() => {
 
 
 function load() {
-    //const productsUrl = './TestData/test_data_products_v1.2.JSON'
-    //const productsUrl = 'http://localhost:8080/products'
-    const productsUrl = "http://hakimlivs.herokuapp.com/products";
+  //const productsUrl = './TestData/test_data_products_v1.2.JSON'
+  //const productsUrl = 'http://localhost:8080/products'
+  const productsUrl = "https://hakimlivs.herokuapp.com/products";
 
-    axios
-        .get(productsUrl)
-        .then((response) => {
-            renderCategories(response.data);
-        })
-        .catch((err) => {
-            alert(err);
-        });
+  axios
+    .get(productsUrl)
+    .then((response) => {
+      renderCategories(response.data);
+    })
+    .catch((err) => {
+      alert(err);
+    });
 }
 
 
@@ -247,7 +247,7 @@ function renderProducts(list) {
 
     $.each($(".add-product-to-cart"), function (index, value) {
         value.addEventListener("click", (e) => {
-            availableProducts.forEach((product) => {
+            products.forEach((product) => {
                 if (
                     product.sku == e.target.parentElement.parentElement.parentElement.id
                 ) {
@@ -476,6 +476,9 @@ function renderProducts(list) {
 
 
 
+
+
+
     let firstName = $("#register-first-name"),
         lastName = $("#register-last-name"),
         regristrationEmail = $("#register-email"),
@@ -506,15 +509,15 @@ function renderProducts(list) {
      * Eventlistener
      */
 
-    firstName.focusout(()=>{
-        let bool = true
-        bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
-    });
+ firstName.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG)
+});
 
-    lastName.focusout(()=>{
-        let bool = true
-        bool = checkForInput(testForOnlyText, lastName, bool, LASTNAME_ERROR_MSG)
-    });
+lastName.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForName, lastName, bool, LASTNAME_ERROR_MSG)
+});
 
     regristrationEmail.focusout(()=>{
         let bool = true
@@ -613,31 +616,34 @@ function renderProducts(list) {
         resetBorder(city);
     }
 
-    function validateForm() {
-        let bool = true;
 
-        bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG);
-        bool = checkForInput(testForOnlyText, lastName, bool, LASTNAME_ERROR_MSG);
-        bool = checkForInput(testForEmail, regristrationEmail, bool, EMAIL_ERROR_MSG);
-        bool = checkForInput(
-            testForNumbersOnly,
-            phoneNumber,
-            bool,
-            PHONE_NUMBER_ERROR_MSG
-        );
-        bool = checkForInput(testForAddress, address, bool, ADDRESS_ERROR_MSG);
-        bool = checkForInput(testForZipCode, zipCode, bool, ZIPCODE_ERROR_MSG);
-        bool = checkForInput(testForOnlyText, city, bool, CITY_ERROR_MSG);
-        bool = checkForInput(
-            testForPassword,
-            newPassword,
-            bool,
-            WRONNG_PASSWORD_ERROR_MSG
-        );
+function validateForm() {
+  let bool = true;
 
-        bool = checkPassword(bool);
-        return bool;
-    }
+  bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG);
+  bool = checkForInput(testForName, lastName, bool, LASTNAME_ERROR_MSG);
+  bool = checkForInput(testForEmail, regristrationEmail, bool, EMAIL_ERROR_MSG);
+  bool = checkForInput(
+    testForNumbersOnly,
+    phoneNumber,
+    bool,
+    PHONE_NUMBER_ERROR_MSG
+  );
+  bool = checkForInput(testForAddress, address, bool, ADDRESS_ERROR_MSG);
+  bool = checkForInput(testForZipCode, zipCode, bool, ZIPCODE_ERROR_MSG);
+  bool = checkForInput(testForOnlyText, city, bool, CITY_ERROR_MSG);
+  bool = checkForInput(
+    testForPassword,
+    newPassword,
+    bool,
+    WRONNG_PASSWORD_ERROR_MSG
+  );
+
+  bool = checkPassword(bool);
+  return bool;
+}
+
+
 
     function checkPassword(bool) {
         if (newPassword.val() !== confirmPassword.val()) {

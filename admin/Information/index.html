@@ -48,6 +48,7 @@
                 type="search"
                 placeholder="Sök"
                 aria-label="Sök"
+                maxlength="50"
               />
               <button class="btn btn-outline-light mx-2" type="submit">
                 Sök
@@ -132,15 +133,15 @@
               <h4 class="my-4">Kontaktuppgifter till butiken</h4>
 
               <label for="info-address" class="form-label">Gatuadress</label>
-              <input type="text" class="form-control" id="info-address" />
+              <input type="text" class="form-control" id="info-address" maxlength="50" />
               <label for="info-zip" class="form-label">Postnummer</label>
-              <input type="text" class="form-control" id="info-zip" />
+              <input type="text" class="form-control" id="info-zip"  maxlength="6"/>
               <label for="info-city" class="form-label">Postort</label>
-              <input type="text" class="form-control" id="info-city" />
+              <input type="text" class="form-control" id="info-city" maxlength="50"/>
               <label for="info-phone" class="form-label">Telefonnummer</label>
-              <input type="text" class="form-control" id="info-phone" />
+              <input type="text" class="form-control" id="info-phone" maxlength="20"/>
               <label for="info-email" class="form-label">Email</label>
-              <input type="text" class="form-control mb-2" id="info-email" readonly/>
+              <input type="text" class="form-control mb-2" id="info-email" readonly maxlength="325"/>
               <button class="btn btn-secondary mt-3 save-button" id="btnContact">
                 Spara kontaktuppgifter
               </button>
@@ -183,6 +184,7 @@
                 accept=".jpg,.jpeg,.png,.gif"
                 class="form-control"
                 id="fileUpload"
+                maxlength="50"
               />
               <button class="btn btn-secondary" id="uploadButton">
                 Ladda upp
