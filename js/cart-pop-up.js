@@ -254,7 +254,7 @@ $("#clear").click(function () {
       });
       hideCart();
       localStorage.clear();
-      $("#total-items-in-cart").text("0");
+      $("#total-items-in-cart").hide();
       $("#priceOutput").text("");
       $("#cartOutput").text("");
       setCartAvailability();
