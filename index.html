@@ -17,7 +17,7 @@
   <body id="login-page">
     <!-- navbar (prototype) -->
 
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <nav class="navbar navbar-expand-xl navbar-light fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"
           ><img
@@ -40,6 +40,7 @@
           </div>
         </div>
         <button
+          id="mobileMenu"
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -52,11 +53,11 @@
         </button>
         <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
         <div
-          class="d-lg-flex justify-content-lg-evenly collapse navbar-collapse"
+          class="d-xl-flex justify-content-xl-end collapse navbar-collapse "
           id="navbarTogglerDemo02"
         >
-          <div class="container col-md-6 mt-3">
-            <div class="input-group mb-3 me-0 me-lg-5">
+          <!-- <div class="container col-md-6 mt-3"> -->
+            <!-- <div class="input-group mb-3 me-0 me-xl-5"> -->
               <!-- searchfield -->
 
               <!-- searchfield ends -->
@@ -75,11 +76,11 @@
               >
                 Sök
               </button> -->
-            </div>
-          </div>
+            <!-- </div> -->
+          <!-- </div> -->
 
-          <ul class="navbar-nav mb-2 mb-lg-0 text-start text-sm-end">
-            <li class="nav-item me-lg-4 mb-2 mb-lg-0">
+          <ul class="navbar-nav mb-2 mb-xl-0 text-start text-sm-end">
+            <li class="nav-item me-xl-4 mb-3 mb-xl-0">
               <a
                 type="button nav-link"
                 class="btn btn-outline-secondary text-dark"
@@ -87,7 +88,7 @@
                 >Logga in</a
               >
             </li>
-            <li class="nav-item me-4">
+            <li class="nav-item me-xl-4">
               <div class="dropdown">
                 <button
                   class="btn btn-secondary dropdown-toggle"
@@ -112,7 +113,7 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mt-3 mt-xl-0">
               <button
                 class="btn btn-secondary"
                 type="button"
@@ -129,7 +130,7 @@
                 >
               </button>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mt-2 mt-xl-0">
               <a id="admin-view-link" class="nav-link" href="./admin/"
                 >Adminvy</a
               >
@@ -158,7 +159,7 @@
         </div>
 
         <div class="col-sm-8 col-xl-9" id="display-body">
-          <div class="card w-100 text-white">
+          <!-- <div class="card w-100 text-white">
             <img
               src="https://picsum.photos/1000/300"
               class="card-img-top"
@@ -169,7 +170,7 @@
                 Veckans vara
               </h1>
             </div>
-          </div>
+          </div> -->
 
           <div class="dropdown text-end mt-3">
             <button
@@ -280,7 +281,7 @@
             <h5 class="text-uppercase mb-3">Om Hakim Livs</h5>
             <ul class="list-unstyled mb-3">
               <li>
-                <a href="/pages/about/index.html" class="text-light"><p>Om oss</p></a>
+                <a href="./pages/about/index.html" class="text-light"><p>Om oss</p></a>
               </li>
             </ul>
           </div>
@@ -324,6 +325,7 @@
                   class="form-control"
                   id="login-email"
                   placeholder="E-post"
+                  max="325"
                 />
                 <label for="login-email" class="form-label text-muted"
                   >E-post</label
@@ -336,6 +338,7 @@
                     class="form-control"
                     id="login-password"
                     placeholder="Lösenord"
+                    maxlength="50"
                   />
                   <label for="login-password" class="form-label text-muted"
                     >Lösenord</label
@@ -349,9 +352,9 @@
                   </button>
                 </div>
               </div>
-              <div class="smaller-text d-flex">
+              <!--<div class="smaller-text d-flex">
                 <div><a href="#">Glömt ditt lösenord?</a></div>
-              </div>
+              </div>-->
             </form>
           </div>
           <div class="modal-footer border-0 mx-auto">
@@ -408,6 +411,7 @@
                     placeholder="Förnamn"
                     required
                     name="firstName"
+                    maxlength="50"
                   />
                   <label for="register-first-name" class="form-label text-muted"
                     >Förnamn</label
@@ -423,6 +427,7 @@
                     id="register-last-name"
                     placeholder="Efternamn"
                     name="lastName"
+                    maxlength="50"
                   />
                   <label for="register-last-name" class="form-label text-muted"
                     >Efternamn</label
@@ -439,6 +444,7 @@
                     placeholder="E-post"
                     required
                     name="email"
+                    maxlength="325"
                   />
                   <label for="register-email" class="form-label text-muted"
                     >E-post</label
@@ -454,6 +460,7 @@
                     id="register-phone-number"
                     placeholder="Telefonnummer"
                     name="phoneNumber"
+                    maxlength="20"
                   />
                   <label
                     for="register-phone-number"
@@ -471,6 +478,7 @@
                     id="register-password"
                     placeholder="Efternamn"
                     name="password"
+                    maxlength="50"
                   />
                   <label for="register-password" class="form-label text-muted"
                     >Välj lösenord</label
@@ -485,6 +493,7 @@
                     class="form-control"
                     id="register-confirm-password"
                     placeholder="Efternamn"
+                    maxlength="50"
                   />
                   <label
                     for="register-confirm-password"
@@ -508,6 +517,7 @@
                     id="register-street"
                     placeholder="Efternamn"
                     name="streetAddress"
+                    maxlength="50"
                   />
                   <label for="register-street" class="form-label text-muted"
                     >Gatuadress</label
@@ -523,7 +533,7 @@
                     class="form-control"
                     id="register-city"
                     placeholder="Efternamn"
-                    maxlength="6"
+                    maxlength="50"
                     name="city"
                   />
                   <label for="register-city" class="form-label text-muted"
@@ -541,6 +551,7 @@
                     id="register-zip"
                     placeholder="Efternamn"
                     name="zipCode"
+                    maxlength="6"
                   />
                   <label for="register-zip" class="form-label text-muted"
                     >Postnummer</label
@@ -549,6 +560,8 @@
                     Felaktigt postnummer, måste matas in t.ex "123 45"
                   </div>
                 </div>
+
+                
 
                 <div class="col-md-4">
                   <label for="register-year" class="form-label"
@@ -633,10 +646,10 @@
             <div class="container">
               <div class="row border-bottom text-center">
                 <div class="col-1"><i class="bi bi-trash-fill"></i></div>
-                <div class="col-4 col-md-5 text-start"><h5>Produkt</h5></div>
-                <div class="col-2"><h5>Pris</h5></div>
-                <div class="col-3 col-md-2"><h5>Antal</h5></div>
-                <div class="col-2"><h5>Totalt</h5></div>
+                <div class="col-4 col-md-5 text-start pt-1 pt-lg-0"><h5>Produkt</h5></div>
+                <div class="col-2 pt-1 pt-lg-0"><h5>Pris <small>kr</small></h5></div>
+                <div class="col-2 col-md-2 pt-1 pt-lg-0 text-end"><h5>Antal</h5></div>
+                <div class="col-3 col-md-2 pt-1 pt-lg-0 text-end"><h5>Totalt <small>kr</small></h5></div>
               </div>
             </div>
             <div class="list-group">
@@ -660,7 +673,9 @@
             >
               Töm varukorgen
             </button>
-            <a href="./pages/checkout/">
+
+            <a id="checkOutLink">
+
               <button
                 type="button"
                 class="btn btn-primary btn-sm"
@@ -677,16 +692,22 @@
 
     <!-- product-card-pop-up-modal-->
     <div class="modal fade" id="product-card-modal">
-      <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header border-0 p-lg-3">
-            <h4 class="pl-xl-10 product-modal-title">Produktinformation</h4>
+            <h4 class="pl-xl-10">Produktinformation</h4>
+            <button
+            type="button"
+            class="btn-close display-8"
+            data-bs-dismiss="modal"
+          ></button>
           </div>
           <div class="modal-body">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-xl-6">
                   <img
+                    id="product-pop-up-img"
                     class="img-fluid rounded mx-auto d-block"
                     src="https://assets.icanet.se/t_product_large_2x_v1,f_auto/7318690173946.jpg"
                     alt="product-image"
@@ -695,43 +716,39 @@
                 <div class="col-xl-6">
                   <div class="row">
                     <div class="col-12">
-                      <h1 class="text-lg-start display-3">Laxfilé</h1>
+                      <h1 id="product-pop-up-title" class="text-lg-start">Laxfilé</h1>
+                      <h4 id="product-pop-up-unit">250 ml</h4>
                     </div>
                     <div class="col-12 mt-5">
-                      <h3>Beskrivning:</h3>
+                      <h4>Beskrivning:</h4>
                     </div>
                     <div class="col-12">
-                      <p>
-                        ICA Laxfilé Fryst är perfekta att ha i frysen för att
-                        snabbt plocka fram till en god middag. Lax är en perfekt
-                        start på en god middag, och kan varieras i evigheter.
-                        Stek den och servera med pressad potatis och brynt smör
-                        eller ugnsstek med sötstark sås och strössla på
-                        sesamfrön, så har du fått två helt olika slags rätter..
-                        Det finns minst tusen till.
-                      </p>
+                      <p id="product-pop-up-desc"></p>
                     </div>
 
-                    <div class="col-12">
-                      <h3>Ingredienser</h3>
+                    <div class="row">
+                      <div class="col-6">
+                        <h5>Jämförpris</h5>
+                      </div>
+                      <div class="col-6">
+                        <h5>Pris</h5>
+                      </div>
                     </div>
-                    <div class="col-12">
-                      <p>
-                        Ingredienser: LAXFILÉ* i bit (Salmo salar). *Odlad i
-                        Norge.
-                      </p>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id="product-pop-up-comp-price">
+                          34 kr/kg
+                        </p>
+                      </div>
+                      <div class="col-6">
+                        <p id="product-pop-up-price">
+                           kr
+                        </p>
+                      </div>
+
                     </div>
-                    <div class="col-12 mt-3">
-                      <h4>Näringsvärde per 100 g</h4>
-                    </div>
-                    <div class="col-12">
-                      <p>
-                        Energi (kcal) 220 kcal, Energi (kJ) 900 kJ, Fett 16 g,
-                        Varav mättat fett 3 g, Varav enkelomättat fett 0 g,
-                        Varav fleromättat fett 0 g, Kolhydrater 0 g, Varav
-                        socker 0 g, Protein 19 g, Salt 0.1 g
-                      </p>
-                    </div>
+                    
+                    
                   </div>
                 </div>
               </div>
@@ -740,11 +757,6 @@
               <dic class="container-fluid">
                 <div class="row align-items-center text-center">
                   <div class="col-12">
-                    <button
-                      type="button"
-                      class="btn-close display-8"
-                      data-bs-dismiss="modal"
-                    ></button>
                   </div>
                 </div>
               </dic>
@@ -769,13 +781,13 @@
     ></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+    <script src="./js/format.js"></script>
     <script src="./js/cart-pop-up.js"></script>
     <script src="./js/validate.js"></script>
     <script src="./js/register.js"></script>
-    <script src="./js/homepage.js"></script>
     <script src="./js/searchBar.js"></script>
+    <script src="./js/homepage.js"></script>
     <script src="./js/sortingAlgorithm.js"></script>
-    <script src="/js/footer.js"></script>
+    
   </body>
 </html>

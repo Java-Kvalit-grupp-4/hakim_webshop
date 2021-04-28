@@ -48,6 +48,7 @@
                 type="search"
                 placeholder="Sök"
                 aria-label="Sök"
+                maxlength="50"
               />
               <button class="btn btn-outline-light mx-2" type="submit">
                 Sök
@@ -77,7 +78,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../VIP/index.html" id="nav-vip"
+                <a class="nav-link" href="../VIP/index.html" id="nav-vip" hidden
                   >VIP</a
                 >
               </li>
@@ -132,15 +133,15 @@
               <h4 class="my-4">Kontaktuppgifter till butiken</h4>
 
               <label for="info-address" class="form-label">Gatuadress</label>
-              <input type="text" class="form-control" id="info-address" />
+              <input type="text" class="form-control" id="info-address" maxlength="50" />
               <label for="info-zip" class="form-label">Postnummer</label>
-              <input type="text" class="form-control" id="info-zip" />
+              <input type="text" class="form-control" id="info-zip"  maxlength="6"/>
               <label for="info-city" class="form-label">Postort</label>
-              <input type="text" class="form-control" id="info-city" />
+              <input type="text" class="form-control" id="info-city" maxlength="50"/>
               <label for="info-phone" class="form-label">Telefonnummer</label>
-              <input type="text" class="form-control" id="info-phone" />
+              <input type="text" class="form-control" id="info-phone" maxlength="20"/>
               <label for="info-email" class="form-label">Email</label>
-              <input type="text" class="form-control mb-2" id="info-email" readonly/>
+              <input type="text" class="form-control mb-2" id="info-email" readonly maxlength="325"/>
               <button class="btn btn-secondary mt-3 save-button" id="btnContact">
                 Spara kontaktuppgifter
               </button>
@@ -183,6 +184,7 @@
                 accept=".jpg,.jpeg,.png,.gif"
                 class="form-control"
                 id="fileUpload"
+                maxlength="50"
               />
               <button class="btn btn-secondary" id="uploadButton">
                 Ladda upp
@@ -198,7 +200,6 @@
       <!--slutar row-->
       <div class="container text-output"></div>
     </div>
-<<<<<<< HEAD
     <!--slutar row-->
   </div>
   <!--slutar container-->
@@ -210,18 +211,15 @@
       }
 </script>
 </body>
-=======
     <!--slutar container-->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
->>>>>>> 168b364133c4f45aecc8ce05d11d192c0876b636
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
       crossorigin="anonymous"
-    ></script>
+    ></script><script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../../js/admin-information.js"></script>
   </body>
