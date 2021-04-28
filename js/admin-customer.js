@@ -57,6 +57,8 @@ $(document).on('click', '#nav-profile-tab', function(){
     city.val("")
     zipCode.val("")
     customerComment.val("")
+    startDate = null;
+    endDate = null;
     load();
 })
 
@@ -74,7 +76,7 @@ function load(){
                 customers = response.data   
             }
             else{
-                swal("Något gick fel vid inläsning av kunder", "warning")
+                swal({title:"Något gick fel vid inläsning av kunder", icon:"warning"})
             }
         })
         .catch(err =>{
@@ -210,8 +212,6 @@ function filterSearch(){
     //let tempOrders = [];
     let filter = $("#search-select option:selected").text();
     let input = $("#input").val();
-  
-    console.log(startDate, endDate);
         
     $("#customerTable").empty();
     switch (filter) {
@@ -224,24 +224,30 @@ function filterSearch(){
         case 'Total ordersumma över:':
             if(input!="" && input!=NaN){
                 resetsInputBorders()
-                axios.get(getAllOrders)
-                    .then((response) =>{
-                        let filterCustomers = [];
-                        let filterOrders = response.data
-                        console.log(filterOrders)
-                        if(startDate!=null && endDate!=null){
-                            filterOrders.stream()
-                                .forEach(order => {let date = new Date(order.orderTimestamp)})
-                                .filter(date>=startDate && date<=endDate)    
-                            }
-                        console.log(filterOrders)
-                        customers.forEach(customer =>{
-                            if(getTotalPriceOfOrders(filterOrders.filter(order => order.appUser.customerNumber==customer.customerNumber))>input){
-                                filterCustomers.push(customer)
-                            }
+                    axios.get(getAllOrders)
+                        .then((response) =>{
+                            let filterCustomers = [];
+                            let filterOrders = response.data
+                            let date;
+                            let filterOrders2=[];
+                            if(startDate!=null && endDate!=null){
+                                filterOrders
+                                    .forEach(order => {
+                                        date = new Date(order.timeStamp)
+                                        if( date>=startDate && date<=endDate){
+                                            filterOrders2.push(order)
+                                        }})
+                                }
+                            customers.forEach(customer =>{
+                                if(getTotalPriceOfOrders(filterOrders2.filter(order => 
+                                    order.appUser.customerNumber==customer.customerNumber))>input){
+
+                                    filterCustomers.push(customer)
+                                }
+                            })
+                            showCustomers(filterCustomers)
+                            
                         })
-                        showCustomers(filterCustomers)
-                    })
             }
             else{
                 swal("Fel input!", "Du måste skriva in totalsumma","warning" )
@@ -254,17 +260,27 @@ function filterSearch(){
                         .then((response) =>{
                             let filterCustomers = [];
                             let filterOrders = response.data
+                            let date;
+                            let filterOrders2=[];
+                            console.log("startdate: " + startDate +"endDate: " +endDate);
                             if(startDate!=null && endDate!=null){
-                                filterOrders.stream()
-                                    .forEach(order => {let date = new Date(order.orderTimestamp)})
-                                    .filter(date>=startDate && date<=endDate)    
+                                filterOrders
+                                    .forEach(order => {
+                                        date = new Date(order.timeStamp)
+                                        console.log(date)
+                                        if( date>=startDate && date<=endDate){
+                                            filterOrders2.push(order)
+                                        }})
                                 }
                             customers.forEach(customer =>{
-                                if(customerOrderLength(filterOrders.filter(order => order.appUser.customerNumber==customer.customerNumber))>input){
+                                if(customerOrderLength(filterOrders2.filter(order => 
+                                    order.appUser.customerNumber==customer.customerNumber))>input){
+
                                     filterCustomers.push(customer)
                                 }
                             })
                             showCustomers(filterCustomers)
+                            
                         })
                 }
                 else{
@@ -272,8 +288,7 @@ function filterSearch(){
                 }
             break;
     }
-    startDate=null;
-    endDate=null;
+   
 };
 
 function showOrders(customerOrders){
