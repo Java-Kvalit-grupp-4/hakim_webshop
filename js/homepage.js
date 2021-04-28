@@ -79,7 +79,7 @@ $(document).ready(() => {
 function load() {
   //const productsUrl = './TestData/test_data_products_v1.2.JSON'
   //const productsUrl = 'http://localhost:8080/products'
-  const productsUrl = "http://hakimlivs.herokuapp.com/products";
+  const productsUrl = "https://hakimlivs.herokuapp.com/products";
 
   axios.get(productsUrl)
     .then((response) => {
@@ -159,8 +159,9 @@ function renderProducts(list) {
 
   list.forEach((element) => {
     $("#products").append(`
-        <div class="product-card">
-              <div id="${element.sku}">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+      <div class="product-card">
+          <div id="${element.sku}">
                 <div class="img-container">
                   <img src="${
                     element.image
@@ -175,6 +176,7 @@ function renderProducts(list) {
                       maximumFractionDigits: 2,
                     }
                   )} kr</h5>
+                  <p id="" class="card-comp-price">jfr-pris 60 kr/l</p>
                   <p id="${
                     element.description
                   }"class="card-text">Mer info om produkten</p>
@@ -195,9 +197,9 @@ function renderProducts(list) {
                     <button class="add-product-to-cart" style="margin-top: 5%">Köp</button>
                   </div>
                 </div>
-              </div>
-            </div>  
-
+          </div>
+      </div>  
+    </div>            
         `);
   });
 
@@ -211,8 +213,9 @@ function renderProducts(list) {
         if (
           product.sku == e.target.parentElement.parentElement.parentElement.id
         ) {
+          console.log(e.target.parentElement.parentElement.children[4]);
           product.inCart = Number(
-            e.target.parentElement.parentElement.children[3].children[1]
+            e.target.parentElement.parentElement.children[4].children[1]
               .children[0].value
           );
           if (product.inCart < 1) {
@@ -220,7 +223,7 @@ function renderProducts(list) {
           } else if (product.inCart.toString().includes(".")) {
             swal("Du måste ange heltal", "", "warning");
           } else {
-            e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1;
+            e.target.parentElement.parentElement.children[4].children[1].children[0].value = 1;
             let isToMany = false;
             isToMany = saveProductToCart(product);
 
@@ -285,14 +288,32 @@ function renderProducts(list) {
 
   //------------------------------- product-card-modal ----------------------------------\\
 
+  const renderProductPopUpModal = (element) => {
+    console.log('in here');
+    let imgSrc = element.children[0].children[0].src
+    let title = element.children[1].children[0].innerText
+    let desc = element.children[1].children[3].id
+    let price = element.children[1].children[1].innerText
+    let compPrice = element.children[1].children[2].innerText
+    $('#product-pop-up-img').attr("src", imgSrc)
+    $('#product-pop-up-title').text(title)
+    $('#product-pop-up-unit').text('250 ml')
+    $('#product-pop-up-desc').text(desc)
+    $('#product-pop-up-price').text(price)
+    $('#product-pop-up-comp-price').text(compPrice)
+
+  }
+
   $.each($(".card-text"), function (index, value) {
     value.addEventListener("click", () => {
+      renderProductPopUpModal(value.parentElement.parentElement)
       $("#product-card-modal").modal("show");
     });
   });
 
   $.each($(".product-card-img"), function (index, value) {
     value.addEventListener("click", () => {
+      renderProductPopUpModal(value.parentElement.parentElement)
       $("#product-card-modal").modal("show");
     });
   });
