@@ -237,9 +237,12 @@ function showProducts(l) {
     $("#products").append(
       `<tr id="${element.sku}">
             <td>${element.sku}</td>
-            <td ><h5 >${element.title}</h5></td>
-            <td ><h5 >${element.brand.name}</h5></td>
-            <td>${element.price} kr</td>
+            <td >${element.title}</td>
+            <td >${element.brand.name}</td>
+            <td>${element.price.toLocaleString("sv-SE", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })} kr</td>
             <td> ${element.quantity}</td>
             </tr>`
     );

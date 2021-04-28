@@ -14,17 +14,15 @@
     />
     <link rel="stylesheet" href="../../styles/style.css" />
     <link rel="stylesheet" href="../Customer/admin-customer.css" />
+    <link rel="stylesheet" href="../Orders/admin-orders.css" />
     <title>Admin-ordrar</title>
-    
   </head>
 
   <body>
     <nav>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand" href="../index.html" id="nav-home"
-            >ADMIN</a
-          >
+          <a class="navbar-brand" href="../index.html" id="nav-home">ADMIN</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -73,12 +71,15 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../Customer/index.html" id="nav-customer"
+                <a
+                  class="nav-link"
+                  href="../Customer/index.html"
+                  id="nav-customer"
                   >Kunder</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../VIP/index.html" id="nav-vip"
+                <a class="nav-link" href="../VIP/index.html" id="nav-vip" hidden
                   >VIP</a
                 >
               </li>
@@ -91,13 +92,11 @@
                 >
               </li>
             </ul>
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="../../index.html">Kundvy</a>
-                </li>
-              </ul>
-
-
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="../../index.html">Kundvy</a>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
@@ -142,208 +141,313 @@
         aria-labelledby="nav-profile-tab"
       >
         <div class="container p-4">
-            <div class="row">
-                <div class="header col-lg-6 col-md-12">
-                    <h2>Orderlista</h2>
-                </div>
-                <div class="price col-lg-3 col-md-6">
+          <div class="row">
+            <div class="header col-lg-6 col-md-12">
+              <h2>Orderlista</h2>
+            </div>
+            <!-- <div class="price col-lg-3 col-md-6">
                 <p>Pris</p>
-                </div>
-                <div class="order-nr col-lg-3 col-md-6">
+                </div> -->
+            <!-- <div class="order-nr col-lg-3 col-md-6">
                 <p>Order-nr</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-4">
-                    <div class="datepicker">
-                        <form class="form-horizontal">
-                            <fieldset>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <div class="input-group input-group-prepend">
-                                            <span class="input-group-text"
-                                            ><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="20"
-                                            height="20"
-                                            fill="currentColor"
-                                            class="bi bi-calendar3"
-                                            viewBox="0 0 16 16"
-                                            >
-                                            <path
-                                            d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"
-                                            />
-                                            <path
-                                            d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
-                                            /></svg></span
-                                            ><input
-                                            type="text"
-                                            style="width: 200px"
-                                            name="reservation"
-                                            id="reservation"
-                                            class="form-control"
-                                            value="04/01/2021 - 04/30/2021"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Order Status
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Obehandlad</a>
-                            <a class="dropdown-item" href="#">Plockas</a>
-                            <a class="dropdown-item" href="#">Leverarad</a>
+                </div> -->
+          </div>
+          <div class="row">
+            <div class="col col-md-7 col-lg-4">
+              <div class="datepicker">
+                <form class="form-horizontal">
+                  <fieldset>
+                    <div class="control-group">
+                      <div class="controls">
+                        <div class="input-group input-group-prepend">
+                          <span class="input-group-text"
+                            ><svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="20"
+                              height="20"
+                              fill="currentColor"
+                              class="bi bi-calendar3"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"
+                              />
+                              <path
+                                d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                              /></svg></span
+                          ><input
+                            type="text"
+                            style="width: 200px"
+                            name="reservation"
+                            id="reservation"
+                            class="form-control"
+                            value="04/01/2021 - 04/30/2021"
+                          />
                         </div>
+                      </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    <form class="form-inline my-2 my-lg-0 d-flex">
-                        <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search">
-                        <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
-                    </form>
-                </div>
-                <div class="col-lg-3">
-                    <form class="form-inline my-1 my-lg-0  d-flex">
-                        <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search">
-                        <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
-                    </form>
-                </div>
+                  </fieldset>
+                </form>
+              </div>
             </div>
+            <div class="col-12 col-md-5 col-lg-4 my-3 mt-md-0">
+              <select class="form-select" aria-label="Orderstatus">
+                <option selected disabled>Orderstatus</option>
+                <option value="1">Obehandlad</option>
+                <option value="2">Plockas</option>
+                <option value="3">Skickad</option>
+                <option value="4">Avbeställd</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-5 col-lg-4 mb-3 mt-md-0">
+              <select class="form-select" aria-label="Orderstatus">
+                <option selected disabled>Betalstatus</option>
+                <option value="1">Obetald</option>
+                <option value="2">Betald</option>
+              </select>
+            </div>
+            <div class="col">
+              <div class="input-group">
+                <select
+                  class="form-select"
+                  id="inputGroupSelect04"
+                  aria-label="Example select with button addon"
+                >
+                  <option selected disabled>Sök efter...</option>
+                  <option value="1">Ordernummer</option>
+                  <option value="2">Totalt pris över</option>
+                </select>
+                <input
+                  class="form-control"
+                  type="search"
+                  placeholder="Sök"
+                  aria-label="Search"
+                />
+                <button class="btn btn-secondary" type="button">Sök</button>
+              </div>
+              <!-- <form class="form-inline my-2 my-lg-0 d-flex">
+                      <label for="total-price" class="form-label">Pris</label>
+                        <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search" id="total-price">
+                        <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
+                    </form> -->
+            </div>
+          </div>
         </div>
-        <div class="container"> 
-            <table class="table table-secondary ">
-                <thead>
-                    <tr>
-                        <th scope="col" class="pb-3 ps-md-5">Ordernummer</th>
-                        <th scope="col" class="pb-3 ps-md-5">Kundnummer</th>
-                        <th scope="col" class="pb-3 ">Datum</th>
-                        <th scope="col" class="pb-3">Totalt</th>
-                        <th scope="col" class="pb-3">Orderstatus</th>
-                        <th scope="col" class="pb-3">Betalstatus</th>
-                    </tr>
-                </thead>
-                <tbody id="orders-container">
-                    <!-- <tr>
-                        <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
-                        <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
-                        <td>2021-01-20</td>
-                        <td>135 kr</td>
-                        <td>Levererad</td>
-                        <td>Mottagen</td>
-                    </tr> -->
-                </tbody>
-            </table>
+        <div class="container">
+          <table
+            class="table table-secondary table-responsive table-sm table-hover"
+          >
+            <thead>
+              <tr>
+                <th scope="col" class="pb-3 ps-md-5 col-2">Ordernr</th>
+                <th scope="col" class="pb-3 ps-md-5">Kundnr</th>
+                <th scope="col" class="pb-3">Datum</th>
+                <th scope="col" class="pb-3">Totalt <small>kr</small></th>
+                <th scope="col" class="pb-3">Orderstatus</th>
+                <th scope="col" class="pb-3">Betalstatus</th>
+              </tr>
+            </thead>
+            <tbody id="orders-container">
+              <!-- <tr>
+                    <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
+                    <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
+                    <td>2021-01-20</td>
+                    <td>135 kr</td>
+                    <td>Levererad</td>
+                    <td>Mottagen</td>
+                </tr> -->
+            </tbody>
+          </table>
         </div>
-    </div>
-    <div
+      </div>
+      <div
         class="tab-pane fade"
         id="nav-contact"
         role="tabpanel"
         aria-labelledby="nav-contact-tab"
-    >
-    <div class="container row">
-        <div class="container col-3 pb-5">
-            <div class="container col-12 pb-5">
-                <div class="customer-info mt-5">
-                    <div class="mb-5">
-                        <h2>Kundinformation</h2>
-                    </div>
-                    <form>
-                        <div class="col-lg-12 mb-3">
-                        <label for="customer-first-name" class="form-label">Förnamn</label>
-                        <input type="text" class="form-control" placeholder="Förnamn" aria-label="Förnamn"
-                            id="customer-first-name">
-                        </div>
-                        <div class="col-lg-12 mb-3">
-                            <label for="customer-last-name" class="form-label">Efternamn</label>
-                            <input type="text" class="form-control " placeholder="Efternamn" aria-label="Efternamn"
-                         id="customer-last-name">
-                        </div>
-                        <div class="col-lg-12 mb-3">
-                            <label for="customer-street-address" class="form-label">Address</label>
-                            <input type="text" class="form-control" placeholder="Address" aria-label="Address"
-                            id="customer-street-address">
-                        </div>
-                        <div class="col-lg-12 mb-3">
-                          <label for="customer-zipcode" class="form-label">Postnummer</label>
-                          <input type="text" class="form-control" placeholder="Postnummer" aria-label="Postnummer"
-                          id="customer-zipcode">
-                      </div>
-                        <div class="col-lg-12 mb-3">
-                            <label for="customer-city" class="form-label">Postort</label>
-                            <input type="text" class="form-control " placeholder="Postort" aria-label="Postort"
-                            id="customer-city">
-                        </div>
-                        <div class="col-lg-12 mb-3">
-                            <label for="customer-email" class="form-label">E-post</label>
-                            <input type="text" class="form-control" placeholder="E-post" aria-label="E-post"
-                            id="customer-email">
-                        </div>
-                        <div class="col-lg-12 mb-3">
-                            <label for="customer-phone-number" class="form-label">Telefonnummer</label>
-                            <input type="text" class="form-control" placeholder="Telefonnummer" aria-label="Telefonnummer"
-                            id="customer-phone-number">
-                        </div>
-                        <div class="col mb-3 mt-4">
-                            <button type="submit" class="btn btn-secondary save-button" style="width: 100px;" 
-                            id="save-customer-data-btn">Spara</button>
-                        </div>
-                    </form>
+      >
+        <div class="row order-body gx-0 gx-lg-3">
+          <div class="container col-lg-3 pb-5 order-last">
+            <div class="container col-12 px-3 pb-5">
+              <div class="customer-info mt-5">
+                <div class="mb-5">
+                  <h2>Kundinformation</h2>
                 </div>
-            </div>
-        </div>
-        <div class="container col-9 pb-5">
-            <div class="container col-12">
-                <div class="customer-info mt-5">
-                    <div class="mb-5">
-                      <h2>Produkter i ordern</h2>
-                    </div>
-                    <div class="container"> 
-                        <table class="table table-secondary ">
-                          <thead>
-                            <tr>
-                              <th scope="col" class="pb-3 ps-md-5">Artikel-nr</th>
-                              <th scope="col" class="pb-3 ps-md-5">Produktnamn</th>
-                              <th scope="col" class="pb-3 ">Antal </th>
-                              <th scope="col" class="pb-3">Styckpris</th>
-                              <th scope="col" class="pb-3">Totalt pris</th>
-                            </tr>
-                          </thead>
-                          <tbody id="product-container">
-                          </tbody>
-                        </table>
-                      </div>
-                </div>
-                  <div class= "countainer text-end pe-4" id="order-total-cost">
-                      <p>Total Summa: 1000kr</p>
+                <form>
+                  <div class="col-lg-12 mb-3">
+                    <label for="customer-first-name" class="form-label"
+                      >Förnamn</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Förnamn"
+                      aria-label="Förnamn"
+                      id="customer-first-name"
+                    />
                   </div>
+                  <div class="col-lg-12 mb-3">
+                    <label for="customer-last-name" class="form-label"
+                      >Efternamn</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Efternamn"
+                      aria-label="Efternamn"
+                      id="customer-last-name"
+                    />
+                  </div>
+                  <div class="col-lg-12 mb-3">
+                    <label for="customer-street-address" class="form-label"
+                      >Address</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Address"
+                      aria-label="Address"
+                      id="customer-street-address"
+                    />
+                  </div>
+                  <div class="col-lg-12 mb-3">
+                    <label for="customer-zipcode" class="form-label"
+                      >Postnummer</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Postnummer"
+                      aria-label="Postnummer"
+                      id="customer-zipcode"
+                    />
+                  </div>
+                  <div class="col-lg-12 mb-3">
+                    <label for="customer-city" class="form-label"
+                      >Postort</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Postort"
+                      aria-label="Postort"
+                      id="customer-city"
+                    />
+                  </div>
+                  <div class="col-lg-12 mb-3">
+                    <label for="customer-email" class="form-label"
+                      >E-post</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="E-post"
+                      aria-label="E-post"
+                      id="customer-email"
+                    />
+                  </div>
+                  <div class="col-lg-12 mb-3">
+                    <label for="customer-phone-number" class="form-label"
+                      >Telefonnummer</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Telefonnummer"
+                      aria-label="Telefonnummer"
+                      id="customer-phone-number"
+                    />
+                  </div>
+                  <div class="col mb-3 mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-secondary save-button"
+                      style="width: 100px"
+                      id="save-customer-data-btn"
+                    >
+                      Spara
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-            <div class="container col-12 pt-3 ps-5">
-                <h2>Kommentar på ordern</h2>
+          </div>
+          <div class="container col col-lg-9 pb-5 pe-0">
+            <div class="container col">
+              <div class="customer-info mt-5 container ms-xl-4 px-1 px-lg-0">
+                <div class="mb-5">
+                  <h2>Produkter i ordern</h2>
+                </div>
+
+                <table
+                  class="table table-secondary table-responsive table-smaller small-headings"
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col" class="pb-3 ps-md-5">Artikelnr</th>
+                      <th scope="col" class="pb-3 ps-md-5">Produktnamn</th>
+                      <th scope="col" class="pb-3">Antal</th>
+                      <th scope="col" class="pb-3">Pris <small>kr</small></th>
+                      <th scope="col" class="pb-3">Totalt <small>kr</small></th>
+                    </tr>
+                  </thead>
+                  <tbody id="product-container"></tbody>
+                </table>
+              </div>
+              <div class="container text-end pe-4" id="order-total-cost">
+                <p>Totalt: </p>
+              </div>
+
+              <div class="text mb-2 px-3 ms-xl-4 col-lg-6">
+                Orderstatus
+                <select class="form-select" aria-label="Orderstatus">
+                  <option selected disabled>Orderstatus</option>
+                  <option value="Obehandlad">Väntar på behandling</option>
+                  <option value="2">Plockning pågår</option>
+                  <option value="3">Skickad</option>
+                  <option value="4">Avbeställd</option>
+                </select>
+              </div>
             </div>
-            <div class="container col-12 ps-5">
-                <textarea name="" id="" cols="100" rows="10" placeholder="Skriv kommentar här..."></textarea>
-                <div class="container text-end"><button type="submit" class="btn btn-secondary save-button" style="width: 100px;" 
-              id="save-order-comment-btn">Spara</button>
+
+            <div class="container col-12 pt-3 ps-3 ps-lg-5">
+              <h2>Kommentar på ordern</h2>
             </div>
+            <div class="container col px-3 ps-lg-5 pe-lg-0">
+              <textarea
+                class="form-control"
+                name=""
+                id=""
+                rows="10"
+                placeholder="Skriv kommentar här..."
+                style="height: 300px"
+              ></textarea>
+              <div class="container text-end mt-5">
+                <button
+                  type="submit"
+                  class="btn btn-secondary save-button"
+                  style="width: 100px"
+                  id="save-order-comment-btn"
+                >
+                  Spara
+                </button>
+              </div>
             </div>
-    </div>
+          </div>
         </div>
-        <script>
-          let customer = JSON.parse(sessionStorage.getItem('customer'))
-          console.log(customer)
-            if(customer==null || customer== undefined || customer.isAdmin==false){
-              window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
-            }
+      </div>
+    </div>
+    <script>
+      let customer = JSON.parse(sessionStorage.getItem("customer"));
+      console.log(customer);
+      if (
+        customer == null ||
+        customer == undefined ||
+        customer.isAdmin == false
+      ) {
+        window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html";
+      }
     </script>
-    
 
     <script
       type="text/javascript"

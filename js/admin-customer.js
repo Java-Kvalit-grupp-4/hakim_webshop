@@ -106,16 +106,20 @@ function showCustomers(customerArr){
     
         $("#customerTable").append(`
             <tr>
-                <th scope="row"><a href="#" class="customer-tab">${e.customerNumber}</a></th>
+                <th scope="row"><a href="#" class="customer-tab">${
+                  e.customerNumber
+                }</a></th>
                 <td>${e.firstName}</td>
                 <td>${e.lastName}</td>
                 <td><a href="mailto:${e.email}">${e.email}</a></td>
                 <td>${customerOrders}</td>
-                <td>${totalPrice.toFixed(2)} kr</td>
+                <td>${totalPrice.toLocaleString("sv-SE", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })} kr</td>
                 <td><i class="bi ${isVip}"></i></td>
             </tr>
-            `
-        )})
+            `);})
 }
 
 function openCustomerTab(){
@@ -245,11 +249,21 @@ function showOrders(customerOrders){
                     <td class="col-2">${orders.orderStatus.type}</td>
                     <td class="col-2">${isPaid}</td>
                     <td class="col-3">${orderDate}</td>
-                    <td class="col-2">${orders.totalCost.toFixed(2)} kr</td>
-                </tr>`
-            )
+                    <td class="col-2">${orders.totalCost.toLocaleString(
+                      "sv-SE",
+                      {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }
+                    )}</td>
+                </tr>`);
     })
-    $("#totalCost").text(sum.toFixed(2) + " kr");
+    $("#totalCost").text(
+      sum.toLocaleString("sv-SE", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }) + " "
+    );
         
 }
 
