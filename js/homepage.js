@@ -162,8 +162,8 @@ function renderProducts(list) {
   list.forEach((element) => {
     $("#products").append(`
     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-        <div class="product-card">
-              <div id="${element.sku}">
+      <div class="product-card">
+          <div id="${element.sku}">
                 <div class="img-container">
                   <img src="${
                     element.image
@@ -199,8 +199,8 @@ function renderProducts(list) {
                     <button class="add-product-to-cart" style="margin-top: 5%">Köp</button>
                   </div>
                 </div>
-              </div>
-            </div>  
+          </div>
+      </div>  
     </div>            
         `);
   });
