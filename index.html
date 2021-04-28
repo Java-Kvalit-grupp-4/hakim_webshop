@@ -156,7 +156,7 @@
         </div>
 
         <div class="col-sm-8 col-xl-9" id="display-body">
-          <div class="card w-100 text-white">
+          <!-- <div class="card w-100 text-white">
             <img
               src="https://picsum.photos/1000/300"
               class="card-img-top"
@@ -167,7 +167,7 @@
                 Veckans vara
               </h1>
             </div>
-          </div>
+          </div> -->
 
           <div class="dropdown text-end mt-3">
             <button
@@ -691,10 +691,10 @@
 
     <!-- product-card-pop-up-modal-->
     <div class="modal fade" id="product-card-modal">
-      <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header border-0 p-lg-3">
-            <h4 class="pl-xl-10 product-modal-title">Produktinformation</h4>
+            <h4 class="pl-xl-10">Produktinformation</h4>
             <button
             type="button"
             class="btn-close display-8"
@@ -706,6 +706,7 @@
               <div class="row">
                 <div class="col-xl-6">
                   <img
+                    id="product-pop-up-img"
                     class="img-fluid rounded mx-auto d-block"
                     src="https://assets.icanet.se/t_product_large_2x_v1,f_auto/7318690173946.jpg"
                     alt="product-image"
@@ -714,43 +715,39 @@
                 <div class="col-xl-6">
                   <div class="row">
                     <div class="col-12">
-                      <h1 class="text-lg-start display-3">Laxfilé</h1>
+                      <h1 id="product-pop-up-title" class="text-lg-start">Laxfilé</h1>
+                      <h4 id="product-pop-up-unit">250 ml</h4>
                     </div>
                     <div class="col-12 mt-5">
-                      <h3>Beskrivning:</h3>
+                      <h4>Beskrivning:</h4>
                     </div>
                     <div class="col-12">
-                      <p>
-                        ICA Laxfilé Fryst är perfekta att ha i frysen för att
-                        snabbt plocka fram till en god middag. Lax är en perfekt
-                        start på en god middag, och kan varieras i evigheter.
-                        Stek den och servera med pressad potatis och brynt smör
-                        eller ugnsstek med sötstark sås och strössla på
-                        sesamfrön, så har du fått två helt olika slags rätter..
-                        Det finns minst tusen till.
-                      </p>
+                      <p id="product-pop-up-desc"></p>
                     </div>
 
-                    <div class="col-12">
-                      <h3>Ingredienser</h3>
+                    <div class="row">
+                      <div class="col-6">
+                        <h5>Jämförpris</h5>
+                      </div>
+                      <div class="col-6">
+                        <h5>Pris</h5>
+                      </div>
                     </div>
-                    <div class="col-12">
-                      <p>
-                        Ingredienser: LAXFILÉ* i bit (Salmo salar). *Odlad i
-                        Norge.
-                      </p>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id="product-pop-up-comp-price">
+                          34 kr/kg
+                        </p>
+                      </div>
+                      <div class="col-6">
+                        <p id="product-pop-up-price">
+                           kr
+                        </p>
+                      </div>
+
                     </div>
-                    <div class="col-12 mt-3">
-                      <h4>Näringsvärde per 100 g</h4>
-                    </div>
-                    <div class="col-12">
-                      <p>
-                        Energi (kcal) 220 kcal, Energi (kJ) 900 kJ, Fett 16 g,
-                        Varav mättat fett 3 g, Varav enkelomättat fett 0 g,
-                        Varav fleromättat fett 0 g, Kolhydrater 0 g, Varav
-                        socker 0 g, Protein 19 g, Salt 0.1 g
-                      </p>
-                    </div>
+                    
+                    
                   </div>
                 </div>
               </div>
@@ -787,9 +784,9 @@
     <script src="./js/cart-pop-up.js"></script>
     <script src="./js/validate.js"></script>
     <script src="./js/register.js"></script>
-    <script src="./js/homepage.js"></script>
     <script src="./js/searchBar.js"></script>
+    <script src="./js/homepage.js"></script>
     <script src="./js/sortingAlgorithm.js"></script>
-    <script src="./js/footer.js"></script>
+    
   </body>
 </html>

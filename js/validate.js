@@ -90,7 +90,7 @@ function testForDecimalNumbers(input) {
  * @returns true or false
  */
 function testForPhoneNumber(input) {
-    let test = input.replaceAll(' ','')
+    let test = input.replaceAll(' ','').replaceAll('-','')
     let pattern =  /^[(]{0,1}[0-9]{2,4}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{2,6}$/; 
     return testForSqlInjections(test) ? false : pattern.test(test)
 }

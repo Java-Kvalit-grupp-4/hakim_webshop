@@ -4,7 +4,6 @@ axios.get("../TestData/test_data_orders.json")
 .then(response => getOrderStatus(response.data))
 
 function getOrderStatus (data) {
-    console.log(data)
    let waiting = 0;
    let picking = 0;
    let ready = 0;

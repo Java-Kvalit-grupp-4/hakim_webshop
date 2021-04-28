@@ -3,9 +3,7 @@ let cart = [];
 $(document).ready(load);
 
 function load() {
-
   renderCart();
-  
 }
 
 function makeArrayFromData(data) {
@@ -35,7 +33,7 @@ function renderCart() {
                       <div class="col-lg-1 d-none d-lg-inline text-start">
 
                         <img class="cart-thumbnail "
-                    src="${element.image} alt="${element.title}-bild">
+                    src="${element.image}" alt="${element.title}-bild">
                       </div>
                       <div class="col-2">${element.price.toLocaleString(
                         "sv-SE",
@@ -127,6 +125,7 @@ function renderCart() {
     });
   }
 }
+
 function updateTotalPrice(product) {
   let totalPrice = JSON.parse(localStorage.getItem("cartTotalPrice"));
   totalPrice -= product.price * product.inCart;
