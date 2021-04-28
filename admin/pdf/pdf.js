@@ -5,7 +5,14 @@ pdfButton.addEventListener('click', () => {
     html2pdf(pdf).save()
 });
 
-function renderOrder (data) {
+$(function () {
+    fetch("../../TestData/test_data_orders.json")
+      .then((response) => response.json())
+      .then((response) => (orders = response))
+      .then((response) => renderOrder(order));
+  });
+
+function renderOrder (order) {
     let order = $('order-container')
     order.html('')
     order.array.forEach(element => {
@@ -25,12 +32,44 @@ let totalPrice = 0;
     $.each($('.line-item-total-price'),(index, e) => totalPrice += parseFloat(e.innerText))
     $('#order-total-price').text(totalPrice.toFixed(2));
 
-function totalVat (data) {
+function totalVat () {
     let vat = $('vat')
     vat.html('')
     vat.forEach(element => {
         vat.append(`
         <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(element.price * element.inCart).toFixed(2) * 0.1071}</p></div>
+        `)
+    });
+}
+
+function invoiceDate(){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    
+    today = mm + '/' + dd + '/' + yyyy;
+    document.write(today);
+    today = $("#invoiceDate")
+}
+
+function dueDate(){
+    var date = new Date();
+    var dd = String(today.getDate() + 30).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    
+    date = mm + '/' + dd + '/' + yyyy;
+    document.write(today);
+    today = $("#dueDate")
+}
+
+function pricePlusShipping(){
+    let total = $('#price-plus-shipping')
+    total.html('')
+    total.forEach(element => {
+        total.append(`
+        <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(element.price * element.inCart).toFixed(2) + 49}</p></div>
         `)
     });
 }

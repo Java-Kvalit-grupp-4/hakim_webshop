@@ -43,16 +43,19 @@
                 </div>
                 <div>
                     <span>Fakturadatum:</span>
+                    <div id="invoiceDate"></div>
                 </div>
                 <div>
                     <span>Leveransdatum:</span>
+                    Dag efter beställning
                 </div>
                 <div>
                     <span>Betalningsvillkor</span>
-                    30 dagar
+                    14 dagar
                 </div>
                 <div>
                     <span>Förfallodatum:</span>
+                    <div id="dueDate"></div>
                 </div>
                 <div>
                     <span>Dröjsmålsränta:</span>
@@ -78,7 +81,7 @@
                             <td class="product"></td>
                             <td class="desc"></td>
                             <td class="unit"></td>
-                            <td class="qty"></td>
+                            <td class="quantity"></td>
                             <td class="total"></td>
                         </tr>
                     </div>
@@ -96,7 +99,7 @@
                     </tr>
                     <tr>
                         <td colspan="4" class="grand total">Totalsumma</td>
-                        <td class="grand total"></td>
+                        <td class="grand total" id="price-plus-shipping"></td>
                     </tr>
                 </tbody>
             </table>
