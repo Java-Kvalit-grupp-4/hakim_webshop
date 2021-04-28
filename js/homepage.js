@@ -21,7 +21,8 @@ const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
 /**
  * Eventlistener
 
- */ C: $("#newCust-button").click(() => {
+ */ 
+$("#newCust-button").click(() => {
   $("#registerForm").modal("show");
 });
 
@@ -31,10 +32,8 @@ $("#checkout-button").click(function () {
     swal("Du måste vara inloggad för att lägga beställning", "", "warning");
   } else {
     $("#checkOutLink").attr("href", "./pages/checkout/");
-
   }
 });
-
 
 $("#show-password-button").click(function () {
   if ($(this).text() == "Visa") {
@@ -82,8 +81,7 @@ function load() {
   //const productsUrl = 'http://localhost:8080/products'
   const productsUrl = "http://hakimlivs.herokuapp.com/products";
 
-  axios
-    .get(productsUrl)
+  axios.get(productsUrl)
     .then((response) => {
       renderCategories(response.data);
     })
