@@ -279,7 +279,7 @@ function renderProducts(list) {
 
                             $.each($('.add1btn'), function (index, value) {
                                 value.addEventListener('click', (e) => {
-                                    availableProducts.forEach(product => {
+                                    products.forEach(product => {
 
                                         if (product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id) {
                                             let currentValue = Number(e.target.parentElement.parentElement.children[1].children[0].value) + 1;
@@ -292,7 +292,7 @@ function renderProducts(list) {
                             })
                             $.each($('.reduce1btn'), function (index, value) {
                                 value.addEventListener('click', (e) => {
-                                    availableProducts.forEach(product => {
+                                    products.forEach(product => {
                                         if (product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id) {
 
                                             let currentValue = Number(e.target.parentElement.parentElement.children[1].children[0].value) - 1;
