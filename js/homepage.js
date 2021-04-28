@@ -14,7 +14,7 @@ let emailToCheck = $("#login-email"),
 
 let adminview = $("#admin-view-link");
 
-let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser?email='
+let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/'
 
 //const addUserUrl = "http://localhost:8080/users/add"
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
@@ -32,20 +32,26 @@ $("#checkout-button").click(function () {
   if (customer == null || customer == undefined) {
     swal("Du måste vara inloggad för att lägga beställning", "", "warning");
   } else {
-    axios
+    fetchCustomerInfo(customer, "./pages/checkout/")
+  }
+});
+
+function fetchCustomerInfo(customer, openPage){
+  axios
     .get(getCustomerUrl+customer.email)
     .then((response) => {
       console.log(response.data)
-      sessionStorage.setItem("customer", JSON.stringify(response.data));
-      $("#checkOutLink").attr("href", "./pages/checkout/");
+      setCustomer(response.data)
+      location.replace(openPage)
     })
     .catch((err) => {
       alert(err);
     });
-   
+}
 
-  }
-});
+function setCustomer(customer){
+  sessionStorage.setItem("customer", JSON.stringify(customer))
+}
 
 
 $("#show-password-button").click(function () {
