@@ -20,12 +20,11 @@ function loadProducts() {
     .catch((err) => {
       alert("Serverfel! " + err);
     });
-
+  
+  
   function render(products) {
-
-  //  $("#isProductHidden").prop("checked", false);
-
-    products.forEach((element) => {
+    //console.log($("#isProductHidden").attr("checked"));
+      products.forEach((element) => {
       for (let i = 0; i < element.categories.length; i++) {
         let obj = element.categories[i];
         categories.push(obj.name);
@@ -46,12 +45,14 @@ function loadProducts() {
     });
 
     showCategories();
+    showProducts(products);
 
     /**
      * Add products that belong to the celected category
      */
     $("#select").on("change", function () {
       let optionId = $(this).val();
+      console.log(optionId)
       let list = [];
       products.forEach((element) => {
         for (let i = 0; i < element.categories.length; i++) {
@@ -61,7 +62,7 @@ function loadProducts() {
             list.push(element);
             showProducts(list);
           }
-          if (optionId === "all") {
+          if (optionId === "Kategori") {
             $("#products").empty();
             showProducts(products);
           }
@@ -69,12 +70,17 @@ function loadProducts() {
       });
     });
 
+    $("#tab-product-catalog").click(function () {
+      location.reload();
+      showProducts(products);
+    });
+
     /**
      * Add new tags to the list of tags on selected product
      */
     $("#tagSave").click(function () {
       let input = $("#tagInput").val();
-      console.log(input);
+      //console.log(input);
       $("#tagColumn").append(`
           <div id="${input}" class="form-check">
                       <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${input}" onchange="removeIfUnchecked(${input})">
@@ -122,7 +128,8 @@ function loadProducts() {
       $("#column").empty();
       $("#tagColumn").empty();
       $("#tagInput").val("");
-      
+      $("#isProductHidden").prop("checked", false);
+      console.log($("#isProductHidden").val());
 
       products.forEach((element) => {
         if (element.sku == productId) {
@@ -135,8 +142,11 @@ function loadProducts() {
           showCategories();
           showTags(element);
           sku = element.sku;
+          if (element.isAvailable === false) {
+          $("#isProductHidden").prop("checked", true);
         }
-
+        }
+      
         $("#column div").filter(function () {
           for (let i = 0; i < element.categories.length; i++) {
             let obj = element.categories[i];
@@ -173,7 +183,7 @@ function loadProducts() {
       cat.forEach((element) => {
         productCategory.push({ name: element });
       });
-      console.log(productCategory);
+      //console.log(productCategory);
 
       let isAvailable = true;
 
@@ -262,9 +272,9 @@ function showCategories() {
 
 function showTags(element) {
   let tags = element.tags;
-  console.log(tags);
+ // console.log(tags);
   tags.forEach(e => {
-    console.log(e.name);
+  //  console.log(e.name);
   $("#tagColumn").append(`
           <div id="${e.name}" class="form-check">
                       <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${e.name}" onchange="removeIfUnchecked(${e.name})">
@@ -276,6 +286,6 @@ function showTags(element) {
 
 function removeIfUnchecked(value) {
   let v = $(this).children;
-  console.log(v);
-  console.log(value);
+//  console.log(v);
+//  console.log(value);
 }
