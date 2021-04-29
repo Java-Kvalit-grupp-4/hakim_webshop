@@ -218,7 +218,59 @@ function loadProducts() {
         .catch(() => {
           alert('Något fick fel!','Vänligen försök igen', 'warning')
         })
-      
+    });
+
+    $("#saveNewProduct").click(function () {
+      let cat = [];
+      $("#column div")
+        .children()
+        .each(function () {
+          if ($(this).is(":checked")) {
+            let element = $(this).attr("id");
+            cat.push(element);
+          }
+        });
+      let productCategory = [];
+      cat.forEach((element) => {
+        productCategory.push({ name: element });
+      });
+      //console.log(productCategory);
+
+      let isAvailable = true;
+
+      if ($("#isProductHidden").is(":checked")) {
+        isAvailable = false;
+      }
+     
+
+      let productObject = {
+        sku: sku,
+        description: $("#description").val(),
+        image: $("#img").val(),
+        isAvailable: isAvailable,
+        price: $("#price").val(),
+        quantity: $("#lager").val(),
+        title: $("#title").val(),
+        brand: {
+          name: $("#brand").val(),
+        },
+        tags: tags,
+
+        categories: productCategory,
+      };
+
+      console.log(productObject);
+      alert("Produkten har sparats");
+
+        axios.post("https://hakimlivs.herokuapp.com/products/add",  productObject  )
+        .then(() => {
+          console.log("Done!")
+        })
+        .catch(() => {
+          alert('Något fick fel!','Vänligen försök igen', 'warning')
+        })
+    });
+
       /**
      * Empty form to add new product
      */
@@ -234,7 +286,7 @@ function loadProducts() {
 
       $("#tab-product-site").tab("show");
     });
-    });
+    
   }
 }
 
