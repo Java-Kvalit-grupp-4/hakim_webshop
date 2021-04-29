@@ -90,15 +90,12 @@
             </li>
             <li class="nav-item me-xl-4">
               <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
+                <a href="pages/my-account/my-account.html"
+                  type="button nav-link"
+                  class="btn btn-secondary text-dark"
                   id="myAccountDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  >Mina sidor</a
                 >
-                  Mina sidor
-                </button>
                 <ul class="dropdown-menu" aria-labelledby="myAccountDropdown">
                   <li>
                     <a
@@ -159,7 +156,7 @@
         </div>
 
         <div class="col-sm-8 col-xl-9" id="display-body">
-          <div class="card w-100 text-white">
+          <!-- <div class="card w-100 text-white">
             <img
               src="https://picsum.photos/1000/300"
               class="card-img-top"
@@ -170,7 +167,7 @@
                 Veckans vara
               </h1>
             </div>
-          </div>
+          </div> -->
 
           <div class="dropdown text-end mt-3">
             <button
@@ -251,10 +248,12 @@
       </div>
     </div>
 
-<footer class="bg-dark text-center text-lg-start">
-      <div class="container p-4 justify-content-center">
+  <!-- footer goes here-->
+     <footer class="bg-dark text-center text-lg-start">
+      <div class="container pt-4 justify-content-center">
         <div class="row">
-          <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+          <div class="col-1"></div>
+          <div class="col-md-12 col-lg-4  mb-4 mb-md-0  ps-lg-5">
             <h5 class="text-uppercase mb-3">Kontakt</h5>
 
             <ul class="list-unstyled mb-3">
@@ -281,11 +280,11 @@
             <h5 class="text-uppercase mb-3">Om Hakim Livs</h5>
             <ul class="list-unstyled mb-3">
               <li>
-                <a href="./pages/about/index.html" class="text-light"><p>Om oss</p></a>
+                <a href="/pages/about/" class="text-light"><p>Om oss</p></a>
               </li>
             </ul>
           </div>
-          <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+          <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
             <h5 class="text-uppercase mb-3">Öppettider</h5>
 
             <ul class="list-unstyled">
@@ -294,7 +293,7 @@
               </li>
 
               <li>
-                <a href="/pages/about/index.html#deviating" class="text-light"
+                <a href="/pages/about/#deviating" class="text-light"
                   ><p>Se avvikande öppetider</p></a
                 >
               </li>
@@ -325,6 +324,7 @@
                   class="form-control"
                   id="login-email"
                   placeholder="E-post"
+                  max="325"
                 />
                 <label for="login-email" class="form-label text-muted"
                   >E-post</label
@@ -337,6 +337,7 @@
                     class="form-control"
                     id="login-password"
                     placeholder="Lösenord"
+                    maxlength="50"
                   />
                   <label for="login-password" class="form-label text-muted"
                     >Lösenord</label
@@ -409,6 +410,7 @@
                     placeholder="Förnamn"
                     required
                     name="firstName"
+                    maxlength="50"
                   />
                   <label for="register-first-name" class="form-label text-muted"
                     >Förnamn</label
@@ -424,6 +426,7 @@
                     id="register-last-name"
                     placeholder="Efternamn"
                     name="lastName"
+                    maxlength="50"
                   />
                   <label for="register-last-name" class="form-label text-muted"
                     >Efternamn</label
@@ -440,6 +443,7 @@
                     placeholder="E-post"
                     required
                     name="email"
+                    maxlength="325"
                   />
                   <label for="register-email" class="form-label text-muted"
                     >E-post</label
@@ -455,6 +459,7 @@
                     id="register-phone-number"
                     placeholder="Telefonnummer"
                     name="phoneNumber"
+                    maxlength="20"
                   />
                   <label
                     for="register-phone-number"
@@ -472,6 +477,7 @@
                     id="register-password"
                     placeholder="Efternamn"
                     name="password"
+                    maxlength="50"
                   />
                   <label for="register-password" class="form-label text-muted"
                     >Välj lösenord</label
@@ -486,6 +492,7 @@
                     class="form-control"
                     id="register-confirm-password"
                     placeholder="Efternamn"
+                    maxlength="50"
                   />
                   <label
                     for="register-confirm-password"
@@ -509,12 +516,30 @@
                     id="register-street"
                     placeholder="Efternamn"
                     name="streetAddress"
+                    maxlength="50"
                   />
                   <label for="register-street" class="form-label text-muted"
                     >Gatuadress</label
                   >
                   <div id="ADDRESS_ERROR_MSG" class="error-msg">
                     Felaktig adress, adress skall innehålla Gatunamn samt nummer
+                  </div>
+                </div>
+
+                <div class="col-md-8 form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="register-city"
+                    placeholder="Efternamn"
+                    maxlength="50"
+                    name="city"
+                  />
+                  <label for="register-city" class="form-label text-muted"
+                    >Postort</label
+                  >
+                  <div id="CITY_ERROR_MSG" class="error-msg">
+                    Felaktig ort, ort skall innehålla bara bokstäver
                   </div>
                 </div>
 
@@ -525,6 +550,7 @@
                     id="register-zip"
                     placeholder="Efternamn"
                     name="zipCode"
+                    maxlength="6"
                   />
                   <label for="register-zip" class="form-label text-muted"
                     >Postnummer</label
@@ -534,22 +560,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-8 form-floating mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="register-city"
-                    placeholder="Efternamn"
-                    maxlength="6"
-                    name="city"
-                  />
-                  <label for="register-city" class="form-label text-muted"
-                    >Postort</label
-                  >
-                  <div id="CITY_ERROR_MSG" class="error-msg">
-                    Felaktig ort, ort skall innehålla bara bokstäver
-                  </div>
-                </div>
+                
 
                 <div class="col-md-4">
                   <label for="register-year" class="form-label"
@@ -680,10 +691,10 @@
 
     <!-- product-card-pop-up-modal-->
     <div class="modal fade" id="product-card-modal">
-      <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header border-0 p-lg-3">
-            <h4 class="pl-xl-10 product-modal-title">Produktinformation</h4>
+            <h4 class="pl-xl-10">Produktinformation</h4>
             <button
             type="button"
             class="btn-close display-8"
@@ -695,6 +706,7 @@
               <div class="row">
                 <div class="col-xl-6">
                   <img
+                    id="product-pop-up-img"
                     class="img-fluid rounded mx-auto d-block"
                     src="https://assets.icanet.se/t_product_large_2x_v1,f_auto/7318690173946.jpg"
                     alt="product-image"
@@ -703,43 +715,39 @@
                 <div class="col-xl-6">
                   <div class="row">
                     <div class="col-12">
-                      <h1 class="text-lg-start display-3">Laxfilé</h1>
+                      <h1 id="product-pop-up-title" class="text-lg-start">Laxfilé</h1>
+                      <h4 id="product-pop-up-unit">250 ml</h4>
                     </div>
                     <div class="col-12 mt-5">
-                      <h3>Beskrivning:</h3>
+                      <h4>Beskrivning:</h4>
                     </div>
                     <div class="col-12">
-                      <p>
-                        ICA Laxfilé Fryst är perfekta att ha i frysen för att
-                        snabbt plocka fram till en god middag. Lax är en perfekt
-                        start på en god middag, och kan varieras i evigheter.
-                        Stek den och servera med pressad potatis och brynt smör
-                        eller ugnsstek med sötstark sås och strössla på
-                        sesamfrön, så har du fått två helt olika slags rätter..
-                        Det finns minst tusen till.
-                      </p>
+                      <p id="product-pop-up-desc"></p>
                     </div>
 
-                    <div class="col-12">
-                      <h3>Ingredienser</h3>
+                    <div class="row">
+                      <div class="col-6">
+                        <h5>Jämförpris</h5>
+                      </div>
+                      <div class="col-6">
+                        <h5>Pris</h5>
+                      </div>
                     </div>
-                    <div class="col-12">
-                      <p>
-                        Ingredienser: LAXFILÉ* i bit (Salmo salar). *Odlad i
-                        Norge.
-                      </p>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id="product-pop-up-comp-price">
+                          34 kr/kg
+                        </p>
+                      </div>
+                      <div class="col-6">
+                        <p id="product-pop-up-price">
+                           kr
+                        </p>
+                      </div>
+
                     </div>
-                    <div class="col-12 mt-3">
-                      <h4>Näringsvärde per 100 g</h4>
-                    </div>
-                    <div class="col-12">
-                      <p>
-                        Energi (kcal) 220 kcal, Energi (kJ) 900 kJ, Fett 16 g,
-                        Varav mättat fett 3 g, Varav enkelomättat fett 0 g,
-                        Varav fleromättat fett 0 g, Kolhydrater 0 g, Varav
-                        socker 0 g, Protein 19 g, Salt 0.1 g
-                      </p>
-                    </div>
+                    
+                    
                   </div>
                 </div>
               </div>
@@ -776,9 +784,10 @@
     <script src="./js/cart-pop-up.js"></script>
     <script src="./js/validate.js"></script>
     <script src="./js/register.js"></script>
-    <script src="./js/homepage.js"></script>
     <script src="./js/searchBar.js"></script>
+    <script src="./js/homepage.js"></script>
+    <script src="./js/makeSearchWordArray.js"></script>
     <script src="./js/sortingAlgorithm.js"></script>
-    <script src="./js/footer.js"></script>
+    
   </body>
 </html>

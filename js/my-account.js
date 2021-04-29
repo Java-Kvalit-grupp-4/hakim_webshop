@@ -10,7 +10,7 @@ $('form').submit(false)
 let firstName = $('#my-info-first-name'),
 lastName = $('#my-info-last-name'),
 email = $('#my-info-email'),
-phoneNumber = $('#my-info-phone-number'),
+myAccountPhoneNumber = $('#my-info-phone-number'),
 address = $('#my-info-address'),
 city = $('#my-info-city'),
 zipCode = $('#my-info-zipCode'),
@@ -42,21 +42,19 @@ $("#login-btn").click(function(){
   })
 
 $('#submit').click( () => { 
-  if(validateForm()) {
+  if(validateFormMyAccount()) {
     
     resetsInputBorders()
     
     let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
-
     // let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
-
     //let updateUserInfo = `http://localhost:8080/users/update/user/info`
 
     // create object to update
     let updateInfo = {
       "firstName": firstName.val().trim(), 
       "lastName": lastName.val().trim(), 
-      "phoneNumber": formatPhoneNumberForDB(phoneNumber.val().trim()), 
+      "phoneNumber": formatPhoneNumberForDB(myAccountPhoneNumber.val().trim()), 
       "email": email.val().trim(),    
       "streetAddress": address.val(),
       "zipCode": formatZipForDB(zipCode.val().trim()),
@@ -85,25 +83,31 @@ $('#change-password-btn').click(() => {
 
 $(document).on('click', '.orderNumber', showOrder);
 
+$(document).ready(() => {
+  hideAllErrorMsgs()
+  fillInputFieldsWithLoggedIn()
+  getAllOrders()
+})
 
   /**
    * Functions
    */
 
   function checkIfLoggedIn() {
-    let customer = JSON.parse(sessionStorage.getItem('customer'))
-    if(customer == undefined){
-      $(document).load('./')
+    let customer = JSON.parse(sessionStorage.getItem("customer"));
+    if (customer == null || customer == undefined) {
+      window.location.href = "../../"
     }
 
   }
+  checkIfLoggedIn()
 
   function fillInputFieldsWithLoggedIn() {
     let customer = JSON.parse(sessionStorage.getItem('customer'))
      firstName.val(formatFirstLetterToUpperCase(customer.firstName))
      lastName.val(formatFirstLetterToUpperCase(customer.lastName))
      email.val(customer.email)
-     phoneNumber.val(formatPhoneNumber(customer.phoneNumber))
+     myAccountPhoneNumber.val(formatPhoneNumber(customer.phoneNumber))
      address.val(formatFirstLetterToUpperCase(customer.streetAddress))
      city.val(formatFirstLetterToUpperCase(customer.city.name))
      zipCode.val(formatZipCode(customer.zipCode))
@@ -122,7 +126,7 @@ $(document).on('click', '.orderNumber', showOrder);
             }
         })
         .catch(err =>{
-            alert("Serverfel!" + err)
+            alert("Serverfel! " + err)
         })
   }
 
@@ -143,13 +147,17 @@ $(document).on('click', '.orderNumber', showOrder);
                 }
                 $("#orderTable").append(`
                   <tr>
-                    <th scope="row" class="ps-md-5 orderNumber"> <a href="#show-selected-order" >${orders.orderNumber}</a></th>
+                    <th scope="row" class="ps-md-5 orderNumber"> <a href="#show-selected-order" >${
+                      orders.orderNumber
+                    }</a></th>
                     <td>${orderDate} </td>
-                    <td>${orders.totalCost.toFixed(2)}</td>
+                    <td>${orders.totalCost.toLocaleString("sv-SE", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}</td>
                     <td>${orders.orderStatus.type}</td>
                     <td>${isPaid}</td>
-                  </tr>`
-                )
+                  </tr>`);
         })
     }
   }
@@ -169,14 +177,27 @@ $(document).on('click', '.orderNumber', showOrder);
           $("#orderIncludes").append(`
           <tr>
               <td class="ps-md-5">${lineItem.product.title}</td>
-              <td>${lineItem.product.price.toFixed(2)}</td>
+              <td>${lineItem.product.price.toLocaleString("sv-SE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}</td>
               <td>${lineItem.quantity}</td>
-              <td class="text-center">${lineItem.itemPrice.toFixed(2)}</td>
-            </tr>`
-          )
+              <td class="text-center">${lineItem.itemPrice.toLocaleString(
+                "sv-SE",
+                {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              )}</td>
+            </tr>`);
         })
         $("#totalQuantity").html(totalQty)
-        $("#totalPrice").html(order.totalCost.toFixed(2))
+        $("#totalPrice").html(
+          order.totalCost.toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })
+        );
       }
     })
   }
@@ -185,7 +206,7 @@ $(document).on('click', '.orderNumber', showOrder);
     resetBorder(firstName)
     resetBorder(lastName)
     resetBorder(email)
-    resetBorder(phoneNumber)
+    resetBorder(myAccountPhoneNumber)
     resetBorder(address)
     resetBorder(zipCode)
     resetBorder(city)
@@ -204,13 +225,13 @@ $(document).on('click', '.orderNumber', showOrder);
     WRONNG_PASSWORD_ERROR_MSG.hide()
   }
 
-  function validateForm() {
+  function validateFormMyAccount() {
     let bool = true
 
-    bool = checkForInput(testForOnlyText, firstName, bool, FIRSTNAME_ERROR_MSG)
-    bool = checkForInput(testForOnlyText, lastName, bool,LASTNAME_ERROR_MSG)
+    bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG)
+    bool = checkForInput(testForName, lastName, bool,LASTNAME_ERROR_MSG)
     bool = checkForInput(testForEmail, email, bool,EMAIL_ERROR_MSG)
-    bool = checkForInput(testForPhoneNumber,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
+    bool = checkForInput(testForPhoneNumber,myAccountPhoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
     bool = checkForInput(testForAddress, address, bool,ADDRESS_ERROR_MSG)
     bool = checkForInput(testForZipCode, zipCode, bool,ZIPCODE_ERROR_MSG)
     bool = checkForInput(testForOnlyText, city,bool,CITY_ERROR_MSG)
@@ -249,9 +270,7 @@ $(document).on('click', '.orderNumber', showOrder);
   const updatePassword = (newPassword) => {
 
     let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
-
     // let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
-
     //let updatePasswordUrl = `http://localhost:8080/users/update/password`
 
     let updatePassword = {
@@ -280,13 +299,6 @@ $(document).on('click', '.orderNumber', showOrder);
 
   fillInputFieldsWithLoggedIn()
 
-  /**
-   * Page loaded
-   */
-  $(document).ready(() => {
-    checkIfLoggedIn()
-    hideAllErrorMsgs()
-    fillInputFieldsWithLoggedIn()
-    getAllOrders()
-  })
+ 
+  
   

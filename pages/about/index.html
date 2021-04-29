@@ -12,60 +12,49 @@
       crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="about.css" />
+   
     <link rel="stylesheet" href="../../styles/homepage.css" />
     <link rel="stylesheet" href="../../styles/style.css" />
     <link rel="stylesheet" href="../../styles/searchbar.css" />
-    <title>Om Hakim Livs</title>
+    <link rel="stylesheet" href="../../styles/cart-pop-up.css" />
+    <link rel="stylesheet" href="../../styles/about.css" />
+    <title>Om Hakim Livs</title> 
   </head>
   <body>
     <header>
       <!-- navbar (prototype) -->
 
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="../../index.html"
-            ><img
-              src="../../logo.png"
-              class="img-fluid nav-image"
-              style="margin-left: -0.5rem"
-          /></a>
-          <div class="wrapper">
-            <div class="search-input">
-              <input
-                id="search-field"
-                type="text"
-                placeholder="Sök produkt..."
-                maxlength="40"
-              />
-              <div class="autocom-box">
-                <!-- here list are inserted from javascript -->
-              </div>
-              <div class="icon"><i class="bi bi-search"></i></div>
-            </div>
-          </div>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
-          <div
-            class="d-lg-flex justify-content-lg-evenly collapse navbar-collapse"
-            id="navbarTogglerDemo02"
-          >
-            <div class="container col-md-6 mt-3">
-              <div class="input-group mb-3 me-0 me-lg-5">
-                <!-- searchfield -->
+      <nav class="navbar navbar-expand-xl navbar-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/index.html"
+          ><img
+            src="../../logo.png"
+            class="img-fluid nav-image"
+            style="margin-left: -0.5rem"
+        /></a>
+        <button
+          id="mobileMenu"
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
+        <div
+          class="d-xl-flex justify-content-xl-end collapse navbar-collapse "
+          id="navbarTogglerDemo02"
+        >
+          <!-- <div class="container col-md-6 mt-3"> -->
+            <!-- <div class="input-group mb-3 me-0 me-xl-5"> -->
+              <!-- searchfield -->
 
-                <!-- searchfield ends -->
-                <!-- <input
+              <!-- searchfield ends -->
+              <!-- <input
                 type="text"
                 class="form-control product-search"
                 placeholder="Sök produkt"
@@ -80,69 +69,66 @@
               >
                 Sök
               </button> -->
-              </div>
-            </div>
+            <!-- </div> -->
+          <!-- </div> -->
 
-            <ul class="navbar-nav mb-2 mb-lg-0 text-start text-sm-end">
-              <li class="nav-item me-lg-4 mb-2 mb-lg-0">
-                <a
+          <ul class="navbar-nav mb-2 mb-xl-0 text-start text-sm-end">
+            <li class="nav-item me-xl-4 mb-3 mb-xl-0">
+              <a
+                type="button nav-link"
+                class="btn btn-outline-secondary text-dark"
+                id="login-btn"
+                >Logga in</a
+              >
+            </li>
+            <li class="nav-item me-xl-4">
+              <div class="dropdown">
+                <a href="../my-account/my-account.html"
                   type="button nav-link"
-                  class="btn btn-outline-secondary text-dark"
-                  id="login-btn"
-                  >Logga in</a
+                  class="btn btn-secondary text-dark"
+                  id="myAccountDropdown"
+                  >Mina sidor</a
                 >
-              </li>
-              <li class="nav-item me-4">
-                <div class="dropdown">
-                  <button
-                    class="btn btn-secondary dropdown-toggle"
-                    type="button"
-                    id="myAccountDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Mina sidor
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="myAccountDropdown">
-                    <li>
-                      <a
-                        class="dropdown-item"
-                        href="pages/my-account/my-account.html"
-                        >Ändra kunduppgifter</a
-                      >
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Se tidigare ordrar</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <button
-                  class="btn btn-secondary"
-                  type="button"
-                  id="cartDropdown"
-                  data-bs-toggle="modal"
-                  data-bs-target="#cart-pop-up"
-                  aria-expanded="false"
+                <ul class="dropdown-menu" aria-labelledby="myAccountDropdown">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="../my-account/my-account.html"
+                      >Ändra kunduppgifter</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Se tidigare ordrar</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item mt-3 mt-xl-0">
+              <button
+                class="btn btn-secondary"
+                type="button"
+                id="cartDropdown"
+                data-bs-toggle="modal"
+                data-bs-target="#cart-pop-up"
+                aria-expanded="false"
+              >
+                Varukorg&nbsp;&nbsp;<span
+                  class="badge badge-pill bg-danger"
+                  id="total-items-in-cart"
+                  style="display: inline"
+                  >0</span
                 >
-                  Varukorg&nbsp;&nbsp;<span
-                    class="badge badge-pill bg-danger"
-                    id="total-items-in-cart"
-                    style="display: inline"
-                    >0</span
-                  >
-                </button>
-              </li>
-              <li class="nav-item">
-                <a id="admin-view-link" class="nav-link" href="./admin/"
-                  >Adminvy</a
-                >
-              </li>
-            </ul>
-          </div>
+              </button>
+            </li>
+            <li class="nav-item mt-2 mt-xl-0">
+              <a id="admin-view-link" class="nav-link" href="../../admin/"
+                >Adminvy</a
+              >
+            </li>
+          </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
 
       <!-- navbar end -->
     </header>
@@ -168,11 +154,391 @@
       </div>
     </section>
     <!-- aobut section ends-->
+
+
+
+
+ <!-- Login Modal -->
+    <div class="modal fade" id="login-modal">
+      <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h4 class="modal-title mx-auto">Logga in</h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body m-3">
+            <form class="g-3 mt-3">
+              <div class="form-floating my-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="login-email"
+                  placeholder="E-post"
+                />
+                <label for="login-email" class="form-label text-muted"
+                  >E-post</label
+                >
+              </div>
+              <div class="my-3">
+                <div class="form-floating input-group mb-3" id="password-group">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="login-password"
+                    placeholder="Lösenord"
+                  />
+                  <label for="login-password" class="form-label text-muted"
+                    >Lösenord</label
+                  >
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    id="show-password-button"
+                  >
+                    Visa
+                  </button>
+                </div>
+              </div>
+              <div class="smaller-text d-flex">
+                <div><a href="#">Glömt ditt lösenord?</a></div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer border-0 mx-auto">
+            <button type="button" class="btn btn-dark" id="login-button">
+              Logga in
+            </button>
+            <button
+              type="button"
+              class="btn btn-dark"
+              data-dismiss="modal"
+              id="newCust-button"
+            >
+              Ny kund
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     <!-- Customer registration modal -->
+    <div
+      class="modal fade"
+      id="registerForm"
+      data-bs-backdrop="static"
+      tabindex="-1"
+      aria-labelledby="registerFormLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerFormLabel">Registrera dig</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- Registration Form -->
+            <div class="container mt-3">
+              <form
+                id="registration-Form"
+                class="row g-3"
+                method="POST"
+                action="http://localhost:8080/users/add"
+              >
+                <div class="col-md-6 form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="register-first-name"
+                    placeholder="Förnamn"
+                    required
+                    name="firstName"
+                  />
+                  <label for="register-first-name" class="form-label text-muted"
+                    >Förnamn</label
+                  >
+                  <div id="FIRSTNAME_ERROR_MSG" class="error-msg">
+                    Förnamn måste bestå av endast bokstäver, max 50 tecken
+                  </div>
+                </div>
+                <div class="col-md-6 form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="register-last-name"
+                    placeholder="Efternamn"
+                    name="lastName"
+                  />
+                  <label for="register-last-name" class="form-label text-muted"
+                    >Efternamn</label
+                  >
+                  <div id="LASTNAME_ERROR_MSG" class="error-msg">
+                    Förnamn måste bestå av endast bokstäver, max 50 tecken
+                  </div>
+                </div>
+                <div class="col-md-6 form-floating mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="register-email"
+                    placeholder="E-post"
+                    required
+                    name="email"
+                  />
+                  <label for="register-email" class="form-label text-muted"
+                    >E-post</label
+                  >
+                  <div id="EMAIL_ERROR_MSG" class="error-msg">
+                    Felaktig email
+                  </div>
+                </div>
+                <div class="col-md-6 form-floating mb-3">
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="register-phone-number"
+                    placeholder="Telefonnummer"
+                    name="phoneNumber"
+                  />
+                  <label
+                    for="register-phone-number"
+                    class="form-label text-muted"
+                    >Telefonnummer</label
+                  >
+                  <div id="PHONE_NUMBER_ERROR_MSG" class="error-msg">
+                    Felaktig telefonnummer
+                  </div>
+                </div>
+                <div class="col-md-6 form-floating mb-3">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="register-password"
+                    placeholder="Efternamn"
+                    name="password"
+                  />
+                  <label for="register-password" class="form-label text-muted"
+                    >Välj lösenord</label
+                  >
+                  <div id="WRONG_PASSWORD_ERROR_MSG" class="error-msg">
+                    Felaktigt lösenord
+                  </div>
+                </div>
+                <div class="col-md-6 form-floating mb-3">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="register-confirm-password"
+                    placeholder="Efternamn"
+                  />
+                  <label
+                    for="register-confirm-password"
+                    class="form-label text-muted"
+                    >Bekräfta lösenord</label
+                  >
+                  <div id="NEW_PASSWORD_NOT_MATCH_ERROR_MSG" class="error-msg">
+                    Lösenorden matchar inte
+                  </div>
+                  <div
+                    id="NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG"
+                    class="error-msg"
+                  >
+                    Du har redan detta lösenord
+                  </div>
+                </div>
+                <div class="col-12 form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="register-street"
+                    placeholder="Efternamn"
+                    name="streetAddress"
+                  />
+                  <label for="register-street" class="form-label text-muted"
+                    >Gatuadress</label
+                  >
+                  <div id="ADDRESS_ERROR_MSG" class="error-msg">
+                    Felaktig adress, adress skall innehålla Gatunamn samt nummer
+                  </div>
+                </div>
+
+                <div class="col-md-8 form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="register-city"
+                    placeholder="Efternamn"
+                    maxlength="6"
+                    name="city"
+                  />
+                  <label for="register-city" class="form-label text-muted"
+                    >Postort</label
+                  >
+                  <div id="CITY_ERROR_MSG" class="error-msg">
+                    Felaktig ort, ort skall innehålla bara bokstäver
+                  </div>
+                </div>
+
+                <div class="col-md-4 form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="register-zip"
+                    placeholder="Efternamn"
+                    name="zipCode"
+                  />
+                  <label for="register-zip" class="form-label text-muted"
+                    >Postnummer</label
+                  >
+                  <div id="ZIPCODE_ERROR_MSG" class="error-msg">
+                    Felaktigt postnummer, måste matas in t.ex "123 45"
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="register-year" class="form-label"
+                    >Födelseår</label
+                  >
+                  <select
+                    id="register-year"
+                    class="form-select"
+                    placeholder="Efternamn"
+                  >
+                    <option selected disabled value="">Välj</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="register-month" class="form-label">Månad</label>
+                  <select id="register-month" class="form-select">
+                    <option selected disabled value="">Välj</option>
+                    <option value="1">Januari</option>
+                    <option value="2">Februari</option>
+                    <option value="3">Mars</option>
+                    <option value="4">April</option>
+                    <option value="5">Maj</option>
+                    <option value="6">Juni</option>
+                    <option value="7">Juli</option>
+                    <option value="8">Augusti</option>
+                    <option value="9">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="register-day" class="form-label">Dag</label>
+                  <select id="register-day" class="form-select">
+                    <option selected disabled value="">Välj</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Tillbaka
+            </button>
+            <button type="submit" class="btn btn-primary" id="confirm-account">
+              Registrera ditt konto
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- Cart modal -->
+    <div
+      class="modal fade m-0"
+      id="cart-pop-up"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+      style="padding-right: 0"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Din varukorg</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row border-bottom text-center">
+                <div class="col-1"><i class="bi bi-trash-fill"></i></div>
+                <div class="col-4 col-md-5 text-start pt-1 pt-lg-0"><h5>Produkt</h5></div>
+                <div class="col-2 pt-1 pt-lg-0"><h5>Pris <small>kr</small></h5></div>
+                <div class="col-2 col-md-2 pt-1 pt-lg-0 text-end"><h5>Antal</h5></div>
+                <div class="col-3 col-md-2 pt-1 pt-lg-0 text-end"><h5>Totalt <small>kr</small></h5></div>
+              </div>
+            </div>
+            <div class="list-group">
+              <div id="cartOutput"></div>
+            </div>
+          </div>
+          <div class="container total-price-row">
+            <div class="row px-3">
+              <div class="col-7 col-sm-8"></div>
+              <div class="col-3 col-sm-2 text-center">
+                <h5 class="total-price">Totalt:</h5>
+              </div>
+              <div class="col-2 text-center" id="priceOutput"></div>
+            </div>
+          </div>
+          <div class="modal-footer smaller">
+            <button
+              type="button"
+              class="btn btn-outline-secondary me-xs-2 me-lg-4 btn-sm"
+              id="clear"
+            >
+              Töm varukorgen
+            </button>
+            <a href="#" id="checkOutLink">
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                id="checkout-button"
+              >
+                Gå till kassan
+              </button></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- cart modal ends -->
+
+
     <!-- footer goes here-->
     <footer class="bg-dark text-center text-lg-start">
-      <div class="container p-4 justify-content-center">
+      <div class="container pt-4 justify-content-center">
         <div class="row">
-          <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+          <div class="col-1"></div>
+          <div class="col-md-12 col-lg-4  mb-4 mb-md-0  ps-lg-5">
             <h5 class="text-uppercase mb-3">Kontakt</h5>
 
             <ul class="list-unstyled mb-3">
@@ -203,7 +569,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+          <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
             <h5 class="text-uppercase mb-3">Öppettider</h5>
 
             <ul class="list-unstyled">
@@ -222,13 +588,21 @@
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
       crossorigin="anonymous"
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        
+    <script src="../../js/cart-pop-up.js"></script>
     <script src="../../js/footer.js"></script>
+    
     <script src="../../js/about-page.js"></script>
+    <script src="../../js/validate.js"></script>
+    <script src="../../js/navbar.js"></script>
+    <script src="../../js/register.js"></script>
   </body>
 </html>
