@@ -132,11 +132,10 @@ function renderCategories(data) {
     $("#sidomeny button").on("click", function () {
         let categoryName = $(this).attr("id");
         let selectedCategoryList = [];
-
         availableProducts.forEach((product) => {
             if (categoryName === "all") {
                 $("#products").empty();
-                renderProducts(products);
+                renderProducts(availableProducts);
                 localStorage.setItem("categoryList", JSON.stringify(products));
             } else {
                 let currentProduct = product;
