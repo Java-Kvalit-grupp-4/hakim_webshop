@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/homepage.css" />
     <link rel="stylesheet" href="./styles/searchbar.css" />
+    <style>
+     
+
+    </style>
 
     <title>Hakim's Livs homepage</title>
   </head>
@@ -141,11 +145,14 @@
     </nav>
 
     <!-- navbar end -->
+    
     <div class="container-fluid">
       <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
-        <div class="col-sm-4 col-lg-3 col-xl-2" id="sidebar">
+
+        <!--Sidebar start-->
+        <div class="col-12 col-sm-4 col-lg-3 col-xl-2 mb-5" id="sidebar-container">
+        <div id="sidebar">
           <!-- <div class="list-group"> -->
-          <div class="list-group" id="sidomeny">
             <button
               id="all"
               type="button"
@@ -154,9 +161,13 @@
             >
               Alla produkter
             </button>
+          <div class="list-group" id="sidomeny">
+
           </div>
           <!-- </div> -->
         </div>
+      </div>
+        <!--Sidebar end-->
 
         <div class="col-sm-8 col-xl-9" id="display-body">
           <!-- <div class="card w-100 text-white">
