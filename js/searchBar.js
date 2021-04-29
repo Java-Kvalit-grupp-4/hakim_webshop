@@ -5,6 +5,18 @@ const searchIcon = $('.icon')
 const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
 let searchWords = []
 
+$(document).ready(() => {
+    const productsUrl = 'http://hakimlivs.herokuapp.com/products'
+       axios.get(productsUrl)
+       .then(response => {
+         createSearchWords(response.data)
+       })
+       .catch(err => {
+         alert(err)
+       }) 
+
+})
+
 /**
  * Checks for keyPresses in the searchField
  */
@@ -41,6 +53,7 @@ searchField.keyup((e)=>{
  * @param {Array} products 
  */
 function createSearchWords(products) {
+
     let searchStringToSplit = '';
     products.forEach(product => {
         searchStringToSplit += `${product.title} `

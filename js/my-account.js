@@ -126,7 +126,7 @@ $(document).ready(() => {
             }
         })
         .catch(err =>{
-            alert("Serverfel!" + err)
+            alert("Serverfel! " + err)
         })
   }
 
@@ -147,13 +147,17 @@ $(document).ready(() => {
                 }
                 $("#orderTable").append(`
                   <tr>
-                    <th scope="row" class="ps-md-5 orderNumber"> <a href="#show-selected-order" >${orders.orderNumber}</a></th>
+                    <th scope="row" class="ps-md-5 orderNumber"> <a href="#show-selected-order" >${
+                      orders.orderNumber
+                    }</a></th>
                     <td>${orderDate} </td>
-                    <td>${orders.totalCost.toFixed(2)}</td>
+                    <td>${orders.totalCost.toLocaleString("sv-SE", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}</td>
                     <td>${orders.orderStatus.type}</td>
                     <td>${isPaid}</td>
-                  </tr>`
-                )
+                  </tr>`);
         })
     }
   }
@@ -173,14 +177,27 @@ $(document).ready(() => {
           $("#orderIncludes").append(`
           <tr>
               <td class="ps-md-5">${lineItem.product.title}</td>
-              <td>${lineItem.product.price.toFixed(2)}</td>
+              <td>${lineItem.product.price.toLocaleString("sv-SE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}</td>
               <td>${lineItem.quantity}</td>
-              <td class="text-center">${lineItem.itemPrice.toFixed(2)}</td>
-            </tr>`
-          )
+              <td class="text-center">${lineItem.itemPrice.toLocaleString(
+                "sv-SE",
+                {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              )}</td>
+            </tr>`);
         })
         $("#totalQuantity").html(totalQty)
-        $("#totalPrice").html(order.totalCost.toFixed(2))
+        $("#totalPrice").html(
+          order.totalCost.toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })
+        );
       }
     })
   }
