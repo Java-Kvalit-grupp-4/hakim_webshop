@@ -1,7 +1,7 @@
 /**
  * Cache variables
  */
-  (firstName = $("#firstName")),
+(firstName = $("#firstName")),
   (lastName = $("#lastName")),
   (email = $("#email")),
   (phone = $("#phone")),
@@ -11,7 +11,6 @@
   (orderComment = $("#order-comment"));
 
 $(document).ready(() => {
-
   /**
    *  Eventlistiners
    */
@@ -21,7 +20,7 @@ $(document).ready(() => {
 
   let customer = JSON.parse(sessionStorage.getItem("customer"));
   if (customer == null || customer == undefined) {
-    window.location.href = "../../"
+    window.location.href = "../../";
   }
   renderCart();
   renderCustomerInfo();
@@ -73,13 +72,9 @@ $(document).ready(() => {
       )
     );
 
-    let totalInCart = 0;
-    $.each($(".line-item-total-quantity"),(index, e) => (totalInCart += parseInt(e.innerText)));
-    $("#cart-total-quantity").text(totalInCart);
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
-    document.getElementById("total-items-in-cart").innerHTML = cartQuantity;
-   }
-
+    $("#cart-total-quantity").text(cartQuantity);
+  }
 });
 
 /**
@@ -146,7 +141,7 @@ function makeOrderObject() {
     totalCost: parseFloat($("#cart-total-price").text()),
     isPaid: false,
     orderStatus: {
-      type: "ohanterad",
+      type: "Ohanterad",
     },
     lineItems: lineItems,
   };
@@ -159,7 +154,8 @@ function sendOrderToServer(orderObject) {
   // const url = "https://hakimlogintest.herokuapp.com/customerOrder/add";
   //const url = 'http://localhost:8080/customerOrder/add'
 
-  axios.post(url, orderObject)
+  axios
+    .post(url, orderObject)
     .then((response) => {
       if (response.status == 200) {
         console.log(response);

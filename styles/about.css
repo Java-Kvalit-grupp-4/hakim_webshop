@@ -1,4 +1,7 @@
-
+body {
+    padding:0;
+    margin:0;
+}
 
 nav {
     margin-bottom: 10rem;
@@ -41,6 +44,27 @@ img {
 .title{
     margin-bottom: 2rem;
 }
+@media(max-width: 599px) {
+  #mobileMenu {
+    margin-top: 0rem !important;
+  }
+}
+
+@media(max-width: 546px) {
+  #mobileMenu {
+    margin-top: -6.2rem !important;
+  }
+}
+@media (max-width: 374px) {
+  
+  #mobileMenu {
+    margin-top: -0.5rem !important;
+  }
+  
+  #login-btn {
+    margin-top: 1rem;
+  }
+}
 
 @media (max-width: 454px) {
     #about {
@@ -63,6 +87,10 @@ img {
         font-size: 1.7rem;
         line-height: 1.6;
     }
+  }
+  footer {
+      max-width: 100vw;
+      
   }
 
  @media (max-width: 1200px) {

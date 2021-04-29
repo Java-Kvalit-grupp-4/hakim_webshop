@@ -1,40 +1,62 @@
 html {
-    --border-cl: #464646;
-    font-size: 100%;
-  }
-  
-  section {
-    min-height: 90vh;
-  }
+  --border-cl: #464646;
+  font-size: 100%;
+}
 
-  textarea{
-    resize: none;
-    outline:none;
-    padding: 0.2rem;
-  }
-  
-  .cart-title {
-    border-bottom: 3px solid var(--border-cl);
-    display: flex;
-    padding-top: 2rem;        
-  }
-  .line-item-border {
-    display: flex;
-    border-bottom: 1px solid var(--border-cl);
-  }
-  .cart-footer {
-    border-top: 1px solid var(--border-cl);
-  }
+section {
+  min-height: 90vh;
+}
 
-  @media (max-width: 540px){
-    .cart h1 {
-      text-align: center;
-    }
-    .cart-title h6 {
+textarea {
+  resize: none;
+  outline: none;
+  padding: 0.2rem;
+}
+
+.cart-title {
+  border-bottom: 3px solid var(--border-cl);
+  display: flex;
+  padding-top: 2rem;
+}
+.line-item-border {
+  display: flex;
+  border-bottom: 1px solid var(--border-cl);
+}
+.cart-footer {
+  border-top: 1px solid var(--border-cl);
+}
+
+@media(max-width: 599px) {
+  #mobileMenu {
+    margin-top: 0rem !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .cart h1 {
+    text-align: center;
+  }
+  .cart-title h6 {
     font-size: 0.6rem;
   }
   .cart-line-item {
     font-size: 0.7rem;
   }
-  
+  #mobileMenu {
+    margin-top: -6rem !important;
   }
+}
+
+
+@media (max-width: 374px) {
+  
+  #mobileMenu {
+    margin-top: -0.5rem !important;
+  }
+  .cart h1 {
+    margin-top: 1rem;
+  }
+  #myAccountDropdown {
+    margin-top: 1rem;
+  }
+}
