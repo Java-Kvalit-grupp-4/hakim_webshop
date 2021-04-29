@@ -1,0 +1,5 @@
+@media(max-width:400px) {
+    #orderStatusQuantity {
+        font-size: 0.75rem;
+    }
+}
