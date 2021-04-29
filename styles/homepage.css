@@ -159,7 +159,7 @@ footer {
     color: rgba(24, 24, 24, 0.39);
 }
 
-#sidebar{
+#fixedSidebar{
     max-height:50%;
     position:fixed;
     overflow: auto;
@@ -168,7 +168,7 @@ footer {
     top: 10rem;
   }
 
-#sidebar-container{
+#sidebar{
     position:relative;
 }
 
