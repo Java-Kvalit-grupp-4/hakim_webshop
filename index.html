@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/homepage.css" />
     <link rel="stylesheet" href="./styles/searchbar.css" />
+    <link rel="stylesheet" href="./styles/categoreis.css">
 
     <title>Hakim's Livs homepage</title>
   </head>
@@ -138,22 +139,33 @@
     </nav>
 
     <!-- navbar end -->
+    
     <div class="container-fluid">
       <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
-        <div class="col-sm-4 col-lg-3 col-xl-2" id="sidebar">
+<!--Sidebar start-->
+<!--<div class="col-12 col-sm-4 col-lg-3 col-xl-2 mb-5" id="sidebar-container">
+  <div id="sidebar">-->
+    <div class="col-6 col-sm-4 col-lg-3 col-xl-2" >
+        <div class="col-6 col-sm-4 col-lg-3 col-xl-2" id="sidebar" style="background-color: aqua;">
           <!-- <div class="list-group"> -->
+            <div id="fixedSidebar">
           <div class="list-group" id="sidomeny">
-            <button
+            <div class="all-categories">Kategorier<i class="bi bi-caret-down-fill down-arrow"></i></div>
+           
+              <button
               id="all"
               type="button"
-              class="list-group-item list-group-item-action fs-4"
-              style="background-color: sandybrown"
+              class="list-group-item list-group-item-action fs-4 categories-dropdown-list"
             >
               Alla produkter
-            </button>
+          </button>
+
           </div>
+        </div>
           <!-- </div> -->
         </div>
+      </div>
+        <!--Sidebar end-->
 
         <div class="col-sm-8 col-xl-9" id="display-body">
           <!-- <div class="card w-100 text-white">
@@ -169,7 +181,7 @@
             </div>
           </div> -->
 
-          <div class="dropdown text-end mt-3">
+          <div class="dropdown text-end mt-3 sorting-dropdown">
             <button
               class="btn btn-secondary dropdown-toggle"
               type="button"
@@ -784,10 +796,10 @@
     <script src="./js/cart-pop-up.js"></script>
     <script src="./js/validate.js"></script>
     <script src="./js/register.js"></script>
-    <script src="./js/searchBar.js"></script>
     <script src="./js/homepage.js"></script>
-    <script src="./js/makeSearchWordArray.js"></script>
+    <script src="./js/searchBar.js"></script>
     <script src="./js/sortingAlgorithm.js"></script>
+    <script src="./js/categoeies.js"></script>
     
   </body>
 </html>
