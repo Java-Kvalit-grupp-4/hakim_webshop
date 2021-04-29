@@ -1,18 +1,16 @@
-const pdfButton = document.getElementById("#generate-pdf")
+const pdfButton = document.getElementById("generate-pdf")
 
 pdfButton.addEventListener('click', () => {
     let pdf = document.getElementById('pdf')
     html2pdf(pdf).save()
+}); 
+
+const dued = document.getElementById("dueDate")
+dued.addEventListener('click', () => {
+    dueDate()
 });
 
-$(function () {
-    fetch("../../TestData/test_data_orders.json")
-      .then((response) => response.json())
-      .then((response) => (orders = response))
-      .then((response) => renderOrder(order));
-  });
-
-function renderOrder (order) {
+function renderOrder (orders) {
     let order = $('order-container')
     order.html('')
     order.array.forEach(element => {
@@ -26,6 +24,10 @@ function renderOrder (order) {
         </div>
         `)
     });
+}
+
+const reverse = (s) => {
+    return [...s].reverse().join("");
 }
 
 let totalPrice = 0;
@@ -44,25 +46,19 @@ function totalVat () {
 
 function invoiceDate(){
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
-    
-    today = mm + '/' + dd + '/' + yyyy;
+    today.toLocaleDateString()
     document.write(today);
     today = $("#invoiceDate")
 }
 
 function dueDate(){
-    var date = new Date();
-    var dd = String(today.getDate() + 30).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
-    
-    date = mm + '/' + dd + '/' + yyyy;
-    document.write(today);
-    today = $("#dueDate")
+    let date = new Date();
+    date.setDate(date.getDate() + 30)
+    console.log(date.toLocaleDateString())
+    document.write(date);
+    date = $("#dueDate")
 }
+
 
 function pricePlusShipping(){
     let total = $('#price-plus-shipping')
