@@ -302,7 +302,7 @@ const productImageUpload = (fileInputField) => {
     if (imagefile != undefined) {
       formData.append("file", imagefile, fileName);
       axios
-        .post("http://localhost:8080/v1/upload/db", formData, {
+        .post("http://localhost:8080/api/v1/upload/db", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -400,6 +400,8 @@ const createProductInDataBase = () => {
 
   const newProduct = createProductObjekt()
 
+  console.log(newProduct)
+
   axios.post("http://localhost:8080/products/add",  newProduct)
         .then(() => {
           swal("Ny produkt tillagd", '', "success")
@@ -418,7 +420,7 @@ $('#fileUpload').change(function() {
   let reader = new FileReader();
   console.log(this.files[0].size);
   if(this.files[0].size > 25000){
-    swal('Bilden är för stor!', 'max gräns är 25,0 kb', 'warning')
+    swal('Bilden är för stor!', 'max gräns är 250,0 kb', 'warning')
   }else{
     reader.onload = (e) => $('#img').attr('src', e.target.result)
   reader.readAsDataURL(this.files[0]);
