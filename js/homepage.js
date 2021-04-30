@@ -176,6 +176,7 @@ function renderProducts(list) {
         if(element.unit == 'gr' || element.unit == 'hg' || element.unit == 'kg'){
           unitCheck = 'kg'
         } 
+        console.log(element)
 
     $("#products").append(`
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
@@ -193,7 +194,7 @@ function renderProducts(list) {
                         maximumFractionDigits: 2,
                         }
                     )} kr</h5>
-                    <p id="${element.volume}" class="card-comp-price">jfr-pris ${element.comparablePrice} kr/${unitCheck}</p>
+                    <p id="${element.volume}" class="card-comp-price"> ${element.comparePrice} kr/${unitCheck}</p>
                     <p id="${element.description}"class="card-text">Mer info om produkten</p>
                     <div class="add-subtract-container">
                         <div class="subtract-btn">
