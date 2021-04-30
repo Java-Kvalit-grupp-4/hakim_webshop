@@ -302,7 +302,7 @@ const productImageUpload = (fileInputField) => {
     if (imagefile != undefined) {
       formData.append("file", imagefile, fileName);
       axios
-        .post("http://localhost:8080/api/v1/upload/db", formData, {
+        .post("https://hakimlivs.herokuapp.com//api/v1/upload/db", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -402,7 +402,7 @@ const createProductInDataBase = () => {
 
   console.log(newProduct)
 
-  axios.post("http://localhost:8080/products/add",  newProduct)
+  axios.post("https://hakimlivs.herokuapp.com/products/add",  newProduct)
         .then(() => {
           swal("Ny produkt tillagd", '', "success")
           imageStringForProduct = ""

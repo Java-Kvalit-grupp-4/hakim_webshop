@@ -72,8 +72,8 @@ $(document).ready(() => {
 function load() {
     //const productsUrl = './TestData/test_data_products_v1.2.JSON'
     //const productsUrl = 'http://localhost:8080/products'
-    //const productsUrl = "https://hakimlivs.herokuapp.com/products";
-    const productsUrl = "https://hakimlogintest.herokuapp.com/products";
+    const productsUrl = "https://hakimlivs.herokuapp.com/products";
+    //const productsUrl = "https://hakimlogintest.herokuapp.com/products";
 
 
     axios
@@ -194,7 +194,7 @@ function renderProducts(list) {
                         maximumFractionDigits: 2,
                         }
                     )} kr</h5>
-                    <p id="${element.volume}" class="card-comp-price"> ${element.comparePrice} kr/${unitCheck}</p>
+                    <p id="${element.volume}" class="card-comp-price"> ${element.comparablePrice} kr/${unitCheck}</p>
                     <p id="${element.description}"class="card-text">Mer info om produkten</p>
                     <div class="add-subtract-container">
                         <div class="subtract-btn">
