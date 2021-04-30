@@ -51,18 +51,20 @@ function loadProducts() {
      * Add products that belong to the celected category
      */
     $("#select").on("change", function () {
-      let optionId = $(this).val();
-      console.log(optionId)
+
+      let categoryName = $(this).val();
+      console.log(categoryName)
+
       let list = [];
       products.forEach((element) => {
         for (let i = 0; i < element.categories.length; i++) {
           let obj = element.categories[i];
-          if (obj.name === optionId) {
+          if (obj.name === categoryName) {
             $("#products").empty();
             list.push(element);
             showProducts(list);
           }
-          if (optionId === "Kategori") {
+          if (categoryName === "Kategori") {
             $("#products").empty();
             showProducts(products);
           }
@@ -88,7 +90,7 @@ function loadProducts() {
                   </div>
           `);
 
-      tags.push(input);
+      tags.push({ name: input});
 
       $("#tagSave").val("");
     });
@@ -220,57 +222,6 @@ function loadProducts() {
         })
     });
 
-    $("#saveNewProduct").click(function () {
-      let cat = [];
-      $("#column div")
-        .children()
-        .each(function () {
-          if ($(this).is(":checked")) {
-            let element = $(this).attr("id");
-            cat.push(element);
-          }
-        });
-      let productCategory = [];
-      cat.forEach((element) => {
-        productCategory.push({ name: element });
-      });
-      //console.log(productCategory);
-
-      let isAvailable = true;
-
-      if ($("#isProductHidden").is(":checked")) {
-        isAvailable = false;
-      }
-     
-
-      let productObject = {
-        sku: sku,
-        description: $("#description").val(),
-        image: $("#img").val(),
-        isAvailable: isAvailable,
-        price: $("#price").val(),
-        quantity: $("#lager").val(),
-        title: $("#title").val(),
-        brand: {
-          name: $("#brand").val(),
-        },
-        tags: tags,
-
-        categories: productCategory,
-      };
-
-      console.log(productObject);
-      alert("Produkten har sparats");
-
-        axios.post("https://hakimlivs.herokuapp.com/products/add",  productObject  )
-        .then(() => {
-          console.log("Done!")
-        })
-        .catch(() => {
-          alert('Något fick fel!','Vänligen försök igen', 'warning')
-        })
-    });
-
       /**
      * Empty form to add new product
      */
@@ -387,9 +338,11 @@ const productImageUpload = (fileInputField) => {
 $('#new-product').click(() => {
   if(imageStringForProduct == undefined){
     swal('Varning', 'Vill du verkligen skapa en ny produkt utan en produktbild?', 'warning')
+  }else{
+    console.log(imageStringForProduct);
+    createProductInDataBase()
   }
-  console.log(imageStringForProduct);
-  createProductInDataBase()
+  
 })
 
 // setting the unit on change 
@@ -403,13 +356,13 @@ $('#weight_volume').focusout(function(){
   console.log(weightVolume);
 });
  
-
-
+// skapa productobject
 const createProductObjekt = () => {
 
   let productCategories = createCategoriesForProduct();
-  let isAvailable = true;
+  let isAvailable = checkIfProductIsAvalible();
 
+  console.log(tags);
   return {
     
     title: $("#title").val(),
@@ -424,20 +377,23 @@ const createProductObjekt = () => {
       name: $("#brand").val(),
     },
     tags: tags,
-
     categories: productCategories
   };
 }
 
 const createCategoriesForProduct = () => {
-  let checkedCategories = [];
-  $("#column div").children().each(function () {
-      $(this).is(":checked") ? checkedCategories.push($(this).attr("id")) : null
-  });
-
+  let cat = [];
+  $("#column div")
+    .children()
+    .each(function () {
+      if ($(this).is(":checked")) {
+        let element = $(this).attr("id");
+        cat.push(element);
+      }
+    });
   let productCategory = [];
-  checkedCategories.forEach((element) => {
-    productCategory.push(element.name);
+  cat.forEach((element) => {
+    productCategory.push({ name: element });
   });
   return productCategory;
 }
@@ -447,6 +403,11 @@ const createTagsForProduct = () => {
 }
 
 const checkIfProductIsAvalible = () => {
+      if ($("#isProductHidden").is(":checked")) {
+        return false;
+      }else {
+        return true;
+      }
   
 }
 
@@ -455,9 +416,8 @@ const createProductInDataBase = () => {
   const newProduct = createProductObjekt()
 
   axios.post("http://localhost:8080/products/add",  newProduct)
-        .then((resp) => {
-          console.log(resp);
-          console.log("Done!")
+        .then(() => {
+          swal("Ny produkt tillagd", '', "success")
         })
         .catch(() => {
           alert('Något fick fel!','Vänligen försök igen', 'warning')
