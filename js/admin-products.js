@@ -206,7 +206,7 @@ function loadProducts() {
 
       alert("Produkten har sparats");
 
-        axios.post("https://hakimlivs.herokuapp.com/products/upsertProduct",  productObject  )
+        axios.post("http://localhost:8080/products/upsertProduct",  productObject  )
         .then(() => {
         })
         .catch(() => {
@@ -400,6 +400,8 @@ const createProductInDataBase = () => {
 
   const newProduct = createProductObjekt()
 
+  console.log(newProduct)
+
   axios.post("http://localhost:8080/products/add",  newProduct)
         .then(() => {
           swal("Ny produkt tillagd", '', "success")
@@ -416,8 +418,9 @@ const createProductInDataBase = () => {
 // render the uploaded file to preview
 $('#fileUpload').change(function() {
   let reader = new FileReader();
-  if(this.files[0].size > 25000){
-    swal('Bilden är för stor!', 'max gräns är 25,0 kb', 'warning')
+  console.log(this.files[0].size);
+  if(this.files[0].size > 250000){
+    swal('Bilden är för stor!', 'max gräns är 250,0 kb', 'warning')
   }else{
     reader.onload = (e) => $('#img').attr('src', e.target.result)
   reader.readAsDataURL(this.files[0]);
