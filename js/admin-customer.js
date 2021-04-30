@@ -70,7 +70,6 @@ function load(){
     })
     axios.get(getAllCustomers)
         .then((response) =>{
-            console.log(response.data)
             if(response.status ===200){
                 showCustomers(response.data) 
                 customers = response.data   
@@ -91,8 +90,7 @@ function showCustomers(customerArr){
     }
     customerArr.forEach(customer => {
         let isVip = "";
-        if(customer.isVip=== true){
-            console.log("ÄR VIP")
+        if(e.isVip=== true){
             isVip = "bi-check2"
         }
         else{
@@ -148,9 +146,7 @@ function openCustomerTab(){
 
 function saveCustomer(customerNumber){
     customers.forEach(customer => {
-        console.log("Telefon " + customer.phoneNumber)
-        console.log("postadress " + customer.zipCode)
-        
+
         if(customer.customerNumber==customerNumber){
             let newZipCode = "";
             let newPhoneNumber = `${customer.phoneNumber.substring(0,3)} ${customer.phoneNumber.substring(3,6)} ${customer.phoneNumber.substring(6,8)} ${customer.phoneNumber.substring(8)}`
@@ -334,9 +330,7 @@ function updateCustomer(){
     if(validateForm()){
         resetsInputBorders()
         let newPhoneNumber = phoneNumber.val().replaceAll(" ", "");
-        console.log("Telefon " + newPhoneNumber)
         let newZipCode = zipCode.val().replaceAll(" ", "");
-        console.log("Zip " + newZipCode)
 
         let data = {
             "firstName" : $(firstName).val(),
@@ -379,11 +373,6 @@ function validateForm() {
     return bool
   }
 
-  /*function validateInput(){
-      let bool = true;
-      bool = checkForInput(testForDecimalNumbers, $("#input"),bool,INPUT_ERROR_MSG)
-      return bool;
-  }*/
 
   function hideAllErrorMsgs() {
     FIRSTNAME_ERROR_MSG.hide()

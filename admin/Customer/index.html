@@ -18,11 +18,9 @@
 
   <body>
     <nav>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <nav class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand" href="../index.html" id="nav-home"
-            >ADMIN</a
-          >
+          <a class="navbar-brand" href="../index.html" id="nav-home">ADMIN</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -35,7 +33,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex mx-3">
+            <form class="d-flex mx-lg-3 my-5 my-xl-0">
               <select
                 class="form-select form-select-sm mx-22"
                 aria-label=".form-select-sm example"
@@ -56,22 +54,22 @@
               </button>
             </form>
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="../Products/index.html"
-                  id="nav-products"
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+              <li class="nav-item ">
+                <a class="nav-link" href="../Products/" id="nav-products"
                   >Produkter</a
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item ">
                 <a class="nav-link" href="../Orders/index.html" id="nav-orders">
                   Ordrar</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.html" id="nav-customer"
+                <a
+                  class="nav-link"
+                  href="index.html"
+                  id="nav-customer"
                   >Kunder</a
                 >
               </li>
@@ -87,15 +85,13 @@
                   id="nav-information"
                   >Webbsidans info</a
                 >
-
-              </ul>
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="../../index.html">Kundvy</a>
-                </li>
-              </ul>
-
-
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="../../index.html">Kundvy</a>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
@@ -308,7 +304,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="mb-5 col">
+                <div class="mb-2 col">
                   <label for="customer-zip" class="form-label"
                     >Postnummer</label
                     
@@ -323,15 +319,29 @@
                   <div id="ZIPCODE_ERROR_MSG" class="error-msg">Felaktigt postnummer, måste matas in t.ex "123 45"</div>
                 </div>
               </div>
+             
+            </form>
+              <div class="row">
+                <div class="col mb-2">
+                  <h2 class="my-3">Kommentar om kund</h2>
+                  <div class="mb-3 form-floating">
+                    <textarea
+                      class="form-control"
+                      id="customer-comments"
+                      style="height: 16rem"
+                    ></textarea
+                    ><label for="customer-comments" class="form-label" id = "commentTextField"
+                      >Skriv meddelande...</label
+                    >
+                  </div>
+                </div>
+              </div>
               <div class="row">
                 <div class="mb-4 col">
                   <button class="btn-secondary btn" type="submit" id="updateBtn">
                     Spara ändringar
                   </button>
                 </div>
-              </div>
-            </form>
-              <div class="row">
               </div>
             </div>
             <div class="container col-12 col-xl-7 order-container ms-xl-5 mb-5">
@@ -357,7 +367,7 @@
                   </tfoot>
                 </table>
               </div>
-              <div class="row">
+              <!--<div class="row">
                 <div class="col mb-5">
                   <h2 class="my-5">Kommentar om kund</h2>
                   <div class="mb-3 form-floating">
@@ -371,19 +381,19 @@
                     >
                   </div>
                 </div>
-              </div>
+              </div>-->
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- <script>
+    <script>
           let customer = JSON.parse(sessionStorage.getItem('customer'))
           console.log(customer)
             if(customer==null || customer== undefined || customer.isAdmin==false){
               window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
             }
-    </script> -->
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       type="text/javascript"
