@@ -206,7 +206,7 @@ function loadProducts() {
 
       alert("Produkten har sparats");
 
-        axios.post("http://localhost:8080/products/upsertProduct",  productObject  )
+        axios.post("https://hakimlivs.herokuapp.com/products/upsertProduct",  productObject  )
         .then(() => {
         })
         .catch(() => {
