@@ -27,6 +27,7 @@ function loadProducts() {
         let obj = element.categories[i];
         categories.push(obj.name);
       }
+      console.log(products)
     });
 
     /**
@@ -132,7 +133,11 @@ function loadProducts() {
           $("#title").val(element.title);
           $("#brand").val(element.brand.name);
           $("#description").val(element.description);
-          $("#imge").val(element.image);
+          $("#img").val(element.image);
+          imageStringForProduct=element.image;
+          $('#img').attr('src', element.image)
+          $('#unit').val(element.unit)
+          $("#weight_volume").val(element.volume);
           $("#price").val(element.price);
           $("#lager").val(element.quantity);
           showCategories();
@@ -166,41 +171,26 @@ function loadProducts() {
      * Make object of selected product and post it
      */
     $("#saveChanges").click(function () {
-      let cat = [];
-      $("#column div")
-        .children()
-        .each(function () {
-          if ($(this).is(":checked")) {
-            let element = $(this).attr("id");
-            cat.push(element);
-          }
-        });
-      let productCategory = [];
-      cat.forEach((element) => {
-        productCategory.push({ name: element });
-      });
-
-      let isAvailable = true;
-
-      if ($("#isProductHidden").is(":checked")) {
-        isAvailable = false;
-      }
+     
+      let productCategories = createCategoriesForProduct();
+      let isAvailable = checkIfProductIsAvalible();
      
 
       let productObject = {
         sku: sku,
+        title: $("#title").val(),
         description: $("#description").val(),
-        image: $("#img").val(),
+        image: imageStringForProduct,
         isAvailable: isAvailable,
         price: $("#price").val(),
+        unit: unit,
+        volume: weightVolume,
         quantity: $("#lager").val(),
-        title: $("#title").val(),
         brand: {
           name: $("#brand").val(),
         },
         tags: tags,
-
-        categories: productCategory,
+        categories: productCategories
       };
 
 
