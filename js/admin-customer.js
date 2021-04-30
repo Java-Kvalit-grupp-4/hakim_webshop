@@ -17,6 +17,7 @@ let firstName = $('#customer-first-name'),
     address = $('#customer-street'),
     city = $('#customer-city'),
     zipCode = $('#customer-zip')
+    customerComment = $('#customer-comments')
 
  let FIRSTNAME_ERROR_MSG = $('#FIRSTNAME_ERROR_MSG'),
     LASTNAME_ERROR_MSG = $('#LASTNAME_ERROR_MSG'),
@@ -53,6 +54,7 @@ $(document).on('click', '#nav-profile-tab', function(){
     address.val("")
     city.val("")
     zipCode.val("")
+    customerComment.val("")
     load();
 })
 
@@ -64,7 +66,6 @@ function load(){
     })
     axios.get(getAllCustomers)
         .then((response) =>{
-            console.log(response.data)
             if(response.status ===200){
                 showCustomers(response.data) 
                 customers = response.data   
@@ -86,7 +87,6 @@ function showCustomers(customerArr){
     customerArr.forEach(e => {
         let isVip = "";
         if(e.isVip=== true){
-            console.log("ÄR VIP")
             isVip = "bi-check2"
         }
         else{
@@ -130,9 +130,7 @@ function openCustomerTab(){
 
 function saveCustomer(customerNumber){
     customers.forEach(customer => {
-        console.log("Telefon " + customer.phoneNumber)
-        console.log("postadress " + customer.zipCode)
-        
+
         if(customer.customerNumber==customerNumber){
             let newZipCode = "";
             let newPhoneNumber = `${customer.phoneNumber.substring(0,3)} ${customer.phoneNumber.substring(3,6)} ${customer.phoneNumber.substring(6,8)} ${customer.phoneNumber.substring(8)}`
@@ -152,6 +150,7 @@ function saveCustomer(customerNumber){
             if(isCustomerOrdersNull(customer.customerOrders)>0){
                 showOrders(customer.customerOrders);
             } 
+            customerComment.val(customer.comment)
         }
     })
 }
@@ -169,7 +168,6 @@ function isCustomerOrdersNull(orderArr){
 function getTotalPriceOfOrders(orderArr){
     if(orderArr!=null){
         let sum = 0;
-        console.log(typeof orderArr)
         orderArr.forEach(e => {
             sum += e.totalCost;
         })
@@ -184,8 +182,6 @@ function filterSearch(){
     //let tempOrders = [];
     let filter = $("#search-select option:selected").text();
     let input = $("#input").val();
-  
-    console.log(startDate, endDate);
         
     $("#customerTable").empty();
     switch (filter) {
@@ -235,7 +231,6 @@ function showOrders(customerOrders){
             sum += orders.totalCost;
             let dateFromOrder = new Date(orders.timeStamp);
             let orderDate = dateFromOrder.toISOString().substring(0,10);
-            console.log(orderDate)
             let orderNumber = (orders.id +"").substring(0,6)
            
             let isPaid = "Obetalad";
@@ -271,9 +266,7 @@ function updateCustomer(){
     if(validateForm()){
         resetsInputBorders()
         let newPhoneNumber = phoneNumber.val().replaceAll(" ", "");
-        console.log("Telefon " + newPhoneNumber)
         let newZipCode = zipCode.val().replaceAll(" ", "");
-        console.log("Zip " + newZipCode)
 
         let data = {
             "firstName" : $(firstName).val(),
@@ -286,7 +279,7 @@ function updateCustomer(){
                 "name": $(city).val()
                 },
             "zipCode" : newZipCode,
-            "comment" : $("#commentTextField").val()
+            "comment" : $(customerComment).val()
         }
 
 
@@ -316,11 +309,6 @@ function validateForm() {
     return bool
   }
 
-  /*function validateInput(){
-      let bool = true;
-      bool = checkForInput(testForDecimalNumbers, $("#input"),bool,INPUT_ERROR_MSG)
-      return bool;
-  }*/
 
   function hideAllErrorMsgs() {
     FIRSTNAME_ERROR_MSG.hide()

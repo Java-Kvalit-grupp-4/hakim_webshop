@@ -2,10 +2,8 @@ let orders = [];
 let activeOrder;
 let startDate = null;
 let endDate = null;
-// const updateOrderLink = "https://hakimlivs.herokuapp.com/users/customerOrder/update";
-// const getAllOrders = "https://hakimlivs.herokuapp.com/customerOrder/orders";
-// const server = "https://hakimlivs.herokuapp.com/";
-const server = "http://localhost:8080/";
+const server = "https://hakimlivs.herokuapp.com/";
+// const server = "http://localhost:8080/";
 const updateOrderLink = server + "customerOrder/update";
 const getAllOrders = server + "customerOrder/orders";
 
