@@ -131,7 +131,7 @@ function loadProducts() {
       $("#tagColumn").empty();
       $("#tagInput").val("");
       $("#isProductHidden").prop("checked", false);
-      console.log($("#isProductHidden").val());
+    //  console.log($("#isProductHidden").val());
 
       products.forEach((element) => {
         if (element.sku == productId) {
@@ -226,20 +226,28 @@ function loadProducts() {
      * Empty form to add new product
      */
     $("#new").click(function () {
-      $("#title").val("");
-      $("#brand").val("");
-      $("#description").val("");
-      $("#imge").val("");
-      $("#sku").val("");
-      $("#price").val("");
-      $("#lager").val("");
-      $("input").prop("checked", false);
-
+      emptyAllFields();
       $("#tab-product-site").tab("show");
     });
     
   }
 }
+
+function emptyAllFields() {
+  $("#title").val("");
+  $("#brand").val("");
+  $("#description").val("");
+  $("#imge").val("");
+  $("#price").val("");
+  $("#lager").val("");
+  $("#isProductHidden").prop("checked", false);
+  $("#column div").children().each(function () {
+    $(this).prop("checked", false);
+     
+  });
+}
+
+
 
 /**
  * Generates a table with products
@@ -313,7 +321,7 @@ const productImageUpload = (fileInputField) => {
       formData.append("file", imagefile, fileName);
       console.log(formData);
       axios
-        .post("http://localhost:8080/api/v1/upload/db", formData, {
+        .post("https://hakimlivs.herokuapp.com/api/v1/upload/db", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -412,17 +420,28 @@ const checkIfProductIsAvalible = () => {
 }
 
 const createProductInDataBase = () => {
-
+  if ($("#column div input:checkbox:checked").length > 0) {
+   console.log("Correct!")
+  }
+  else {
+    alert("Fel")
+  }
+  if (validateForm()) {
+    resetsInputBorders();
+  
   const newProduct = createProductObjekt()
 
-  axios.post("http://localhost:8080/products/add",  newProduct)
+  axios.post("https://hakimlivs.herokuapp.com/products/add",  newProduct)
         .then(() => {
           swal("Ny produkt tillagd", '', "success")
         })
         .catch(() => {
           alert('Något fick fel!','Vänligen försök igen', 'warning')
         })
+    
+    emptyAllFields();
       
+  }
 }
 
 
@@ -437,3 +456,95 @@ $('#fileUpload').change(function() {
 $('#uploadButton').click(() => {
   productImageUpload($('#fileUpload'))
 })
+
+// Fältvalidering
+
+let productName = $("#title"),
+  brandName = $("#brand"),
+  categoryNameInput = $("#categoryInput"),
+  tagName = $("#tagInput"),
+  priceInput = $("#price"),
+  lagerInput = $("#lager"),
+  weight_volumeInput = $("#weight_volume");
+  
+
+let PRODUCTNAME_ERROR_MSG = $("#PRODUCTNAME_ERROR_MSG"),
+BRAND_ERROR_MSG = $("#BRAND_ERROR_MSG"),
+CATEGORY_ERROR_MSG = $("#CATEGORY_ERROR_MSG"),
+TAG_ERROR_MSG = $("#TAG_ERROR_MSG"),
+PRICE_ERROR_MSG = $("#PRICE_ERROR_MSG"),
+LAGER_ERROR_MSG = $("#LAGER_ERROR_MSG"),
+WEIGHT_ERROR_MSG = $("#WEIGHT_ERROR_MSG");
+
+productName.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForName, productName, bool, PRODUCTNAME_ERROR_MSG)
+});
+
+brandName.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForName, brandName, bool, BRAND_ERROR_MSG)
+});
+
+categoryNameInput.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG)
+});
+
+tagName.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG)
+});
+
+priceInput.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForDecimalNumbers, priceInput, bool, PRICE_ERROR_MSG)
+});
+
+lagerInput.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForNumbersOnly, lagerInput, bool, LAGER_ERROR_MSG)
+});
+
+weight_volumeInput.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForDecimalNumbers, weight_volumeInput, bool, WEIGHT_ERROR_MSG)
+});
+  
+function hideAllErrorMsgs() {
+  PRODUCTNAME_ERROR_MSG.hide();
+  BRAND_ERROR_MSG.hide();
+  CATEGORY_ERROR_MSG.hide();
+  TAG_ERROR_MSG.hide();
+  PRICE_ERROR_MSG.hide();
+  LAGER_ERROR_MSG.hide();
+  WEIGHT_ERROR_MSG.hide();
+}
+
+function resetsInputBorders() {
+  resetBorder(productName);
+  resetBorder(brandName);
+  resetBorder(categoryNameInput);
+  resetBorder(tagName);
+  resetBorder(priceInput);
+  resetBorder(lagerInput);
+  resetBorder(weight_volumeInput);
+}
+
+function validateForm() {
+  let bool = true;
+
+  bool = checkForInput(testForName, productName, bool, PRODUCTNAME_ERROR_MSG);
+  bool = checkForInput(testForName, brandName, bool, BRAND_ERROR_MSG);
+  bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG);
+  bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG)
+  bool = checkForInput(testForDecimalNumbers, priceInput, bool, PRICE_ERROR_MSG)
+  bool = checkForInput(testForNumbersOnly, lagerInput, bool, LAGER_ERROR_MSG)
+  bool = checkForInput(testForDecimalNumbers, weight_volumeInput, bool, WEIGHT_ERROR_MSG)
+
+  return bool;
+}
+
+hideAllErrorMsgs();
+
+

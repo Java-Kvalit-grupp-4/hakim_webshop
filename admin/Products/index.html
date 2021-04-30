@@ -180,10 +180,16 @@
                 <input class="form-check-input me-3" type="checkbox" value="false" id="isProductHidden">
                 <label class="form-check-label" for="isProductHidden">Dölj produkten</label>
             </div>
-              <label for="titleInput" class="form-label">Produktnamn</label>
-              <input type="text" class="form-control mb-3" id="title" maxlength="50"/>
+              <label for="title" class="form-label">Produktnamn</label>
+              <input type="text" class="form-control mb-3" id="title" maxlength="50" required/>
+              <div id="PRODUCTNAME_ERROR_MSG" class="error-msg">
+                Produktnamn måste bestå av endast bokstäver, max 50 tecken
+              </div>
               <label for="brandInput" class="form-label">Tillverkare</label>
-              <input type="text" class="form-control mb-3" id="brand" maxlength="50"/>
+              <input type="text" class="form-control mb-3" id="brand" maxlength="50" required/>
+              <div id="BRAND_ERROR_MSG" class="error-msg">
+                Tillverkare måste bestå av endast bokstäver, max 50 tecken
+              </div>
               <label for="descriptionInput" class="form-label"
                 >Beskrivning</label
               >
@@ -206,6 +212,9 @@
                   aria-describedby="category-input"
                   maxlength="50"
                 />
+                <div id="CATEGORY_ERROR_MSG" class="error-msg">
+                  Category måste bestå av endast bokstäver, max 50 tecken
+                </div>
                 <button
                   class="btn btn-outline-secondary"
                   type="button"
@@ -229,8 +238,11 @@
                   placeholder=""
                   aria-label="New tag"
                   aria-describedby="tag-input"
-                  maxlength="50"
+                  maxlength="50" 
                 />
+                <div id="TAG_ERROR_MSG" class="error-msg">
+                  Tag måste bestå av endast bokstäver, max 50 tecken
+                </div>
                 <button
                   class="btn btn-outline-secondary"
                   type="button"
@@ -248,9 +260,15 @@
             <div class="col-lg-6 mt-4 mt-lg-0">
 
               <label for="priceInput" class="form-label">Pris</label>
-              <input type="text" class="form-control mb-3" id="price" maxlength="50"/>
+              <input type="text" class="form-control mb-3" id="price" maxlength="50" required/>
+              <div id="PRICE_ERROR_MSG" class="error-msg">
+                Price måste bestå av endast siffror, decimaltal inkluderat
+              </div>
               <label for="lagerInput" class="form-label">Lagerstatus</label>
-              <input type="text" class="form-control mb-3" id="lager" maxlength="5"/>
+              <input type="text" class="form-control mb-3" id="lager" maxlength="5" required/>
+              <div id="LAGER_ERROR_MSG" class="error-msg">
+                Lagerstatus måste bestå av endast siffror
+              </div>
               <div class="col">
                 <label for="img" class="form-label">Produktbild</label>
               </div>
@@ -282,7 +300,10 @@
               </div>
               <div class="row gx-0">
                 <div class="col-6 mt-3">
-                  <input type="text" id="weight_volume" class="form-control">
+                  <input type="text" id="weight_volume" class="form-control" required>
+                </div>
+                <div id="WEIGHT_ERROR_MSG" class="error-msg">
+                  Vikt/volym måste bestå av endast siffror, decimaltal inkluderat
                 </div>
                 <div class="col-4 dropdown m-3 sorting-dropdown">
                   <select id="unit" class="form-select">
@@ -335,6 +356,8 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../../js/validate.js"></script>
+
     <script src="../../js/admin-products.js"></script>
   </body>
 </html>
