@@ -193,33 +193,37 @@ function loadProducts() {
         isAvailable = false;
       }
      
+      if (validateForm()) {
+        resetsInputBorders();
 
-      let productObject = {
-        sku: sku,
-        description: $("#description").val(),
-        image: $("#img").val(),
-        isAvailable: isAvailable,
-        price: $("#price").val(),
-        quantity: $("#lager").val(),
-        title: $("#title").val(),
-        brand: {
-          name: $("#brand").val(),
-        },
-        tags: tags,
+        let productObject = {
+          sku: sku,
+          description: $("#description").val(),
+          image: $("#img").val(),
+          isAvailable: isAvailable,
+          price: $("#price").val(),
+          quantity: $("#lager").val(),
+          title: $("#title").val(),
+          brand: {
+            name: $("#brand").val(),
+          },
+          tags: tags,
 
-        categories: productCategory,
-      };
+          categories: productCategory,
+        };
 
-      console.log(productObject);
-      alert("Produkten har sparats");
+        console.log(productObject);
+        alert("Produkten har sparats");
 
-        axios.post("https://hakimlivs.herokuapp.com/products/upsertProduct",  productObject  )
-        .then(() => {
-          console.log("Done!")
-        })
-        .catch(() => {
-          alert('Något fick fel!','Vänligen försök igen', 'warning')
-        })
+        axios.post("https://hakimlivs.herokuapp.com/products/upsertProduct", productObject)
+          .then(() => {
+            console.log("Done!")
+          })
+          .catch(() => {
+            alert('Något fick fel!', 'Vänligen försök igen', 'warning')
+          })
+        emptyAllFields();
+      }
     });
 
       /**
