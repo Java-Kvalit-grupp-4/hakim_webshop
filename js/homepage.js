@@ -6,6 +6,7 @@ let loginbutton2 = $("#login-button");
 let wrongEmail = $("#wrong-email");
 let wrongPassword = $("#wrong-password");
 let whichPage = $("#login-page");
+const totalItemsInCart = $("#total-items-in-cart");
 
 let emailToCheck = $("#login-email"),
     passwordToCheck = $("#login-password"),
@@ -18,13 +19,13 @@ let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/'
 
 //const addUserUrl = "http://localhost:8080/users/add"
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
-//const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 
 /**
  * Eventlistener
 
- */ C: $("#newCust-button").click(() => {
-    $("#registerForm").modal("show");
+ */ 
+$("#newCust-button").click(() => {
+  $("#registerForm").modal("show");
 });
 
 $("#checkout-button").click(function () {
@@ -86,65 +87,32 @@ $("#myAccountDropdown").click(function(){
 $("form").submit(false);
 
 $(document).ready(() => {
+  totalItemsInCart.hide();
+  hideOrShowAdminView();
+  load();
 
-    load();
-    let loggedIn = sessionStorage.getItem("customer");
-    if (loggedIn == undefined) {
-        adminview.hide();
-    } else {
-        if (loggedIn.isAdmin) {
-            $("#checkOutLink").attr("href", "./pages/checkout/");
-            adminview.show();
-        }
-    }
-});
-
+})
 
 function load() {
-  //const productsUrl = './TestData/test_data_products_v1.2.JSON'
-  //const productsUrl = 'http://localhost:8080/products'
-  const productsUrl = "https://hakimlivs.herokuapp.com/products";
+    //const productsUrl = './TestData/test_data_products_v1.2.JSON'
+    //const productsUrl = 'http://localhost:8080/products'
+    const productsUrl = "https://hakimlivs.herokuapp.com/products";
 
-  axios
-    .get(productsUrl)
-    .then((response) => {
-      renderCategories(response.data);
-    })
-    .catch((err) => {
-      alert(err);
-    });
+    axios
+        .get(productsUrl)
+        .then((response) => {
+            renderCategories(response.data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
 }
-
-
-
-$("#sidomeny button").on("click", function () {
-    let categoryName = $(this).attr("id");
-    let selectedCategoryList = [];
-
-    availableProducts.forEach(product => {
-
-        if (categoryName === "all") {
-            $("#products").empty();
-            renderProducts(availableProducts);
-            localStorage.setItem('categoryList', JSON.stringify(availableProducts));
-        } else {
-            let currentProduct = product
-            product.categories.forEach(category => {
-
-                if (category.name == categoryName) {
-                    selectedCategoryList.push(currentProduct);
-                    $("#products").empty();
-                    renderProducts(selectedCategoryList);
-                    localStorage.setItem('categoryList', JSON.stringify(selectedCategoryList));
-                }
-            })
-        }
-    })
-});
-
 
 function renderCategories(data) {
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
+    if(cartQuantity != null || cartQuantity>0) {
+        totalItemsInCart.show();
+      }
     let customer = sessionStorage.getItem("customer") || "";
     if (customer.length > 0) {
         navLoginBtn.text("Logga ut");
@@ -153,10 +121,11 @@ function renderCategories(data) {
         $("#myAccountDropdown").hide();
     }
     products = data;
+    
 
   let categories = [];
   
-    let availableProducts = [];
+  let availableProducts = [];
     products.forEach(element => {
         if (element.isAvailable == true) {
             availableProducts.push(element)
@@ -178,7 +147,7 @@ function renderCategories(data) {
 
     uniqueCategories.forEach((element) => {
         $("#sidomeny").append(`
-                  <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4" style="background-color:wheat ;">${element}</button>`);
+                  <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4 categories-dropdown-list" >${element}</button>`);
     });
 
     $("#total-items-in-cart").text(cartQuantity);
@@ -187,11 +156,10 @@ function renderCategories(data) {
     $("#sidomeny button").on("click", function () {
         let categoryName = $(this).attr("id");
         let selectedCategoryList = [];
-
         availableProducts.forEach((product) => {
             if (categoryName === "all") {
                 $("#products").empty();
-                renderProducts(products);
+                renderProducts(availableProducts);
                 localStorage.setItem("categoryList", JSON.stringify(products));
             } else {
                 let currentProduct = product;
@@ -215,187 +183,174 @@ function renderCategories(data) {
  * @param {Array} list of product
  */
 function renderProducts(list) {
-
     $("#products").empty();
 
+  // add product to website  
+  list.forEach((element) => {
+      let unit = 'hg'
+      let unitCheck = ''
+      let volym = 33
+      let comparePrice = '35,00'
 
-    list.forEach((element) => {
-        $("#products").append(`
+      // lägg till element framför för att jämföra med databasen
+      if(unit == 'ml' || unit == 'cl' || unit == 'l'){
+          unitCheck = 'l'
+      }
+      if(unit == 'gr' || unit == 'hg' || unit == 'kg'){
+        unitCheck = 'kg'
+      }
+
+        /* if(element.unit == 'ml' || element.unit == 'cl' || element.unit == 'l'){
+            unitCheck = 'l'
+        }
+        if(element.unit == 'gr' || element.unit == 'hg' || element.unit == 'kg'){
+          unitCheck = 'kg'
+        } */
+
+    $("#products").append(`
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
         <div class="product-card">
-              <div id="${element.sku}">
-                <div class="img-container">
-                  <img src="${
-            element.image
-        }" alt="img" class="product-card-img">
-                </div>
-                <div class="product-card-text">
-                  <h3 class="card-title">${element.title}</h3>
-                  <h5 class="card-price">${element.price.toLocaleString(
-            "sv-SE",
-            {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-            }
-        )} kr</h5>
-                  <p id="${
-            element.description
-        }"class="card-text">Mer info om produkten</p>
-                  <div class="add-subtract-container">
-                      <div class="subtract-btn">
-                        <div class="reduce1btn">-</div>
-                      </div>
-                      <div  class="quantity">
-                        <input type="text" maxlength="2" value="1" class="amount${
-            element.sku
-        } amount">
-                      </div>
-                      <div class="add-btn">
-                        <div class="add1btn">+</div>
-                      </div>
-                  </div>
-                  <div class="add-product-to-cart-container">
-                    <button class="add-product-to-cart" style="margin-top: 5%">Köp</button>
-                  </div>
-                </div>
-              </div>
-            </div>  
-            `);
-    });
+            <div id="${element.sku}">
+                    <div class="img-container">
+                    <img src="${element.image}" alt="img" class="product-card-img">
+                    </div>
+                    <div id="${unit}" class="product-card-text">
+                    <h3 class="card-title">${element.title}</h3>
+                    <h5 class="card-price">${element.price.toLocaleString(
+                        "sv-SE",
+                        {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                        }
+                    )} kr</h5>
+                    <p id="${volym}" class="card-comp-price">jfr-pris ${comparePrice} kr/${unitCheck}</p>
+                    <p id="${element.description}"class="card-text">Mer info om produkten</p>
+                    <div class="add-subtract-container">
+                        <div class="subtract-btn">
+                            <div class="reduce1btn">-</div>
+                        </div>
+                        <div  class="quantity">
+                            <input type="text" maxlength="2" value="1" class="amount${element.sku} amount">
+                        </div>
+                        <div class="add-btn">
+                            <div class="add1btn">+</div>
+                        </div>
+                    </div>
+                    <div class="add-product-to-cart-container">
+                        <button class="add-product-to-cart" style="margin-top: 5%">Köp</button>
+                    </div>
+                    </div>
+            </div>
+        </div>  
+        </div>            
+    `);
+  });
 
+  // add function to cartbtn
+  $("#cartDropdown").on("click", function () {
+    renderCart();
+  });
 
-    $("#cartDropdown").on("click", function () {
-        renderCart();
-    });
-
-    $.each($(".add-product-to-cart"), function (index, value) {
+  // add function to "köp" btn
+  $.each($(".add-product-to-cart"), function (index, value) {
         value.addEventListener("click", (e) => {
             products.forEach((product) => {
-                if (
-                    product.sku == e.target.parentElement.parentElement.parentElement.id
-                ) {
-                    product.inCart = Number(
-                        e.target.parentElement.parentElement.children[3].children[1]
-                            .children[0].value
-                    );
-                    if (product.inCart < 1) {
+
+                if (product.sku == e.target.parentElement.parentElement.parentElement.id) {
+                        product.inCart = Number(e.target.parentElement.parentElement.children[4].children[1].children[0].value);
+
+                if (product.inCart < 1) {
                         swal("Minsta tillåtet antal är 1", "", "warning");
-                    } else if (product.inCart.toString().includes(".")) {
+
+                } else if (product.inCart.toString().includes(".")) {
                         swal("Du måste ange heltal", "", "warning");
-                    } else {
-                        e.target.parentElement.parentElement.children[3].children[1].children[0].value = 1;
+
+                } else {
+                        e.target.parentElement.parentElement.children[4].children[1].children[0].value = 1;
                         let isToMany = false;
                         isToMany = saveProductToCart(product);
 
                         if (isToMany == false) {
-                            saveTotalPrice(product);
-                            updateTotalCartUI();
-                            setCartAvailability();
-
-                            $.each($('.amount'), function (index, value) {
-                                value.addEventListener('focusout', (e) => {
-                                    if (e.target.value == 0 || isNaN(e.target.value)) {
-                                        e.target.value = 1
-                                    }
-                                })
-                            })
-
-                            $.each($('.add1btn'), function (index, value) {
-                                value.addEventListener('click', (e) => {
-                                    availableProducts.forEach(product => {
-
-                                        if (product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id) {
-                                            let currentValue = Number(e.target.parentElement.parentElement.children[1].children[0].value) + 1;
-                                            if (currentValue < 99) {
-                                                e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
-                                            }
-                                        }
-                                    })
-                                })
-                            })
-                            $.each($('.reduce1btn'), function (index, value) {
-                                value.addEventListener('click', (e) => {
-                                    availableProducts.forEach(product => {
-                                        if (product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id) {
-
-                                            let currentValue = Number(e.target.parentElement.parentElement.children[1].children[0].value) - 1;
-                                            if (currentValue >= 1) {
-                                                e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
-                                            }
-                                        }
-                                    })
-
-                                })
-                            });
+                        saveTotalPrice(product);
+                        updateTotalCartUI();
+                        setCartAvailability();
                         }
-                        ;
-                    }
-                    ;
                 }
-            })
-        })
+                }
+            });
+        });
+  });
+
+    $.each($(".amount"), function (index, value) {
+        value.addEventListener("focusout", (e) => {
+            if (e.target.value == 0 || isNaN(e.target.value)) {
+                e.target.value = 1;
+            }
+        });
     });
-                
 
+    $.each($(".add1btn"), function (index, value) {
+        value.addEventListener("click", (e) => {
+            products.forEach((product) => {
 
-        $.each($(".amount"), function (index, value) {
-            value.addEventListener("focusout", (e) => {
-                if (e.target.value == 0 || isNaN(e.target.value)) {
-                    e.target.value = 1;
+                if (product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id) {
+                    let currentValue = Number(e.target.parentElement.parentElement.children[1].children[0].value) + 1;
+
+                    if (currentValue < 100) {
+                        e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
+                    }
                 }
             });
         });
+    });
 
-        $.each($(".add1btn"), function (index, value) {
-            value.addEventListener("click", (e) => {
-                products.forEach((product) => {
-                    if (
-                        product.sku ==
-                        e.target.parentElement.parentElement.parentElement.parentElement.id
-                    ) {
-                        let currentValue =
-                            Number(
-                                e.target.parentElement.parentElement.children[1].children[0].value
-                            ) + 1;
-                        if (currentValue < 100) {
-                            e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
-                        }
+    $.each($(".reduce1btn"), function (index, value) {
+        value.addEventListener("click", (e) => {
+            products.forEach((product) => {
+
+                if (product.sku == e.target.parentElement.parentElement.parentElement.parentElement.id) {
+                    let currentValue = Number(e.target.parentElement.parentElement.children[1].children[0].value) - 1;
+
+                    if (currentValue >= 1) {
+                        e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
                     }
-                });
+                }
             });
         });
-        $.each($(".reduce1btn"), function (index, value) {
-            value.addEventListener("click", (e) => {
-                products.forEach((product) => {
-                    if (
-                        product.sku ==
-                        e.target.parentElement.parentElement.parentElement.parentElement.id
-                    ) {
-                        let currentValue =
-                            Number(
-                                e.target.parentElement.parentElement.children[1].children[0].value
-                            ) - 1;
-                        if (currentValue >= 1) {
-                            e.target.parentElement.parentElement.children[1].children[0].value = currentValue;
-                        }
-                    }
-                });
-            });
-        });
+    });
 
-        //------------------------------- product-card-modal ----------------------------------\\
+    const renderProductPopUpModal = (element) => {
+        
+        let imgSrc = element.children[0].children[0].src
+        let title = element.children[1].children[0].innerText
+        let desc = element.children[1].children[3].id
+        let volym = element.children[1].children[2].id + element.children[1].id
+        let price = element.children[1].children[1].innerText
+        let compPrice = element.children[1].children[2].innerText
 
-        $.each($(".card-text"), function (index, value) {
-            value.addEventListener("click", () => {
-                $("#product-card-modal").modal("show");
-            });
-        });
-
-        $.each($(".product-card-img"), function (index, value) {
-            value.addEventListener("click", () => {
-                $("#product-card-modal").modal("show");
-            });
-        });
+        $('#product-pop-up-img').attr("src", imgSrc)
+        $('#product-pop-up-title').text(title)
+        $('#product-pop-up-unit').text(volym)
+        $('#product-pop-up-desc').text(desc)
+        $('#product-pop-up-price').text(price)
+        $('#product-pop-up-comp-price').text(compPrice)
     }
+
+    $.each($(".card-text"), function (index, value) {
+        value.addEventListener("click", () => {
+        renderProductPopUpModal(value.parentElement.parentElement)
+        $("#product-card-modal").modal("show");
+        });
+    });
+
+    $.each($(".product-card-img"), function (index, value) {
+        value.addEventListener("click", () => {
+        renderProductPopUpModal(value.parentElement.parentElement)
+        $("#product-card-modal").modal("show");
+        });
+    });
+}
+    
 
     /**
      * Checks if product is in cart and increment quantity by 1,
@@ -455,23 +410,33 @@ function renderProducts(list) {
             : localStorage.setItem("cartTotalPrice", product.price * product.inCart);
     }
 
-    function updateTotalCartUI() {
-        $("#total-items-in-cart").text(
-            JSON.parse(localStorage.getItem("cartQuantity"))
-        );
+
+function updateTotalCartUI(){
+  $("#total-items-in-cart").show();
+  $('#total-items-in-cart').text(JSON.parse(localStorage.getItem("cartQuantity")))
+}
+
+
+function hideOrShowAdminView() {
+  adminview.hide();
+  let loggedIn = JSON.parse(sessionStorage.getItem("customer"));
+    if (loggedIn == undefined) {
+    adminview.hide();
+  } else {
+    if (loggedIn.isAdmin) {
+      $("#checkOutLink").attr("href", "./pages/checkout/");
+      adminview.show();
     }
+  }
+}
 
 //------------------------------------- login ----------------------------------\\
-
 
     $("#login-button").click(() => {
         let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
 
-
-        axios
-            .get(url)
+        axios.get(url)
             .then((response) => {
-
                 if (response.status !== 200) {
                     swal("Fel email eller lösenord", "", "warning");
                     emailToCheck.val("");
@@ -482,10 +447,10 @@ function renderProducts(list) {
                     if (response.data.isAdmin == true) {
                         location.replace("admin/index.html");
                     } else {
+
                         loginModal.modal("hide");
                         navLoginBtn.text("Logga ut");
                         myAccountMenu.show();
-
                     }
                 }
             })
@@ -495,11 +460,6 @@ function renderProducts(list) {
     });
 
 //---------------------------------- Regristration ---------------------------------\\
-
-
-
-
-
 
     let firstName = $("#register-first-name"),
         lastName = $("#register-last-name"),
@@ -523,23 +483,21 @@ function renderProducts(list) {
         CITY_ERROR_MSG = $("#CITY_ERROR_MSG"),
         WRONNG_PASSWORD_ERROR_MSG = $("#WRONG_PASSWORD_ERROR_MSG"),
         NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $("#NEW_PASSWORD_NOT_MATCH_ERROR_MSG"),
-        NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $(
-            "#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG"
-        );
+        NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $("#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG");
 
     /**
      * Eventlistener
      */
 
- firstName.focusout(()=>{
-  let bool = true
-  bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG)
-});
+    firstName.focusout(()=>{
+    let bool = true
+    bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG)
+    });
 
-lastName.focusout(()=>{
-  let bool = true
-  bool = checkForInput(testForName, lastName, bool, LASTNAME_ERROR_MSG)
-});
+    lastName.focusout(()=>{
+    let bool = true
+    bool = checkForInput(testForName, lastName, bool, LASTNAME_ERROR_MSG)
+    });
 
     regristrationEmail.focusout(()=>{
         let bool = true
@@ -548,7 +506,7 @@ lastName.focusout(()=>{
 
     phoneNumber.focusout(()=>{
         let bool = true
-        bool = checkForInput(testForNumbersOnly,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
+        bool = checkForInput(testForPhoneNumber,phoneNumber, bool,PHONE_NUMBER_ERROR_MSG)
     });
 
     address.focusout(()=>{
@@ -578,7 +536,7 @@ lastName.focusout(()=>{
             let data = {
                 firstName: firstName.val(),
                 lastName: lastName.val(),
-                phoneNumber: phoneNumber.val(),
+                phoneNumber: phoneNumber.val().replaceAll(' ','').replaceAll('-',''),
                 email: regristrationEmail.val(),
                 streetAddress: address.val(),
                 password: newPassword.val(),
@@ -645,21 +603,11 @@ function validateForm() {
   bool = checkForInput(testForName, firstName, bool, FIRSTNAME_ERROR_MSG);
   bool = checkForInput(testForName, lastName, bool, LASTNAME_ERROR_MSG);
   bool = checkForInput(testForEmail, regristrationEmail, bool, EMAIL_ERROR_MSG);
-  bool = checkForInput(
-    testForNumbersOnly,
-    phoneNumber,
-    bool,
-    PHONE_NUMBER_ERROR_MSG
-  );
+  bool = checkForInput(testForPhoneNumber,phoneNumber,bool,PHONE_NUMBER_ERROR_MSG);
   bool = checkForInput(testForAddress, address, bool, ADDRESS_ERROR_MSG);
   bool = checkForInput(testForZipCode, zipCode, bool, ZIPCODE_ERROR_MSG);
   bool = checkForInput(testForOnlyText, city, bool, CITY_ERROR_MSG);
-  bool = checkForInput(
-    testForPassword,
-    newPassword,
-    bool,
-    WRONNG_PASSWORD_ERROR_MSG
-  );
+  bool = checkForInput(testForPassword,newPassword, bool,WRONNG_PASSWORD_ERROR_MSG);
 
   bool = checkPassword(bool);
   return bool;
