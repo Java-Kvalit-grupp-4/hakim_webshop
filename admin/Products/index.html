@@ -177,7 +177,7 @@
           <div class="row gx-0 gx-lg-5">
             <div class="col-lg-6">
               <div class="form-check mb-4">
-                <input class="form-check-input me-3" type="checkbox" value="" id="isProductHidden">
+                <input class="form-check-input me-3" type="checkbox" value="false" id="isProductHidden">
                 <label class="form-check-label" for="isProductHidden">Dölj produkten</label>
             </div>
               <label for="titleInput" class="form-label">Produktnamn</label>
@@ -216,41 +216,6 @@
               </div>
               <label for="category" class="form-label mt-3">Kategori</label>
               <div class="col" id="column"></div>
-            </div>
-
-            <div class="col-lg-6 mt-4 mt-lg-0">
-
-              <label for="weightInput" class="form-label">Artikelnummer</label>
-              <input type="text" class="form-control mb-3" id="sku" maxlength="50" />
-
-              <label for="priceInput" class="form-label">Pris</label>
-              <input type="text" class="form-control mb-3" id="price" maxlength="50"/>
-              <label for="lagerInput" class="form-label">Lagerstatus</label>
-              <input type="text" class="form-control mb-3" id="lager" maxlength="5"/>
-              <div class="col">
-                <label for="img" class="form-label">Produktbild</label>
-              </div>
-              <div class="container text-center mt-3">
-              <img id="img" src="https://picsum.photos/300" alt="img" /></div>
-              <div class="col text-end mt-5">
-              <button class="btn btn-secondary mt-3" id="removeImageButton">
-                Ta bort uppladdad bild
-              </button></div>
-              <div class="input-group mb-3 mt-5">
-                <input
-                  type="file"
-                  accept=".jpg,.jpeg,.png,.gif"
-                  class="form-control"
-                  id="fileUpload"
-                  maxlength="50"
-                />
-                <button class="btn btn-secondary" id="uploadButton">
-                  Ladda upp
-                </button>
-                <!-- <label class="input-group-text" for="inputGroupFile02"
-                >Ladda upp</label
-              > -->
-              </div>
               <div class="col">
                 <label for="tagInput" class="form-label mt-3"
                   >Lägg till söktagg</label
@@ -274,14 +239,73 @@
                   Spara söktagg
                 </button>
               </div>
+              <div class="col-12">
+                <label for="category" class="form-label mt-3">Tags</label>
+                <div id="tagColumn"></div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 mt-4 mt-lg-0">
+
+              <label for="priceInput" class="form-label">Pris</label>
+              <input type="text" class="form-control mb-3" id="price" maxlength="50"/>
+              <label for="lagerInput" class="form-label">Lagerstatus</label>
+              <input type="text" class="form-control mb-3" id="lager" maxlength="5"/>
+              <div class="col">
+                <label for="img" class="form-label">Produktbild</label>
+              </div>
+              <div class="container text-center mt-3">
+              <img id="img" src="" alt="img" /></div>
+              <div class="col text-end mt-5">
+              <button class="btn btn-secondary mt-3" id="removeImageButton">
+                Ta bort uppladdad bild
+              </button></div>
+              <div class="input-group mb-3 mt-5">
+                <input
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.gif"
+                  class="form-control"
+                  id="fileUpload"
+                  maxlength="50"
+                />
+                <button class="btn btn-secondary" id="uploadButton">
+                  Ladda upp
+                </button>
+                <!-- <label class="input-group-text" for="inputGroupFile02"
+                >Ladda upp</label
+              > -->
+              </div>
+              <div class="row">
+                <div class="col-12 mt-3">
+                  <label for="weight_volume" class="form-label">Vikt/Volym</label>
+                </div>
+              </div>
               <div class="row gx-0">
-                <div class="col-7">
-                  <label for="category" class="form-label mt-3">Tags</label>
-                  <div id="tagColumn"></div>
+                <div class="col-6 mt-3">
+                  <input type="text" id="weight_volume" class="form-control">
+                </div>
+                <div class="col-4 dropdown m-3 sorting-dropdown">
+                  <select id="unit" class="form-select">
+                    <option value="ml" id="ml">ml</option>
+                    <option value="cl" id="cl">cl</option>
+                    <option value="l" id="l">l</option>
+                    <option value="gr" id="gr">gr</option>
+                    <option value="hg" id="hg">hg</option>
+                    <option value="kg" id="kg">kg</option>
+                 </select>
+                </div>
+              </div>
+              
+              <div class="row gx-0 mt-5">
+                
+                <div class="col-5 mt-3 text-end">
+                  <button id="saveChanges" class="btn btn-secondary mb-3">
+                    Spara ändringar
+                  </button>
                 </div>
                 <div class="col-5 mt-3 text-end">
-                  <button id="saveChanges" class="btn btn-secondary">
-                    Spara ändringar
+                  <button id="new-product" class="btn btn-secondary">
+                    Skapa ny produkt
                   </button>
                 </div>
               </div>
@@ -298,19 +322,19 @@
     <script>
         let customer = JSON.parse(sessionStorage.getItem('customer'))
         console.log(customer)
-          if(customer==null || customer== undefined || customer.isAdmin==false){
+          /* if(customer==null || customer== undefined || customer.isAdmin==false){
             window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
-          }
+          } */
   </script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../js/admin-products.js"></script>
   </body>
 </html>
