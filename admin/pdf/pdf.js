@@ -1,6 +1,7 @@
 const pdfButton = document.getElementById("generate-pdf")
 
 pdfButton.addEventListener('click', () => {
+    renderOrder()
     let pdf = document.getElementById('pdf')
     html2pdf(pdf).save()
 }); 
@@ -10,18 +11,27 @@ dued.addEventListener('click', () => {
     dueDate()
 });
 
-function renderOrder (orders) {
-    let order = $('order-container')
+
+function renderOrder () {
+    let orders = ['hej','ska','gda']
+    console.log(orders)
+    let order = $('#line-items')
     order.html('')
-    order.array.forEach(element => {
+    orders.forEach(element => {
         order.append(`
-        <div class="row pt-2 line-item-border">
-            <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${element.sku}</p></div>
-            <div class="col col-xs-2 col-lg-4 cart-line-item"><p>${element.title}</p></div>
-            <div class="col col-xs-1 col-lg-1 cart-line-item"><p>${element.price.toFixed(2)}</p></div>
-            <div class="col col-xs-2 col-lg-2 cart-line-item"><p line-item-total-quantity>${element.inCart}</p></div>
-            <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(element.price * element.inCart).toFixed(2)} kr</p></div>
-        </div>
+        <tr>
+            <td class="product">${element.sku}dfsfsdf</td>
+            <td class="desc">${element.title}</td>
+            <td>${element.price.toLocaleString("sv-SE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}/td>
+            <td>${element.inCart}</td>
+            <td>${(element.price * element.inCart).toLocaleString("sv-SE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })} kr</td>
+        </tr>
         `)
     });
 }
@@ -33,14 +43,20 @@ const reverse = (s) => {
 
 let totalPrice = 0;
     $.each($('.line-item-total-price'),(index, e) => totalPrice += parseFloat(e.innerText))
-    $('#order-total-price').text(totalPrice.toFixed(2));
+    $('#order-total-price').text(totalPrice.toLocaleString("sv-SE", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }));
 
 function totalVat () {
     let vat = $('vat')
     vat.html('')
     vat.forEach(element => {
         vat.append(`
-        <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(element.price * element.inCart).toFixed(2) * 0.1071}</p></div>
+        <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(element.price * element.inCart).toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }) * 0.1071}</p></div>
         `)
     });
 }
@@ -68,7 +84,10 @@ function pricePlusShipping(){
     total.html('')
     total.forEach(element => {
         total.append(`
-        <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(element.price * element.inCart).toFixed(2) + 49}</p></div>
+        <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(element.price * element.inCart).toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }) + 49}</p></div>
         `)
     });
 }
@@ -93,11 +112,8 @@ function renderCustomerInfo() {
 
 const btn = document.querySelector("#generate-btn");
 
-let add = document.getElementById('line-items')
-
 btn.addEventListener('click', () => {
-
-    let array = ['hej','ska','gda']
+    renderOrder()
 
     document.getElementById('orderNumber').innerText = '3214-3213'
     document.getElementById('fullName').innerText = 'Kalle Anka'
@@ -105,17 +121,6 @@ btn.addEventListener('click', () => {
     document.getElementById('email').innerText = 'Adress'
     document.getElementById('invoiceDate').innerText = invoiceDate()
     document.getElementById('dueDate').innerText = dueDate()
-
-
-    array.forEach(element => {
-       add.innerHTML += `<tr>
-       <td class="product">${element}</td>
-       <td class="desc">PRODUKTNAMN</td>
-       <td>PRIS / KR</td>
-       <td>ANTAL</td>
-       <td>TOTAL / KR</td>
-   </tr>`
-    });
 
     let element = document.getElementById('pdf');
     let opt = {
