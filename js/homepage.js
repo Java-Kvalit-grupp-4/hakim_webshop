@@ -15,6 +15,8 @@ let emailToCheck = $("#login-email"),
 
 let adminview = $("#admin-view-link");
 
+let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/'
+
 //const addUserUrl = "http://localhost:8080/users/add"
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
 
@@ -31,9 +33,27 @@ $("#checkout-button").click(function () {
   if (customer == null || customer == undefined) {
     swal("Du måste vara inloggad för att lägga beställning", "", "warning");
   } else {
-    $("#checkOutLink").attr("href", "./pages/checkout/");
+    fetchCustomerInfo(customer, "./pages/checkout/")
   }
 });
+
+function fetchCustomerInfo(customer, openPage){
+  axios
+    .get(getCustomerUrl+customer.email)
+    .then((response) => {
+      console.log(response.data)
+      setCustomer(response.data)
+      location.replace(openPage)
+    })
+    .catch((err) => {
+      alert(err);
+    });
+}
+
+function setCustomer(customer){
+  sessionStorage.setItem("customer", JSON.stringify(customer))
+}
+
 
 $("#show-password-button").click(function () {
     if ($(this).text() == "Visa") {
@@ -59,6 +79,10 @@ $("#login-btn").click(function () {
     }
 });
 
+$("#myAccountDropdown").click(function(){
+  let customer = JSON.parse(sessionStorage.getItem("customer"));
+  fetchCustomerInfo(customer, "pages/my-account/my-account.html")
+})
 
 $("form").submit(false);
 
