@@ -131,14 +131,14 @@ $(document).ready(() => {
   }
 
   function fillOrderTable(customerOrders){
-      console.log(customerOrders)
+
       if(customerOrders!=null){
         sessionStorage.setItem("customerOrders",JSON.stringify(customerOrders));
       
         customerOrders.forEach(orders => {
                 let dateFromOrder = new Date(orders.timeStamp);
                 let orderDate = dateFromOrder.toISOString().substring(0,10);
-                console.log(orderDate)
+
                 //let orderNumber = (orders.id +"").substring(0,6)
               
                 let isPaid = "Obetalad";
@@ -280,7 +280,6 @@ $(document).ready(() => {
 
     axios.post(updatePasswordUrl,updatePassword)
     .then(respone => {
-      console.log(respone);
       if(respone.status == 200){
         swal("Nytt lösenord sparat", "", "success")
 

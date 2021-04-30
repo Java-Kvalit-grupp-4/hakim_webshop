@@ -25,7 +25,6 @@ $(function () {
       aboutInfo: response[0].aboutInfo,
       imageUrl: response[0].imageUrl,
     };
-    console.log(informationObject);
 
     //This fetches images from local directory. Will not work on Heroku
     // let imageSource = "http://localhost:8080/api/v1/image?imageUrl=";
@@ -34,13 +33,9 @@ $(function () {
     let imageLink = imageSource;
     response.forEach((element) => {
       imageLink += element.imageUrl;
-      console.log(imageSource);
-      console.table(element);
-      console.log(element.openingHours);
       const openingHours = element.openingHours.replaceAll("/", "\n");
       const deviatingHours = element.deviatingHours.replaceAll("/", "\n");
       const aboutInfo = element.aboutInfo.replaceAll("/", "\n");
-      console.log(openingHours);
       $("#opening-hours").text(`${openingHours}`);
       $("#deviating-hours").text(`${deviatingHours}`);
       $("#info-address:text").val(`${element.streetAddress}`);
@@ -57,8 +52,6 @@ $(function () {
   $('input[type="file"]').change(function (e) {
     let fileName = e.target.files[0].name;
     let fileData = e.target.files[0];
-    console.log(fileData);
-    console.log('The file "' + fileName + '" has been selected.');
   });
 
   $("#uploadButton").on("click", function () {
@@ -78,7 +71,6 @@ $(function () {
         ).then(() => loadPage());
       })
       .catch((error) => {
-        console.log(error.response.data);
         swal("Något fick fel!", "Vänligen försök igen", "warning");
       });
   });
