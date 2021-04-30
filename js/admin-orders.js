@@ -46,16 +46,16 @@ function saveChosenOrder(id) {
 }
 
 function renderLineItems() {
-  console.log("rendering");
+
   // let order;
   let chosenId = Number(sessionStorage.getItem("chosenOrder"));
   let totalCost = 0;
-  console.log(chosenId);
+
   $("#product-container").html("");
   orders.forEach((order) => {
     if (order.id == chosenId) {
       activeOrder = order;
-      console.log(order);
+
       order.lineItems.forEach((lineItem) => {
         totalCost += Number(lineItem.itemPrice) * Number(lineItem.quantity);
         $("#product-container").append(`
@@ -90,8 +90,6 @@ function renderLineItems() {
 }
 
 function renderUserData() {
-  console.log("user data");
-  console.log(activeOrder.user.firstName);
   $("#customer-first-name").val(activeOrder.user.firstName);
   $("#customer-last-name").val(activeOrder.user.lastName);
   $("#customer-street-address").val(activeOrder.user.streetAddress);
