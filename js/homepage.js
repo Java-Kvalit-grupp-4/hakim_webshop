@@ -17,7 +17,6 @@ let adminview = $("#admin-view-link");
 
 //const addUserUrl = "http://localhost:8080/users/add"
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
-//const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
 
 /**
  * Eventlistener
@@ -70,19 +69,20 @@ $(document).ready(() => {
 
 })
 
-    function load() {
-        //const productsUrl = './TestData/test_data_products_v1.2.JSON'
-        const productsUrl = 'http://localhost:8080/products'
-        //const productsUrl = 'https://hakimlivs.herokuapp.com/products'
-       axios.get(productsUrl)
-       .then(response => {
-         renderCategories(response.data)
-       })
-       .catch(err => {
-         alert(err)
-       }) 
-    }
+function load() {
+    //const productsUrl = './TestData/test_data_products_v1.2.JSON'
+    //const productsUrl = 'http://localhost:8080/products'
+    const productsUrl = "https://hakimlivs.herokuapp.com/products";
 
+    axios
+        .get(productsUrl)
+        .then((response) => {
+            renderCategories(response.data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
+}
 
 function renderCategories(data) {
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
@@ -132,11 +132,10 @@ function renderCategories(data) {
     $("#sidomeny button").on("click", function () {
         let categoryName = $(this).attr("id");
         let selectedCategoryList = [];
-
         availableProducts.forEach((product) => {
             if (categoryName === "all") {
                 $("#products").empty();
-                renderProducts(products);
+                renderProducts(availableProducts);
                 localStorage.setItem("categoryList", JSON.stringify(products));
             } else {
                 let currentProduct = product;
