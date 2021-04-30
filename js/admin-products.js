@@ -288,6 +288,8 @@ function removeIfUnchecked(value) {
 //--------------------- CREATE NEW PRODUCT ------------------------------\\
 
 let imageStringForProduct;
+let weightVolume;
+let unit;
 
 const productImageUpload = (fileInputField) => {
     let formData = new FormData();
@@ -304,28 +306,47 @@ const productImageUpload = (fileInputField) => {
           },
         })
         .then((resp) => {
-          console.log(resp);
           swal("Ny bild uppladdad", "Uppladdningen lyckades", "success")
             .then(imageStringForProduct = `${resp.data.downloadUrl}/${resp.data.fileName}`)
         })
-        .catch(() => {
-          swal("Något fick fel!", "Vänligen försök igen", "warning");
+        .catch((err) => {
+          if(err.response.status == 500){
+            swal("Bildnamn finns redan!", "Ändra bildnamn eller ladda upp en annan bild", "warning");
+          }else{
+            swal("Något fick fel!", "Vänligen försök igen", "warning");
+          }   
         });
     }
 }
 
+// eventlisteners
+
+// create product
 $('#new-product').click(() => {
   if(imageStringForProduct == undefined){
     swal('Varning', 'Vill du verkligen skapa en ny produkt utan en produktbild?', 'warning')
   }
   console.log(imageStringForProduct);
-
+  createProductInDataBase()
 })
+
+// setting the unit on change 
+$("#unit").change(function() {
+  unit =  $(this).children(":selected").attr("id");
+  console.log(unit);
+});
+
+$('#weight_volume').focusout(function(){
+  weightVolume = $('#weight_volume').val()
+  console.log(weightVolume);
+});
+ 
+
 
 const createProductObjekt = () => {
 
   let productCategories = createCategoriesForProduct();
-  let isAvailable = checkIfAvailable();
+  let isAvailable = true;
 
   return {
     
@@ -334,8 +355,9 @@ const createProductObjekt = () => {
     image: imageStringForProduct,
     isAvailable: isAvailable,
     price: $("#price").val(),
+    unit: unit,
+    weightVolume: weightVolume,
     quantity: $("#lager").val(),
-    
     brand: {
       name: $("#brand").val(),
     },
@@ -343,9 +365,6 @@ const createProductObjekt = () => {
 
     categories: productCategories
   };
-
-      
-
 }
 
 const createCategoriesForProduct = () => {
@@ -366,7 +385,22 @@ const createTagsForProduct = () => {
 }
 
 const checkIfProductIsAvalible = () => {
-  $("#isProductHidden").is(':checked') ? return true : return false
+  
+}
+
+const createProductInDataBase = () => {
+
+  const newProduct = createProductObjekt()
+
+  axios.post("http://localhost:8080/products/add",  newProduct)
+        .then((resp) => {
+          console.log(resp);
+          console.log("Done!")
+        })
+        .catch(() => {
+          alert('Något fick fel!','Vänligen försök igen', 'warning')
+        })
+      
 }
 
 

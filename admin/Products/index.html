@@ -216,6 +216,33 @@
               </div>
               <label for="category" class="form-label mt-3">Kategori</label>
               <div class="col" id="column"></div>
+              <div class="col">
+                <label for="tagInput" class="form-label mt-3"
+                  >Lägg till söktagg</label
+                >
+              </div>
+              <div class="input-group mb-3">
+                <input
+                  id="tagInput"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  aria-label="New tag"
+                  aria-describedby="tag-input"
+                  maxlength="50"
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="tagSave"
+                >
+                  Spara söktagg
+                </button>
+              </div>
+              <div class="col-12">
+                <label for="category" class="form-label mt-3">Tags</label>
+                <div id="tagColumn"></div>
+              </div>
             </div>
 
             <div class="col-lg-6 mt-4 mt-lg-0">
@@ -251,34 +278,29 @@
                 >Ladda upp</label
               > -->
               </div>
-              <div class="col">
-                <label for="tagInput" class="form-label mt-3"
-                  >Lägg till söktagg</label
-                >
-              </div>
-              <div class="input-group mb-3">
-                <input
-                  id="tagInput"
-                  type="text"
-                  class="form-control"
-                  placeholder=""
-                  aria-label="New tag"
-                  aria-describedby="tag-input"
-                  maxlength="50"
-                />
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  id="tagSave"
-                >
-                  Spara söktagg
-                </button>
+              <div class="row">
+                <div class="col-12 mt-3">
+                  <label for="weight_volume" class="form-label">Vikt/Volym</label>
+                </div>
               </div>
               <div class="row gx-0">
-                <div class="col-12">
-                  <label for="category" class="form-label mt-3">Tags</label>
-                  <div id="tagColumn"></div>
+                <div class="col-6 mt-3">
+                  <input type="text" id="weight_volume" class="form-control">
                 </div>
+                <div class="col-4 dropdown m-3 sorting-dropdown">
+                  <select id="unit" class="form-select">
+                    <option value="ml" id="ml">ml</option>
+                    <option value="cl" id="cl">cl</option>
+                    <option value="l" id="l">l</option>
+                    <option value="gr" id="gr">gr</option>
+                    <option value="hg" id="hg">hg</option>
+                    <option value="kg" id="kg">kg</option>
+                 </select>
+                </div>
+              </div>
+              
+              <div class="row gx-0 mt-5">
+                
                 <div class="col-5 mt-3 text-end">
                   <button id="saveChanges" class="btn btn-secondary">
                     Spara ändringar
