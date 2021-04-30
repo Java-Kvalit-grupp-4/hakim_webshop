@@ -206,7 +206,7 @@ function loadProducts() {
 
       alert("Produkten har sparats");
 
-        axios.post("https://hakimlivs.herokuapp.com/products/upsertProduct",  productObject  )
+        axios.post("http://localhost:8080/products/upsertProduct",  productObject  )
         .then(() => {
         })
         .catch(() => {
@@ -302,7 +302,7 @@ const productImageUpload = (fileInputField) => {
     if (imagefile != undefined) {
       formData.append("file", imagefile, fileName);
       axios
-        .post("https://hakimlogintest.herokuapp.com/v1/upload/db", formData, {
+        .post("http://localhost:8080/v1/upload/db", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
