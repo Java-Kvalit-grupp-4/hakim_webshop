@@ -79,7 +79,7 @@
     ],
     "orderComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
     "status": {
-      "statusId": 4,
+      "statusId": 3,
       "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },
@@ -110,9 +110,9 @@
     "orderTimestamp": 1,
     "orderComment": "Kunden ringde och ville ha ett paket havregryn till, var jäkligt trevlig!",
     "totalCost": 86,
-    "isPaid": true,
+    "isPaid": false,
     "status": {
-      "statusId": 4,
+      "statusId": 3,
       "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },
@@ -200,7 +200,7 @@
     "totalCost": 86,
     "isPaid": true,
     "status": {
-      "statusId": 4,
+      "statusId": 3,
       "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },
@@ -288,7 +288,7 @@
     "totalCost": 86,
     "isPaid": true,
     "status": {
-      "statusId": 4,
+      "statusId": 3,
       "statusTimestamp": "2021-01-20 09:05:03",
       "type": "Skickad"
     },

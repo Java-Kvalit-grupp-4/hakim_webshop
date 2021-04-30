@@ -74,7 +74,7 @@ function load(){
             }
         })
         .catch(err =>{
-            alert("Server fel!" + err)
+            alert("Serverfel!" + err)
         })
 }
 
