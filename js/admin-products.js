@@ -419,7 +419,7 @@ const createProductInDataBase = () => {
 $('#fileUpload').change(function() {
   let reader = new FileReader();
   console.log(this.files[0].size);
-  if(this.files[0].size > 25000){
+  if(this.files[0].size > 250000){
     swal('Bilden är för stor!', 'max gräns är 250,0 kb', 'warning')
   }else{
     reader.onload = (e) => $('#img').attr('src', e.target.result)
