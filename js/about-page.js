@@ -28,7 +28,6 @@ $(function () {
   function renderInformation(response) {
       let deviatingHours = response[0].deviatingHours.replaceAll("/", "<br>");
       let aboutInfo = response[0].aboutInfo.replaceAll("/", "<br>");
-      console.log(response);
 
       $("#deviating-hours").html(deviatingHours)
       $("#about-text-hakim-livs").html(aboutInfo);
