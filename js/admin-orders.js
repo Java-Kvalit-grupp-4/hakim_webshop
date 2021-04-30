@@ -103,9 +103,21 @@ function renderLineItems() {
       maximumFractionDigits: 2,
     })}`
   );
-  document.getElementById("order-status").value = activeOrder.orderStatus.id;
-  document.getElementById("payment-status").value = activeOrder.isPaid;
-  document.getElementById("customer-comment").value = activeOrder.orderComment;
+
+  console.log(activeOrder.orderChanges);
+  const $orderChanges = $("#order-changes");
+  $orderChanges.html("");
+  activeOrder.orderChanges.forEach(change => {
+    $orderChanges.prepend(`<li class="list-group-item">${change.changeDateTime.replace("T", " ").substring(2, 16)} 
+    <p>${change.description}</p></li>`)
+  });
+
+  //Checks for nullish value
+  const sentDateText = activeOrder.sentTimestamp ? `${activeOrder.sentTimestamp.replace("T", " ").substring(2, 16)}` : "Inte skickad";
+  $("#order-sent-date-field").text(sentDateText);
+  $("#order-status").val(activeOrder.orderStatus.id);
+  $("#payment-status").val(activeOrder.isPaid);
+  $("#customer-comment").val(activeOrder.orderComment);
 }
 
 function renderUserData() {
