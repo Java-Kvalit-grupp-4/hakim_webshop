@@ -279,3 +279,105 @@ function removeIfUnchecked(value) {
   console.log(v);
   console.log(value);
 }
+
+
+
+
+/* "https://hakimlivs.herokuapp.com/api/v1/upload/db" */
+
+//--------------------- CREATE NEW PRODUCT ------------------------------\\
+
+let imageStringForProduct;
+
+const productImageUpload = (fileInputField) => {
+    let formData = new FormData();
+    let fileName = fileInputField.prop('files')[0].name.replaceAll(' ','')
+    let imagefile = fileInputField.prop('files')[0]
+
+    if (imagefile != undefined) {
+      formData.append("file", imagefile, fileName);
+      console.log(formData);
+      axios
+        .post("http://localhost:8080/api/v1/upload/db", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((resp) => {
+          console.log(resp);
+          swal("Ny bild uppladdad", "Uppladdningen lyckades", "success")
+            .then(imageStringForProduct = `${resp.data.downloadUrl}/${resp.data.fileName}`)
+        })
+        .catch(() => {
+          swal("Något fick fel!", "Vänligen försök igen", "warning");
+        });
+    }
+}
+
+$('#new-product').click(() => {
+  if(imageStringForProduct == undefined){
+    swal('Varning', 'Vill du verkligen skapa en ny produkt utan en produktbild?', 'warning')
+  }
+  console.log(imageStringForProduct);
+
+})
+
+const createProductObjekt = () => {
+
+  let productCategories = createCategoriesForProduct();
+  let isAvailable = checkIfAvailable();
+
+  return {
+    
+    title: $("#title").val(),
+    description: $("#description").val(),
+    image: imageStringForProduct,
+    isAvailable: isAvailable,
+    price: $("#price").val(),
+    quantity: $("#lager").val(),
+    
+    brand: {
+      name: $("#brand").val(),
+    },
+    tags: tags,
+
+    categories: productCategories
+  };
+
+      
+
+}
+
+const createCategoriesForProduct = () => {
+  let checkedCategories = [];
+  $("#column div").children().each(function () {
+      $(this).is(":checked") ? checkedCategories.push($(this).attr("id")) : null
+  });
+
+  let productCategory = [];
+  checkedCategories.forEach((element) => {
+    productCategory.push(element.name);
+  });
+  return productCategory;
+}
+
+const createTagsForProduct = () => {
+
+}
+
+const checkIfProductIsAvalible = () => {
+  $("#isProductHidden").is(':checked') ? return true : return false
+}
+
+
+
+// render the uploaded file to preview
+$('#fileUpload').change(function() {
+  let reader = new FileReader();
+  reader.onload = (e) => $('#img').attr('src', e.target.result)
+  reader.readAsDataURL(this.files[0]);   
+})
+
+$('#uploadButton').click(() => {
+  productImageUpload($('#fileUpload'))
+})
