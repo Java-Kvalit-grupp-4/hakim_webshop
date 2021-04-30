@@ -9,7 +9,6 @@ function loadProducts() {
   axios
     .get("https://hakimlivs.herokuapp.com/products/")
     .then((response) => {
-      console.log(response.data);
       if (response.status === 200) {
         products = response.data;
         render(products);
@@ -23,7 +22,6 @@ function loadProducts() {
   
   
   function render(products) {
-    //console.log($("#isProductHidden").attr("checked"));
       products.forEach((element) => {
       for (let i = 0; i < element.categories.length; i++) {
         let obj = element.categories[i];
@@ -53,8 +51,6 @@ function loadProducts() {
     $("#select").on("change", function () {
 
       let categoryName = $(this).val();
-      console.log(categoryName)
-
       let list = [];
       products.forEach((element) => {
         for (let i = 0; i < element.categories.length; i++) {
@@ -82,7 +78,6 @@ function loadProducts() {
      */
     $("#tagSave").click(function () {
       let input = $("#tagInput").val();
-      //console.log(input);
       $("#tagColumn").append(`
           <div id="${input}" class="form-check">
                       <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${input}" onchange="removeIfUnchecked(${input})">
@@ -131,7 +126,6 @@ function loadProducts() {
       $("#tagColumn").empty();
       $("#tagInput").val("");
       $("#isProductHidden").prop("checked", false);
-      console.log($("#isProductHidden").val());
 
       products.forEach((element) => {
         if (element.sku == productId) {
@@ -185,7 +179,6 @@ function loadProducts() {
       cat.forEach((element) => {
         productCategory.push({ name: element });
       });
-      //console.log(productCategory);
 
       let isAvailable = true;
 
@@ -210,12 +203,11 @@ function loadProducts() {
         categories: productCategory,
       };
 
-      console.log(productObject);
+
       alert("Produkten har sparats");
 
         axios.post("https://hakimlivs.herokuapp.com/products/upsertProduct",  productObject  )
         .then(() => {
-          console.log("Done!")
         })
         .catch(() => {
           alert('Något fick fel!','Vänligen försök igen', 'warning')
@@ -275,9 +267,9 @@ function showCategories() {
 
 function showTags(element) {
   let tags = element.tags;
- // console.log(tags);
+
   tags.forEach(e => {
-  //  console.log(e.name);
+
   $("#tagColumn").append(`
           <div id="${e.name}" class="form-check">
                       <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${e.name}" onchange="removeIfUnchecked(${e.name})">
@@ -289,8 +281,6 @@ function showTags(element) {
 
 function removeIfUnchecked(value) {
   let v = $(this).children;
-//  console.log(v);
-//  console.log(value);
 }
 
 
@@ -311,7 +301,6 @@ const productImageUpload = (fileInputField) => {
 
     if (imagefile != undefined) {
       formData.append("file", imagefile, fileName);
-      console.log(formData);
       axios
         .post("http://localhost:8080/api/v1/upload/db", formData, {
           headers: {
@@ -336,10 +325,9 @@ const productImageUpload = (fileInputField) => {
 
 // create product
 $('#new-product').click(() => {
-  if(imageStringForProduct == undefined){
-    swal('Varning', 'Vill du verkligen skapa en ny produkt utan en produktbild?', 'warning')
+  if(imageStringForProduct == undefined ||imageStringForProduct == "" ){
+    swal('Varning', 'Du kan inte skapa en produkt utan att ladda upp produktbild', 'warning')
   }else{
-    console.log(imageStringForProduct);
     createProductInDataBase()
   }
   
@@ -348,12 +336,10 @@ $('#new-product').click(() => {
 // setting the unit on change 
 $("#unit").change(function() {
   unit =  $(this).children(":selected").attr("id");
-  console.log(unit);
 });
 
 $('#weight_volume').focusout(function(){
   weightVolume = $('#weight_volume').val()
-  console.log(weightVolume);
 });
  
 // skapa productobject
@@ -362,7 +348,6 @@ const createProductObjekt = () => {
   let productCategories = createCategoriesForProduct();
   let isAvailable = checkIfProductIsAvalible();
 
-  console.log(tags);
   return {
     
     title: $("#title").val(),
@@ -371,7 +356,7 @@ const createProductObjekt = () => {
     isAvailable: isAvailable,
     price: $("#price").val(),
     unit: unit,
-    weightVolume: weightVolume,
+    volume: weightVolume,
     quantity: $("#lager").val(),
     brand: {
       name: $("#brand").val(),
@@ -418,6 +403,7 @@ const createProductInDataBase = () => {
   axios.post("http://localhost:8080/products/add",  newProduct)
         .then(() => {
           swal("Ny produkt tillagd", '', "success")
+          imageStringForProduct = ""
         })
         .catch(() => {
           alert('Något fick fel!','Vänligen försök igen', 'warning')
@@ -430,8 +416,12 @@ const createProductInDataBase = () => {
 // render the uploaded file to preview
 $('#fileUpload').change(function() {
   let reader = new FileReader();
-  reader.onload = (e) => $('#img').attr('src', e.target.result)
-  reader.readAsDataURL(this.files[0]);   
+  if(this.files[0].size > 25000){
+    swal('Bilden är för stor!', 'max gräns är 25,0 kb', 'warning')
+  }else{
+    reader.onload = (e) => $('#img').attr('src', e.target.result)
+  reader.readAsDataURL(this.files[0]);
+  }
 })
 
 $('#uploadButton').click(() => {
