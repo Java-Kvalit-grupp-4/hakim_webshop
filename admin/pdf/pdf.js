@@ -26,6 +26,7 @@ function renderOrder (orders) {
     });
 }
 
+/* Stoppa in ordernumret och vänd på det för att skapa fakturanummer */
 const reverse = (s) => {
     return [...s].reverse().join("");
 }
@@ -44,21 +45,23 @@ function totalVat () {
     });
 }
 
-function invoiceDate(){
+const invoiceDate = () =>{
     var today = new Date();
     today.toLocaleDateString()
-    document.write(today);
-    today = $("#invoiceDate")
+    return today.toLocaleDateString()
 }
 
-function dueDate(){
+const deliveryDate = () => {
+    let date = new Date();
+    date.setDate(date.getDate() + 1)
+    return date.toLocaleDateString()
+}
+
+const dueDate = () => {
     let date = new Date();
     date.setDate(date.getDate() + 30)
-    console.log(date.toLocaleDateString())
-    document.write(date);
-    date = $("#dueDate")
+    return date.toLocaleDateString()
 }
-
 
 function pricePlusShipping(){
     let total = $('#price-plus-shipping')
@@ -87,3 +90,46 @@ function renderCustomerInfo() {
     zip.val(zipCode);
     city.val(loggedInCustomer.city.name);
 }
+
+const btn = document.querySelector("#generate-btn");
+
+let add = document.getElementById('line-items')
+
+btn.addEventListener('click', () => {
+
+    let array = ['hej','ska','gda']
+
+    document.getElementById('orderNumber').innerText = '3214-3213'
+    document.getElementById('fullName').innerText = 'Kalle Anka'
+    document.getElementById('address').innerText = 'Adress'
+    document.getElementById('email').innerText = 'Adress'
+    document.getElementById('invoiceDate').innerText = invoiceDate()
+    document.getElementById('dueDate').innerText = dueDate()
+
+
+    array.forEach(element => {
+       add.innerHTML += `<tr>
+       <td class="product">${element}</td>
+       <td class="desc">PRODUKTNAMN</td>
+       <td>PRIS / KR</td>
+       <td>ANTAL</td>
+       <td>TOTAL / KR</td>
+   </tr>`
+    });
+
+    let element = document.getElementById('pdf');
+    let opt = {
+        margin:       1,
+        filename:     'myfile.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    // New Promise-based usage:
+    html2pdf(element).set(opt).save();
+
+    add.innerHTML = ''
+
+});
+

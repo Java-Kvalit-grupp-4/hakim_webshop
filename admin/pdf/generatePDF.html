@@ -9,7 +9,7 @@
 </head>
 <body>
     <button id="generate-pdf">PDF</button>
-    <button id="dueDate">test duedate</button>
+    <button id="generate-btn">PDF 2</button>
 
     <div id="pdf">
         <header class="clearfix">
@@ -19,48 +19,48 @@
             <h1>Faktura</h1>
             <div id="customer" class="clearfix">
                 <div>
-                    <span>Ordernummer:</span>
+                    Ordernummer:
+                    <span id="orderNumber"></span>
                 </div>
                 <div>
-                    <span>Kundnamn:
-                        <div id="fullName"></div>
-                    </span>
+                    Kundnamn:
+                    <span id="fullName"></span>
                 </div>
                 <div>
-                    <span>Leveransadress:
-                        <div id="adress"></div>
+                    Leveransadress:
+                    <span>
+                        <div id="address"></div>
                         <div id="zip"><div id="city"></div></div>
                     </span>
                 </div>
                 <div>
-                    <span>Email:
-                        <div id="email"></div>
-                    </span>
-                </div>
+                    Email:
+                    <span id="email"></div>
             </div>
             <div id="project">
                 <div>
-                    <span>Fakturanummer:</span>
+                    Fakturanummer:
+                    <span></span>
                 </div>
                 <div>
-                    <span>Fakturadatum:</span>
-                    <div id="invoiceDate"></div>
+                    Fakturadatum:
+                    <span id="invoiceDate"></span>
                 </div>
                 <div>
-                    <span>Leveransdatum:</span>
-                    Dag efter beställning
+                    Leveransdatum:
+                    <span id="deliveryDate"></span> 
                 </div>
                 <div>
-                    <span>Betalningsvillkor</span>
-                    14 dagar
+                    Betalningsvillkor
+                    <span>14 dagar</span> 
                 </div>
                 <div>
-                    <span>Förfallodatum:</span>
-                    <div id="dueDate"></div>
+                    Förfallodatum:
+                    <span id="dueDate"></span>
                 </div>
                 <div>
-                    <span>Dröjsmålsränta:</span>
-                    7,5%
+                    Dröjsmålsränta:
+                    <span>7,5%</span>
                 </div>
             </div>
         </header>
