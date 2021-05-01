@@ -1,32 +1,50 @@
 let orders = [];
 let activeOrder;
+let startDate = null;
+let endDate = null;
+const server = "https://hakimlivs.herokuapp.com/";
+// const server = "http://localhost:8080/";
+const updateOrderLink = server + "customerOrder/update";
+const getAllOrders = server + "customerOrder/orders";
 
-$(function () {
-  fetch("../../TestData/test_data_orders.json")
-    .then((response) => response.json())
-    .then((response) => (orders = response))
-    .then((response) => renderOrders(orders));
-});
+$(
+  axios
+    .get(getAllOrders)
+    .then((response) => {
+      if (response.status === 200) {
+        orders = response.data;
+        renderOrders();
+      } else {
+        swal("Något gick fel vid inläsning av order");
+      }
+    })
+    .catch((err) => {
+      alert("Serverfel!" + err);
+    })
+);
 
-function renderOrders(orders) {
+function renderOrders() {
+  $("#reservation").daterangepicker(null, function (start, end, label) {
+    startDate = new Date(start.toISOString());
+    endDate = new Date(end.toISOString());
+  });
+
   orders.forEach((order) => {
-    const paymentStatusString = order.isPaid
-      ? "Mottagen"
-      : "Väntar på betalning";
+    const paymentStatusString = order.isPaid ? "Betald" : "Obetald";
     $("#orders-container").append(`
       <tr>
           <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${
-            order.id
+            order.orderNumber
           }</a> </th>
           <th scope="row" class="ps-md-5"><a href="#" class="customer-tab">${
-            order.user.customerNumber
+            order.appUser.customerNumber
           }</a> </th>
-          <td>${order.orderTimestamp}</td>
+          <td>${order.timeStamp.substring(0, 10)}</td>
           <td>${order.totalCost.toLocaleString("sv-SE", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })} </td>
-          <td>${order.status.type}</td>
+          <td>${order.orderStatus.type}</td>
           <td>${paymentStatusString}</td>
       </tr>`);
   });
@@ -46,16 +64,12 @@ function saveChosenOrder(id) {
 }
 
 function renderLineItems() {
-
-  // let order;
   let chosenId = Number(sessionStorage.getItem("chosenOrder"));
   let totalCost = 0;
-
   $("#product-container").html("");
   orders.forEach((order) => {
-    if (order.id == chosenId) {
+    if (order.orderNumber == chosenId) {
       activeOrder = order;
-
       order.lineItems.forEach((lineItem) => {
         totalCost += Number(lineItem.itemPrice) * Number(lineItem.quantity);
         $("#product-container").append(`
@@ -87,67 +101,143 @@ function renderLineItems() {
       maximumFractionDigits: 2,
     })}`
   );
+
+  console.log(activeOrder.orderChanges);
+  const $orderChanges = $("#order-changes");
+  $orderChanges.html("");
+  activeOrder.orderChanges.forEach(change => {
+    $orderChanges.prepend(`<li class="list-group-item">${change.changeDateTime.replace("T", " ").substring(2, 16)} 
+    <p>${change.description}</p></li>`)
+  });
+
+  //Checks for nullish value
+  const sentDateText = activeOrder.sentTimestamp ? `${activeOrder.sentTimestamp.replace("T", " ").substring(2, 16)}` : "Inte skickad";
+  $("#order-sent-date-field").text(sentDateText);
+  $("#order-status").val(activeOrder.orderStatus.id);
+  $("#payment-status").val(activeOrder.isPaid);
+  $("#customer-comment").val(activeOrder.orderComment);
 }
 
 function renderUserData() {
-  $("#customer-first-name").val(activeOrder.user.firstName);
-  $("#customer-last-name").val(activeOrder.user.lastName);
-  $("#customer-street-address").val(activeOrder.user.streetAddress);
-  $("#customer-zipcode").val(activeOrder.user.zipcode);
-  $("#customer-city").val(activeOrder.user.city.name);
-  $("#customer-email").val(activeOrder.user.email);
-  $("#customer-phone-number").val(activeOrder.user.phoneNumber);
+  $("#customer-first-name").val(activeOrder.appUser.firstName);
+  $("#customer-last-name").val(activeOrder.appUser.lastName);
+  $("#customer-street-address").val(activeOrder.appUser.streetAddress);
+  $("#customer-zipcode").val(activeOrder.appUser.zipcode);
+  $("#customer-city").val(activeOrder.appUser.city.name);
+  $("#customer-email").val(activeOrder.appUser.email);
+  $("#customer-phone-number").val(activeOrder.appUser.phoneNumber);
 }
 
-/* $(function () {
-  fetch("../../TestData/test_data_orders.json")
-    .then((response) => response.json())
-    .then((response) => renderOrders(response))
-});
+$(document).on("click", "#save-order-btn", updateOrder);
 
-function renderOrders(response) {
-  orders = response
-  let output = ""; 
-  orders.forEach((element) => {
-    const paidString = element.isPaid ? "Mottagen" : "Väntar på betalning";
-    output += `
-      <tr>
-          <th scope="row" class="ps-md-5"><a href="#">${element.orderId}</a> </th>
-          <th scope="row" class="ps-md-5"><a href="#">${element.user.id}</a> </th>
-          <td>${element.orderTimestamp}</td>
-          <td>${element.totalCost} kr</td>
-          <td>${element.status.type}</td>
-          <td>${paidString}</td>
-      </tr>
-      `
-  });
-  $('#orders-container').append(output);
-}  */
+function updateOrder() {
+  activeOrder.isPaid = document.getElementById("payment-status").value;
+  activeOrder.orderStatus.id = document.getElementById("order-status").value;
+  let newCommentString = document.getElementById("add-comment-field").value;
+  if (newCommentString != "") {
+    activeOrder.orderChanges.push(newCommentString);
+    document.getElementById("add-comment-field").value = "";
+  }
 
-// $(document).ready(() => {
+  axios
+    .post(updateOrderLink, activeOrder)
+    .then(() => {
+      swal("Ordern är uppdaterad!");
+    })
+    .catch(() => {
+      swal("Något gick fel!", "Vänligen försök igen", "warning");
+    });
+  console.log(activeOrder);
+}
 
-//   /**
-//    * Cacha variabels
-//    */
-//   let orderContainer = $('#orders-container')
-//   let urlToOrders = "../../TestData/test_data_orders.json"
+$(document).on("click", "#filter-button", filterSearch);
 
-//   /**
-//    * Renders response from url
-//    */
-//  $.getJSON(urlToOrders, (response) => {
-//   $.each(response, (index, element) => {
-//     orderContainer.append(`
-//         <tr>
-//           <th scope="row" class="ps-md-5"><a href="#">${element.orderId}</a> </th>
-//           <th scope="row" class="ps-md-5"><a href="#">${element.user.id}</a> </th>
-//           <td>${element.orderTimestamp}</td>
-//           <td>${element.totalCost} kr</td>
-//           <td>${element.status.type}</td>
-//           <td>Mottagen</td>
-//         </tr>
-//       `
-//     )
-//   })
-// })
-// })
+function filterSearch() {
+  console.log("Printing dates");
+  console.log(startDate);
+  console.log(endDate);
+
+  //let tempOrders = [];
+  let filter = $("#search-select option:selected").text();
+  let input = $("#input").val();
+
+  $("#customerTable").empty();
+  switch (filter) {
+    case "Visa alla":
+      showCustomers(customers);
+      break;
+    case "Vip-kunder":
+      showCustomers(customers.filter((customer) => customer.isVip == true));
+      break;
+    case "Total ordersumma över:":
+      if (input != "" && input != NaN) {
+        resetsInputBorders();
+        axios.get(getAllOrders).then((response) => {
+          let filterCustomers = [];
+          let filterOrders = response.data;
+          let date;
+          let filterOrders2 = [];
+          if (startDate != null && endDate != null) {
+            filterOrders.forEach((order) => {
+              date = new Date(order.timeStamp);
+              if (date >= startDate && date <= endDate) {
+                filterOrders2.push(order);
+              }
+            });
+          }
+          customers.forEach((customer) => {
+            if (
+              getTotalPriceOfOrders(
+                filterOrders2.filter(
+                  (order) =>
+                    order.appUser.customerNumber == customer.customerNumber
+                )
+              ) > input
+            ) {
+              filterCustomers.push(customer);
+            }
+          });
+          showCustomers(filterCustomers);
+        });
+      } else {
+        swal("Fel input!", "Du måste skriva in totalsumma", "warning");
+      }
+      break;
+    case "Totalt antal ordrar över:":
+      if (input != "" && input != NaN) {
+        resetsInputBorders();
+        axios.get(getAllOrders).then((response) => {
+          let filterCustomers = [];
+          let filterOrders = response.data;
+          let date;
+          let filterOrders2 = [];
+          console.log("startdate: " + startDate + "endDate: " + endDate);
+          if (startDate != null && endDate != null) {
+            filterOrders.forEach((order) => {
+              date = new Date(order.timeStamp);
+              console.log(date);
+              if (date >= startDate && date <= endDate) {
+                filterOrders2.push(order);
+              }
+            });
+          }
+          customers.forEach((customer) => {
+            if (
+              customerOrderLength(
+                filterOrders2.filter(
+                  (order) =>
+                    order.appUser.customerNumber == customer.customerNumber
+                )
+              ) > input
+            ) {
+              filterCustomers.push(customer);
+            }
+          });
+          showCustomers(filterCustomers);
+        });
+      } else {
+        swal("Fel input", "Du måste skriva in totalt antal ordrar", "warning");
+      }
+      break;
+  }
+}

@@ -10,3 +10,7 @@
         font-size: 0.75em;
     }
 }
+
+#nav-tabContent{
+    max-width: 100vw;
+}
