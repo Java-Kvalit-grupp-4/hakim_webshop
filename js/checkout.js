@@ -30,10 +30,67 @@ $(document).ready(() => {
    * @param {Array} data array of products
    */
   function renderCart() {
+    let $VAT25 = $("#vat-25");
+    $VAT25.hide();
+    let $VAT12 = $("#vat-12");
+    $VAT12.hide();
+    let $VAT6 = $("#vat-6");
+    $VAT6.hide();
+    let VAT25 = 0;
+    let VAT12 = 0;
+    let VAT6 = 0;
     let cartData = JSON.parse(localStorage.getItem("cart"));
     let cart = $("#cart-container");
     cart.html("");
     $.each(cartData, (index, e) => {
+      let linePrice = e.price * e.inCart;
+
+      switch (e.vat) {
+        case 1.25:
+          VAT25 += linePrice - linePrice / e.vat;
+          console.log(VAT25);
+          break;
+        case 1.12:
+          VAT12 += linePrice - linePrice / e.vat;
+          console.log(VAT12);
+          break;
+        case 1.06:
+          VAT6 += linePrice - linePrice / e.vat;
+          console.log(VAT6);
+          break;
+        default:
+          break;
+      }
+
+      if(VAT25>0) {
+
+        $VAT25.show();
+        $("#VAT-25").text(
+          `${VAT25.toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}`
+        );
+      }
+      if (VAT12 > 0) {
+        $VAT12.show();
+        $("#VAT-12").text(
+          `${VAT12.toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}`
+        );
+      }
+      if (VAT6 > 0) {
+        $VAT6.show();
+        $("#VAT-6").text(
+          `${VAT6.toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}`
+        );
+      }
+
       cart.append(`
         <div class="row pt-2 line-item-border">
             <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${
@@ -52,9 +109,7 @@ $(document).ready(() => {
                 maximumFractionDigits: 2,
               }
             )}</p></div>
-            <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(
-              e.price * e.inCart
-            ).toLocaleString("sv-SE", {
+            <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${linePrice.toLocaleString("sv-SE", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}</p></div>
