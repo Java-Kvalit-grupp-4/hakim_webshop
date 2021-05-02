@@ -7,6 +7,8 @@ let wrongPassword = $("#wrong-password");
 let whichPage = $("#login-page");
 let cartButton = $("#cartDropdown");
 let cartNumber = $("#total-items-in-cart");
+let loggedIn = JSON.parse(sessionStorage.getItem("customer"));
+
 
 let emailToCheck = $("#login-email"),
   passwordToCheck = $("#login-password"),
@@ -16,9 +18,18 @@ let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
 
 $(function () {
+  adminview.hide();
   setCartButtonAvailability();
   cartNumber.text(cartQuantity);
   addShowOrHidePasswordOnButton();
+
+  if(loggedIn!=undefined) {
+    if (loggedIn.isAdmin) {
+    adminview.show();
+  }
+  $("#checkOutLink").attr("href", "../../pages/checkout/");
+  }
+  
 
   $("#newCust-button").click(() => {
     $("#registerForm").modal("show");

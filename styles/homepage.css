@@ -159,6 +159,19 @@ footer {
     color: rgba(24, 24, 24, 0.39);
 }
 
+#fixedSidebar{
+    max-height:50%;
+    position:fixed;
+    overflow: auto;
+    bottom: 50px;
+    left: 3rem;
+    top: 10rem;
+  }
+
+#sidebar{
+    position:relative;
+}
+
 @media (max-width: 576px) {
     .product-card {
         max-width: 80%;
