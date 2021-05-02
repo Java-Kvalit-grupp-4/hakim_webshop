@@ -133,7 +133,6 @@ function renderCategories(data) {
             availableProducts.push(element)
         }
     });
-    console.log(availableProducts);
 
 
     localStorage.setItem('categoryList', JSON.stringify(availableProducts));
@@ -200,7 +199,7 @@ function renderProducts(products) {
         if(element.unit == 'gr' || element.unit == 'hg' || element.unit == 'kg'){
           unitCheck = 'kg'
         } 
-        console.log(element)
+        
 
     $("#products").append(`
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">

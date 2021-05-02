@@ -48,15 +48,12 @@ $(document).ready(() => {
       switch (e.vat) {
         case 1.25:
           VAT25 += linePrice - linePrice / e.vat;
-          console.log(VAT25);
           break;
         case 1.12:
           VAT12 += linePrice - linePrice / e.vat;
-          console.log(VAT12);
           break;
         case 1.06:
           VAT6 += linePrice - linePrice / e.vat;
-          console.log(VAT6);
           break;
         default:
           break;
