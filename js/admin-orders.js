@@ -2,8 +2,8 @@ let orders = [];
 let activeOrder;
 let startDate = null;
 let endDate = null;
-const server = "https://hakimlivs.herokuapp.com/";
-// const server = "http://localhost:8080/";
+// const server = "https://hakimlivs.herokuapp.com/";
+const server = "http://localhost:8080/";
 const updateOrderLink = server + "customerOrder/update";
 const getAllOrders = server + "customerOrder/orders";
 
@@ -71,6 +71,7 @@ function renderLineItems() {
     if (order.orderNumber == chosenId) {
       activeOrder = order;
       order.lineItems.forEach((lineItem) => {
+        console.log(lineItem);
         totalCost += Number(lineItem.itemPrice) * Number(lineItem.quantity);
         $("#product-container").append(`
         <tr>
@@ -80,7 +81,17 @@ function renderLineItems() {
           <th scope="row" class="ps-md-5">
             <a href="#">${lineItem.product.title}</a>
           </th>
-          <td>${lineItem.quantity}</td>
+          <td>
+          <form>
+           <input
+              type="text"
+              class="quantity-field hi"
+              placeholder="${lineItem.quantity}"
+              id="${lineItem.product.sku}"
+              maxlength="2"
+            />
+            </form>
+          </td>
           <td>${lineItem.itemPrice.toLocaleString("sv-SE", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
@@ -102,16 +113,27 @@ function renderLineItems() {
     })}`
   );
 
+  //Feel free to change this event set up - this was the only one I managed to get working
+  const quantityFields = $(".quantity-field");
+  for (var i = 0; i < quantityFields.length; i++) {
+    quantityFields[i].addEventListener("blur", updateQuantity, false);
+  }
+
+
   console.log(activeOrder.orderChanges);
   const $orderChanges = $("#order-changes");
   $orderChanges.html("");
-  activeOrder.orderChanges.forEach(change => {
-    $orderChanges.prepend(`<li class="list-group-item">${change.changeDateTime.replace("T", " ").substring(2, 16)} 
-    <p>${change.description}</p></li>`)
+  activeOrder.orderChanges.forEach((change) => {
+    $orderChanges.prepend(`<li class="list-group-item">${change.changeDateTime
+      .replace("T", " ")
+      .substring(2, 16)} 
+    <p>${change.description}</p></li>`);
   });
 
   //Checks for nullish value
-  const sentDateText = activeOrder.sentTimestamp ? `${activeOrder.sentTimestamp.replace("T", " ").substring(2, 16)}` : "Inte skickad";
+  const sentDateText = activeOrder.sentTimestamp
+    ? `${activeOrder.sentTimestamp.replace("T", " ").substring(2, 16)}`
+    : "Inte skickad";
   $("#order-sent-date-field").text(sentDateText);
   $("#order-status").val(activeOrder.orderStatus.id);
   $("#payment-status").val(activeOrder.isPaid);
@@ -150,6 +172,102 @@ function updateOrder() {
   console.log(activeOrder);
 }
 
+function validateQuanityChange(value) {
+  return /(\+|\-)?\d?\d/.test(value);
+}
+
+function updateQuantity(quantityField) {
+  console.log(quantityField);
+  let sku = quantityField.target.id;
+  let quantityString; //fill with field value
+  console.log("updating");
+  console.log(sku);
+  // let newQuantity = quantityField.target.val;
+  // console.log(newQuantity);
+  // console.log(quantityField.innertext);
+  let field = $("#" + sku)
+  console.log(field);
+  console.log(typeof field);
+  console.log(field[0]);
+  console.log(typeof field[0]);
+  console.log(field.val);
+  console.log(typeof field.val);
+
+  if (!validateQuanityChange) {
+    alert("Ogiltig antal produkter för vara " + sku);
+    return;
+  }
+
+  activeOrder.lineItems.forEach(lineItem => {
+    if (lineItem.product.sku == sku) {
+      let newQuantity;
+      if (quantityString.startsWith("+")) {
+        newQuantity = lineItem.quantity + Number(quantityString.substring(1));
+      } else if (quantityString.startsWith("-")) {
+        newQuantity = lineItem.quantity - Number(quantityString.substring(1))
+      } else {
+        newQuantity = Number(quantityString)
+      }
+      if (newQuantity > 99) {
+        newQuantity = 99;
+      } else if (newQuantity < 0) {
+        newQuantity = 0;
+      }
+      lineItem.quantity = newQuantity;
+      renderLineItems();
+    }
+  });
+}
+
+/* function addProduct(product) {
+  console.log(product);
+  let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
+  let cartTemp = JSON.parse(localStorage.getItem("cart"));
+  cartTemp.forEach((element) => {
+    if (element.sku == product) {
+      if (element.inCart < 99) {
+        element.inCart += 1;
+        addToTotalPrice(element);
+        cartQuantity += 1;
+        document.getElementById("total-items-in-cart").innerHTML = cartQuantity;
+      }
+    }
+  });
+  localStorage.setItem("cart", JSON.stringify(cartTemp));
+  updateCartQuantity();
+  $("#priceOutput").text(
+    JSON.parse(localStorage.getItem("cartTotalPrice")).toLocaleString("sv-SE", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+  );
+  localStorage.setItem("cartQuantity", JSON.stringify(cartQuantity));
+}
+
+function removeProduct(product) {
+  let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
+  let cartTemp = JSON.parse(localStorage.getItem("cart"));
+  cartTemp.forEach((element) => {
+    if (element.sku == product) {
+      if (element.inCart !== 1) {
+        element.inCart -= 1;
+        removeFromTotalPrice(element);
+        cartQuantity -= 1;
+        document.getElementById("total-items-in-cart").innerHTML = cartQuantity;
+      }
+    }
+  });
+  localStorage.setItem("cart", JSON.stringify(cartTemp));
+  updateCartQuantity();
+  $("#priceOutput").text(
+    JSON.parse(localStorage.getItem("cartTotalPrice")).toLocaleString("sv-SE", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+  );
+  localStorage.setItem("cartQuantity", JSON.stringify(cartQuantity));
+} */
+
 $(document).on("click", "#filter-button", filterSearch);
 
 function filterSearch() {
@@ -157,6 +275,7 @@ function filterSearch() {
   console.log(startDate);
   console.log(endDate);
 
+  /*
   //let tempOrders = [];
   let filter = $("#search-select option:selected").text();
   let input = $("#input").val();
@@ -240,4 +359,5 @@ function filterSearch() {
       }
       break;
   }
+  */
 }
