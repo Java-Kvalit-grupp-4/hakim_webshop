@@ -152,13 +152,14 @@ function updateOrder() {
   console.log(activeOrder);
 }
 
+
 $(document).on("click", "#filter-button", filterSearch);
 
 function filterSearch() {
   console.log("Printing dates");
   console.log(startDate);
   console.log(endDate);
-
+/*
   //let tempOrders = [];
   let filter = $("#search-select option:selected").text();
   let input = $("#input").val();
@@ -242,4 +243,5 @@ function filterSearch() {
       }
       break;
   }
+  */
 }
