@@ -1,3 +1,9 @@
+// const fetchUrl = "https://hakimlivs.herokuapp.com/products/";
+const fetchUrl = "http://localhost:8080/products";
+// const updateUrl = "https://hakimlivs.herokuapp.com/products/upsertProduct";
+const updateUrl = "http://localhost:8080/products/upsertProduct";
+const postUrl = "http://localhost:8080/products/add";
+// const postUrl = "https://hakimlivs.herokuapp.com/products/add";
 $(document).ready(loadProducts);
 
 let products = [];
@@ -7,7 +13,7 @@ let tags = [];
 
 function loadProducts() {
   axios
-    .get("https://hakimlivs.herokuapp.com/products/")
+    .get(fetchUrl)
     .then((response) => {
       if (response.status === 200) {
         products = response.data;
@@ -28,6 +34,7 @@ function loadProducts() {
         categories.push(obj.name);
       }
       console.log(products)
+      console.log("Utan moms:" + (element.price/element.vat));
     });
 
     /**
@@ -183,20 +190,23 @@ function loadProducts() {
         image: imageStringForProduct,
         isAvailable: isAvailable,
         price: $("#price").val(),
-        unit: unit,
-        volume: weightVolume,
+        unit: $("#unit").children(":selected").attr("id"),
+        volume: $("#weight_volume").val(),
         quantity: $("#lager").val(),
+        vat: Number($("#VAT").val()),
         brand: {
           name: $("#brand").val(),
         },
         tags: tags,
-        categories: productCategories
+        categories: productCategories,
       };
 
+      console.table(productObject);
 
-      alert("Produkten har sparats");
 
-        axios.post("https://hakimlivs.herokuapp.com/products/upsertProduct",  productObject  )
+      swal("Produkten har sparats");
+
+        axios.post(updateUrl,  productObject  )
         .then(() => {
         })
         .catch(() => {
@@ -324,22 +334,18 @@ $('#new-product').click(() => {
 })
 
 // setting the unit on change 
-$("#unit").change(function() {
-  unit =  $(this).children(":selected").attr("id");
-});
 
-$('#weight_volume').focusout(function(){
-  weightVolume = $('#weight_volume').val()
-});
+  
  
 // skapa productobject
 const createProductObjekt = () => {
+  unit =  $("#unit").val();
+  weightVolume = $('#weight_volume').val();
 
   let productCategories = createCategoriesForProduct();
   let isAvailable = checkIfProductIsAvalible();
 
   return {
-    
     title: $("#title").val(),
     description: $("#description").val(),
     image: imageStringForProduct,
@@ -348,11 +354,12 @@ const createProductObjekt = () => {
     unit: unit,
     volume: weightVolume,
     quantity: $("#lager").val(),
+    vat: Number($("#VAT").val()),
     brand: {
       name: $("#brand").val(),
     },
     tags: tags,
-    categories: productCategories
+    categories: productCategories,
   };
 }
 
@@ -390,15 +397,15 @@ const createProductInDataBase = () => {
 
   const newProduct = createProductObjekt()
 
-  console.log(newProduct)
+  console.table(newProduct)
 
-  axios.post("https://hakimlivs.herokuapp.com/products/add",  newProduct)
+  axios.post(postUrl,  newProduct)
         .then(() => {
           swal("Ny produkt tillagd", '', "success")
           imageStringForProduct = ""
         })
         .catch(() => {
-          alert('Något fick fel!','Vänligen försök igen', 'warning')
+          swal('Något fick fel!','Vänligen försök igen', 'warning')
         })
       
 }
