@@ -95,8 +95,8 @@ $(document).ready(() => {
 
 function load() {
     //const productsUrl = './TestData/test_data_products_v1.2.JSON'
-    //const productsUrl = 'http://localhost:8080/products'
-    const productsUrl = "https://hakimlivs.herokuapp.com/products";
+    const productsUrl = 'http://localhost:8080/products'
+    // const productsUrl = "https://hakimlivs.herokuapp.com/products";
     //const productsUrl = "https://hakimlogintest.herokuapp.com/products";
 
 
@@ -184,12 +184,12 @@ function renderCategories(data) {
  * Render products to UI and adds functions to add-to-cart button
  * @param {Array} list of product
  */
-function renderProducts(list) {
+function renderProducts(products) {
     $("#products").empty();
 
   // add product to website  
-  list.forEach((element) => {
-      let unitCheck = ''
+  products.forEach((element) => {
+      let unitCheck = '';
 
 
       // lägg till element framför för att jämföra med databasen
@@ -232,7 +232,7 @@ function renderProducts(list) {
                         </div>
                     </div>
                     <div class="add-product-to-cart-container">
-                        <button class="add-product-to-cart" style="margin-top: 5%">Köp</button>
+                        <button class="add-product-to-cart" style="margin-top: 5%" id=${element.sku}>Köp</button>
                     </div>
                     </div>
             </div>
