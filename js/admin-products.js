@@ -33,8 +33,6 @@ function loadProducts() {
         let obj = element.categories[i];
         categories.push(obj.name);
       }
-      console.log(products)
-      console.log("Utan moms:" + (element.price/element.vat));
     });
 
     /**
