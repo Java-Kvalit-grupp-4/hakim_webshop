@@ -144,6 +144,7 @@ function loadProducts() {
           imageStringForProduct=element.image;
           $('#img').attr('src', element.image)
           $('#unit').val(element.unit)
+          $("#VAT").val(element.vat);
           $("#weight_volume").val(element.volume);
           $("#price").val(element.price);
           $("#lager").val(element.quantity);
