@@ -1,13 +1,21 @@
 const searchWrapper = $('.search-input') 
 const searchField =  $('#search-field') 
 const suggBox = $('.autocom-box')
-const searchIcon = $('.icon')  
+const searchIcon = $('.icon')
 const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
 let searchWords = []
 
-/**
- * Eventlisteners
- */
+$(document).ready(() => {
+    const productsUrl = 'http://hakimlivs.herokuapp.com/products'
+       axios.get(productsUrl)
+       .then(response => {
+         createSearchWords(response.data)
+       })
+       .catch(err => {
+         alert(err)
+       }) 
+
+})
 
 /**
  * Checks for keyPresses in the searchField
@@ -39,36 +47,30 @@ searchField.keyup((e)=>{
 })
 
 /**
- * Gets the products from the database
- */
-function getProductsFromDataBase() {
-    axios.get(allProductsUrl)
-    .then(response => {
-        createSearchWords(response.data) // use this if you fetching from database -> response.data
-    })
-    //.catch(err => alert('här' + err))
-}
-
-/**
  * Take an array of products, gets the product title,
  * product categories, product tags, and the product 
  * discription and puts in an array
  * @param {Array} products 
  */
 function createSearchWords(products) {
-    let searchStringToSplit = '';
 
+    let searchStringToSplit = '';
     products.forEach(product => {
-        searchStringToSplit += `${product.title} ${product.description}`
+        searchStringToSplit += `${product.title} `
         product.categories.forEach(category => {
-            searchStringToSplit += ` ${category.category}`
+            searchStringToSplit += `${category.name} `
         })
         product.tags.forEach(tag => {
-            searchStringToSplit += ` ${tag.tagName} `
+            searchStringToSplit += `${tag.name} `
         }) 
     })
     
-    searchWords = searchStringToSplit.split(' ')
+    // to remove duplcate from array
+    const distinct = (value, index, self) => {
+        return self.indexOf(value) === index
+    }
+
+    searchWords = searchStringToSplit.split(' ').filter(distinct)
 }
 
 /**
@@ -81,8 +83,8 @@ function createSearchWords(products) {
 function select(element){
     let selectData = element.innerText
     searchField.val(selectData)
-    searchIcon.click(() =>{
-        sendDataToServer(selectData)
+    searchIcon.click(() => {
+        sendDataToServer(selectData)   
     })
     searchWrapper.removeClass("active")
 }
@@ -119,10 +121,14 @@ function sendDataToServer(searchWord) {
 
     axios.get(productMatchWordUrl)
     .then(response => {
+        localStorage.removeItem('categoryList')
         localStorage.setItem('categoryList', JSON.stringify(response.data));
         renderProducts(response.data)
+        searchIcon.off('click')
     })
     .catch(err => alert(err))
 }
 
-getProductsFromDataBase()
+
+
+

@@ -1,3 +1,14 @@
+#login-page {
+    padding:0;
+    
+}
+footer {
+    max-width: 100vw;
+}
+#products{
+    min-height: 90vh;
+}
+
 .product-card {
     max-width: 23vh;
     margin: auto;
@@ -19,17 +30,19 @@
 
 .product-card div div img {
     max-width: 90%;
+    height: 200px;
     margin: 5% auto;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: all 0.2 ease-in-out;
     border-radius: 3px;
 }
-.product-card div div img:hover{
-    opacity: 0.7;
-    
-}
 
+.product-card div div img:hover{
+    opacity: 0.8;
+    transform: scale(1.04);
+    transition: all 250ms ease-in-out;    
+}
 
 .product-card-text{
     text-align: center;
@@ -38,7 +51,10 @@
 .card-price {
     font-size: 1.2rem;
     pointer-events: none;
-    
+}
+.card-comp-price{
+    pointer-events: none;
+    font-size: 0.8rem;
 }
 .card-title{
     font-weight: bold;
@@ -143,8 +159,18 @@
     color: rgba(24, 24, 24, 0.39);
 }
 
+#fixedSidebar{
+    max-height:50%;
+    position:fixed;
+    overflow: auto;
+    bottom: 50px;
+    left: 3rem;
+    top: 10rem;
+  }
 
-
+#sidebar{
+    position:relative;
+}
 
 @media (max-width: 576px) {
     .product-card {

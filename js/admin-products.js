@@ -9,7 +9,6 @@ function loadProducts() {
   axios
     .get("https://hakimlivs.herokuapp.com/products/")
     .then((response) => {
-      console.log(response.data);
       if (response.status === 200) {
         products = response.data;
         render(products);
@@ -20,13 +19,15 @@ function loadProducts() {
     .catch((err) => {
       alert("Serverfel! " + err);
     });
-
+  
+  
   function render(products) {
-    products.forEach((element) => {
+      products.forEach((element) => {
       for (let i = 0; i < element.categories.length; i++) {
         let obj = element.categories[i];
         categories.push(obj.name);
       }
+      console.log(products)
     });
 
     /**
@@ -43,22 +44,24 @@ function loadProducts() {
     });
 
     showCategories();
+    showProducts(products);
 
     /**
      * Add products that belong to the celected category
      */
     $("#select").on("change", function () {
-      let optionId = $(this).val();
+
+      let categoryName = $(this).val();
       let list = [];
       products.forEach((element) => {
         for (let i = 0; i < element.categories.length; i++) {
           let obj = element.categories[i];
-          if (obj.name === optionId) {
+          if (obj.name === categoryName) {
             $("#products").empty();
             list.push(element);
             showProducts(list);
           }
-          if (optionId === "all") {
+          if (categoryName === "Kategori") {
             $("#products").empty();
             showProducts(products);
           }
@@ -66,12 +69,16 @@ function loadProducts() {
       });
     });
 
+    $("#tab-product-catalog").click(function () {
+      location.reload();
+      showProducts(products);
+    });
+
     /**
      * Add new tags to the list of tags on selected product
      */
     $("#tagSave").click(function () {
       let input = $("#tagInput").val();
-      console.log(input);
       $("#tagColumn").append(`
           <div id="${input}" class="form-check">
                       <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${input}" onchange="removeIfUnchecked(${input})">
@@ -79,7 +86,7 @@ function loadProducts() {
                   </div>
           `);
 
-      tags.push(input);
+      tags.push({ name: input});
 
       $("#tagSave").val("");
     });
@@ -109,25 +116,38 @@ function loadProducts() {
       productId = $(this).attr("id");
     });
 
+    let sku = "";
+
     /**
      * Select product's info and add it to the form on product site
      * Make check-boxes of the available categories and add property "checked" to the one corresponding the product's category
      */
     $("#choose").click(function () {
       $("#column").empty();
+      $("#tagColumn").empty();
+      $("#tagInput").val("");
+      $("#isProductHidden").prop("checked", false);
 
       products.forEach((element) => {
         if (element.sku == productId) {
           $("#title").val(element.title);
           $("#brand").val(element.brand.name);
           $("#description").val(element.description);
-          $("#imge").val(element.image);
-          $("#sku").val(element.sku);
+          $("#img").val(element.image);
+          imageStringForProduct=element.image;
+          $('#img').attr('src', element.image)
+          $('#unit').val(element.unit)
+          $("#weight_volume").val(element.volume);
           $("#price").val(element.price);
           $("#lager").val(element.quantity);
           showCategories();
+          showTags(element);
+          sku = element.sku;
+          if (element.isAvailable === false) {
+          $("#isProductHidden").prop("checked", true);
         }
-
+        }
+      
         $("#column div").filter(function () {
           for (let i = 0; i < element.categories.length; i++) {
             let obj = element.categories[i];
@@ -147,10 +167,44 @@ function loadProducts() {
       $("#tab-product-site").tab("show");
     });
 
-    $("input:checkbox").on("change", function (e) {
-      console.log("Klick");
-    });
     /**
+     * Make object of selected product and post it
+     */
+    $("#saveChanges").click(function () {
+     
+      let productCategories = createCategoriesForProduct();
+      let isAvailable = checkIfProductIsAvalible();
+     
+
+      let productObject = {
+        sku: sku,
+        title: $("#title").val(),
+        description: $("#description").val(),
+        image: imageStringForProduct,
+        isAvailable: isAvailable,
+        price: $("#price").val(),
+        unit: unit,
+        volume: weightVolume,
+        quantity: $("#lager").val(),
+        brand: {
+          name: $("#brand").val(),
+        },
+        tags: tags,
+        categories: productCategories
+      };
+
+
+      alert("Produkten har sparats");
+
+        axios.post("https://hakimlivs.herokuapp.com/products/upsertProduct",  productObject  )
+        .then(() => {
+        })
+        .catch(() => {
+          alert('Något fick fel!','Vänligen försök igen', 'warning')
+        })
+    });
+
+      /**
      * Empty form to add new product
      */
     $("#new").click(function () {
@@ -165,53 +219,7 @@ function loadProducts() {
 
       $("#tab-product-site").tab("show");
     });
-
-    /**
-     * Make object of selected product
-     */
-    $("#saveChanges").click(function () {
-      let cat = [];
-      $("#column div")
-        .children()
-        .each(function () {
-          if ($(this).is(":checked")) {
-            let element = $(this).attr("id");
-            cat.push(element);
-          }
-        });
-      let productCategory = [];
-      cat.forEach((element) => {
-        productCategory.push({ name: element });
-      });
-      console.log(productCategory);
-
-      let productObject = {
-        sku: $("#sku").val(),
-        description: $("#description").val(),
-        image: $("#img").val(),
-        isAvailable: true,
-        price: $("#price").val(),
-        quantity: $("#lager").val(),
-        title: $("#title").val(),
-        brand: {
-          name: $("#brand").val(),
-        },
-        tags: tags,
-
-        categories: productCategory,
-      };
-
-      console.log(productObject);
-      alert("Produkten har sparats");
-
-      /*  axios.post("http://localhost:8080/products/add",  productObject  )
-        .then(() => {
-          console.log("Done!")
-        })
-        .catch(() => {
-          alert('Något fick fel!','Vänligen försök igen', 'warning')
-        }) */
-    });
+    
   }
 }
 
@@ -226,7 +234,10 @@ function showProducts(l) {
             <td>${element.sku}</td>
             <td >${element.title}</td>
             <td >${element.brand.name}</td>
-            <td>${element.price} kr</td>
+            <td>${element.price.toLocaleString("sv-SE", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })} kr</td>
             <td> ${element.quantity}</td>
             </tr>`
     );
@@ -244,8 +255,168 @@ function showCategories() {
   });
 }
 
+function showTags(element) {
+  let tags = element.tags;
+
+  tags.forEach(e => {
+
+  $("#tagColumn").append(`
+          <div id="${e.name}" class="form-check">
+                      <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${e.name}" onchange="removeIfUnchecked(${e.name})">
+                      <label class="form-check-label" for="${e.name}">${e.name}</label>
+                  </div>
+          `);
+        })
+}
+
 function removeIfUnchecked(value) {
   let v = $(this).children;
-  console.log(v);
-  console.log(value);
 }
+
+
+
+
+/* "https://hakimlivs.herokuapp.com/api/v1/upload/db" */
+
+//--------------------- CREATE NEW PRODUCT ------------------------------\\
+
+let imageStringForProduct;
+let weightVolume;
+let unit;
+
+const productImageUpload = (fileInputField) => {
+    let formData = new FormData();
+    let fileName = fileInputField.prop('files')[0].name.replaceAll(' ','')
+    let imagefile = fileInputField.prop('files')[0]
+
+    if (imagefile != undefined) {
+      formData.append("file", imagefile, fileName);
+      axios
+        .post("https://hakimlivs.herokuapp.com//api/v1/upload/db", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((resp) => {
+          swal("Ny bild uppladdad", "Uppladdningen lyckades", "success")
+            .then(imageStringForProduct = `${resp.data.downloadUrl}/${resp.data.fileName}`)
+        })
+        .catch((err) => {
+          if(err.response.status == 500){
+            swal("Bildnamn finns redan!", "Ändra bildnamn eller ladda upp en annan bild", "warning");
+          }else{
+            swal("Något fick fel!", "Vänligen försök igen", "warning");
+          }   
+        });
+    }
+}
+
+// eventlisteners
+
+// create product
+$('#new-product').click(() => {
+  if(imageStringForProduct == undefined ||imageStringForProduct == "" ){
+    swal('Varning', 'Du kan inte skapa en produkt utan att ladda upp produktbild', 'warning')
+  }else{
+    createProductInDataBase()
+  }
+  
+})
+
+// setting the unit on change 
+$("#unit").change(function() {
+  unit =  $(this).children(":selected").attr("id");
+});
+
+$('#weight_volume').focusout(function(){
+  weightVolume = $('#weight_volume').val()
+});
+ 
+// skapa productobject
+const createProductObjekt = () => {
+
+  let productCategories = createCategoriesForProduct();
+  let isAvailable = checkIfProductIsAvalible();
+
+  return {
+    
+    title: $("#title").val(),
+    description: $("#description").val(),
+    image: imageStringForProduct,
+    isAvailable: isAvailable,
+    price: $("#price").val(),
+    unit: unit,
+    volume: weightVolume,
+    quantity: $("#lager").val(),
+    brand: {
+      name: $("#brand").val(),
+    },
+    tags: tags,
+    categories: productCategories
+  };
+}
+
+const createCategoriesForProduct = () => {
+  let cat = [];
+  $("#column div")
+    .children()
+    .each(function () {
+      if ($(this).is(":checked")) {
+        let element = $(this).attr("id");
+        cat.push(element);
+      }
+    });
+  let productCategory = [];
+  cat.forEach((element) => {
+    productCategory.push({ name: element });
+  });
+  return productCategory;
+}
+
+const createTagsForProduct = () => {
+
+}
+
+const checkIfProductIsAvalible = () => {
+      if ($("#isProductHidden").is(":checked")) {
+        return false;
+      }else {
+        return true;
+      }
+  
+}
+
+const createProductInDataBase = () => {
+
+  const newProduct = createProductObjekt()
+
+  console.log(newProduct)
+
+  axios.post("https://hakimlivs.herokuapp.com/products/add",  newProduct)
+        .then(() => {
+          swal("Ny produkt tillagd", '', "success")
+          imageStringForProduct = ""
+        })
+        .catch(() => {
+          alert('Något fick fel!','Vänligen försök igen', 'warning')
+        })
+      
+}
+
+
+
+// render the uploaded file to preview
+$('#fileUpload').change(function() {
+  let reader = new FileReader();
+  console.log(this.files[0].size);
+  if(this.files[0].size > 250000){
+    swal('Bilden är för stor!', 'max gräns är 250,0 kb', 'warning')
+  }else{
+    reader.onload = (e) => $('#img').attr('src', e.target.result)
+  reader.readAsDataURL(this.files[0]);
+  }
+})
+
+$('#uploadButton').click(() => {
+  productImageUpload($('#fileUpload'))
+})
