@@ -174,13 +174,13 @@ function makeOrderObject() {
   let lineItems = [];
 
   // create lineItems for database
-  $.each(cart, (index, e) => {
+  $.each(cart, (index, productElement) => {
     let lineItem = {
       product: {
-        sku: e.sku,
+        sku: productElement.sku,
       },
-      quantity: e.inCart,
-      itemPrice: (e.price * e.inCart).toFixed(2),
+      quantity: productElement.inCart,
+      itemPrice: productElement.price.toFixed(2),
     };
     lineItems.push(lineItem);
   });
