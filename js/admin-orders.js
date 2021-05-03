@@ -276,4 +276,6 @@ function reset() {
   $("#filter-payment-status-selector").val("NA");
   $("#filter-payment-status-selector").val("NA");
   $("#order-search-text-form").val("");
+  
+  renderOrders(allOrders);
 }
