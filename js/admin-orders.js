@@ -31,6 +31,7 @@ function renderOrders() {
   });
 
   orders.forEach((order) => {
+    console.log(order.orderNumber)
     const paymentStatusString = order.isPaid ? "Betald" : "Obetald";
     $("#orders-container").append(`
       <tr>
@@ -47,36 +48,39 @@ function renderOrders() {
           })} </td>
           <td>${order.orderStatus.type}</td>
           <td>${paymentStatusString}</td>
-          <td><a id="generate-pdf" href="../admin/pdf/generatePDF.html">pdf</a></td>
       </tr>`);
   });
 }
 
 $(document).on("click", ".order-number-link", openOrderTab);
 
-$(document).on("click", ".generate-pdf", openPdfGenerator);
-
-function openPdfGenerator() {
-  saveChosenOrder(Number($(this).text()));
-  orders.forEach((order) => {
-    if (order.orderNumber == saveChosenOrder){
-      generatPdf(order)
-    }
-
-  })
-}
-
-
-
 function openOrderTab() {
   saveChosenOrder(Number($(this).text()));
   renderLineItems();
   renderUserData();
+  addOrderToPdfBtn()
   $("#navbar-order-tab").tab("show");
 }
 
 function saveChosenOrder(id) {
   sessionStorage.setItem("chosenOrder", id);
+}
+
+function addOrderToPdfBtn(){
+  let chosenId = Number(sessionStorage.getItem("chosenOrder"));
+  console.log(chosenId);
+
+  orders.forEach((order) => {
+    if (order.orderNumber == chosenId) {
+      console.log("inne i generate pdf")
+      $("#generate-pdf").click(()=>{
+        generatPdf(order)
+        $("#pdf-modal").modal("show")
+
+      }
+
+      )}
+  })
 }
 
 function renderLineItems() {

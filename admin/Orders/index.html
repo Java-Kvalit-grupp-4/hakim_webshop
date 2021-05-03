@@ -13,6 +13,7 @@
       href="../../styles/daterangpicker-bs3.css"
     />
     <link rel="stylesheet" href="../../styles/style.css" />
+   <!--  <link rel="stylesheet" href="../../styles/pdf.css" />-->
     <!-- <link rel="stylesheet" href="../Customer/admin-customer.css" /> -->
     <link rel="stylesheet" href="../Orders/admin-orders.css" />
     <title>Admin-ordrar</title>
@@ -477,12 +478,159 @@
                   id="save-order-btn"
                 >Spara
                 </button>
+                <button
+                class="btn btn-secondary save-button"
+                style="width: 100px"
+                id="generate-pdf"
+              >PDF
+              </button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+     <!-- PDF MODAL START -->
+    <div class="modal fade" id="pdf-modal">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div id="pdf" class="modal-content">
+          <div class="modal-body">
+            <div id="pdf">
+              <header class="clearfix">
+                  <div id="logo">
+                      <img src="../../logo.png"/>
+                  </div>
+                  <h1>Faktura</h1>
+                  <div id="customer" class="clearfix">
+                      <div>
+                          Ordernummer:
+                          <span id="orderNumber"></span>
+                      </div>
+                      <div>
+                          Kundnamn:
+                          <span id="fullName"></span>
+                      </div>
+                      <div>
+                          Leveransadress:
+                          <span>
+                              <div id="address"></div>
+                              <div id="zip"><div id="city"></div></div>
+                          </span>
+                      </div>
+                      <div>
+                          Email:
+                          <span id="email"></div>
+                  </div>
+                  <div id="project">
+                      <div>
+                          Fakturanummer:
+                          <span></span>
+                      </div>
+                      <div>
+                          Fakturadatum:
+                          <span id="invoiceDate"></span>
+                      </div>
+                      <div>
+                          Leveransdatum:
+                          <span id="deliveryDate"></span> 
+                      </div>
+                      <div>
+                          Betalningsvillkor
+                          <span>14 dagar</span> 
+                      </div>
+                      <div>
+                          Förfallodatum:
+                          <span id="dueDate"></span>
+                      </div>
+                      <div>
+                          Dröjsmålsränta:
+                          <span>7,5%</span>
+                      </div>
+                  </div>
+              </header>
+              <main>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Artikelnummer</th>
+                              <th>Produktnamn</th>
+                              <th>Pris kr</th>
+                              <th>Antal</th>
+                              <th>Totalt kr</th>
+                          </tr>
+                      </thead>
+                      <tbody id="line-items">
+                          <tr>
+                              <td colspan="4" class="grand total">Summa</td>
+                              <td class="grand total" id="order-total-price"></td>
+                          </tr>
+                          <tr>
+                              <td colspan="4">Frakt</td>
+                              <td class="total">49 kr</td>
+                          </tr>
+                          <tr>
+                              <td colspan="4">Moms 12%</td>
+                              <td class="total" id="vat"></td>
+                          </tr>
+                          <tr>
+                              <td colspan="4" class="grand total">Totalsumma</td>
+                              <td class="grand total" id="price-plus-shipping"></td>
+                          </tr>
+              
+                      </tbody>
+                      <tbody id="table-footer"></tbody>
+                  </table>
+              </main>
+              <footer>
+                  <div id="company" class="clearfix">
+                      <div>
+                          <span>Hakim Livs</span>
+                      </div>
+                      <div>
+                          <span>Kungsgatan 65</span>
+                      </div>
+                      <div>
+                          <span>116 42 Stockholm</span>
+                      </div>
+                      <div>
+                          <span>+46 70 861 31 89</span>
+                      </div>
+                      <div>
+                          <span>hakimlivs@gmail.com</span>
+                      </div>
+                      <br>
+                  </div>
+                  <div id="company-bank">Bankgiro:
+                      <span>1234-5678</span>
+                      <div>Godkänd för F-skatt</div>
+                  </div>
+              </footer>
+          </div>
+
+          </div>
+         
+            <button type="button" class="btn btn-dark" id="save-pdf">
+              Save pdf
+            </button>
+
+        </div>
+      </div>
+    </div>
+    <!-- PDF MODAL END -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!-- <script>
       let customer = JSON.parse(sessionStorage.getItem("customer"));
       if (

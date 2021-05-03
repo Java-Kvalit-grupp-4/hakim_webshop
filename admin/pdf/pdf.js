@@ -11,7 +11,8 @@ dued.addEventListener('click', () => {
     dueDate()
 });
 */
-let orderObject =     {
+let orderObject =
+/* {
     "orderNumber": 20215386,
     "timeStamp": "2021-05-03T10:02:51",
     "sentTimestamp": null,
@@ -212,13 +213,14 @@ let orderObject =     {
     ],
     "orderChanges": []
 }
+*/
 
-$("#preview-pdf").click(() => {
+$("#preview-pdf").click(()=> {
     $('#save-pdf').show()
-    generatPdf(orderObject)
-    
-    console.log(orderObject)
-})
+    // here you send in the selected order to generate a pdf preview
+    generatePdf(orderObject)
+    $("#pdf-modal").modal("show");
+}) 
 
 $('#save-pdf').click(() => {
     $('#save-pdf').hide()
@@ -235,6 +237,7 @@ $('#save-pdf').click(() => {
 })
 
 const generatPdf = (order) => {
+    console.log(order)
 
     $('#orderNumber').text(order.orderNumber)
     $('#fullName').text(order.appUser.firstName + ' ' + order.appUser.lastName)
