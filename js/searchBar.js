@@ -6,7 +6,7 @@ const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
 let searchWords = []
 
 $(document).ready(() => {
-    const productsUrl = 'http://hakimlivs.herokuapp.com/products'
+    const productsUrl = 'https://hakimlivs.herokuapp.com/products'
        axios.get(productsUrl)
        .then(response => {
          createSearchWords(response.data)
