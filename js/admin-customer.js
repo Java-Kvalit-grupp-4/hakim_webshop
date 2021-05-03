@@ -338,11 +338,6 @@ function showOrders(customerOrders){
         
 }
 
-function openOrderTab(){
-    sessionStorage.setItem("chosenOrder", Number($(this).text()));
-    location.replace("../Orders/index.html");
-}
-
 function updateCustomer(){
     if(validateForm()){
         resetsInputBorders()
