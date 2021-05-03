@@ -59,21 +59,24 @@ function renderOrders() {
 $(document).on("click", ".order-number-link", openOrderTab);
 
 function openOrderTab() {
-  console.log($(this).attr("href"));
-  window.location.href = ($(this).attr("href"));
-  console.log("hash" + window.location.href)
-  console.log("pathname " + location.pathname)
-  console.log("href " + location.href)
-
   saveChosenOrder(Number($(this).text()));
   renderLineItems();
   renderUserData();
+  sessionStorage.removeItem("chosenOrder");
   $("#navbar-order-tab").tab("show");
+  
 }
 
 
 function saveChosenOrder(id) {
   sessionStorage.setItem("chosenOrder", id);
+}
+
+function openCustomerOrder(){
+  renderLineItems();
+  renderUserData();
+  sessionStorage.removeItem("chosenOrder");
+  $("#navbar-order-tab").tab("show");
 }
 
 function renderLineItems() {
