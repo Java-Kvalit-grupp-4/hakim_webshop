@@ -26,7 +26,6 @@ let endDate;
 
 function renderOrders(orders) {
   $("#reservation").daterangepicker(null, function (start, end, label) {
-    console.log(start);
     startDate = moment(start);
     endDate = moment(end);
   });
@@ -50,8 +49,6 @@ function renderOrders(orders) {
           <td>${paymentStatusString}</td>
       </tr>`);
   });
-
-  // console.log(filterByDate(allOrders[0]));
 }
 
 $(document).on("click", ".order-number-link", openOrderTab);
@@ -207,16 +204,11 @@ function updateQuantity(quantityField) {
 
 $("#search-btn").on("click", search);
 $("#reset-btn").on("click", reset);
-// $(document).on("click", "#filter-button", filterSearch);
 
 let orderStatusFilter;
 let paymentStatusFilter;
 
 function search() {
-  // console.log("Printing dates");
-  console.log(startDate);
-  console.log(endDate);
-
   let searchMode = $("#search-options-selector option:selected").val();
   let searchString = $("#order-search-text").val();
   orderStatusFilter = $("#filter-order-status-selector").val();
@@ -228,7 +220,6 @@ function search() {
   let ordersMatchingDate = ordersMatchingStatuses.filter((order) =>
     filterByDate(order)
   );
-  // console.log(ordersMatchingStatuses);
 
   switch (searchMode) {
     case "NA":
@@ -258,11 +249,6 @@ function search() {
 
 function filterByDate(order) {
   let orderDate = moment(order.timeStamp);
-  console.log(order.timeStamp);
-  console.log(orderDate); 
-  console.log((orderDate.isSame(startDate, "day")  || orderDate.isAfter(startDate))
-  && (orderDate.isSame(endDate, "day") || orderDate.isBefore(endDate)));
-
   return (orderDate.isSame(startDate, "day")  || orderDate.isAfter(startDate))
   && (orderDate.isSame(endDate, "day") || orderDate.isBefore(endDate));
 }

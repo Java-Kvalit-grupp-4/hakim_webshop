@@ -57,13 +57,16 @@
               </button>
             </form>
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-              <li class="nav-item ">
-                <a class="nav-link" href="../Products/index.html" id="nav-products"
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="../Products/index.html"
+                  id="nav-products"
                   >Produkter</a
                 >
               </li>
-              <li class="nav-item ">
+              <li class="nav-item">
                 <a class="nav-link" href="../Orders/index.html" id="nav-orders">
                   Ordrar</a
                 >
@@ -143,12 +146,6 @@
             <div class="header col-lg-6 col-md-12">
               <h2>Orderlista</h2>
             </div>
-            <!-- <div class="price col-lg-3 col-md-6">
-                <p>Pris</p>
-                </div> -->
-            <!-- <div class="order-nr col-lg-3 col-md-6">
-                <p>Order-nr</p>
-                </div> -->
           </div>
           <div class="row">
             <div class="col col-md-7 col-lg-4">
@@ -189,7 +186,11 @@
               </div>
             </div>
             <div class="col-12 col-md-5 col-lg-3 my-3 mt-md-0">
-              <select class="form-select" aria-label="Orderstatus" id="filter-order-status-selector">
+              <select
+                class="form-select"
+                aria-label="Orderstatus"
+                id="filter-order-status-selector"
+              >
                 <option selected value="NA">Orderstatus</option>
                 <option value="1">Ohanterad</option>
                 <option value="2">Plockas</option>
@@ -198,15 +199,20 @@
               </select>
             </div>
             <div class="col-12 col-md-5 col-lg-4 mb-3 mt-md-0">
-              <select class="form-select" aria-label="Betalstatus" id="filter-payment-status-selector">
+              <select
+                class="form-select"
+                aria-label="Betalstatus"
+                id="filter-payment-status-selector"
+              >
                 <option selected value="NA">Betalstatus</option>
                 <option value="0">Obetald</option>
                 <option value="1">Betald</option>
               </select>
             </div>
             <div class="col-lg-1 mb-3 mb-lg-0">
-              <button class="btn btn-secondary" type="button" id="reset-btn">Återställ</button>
-              
+              <button class="btn btn-secondary" type="button" id="reset-btn">
+                Återställ
+              </button>
             </div>
             <div class="col">
               <div class="input-group">
@@ -227,7 +233,9 @@
                   maxlength="50"
                   id="order-search-text"
                 />
-                <button class="btn btn-secondary" type="button" id="search-btn">Sök</button>
+                <button class="btn btn-secondary" type="button" id="search-btn">
+                  Sök
+                </button>
               </div>
               <!-- <form class="form-inline my-2 my-lg-0 d-flex">
                       <label for="total-price" class="form-label">Pris</label>
@@ -235,7 +243,6 @@
                         <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
                     </form> -->
             </div>
-            
           </div>
         </div>
         <div class="container">
@@ -383,7 +390,9 @@
           </div>
           <div class="container col col-lg-9 pb-5 pe-0">
             <div class="container col">
-              <div class="product-info mt-5 container ms-xl-4 px-1 px-lg-0 ps-lg-5">
+              <div
+                class="product-info mt-5 container ms-xl-4 px-1 px-lg-0 ps-lg-5"
+              >
                 <div class="mb-5">
                   <h2>Produkter i ordern</h2>
                 </div>
@@ -417,22 +426,29 @@
                   <p>Totalt: 0</p>
                 </div>
               </div>
-              
+
               <div class="row ps-lg-5">
                 <div class="text mb-2 px-3 ms-xl-4 col-lg-6">
                   Orderstatus
-                  <select class="form-select" aria-label="Orderstatus" id="order-status">
+                  <select
+                    class="form-select"
+                    aria-label="Orderstatus"
+                    id="order-status"
+                  >
                     <option selected disabled>Orderstatus</option>
                     <option value="1">Ohanterad</option>
                     <option value="2">Plockas</option>
                     <option value="3">Skickad</option>
                     <option value="4">Avbeställd</option>
                   </select>
-                  
                 </div>
                 <div class="text mb-2 px-3 ms-xl-4 col-lg-5">
                   Betalstatus
-                  <select class="form-select" aria-label="Paymentstatus" id="payment-status">
+                  <select
+                    class="form-select"
+                    aria-label="Paymentstatus"
+                    id="payment-status"
+                  >
                     <option selected disabled>Betalstatus</option>
                     <option value="true">Betald</option>
                     <option value="false">Obetald</option>
@@ -441,10 +457,12 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <p class="lead fw-bold mt-4 ms-lg-5 mb-5 px-3 px-lg-0" id="order-sent-date-field"></p>
+                  <p
+                    class="lead fw-bold mt-4 ms-lg-5 mb-5 px-3 px-lg-0"
+                    id="order-sent-date-field"
+                  ></p>
                 </div>
               </div>
-              
             </div>
             <div class="container">
               <div class="container col-12 pt-3 ps-3 ps-lg-5">
@@ -460,33 +478,34 @@
                   style="height: 100px"
                   readonly
                 ></textarea>
-            </div>
-            <div class="container ps-lg-5 px-3 px-lg-0 pt-3 pt-5">
-              <h2>Ändringar</h2>
-              <ul class="list-group" id="order-changes">
-            </ul>
-          </div>
-            <div class="container col-12 pt-5 ps-3 ps-lg-5">
-              <h2>Lägg till kommentar</h2>
-            </div>
-            <div class="container col px-3 ps-lg-5 pe-lg-0">
-              <textarea
-                class="form-control"
-                name=""
-                id="add-comment-field"
-                rows="10"
-                placeholder=""
-                style="height: 150px"
-                maxlength="250"
-              ></textarea>
-              <div class="container mt-5">
-                <button
-                  type="submit"
-                  class="btn btn-secondary save-button"
-                  style="width: 100px"
-                  id="save-order-btn"
-                >Spara
-                </button>
+              </div>
+              <div class="container ps-lg-5 px-3 px-lg-0 pt-3 pt-5">
+                <h2>Ändringar</h2>
+                <ul class="list-group" id="order-changes"></ul>
+              </div>
+              <div class="container col-12 pt-5 ps-3 ps-lg-5">
+                <h2>Lägg till kommentar</h2>
+              </div>
+              <div class="container col px-3 ps-lg-5 pe-lg-0">
+                <textarea
+                  class="form-control"
+                  name=""
+                  id="add-comment-field"
+                  rows="10"
+                  placeholder=""
+                  style="height: 150px"
+                  maxlength="250"
+                ></textarea>
+                <div class="container mt-5">
+                  <button
+                    type="submit"
+                    class="btn btn-secondary save-button"
+                    style="width: 100px"
+                    id="save-order-btn"
+                  >
+                    Spara
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -517,12 +536,6 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../js/moment.js"></script>
     <script type="text/javascript" src="../../js/daterangpicker.js"></script>
-    <!-- <script type="text/javascript">
-      $(document).ready(function () {
-        $("#reservation").daterangepicker(null, function (start, end, label) {
-        });
-      });
-    </script> -->
     <script src="../../js/admin-orders.js"></script>
   </body>
 </html>
