@@ -51,8 +51,6 @@ $(document).on('focus', '#search-select', function(){
     $("#input").val("");
 })
 
-$(document).on('click', ".orderNumber", openOrderTab)
-
 $(document).on('click', '#nav-profile-tab', function(){
     $("#orderTable").empty();
     firstName.val("")
@@ -245,14 +243,25 @@ function filterSearch(){
                                         if( date>=startDate && date<=endDate){
                                             filterOrders2.push(order)
                                         }})
-                                }
-                            customers.forEach(customer =>{
-                                if(getTotalPriceOfOrders(filterOrders2.filter(order => 
-                                    order.appUser.customerNumber==customer.customerNumber))>input){
+                                
+                                customers.forEach(customer =>{
+                                    if(getTotalPriceOfOrders(filterOrders2.filter(order => 
+                                        order.appUser.customerNumber==customer.customerNumber))>input){
 
-                                    filterCustomers.push(customer)
-                                }
-                            })
+                                        filterCustomers.push(customer)
+                                    }
+                                })
+                            }
+                            else{
+                                customers.forEach(customer =>{
+                                    if(getTotalPriceOfOrders(filterOrders.filter(order => 
+                                        order.appUser.customerNumber==customer.customerNumber))>input){
+
+                                        filterCustomers.push(customer)
+                                    }
+                                })
+
+                            }
                             showCustomers(filterCustomers)
                             
                         })
@@ -279,14 +288,25 @@ function filterSearch(){
                                         if( date>=startDate && date<=endDate){
                                             filterOrders2.push(order)
                                         }})
-                                }
-                            customers.forEach(customer =>{
-                                if(customerOrderLength(filterOrders2.filter(order => 
-                                    order.appUser.customerNumber==customer.customerNumber))>input){
+                                    
+                                customers.forEach(customer =>{
+                                    if(customerOrderLength(filterOrders2.filter(order => 
+                                        order.appUser.customerNumber==customer.customerNumber))>input){
 
-                                    filterCustomers.push(customer)
-                                }
-                            })
+                                        filterCustomers.push(customer)
+                                    }
+                                })
+                            }
+                            else{
+                                customers.forEach(customer =>{
+                                    if(customerOrderLength(filterOrders.filter(order => 
+                                        order.appUser.customerNumber==customer.customerNumber))>input){
+
+                                        filterCustomers.push(customer)
+                                    }
+                                })
+
+                            }
                             showCustomers(filterCustomers)
                             
                         })
