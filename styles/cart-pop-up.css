@@ -106,7 +106,7 @@ svg {
     font-size: 0.9em;
   }
   .modal-body h5 {
-    font-size: 0.804em;
+    font-size: 0.9em;
   }
   .modal-body div.smaller {
     font-size: 0.8em;
@@ -137,6 +137,15 @@ svg {
   }
   .qty-label {
     margin-top:-2px
+  }
+}
+
+@media(max-width: 469px) {
+  .modal-body h5 {
+    font-size: 0.9em;
+  }
+  .qty-header {
+    margin-left: 10px;
   }
 }
 .cart-row {

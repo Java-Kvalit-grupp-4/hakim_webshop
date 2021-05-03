@@ -18,7 +18,7 @@
   <body id="login-page">
     <!-- navbar (prototype) -->
 
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+     <nav class="navbar navbar-expand-xl navbar-light fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"
           ><img
@@ -41,6 +41,7 @@
           </div>
         </div>
         <button
+          id="mobileMenu"
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -53,11 +54,11 @@
         </button>
         <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
         <div
-          class="d-lg-flex justify-content-lg-evenly collapse navbar-collapse"
+          class="d-xl-flex justify-content-xl-end collapse navbar-collapse "
           id="navbarTogglerDemo02"
         >
-          <div class="container col-md-6 mt-3">
-            <div class="input-group mb-3 me-0 me-lg-5">
+          <!-- <div class="container col-md-6 mt-3"> -->
+            <!-- <div class="input-group mb-3 me-0 me-xl-5"> -->
               <!-- searchfield -->
 
               <!-- searchfield ends -->
@@ -76,11 +77,11 @@
               >
                 Sök
               </button> -->
-            </div>
-          </div>
+            <!-- </div> -->
+          <!-- </div> -->
 
-          <ul class="navbar-nav mb-2 mb-lg-0 text-start text-sm-end">
-            <li class="nav-item me-lg-4 mb-2 mb-lg-0">
+          <ul class="navbar-nav mb-2 mb-xl-0 text-start text-sm-end">
+            <li class="nav-item me-xl-4 mb-3 mb-xl-0 mt-3 mt-xl-0">
               <a
                 type="button nav-link"
                 class="btn btn-outline-secondary text-dark"
@@ -88,7 +89,7 @@
                 >Logga in</a
               >
             </li>
-            <li class="nav-item me-4">
+            <li class="nav-item me-xl-4">
               <div class="dropdown">
                 <a href="pages/my-account/my-account.html"
                   type="button nav-link"
@@ -110,7 +111,7 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mt-3 mt-xl-0">
               <button
                 class="btn btn-secondary"
                 type="button"
@@ -127,7 +128,7 @@
                 >
               </button>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mt-2 mt-xl-0">
               <a id="admin-view-link" class="nav-link" href="./admin/"
                 >Adminvy</a
               >
@@ -149,7 +150,7 @@
           <!-- <div class="list-group"> -->
             <div id="fixedSidebar">
           <div class="list-group" id="sidomeny">
-            <div class="all-categories">Kategorier<i class="bi bi-caret-down-fill down-arrow"></i></div>
+            <div class="all-categories " style="margin-left: -2rem;">Kategorier<i class="bi bi-caret-down-fill down-arrow"></i></div>
            
               <button
               id="all"
@@ -273,7 +274,7 @@
               </li>
               <li>
                 <a href="mailto:hakimlivs@gmail.com"
-                  ><p>hakimlivs@gmail.com</p></a
+                  ><p class="footer-link-hover">hakimlivs@gmail.com</p></a
                 >
               </li>
               <li id="address-footer">
@@ -281,17 +282,17 @@
                   href="https://www.google.com/maps/search/Kungsgatan+65,+Stockholm+3/@59.3332978,18.0530605,17z/data=!3m1!4b1"
                   class="text-light"
                   target="_blank"
-                  ><div id="">Kungsgatan 65, Stockholm 3</div></a
+                  ><div id="" class="footer-link-hover">Kungsgatan 65, Stockholm 3</div></a
                 >
               </li>
             </ul>
           </div>
 
           <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-3">Om Hakim Livs</h5>
+            <h5 class="text-uppercase mb-3 ">Om Hakim Livs</h5>
             <ul class="list-unstyled mb-3">
               <li>
-                <a href="./pages/about/index.html" class="text-light"><p>Om oss</p></a>
+                <a href="./pages/about/index.html" class="text-light"><p class="footer-link-hover">Om oss</p></a>
               </li>
             </ul>
           </div>
@@ -304,8 +305,8 @@
               </li>
 
               <li>
-                <a href="./pages/about/index.html#deviating" class="text-light"
-                  ><p>Se avvikande öppetider</p></a
+                <a href="./pages/about/index.html" class="text-light "
+                  ><p class="footer-link-hover">Se avvikande öppetider</p></a
                 >
               </li>
             </ul>
@@ -656,10 +657,10 @@
             <div class="container">
               <div class="row border-bottom text-center">
                 <div class="col-1"><i class="bi bi-trash-fill"></i></div>
-                <div class="col-4 col-md-5 text-start"><h5>Produkt</h5></div>
-                <div class="col-2"><h5>Pris</h5></div>
-                <div class="col-3 col-md-2"><h5>Antal</h5></div>
-                <div class="col-2"><h5>Totalt</h5></div>
+                <div class="col-3 col-sm-4 col-md-5 text-start"><h5>Produkt</h5></div>
+                <div class="col-3 col-sm-2 text-end text-sm-center"><h5>Pris <small>kr</small></h5></div>
+                <div class="col-2 col-md-2 "><h5 class="qty-header">Antal</h5></div>
+                <div class="col-3 col-md-2 text-end text-md-center ms-n2"><h5>Totalt <small>kr</small></h5></div>
               </div>
             </div>
             <div class="list-group">
@@ -725,7 +726,8 @@
                   <div class="row">
                     <div class="col-12">
                       <h1 id="product-pop-up-title" class="text-lg-start">Laxfilé</h1>
-                      <h4 id="product-pop-up-unit">250 ml</h4>
+                      <h4 id="product-pop-up-brand"></h4>
+                      <h6 id="product-pop-up-unit"></h6>
                     </div>
                     <div class="col-12 mt-5">
                       <h4>Beskrivning:</h4>
@@ -744,9 +746,7 @@
                     </div>
                     <div class="row">
                       <div class="col-6">
-                        <p id="product-pop-up-comp-price">
-                          34 kr/kg
-                        </p>
+                        <p id="product-pop-up-comp-price"></p>
                       </div>
                       <div class="col-6">
                         <p id="product-pop-up-price">
@@ -794,6 +794,7 @@
     <script src="./js/validate.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/homepage.js"></script>
+    <script src="./js/footer.js"></script>
     <script src="./js/searchBar.js"></script>
     <script src="./js/sortingAlgorithm.js"></script>
     <script src="./js/categoeies.js"></script>

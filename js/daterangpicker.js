@@ -227,6 +227,7 @@
         daysOfWeek: moment.weekdaysMin(),
         monthNames: moment.monthsShort(),
         firstDay: moment.localeData()._week.dow,
+        
       };
 
       this.cb = function () {};

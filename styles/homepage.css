@@ -164,12 +164,17 @@ footer {
     position:fixed;
     overflow: auto;
     bottom: 50px;
-    left: 3rem;
+    left: 2rem;
     top: 10rem;
   }
 
 #sidebar{
     position:relative;
+}
+
+.footer-link-hover:hover{
+    color: rgb(151, 151, 151);
+
 }
 
 @media (max-width: 576px) {
