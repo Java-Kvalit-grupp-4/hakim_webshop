@@ -6,3 +6,14 @@ html {
     font-size: 0.75rem;
     font-style: italic;
 }
+
+@media (max-width: 420px) {
+  #login-title {
+    margin-left: 2rem ;
+  }
+}
+@media (max-width: 375px) {
+  #login-title {
+    margin-left: 1rem !important;
+  }
+}
