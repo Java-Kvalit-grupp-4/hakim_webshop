@@ -369,10 +369,7 @@ function updateCustomer(){
 
 function saveAndOpenOrder(){
     sessionStorage.setItem("chosenOrder", Number($(this).text()));
-    $(this).attr("href", "../Orders/index.html")
-    renderLineItems();
-    renderUserData();
-    $("#navbar-order-tab").tab("show");
+    location.replace("../Orders/index.html");
 }
 
 
