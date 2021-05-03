@@ -15,6 +15,7 @@ $(
       if (response.status === 200) {
         orders = response.data;
         renderOrders();
+        
       } else {
         swal("Något gick fel vid inläsning av order");
       }
@@ -58,7 +59,10 @@ function openOrderTab() {
   renderLineItems();
   renderUserData();
   $("#navbar-order-tab").tab("show");
+  sessionStorage.removeItem("chosenOrder");
 }
+
+
 
 function saveChosenOrder(id) {
   sessionStorage.setItem("chosenOrder", id);
