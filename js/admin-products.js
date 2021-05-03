@@ -1,9 +1,12 @@
-// const fetchUrl = "https://hakimlivs.herokuapp.com/products/";
-const fetchUrl = "http://localhost:8080/products";
-// const updateUrl = "https://hakimlivs.herokuapp.com/products/upsertProduct";
-const updateUrl = "http://localhost:8080/products/upsertProduct";
-const postUrl = "http://localhost:8080/products/add";
-// const postUrl = "https://hakimlivs.herokuapp.com/products/add";
+const fetchUrl = "https://hakimlivs.herokuapp.com/products/";
+// const fetchUrl = "https://hakim-test.herokuapp.com/products/";
+// const fetchUrl = "http://localhost:8080/products";
+const updateUrl = "https://hakimlivs.herokuapp.com/products/upsertProduct";
+// const updateUrl = "https://hakim-test.herokuapp.com/products/upsertProduct";
+// const updateUrl = "http://localhost:8080/products/upsertProduct";
+// const postUrl = "http://localhost:8080/products/add";
+const postUrl = "https://hakimlivs.herokuapp.com/products/add";
+// const postUrl = "https://hakim-test.herokuapp.com/products/add";
 $(document).ready(loadProducts);
 
 let products = [];
