@@ -18,7 +18,7 @@
   <body id="login-page">
     <!-- navbar (prototype) -->
 
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+     <nav class="navbar navbar-expand-xl navbar-light fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"
           ><img
@@ -41,6 +41,7 @@
           </div>
         </div>
         <button
+          id="mobileMenu"
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -53,11 +54,11 @@
         </button>
         <!-- d-flex overridar bootstraps toggle-funktion just nu. Behöver skriva en egen funktion för att visa/dölja hamburgermenyn -->
         <div
-          class="d-lg-flex justify-content-lg-evenly collapse navbar-collapse"
+          class="d-xl-flex justify-content-xl-end collapse navbar-collapse "
           id="navbarTogglerDemo02"
         >
-          <div class="container col-md-6 mt-3">
-            <div class="input-group mb-3 me-0 me-lg-5">
+          <!-- <div class="container col-md-6 mt-3"> -->
+            <!-- <div class="input-group mb-3 me-0 me-xl-5"> -->
               <!-- searchfield -->
 
               <!-- searchfield ends -->
@@ -76,11 +77,11 @@
               >
                 Sök
               </button> -->
-            </div>
-          </div>
+            <!-- </div> -->
+          <!-- </div> -->
 
-          <ul class="navbar-nav mb-2 mb-lg-0 text-start text-sm-end">
-            <li class="nav-item me-lg-4 mb-2 mb-lg-0">
+          <ul class="navbar-nav mb-2 mb-xl-0 text-start text-sm-end">
+            <li class="nav-item me-xl-4 mb-3 mb-xl-0 mt-3 mt-xl-0">
               <a
                 type="button nav-link"
                 class="btn btn-outline-secondary text-dark"
@@ -88,7 +89,7 @@
                 >Logga in</a
               >
             </li>
-            <li class="nav-item me-4">
+            <li class="nav-item me-xl-4">
               <div class="dropdown">
                 <a href="pages/my-account/my-account.html"
                   type="button nav-link"
@@ -110,7 +111,7 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mt-3 mt-xl-0">
               <button
                 class="btn btn-secondary"
                 type="button"
@@ -127,7 +128,7 @@
                 >
               </button>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mt-2 mt-xl-0">
               <a id="admin-view-link" class="nav-link" href="./admin/"
                 >Adminvy</a
               >
@@ -149,7 +150,7 @@
           <!-- <div class="list-group"> -->
             <div id="fixedSidebar">
           <div class="list-group" id="sidomeny">
-            <div class="all-categories">Kategorier<i class="bi bi-caret-down-fill down-arrow"></i></div>
+            <div class="all-categories " style="margin-left: -2rem;">Kategorier<i class="bi bi-caret-down-fill down-arrow"></i></div>
            
               <button
               id="all"
@@ -794,6 +795,7 @@
     <script src="./js/validate.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/homepage.js"></script>
+    <script src="./js/footer.js"></script>
     <script src="./js/searchBar.js"></script>
     <script src="./js/sortingAlgorithm.js"></script>
     <script src="./js/categoeies.js"></script>

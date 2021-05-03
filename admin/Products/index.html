@@ -49,13 +49,13 @@
               </button>
             </form>
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-              <li class="nav-item ">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
                 <a class="nav-link" href="index.html" id="nav-products"
                   >Produkter</a
                 >
               </li>
-              <li class="nav-item ">
+              <li class="nav-item">
                 <a class="nav-link" href="../Orders/index.html" id="nav-orders">
                   Ordrar</a
                 >
@@ -144,7 +144,10 @@
           <br />
 
           <div class="col table-smaller">
-            <table class="table table-striped table-hover table-condensed table-responsive table-sm" style="width: 100%">
+            <table
+              class="table table-striped table-hover table-condensed table-responsive table-sm"
+              style="width: 100%"
+            >
               <thead>
                 <tr>
                   <th scope="col">Artikelnr</th>
@@ -258,7 +261,6 @@
             </div>
 
             <div class="col-lg-6 mt-4 mt-lg-0">
-
               <label for="priceInput" class="form-label">Pris</label>
               <input type="text" class="form-control mb-3" id="price" maxlength="50" required/>
               <div id="PRICE_ERROR_MSG" class="error-msg">
@@ -273,8 +275,14 @@
                 <label for="img" class="form-label">Produktbild</label>
               </div>
               <div class="container text-center mt-3 position-relative">
-              <img id="img" src="" />
-              <div class="img-text"><p>Ladda upp <br> en bild</p></div></div>
+                <img id="img" src="" />
+                <div class="img-text">
+                  <p>
+                    Ladda upp <br />
+                    en bild
+                  </p>
+                </div>
+              </div>
               <div class="input-group mb-3 mt-5">
                 <input
                   type="file"
@@ -292,7 +300,9 @@
               </div>
               <div class="row">
                 <div class="col-12 mt-3">
-                  <label for="weight_volume" class="form-label">Vikt/Volym</label>
+                  <label for="weight_volume" class="form-label"
+                    >Vikt/Volym</label
+                  >
                 </div>
               </div>
               <div class="row gx-0">
@@ -308,7 +318,7 @@
                     <option value="gr" id="gr">gr</option>
                     <option value="hg" id="hg">hg</option>
                     <option value="kg" id="kg">kg</option>
-                 </select>
+                  </select>
                 </div>
               </div>
               <div id="WEIGHT_ERROR_MSG" class="error-msg">
@@ -316,7 +326,6 @@
               </div>
               
               <div class="row gx-0 mt-5">
-                
                 <div class="col-5 mt-3 text-end">
                   <button id="saveChanges" class="btn btn-secondary mb-3">
                     Spara ändringar
@@ -339,11 +348,11 @@
       </div>
     </div>
     <script>
-        let customer = JSON.parse(sessionStorage.getItem('customer'))
-          /* if(customer==null || customer== undefined || customer.isAdmin==false){
+      let customer = JSON.parse(sessionStorage.getItem("customer"));
+      /* if(customer==null || customer== undefined || customer.isAdmin==false){
             window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
           } */
-  </script>
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
