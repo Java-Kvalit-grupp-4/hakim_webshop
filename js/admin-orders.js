@@ -14,7 +14,12 @@ $(
     .then((response) => {
       if (response.status === 200) {
         orders = response.data;
-        renderOrders();
+        let chosenId = Number(sessionStorage.getItem("chosenOrder"));
+        if(chosenId!=null){
+          openCustomerOrder();
+        } else {
+          renderOrders();
+        }
       } else {
         swal("Något gick fel vid inläsning av order");
       }
@@ -58,6 +63,14 @@ function openOrderTab() {
   renderLineItems();
   renderUserData();
   $("#navbar-order-tab").tab("show");
+  sessionStorage.removeItem("chosenOrder");
+}
+
+function openCustomerOrder(){
+  renderLineItems();
+  renderUserData();
+  $("#navbar-order-tab").tab("show");
+  sessionStorage.removeItem("chosenOrder");
 }
 
 function saveChosenOrder(id) {

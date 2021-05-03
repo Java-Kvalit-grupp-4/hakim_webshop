@@ -51,6 +51,8 @@ $(document).on('focus', '#search-select', function(){
     $("#input").val("");
 })
 
+$(document).on('click', ".orderNumber", openOrderTab)
+
 $(document).on('click', '#nav-profile-tab', function(){
     $("#orderTable").empty();
     firstName.val("")
@@ -313,7 +315,7 @@ function showOrders(customerOrders){
             $("#orderTable").append(`
                 <tr>
                     <th scope="row" class="col-3">
-                    <a href="#">${orders.orderNumber}</a>
+                    <a href="#" class="orderNumber">${orders.orderNumber}</a>
                     <td class="col-2">${orders.orderStatus.type}</td>
                     <td class="col-2">${isPaid}</td>
                     <td class="col-3">${orderDate}</td>
@@ -334,6 +336,11 @@ function showOrders(customerOrders){
       }) + " "
     );
         
+}
+
+function openOrderTab(){
+    sessionStorage.setItem("chosenOrder", Number($(this).text()));
+    location.replace("../Orders/index.html");
 }
 
 function updateCustomer(){
