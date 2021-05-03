@@ -13,8 +13,13 @@ $(
     .then((response) => {
       if (response.status === 200) {
         orders = response.data;
+        let chosenId = Number(sessionStorage.getItem("chosenOrder"));
+        if(chosenId!=null){
+          openCustomerOrder();
+        } else {
         renderOrders();
-      } else {
+        } 
+      }else {
         swal("Något gick fel vid inläsning av order");
       }
     })
