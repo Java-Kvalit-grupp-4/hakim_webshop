@@ -11,7 +11,8 @@ dued.addEventListener('click', () => {
     dueDate()
 });
 */
-let orderObject =     {
+let orderObject =
+/* {
     "orderNumber": 20215386,
     "timeStamp": "2021-05-03T10:02:51",
     "sentTimestamp": null,
@@ -212,13 +213,14 @@ let orderObject =     {
     ],
     "orderChanges": []
 }
+*/
 
-$("#preview-pdf").click(() => {
+$("#preview-pdf").click(()=> {
     $('#save-pdf').show()
-    generatPdf(orderObject)
-    
-    console.log(orderObject)
-})
+    // here you send in the selected order to generate a pdf preview
+    generatePdf(orderObject)
+    $("#pdf-modal").modal("show");
+}) 
 
 $('#save-pdf').click(() => {
     $('#save-pdf').hide()
@@ -235,6 +237,7 @@ $('#save-pdf').click(() => {
 })
 
 const generatPdf = (order) => {
+    console.log(order)
 
     $('#orderNumber').text(order.orderNumber)
     $('#fullName').text(order.appUser.firstName + ' ' + order.appUser.lastName)
@@ -244,17 +247,17 @@ const generatPdf = (order) => {
     $('#dueDate').text(dueDate())
     $('#deliveryDate').text(deliveryDate())
 
-    renderLineItems(order.lineItems)
+    renderLineItemsPdf(order.lineItems)
 }
 
-const renderLineItems = (order) => {
+const renderLineItemsPdf = (order) => {
     let totalPrice = 0
 
     $('#line-items').html('')
     $('#table-footer').html('')
 
-    console.log(order)
-    console.log(order.lineItems)
+    let pricePlusShipping = 0
+  
     order.forEach(element => {
         totalPrice += element.price
         $('#line-items').append(`
@@ -272,14 +275,15 @@ const renderLineItems = (order) => {
               })} kr</td>
         </tr>
         `)
+            pricePlusShipping += element.itemPrice
     });
 
     $('#table-footer').append(`
     <tr>
         <th scope="row"></th>
+            <td>Frakt</td>
             <td></td>
-            <td></td>
-            <td>Frakt </td>
+            <td> </td>
             <td>49,00 kr </td>
     </tr>
     <tr>
@@ -294,7 +298,7 @@ const renderLineItems = (order) => {
             <td></td>
             <td></td>
             <td>Totalpris </td>
-            <td>${pricePlusShipping}</td>
+            <td>${pricePlusShipping + 49}</td>
     </tr>
     `)
 }
@@ -342,7 +346,7 @@ const dueDate = () => {
     date.setDate(date.getDate() + 30)
     return date.toLocaleDateString()
 }
-
+/*
 function pricePlusShipping(){
     let total = $('#price-plus-shipping')
     total.html('')
@@ -354,7 +358,7 @@ function pricePlusShipping(){
           }) + 49}</p></div>
         `)
     });
-}
+}*/
 
 let fullName = $('#fullName'),
     email = $('#email'),

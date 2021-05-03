@@ -15,9 +15,12 @@ let emailToCheck = $("#login-email"),
 
 let adminview = $("#admin-view-link");
 
+let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/'
+// let getCustomerUrl = 'https://hakim-test.herokuapp.com/users/getUser/'
+
 //const addUserUrl = "http://localhost:8080/users/add"
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
-//const addUserUrl = "https://hakimlivs.herokuapp.com/users/add"
+// const addUserUrl = "https://hakim-test.herokuapp.com/users/add";
 
 /**
  * Eventlistener
@@ -32,9 +35,27 @@ $("#checkout-button").click(function () {
   if (customer == null || customer == undefined) {
     swal("Du måste vara inloggad för att lägga beställning", "", "warning");
   } else {
-    $("#checkOutLink").attr("href", "./pages/checkout/");
+    fetchCustomerInfo(customer, "./pages/checkout/")
   }
 });
+
+function fetchCustomerInfo(customer, openPage){
+  axios
+    .get(getCustomerUrl+customer.email)
+    .then((response) => {
+      console.log(response.data)
+      setCustomer(response.data)
+      location.replace(openPage)
+    })
+    .catch((err) => {
+      alert(err);
+    });
+}
+
+function setCustomer(customer){
+  sessionStorage.setItem("customer", JSON.stringify(customer))
+}
+
 
 $("#show-password-button").click(function () {
     if ($(this).text() == "Visa") {
@@ -60,6 +81,10 @@ $("#login-btn").click(function () {
     }
 });
 
+$("#myAccountDropdown").click(function(){
+  let customer = JSON.parse(sessionStorage.getItem("customer"));
+  fetchCustomerInfo(customer, "pages/my-account/my-account.html")
+})
 
 $("form").submit(false);
 
@@ -70,19 +95,23 @@ $(document).ready(() => {
 
 })
 
-    function load() {
-        //const productsUrl = './TestData/test_data_products_v1.2.JSON'
-        //const productsUrl = 'http://localhost:8080/products'
-        const productsUrl = 'http://hakimlivs.herokuapp.com/products'
-       axios.get(productsUrl)
-       .then(response => {
-         renderCategories(response.data)
-       })
-       .catch(err => {
-         alert(err)
-       }) 
-    }
+function load() {
+    //const productsUrl = './TestData/test_data_products_v1.2.JSON'
+    // const productsUrl = 'http://localhost:8080/products'
+    const productsUrl = "https://hakimlivs.herokuapp.com/products";
+    // const productsUrl = "https://hakim-test.herokuapp.com/products";
+    //const productsUrl = "https://hakimlogintest.herokuapp.com/products";
 
+
+    axios
+        .get(productsUrl)
+        .then((response) => {
+            renderCategories(response.data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
+}
 
 function renderCategories(data) {
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
@@ -101,13 +130,12 @@ function renderCategories(data) {
 
   let categories = [];
   
-    let availableProducts = [];
+  let availableProducts = [];
     products.forEach(element => {
         if (element.isAvailable == true) {
             availableProducts.push(element)
         }
     });
-    console.log(availableProducts);
 
 
     localStorage.setItem('categoryList', JSON.stringify(availableProducts));
@@ -132,11 +160,10 @@ function renderCategories(data) {
     $("#sidomeny button").on("click", function () {
         let categoryName = $(this).attr("id");
         let selectedCategoryList = [];
-
         availableProducts.forEach((product) => {
             if (categoryName === "all") {
                 $("#products").empty();
-                renderProducts(products);
+                renderProducts(availableProducts);
                 localStorage.setItem("categoryList", JSON.stringify(products));
             } else {
                 let currentProduct = product;
@@ -159,11 +186,24 @@ function renderCategories(data) {
  * Render products to UI and adds functions to add-to-cart button
  * @param {Array} list of product
  */
-function renderProducts(list) {
+function renderProducts(products) {
     $("#products").empty();
 
   // add product to website  
-  list.forEach((element) => {
+  products.forEach((element) => {
+      let unitCheck = '';
+
+
+      // lägg till element framför för att jämföra med databasen
+
+        if(element.unit == 'ml' || element.unit == 'cl' || element.unit == 'l'){
+            unitCheck = 'l'
+        }
+        if(element.unit == 'gr' || element.unit == 'hg' || element.unit == 'kg'){
+          unitCheck = 'kg'
+        } 
+        
+
     $("#products").append(`
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
         <div class="product-card">
@@ -171,7 +211,7 @@ function renderProducts(list) {
                     <div class="img-container">
                     <img src="${element.image}" alt="img" class="product-card-img">
                     </div>
-                    <div class="product-card-text">
+                    <div id="${element.unit}" class="product-card-text">
                     <h3 class="card-title">${element.title}</h3>
                     <h5 class="card-price">${element.price.toLocaleString(
                         "sv-SE",
@@ -180,7 +220,7 @@ function renderProducts(list) {
                         maximumFractionDigits: 2,
                         }
                     )} kr</h5>
-                    <p id="" class="card-comp-price">jfr-pris 60 kr/l</p>
+                    <p id="${element.volume}" class="card-comp-price"> ${element.comparablePrice} kr/${unitCheck}</p>
                     <p id="${element.description}"class="card-text">Mer info om produkten</p>
                     <div class="add-subtract-container">
                         <div class="subtract-btn">
@@ -194,7 +234,7 @@ function renderProducts(list) {
                         </div>
                     </div>
                     <div class="add-product-to-cart-container">
-                        <button class="add-product-to-cart" style="margin-top: 5%">Köp</button>
+                        <button class="add-product-to-cart" style="margin-top: 5%" id=${element.sku}>Köp</button>
                     </div>
                     </div>
             </div>
@@ -277,15 +317,17 @@ function renderProducts(list) {
     });
 
     const renderProductPopUpModal = (element) => {
+        
         let imgSrc = element.children[0].children[0].src
         let title = element.children[1].children[0].innerText
         let desc = element.children[1].children[3].id
+        let volym = element.children[1].children[2].id + element.children[1].id
         let price = element.children[1].children[1].innerText
         let compPrice = element.children[1].children[2].innerText
 
         $('#product-pop-up-img').attr("src", imgSrc)
         $('#product-pop-up-title').text(title)
-        $('#product-pop-up-unit').text('250 ml')
+        $('#product-pop-up-unit').text(volym)
         $('#product-pop-up-desc').text(desc)
         $('#product-pop-up-price').text(price)
         $('#product-pop-up-comp-price').text(compPrice)
@@ -305,19 +347,6 @@ function renderProducts(list) {
         });
     });
 }
-        
-
-     //------------------------------- product-card-modal ----------------------------------\\
-     $.each($(".card-text"), function (index, value) {
-         value.addEventListener("click", () => {
-             $("#product-card-modal").modal("show");
-         });
-     });
-     $.each($(".product-card-img"), function (index, value) {
-         value.addEventListener("click", () => {
-             $("#product-card-modal").modal("show");
-         });
-     });
     
 
     /**
@@ -402,6 +431,7 @@ function hideOrShowAdminView() {
 
     $("#login-button").click(() => {
         let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+        // let url = `https://hakim-test.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
 
         axios.get(url)
             .then((response) => {
