@@ -16,9 +16,11 @@ let emailToCheck = $("#login-email"),
 let adminview = $("#admin-view-link");
 
 let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/'
+// let getCustomerUrl = 'https://hakim-test.herokuapp.com/users/getUser/'
 
 //const addUserUrl = "http://localhost:8080/users/add"
 const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
+// const addUserUrl = "https://hakim-test.herokuapp.com/users/add";
 
 /**
  * Eventlistener
@@ -95,8 +97,9 @@ $(document).ready(() => {
 
 function load() {
     //const productsUrl = './TestData/test_data_products_v1.2.JSON'
-    //const productsUrl = 'http://localhost:8080/products'
+    // const productsUrl = 'http://localhost:8080/products'
     const productsUrl = "https://hakimlivs.herokuapp.com/products";
+    // const productsUrl = "https://hakim-test.herokuapp.com/products";
     //const productsUrl = "https://hakimlogintest.herokuapp.com/products";
 
 
@@ -133,7 +136,6 @@ function renderCategories(data) {
             availableProducts.push(element)
         }
     });
-    console.log(availableProducts);
 
 
     localStorage.setItem('categoryList', JSON.stringify(availableProducts));
@@ -184,12 +186,12 @@ function renderCategories(data) {
  * Render products to UI and adds functions to add-to-cart button
  * @param {Array} list of product
  */
-function renderProducts(list) {
+function renderProducts(products) {
     $("#products").empty();
 
   // add product to website  
-  list.forEach((element) => {
-      let unitCheck = ''
+  products.forEach((element) => {
+      let unitCheck = '';
 
 
       // lägg till element framför för att jämföra med databasen
@@ -200,7 +202,7 @@ function renderProducts(list) {
         if(element.unit == 'gr' || element.unit == 'hg' || element.unit == 'kg'){
           unitCheck = 'kg'
         } 
-        console.log(element)
+        
 
     $("#products").append(`
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
@@ -232,7 +234,7 @@ function renderProducts(list) {
                         </div>
                     </div>
                     <div class="add-product-to-cart-container">
-                        <button class="add-product-to-cart" style="margin-top: 5%">Köp</button>
+                        <button class="add-product-to-cart" style="margin-top: 5%" id=${element.sku}>Köp</button>
                     </div>
                     </div>
             </div>
@@ -429,6 +431,7 @@ function hideOrShowAdminView() {
 
     $("#login-button").click(() => {
         let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+        // let url = `https://hakim-test.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
 
         axios.get(url)
             .then((response) => {

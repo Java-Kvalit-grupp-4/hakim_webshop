@@ -110,6 +110,10 @@ function showSuggestions(list){
     suggBox.html(listData)
 }
 
+/**
+ * Returns a list of filtered products based on the searchword
+ * @param {String} searchWord 
+ */
 const renderProductFromSearchWord = (searchWord) => {
     let filteredList = []
 
