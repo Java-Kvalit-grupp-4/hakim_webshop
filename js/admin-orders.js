@@ -24,6 +24,7 @@ $(
 );
 
 function renderOrders() {
+  
   $("#reservation").daterangepicker(null, function (start, end, label) {
     startDate = new Date(start.toISOString());
     endDate = new Date(end.toISOString());
@@ -53,11 +54,18 @@ function renderOrders() {
 $(document).on("click", ".order-number-link", openOrderTab);
 
 function openOrderTab() {
+  console.log($(this).attr("href"));
+  window.location.href = ($(this).attr("href"));
+  console.log("hash" + window.location.href)
+  console.log("pathname " + location.pathname)
+  console.log("href " + location.href)
+
   saveChosenOrder(Number($(this).text()));
   renderLineItems();
   renderUserData();
   $("#navbar-order-tab").tab("show");
 }
+
 
 function saveChosenOrder(id) {
   sessionStorage.setItem("chosenOrder", id);
@@ -102,7 +110,7 @@ function renderLineItems() {
     })}`
   );
 
-  console.log(activeOrder.orderChanges);
+ /* console.log(activeOrder.orderChanges);
   const $orderChanges = $("#order-changes");
   $orderChanges.html("");
   activeOrder.orderChanges.forEach(change => {
@@ -117,7 +125,8 @@ function renderLineItems() {
   $("#payment-status").val(activeOrder.isPaid);
   $("#customer-comment").val(activeOrder.orderComment);
 }
-
+*/
+}
 function renderUserData() {
   $("#customer-first-name").val(activeOrder.appUser.firstName);
   $("#customer-last-name").val(activeOrder.appUser.lastName);
