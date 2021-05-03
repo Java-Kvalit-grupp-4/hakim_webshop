@@ -259,7 +259,7 @@ const renderLineItems = (order) => {
         totalPrice += element.price
         $('#line-items').append(`
         <tr>
-            <th scope="row" class="product">${element.product.sku}</th>
+            <td class="desc">${element.product.sku}</td>
             <td class="desc">${element.product.title}</td>
             <td>${element.product.price.toLocaleString("sv-SE", {
                 minimumFractionDigits: 2,
