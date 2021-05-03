@@ -226,7 +226,7 @@
         customRangeLabel: "Custom Range",
         daysOfWeek: moment.weekdaysMin(),
         monthNames: moment.monthsShort(),
-        firstDay: moment.localeData()._week.dow,
+        firstDay: 1,
         
       };
 
