@@ -172,6 +172,11 @@ footer {
     position:relative;
 }
 
+.footer-link-hover:hover{
+    color: rgb(151, 151, 151);
+
+}
+
 @media (max-width: 576px) {
     .product-card {
         max-width: 80%;
