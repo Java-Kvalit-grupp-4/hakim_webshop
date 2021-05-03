@@ -4,15 +4,15 @@ const suggBox = $('.autocom-box')
 const searchIcon = $('.icon')
 const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
 let searchWords = []
+let productsToSerach = []
 
 $(document).ready(() => {
-    const productsUrl = 'https://hakimlivs.herokuapp.com/products'
-       axios.get(productsUrl)
+       axios.get(allProductsUrl)
        .then(response => {
          createSearchWords(response.data)
        })
        .catch(err => {
-         alert(err)
+         console.log('error in searchbar script! ' + err.response.status);
        }) 
 
 })
@@ -53,7 +53,8 @@ searchField.keyup((e)=>{
  * @param {Array} products 
  */
 function createSearchWords(products) {
-
+    productsToSerach = products
+    
     let searchStringToSplit = '';
     products.forEach(product => {
         searchStringToSplit += `${product.title} `
@@ -64,14 +65,11 @@ function createSearchWords(products) {
             searchStringToSplit += `${tag.name} `
         }) 
     })
-    
-    // to remove duplcate from array
-    const distinct = (value, index, self) => {
-        return self.indexOf(value) === index
-    }
-
+     
     searchWords = searchStringToSplit.split(' ').filter(distinct)
 }
+
+
 
 /**
  * Gets the text from the selected element
@@ -84,7 +82,8 @@ function select(element){
     let selectData = element.innerText
     searchField.val(selectData)
     searchIcon.click(() => {
-        sendDataToServer(selectData)   
+        renderProductFromSearchWord(selectData)
+        //sendDataToServer(selectData)   
     })
     searchWrapper.removeClass("active")
 }
@@ -107,26 +106,50 @@ function showSuggestions(list){
     suggBox.html(listData)
 }
 
+// to remove duplcate from array
+const distinct = (value, index, self) => {
+    return self.indexOf(value) === index
+}
+
 /**
- * Take the users searchword and send it to 
- * the database for a response. Gets an array
- * of product that matches the word and send it
- * to getProducts() for render on the screen
+ * Returns a list of filtered products based on the searchword
  * @param {String} searchWord 
  */
+const renderProductFromSearchWord = (searchWord) => {
+    let filteredList = []
 
-function sendDataToServer(searchWord) {
-    
-    let productMatchWordUrl = `https://hakimlivs.herokuapp.com/products/searchProducts?searchWord=${searchWord}`
+    // checks if searchwrod is among title, brand or description
+    filteredList = productsToSerach.filter(product => product.title.includes(searchWord) || 
+                                                            product.brand.name.includes(searchWord) || 
+                                                            product.description.includes(searchWord) 
+                                                            );
 
-    axios.get(productMatchWordUrl)
-    .then(response => {
-        localStorage.removeItem('categoryList')
-        localStorage.setItem('categoryList', JSON.stringify(response.data));
-        renderProducts(response.data)
-        searchIcon.off('click')
-    })
-    .catch(err => alert(err))
+    // check if searchwords is among the tags of each product
+    productsToSerach.forEach(product => {
+        product.tags.forEach(tag => {
+            if(tag.name.includes(searchWord)){
+                filteredList.push(product)
+            }
+        })
+    });
+
+     // check if searchwords is among the categories of each product
+    productsToSerach.forEach(product => {
+        product.categories.forEach(category => {
+            if(category.name.includes(searchWord)){
+                filteredList.push(product)
+            }
+        })
+    });
+
+    // remove duplcates from the filtered list
+    filteredList = filteredList.filter(distinct)
+
+    // sets the filtered list to localstorage
+    localStorage.removeItem('categoryList')
+    localStorage.setItem('categoryList', JSON.stringify(filteredList));
+                                      
+    renderProducts(filteredList)
 }
 
 
