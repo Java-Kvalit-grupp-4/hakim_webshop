@@ -281,4 +281,9 @@ function reset() {
   endDate = moment();
   
   $("#reservation").val(startDate.format("YYYY-MM-DD") + " - " + endDate.format("YYYY-MM-DD"))
+
+  $("#filter-order-status-selector").val("NA");
+  $("#filter-payment-status-selector").val("NA");
+  $("#filter-payment-status-selector").val("NA");
+  $("#order-search-text-form").val("");
 }
