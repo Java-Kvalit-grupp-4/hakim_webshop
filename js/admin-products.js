@@ -24,6 +24,7 @@ function loadProducts() {
   
   function render(products) {
     //console.log($("#isProductHidden").attr("checked"));
+    emptyAllFields();
       products.forEach((element) => {
       for (let i = 0; i < element.categories.length; i++) {
         let obj = element.categories[i];
@@ -191,7 +192,14 @@ function loadProducts() {
 
       if ($("#isProductHidden").is(":checked")) {
         isAvailable = false;
-      }
+      };
+
+      if ($("#column div input:checkbox:checked").length > 0) {
+        console.log("Correct!")
+       }
+       else {
+         alert("Fel")
+       };
      
       if (validateForm()) {
         resetsInputBorders();
@@ -424,12 +432,14 @@ const checkIfProductIsAvalible = () => {
 }
 
 const createProductInDataBase = () => {
+
   if ($("#column div input:checkbox:checked").length > 0) {
    console.log("Correct!")
   }
   else {
     alert("Fel")
-  }
+  };
+
   if (validateForm()) {
     resetsInputBorders();
   
@@ -490,10 +500,13 @@ brandName.focusout(()=>{
   bool = checkForInput(testForName, brandName, bool, BRAND_ERROR_MSG)
 });
 
-categoryNameInput.focusout(()=>{
-  let bool = true
-  bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG)
-});
+if (categoryNameInput != "") {
+  categoryNameInput.focusout(()=>{
+    let bool = true
+    bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG)
+  });
+}
+
 
 tagName.focusout(()=>{
   let bool = true
