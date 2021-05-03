@@ -5,11 +5,14 @@
 let customers = [];
 let allOrders = [];
 let choosedCustomer = "";
+// let getAllCustomers = "https://hakim-test.herokuapp.com/users";
 let getAllCustomers = "https://hakimlivs.herokuapp.com/users";
 let updateUser = "https://hakimlivs.herokuapp.com/users/adminUpdateUser";
+// let updateUser = "https://hakim-test.herokuapp.com/users/adminUpdateUser";
 let getCustomerOrder = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email=";
-//let getAllOrders =  "https://hakimlivs.herokuapp.com/customerOrder/orders"
-let getOrderByOrderNumber = "https://hakimlivs.herokuapp.com/customerOrder/getOrderByOrderNumber?ordernumber="
+// let getCustomerOrder = "https://hakim-test.herokuapp.com/customerOrder/getCustomerOrders?email=";
+// let getAllOrders =  "https://hakim-test.herokuapp.com/customerOrder/orders"
+let getAllOrders =  "https://hakimlivs.herokuapp.com/customerOrder/orders"
 
 let startDateC = null;
 let endDateC = null;
@@ -87,7 +90,7 @@ function load(){
             }
         })
         .catch(err =>{
-            alert("Serverfel!" + err)
+            alert("Serverfel! " + err)
         })
 }
 
@@ -124,16 +127,22 @@ function showCustomers(customerArr){
             
                 $("#customerTable").append(`
                     <tr>
-                        <th scope="row"><a href="#" class="customer-tab">${customer.customerNumber}</a></th>
+                        <th scope="row"><a href="#" class="customer-tab">${
+                          customer.customerNumber
+                        }</a></th>
                         <td>${customer.firstName}</td>
                         <td>${customer.lastName}</td>
-                        <td><a href="mailto:${customer.email}">${customer.email}</a></td>
+                        <td><a href="mailto:${customer.email}">${
+                  customer.email
+                }</a></td>
                         <td>${numberOfOrders}</td>
-                        <td>${totalPrice.toFixed(2)} kr</td>
+                        <td>${totalPrice.toLocaleString("sv-SE", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })} kr</td>
                         <td><i class="bi ${isVip}"></i></td>
                     </tr>
-                    `
-                )
+                    `);
                 
             }
             else{
