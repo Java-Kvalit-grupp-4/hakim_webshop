@@ -214,7 +214,7 @@
       this.buttonClasses = ["btn", "btn-small btn-sm"];
       this.applyClass = "btn-success";
       this.cancelClass = "btn-default";
-      this.format = "DD/MM/YYYY";
+      this.format = "YYYY-MM-DD";
       this.separator = " - ";
 
       this.locale = {
@@ -227,6 +227,7 @@
         daysOfWeek: moment.weekdaysMin(),
         monthNames: moment.monthsShort(),
         firstDay: moment.localeData()._week.dow,
+        
       };
 
       this.cb = function () {};

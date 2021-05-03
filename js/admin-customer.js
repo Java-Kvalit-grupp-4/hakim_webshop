@@ -143,7 +143,7 @@ function showCustomers(customerArr){
             }
         })
         .catch(err =>{
-            alert("Server fel!" + err)
+            alert("Serverfel!" + err)
         })
     })
 }
