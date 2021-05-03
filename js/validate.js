@@ -29,7 +29,7 @@ function testForOnlyText(input) {
  */
 function testForZipCode(input) {
     let test = input.replaceAll(' ', '')
-    console.log(test.length);
+
     if(test.length == 6){
         return false
     }

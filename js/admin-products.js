@@ -9,7 +9,6 @@ function loadProducts() {
   axios
     .get("https://hakimlivs.herokuapp.com/products/")
     .then((response) => {
-      console.log(response.data);
       if (response.status === 200) {
         products = response.data;
         render(products);
@@ -30,6 +29,7 @@ function loadProducts() {
         let obj = element.categories[i];
         categories.push(obj.name);
       }
+      console.log(products)
     });
 
     /**
@@ -54,8 +54,6 @@ function loadProducts() {
     $("#select").on("change", function () {
 
       let categoryName = $(this).val();
-      console.log(categoryName)
-
       let list = [];
       products.forEach((element) => {
         for (let i = 0; i < element.categories.length; i++) {
@@ -83,7 +81,6 @@ function loadProducts() {
      */
     $("#tagSave").click(function () {
       let input = $("#tagInput").val();
-      //console.log(input);
       $("#tagColumn").append(`
           <div id="${input}" class="form-check">
                       <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${input}" onchange="removeIfUnchecked(${input})">
@@ -132,14 +129,17 @@ function loadProducts() {
       $("#tagColumn").empty();
       $("#tagInput").val("");
       $("#isProductHidden").prop("checked", false);
-    //  console.log($("#isProductHidden").val());
 
       products.forEach((element) => {
         if (element.sku == productId) {
           $("#title").val(element.title);
           $("#brand").val(element.brand.name);
           $("#description").val(element.description);
-          $("#imge").val(element.image);
+          $("#img").val(element.image);
+          imageStringForProduct=element.image;
+          $('#img').attr('src', element.image)
+          $('#unit').val(element.unit)
+          $("#weight_volume").val(element.volume);
           $("#price").val(element.price);
           $("#lager").val(element.quantity);
           showCategories();
@@ -295,9 +295,9 @@ function showCategories() {
 
 function showTags(element) {
   let tags = element.tags;
- // console.log(tags);
+
   tags.forEach(e => {
-  //  console.log(e.name);
+
   $("#tagColumn").append(`
           <div id="${e.name}" class="form-check">
                       <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${e.name}" onchange="removeIfUnchecked(${e.name})">
@@ -309,8 +309,6 @@ function showTags(element) {
 
 function removeIfUnchecked(value) {
   let v = $(this).children;
-//  console.log(v);
-//  console.log(value);
 }
 
 
@@ -331,9 +329,8 @@ const productImageUpload = (fileInputField) => {
 
     if (imagefile != undefined) {
       formData.append("file", imagefile, fileName);
-      console.log(formData);
       axios
-        .post("https://hakimlivs.herokuapp.com/api/v1/upload/db", formData, {
+        .post("https://hakimlivs.herokuapp.com//api/v1/upload/db", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -356,10 +353,9 @@ const productImageUpload = (fileInputField) => {
 
 // create product
 $('#new-product').click(() => {
-  if(imageStringForProduct == undefined){
-    swal('Varning', 'Vill du verkligen skapa en ny produkt utan en produktbild?', 'warning')
+  if(imageStringForProduct == undefined ||imageStringForProduct == "" ){
+    swal('Varning', 'Du kan inte skapa en produkt utan att ladda upp produktbild', 'warning')
   }else{
-    console.log(imageStringForProduct);
     createProductInDataBase()
   }
   
@@ -368,12 +364,10 @@ $('#new-product').click(() => {
 // setting the unit on change 
 $("#unit").change(function() {
   unit =  $(this).children(":selected").attr("id");
-  console.log(unit);
 });
 
 $('#weight_volume').focusout(function(){
   weightVolume = $('#weight_volume').val()
-  console.log(weightVolume);
 });
  
 // skapa productobject
@@ -382,7 +376,6 @@ const createProductObjekt = () => {
   let productCategories = createCategoriesForProduct();
   let isAvailable = checkIfProductIsAvalible();
 
-  console.log(tags);
   return {
     
     title: $("#title").val(),
@@ -391,7 +384,7 @@ const createProductObjekt = () => {
     isAvailable: isAvailable,
     price: $("#price").val(),
     unit: unit,
-    weightVolume: weightVolume,
+    volume: weightVolume,
     quantity: $("#lager").val(),
     brand: {
       name: $("#brand").val(),
@@ -445,9 +438,12 @@ const createProductInDataBase = () => {
   
   const newProduct = createProductObjekt()
 
+  console.log(newProduct)
+
   axios.post("https://hakimlivs.herokuapp.com/products/add",  newProduct)
         .then(() => {
           swal("Ny produkt tillagd", '', "success")
+          imageStringForProduct = ""
         })
         .catch(() => {
           alert('Något fick fel!','Vänligen försök igen', 'warning')
@@ -463,8 +459,13 @@ const createProductInDataBase = () => {
 // render the uploaded file to preview
 $('#fileUpload').change(function() {
   let reader = new FileReader();
-  reader.onload = (e) => $('#img').attr('src', e.target.result)
-  reader.readAsDataURL(this.files[0]);   
+  console.log(this.files[0].size);
+  if(this.files[0].size > 250000){
+    swal('Bilden är för stor!', 'max gräns är 250,0 kb', 'warning')
+  }else{
+    reader.onload = (e) => $('#img').attr('src', e.target.result)
+  reader.readAsDataURL(this.files[0]);
+  }
 })
 
 $('#uploadButton').click(() => {
