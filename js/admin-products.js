@@ -13,6 +13,7 @@ let products = [];
 let categories = [];
 let uniqueCategories = [];
 let tags = [];
+let productId = "";
 
 function loadProducts() {
   axios
@@ -20,7 +21,8 @@ function loadProducts() {
     .then((response) => {
       if (response.status === 200) {
         products = response.data;
-        render(products);
+          render(products);
+  
       } else {
         alert("Något gick fel vid inläsning av produkter");
       }
@@ -118,7 +120,7 @@ function loadProducts() {
     /**
      * Highlight chosen product in the table and select its id
      */
-    let productId = "";
+   
     $("#products").on("click", "tr", function () {
       $(this).addClass("highlight").siblings().removeClass("highlight");
       productId = $(this).attr("id");
@@ -240,20 +242,28 @@ function loadProducts() {
  * @param {Array} l - Webshop products to be displayed on the page
  */
 function showProducts(l) {
-  l.forEach((element) => {
-    $("#products").append(
-      `<tr id="${element.sku}">
-            <td>${element.sku}</td>
-            <td >${element.title}</td>
-            <td >${element.brand.name}</td>
-            <td>${element.price.toLocaleString("sv-SE", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })} kr</td>
-            <td> ${element.quantity}</td>
-            </tr>`
-    );
-  });
+  let productNumber = sessionStorage.getItem("productNumber");
+  if(productNumber!=null){
+    console.log("productNumber")
+    productId = productNumber;
+    openProductTab();
+  }
+  else{
+    l.forEach((element) => {
+      $("#products").append(
+        `<tr id="${element.sku}">
+              <td>${element.sku}</td>
+              <td >${element.title}</td>
+              <td >${element.brand.name}</td>
+              <td>${element.price.toLocaleString("sv-SE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })} kr</td>
+              <td> ${element.quantity}</td>
+              </tr>`
+      );
+    });
+  }
 }
 
 function showCategories() {
@@ -429,3 +439,51 @@ $('#fileUpload').change(function() {
 $('#uploadButton').click(() => {
   productImageUpload($('#fileUpload'))
 })
+
+// Opens product tab if productNumber has been choosed from another admin-page
+function openProductTab(){
+  $("#column").empty();
+    $("#tagColumn").empty();
+    $("#tagInput").val("");
+    $("#isProductHidden").prop("checked", false);
+
+    products.forEach((element) => {
+      if (element.sku == productId) {
+        $("#title").val(element.title);
+        $("#brand").val(element.brand.name);
+        $("#description").val(element.description);
+        $("#img").val(element.image);
+        imageStringForProduct=element.image;
+        $('#img').attr('src', element.image)
+        $('#unit').val(element.unit)
+        $("#VAT").val(element.vat);
+        $("#weight_volume").val(element.volume);
+        $("#price").val(element.price);
+        $("#lager").val(element.quantity);
+        showCategories();
+        showTags(element);
+        sku = element.sku;
+        if (element.isAvailable === false) {
+        $("#isProductHidden").prop("checked", true);
+      }
+      }
+    
+      $("#column div").filter(function () {
+        for (let i = 0; i < element.categories.length; i++) {
+          let obj = element.categories[i];
+
+          if (element.sku == productId && obj.name == $(this).attr("id")) {
+            $(this).replaceWith(function () {
+              return `<div class="form-check ">
+              <input class="form-check-input tag" type="checkbox" value="" id="${obj.name}" checked>
+              <label class="form-check-label" for="cat1">${obj.name}</label>
+          </div>`;
+            });
+          }
+        }
+      });
+    });
+
+    $("#tab-product-site").tab("show");
+    sessionStorage.removeItem("productNumber")   
+}
