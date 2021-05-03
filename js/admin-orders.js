@@ -38,7 +38,7 @@ function renderOrders() {
           <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${
             order.orderNumber
           }</a> </th>
-          <th scope="row" class="ps-md-5"><a href="#" class="customer-tab">${
+          <th scope="row" class="ps-md-5" style="word-break:break-all;"><a href="#" class="customer-tab">${
             order.appUser.customerNumber
           }</a> </th>
           <td>${order.timeStamp.substring(0, 10)}</td>
