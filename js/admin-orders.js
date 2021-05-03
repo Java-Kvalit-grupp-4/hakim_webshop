@@ -118,7 +118,7 @@ function renderLineItems() {
     })}`
   );
 
- /* console.log(activeOrder.orderChanges);
+ console.log(activeOrder.orderChanges);
   const $orderChanges = $("#order-changes");
   $orderChanges.html("");
   activeOrder.orderChanges.forEach(change => {
@@ -133,8 +133,7 @@ function renderLineItems() {
   $("#payment-status").val(activeOrder.isPaid);
   $("#customer-comment").val(activeOrder.orderComment);
 }
-*/
-}
+
 function renderUserData() {
   $("#customer-first-name").val(activeOrder.appUser.firstName);
   $("#customer-last-name").val(activeOrder.appUser.lastName);
