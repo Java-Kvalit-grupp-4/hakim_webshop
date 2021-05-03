@@ -203,6 +203,8 @@ function loadProducts() {
         isAvailable = false;
       };
 
+      let tagsIncluded = createTagsForProduct();
+
       if ($("#column div input:checkbox:checked").length > 0) {
         console.log("Correct!")
        }
@@ -224,20 +226,21 @@ function loadProducts() {
           brand: {
             name: $("#brand").val(),
           },
-          tags: tags,
+          tags: tagsIncluded,
 
           categories: productCategory,
         };
 
         console.log(productObject);
-        swal("Produkten har sparats");
+        console.log(tags);
 
 
         axios.post(updateUrl, productObject)
           .then(() => {
+            swal("Produkten har sparats");
             })
           .catch(() => {
-            alert('Något fick fel!', 'Vänligen försök igen', 'warning')
+            swal('Något fick fel!', 'Vänligen försök igen', 'warning')
           })
         emptyAllFields();
       }
@@ -415,6 +418,7 @@ const createProductObjekt = () => {
 
   let productCategories = createCategoriesForProduct();
   let isAvailable = checkIfProductIsAvalible();
+  let tagsIncluded = createTagsForProduct();
 
   return {
     title: $("#title").val(),
@@ -429,7 +433,7 @@ const createProductObjekt = () => {
     brand: {
       name: $("#brand").val(),
     },
-    tags: tags,
+    tags: tagsIncluded,
     categories: productCategories,
   };
 }
@@ -452,7 +456,23 @@ const createCategoriesForProduct = () => {
 }
 
 const createTagsForProduct = () => {
-
+  let tagList = [];
+ 
+  $("#tagColumn").children().each(function () {
+    if ($(this).is(":checked")) {
+      let element = $(this).attr("id");
+      console.log("Element i tagColumn " + element);
+      tagList.push(element);
+    }
+  });
+  let tagsIncluded = [];
+  
+  tagList.forEach((element) => {
+    tagsIncluded.push({ name: element });
+  });
+  console.log("tagsIncluded " + tagsIncluded);
+  return tagsIncluded;
+  
 }
 
 const checkIfProductIsAvalible = () => {
@@ -478,7 +498,7 @@ const createProductInDataBase = () => {
   
   const newProduct = createProductObjekt()
 
-  console.table(newProduct)
+//  console.table(newProduct)
 
   axios.post(postUrl,  newProduct)
         .then(() => {
@@ -541,18 +561,26 @@ brandName.focusout(()=>{
   bool = checkForInput(testForName, brandName, bool, BRAND_ERROR_MSG)
 });
 
-if (categoryNameInput != "") {
+if (categoryNameInput.val() == "") {
+  console.log("Event listener for category turned off")
+}
+else {
   categoryNameInput.focusout(()=>{
     let bool = true
     bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG)
   });
 }
-
-
-tagName.focusout(()=>{
+  
+if (tagName.val() == "") {
+  console.log("Event listener for tag turned off")
+}
+else {
+  tagName.focusout(()=>{
   let bool = true
   bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG)
 });
+}
+
 
 priceInput.focusout(()=>{
   let bool = true
@@ -561,7 +589,7 @@ priceInput.focusout(()=>{
 
 lagerInput.focusout(()=>{
   let bool = true
-  bool = checkForInput(testForNumbersOnly, lagerInput, bool, LAGER_ERROR_MSG)
+  bool = checkForInput(testForNumbersOnlyNegativeIncluded, lagerInput, bool, LAGER_ERROR_MSG)
 });
 
 weight_volumeInput.focusout(()=>{
@@ -594,17 +622,24 @@ function validateForm() {
 
   bool = checkForInput(testForName, productName, bool, PRODUCTNAME_ERROR_MSG);
   bool = checkForInput(testForName, brandName, bool, BRAND_ERROR_MSG);
-  if (categoryNameInput == "") {
-    bool = true
-    
-  } else {
+  
+  if (categoryNameInput.val() == "") {
+    console.log("Empty field");
+    bool = true;
+  }
+  else {
     bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG);
   }
-  if (tagName != "") {
-    bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG)
+
+  if (tagName.val() == "") {
+    bool = true;
   }
+  else {
+    bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG);
+  }
+  
   bool = checkForInput(testForDecimalNumbers, priceInput, bool, PRICE_ERROR_MSG)
-  bool = checkForInput(testForNumbersOnly, lagerInput, bool, LAGER_ERROR_MSG)
+  bool = checkForInput(testForNumbersOnlyNegativeIncluded, lagerInput, bool, LAGER_ERROR_MSG)
   bool = checkForInput(testForDecimalNumbers, weight_volumeInput, bool, WEIGHT_ERROR_MSG)
 
   return bool;

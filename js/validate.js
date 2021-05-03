@@ -74,6 +74,11 @@ function testForNumbersOnly(input) {
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
 
+function testForNumbersOnlyNegativeIncluded(input) {
+    let pattern = /^-?[0-9\s]*$/;
+    return testForSqlInjections(input) ? false : pattern.test(input)
+}
+
 /**
  * Takes input as String and checks it 
  * to match decimal numbers
