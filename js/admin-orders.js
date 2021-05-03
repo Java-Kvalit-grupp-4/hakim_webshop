@@ -3,6 +3,7 @@ let activeOrder;
 let startDate = null;
 let endDate = null;
 const server = "https://hakimlivs.herokuapp.com/";
+// const server = "https://hakim-test.herokuapp.com/";
 // const server = "http://localhost:8080/";
 const updateOrderLink = server + "customerOrder/update";
 const getAllOrders = server + "customerOrder/orders";
