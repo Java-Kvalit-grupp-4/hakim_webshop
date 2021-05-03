@@ -83,7 +83,7 @@ function load(){
             }
         })
         .catch(err =>{
-            alert("Serverfel!" + err)
+            alert("Serverfel! " + err)
         })
 }
 
@@ -94,7 +94,7 @@ function showCustomers(customerArr){
     }
     customerArr.forEach(customer => {
         let isVip = "";
-        if(e.isVip=== true){
+        if(customer.isVip=== true){
             isVip = "bi-check2"
         }
         else{
