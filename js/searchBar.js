@@ -12,7 +12,7 @@ $(document).ready(() => {
          createSearchWords(response.data)
        })
        .catch(err => {
-         console.log('error in searchbar script! ' + err.response);
+         console.log('error in searchbar script! ' + err.response.status);
        }) 
 
 })
@@ -139,7 +139,7 @@ const renderProductFromSearchWord = (searchWord) => {
 
     // sets the filtered list to localstorage
     localStorage.removeItem('categoryList')
-    localStorage.setItem('categoryList', JSON.stringify(response.data));
+    localStorage.setItem('categoryList', JSON.stringify(filteredList));
                                       
     renderProducts(filteredList)
 }
