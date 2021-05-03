@@ -1,6 +1,4 @@
-body {
-    background-color: rgb(255, 251, 228);
-}
+
 
 .customer-table {
     max-height: 500px;
@@ -48,5 +46,11 @@ body {
         content: '';
         clear: both;
         display: block;
+    }
+}
+
+@media(max-width: 767px) {
+    table {
+        font-size: 0.65rem;
     }
 }
