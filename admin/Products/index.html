@@ -212,9 +212,6 @@
                   aria-describedby="category-input"
                   maxlength="50"
                 />
-                <div id="CATEGORY_ERROR_MSG" class="error-msg">
-                  Category måste bestå av endast bokstäver, max 50 tecken
-                </div>
                 <button
                   class="btn btn-outline-secondary"
                   type="button"
@@ -222,6 +219,9 @@
                 >
                   Spara ny kategori
                 </button>
+              </div>
+              <div id="CATEGORY_ERROR_MSG" class="error-msg">
+                Kategori måste bestå av endast bokstäver, max 50 tecken
               </div>
               <label for="category" class="form-label mt-3">Kategori</label>
               <div class="col" id="column"></div>
@@ -240,16 +240,16 @@
                   aria-describedby="tag-input"
                   maxlength="50" 
                 />
-                <div id="TAG_ERROR_MSG" class="error-msg">
-                  Tag måste bestå av endast bokstäver, max 50 tecken
-                </div>
-                <button
+                 <button
                   class="btn btn-outline-secondary"
                   type="button"
                   id="tagSave"
                 >
                   Spara söktagg
                 </button>
+              </div>
+              <div id="TAG_ERROR_MSG" class="error-msg">
+                Tag måste bestå av endast bokstäver, max 50 tecken
               </div>
               <div class="col-12">
                 <label for="category" class="form-label mt-3">Tags</label>
@@ -302,9 +302,7 @@
                 <div class="col-6 mt-3">
                   <input type="text" id="weight_volume" class="form-control" required>
                 </div>
-                <div id="WEIGHT_ERROR_MSG" class="error-msg">
-                  Vikt/volym måste bestå av endast siffror, decimaltal inkluderat
-                </div>
+                
                 <div class="col-4 dropdown m-3 sorting-dropdown">
                   <select id="unit" class="form-select">
                     <option value="ml" id="ml">ml</option>
@@ -315,6 +313,9 @@
                     <option value="kg" id="kg">kg</option>
                  </select>
                 </div>
+              </div>
+              <div id="WEIGHT_ERROR_MSG" class="error-msg">
+                Vikt/volym måste bestå av endast siffror, decimaltal inkluderat
               </div>
               
               <div class="row gx-0 mt-5">

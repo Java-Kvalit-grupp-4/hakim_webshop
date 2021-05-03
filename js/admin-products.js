@@ -540,8 +540,15 @@ function validateForm() {
 
   bool = checkForInput(testForName, productName, bool, PRODUCTNAME_ERROR_MSG);
   bool = checkForInput(testForName, brandName, bool, BRAND_ERROR_MSG);
-  bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG);
-  bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG)
+  if (categoryNameInput == "") {
+    bool = true
+    
+  } else {
+    bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG);
+  }
+  if (tagName != "") {
+    bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG)
+  }
   bool = checkForInput(testForDecimalNumbers, priceInput, bool, PRICE_ERROR_MSG)
   bool = checkForInput(testForNumbersOnly, lagerInput, bool, LAGER_ERROR_MSG)
   bool = checkForInput(testForDecimalNumbers, weight_volumeInput, bool, WEIGHT_ERROR_MSG)
