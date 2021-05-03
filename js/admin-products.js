@@ -1,3 +1,12 @@
+const fetchUrl = "https://hakimlivs.herokuapp.com/products/";
+// const fetchUrl = "https://hakim-test.herokuapp.com/products/";
+// const fetchUrl = "http://localhost:8080/products";
+const updateUrl = "https://hakimlivs.herokuapp.com/products/upsertProduct";
+// const updateUrl = "https://hakim-test.herokuapp.com/products/upsertProduct";
+// const updateUrl = "http://localhost:8080/products/upsertProduct";
+// const postUrl = "http://localhost:8080/products/add";
+const postUrl = "https://hakimlivs.herokuapp.com/products/add";
+// const postUrl = "https://hakim-test.herokuapp.com/products/add";
 $(document).ready(loadProducts);
 
 let products = [];
@@ -7,7 +16,7 @@ let tags = [];
 
 function loadProducts() {
   axios
-    .get("https://hakimlivs.herokuapp.com/products/")
+    .get(fetchUrl)
     .then((response) => {
       if (response.status === 200) {
         products = response.data;
@@ -132,7 +141,12 @@ function loadProducts() {
           $("#title").val(element.title);
           $("#brand").val(element.brand.name);
           $("#description").val(element.description);
-          $("#imge").val(element.image);
+          $("#img").val(element.image);
+          imageStringForProduct=element.image;
+          $('#img').attr('src', element.image)
+          $('#unit').val(element.unit)
+          $("#VAT").val(element.vat);
+          $("#weight_volume").val(element.volume);
           $("#price").val(element.price);
           $("#lager").val(element.quantity);
           showCategories();
@@ -166,47 +180,35 @@ function loadProducts() {
      * Make object of selected product and post it
      */
     $("#saveChanges").click(function () {
-      let cat = [];
-      $("#column div")
-        .children()
-        .each(function () {
-          if ($(this).is(":checked")) {
-            let element = $(this).attr("id");
-            cat.push(element);
-          }
-        });
-      let productCategory = [];
-      cat.forEach((element) => {
-        productCategory.push({ name: element });
-      });
-
-      let isAvailable = true;
-
-      if ($("#isProductHidden").is(":checked")) {
-        isAvailable = false;
-      }
+     
+      let productCategories = createCategoriesForProduct();
+      let isAvailable = checkIfProductIsAvalible();
      
 
       let productObject = {
         sku: sku,
+        title: $("#title").val(),
         description: $("#description").val(),
-        image: $("#img").val(),
+        image: imageStringForProduct,
         isAvailable: isAvailable,
         price: $("#price").val(),
+        unit: $("#unit").children(":selected").attr("id"),
+        volume: $("#weight_volume").val(),
         quantity: $("#lager").val(),
-        title: $("#title").val(),
+        vat: Number($("#VAT").val()),
         brand: {
           name: $("#brand").val(),
         },
         tags: tags,
-
-        categories: productCategory,
+        categories: productCategories,
       };
 
+      console.table(productObject);
 
-      alert("Produkten har sparats");
 
-        axios.post("https://hakimlivs.herokuapp.com/products/upsertProduct",  productObject  )
+      swal("Produkten har sparats");
+
+        axios.post(updateUrl,  productObject  )
         .then(() => {
         })
         .catch(() => {
@@ -302,7 +304,7 @@ const productImageUpload = (fileInputField) => {
     if (imagefile != undefined) {
       formData.append("file", imagefile, fileName);
       axios
-        .post("http://localhost:8080/api/v1/upload/db", formData, {
+        .post("https://hakimlivs.herokuapp.com//api/v1/upload/db", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -334,22 +336,18 @@ $('#new-product').click(() => {
 })
 
 // setting the unit on change 
-$("#unit").change(function() {
-  unit =  $(this).children(":selected").attr("id");
-});
 
-$('#weight_volume').focusout(function(){
-  weightVolume = $('#weight_volume').val()
-});
+  
  
 // skapa productobject
 const createProductObjekt = () => {
+  unit =  $("#unit").val();
+  weightVolume = $('#weight_volume').val();
 
   let productCategories = createCategoriesForProduct();
   let isAvailable = checkIfProductIsAvalible();
 
   return {
-    
     title: $("#title").val(),
     description: $("#description").val(),
     image: imageStringForProduct,
@@ -358,11 +356,12 @@ const createProductObjekt = () => {
     unit: unit,
     volume: weightVolume,
     quantity: $("#lager").val(),
+    vat: Number($("#VAT").val()),
     brand: {
       name: $("#brand").val(),
     },
     tags: tags,
-    categories: productCategories
+    categories: productCategories,
   };
 }
 
@@ -400,13 +399,15 @@ const createProductInDataBase = () => {
 
   const newProduct = createProductObjekt()
 
-  axios.post("http://localhost:8080/products/add",  newProduct)
+  console.table(newProduct)
+
+  axios.post(postUrl,  newProduct)
         .then(() => {
           swal("Ny produkt tillagd", '', "success")
           imageStringForProduct = ""
         })
         .catch(() => {
-          alert('Något fick fel!','Vänligen försök igen', 'warning')
+          swal('Något fick fel!','Vänligen försök igen', 'warning')
         })
       
 }
@@ -416,8 +417,9 @@ const createProductInDataBase = () => {
 // render the uploaded file to preview
 $('#fileUpload').change(function() {
   let reader = new FileReader();
-  if(this.files[0].size > 25000){
-    swal('Bilden är för stor!', 'max gräns är 25,0 kb', 'warning')
+  console.log(this.files[0].size);
+  if(this.files[0].size > 250000){
+    swal('Bilden är för stor!', 'max gräns är 250,0 kb', 'warning')
   }else{
     reader.onload = (e) => $('#img').attr('src', e.target.result)
   reader.readAsDataURL(this.files[0]);

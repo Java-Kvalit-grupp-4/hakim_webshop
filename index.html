@@ -18,7 +18,7 @@
   <body id="login-page">
     <!-- navbar (prototype) -->
 
-    <nav class="navbar navbar-expand-xl navbar-light fixed-top">
+     <nav class="navbar navbar-expand-xl navbar-light fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"
           ><img
@@ -81,7 +81,7 @@
           <!-- </div> -->
 
           <ul class="navbar-nav mb-2 mb-xl-0 text-start text-sm-end">
-            <li class="nav-item me-xl-4 mb-3 mb-xl-0">
+            <li class="nav-item me-xl-4 mb-3 mb-xl-0 mt-3 mt-xl-0">
               <a
                 type="button nav-link"
                 class="btn btn-outline-secondary text-dark"
@@ -150,7 +150,7 @@
           <!-- <div class="list-group"> -->
             <div id="fixedSidebar">
           <div class="list-group" id="sidomeny">
-            <div class="all-categories">Kategorier<i class="bi bi-caret-down-fill down-arrow"></i></div>
+            <div class="all-categories " style="margin-left: -2rem;">Kategorier<i class="bi bi-caret-down-fill down-arrow"></i></div>
            
               <button
               id="all"
@@ -292,7 +292,7 @@
             <h5 class="text-uppercase mb-3">Om Hakim Livs</h5>
             <ul class="list-unstyled mb-3">
               <li>
-                <a href="/pages/about/" class="text-light"><p>Om oss</p></a>
+                <a href="./pages/about/index.html" class="text-light"><p>Om oss</p></a>
               </li>
             </ul>
           </div>
@@ -305,7 +305,7 @@
               </li>
 
               <li>
-                <a href="/pages/about/#deviating" class="text-light"
+                <a href="./pages/about/index.html#deviating" class="text-light"
                   ><p>Se avvikande öppetider</p></a
                 >
               </li>
@@ -657,10 +657,10 @@
             <div class="container">
               <div class="row border-bottom text-center">
                 <div class="col-1"><i class="bi bi-trash-fill"></i></div>
-                <div class="col-4 col-md-5 text-start pt-1 pt-lg-0"><h5>Produkt</h5></div>
-                <div class="col-2 pt-1 pt-lg-0"><h5>Pris <small>kr</small></h5></div>
-                <div class="col-2 col-md-2 pt-1 pt-lg-0 text-end"><h5>Antal</h5></div>
-                <div class="col-3 col-md-2 pt-1 pt-lg-0 text-end"><h5>Totalt <small>kr</small></h5></div>
+                <div class="col-4 col-md-5 text-start"><h5>Produkt</h5></div>
+                <div class="col-2"><h5>Pris</h5></div>
+                <div class="col-3 col-md-2"><h5>Antal</h5></div>
+                <div class="col-2"><h5>Totalt</h5></div>
               </div>
             </div>
             <div class="list-group">
@@ -684,9 +684,7 @@
             >
               Töm varukorgen
             </button>
-
-            <a id="checkOutLink">
-
+            <a href="#" id="checkOutLink">
               <button
                 type="button"
                 class="btn btn-primary btn-sm"
@@ -797,6 +795,7 @@
     <script src="./js/validate.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/homepage.js"></script>
+    <script src="./js/footer.js"></script>
     <script src="./js/searchBar.js"></script>
     <script src="./js/sortingAlgorithm.js"></script>
     <script src="./js/categoeies.js"></script>
