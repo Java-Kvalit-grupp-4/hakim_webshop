@@ -120,16 +120,22 @@ function showCustomers(customerArr){
             
                 $("#customerTable").append(`
                     <tr>
-                        <th scope="row"><a href="#" class="customer-tab">${customer.customerNumber}</a></th>
+                        <th scope="row"><a href="#" class="customer-tab">${
+                          customer.customerNumber
+                        }</a></th>
                         <td>${customer.firstName}</td>
                         <td>${customer.lastName}</td>
-                        <td><a href="mailto:${customer.email}">${customer.email}</a></td>
+                        <td><a href="mailto:${customer.email}">${
+                  customer.email
+                }</a></td>
                         <td>${numberOfOrders}</td>
-                        <td>${totalPrice.toFixed(2)} kr</td>
+                        <td>${totalPrice.toLocaleString("sv-SE", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })} kr</td>
                         <td><i class="bi ${isVip}"></i></td>
                     </tr>
-                    `
-                )
+                    `);
                 
             }
             else{
@@ -137,7 +143,7 @@ function showCustomers(customerArr){
             }
         })
         .catch(err =>{
-            alert("Server fel!" + err)
+            alert("Serverfel!" + err)
         })
     })
 }

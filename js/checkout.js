@@ -180,7 +180,7 @@ function makeOrderObject() {
         sku: e.sku,
       },
       quantity: e.inCart,
-      itemPrice: (e.price * e.inCart).toFixed(2),
+      itemPrice: e.price.toFixed(2),
     };
     lineItems.push(lineItem);
   });
