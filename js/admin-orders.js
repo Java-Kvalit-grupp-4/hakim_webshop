@@ -217,7 +217,7 @@ function search() {
   console.log(startDate);
   console.log(endDate);
 
-  let searchMode = $("#search-options-selector option:selected").text();
+  let searchMode = $("#search-options-selector option:selected").val();
   let searchString = $("#order-search-text").val();
   orderStatusFilter = $("#filter-order-status-selector").val();
   paymentStatusFilter = $("#filter-payment-status-selector").val();
@@ -231,17 +231,17 @@ function search() {
   // console.log(ordersMatchingStatuses);
 
   switch (searchMode) {
-    case "Sök efter...":
+    case "NA":
       renderOrders(ordersMatchingDate);
       break;
-    case "Ordernummer":
+    case "order-number":
       renderOrders(
         ordersMatchingDate.filter((order) =>
           order.orderNumber.toString().includes(searchString)
         )
       );
       break;
-    case "Totalt pris över":
+    case "total-price":
       if (searchString != "" && searchString != NaN) {
         let searchPrice = Number(searchString);
         renderOrders(
