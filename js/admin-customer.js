@@ -83,7 +83,7 @@ function load(){
             }
         })
         .catch(err =>{
-            alert("Serverfel! " + err)
+            alert("Serverfel!" + err)
         })
 }
 
