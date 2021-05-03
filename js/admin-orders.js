@@ -47,11 +47,26 @@ function renderOrders() {
           })} </td>
           <td>${order.orderStatus.type}</td>
           <td>${paymentStatusString}</td>
+          <td><a id="generate-pdf" href="../admin/pdf/generatePDF.html">pdf</a></td>
       </tr>`);
   });
 }
 
 $(document).on("click", ".order-number-link", openOrderTab);
+
+$(document).on("click", ".generate-pdf", openPdfGenerator);
+
+function openPdfGenerator() {
+  saveChosenOrder(Number($(this).text()));
+  orders.forEach((order) => {
+    if (order.orderNumber == saveChosenOrder){
+      generatPdf(order)
+    }
+
+  })
+}
+
+
 
 function openOrderTab() {
   saveChosenOrder(Number($(this).text()));

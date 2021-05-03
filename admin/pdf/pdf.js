@@ -244,10 +244,10 @@ const generatPdf = (order) => {
     $('#dueDate').text(dueDate())
     $('#deliveryDate').text(deliveryDate())
 
-    renderLineItems(order.lineItems)
+    renderLineItemsPdf(order.lineItems)
 }
 
-const renderLineItems = (order) => {
+const renderLineItemsPdf = (order) => {
     let totalPrice = 0
 
     $('#line-items').html('')
