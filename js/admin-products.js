@@ -31,6 +31,9 @@ function loadProducts() {
   
   
   function render(products) {
+
+    emptyAllFields();
+
       products.forEach((element) => {
       for (let i = 0; i < element.categories.length; i++) {
         let obj = element.categories[i];
@@ -87,7 +90,12 @@ function loadProducts() {
      */
     $("#tagSave").click(function () {
       let input = $("#tagInput").val();
-      $("#tagColumn").append(`
+
+      if (validateTag()) {
+
+        resetBorder(tagName);
+
+        $("#tagColumn").append(`
           <div id="${input}" class="form-check">
                       <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${input}" onchange="removeIfUnchecked(${input})">
                       <label class="form-check-label" for="${input}">${input}</label>
@@ -97,24 +105,36 @@ function loadProducts() {
       tags.push({ name: input});
 
       $("#tagSave").val("");
+      }
+      
     });
 
-    /**
+    
+       /**
      * Add new category to the list of existed categories on product site
      */
     $("#inputSave").click(function () {
       let input = $("#categoryInput").val();
-      $("#column").append(`
+
+      if (validateCategory()) {
+
+        resetBorder(categoryNameInput);
+
+        $("#column").append(`
           <div id="${input}" class="form-check">
                       <input class="form-check-input me-3" type="checkbox" value="" id="${input}">
                       <label class="form-check-label" for="cat1">${input}</label>
                   </div>
           `);
 
-      uniqueCategories.push(input);
-      $("#categoryInput").val("");
+        uniqueCategories.push(input);
+        $("#categoryInput").val("");
+      }
     });
 
+  
+
+   
     /**
      * Highlight chosen product in the table and select its id
      */
@@ -183,57 +203,73 @@ function loadProducts() {
      
       let productCategories = createCategoriesForProduct();
       let isAvailable = checkIfProductIsAvalible();
+      let tagsIncluded = createTagsForProduct();
+
+
+      if (validateForm()) {
+        resetsInputBorders();
      
+        let productObject = {
+          sku: sku,
+          title: $("#title").val(),
+          description: $("#description").val(),
+          image: imageStringForProduct,
+          isAvailable: isAvailable,
+          price: $("#price").val(),
+          unit: $("#unit").children(":selected").attr("id"),
+          volume: $("#weight_volume").val(),
+          quantity: $("#lager").val(),
+          vat: Number($("#VAT").val()),
+          brand: {
+            name: $("#brand").val(),
+          },
+          tags: tagsIncluded,
+          categories: productCategories,
+        };
 
-      let productObject = {
-        sku: sku,
-        title: $("#title").val(),
-        description: $("#description").val(),
-        image: imageStringForProduct,
-        isAvailable: isAvailable,
-        price: $("#price").val(),
-        unit: $("#unit").children(":selected").attr("id"),
-        volume: $("#weight_volume").val(),
-        quantity: $("#lager").val(),
-        vat: Number($("#VAT").val()),
-        brand: {
-          name: $("#brand").val(),
-        },
-        tags: tags,
-        categories: productCategories,
-      };
-
-      console.table(productObject);
+        console.table(productObject);
 
 
-      swal("Produkten har sparats");
+        swal("Produkten har sparats");
 
-        axios.post(updateUrl,  productObject  )
-        .then(() => {
-        })
-        .catch(() => {
-          alert('Något fick fel!','Vänligen försök igen', 'warning')
-        })
+        axios.post(updateUrl, productObject)
+          .then(() => {
+          })
+          .catch(() => {
+            alert('Något fick fel!', 'Vänligen försök igen', 'warning')
+          })
+
+        emptyAllFields();
+      }
     });
 
       /**
      * Empty form to add new product
      */
     $("#new").click(function () {
-      $("#title").val("");
-      $("#brand").val("");
-      $("#description").val("");
-      $("#imge").val("");
-      $("#sku").val("");
-      $("#price").val("");
-      $("#lager").val("");
-      $("input").prop("checked", false);
-
+      emptyAllFields();
       $("#tab-product-site").tab("show");
     });
     
   }
 }
+
+function emptyAllFields() {
+  $("#title").val("");
+  $("#brand").val("");
+  $("#description").val("");
+  $("#imge").val("");
+  $("#price").val("");
+  $("#lager").val("");
+  $("#isProductHidden").prop("checked", false);
+  $("#column div").children().each(function () {
+    $(this).prop("checked", false);     
+  });
+  $("#categoryInput").val("");
+  $("#tagColumn").empty();
+  $("#tagInput").val("");
+}
+
 
 /**
  * Generates a table with products
@@ -383,7 +419,22 @@ const createCategoriesForProduct = () => {
 }
 
 const createTagsForProduct = () => {
-
+  let tagList = [];
+ 
+  $("#tagColumn div").children().each(function () {
+    if ($(this).is(":checked")) {
+      let element = $(this).attr("id");
+      console.log("Element i tagColumn " + element);
+      tagList.push(element);
+    }
+  });
+  let tagsIncluded = [];
+  
+  tagList.forEach((element) => {
+    tagsIncluded.push({ name: element });
+  });
+  console.log("tagsIncluded " + tagsIncluded);
+  return tagsIncluded;
 }
 
 const checkIfProductIsAvalible = () => {
@@ -397,19 +448,32 @@ const checkIfProductIsAvalible = () => {
 
 const createProductInDataBase = () => {
 
-  const newProduct = createProductObjekt()
+  if ($("#column div input:checkbox:checked").length > 0) {
+    console.log("Correct!")
+  }
+  else {
+    alert("Fel")
+  };
+  
+  if (validateForm()) {
+    resetsInputBorders();
 
-  console.table(newProduct)
+    const newProduct = createProductObjekt()
 
-  axios.post(postUrl,  newProduct)
-        .then(() => {
-          swal("Ny produkt tillagd", '', "success")
-          imageStringForProduct = ""
-        })
-        .catch(() => {
-          swal('Något fick fel!','Vänligen försök igen', 'warning')
-        })
+    console.table(newProduct)
+
+    axios.post(postUrl, newProduct)
+      .then(() => {
+        swal("Ny produkt tillagd", '', "success")
+        imageStringForProduct = ""
+      })
+      .catch(() => {
+        swal('Något fick fel!', 'Vänligen försök igen', 'warning')
+      })
+    
+    emptyAllFields();
       
+  }
 }
 
 
@@ -429,3 +493,134 @@ $('#fileUpload').change(function() {
 $('#uploadButton').click(() => {
   productImageUpload($('#fileUpload'))
 })
+
+// Fältvalidering
+
+let productName = $("#title"),
+  brandName = $("#brand"),
+  categoryNameInput = $("#categoryInput"),
+  tagName = $("#tagInput"),
+  priceInput = $("#price"),
+  lagerInput = $("#lager"),
+  weight_volumeInput = $("#weight_volume");
+  
+
+let PRODUCTNAME_ERROR_MSG = $("#PRODUCTNAME_ERROR_MSG"),
+BRAND_ERROR_MSG = $("#BRAND_ERROR_MSG"),
+CATEGORY_ERROR_MSG = $("#CATEGORY_ERROR_MSG"),
+TAG_ERROR_MSG = $("#TAG_ERROR_MSG"),
+PRICE_ERROR_MSG = $("#PRICE_ERROR_MSG"),
+LAGER_ERROR_MSG = $("#LAGER_ERROR_MSG"),
+WEIGHT_ERROR_MSG = $("#WEIGHT_ERROR_MSG");
+
+productName.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForName, productName, bool, PRODUCTNAME_ERROR_MSG)
+});
+
+brandName.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForName, brandName, bool, BRAND_ERROR_MSG)
+});
+
+if (categoryNameInput.val() == "") {
+  console.log("Event listener for category turned off")
+}
+else {
+  categoryNameInput.focusout(()=>{
+    let bool = true
+    bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG)
+  });
+}
+  
+if (tagName.val() == "") {
+  console.log("Event listener for tag turned off")
+}
+else {
+  tagName.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG)
+});
+}
+
+
+priceInput.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForDecimalNumbers, priceInput, bool, PRICE_ERROR_MSG)
+});
+
+lagerInput.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForNumbersOnlyNegativeIncluded, lagerInput, bool, LAGER_ERROR_MSG)
+});
+
+weight_volumeInput.focusout(()=>{
+  let bool = true
+  bool = checkForInput(testForDecimalNumbers, weight_volumeInput, bool, WEIGHT_ERROR_MSG)
+});
+  
+function hideAllErrorMsgs() {
+  PRODUCTNAME_ERROR_MSG.hide();
+  BRAND_ERROR_MSG.hide();
+  CATEGORY_ERROR_MSG.hide();
+  TAG_ERROR_MSG.hide();
+  PRICE_ERROR_MSG.hide();
+  LAGER_ERROR_MSG.hide();
+  WEIGHT_ERROR_MSG.hide();
+}
+
+function resetsInputBorders() {
+  resetBorder(productName);
+  resetBorder(brandName);
+  resetBorder(categoryNameInput);
+  resetBorder(tagName);
+  resetBorder(priceInput);
+  resetBorder(lagerInput);
+  resetBorder(weight_volumeInput);
+}
+
+function validateForm() {
+  let bool = true;
+
+  bool = checkForInput(testForName, productName, bool, PRODUCTNAME_ERROR_MSG);
+  bool = checkForInput(testForName, brandName, bool, BRAND_ERROR_MSG);
+  
+  if (categoryNameInput.val() == "") {
+    console.log("Empty field");
+    bool = true;
+  }
+  else {
+    bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG);
+  }
+
+  if (tagName.val() == "") {
+    bool = true;
+  }
+  else {
+    bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG);
+  }
+  
+  bool = checkForInput(testForDecimalNumbers, priceInput, bool, PRICE_ERROR_MSG)
+  bool = checkForInput(testForNumbersOnlyNegativeIncluded, lagerInput, bool, LAGER_ERROR_MSG)
+  bool = checkForInput(testForDecimalNumbers, weight_volumeInput, bool, WEIGHT_ERROR_MSG)
+
+  return bool;
+}
+
+function validateCategory() {
+  let bool = true;
+  bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG);
+  return bool;
+}
+
+function validateTag() {
+  let bool = true;
+  bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG);
+  return bool;
+}
+
+
+
+
+hideAllErrorMsgs();
+
