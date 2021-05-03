@@ -1,6 +1,7 @@
 let allOrders = [];
 let activeOrder;
 const server = "https://hakimlivs.herokuapp.com/";
+// const server = "https://hakim-livs.herokuapp.com/";
 // const server = "http://localhost:8080/";
 const updateOrderLink = server + "customerOrder/update";
 const getAllOrders = server + "customerOrder/orders";
@@ -142,7 +143,7 @@ function renderUserData() {
   $("#customer-first-name").val(activeOrder.appUser.firstName);
   $("#customer-last-name").val(activeOrder.appUser.lastName);
   $("#customer-street-address").val(activeOrder.appUser.streetAddress);
-  $("#customer-zipcode").val(activeOrder.appUser.zipcode);
+  $("#customer-zipcode").val(activeOrder.appUser.zipCode);
   $("#customer-city").val(activeOrder.appUser.city.name);
   $("#customer-email").val(activeOrder.appUser.email);
   $("#customer-phone-number").val(activeOrder.appUser.phoneNumber);
