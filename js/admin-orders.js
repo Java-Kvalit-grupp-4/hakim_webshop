@@ -2,8 +2,8 @@ let orders = [];
 let activeOrder;
 let startDate = null;
 let endDate = null;
-// const server = "https://hakimlivs.herokuapp.com/";
-const server = "http://localhost:8080/";
+const server = "https://hakimlivs.herokuapp.com/";
+// const server = "http://localhost:8080/";
 const updateOrderLink = server + "customerOrder/update";
 const getAllOrders = server + "customerOrder/orders";
 
@@ -86,9 +86,9 @@ function renderLineItems() {
            <input
               type="text"
               class="quantity-field hi"
-              placeholder="${lineItem.quantity}"
+              value="${lineItem.quantity}"
               id="${lineItem.product.sku}"
-              maxlength="2"
+              maxlength="3"
             />
             </form>
           </td>
@@ -179,21 +179,22 @@ function validateQuanityChange(value) {
 function updateQuantity(quantityField) {
   console.log(quantityField);
   let sku = quantityField.target.id;
-  let quantityString; //fill with field value
+  let quantityString = $("#" + sku).val(); //fill with field value
   console.log("updating");
   console.log(sku);
   // let newQuantity = quantityField.target.val;
   // console.log(newQuantity);
   // console.log(quantityField.innertext);
-  let field = $("#" + sku)
+/*   let field = $("#" + sku)
   console.log(field);
   console.log(typeof field);
   console.log(field[0]);
   console.log(typeof field[0]);
-  console.log(field.val);
-  console.log(typeof field.val);
+  console.log("Method " + field.val());
+  console.log(typeof field.val); */
 
-  if (!validateQuanityChange) {
+  console.log(quantityString);
+  if (!validateQuanityChange(quantityString)) {
     alert("Ogiltig antal produkter för vara " + sku);
     return;
   }
