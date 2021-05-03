@@ -220,7 +220,7 @@ function renderProducts(products) {
                         maximumFractionDigits: 2,
                         }
                     )} kr</h5>
-                    <p id="${element.volume}" class="card-comp-price"> ${element.comparablePrice} kr/${unitCheck}</p>
+                    <p id="${element.volume}" class="card-comp-price">Jfr-pris ${element.comparablePrice} kr/${unitCheck}</p>
                     <p id="${element.description}"class="card-text">Mer info om produkten</p>
                     <div class="add-subtract-container">
                         <div class="subtract-btn">
