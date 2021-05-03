@@ -65,15 +65,11 @@ function createSearchWords(products) {
             searchStringToSplit += `${tag.name} `
         }) 
     })
-    
-    // to remove duplcate from array
-    const distinct = (value, index, self) => {
-        return self.indexOf(value) === index
-    }
-
-    
+     
     searchWords = searchStringToSplit.split(' ').filter(distinct)
 }
+
+
 
 /**
  * Gets the text from the selected element
@@ -110,6 +106,11 @@ function showSuggestions(list){
     suggBox.html(listData)
 }
 
+// to remove duplcate from array
+const distinct = (value, index, self) => {
+    return self.indexOf(value) === index
+}
+
 /**
  * Returns a list of filtered products based on the searchword
  * @param {String} searchWord 
@@ -140,6 +141,9 @@ const renderProductFromSearchWord = (searchWord) => {
             }
         })
     });
+
+    // remove duplcates from the filtered list
+    filteredList = filteredList.filter(distinct)
 
     // sets the filtered list to localstorage
     localStorage.removeItem('categoryList')
