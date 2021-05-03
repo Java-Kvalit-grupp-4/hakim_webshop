@@ -13,7 +13,7 @@
       href="../../styles/daterangpicker-bs3.css"
     />
     <link rel="stylesheet" href="../../styles/style.css" />
-   <!--  <link rel="stylesheet" href="../../styles/pdf.css" />-->
+   <link rel="stylesheet" href="../../styles/pdf.css" />
     <!-- <link rel="stylesheet" href="../Customer/admin-customer.css" /> -->
     <link rel="stylesheet" href="../Orders/admin-orders.css" />
     <title>Admin-ordrar</title>
@@ -497,11 +497,11 @@
         <div id="pdf" class="modal-content">
           <div class="modal-body">
             <div id="pdf">
-              <header class="clearfix">
+              <header class="header-pdf clearfix">
                   <div id="logo">
                       <img src="../../logo.png"/>
                   </div>
-                  <h1>Faktura</h1>
+                  <h1 class="h1-pdf">Faktura</h1>
                   <div id="customer" class="clearfix">
                       <div>
                           Ordernummer:
@@ -550,7 +550,7 @@
                   </div>
               </header>
               <main>
-                  <table>
+                  <table class="table-pdf">
                       <thead>
                           <tr>
                               <th>Artikelnummer</th>
@@ -582,7 +582,7 @@
                       <tbody id="table-footer"></tbody>
                   </table>
               </main>
-              <footer>
+              <footer class="footer-pdf">
                   <div id="company" class="clearfix">
                       <div>
                           <span>Hakim Livs</span>

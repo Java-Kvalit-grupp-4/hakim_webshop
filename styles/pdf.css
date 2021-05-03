@@ -4,12 +4,7 @@
     clear: both;
   }
   
-  a {
-    color: #5D6975;
-    text-decoration: underline;
-  }
-  
-  body {
+  #body-pdf {
     position: relative;
     width: 21cm;  
     height: 29.7cm; 
@@ -25,7 +20,7 @@
     margin: 1rem;
   }
   
-  header {
+  #header-pdf {
     padding: 10px 0;
     margin-bottom: 30px;
   }
@@ -39,7 +34,7 @@
     width: 300px;
   }
   
-  h1 {
+  #h1-pdf {
     border-top: 1px solid  #5D6975;
     border-bottom: 1px solid  #5D6975;
     color: #5D6975;
@@ -90,7 +85,7 @@
     white-space: nowrap;        
   }
   
-  table {
+  #table-pdf {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
@@ -146,7 +141,7 @@
     font-size: 1.2em;
   }
   
-  footer {
+  #footer-pdf {
     color: #5D6975;
     width: 100%;
     height: 30px;
