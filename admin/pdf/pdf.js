@@ -253,8 +253,8 @@ const renderLineItems = (order) => {
     $('#line-items').html('')
     $('#table-footer').html('')
 
-    console.log(order)
-    console.log(order.lineItems)
+    let pricePlusShipping = 0
+  
     order.forEach(element => {
         totalPrice += element.price
         $('#line-items').append(`
@@ -272,14 +272,15 @@ const renderLineItems = (order) => {
               })} kr</td>
         </tr>
         `)
+            pricePlusShipping += element.itemPrice
     });
 
     $('#table-footer').append(`
     <tr>
         <th scope="row"></th>
+            <td>Frakt</td>
             <td></td>
-            <td></td>
-            <td>Frakt </td>
+            <td> </td>
             <td>49,00 kr </td>
     </tr>
     <tr>
@@ -294,7 +295,7 @@ const renderLineItems = (order) => {
             <td></td>
             <td></td>
             <td>Totalpris </td>
-            <td>${pricePlusShipping}</td>
+            <td>${pricePlusShipping + 49}</td>
     </tr>
     `)
 }
@@ -342,7 +343,7 @@ const dueDate = () => {
     date.setDate(date.getDate() + 30)
     return date.toLocaleDateString()
 }
-
+/*
 function pricePlusShipping(){
     let total = $('#price-plus-shipping')
     total.html('')
@@ -354,7 +355,7 @@ function pricePlusShipping(){
           }) + 49}</p></div>
         `)
     });
-}
+}*/
 
 let fullName = $('#fullName'),
     email = $('#email'),
