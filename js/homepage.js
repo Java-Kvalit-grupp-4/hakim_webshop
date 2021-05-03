@@ -202,7 +202,6 @@ function renderProducts(products) {
         if(element.unit == 'gr' || element.unit == 'hg' || element.unit == 'kg'){
           unitCheck = 'kg'
         } 
-        
 
     $("#products").append(`
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
@@ -212,7 +211,7 @@ function renderProducts(products) {
                     <img src="${element.image}" alt="img" class="product-card-img">
                     </div>
                     <div id="${element.unit}" class="product-card-text">
-                    <h3 class="card-title">${element.title}</h3>
+                    <h3 id="${element.brand.name}" class="card-title">${element.title}</h3>
                     <h5 class="card-price">${element.price.toLocaleString(
                         "sv-SE",
                         {
@@ -220,7 +219,13 @@ function renderProducts(products) {
                         maximumFractionDigits: 2,
                         }
                     )} kr</h5>
-                    <p id="${element.volume}" class="card-comp-price">Jfr-pris ${element.comparablePrice} kr/${unitCheck}</p>
+                    <p id="${element.volume}" class="card-comp-price">Jfr-pris ${Number(element.comparablePrice).toLocaleString(
+                        "sv-SE",
+                        {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                        }
+                    )} kr/${unitCheck}</p>
                     <p id="${element.description}"class="card-text">Mer info om produkten</p>
                     <div class="add-subtract-container">
                         <div class="subtract-btn">
@@ -320,13 +325,15 @@ function renderProducts(products) {
         
         let imgSrc = element.children[0].children[0].src
         let title = element.children[1].children[0].innerText
+        let brand = element.children[1].children[0].id
         let desc = element.children[1].children[3].id
         let volym = element.children[1].children[2].id + element.children[1].id
         let price = element.children[1].children[1].innerText
-        let compPrice = element.children[1].children[2].innerText
+        let compPrice = element.children[1].children[2].innerText.substring(9)
 
         $('#product-pop-up-img').attr("src", imgSrc)
         $('#product-pop-up-title').text(title)
+        $('#product-pop-up-brand').text(brand)
         $('#product-pop-up-unit').text(volym)
         $('#product-pop-up-desc').text(desc)
         $('#product-pop-up-price').text(price)
