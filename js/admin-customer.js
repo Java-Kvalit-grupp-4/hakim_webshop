@@ -125,18 +125,20 @@ function showCustomers(customerArr){
                         }</a></th>
                         <td>${customer.firstName}</td>
                         <td>${customer.lastName}</td>
-                        <td><a href="mailto:${customer.email}">${
-                  customer.email
-                }</a></td>
+                        <td style="word-break:break-all;"><a href="mailto:${
+                          customer.email
+                        }">${customer.email}</a></td>
                         <td>${numberOfOrders}</td>
                         <td>${totalPrice.toLocaleString("sv-SE", {
                           minimumFractionDigits: 2,
                           maximumFractionDigits: 2,
-                        })} kr</td>
-                        <td><i class="bi ${isVip}"></i></td>
+                        })}</td>
+                        
                     </tr>
                     `);
-                
+                // <td>
+                //   <i class="bi ${isVip}"></i>
+                // </td>;
             }
             else{
                 swal("Något gick fel vid inläsning av kunder")
