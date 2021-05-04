@@ -1,10 +1,37 @@
-$(function(){
 
-    axios.get("https://hakimlivs.herokuapp.com/customerOrder/orders")
-    .then(response => {
+    
+    $(document).ready(load());
+
+    $(document).on('click', '.productNumber', saveAndOpenProduct)
+
+    function load(){
+        axios.get("https://hakimlivs.herokuapp.com/customerOrder/orders")
+        .then(response => {
         getOrderStatus(response.data)
         //console.log(response.data)
-    })
+        })
+
+        axios.get("https://hakimlivs.herokuapp.com/products")
+        .then(response => {
+        getOutOfStockProducts(response.data)
+        })
+    }
+
+    function getOutOfStockProducts(data){
+        console.log(data)
+
+        data.forEach(product =>{
+            if(product.quantity<1){
+                $("#products").append(`
+                <tr>
+                <th><a href="#" class="productNumber">${product.sku}</a></th>
+                <td>${product.title}</td>
+                <td>${product.brand.name}</td>
+                <td>${product.price}</td>
+              </tr>`)
+            }
+        })
+    }
 
     function getOrderStatus (data) {
         
@@ -29,26 +56,7 @@ $(function(){
             $('#canceled').text(canceled)
         }
 
-    axios.get("https://hakimlivs.herokuapp.com/products")
-    .then(response => {
-        getOutOfStockProducts(response.data)
-        
-    })
-
-    function getOutOfStockProducts(data){
-        console.log(data)
-
-        data.forEach(product =>{
-            if(product.quantity<1){
-                $("#products").append(`
-                <tr>
-                <th><a href="#">${product.sku}</a></th>
-                <td>${product.title}</td>
-                <td>${product.brand.name}</td>
-                <td>${product.price}</td>
-              </tr>`)
-            }
-        })
+    function saveAndOpenProduct(){
+        sessionStorage.setItem("productNumber", Number($(this).text()))
+        location.replace("Products/index.html");
     }
-
-})
