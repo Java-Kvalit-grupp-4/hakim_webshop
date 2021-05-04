@@ -6,7 +6,12 @@ const server = "https://hakimlivs.herokuapp.com/";
 const updateOrderLink = server + "customerOrder/update";
 const getAllOrders = server + "customerOrder/orders";
 
-$(
+$(function () {
+  load();
+  reset();
+});
+
+function load() {
   axios
     .get(getAllOrders)
     .then((response) => {
@@ -19,8 +24,8 @@ $(
     })
     .catch((err) => {
       alert("Serverfel!" + err);
-    })
-);
+    });
+}
 
 $(document).on('click', '#nav-profile-tab', updatePage);
 
@@ -66,7 +71,7 @@ $(document).on("click", ".order-number-link", openOrderTab);
 
 function openOrderTab() {
   saveChosenOrder(Number($(this).text()));
-  renderLineItems();
+  renderChosenOrder();
   renderUserData();
   sessionStorage.removeItem("chosenOrder");
   $("#navbar-order-tab").tab("show");
@@ -82,7 +87,7 @@ function saveChosenOrder(id) {
 
 function openCustomerOrder(){
   console.log("inne i openCustomerOrder")
-  renderLineItems();
+  renderChosenOrder();
   renderUserData();
   sessionStorage.removeItem("chosenOrder");
   $("#navbar-order-tab").tab("show");
@@ -93,7 +98,8 @@ function openCustomerPage(){
   location.replace("../Customer/index.html");
 }
 
-function renderLineItems() {
+
+function renderChosenOrder() {
   let chosenId = Number(sessionStorage.getItem("chosenOrder"));
   let totalCost = 0;
   $("#product-container").html("");
@@ -151,8 +157,8 @@ function renderLineItems() {
   const $orderChanges = $("#order-changes");
   $orderChanges.html("");
   activeOrder.orderChanges.forEach((change) => {
-    $orderChanges.prepend(`<li class="list-group-item">${change.changeDateTime
-      .replace("T", " ")
+    $orderChanges.prepend(`<li class="list-group-item">${
+      change.changeDateTime.replace("T", " ")
       .substring(2, 16)} 
     <p>${change.description}</p></li>`);
   });
@@ -183,7 +189,7 @@ function updateOrder() {
   activeOrder.isPaid = document.getElementById("payment-status").value;
   activeOrder.orderStatus.id = document.getElementById("order-status").value;
   let newCommentString = document.getElementById("add-comment-field").value;
-  if (newCommentString != "") {
+  if (newCommentString != "" && testForOnlyText(newCommentString)) {
     activeOrder.orderChanges.push(newCommentString);
     document.getElementById("add-comment-field").value = "";
   }
@@ -226,7 +232,7 @@ function updateQuantity(quantityField) {
         newQuantity = 0;
       }
       lineItem.quantity = newQuantity;
-      renderLineItems();
+      renderChosenOrder();
     }
   });
 }
@@ -278,8 +284,10 @@ function search() {
 
 function filterByDate(order) {
   let orderDate = moment(order.timeStamp);
-  return (orderDate.isSame(startDate, "day")  || orderDate.isAfter(startDate))
-  && (orderDate.isSame(endDate, "day") || orderDate.isBefore(endDate));
+  return (
+    (orderDate.isSame(startDate, "day") || orderDate.isAfter(startDate)) &&
+    (orderDate.isSame(endDate, "day") || orderDate.isBefore(endDate))
+  );
 }
 
 function hasSearchedForStatuses(order) {
@@ -294,13 +302,14 @@ function hasSearchedForStatuses(order) {
 function reset() {
   startDate = moment().subtract(1, "month");
   endDate = moment();
-  
-  $("#reservation").val(startDate.format("YYYY-MM-DD") + " - " + endDate.format("YYYY-MM-DD"))
+
+  $("#reservation").val(
+    startDate.format("YYYY-MM-DD") + " - " + endDate.format("YYYY-MM-DD")
+  );
 
   $("#filter-order-status-selector").val("NA");
   $("#filter-payment-status-selector").val("NA");
   $("#filter-payment-status-selector").val("NA");
   $("#order-search-text-form").val("");
-  
   renderOrders(allOrders);
 }
