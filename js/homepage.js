@@ -202,6 +202,9 @@ function renderProducts(products) {
         if(element.unit == 'gr' || element.unit == 'hg' || element.unit == 'kg'){
           unitCheck = 'kg'
         } 
+        if(element.unit == 'st'){
+            unitCheck = 'st'
+          } 
 
     $("#products").append(`
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
