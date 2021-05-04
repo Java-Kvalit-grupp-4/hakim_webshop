@@ -64,7 +64,7 @@ function openOrderTab() {
   renderChosenOrder();
   renderUserData();
   $("#navbar-order-tab").tab("show");
-  sessionStorage.removeItem("chosenOrder");
+  // sessionStorage.removeItem("chosenOrder");
 }
 
 function saveChosenOrder(id) {
