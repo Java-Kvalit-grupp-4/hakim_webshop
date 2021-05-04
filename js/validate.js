@@ -11,6 +11,17 @@ function testForOnlyText(input) {
 }
 
 /**
+ *  Takes input as String and checks for only all alphabetical characters
+ * @param {String} input to test 
+ * @returns true or false
+ */
+
+function testForWords(input) {
+    let pattern = /\p{L}/gu;
+    return testForSqlInjections(input) ? false : pattern.test(input);
+}
+
+/**
  *  Takes input as String and checks for only characters
  *  capital, lowercase and hyphen allowed
  * @param {String} input to test 

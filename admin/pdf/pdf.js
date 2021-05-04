@@ -52,19 +52,19 @@ const renderLineItemsPdf = (order) => {
      
         totalPrice += element.price
         $('#line-items').append(`
-            <tr>
-                <td class="sku">${element.product.sku}</td>
-                <td class="product">${element.product.title}</td>
-                <td class="price">${element.product.price.toLocaleString("sv-SE", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                  })}</td>
-                <td class="quantity">${element.quantity}</td>
-                <td class="total">${element.itemPrice.toLocaleString("sv-SE", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                  })}</td>
-            </tr>
+        <tr>
+            <td class="sku">${element.product.sku}</td>
+            <td class="product">${element.product.title}</td>
+            <td class="price">${element.product.price.toLocaleString("sv-SE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}</td>
+            <td class="quantity">${element.quantity}</td>
+            <td class="total">${(element.itemPrice * element.quantity).toLocaleString("sv-SE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}</td>
+        </tr>
         `)
             pricePlusShipping += element.itemPrice
     });

@@ -37,7 +37,6 @@ function renderOrders(orders) {
   });
   $("#orders-container").empty();
   orders.forEach((order) => {
-    console.log(order.orderNumber)
     const paymentStatusString = order.isPaid ? "Betald" : "Obetald";
     $("#orders-container").append(`
       <tr>
@@ -89,9 +88,11 @@ function addOrderToPdfBtn(){
 function renderChosenOrder() {
   let chosenId = Number(sessionStorage.getItem("chosenOrder"));
   let totalCost = 0;
+  
   $("#product-container").html("");
   allOrders.forEach((order) => {
     if (order.orderNumber == chosenId) {
+      $("#order-heading").html(`Order ${order.orderNumber}`)
       activeOrder = order;
       order.lineItems.forEach((lineItem) => {
         totalCost += Number(lineItem.itemPrice) * Number(lineItem.quantity);
@@ -103,21 +104,22 @@ function renderChosenOrder() {
           <th scope="row" class="ps-md-5">
             <a href="#">${lineItem.product.title}</a>
           </th>
-          <td>
+          
+          <td class="text-end">${lineItem.itemPrice.toLocaleString("sv-SE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td>
+          <td class="text-center">
           <form>
            <input
               type="text"
-              class="quantity-field hi"
+              class="quantity-field"
               value="${lineItem.quantity}"
               id="${lineItem.product.sku}"
               maxlength="3"
             />
             </form>
           </td>
-          <td>${lineItem.itemPrice.toLocaleString("sv-SE", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}</td>
           <td>${(
             Number(lineItem.itemPrice) * Number(lineItem.quantity)
           ).toLocaleString("sv-SE", {
@@ -129,7 +131,7 @@ function renderChosenOrder() {
     }
   });
   $("#order-total-cost").html(
-    `Totalt: ${totalCost.toLocaleString("sv-SE", {
+    `${totalCost.toLocaleString("sv-SE", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })}`
@@ -141,14 +143,18 @@ function renderChosenOrder() {
     quantityFields[i].addEventListener("blur", updateQuantity, false);
   }
 
-  const $orderChanges = $("#order-changes");
+  let $orderChanges = $("#order-changes");
   $orderChanges.html("");
-  activeOrder.orderChanges.forEach((change) => {
+  console.log(activeOrder);
+  if(activeOrder.orderChanges.length>0){
+    activeOrder.orderChanges.forEach((change) => {
     $orderChanges.prepend(`<li class="list-group-item">${
       change.changeDateTime.replace("T", " ")
       .substring(2, 16)} 
     <p>${change.description}</p></li>`);
   });
+  }
+  
 
   //Checks for nullish value
   const sentDateText = activeOrder.sentTimestamp
@@ -176,15 +182,21 @@ function updateOrder() {
   activeOrder.isPaid = document.getElementById("payment-status").value;
   activeOrder.orderStatus.id = document.getElementById("order-status").value;
   let newCommentString = document.getElementById("add-comment-field").value;
-  if (newCommentString != "" && testForOnlyText(newCommentString)) {
-    activeOrder.orderChanges.push(newCommentString);
+  if (newCommentString != "" && testForWords(newCommentString)) {
+    activeOrder.orderChanges.push(
+      {
+        description: newCommentString,
+      changeDateTime: moment().toISOString(true)}
+      );
+      console.log(activeOrder.orderChanges);
     document.getElementById("add-comment-field").value = "";
   }
 
   axios
     .post(updateOrderLink, activeOrder)
     .then(() => {
-      swal("Ordern är uppdaterad!");
+      swal("Ordern är uppdaterad!")
+      .then(()=> renderChosenOrder());
     })
     .catch(() => {
       swal("Något gick fel!", "Vänligen försök igen", "warning");
