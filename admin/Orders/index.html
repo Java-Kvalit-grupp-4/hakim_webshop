@@ -36,7 +36,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex mx-lg-3 my-5 my-xl-0">
+            <!-- <form class="d-flex mx-lg-3 my-5 my-xl-0">
               <select
                 class="form-select form-select-sm mx-22"
                 aria-label=".form-select-sm example"
@@ -56,15 +56,18 @@
               <button class="btn btn-outline-light mx-2" type="submit">
                 Sök
               </button>
-            </form>
+            </form>-->
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-              <li class="nav-item ">
-                <a class="nav-link" href="../Products/index.html" id="nav-products"
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="../Products/index.html"
+                  id="nav-products"
                   >Produkter</a
                 >
               </li>
-              <li class="nav-item ">
+              <li class="nav-item">
                 <a class="nav-link" href="../Orders/index.html" id="nav-orders">
                   Ordrar</a
                 >
@@ -144,15 +147,9 @@
             <div class="header col-lg-6 col-md-12">
               <h2>Orderlista</h2>
             </div>
-            <!-- <div class="price col-lg-3 col-md-6">
-                <p>Pris</p>
-                </div> -->
-            <!-- <div class="order-nr col-lg-3 col-md-6">
-                <p>Order-nr</p>
-                </div> -->
           </div>
           <div class="row">
-            <div class="col col-md-7 col-lg-4">
+            <div class="col col-md-12 col-lg-4 mb-md-3 mb-lg-0">
               <div class="datepicker">
                 <form class="form-horizontal">
                   <fieldset>
@@ -180,7 +177,7 @@
                             name="reservation"
                             id="reservation"
                             class="form-control"
-                            value="04/01/2021 - 04/30/2021"
+                            value="2021-04-01 - 2021-06-01"
                           />
                         </div>
                       </div>
@@ -189,36 +186,42 @@
                 </form>
               </div>
             </div>
-            <div class="col-12 col-md-5 col-lg-3 my-3 mt-md-0">
-              <select class="form-select" aria-label="Orderstatus">
-                <option selected disabled>Orderstatus</option>
+            <div class="col-12 col-md-6 col-lg-4 my-3 mt-md-0">
+              <select
+                class="form-select"
+                aria-label="Orderstatus"
+                id="filter-order-status-selector"
+              >
+                <option selected value="NA">Orderstatus</option>
                 <option value="1">Ohanterad</option>
                 <option value="2">Plockas</option>
                 <option value="3">Skickad</option>
                 <option value="4">Avbeställd</option>
               </select>
             </div>
-            <div class="col-12 col-md-5 col-lg-4 mb-3 mt-md-0">
-              <select class="form-select" aria-label="Orderstatus">
-                <option selected disabled>Betalstatus</option>
-                <option value="1">Obetald</option>
-                <option value="2">Betald</option>
+            <div class="col-12 col-md-6 col-lg-4 mb-3 mt-md-0">
+              <select
+                class="form-select"
+                aria-label="Betalstatus"
+                id="filter-payment-status-selector"
+              >
+                <option selected value="NA">Betalstatus</option>
+                <option value="0">Obetald</option>
+                <option value="1">Betald</option>
               </select>
             </div>
-            <div class="col-lg-1 mb-3 mb-lg-0">
-              <button class="btn btn-secondary" type="button" id="filter-button">Filter</button>
-              
-            </div>
-            <div class="col">
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-10 col-lg-11">
               <div class="input-group">
                 <select
                   class="form-select"
-                  id="inputGroupSelect04"
+                  id="search-options-selector"
                   aria-label="Example select with button addon"
                 >
-                  <option selected disabled>Sök efter...</option>
-                  <option value="1">Ordernummer</option>
-                  <option value="2">Totalt pris över</option>
+                  <option selected value="NA">Sök efter...</option>
+                  <option value="order-number">Ordernummer</option>
+                  <option value="total-price">Totalt pris över</option>
                 </select>
                 <input
                   class="form-control"
@@ -226,21 +229,28 @@
                   placeholder="Sök"
                   aria-label="Search"
                   maxlength="50"
+                  id="order-search-text"
                 />
-                <button class="btn btn-secondary" type="button">Sök</button>
+                <button class="btn btn-secondary" type="button" id="search-btn">
+                  Sök
+                </button>
               </div>
-              <!-- <form class="form-inline my-2 my-lg-0 d-flex">
+            </div>
+            <div class="col-sm-1 col-12 col-lg-1 mb-lg-0 text-end text-sm-start mt-3 mt-sm-0 ">
+              <button class="btn btn-secondary" type="button" id="reset-btn">
+                Återställ
+              </button>
+            </div>
+            <!-- <form class="form-inline my-2 my-lg-0 d-flex">
                       <label for="total-price" class="form-label">Pris</label>
                         <input class="form-control mx-2" type="search" placeholder="Sök" aria-label="Search" id="total-price">
                         <button type="button" class="btn btn-secondary" type="submit">Secondary</button>
                     </form> -->
-            </div>
-            
           </div>
         </div>
         <div class="container">
           <table
-            class="table table-secondary table-responsive table-sm table-hover"
+            class="table table-secondary table-responsive table-sm table-hover table-condensed"
           >
             <thead>
               <tr>
@@ -386,7 +396,9 @@
           </div>
           <div class="container col col-lg-9 pb-5 pe-0">
             <div class="container col">
-              <div class="product-info mt-5 container ms-xl-4 px-1 px-lg-0 ps-lg-5">
+              <div
+                class="product-info mt-5 container ms-xl-4 px-1 px-lg-0 ps-lg-5"
+              >
                 <div class="mb-5">
                   <h2>Produkter i ordern</h2>
                 </div>
@@ -406,24 +418,43 @@
                   <tbody id="product-container"></tbody>
                 </table>
               </div>
-              <div class="container text-end pe-4" id="order-total-cost">
-                <p>Totalt: 0</p>
+              <div class="row">
+                <!-- <div class="col col-8 text-end">
+                  <button
+                  type="submit"
+                  class="btn btn-secondary save-button"
+                  style="width: 100px"
+                  id="update-quantity-btn"
+                  >Uppdatera antal
+                  </button>
+                </div> -->
+                <div class="col text-end pe-4 col-12" id="order-total-cost">
+                  <p>Totalt: 0</p>
+                </div>
               </div>
+
               <div class="row ps-lg-5">
                 <div class="text mb-2 px-3 ms-xl-4 col-lg-6">
                   Orderstatus
-                  <select class="form-select" aria-label="Orderstatus" id="order-status">
+                  <select
+                    class="form-select"
+                    aria-label="Orderstatus"
+                    id="order-status"
+                  >
                     <option selected disabled>Orderstatus</option>
                     <option value="1">Ohanterad</option>
                     <option value="2">Plockas</option>
                     <option value="3">Skickad</option>
                     <option value="4">Avbeställd</option>
                   </select>
-                  
                 </div>
                 <div class="text mb-2 px-3 ms-xl-4 col-lg-5">
                   Betalstatus
-                  <select class="form-select" aria-label="Paymentstatus" id="payment-status">
+                  <select
+                    class="form-select"
+                    aria-label="Paymentstatus"
+                    id="payment-status"
+                  >
                     <option selected disabled>Betalstatus</option>
                     <option value="true">Betald</option>
                     <option value="false">Obetald</option>
@@ -432,10 +463,12 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <p class="lead fw-bold mt-4 ms-lg-5 mb-5 px-3 px-lg-0" id="order-sent-date-field"></p>
+                  <p
+                    class="lead fw-bold mt-4 ms-lg-5 mb-5 px-3 px-lg-0"
+                    id="order-sent-date-field"
+                  ></p>
                 </div>
               </div>
-              
             </div>
             <div class="container">
               <div class="container col-12 pt-3 ps-3 ps-lg-5">
@@ -593,29 +626,17 @@
       </div>
     </div>
     <!-- PDF MODAL END -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <!-- <script>
+  
+    <script>
       let customer = JSON.parse(sessionStorage.getItem("customer"));
       if (
         customer == null ||
         customer == undefined ||
         customer.isAdmin == false
       ) {
-        window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html";
+        window.location.href = "../../";
       }
-    </script> -->
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
@@ -633,15 +654,10 @@
     crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../../js/validate.js"></script>    
     <script type="text/javascript" src="../../admin/pdf/pdf.js"></script>
     <script type="text/javascript" src="../../js/moment.js"></script>
     <script type="text/javascript" src="../../js/daterangpicker.js"></script>
-    <!-- <script type="text/javascript">
-      $(document).ready(function () {
-        $("#reservation").daterangepicker(null, function (start, end, label) {
-        });
-      });
-    </script> -->
     <script src="../../js/admin-orders.js"></script>
   </body>
 </html>
