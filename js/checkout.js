@@ -30,6 +30,9 @@ $(document).ready(() => {
    * @param {Array} data array of products
    */
   function renderCart() {
+    
+
+
     let $VAT25 = $("#vat-25");
     $VAT25.hide();
     let $VAT12 = $("#vat-12");
@@ -41,6 +44,17 @@ $(document).ready(() => {
     let VAT6 = 0;
     let cartData = JSON.parse(localStorage.getItem("cart"));
     let cart = $("#cart-container");
+
+    // add shipping to order
+    let shippingObject = JSON.parse(localStorage.getItem('shipping'));
+    shippingObject = {
+      ...shippingObject,
+        inCart: 1 
+    }
+
+    cartData.push(shippingObject)
+    
+
     cart.html("");
     $.each(cartData, (index, e) => {
       let linePrice = e.price * e.inCart;
@@ -60,7 +74,6 @@ $(document).ready(() => {
       }
 
       if(VAT25>0) {
-
         $VAT25.show();
         $("#VAT-25").text(
           `${VAT25.toLocaleString("sv-SE", {
@@ -115,7 +128,7 @@ $(document).ready(() => {
     });
 
     $("#cart-total-price").text(
-      JSON.parse(localStorage.getItem("cartTotalPrice")).toLocaleString(
+      Number(JSON.parse(localStorage.getItem("cartTotalPrice")) + shippingObject.price).toLocaleString(
         "sv-SE",
         {
           minimumFractionDigits: 2,
@@ -173,6 +186,14 @@ function makeOrderObject() {
   let orderCommentInput = orderComment.text();
   let lineItems = [];
 
+  // adds shipping to order
+  let shipping = JSON.parse(localStorage.getItem('shipping'))
+  shipping = {
+    ...shipping,
+      inCart: 1 
+  }
+  cart.push(shipping);
+
   // create lineItems for database
   $.each(cart, (index, productElement) => {
     let lineItem = {
@@ -206,6 +227,7 @@ function sendOrderToServer(orderObject) {
   // const url = "https://hakim-test.herokuapp.com/customerOrder/add";
   // const url = "https://hakimlogintest.herokuapp.com/customerOrder/add";
   //const url = 'http://localhost:8080/customerOrder/add'
+
   console.log(orderObject);
 
   axios
