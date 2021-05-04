@@ -33,7 +33,8 @@ $(function () {
 
     $("#address-footer").html(addressOutput);
 
-    $("#phone").text(phoneNumber);
+    
+    $("p#phone").text(phoneNumber);
     $("#openingHours").html(`${oh}`);
   }
 });
