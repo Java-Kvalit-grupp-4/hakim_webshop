@@ -122,7 +122,12 @@ const addShippingProductToLocalStorage = (array) => {
     })
 }
 
+// removes products that are not available
+const removeHiddenProductsFromArray = (array) => array.filter(product => product.isAvailable == true)
+
+
 function renderCategories(data) {
+
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
     if(cartQuantity != null || cartQuantity>0) {
         totalItemsInCart.show();
@@ -134,9 +139,9 @@ function renderCategories(data) {
     } else {
         $("#myAccountDropdown").hide();
     }
-    products = data;
-    
 
+    products = removeHiddenProductsFromArray(data)
+    
   let categories = [];
   
   let availableProducts = [];
