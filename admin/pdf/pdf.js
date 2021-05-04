@@ -215,17 +215,49 @@ let orderObject =
 }
 */
 
-$("#preview-pdf").click(()=> {
-    $('#save-pdf').show()
-    // here you send in the selected order to generate a pdf preview
-    generatPdf(orderObject)
-    $("#pdf-modal").modal("show");
-}) 
+// $("#preview-pdf").click(()=> {
+//     $('#save-pdf').show()
+//     // here you send in the selected order to generate a pdf preview
+//     generatPdf(orderObject)
+//     $("#pdf-modal").modal("show");
+// }) 
+
+$("#preview-pdf").click(() => {
+  $("#save-pdf").show();
+  // here you send in the selected order to generate a pdf preview
+  generatPdf(orderObject);
+  $("#pdf-modal").modal("show");
+}); 
+
+
+function printPdf() {
+    let element = document.getElementById("pdf");
+    let options = {
+      margin: 0,
+      filename: "order.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    };
+
+
+    html2pdf()
+      .from(element)
+      .set(options)
+      .toPdf()
+      .get("pdf")
+      .then(function (pdfObj) {
+        // pdfObj has your jsPDF object in it, use it as you please!
+        // For instance (untested):
+        pdfObj.autoPrint();
+        window.open(pdfObj.output("bloburl"), "_blank");
+      });
+}
 
 $('#save-pdf').click(() => {
     $('#save-pdf').hide()
     let element = document.getElementById('pdf')
-    let opt = {
+    let options = {
         margin:         0,
         filename:       'order.pdf',
         image:          {type: 'jpeg', quality: 0.98},
@@ -242,7 +274,19 @@ $('#save-pdf').click(() => {
         window.open(pdfObj.output('bloburl'), '_blank');
     }); */
 
-    html2pdf(element).set(opt).save()
+    html2pdf()
+      .from(element)
+      .set(options)
+      .toPdf()
+      .get("pdf")
+      .then(function (pdfObj) {
+        // pdfObj has your jsPDF object in it, use it as you please!
+        // For instance (untested):
+        pdfObj.autoPrint();
+        window.open(pdfObj.output("bloburl"), "_blank");
+      });
+
+    // html2pdf(element).set(opt).save()
 })
 
 const generatPdf = (order) => {
@@ -351,7 +395,7 @@ const renderLineItemsPdf = (order) => {
       <div class="row">
     <div class="col-8"></div>
     <div class="col">
-      <h6 class="cart-line-item mb-3">Varav moms:</h6>
+      <h6 class="cart-line-item my-3">Varav moms:</h6>
     </div>
   </div>
       `)
@@ -371,7 +415,7 @@ const renderLineItemsPdf = (order) => {
     </div>
     <div
       id="checkout-cart-VAT-25"
-      class="col-2 cart-line-item text-end"
+      class="col-2 cart-line-item "
     >
       <p id="VAT-25" class="pe-2" >${VAT25.toLocaleString("sv-SE", {
         minimumFractionDigits: 2,
@@ -387,13 +431,13 @@ const renderLineItemsPdf = (order) => {
         <div class="row" id="vat-12">
             <div class="col-8 cart-line-item"></div>
     <div
-      class="col-1 cart-line-item text-end text-sm-start"
+      class="col-1 cart-line-item text-end text-sm-start mt-0"
     >
       <h6 class="cart-line-item">12%:</h6>
     </div>
     <div
       id="checkout-cart-VAT-12"
-      class="col-2 cart-line-item text-end"
+      class="col-2 cart-line-item "
     >
       <p id="VAT-12" class="pe-2" >${VAT12.toLocaleString("sv-SE", {
         minimumFractionDigits: 2,
@@ -415,7 +459,7 @@ const renderLineItemsPdf = (order) => {
                 <h6 class="cart-line-item">6%:</h6>
             </div>
 
-            <div id="checkout-cart-VAT-6" class="col-2 cart-line-item text-end">
+            <div id="checkout-cart-VAT-6" class="col-2 cart-line-item ">
                 <p id="VAT-6" class="pe-2" >${VAT6.toLocaleString("sv-SE", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,

@@ -78,10 +78,9 @@ function addOrderToPdfBtn(){
 
   allOrders.forEach((order) => {
     if (order.orderNumber == chosenId) {
-      $("#generate-pdf").click(()=>{
-        $('#save-pdf').show()     
+      $("#generate-pdf").click(()=>{  
         generatPdf(order)
-        $("#pdf-modal").modal("show")
+        printPdf();
       }
     )}
   })
