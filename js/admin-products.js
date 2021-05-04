@@ -249,7 +249,7 @@ function showProducts(l) {
             <td>${element.price.toLocaleString("sv-SE", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
-            })} kr</td>
+            })}</td>
             <td> ${element.quantity}</td>
             </tr>`
     );
