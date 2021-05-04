@@ -246,6 +246,7 @@ const generatPdf = (order) => {
     $('#invoiceDate').text(invoiceDate())
     $('#dueDate').text(dueDate())
     $('#deliveryDate').text(deliveryDate())
+   // $('#invoiceNumber').text(reverse())
 
     renderLineItemsPdf(order.lineItems)
 }
@@ -255,6 +256,7 @@ const renderLineItemsPdf = (order) => {
 
     $('#line-items').html('')
     $('#table-footer').html('')
+    $('#footer-pdf').html('')
 
     let pricePlusShipping = 0
   
@@ -262,17 +264,17 @@ const renderLineItemsPdf = (order) => {
         totalPrice += element.price
         $('#line-items').append(`
         <tr>
-            <td class="desc">${element.product.sku}</td>
-            <td class="desc">${element.product.title}</td>
-            <td>${element.product.price.toLocaleString("sv-SE", {
+            <td class="sku">${element.product.sku}</td>
+            <td class="product">${element.product.title}</td>
+            <td class="price">${element.product.price.toLocaleString("sv-SE", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
               })}</td>
-            <td>${element.quantity}</td>
-            <td>${element.itemPrice.toLocaleString("sv-SE", {
+            <td class="quantity">${element.quantity}</td>
+            <td class="total">${element.itemPrice.toLocaleString("sv-SE", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
-              })} kr</td>
+              })}</td>
         </tr>
         `)
             pricePlusShipping += element.itemPrice
@@ -284,7 +286,7 @@ const renderLineItemsPdf = (order) => {
             <td>Frakt</td>
             <td></td>
             <td> </td>
-            <td>49,00 kr </td>
+            <td>49,00</td>
     </tr>
     <tr>
         <th scope="row></th>
@@ -298,8 +300,36 @@ const renderLineItemsPdf = (order) => {
             <td></td>
             <td></td>
             <td>Totalpris </td>
-            <td>${pricePlusShipping + 49}</td>
+            <td>${(pricePlusShipping + 49).toLocaleString("sv-SE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}</td>
     </tr>
+    `)
+
+    $('#footer-pdf').append(`
+    <div id="company" class="clearfix">
+                            <div>
+                                <span>Hakim Livs</span>
+                            </div>
+                            <div>
+                                <span>Kungsgatan 65</span>
+                            </div>
+                            <div>
+                                <span>116 42 Stockholm</span>
+                            </div>
+                            <div>
+                                <span>+46 70 861 31 89</span>
+                            </div>
+                            <div>
+                                <span>hakimlivs@gmail.com</span>
+                            </div>
+                            <br>
+                        </div>
+                        <div id="company-bank">Bankgiro:
+                            <span>1234-5678</span>
+                            <div>Godkänd för F-skatt</div>
+                        </div>
     `)
 }
 

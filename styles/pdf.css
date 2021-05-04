@@ -92,47 +92,50 @@
     margin-bottom: 20px;
   }
   
-  table tr:nth-child(2n-1) td {
+  .table-pdf tr:nth-child(2n-1) td {
     background: #F5F5F5;
   }
-  
+  /*
   table th,
   table td {
     text-align: center;
   }
+  */
   
-  table th {
+  .table-pdf #th-pdf {
     padding: 5px 20px;
     color: #5D6975;
     border-bottom: 1px solid #C1CED9;
     white-space: nowrap;        
     font-weight: normal;
   }
-  
-  table .product {
-    text-align: center;
+
+  .table-pdf{
+    width: 98%;
+    margin: auto;
+    
   }
-  table .desc {
+  
+  .table-pdf .sku {
+    text-align: left;
+  }
+  .table-pdf .product {
+    text-align: left;
+  }
+
+  .table-pdf .price {
+    text-align: left;
+  }
+
+  .table-pdf .quantity {
+    text-align: left;
+  }
+
+  .table-pdf .total {
     text-align: left;
   }
   
-  table td {
-    padding: 20px;
-    text-align: right;
-  }
-  
-  table td.service,
-  table td.desc {
-    vertical-align: top;
-  }
-  
-  table td.unit,
-  table td.quantity,
-  table td.total {
-    font-size: 1.2em;
-  }
-  
-  table td.grand {
+  .table-pdf td.grand {
     border-top: 1px solid #5D6975;;
   }
   
@@ -145,7 +148,7 @@
     color: #5D6975;
     width: 100%;
     height: 30px;
-    position: absolute;
+ 
     bottom: 0;
     border-top: 1px solid #C1CED9;
     padding: 8px 0;
