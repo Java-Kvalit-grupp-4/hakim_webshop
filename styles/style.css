@@ -46,7 +46,7 @@ nav #links a {
   font-size: 1.2rem;
 }
 footer {
-  background-color: rgb(34, 33, 33);
+  background-color: #1a3a50 !important;
   color: white;
   max-width: 100vw;
 }
