@@ -76,7 +76,7 @@ function saveChosenOrder(id) {
 function addOrderToPdfBtn(){
   let chosenId = Number(sessionStorage.getItem("chosenOrder"));
 
-  orders.forEach((order) => {
+  allOrders.forEach((order) => {
     if (order.orderNumber == chosenId) {
       $("#generate-pdf").click(()=>{
         $('#save-pdf').show()     
