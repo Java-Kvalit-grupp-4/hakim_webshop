@@ -75,7 +75,8 @@ function testForNumbersOnly(input) {
 }
 
 function testForNumbersOnlyNegativeIncluded(input) {
-    let pattern = /^-?[0-9\s]*$/;
+  //  let pattern = /^-?[0-9\s]*$/;
+    let pattern = /^-?[0-9]*$/;
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
 
@@ -86,7 +87,8 @@ function testForNumbersOnlyNegativeIncluded(input) {
  * @returns true or false
  */
 function testForDecimalNumbers(input) {
-    let pattern = /^\d{1,}\.?\d*$/;
+  //  let pattern = /^\d{1,}\.?\d*$/;
+    let pattern = /^\d{1,}[\,\.]?\d*$/;
     return testForSqlInjections(input) ? false : pattern.test(input)
 }
 /**
