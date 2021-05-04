@@ -226,27 +226,35 @@ $('#save-pdf').click(() => {
     $('#save-pdf').hide()
     let element = document.getElementById('pdf')
     let opt = {
-        margin:         1,
+        margin:         0,
         filename:       'order.pdf',
         image:          {type: 'jpeg', quality: 0.98},
         html2canvas:    {scale: 2},
         jsPDF:          {unit: 'in', format: 'letter', orientation: 'portrait'}
     }
 
+    /* let worker = html2pdf(element).set(opt);
+
+    worker.toPdf().get('pdf').then(function (pdfObj) {
+        // pdfObj has your jsPDF object in it, use it as you please!
+        // For instance (untested):
+        pdfObj.autoPrint();
+        window.open(pdfObj.output('bloburl'), '_blank');
+    }); */
+
     html2pdf(element).set(opt).save()
 })
 
 const generatPdf = (order) => {
-    console.log(order)
 
+    $('#invoiceNumber').text(reverse(String(order.orderNumber)))
     $('#orderNumber').text(order.orderNumber)
     $('#fullName').text(order.appUser.firstName + ' ' + order.appUser.lastName)
-    $('#address').text(order.appUser.streetAddress + ' ' + order.appUser.zipCode + ' ' + order.appUser.city.name)
+    $('#address').html(`${order.appUser.streetAddress} </br> ${order.appUser.zipCode} ${order.appUser.city.name}`)
     $('#email').text(order.appUser.email)
     $('#invoiceDate').text(invoiceDate())
     $('#dueDate').text(dueDate())
     $('#deliveryDate').text(deliveryDate())
-   // $('#invoiceNumber').text(reverse())
 
     renderLineItemsPdf(order.lineItems)
 }
@@ -256,11 +264,14 @@ const renderLineItemsPdf = (order) => {
 
     $('#line-items').html('')
     $('#table-footer').html('')
-    $('#footer-pdf').html('')
+    $('.modal-footer').html('')
 
     let pricePlusShipping = 0
+    
+    
   
     order.forEach(element => {
+     
         totalPrice += element.price
         $('#line-items').append(`
         <tr>
@@ -279,6 +290,7 @@ const renderLineItemsPdf = (order) => {
         `)
             pricePlusShipping += element.itemPrice
     });
+
 
     $('#table-footer').append(`
     <tr>
@@ -307,30 +319,139 @@ const renderLineItemsPdf = (order) => {
     </tr>
     `)
 
-    $('#footer-pdf').append(`
+    let VAT25 = 0;
+    let VAT12 = 0;
+    let VAT6 = 0;  
+
+    console.log(order);
+    
+    $.each(order, (index, e) => {
+        console.log(e);
+      let linePrice = e.itemPrice * e.quantity;
+
+      switch (e.product.vat) {
+        case 1.25:
+          VAT25 += linePrice - linePrice / e.product.vat;
+          break;
+        case 1.12:
+          VAT12 += linePrice - linePrice / e.product.vat;
+          break;
+        case 1.06:
+          VAT6 += linePrice - linePrice / e.product.vat;
+          break;
+        default:
+          break;
+      }
+    })
+
+
+    $('.vat-container').html('')
+    
+      $('.vat-container').append(`
+      <div class="row">
+    <div class="col-8"></div>
+    <div class="col">
+      <h6 class="cart-line-item mb-3">Varav moms:</h6>
+    </div>
+  </div>
+      `)
+
+    
+      if(VAT25>0) {
+
+        $(".vat-container").append(`
+        <div class="row" id="vat-25">
+    <div
+      class="col-8 cart-line-item"
+    ></div>
+    <div
+      class="col-1 cart-line-item text-end text-sm-start"
+    >
+      <h6 class="cart-line-item">25%:</h6>
+    </div>
+    <div
+      id="checkout-cart-VAT-25"
+      class="col-2 cart-line-item text-end"
+    >
+      <p id="VAT-25" class="pe-2" >${VAT25.toLocaleString("sv-SE", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}</p>
+    </div>
+  </div>
+        `
+        );
+      }
+      if (VAT12 > 0) {
+        $(".vat-container").append(`
+        <div class="row" id="vat-12">
+            <div class="col-8 cart-line-item"></div>
+    <div
+      class="col-1 cart-line-item text-end text-sm-start"
+    >
+      <h6 class="cart-line-item">12%:</h6>
+    </div>
+    <div
+      id="checkout-cart-VAT-12"
+      class="col-2 cart-line-item text-end"
+    >
+      <p id="VAT-12" class="pe-2" >${VAT12.toLocaleString("sv-SE", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}</p>
+    </div>
+  </div>
+        `)
+        
+        
+      }
+      if (VAT6 > 0) {
+
+        $('.vat-container').append(`
+        <div class="row" id="vat-6">
+                <div class="col-8 cart-line-item"></div>
+
+            <div class="col-1 cart-line-item text-end text-sm-start">
+                <h6 class="cart-line-item">6%:</h6>
+            </div>
+
+            <div id="checkout-cart-VAT-6" class="col-2 cart-line-item text-end">
+                <p id="VAT-6" class="pe-2" >${VAT6.toLocaleString("sv-SE", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}</p>
+            </div>
+        </div>
+        
+        `)
+        
+        
+      }
+    
+
+    $('.modal-footer').append(`
     <div id="company" class="clearfix">
-                            <div>
+                            
                                 <span>Hakim Livs</span>
-                            </div>
-                            <div>
+                            
                                 <span>Kungsgatan 65</span>
-                            </div>
-                            <div>
+                            
                                 <span>116 42 Stockholm</span>
-                            </div>
-                            <div>
+                            
                                 <span>+46 70 861 31 89</span>
-                            </div>
-                            <div>
+                            
                                 <span>hakimlivs@gmail.com</span>
-                            </div>
+                            
                             <br>
                         </div>
-                        <div id="company-bank">Bankgiro:
+                        <div id="company-bank">
+                            <span>Bankgiro:</span>
                             <span>1234-5678</span>
-                            <div>Godkänd för F-skatt</div>
+                            <span>Godkänd för F-skatt</span>
                         </div>
     `)
+
+
 }
 
 /* Stoppa in ordernumret och vänd på det för att skapa fakturanummer */
@@ -344,20 +465,6 @@ let totalPrice = 0;
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       }));
-/*
-function totalVat () {
-    let vat = $('vat')
-    vat.html('')
-    vat.forEach(element => {
-        vat.append(`
-        <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(element.price * element.inCart).toLocaleString("sv-SE", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }) * 0.1071}</p></div>
-        `)
-    });
-}
-*/
 
 const invoiceDate = () =>{
     var today = new Date();
@@ -376,19 +483,6 @@ const dueDate = () => {
     date.setDate(date.getDate() + 30)
     return date.toLocaleDateString()
 }
-/*
-function pricePlusShipping(){
-    let total = $('#price-plus-shipping')
-    total.html('')
-    total.forEach(element => {
-        total.append(`
-        <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${(element.price * element.inCart).toLocaleString("sv-SE", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }) + 49}</p></div>
-        `)
-    });
-}*/
 
 let fullName = $('#fullName'),
     email = $('#email'),
@@ -396,15 +490,5 @@ let fullName = $('#fullName'),
     zip = $('#zip'),
     city = $('#city')
 
-    /*
-function renderCustomerInfo() {
-        
-    fullName.val(appUser.firstName + appUser.lastName);
-    email.val(loggedInCustomer.email);
-    address.val(loggedInCustomer.streetAddress);
-    zip.val(zipCode);
-    city.val(loggedInCustomer.city.name);
-}
-*/
 
 

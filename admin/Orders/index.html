@@ -494,62 +494,75 @@
      <!-- PDF MODAL START -->
     <div class="modal fade" id="pdf-modal">
       <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div id="pdf" class="modal-content">
-          <div class="modal-body">
-            <div id="pdf">
+        <div class="modal-content">
+          <div id="pdf" class="modal-body">
+            <div >
               <header class="header-pdf clearfix">
                   <div id="logo">
                       <img src="../../logo.png"/>
                   </div>
+                  
                   <h1 class="h1-pdf">Faktura</h1>
-                  <div id="customer" class="clearfix">
-                      <div>
-                          Ordernummer:
-                          <span id="orderNumber"></span>
+                  <div class="row mb-5">
+                    
+                    <div class="col-xl-2">
+                      <div id="customer">
+                        <div>Ordernummer:</div>         
+                        <div>Kundnamn:</div>                           
+                        <div>Leveransadress:</div>  
+                        <div>&nbsp;</div>                        
+                        <div>Email:</div>
+                    </div>
+                    </div>
+                    <div class="col-xl-6">
+                      <div id="customer">
+                        <div id="orderNumber"></div>
+                        <div id="fullName"></div>
+                        <div>
+                            
+                          <div id="address"></div>
+                          <div id="zip"></div>
+                          <div id="city"></div>
+                        
+                        </div>
+                        <div id="email"></div>
                       </div>
-                      <div>
-                          Kundnamn:
-                          <span id="fullName"></span>
-                      </div>
-                      <div>
-                          Leveransadress:
-                          <span>
-                              <div id="address"></div>
-                              <div id="zip"><div id="city"></div></div>
-                          </span>
-                      </div>
-                      <div>
-                          Email:
-                          <span id="email"></div>
+                    </div>
+                    <div class="col-xl-2 ps-2">
+                      <div id="project">
+                        <div>
+                            Fakturanummer:                            
+                        </div>
+                        <div>
+                            Fakturadatum:                            
+                        </div>
+                        <div>
+                            Leveransdatum:                           
+                        </div>
+                        <div>
+                            Betalningsvillkor                            
+                        </div>
+                        <div>
+                            Förfallodatum:                            
+                        </div>
+                        <div>
+                            Dröjsmålsränta:                           
+                        </div>
+                     </div>
+                    </div>
+                    <div class="col-xl-2">
+                      <div id="invoiceNumber"></div>
+                      <div id="invoiceDate"></div>
+                      <div id="deliveryDate"></div> 
+                      <div>14 dagar</div> 
+                      <div id="dueDate"></div>
+                      <div>7,5%</div>
+                    </div>
+                    
                   </div>
-                  <div id="project">
-                      <div>
-                          Fakturanummer:
-                          <span></span>
-                      </div>
-                      <div>
-                          Fakturadatum:
-                          <span id="invoiceDate"></span>
-                      </div>
-                      <div>
-                          Leveransdatum:
-                          <span id="deliveryDate"></span> 
-                      </div>
-                      <div>
-                          Betalningsvillkor
-                          <span>14 dagar</span> 
-                      </div>
-                      <div>
-                          Förfallodatum:
-                          <span id="dueDate"></span>
-                      </div>
-                      <div>
-                          Dröjsmålsränta:
-                          <span>7,5%</span>
-                      </div>
-                  </div>
+                  
+                  
               </header>
-              <main>
                   <table class="table-pdf">
                       <thead>
                           <tr>
@@ -560,18 +573,17 @@
                               <th class="th-pdf">Totalt kr</th>
                           </tr>
                       </thead>
-                      <tbody id="line-items">
-                      </tbody>
+                      <tbody id="line-items"></tbody>
                       <tbody id="table-footer"></tbody>
-                      <tfooter id="footer-pdf">
-                        
-                    </tfooter>
+                      
                   </table>
-              </main>
+                  <div class="vat-container"></div>
+              
               
           </div>
-
+          <div class="modal-footer modal-footer-info"></div>
           </div>
+          
          
             <button type="button" class="btn btn-dark" id="save-pdf">
               Save pdf
@@ -615,6 +627,11 @@
       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
       crossorigin="anonymous"
     ></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"
+    integrity="sha512-w3u9q/DeneCSwUDjhiMNibTRh/1i/gScBVp2imNVAMCt6cUHIw6xzhzcPFIaL3Q1EbI2l+nu17q2aLJJLo4ZYg=="
+    crossorigin="anonymous">
+    </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../admin/pdf/pdf.js"></script>
     <script type="text/javascript" src="../../js/moment.js"></script>

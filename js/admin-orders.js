@@ -68,18 +68,15 @@ function saveChosenOrder(id) {
 
 function addOrderToPdfBtn(){
   let chosenId = Number(sessionStorage.getItem("chosenOrder"));
-  console.log(chosenId);
 
   orders.forEach((order) => {
     if (order.orderNumber == chosenId) {
-      console.log("inne i generate pdf")
       $("#generate-pdf").click(()=>{
+        $('#save-pdf').show()     
         generatPdf(order)
         $("#pdf-modal").modal("show")
-
       }
-
-      )}
+    )}
   })
 }
 
