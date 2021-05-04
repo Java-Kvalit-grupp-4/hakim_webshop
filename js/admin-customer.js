@@ -180,11 +180,11 @@ function openCustomerPage(){
     console.log("inne i openCustomerPage")
     saveCustomer();
     sessionStorage.removeItem("customerNumber");
-   openTab();
+    openTab();
 }
 
 function openTab(){
-    $("#nav-contact-tab").tab('show');
+    $("#nav-contact-tab").tab("show");
 }
 
 function saveCustomer(){
