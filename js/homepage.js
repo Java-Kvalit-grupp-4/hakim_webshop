@@ -168,6 +168,8 @@ function renderCategories(data) {
 
     $("#sidomeny button").on("click", function () {
         let categoryName = $(this).attr("id");
+        let headingText = categoryName == 'all' ? "Produkter" : categoryName;
+        $("#heading").text(headingText);
         let selectedCategoryList = [];
         availableProducts.forEach((product) => {
             if (categoryName === "all") {
