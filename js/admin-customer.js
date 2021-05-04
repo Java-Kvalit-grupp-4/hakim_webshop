@@ -5,6 +5,7 @@
 let customers = [];
 let allOrders = [];
 let choosedCustomer = "";
+
 // let getAllCustomers = "https://hakim-test.herokuapp.com/users";
 let getAllCustomers = "https://hakimlivs.herokuapp.com/users";
 let updateUser = "https://hakimlivs.herokuapp.com/users/adminUpdateUser";
@@ -74,25 +75,33 @@ function openOrderTab(){
 }
 
 function load(){
-    hideAllErrorMsgs()
-    $("#reservation").daterangepicker(null, function (start, end, label) {
-        startDateC = new Date(start.toISOString())
-        endDateC = new Date(end.toISOString())
-    })
-    axios.get(getAllCustomers)
-        .then((response) =>{
-            if(response.status ===200){
-                showCustomers(response.data) 
-                customers = response.data   
-            }
-            else{
-                swal({title:"Något gick fel vid inläsning av kunder", icon:"warning"})
-            }
+    let chosenId = sessionStorage.getItem("customerNumber");
+    if(chosenId!=null || chosenId!=undefined){       
+      openCustomerPage();
+      chosenId =null;
+    } else {
+        hideAllErrorMsgs()
+        $("#reservation").daterangepicker(null, function (start, end, label) {
+            startDateC = new Date(start.toISOString())
+            endDateC = new Date(end.toISOString())
         })
-        .catch(err =>{
-            alert("Serverfel!" + err)
-        })
+        axios.get(getAllCustomers)
+            .then((response) =>{
+                if(response.status ===200){
+                    showCustomers(response.data) 
+                    customers = response.data   
+                }
+                else{
+                    swal({title:"Något gick fel vid inläsning av kunder", icon:"warning"})
+                }
+            })
+            .catch(err =>{
+                alert("Serverfel!" + err)
+            })
+    }
 }
+
+
 
 function showCustomers(customerArr){
     $("#customerTable").empty();
@@ -158,13 +167,29 @@ function showCustomers(customerArr){
 }
 
 function openCustomerTab(){
-    console.log(window.location.href)
+    console.log("inne i openCustomerTab")
     $("#orderTable").empty();
-    saveCustomer($(this).text());
-    $("#nav-contact-tab").tab('show');
+    sessionStorage.setItem("customerNumber", $(this).text())
+    saveCustomer();
+    sessionStorage.removeItem("customerNumber");
+    //$("#nav-contact-tab").tab('show');
+    openTab();
     };
 
-function saveCustomer(customerNumber){
+function openCustomerPage(){
+    console.log("inne i openCustomerPage")
+    saveCustomer();
+    sessionStorage.removeItem("customerNumber");
+   openTab();
+}
+
+function openTab(){
+    $("#nav-contact-tab").tab('show');
+}
+
+function saveCustomer(){
+    console.log("inne i saveCustomer")
+    let customerNumber = Number(sessionStorage.getItem("customerNumber"));
     customers.forEach(customer => {
 
         if(customer.customerNumber==customerNumber){

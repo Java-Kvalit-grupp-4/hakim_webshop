@@ -27,7 +27,10 @@
                 <th><a href="#" class="productNumber">${product.sku}</a></th>
                 <td>${product.title}</td>
                 <td>${product.brand.name}</td>
-                <td>${product.price}</td>
+                <td>${product.price.toLocaleString("sv-SE", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}</td>
               </tr>`)
             }
         })

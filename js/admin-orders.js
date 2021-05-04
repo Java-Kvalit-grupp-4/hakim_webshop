@@ -22,8 +22,9 @@ $(
     })
 );
 
-$(document).on('click', '#nav-profile-tab', renderOrders(allorders));
+$(document).on('click', '#nav-profile-tab', updatePage);
 
+$(document).on('click', '.customerNumber', openCustomerPage);
 
 let startDate;
 let endDate;
@@ -46,7 +47,7 @@ function renderOrders(orders) {
             <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${
               order.orderNumber
             }</a> </th>
-            <th scope="row" class="ps-md-5" style="word-break:break-all;"><a href="#" class="customer-tab">${
+            <th scope="row" class="ps-md-5" style="word-break:break-all;"><a href="#" class="customer-tab customerNumber">${
               order.appUser.customerNumber
             }</a> </th>
             <td>${order.timeStamp.substring(0, 10)}</td>
@@ -69,10 +70,11 @@ function openOrderTab() {
   renderUserData();
   sessionStorage.removeItem("chosenOrder");
   $("#navbar-order-tab").tab("show");
-  sessionStorage.removeItem("chosenOrder");
 }
 
-
+function updatePage(){
+  renderOrders(allOrders)
+}
 
 function saveChosenOrder(id) {
   sessionStorage.setItem("chosenOrder", id);
@@ -84,6 +86,11 @@ function openCustomerOrder(){
   renderUserData();
   sessionStorage.removeItem("chosenOrder");
   $("#navbar-order-tab").tab("show");
+}
+
+function openCustomerPage(){
+  sessionStorage.setItem("customerNumber", Number($(this).text()));
+  location.replace("../Customer/index.html");
 }
 
 function renderLineItems() {
