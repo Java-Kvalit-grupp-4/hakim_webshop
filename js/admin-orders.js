@@ -6,9 +6,9 @@ const server = "https://hakimlivs.herokuapp.com/";
 const updateOrderLink = server + "customerOrder/update";
 const getAllOrders = server + "customerOrder/orders";
 
-$(function () {
+$(function () { 
   load();
-  reset();
+ // reset();
 });
 
 function load() {
@@ -38,7 +38,7 @@ function renderOrders(orders) {
   let chosenId = sessionStorage.getItem("chosenOrder");
   if(chosenId!=null || chosenId!=undefined){
     openCustomerOrder();
-    chosenId =null;
+    //chosenId =null;
   } else {
     $("#reservation").daterangepicker(null, function (start, end, label) {
       startDate = moment(start);
@@ -86,7 +86,6 @@ function saveChosenOrder(id) {
 }
 
 function openCustomerOrder(){
-  console.log("inne i openCustomerOrder")
   renderChosenOrder();
   renderUserData();
   sessionStorage.removeItem("chosenOrder");
@@ -236,8 +235,8 @@ function updateQuantity(quantityField) {
     }
   });
 }
-
-$("#search-btn").on("click", search);
+$(document).on('click', '#search-btn', search)
+//$("#search-btn").on("click", search);
 $("#reset-btn").on("click", reset);
 
 let orderStatusFilter;
