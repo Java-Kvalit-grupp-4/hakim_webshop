@@ -1,9 +1,7 @@
-let orders = [];
+let allOrders = [];
 let activeOrder;
-let startDate = null;
-let endDate = null;
 const server = "https://hakimlivs.herokuapp.com/";
-// const server = "https://hakim-test.herokuapp.com/";
+// const server = "https://hakim-livs.herokuapp.com/";
 // const server = "http://localhost:8080/";
 const updateOrderLink = server + "customerOrder/update";
 const getAllOrders = server + "customerOrder/orders";
@@ -13,9 +11,9 @@ $(
     .get(getAllOrders)
     .then((response) => {
       if (response.status === 200) {
-        orders = response.data;
-        renderOrders();
-      }else {
+        allOrders = response.data;
+        renderOrders(allOrders);
+      } else {
         swal("Något gick fel vid inläsning av order");
       }
     })
@@ -24,22 +22,23 @@ $(
     })
 );
 
-$(document).on('click', '#nav-profile-tab', renderOrders)
+$(document).on('click', '#nav-profile-tab', renderOrders(allorders));
 
-function renderOrders() {
+
+let startDate;
+let endDate;
+
+function renderOrders(orders) {
   let chosenId = sessionStorage.getItem("chosenOrder");
-  console.log("chosenId "+ chosenId)
   if(chosenId!=null || chosenId!=undefined){
-    console.log("inne")
     openCustomerOrder();
     chosenId =null;
   } else {
-    console.log("ute")
     $("#reservation").daterangepicker(null, function (start, end, label) {
-      startDate = new Date(start.toISOString());
-      endDate = new Date(end.toISOString());
+      startDate = moment(start);
+      endDate = moment(end);
     });
-
+    $("#orders-container").empty();
     orders.forEach((order) => {
       const paymentStatusString = order.isPaid ? "Betald" : "Obetald";
       $("#orders-container").append(`
@@ -47,7 +46,7 @@ function renderOrders() {
             <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${
               order.orderNumber
             }</a> </th>
-            <th scope="row" class="ps-md-5"><a href="#" class="customer-tab">${
+            <th scope="row" class="ps-md-5" style="word-break:break-all;"><a href="#" class="customer-tab">${
               order.appUser.customerNumber
             }</a> </th>
             <td>${order.timeStamp.substring(0, 10)}</td>
@@ -70,8 +69,9 @@ function openOrderTab() {
   renderUserData();
   sessionStorage.removeItem("chosenOrder");
   $("#navbar-order-tab").tab("show");
-  
+  sessionStorage.removeItem("chosenOrder");
 }
+
 
 
 function saveChosenOrder(id) {
@@ -90,7 +90,7 @@ function renderLineItems() {
   let chosenId = Number(sessionStorage.getItem("chosenOrder"));
   let totalCost = 0;
   $("#product-container").html("");
-  orders.forEach((order) => {
+  allOrders.forEach((order) => {
     if (order.orderNumber == chosenId) {
       activeOrder = order;
       order.lineItems.forEach((lineItem) => {
@@ -103,7 +103,17 @@ function renderLineItems() {
           <th scope="row" class="ps-md-5">
             <a href="#">${lineItem.product.title}</a>
           </th>
-          <td>${lineItem.quantity}</td>
+          <td>
+          <form>
+           <input
+              type="text"
+              class="quantity-field hi"
+              value="${lineItem.quantity}"
+              id="${lineItem.product.sku}"
+              maxlength="3"
+            />
+            </form>
+          </td>
           <td>${lineItem.itemPrice.toLocaleString("sv-SE", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
@@ -125,16 +135,25 @@ function renderLineItems() {
     })}`
   );
 
- console.log(activeOrder.orderChanges);
+  //Feel free to change this event set up - this was the only one I managed to get working
+  const quantityFields = $(".quantity-field");
+  for (var i = 0; i < quantityFields.length; i++) {
+    quantityFields[i].addEventListener("blur", updateQuantity, false);
+  }
+
   const $orderChanges = $("#order-changes");
   $orderChanges.html("");
-  activeOrder.orderChanges.forEach(change => {
-    $orderChanges.prepend(`<li class="list-group-item">${change.changeDateTime.replace("T", " ").substring(2, 16)} 
-    <p>${change.description}</p></li>`)
+  activeOrder.orderChanges.forEach((change) => {
+    $orderChanges.prepend(`<li class="list-group-item">${change.changeDateTime
+      .replace("T", " ")
+      .substring(2, 16)} 
+    <p>${change.description}</p></li>`);
   });
 
   //Checks for nullish value
-  const sentDateText = activeOrder.sentTimestamp ? `${activeOrder.sentTimestamp.replace("T", " ").substring(2, 16)}` : "Inte skickad";
+  const sentDateText = activeOrder.sentTimestamp
+    ? `${activeOrder.sentTimestamp.replace("T", " ").substring(2, 16)}`
+    : "Inte skickad";
   $("#order-sent-date-field").text(sentDateText);
   $("#order-status").val(activeOrder.orderStatus.id);
   $("#payment-status").val(activeOrder.isPaid);
@@ -145,7 +164,7 @@ function renderUserData() {
   $("#customer-first-name").val(activeOrder.appUser.firstName);
   $("#customer-last-name").val(activeOrder.appUser.lastName);
   $("#customer-street-address").val(activeOrder.appUser.streetAddress);
-  $("#customer-zipcode").val(activeOrder.appUser.zipcode);
+  $("#customer-zipcode").val(activeOrder.appUser.zipCode);
   $("#customer-city").val(activeOrder.appUser.city.name);
   $("#customer-email").val(activeOrder.appUser.email);
   $("#customer-phone-number").val(activeOrder.appUser.phoneNumber);
@@ -170,99 +189,111 @@ function updateOrder() {
     .catch(() => {
       swal("Något gick fel!", "Vänligen försök igen", "warning");
     });
-  console.log(activeOrder);
 }
 
+function validateQuanityChange(value) {
+  return /(\+|\-)?\d?\d/.test(value);
+}
 
-$(document).on("click", "#filter-button", filterSearch);
+function updateQuantity(quantityField) {
+  let sku = quantityField.target.id;
+  let quantityString = $("#" + sku).val();
+  if (!validateQuanityChange(quantityString)) {
+    alert("Ogiltig antal produkter för vara " + sku);
+    return;
+  }
 
-function filterSearch() {
-  console.log("Printing dates");
-  console.log(startDate);
-  console.log(endDate);
-/*
-  //let tempOrders = [];
-  let filter = $("#search-select option:selected").text();
-  let input = $("#input").val();
+  activeOrder.lineItems.forEach((lineItem) => {
+    if (lineItem.product.sku == sku) {
+      let newQuantity;
+      if (quantityString.startsWith("+")) {
+        newQuantity = lineItem.quantity + Number(quantityString.substring(1));
+      } else if (quantityString.startsWith("-")) {
+        newQuantity = lineItem.quantity - Number(quantityString.substring(1));
+      } else {
+        newQuantity = Number(quantityString);
+      }
+      if (newQuantity > 99) {
+        newQuantity = 99;
+      } else if (newQuantity < 0) {
+        newQuantity = 0;
+      }
+      lineItem.quantity = newQuantity;
+      renderLineItems();
+    }
+  });
+}
 
-  $("#customerTable").empty();
-  switch (filter) {
-    case "Visa alla":
-      showCustomers(customers);
+$("#search-btn").on("click", search);
+$("#reset-btn").on("click", reset);
+
+let orderStatusFilter;
+let paymentStatusFilter;
+
+function search() {
+  let searchMode = $("#search-options-selector option:selected").val();
+  let searchString = $("#order-search-text").val();
+  orderStatusFilter = $("#filter-order-status-selector").val();
+  paymentStatusFilter = $("#filter-payment-status-selector").val();
+
+  let ordersMatchingStatuses = allOrders.filter((order) =>
+    hasSearchedForStatuses(order)
+  );
+  let ordersMatchingDate = ordersMatchingStatuses.filter((order) =>
+    filterByDate(order)
+  );
+
+  switch (searchMode) {
+    case "NA":
+      renderOrders(ordersMatchingDate);
       break;
-    case "Vip-kunder":
-      showCustomers(customers.filter((customer) => customer.isVip == true));
+    case "order-number":
+      renderOrders(
+        ordersMatchingDate.filter((order) =>
+          order.orderNumber.toString().includes(searchString)
+        )
+      );
       break;
-    case "Total ordersumma över:":
-      if (input != "" && input != NaN) {
-        resetsInputBorders();
-        axios.get(getAllOrders).then((response) => {
-          let filterCustomers = [];
-          let filterOrders = response.data;
-          let date;
-          let filterOrders2 = [];
-          if (startDate != null && endDate != null) {
-            filterOrders.forEach((order) => {
-              date = new Date(order.timeStamp);
-              if (date >= startDate && date <= endDate) {
-                filterOrders2.push(order);
-              }
-            });
-          }
-          customers.forEach((customer) => {
-            if (
-              getTotalPriceOfOrders(
-                filterOrders2.filter(
-                  (order) =>
-                    order.appUser.customerNumber == customer.customerNumber
-                )
-              ) > input
-            ) {
-              filterCustomers.push(customer);
-            }
-          });
-          showCustomers(filterCustomers);
-        });
+    case "total-price":
+      if (searchString != "" && searchString != NaN) {
+        let searchPrice = Number(searchString);
+        renderOrders(
+          ordersMatchingDate.filter(
+            (order) => Number(order.totalCost) >= searchPrice
+          )
+        );
       } else {
         swal("Fel input!", "Du måste skriva in totalsumma", "warning");
       }
       break;
-    case "Totalt antal ordrar över:":
-      if (input != "" && input != NaN) {
-        resetsInputBorders();
-        axios.get(getAllOrders).then((response) => {
-          let filterCustomers = [];
-          let filterOrders = response.data;
-          let date;
-          let filterOrders2 = [];
-          console.log("startdate: " + startDate + "endDate: " + endDate);
-          if (startDate != null && endDate != null) {
-            filterOrders.forEach((order) => {
-              date = new Date(order.timeStamp);
-              console.log(date);
-              if (date >= startDate && date <= endDate) {
-                filterOrders2.push(order);
-              }
-            });
-          }
-          customers.forEach((customer) => {
-            if (
-              customerOrderLength(
-                filterOrders2.filter(
-                  (order) =>
-                    order.appUser.customerNumber == customer.customerNumber
-                )
-              ) > input
-            ) {
-              filterCustomers.push(customer);
-            }
-          });
-          showCustomers(filterCustomers);
-        });
-      } else {
-        swal("Fel input", "Du måste skriva in totalt antal ordrar", "warning");
-      }
-      break;
   }
-  */
+}
+
+function filterByDate(order) {
+  let orderDate = moment(order.timeStamp);
+  return (orderDate.isSame(startDate, "day")  || orderDate.isAfter(startDate))
+  && (orderDate.isSame(endDate, "day") || orderDate.isBefore(endDate));
+}
+
+function hasSearchedForStatuses(order) {
+  let orderMatch =
+    orderStatusFilter == "NA" ||
+    order.orderStatus.id == Number(orderStatusFilter);
+  let paymentMatch =
+    paymentStatusFilter == "NA" || order.isPaid == Number(paymentStatusFilter);
+  return orderMatch && paymentMatch;
+}
+
+function reset() {
+  startDate = moment().subtract(1, "month");
+  endDate = moment();
+  
+  $("#reservation").val(startDate.format("YYYY-MM-DD") + " - " + endDate.format("YYYY-MM-DD"))
+
+  $("#filter-order-status-selector").val("NA");
+  $("#filter-payment-status-selector").val("NA");
+  $("#filter-payment-status-selector").val("NA");
+  $("#order-search-text-form").val("");
+  
+  renderOrders(allOrders);
 }

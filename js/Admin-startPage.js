@@ -44,7 +44,7 @@
                 console.log(element.orderStatus.type)
                 switch(element.orderStatus.type){
                     case "Ohanterad": waiting += 1;  break;
-                    case "Plockning pågår": picking += 1;       break; 
+                    case "Plockas": picking += 1;       break; 
                     case "Skickad": sent += 1;                  break;              
                     case "Avbeställd": canceled += 1;           break;  
                 }

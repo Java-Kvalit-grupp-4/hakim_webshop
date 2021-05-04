@@ -212,7 +212,6 @@ function sendOrderToServer(orderObject) {
     .post(url, orderObject)
     .then((response) => {
       if (response.status == 200) {
-
         swal({
           title: "Tack för din order!",
           text: `
