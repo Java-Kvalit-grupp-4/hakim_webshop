@@ -395,12 +395,12 @@
             </div>
           </div>
           <div class="container col col-lg-9 pb-5 pe-0">
-            <div class="container col">
+            <div class="container col px-2">
               <div
-                class="product-info mt-5 container ms-xl-4 px-1 px-lg-0 ps-lg-5"
+                class="product-info mt-5 container ms-xl-4 px-3 px-lg-0 px-lg-5"
               >
                 <div class="mb-5">
-                  <h2>Produkter i ordern</h2>
+                  <h2 id="order-heading">Produkter i ordern</h2>
                 </div>
 
                 <table
@@ -410,15 +410,20 @@
                     <tr>
                       <th scope="col" class="pb-3 ps-md-5">Artikelnr</th>
                       <th scope="col" class="pb-3 ps-md-5">Produktnamn</th>
-                      <th scope="col" class="pb-3">Antal</th>
-                      <th scope="col" class="pb-3">Pris <small>kr</small></th>
+                      <th scope="col" class="pb-3 text-end">Pris <small>kr</small></th>
+                      <th scope="col" class="pb-3 text-center">Antal</th>
+                      
                       <th scope="col" class="pb-3">Totalt <small>kr</small></th>
                     </tr>
                   </thead>
                   <tbody id="product-container"></tbody>
+                  <tfoot>
+                    <th scope="col" colspan="4" class="pb-3 text-end pe-4">Totalt <small>kr</small></th>
+                    <td id="order-total-cost" class="pb-3"></td>
+                  </tfoot>
                 </table>
               </div>
-              <div class="row">
+              <div class="row gx-0 gx-lg-5 px-3 px-lg-5" id=small-row>
                 <!-- <div class="col col-8 text-end">
                   <button
                   type="submit"
@@ -428,13 +433,13 @@
                   >Uppdatera antal
                   </button>
                 </div> -->
-                <div class="col text-end pe-4 col-12" id="order-total-cost">
+                <!-- <div class="col text-end  col-12 pe-3" id="order-total-cost">
                   <p>Totalt: 0</p>
                 </div>
-              </div>
+              </div> -->
 
-              <div class="row ps-lg-5">
-                <div class="text mb-2 px-3 ms-xl-4 col-lg-6">
+              <div class="row  gx-0 gx-lg-5 ps-lg-5">
+                <div class="text mb-2   col-lg-6">
                   Orderstatus
                   <select
                     class="form-select"
@@ -448,7 +453,7 @@
                     <option value="4">Avbeställd</option>
                   </select>
                 </div>
-                <div class="text mb-2 px-3 ms-xl-4 col-lg-5">
+                <div class="text mb-2  col-lg-6">
                   Betalstatus
                   <select
                     class="form-select"
@@ -461,10 +466,10 @@
                   </select>
                 </div>
               </div>
-              <div class="row">
-                <div class="col">
+              <div class="row" id="order-sent-row">
+                <div class="col " >
                   <p
-                    class="lead fw-bold mt-4 ms-lg-5 mb-5 px-3 px-lg-0"
+                    class="lead fw-bold mt-4 ms-lg-5 mb-5  px-lg-0"
                     id="order-sent-date-field"
                   ></p>
                 </div>
