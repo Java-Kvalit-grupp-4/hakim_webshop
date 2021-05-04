@@ -14,12 +14,7 @@ $(
     .then((response) => {
       if (response.status === 200) {
         orders = response.data;
-        let chosenId = Number(sessionStorage.getItem("chosenOrder"));
-        if(chosenId!=null){
-          openCustomerOrder();
-        } else {
         renderOrders();
-        } 
       }else {
         swal("Något gick fel vid inläsning av order");
       }
@@ -29,32 +24,42 @@ $(
     })
 );
 
-function renderOrders() {
-  
-  $("#reservation").daterangepicker(null, function (start, end, label) {
-    startDate = new Date(start.toISOString());
-    endDate = new Date(end.toISOString());
-  });
+$(document).on('click', '#nav-profile-tab', renderOrders)
 
-  orders.forEach((order) => {
-    const paymentStatusString = order.isPaid ? "Betald" : "Obetald";
-    $("#orders-container").append(`
-      <tr>
-          <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${
-            order.orderNumber
-          }</a> </th>
-          <th scope="row" class="ps-md-5"><a href="#" class="customer-tab">${
-            order.appUser.customerNumber
-          }</a> </th>
-          <td>${order.timeStamp.substring(0, 10)}</td>
-          <td>${order.totalCost.toLocaleString("sv-SE", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })} </td>
-          <td>${order.orderStatus.type}</td>
-          <td>${paymentStatusString}</td>
-      </tr>`);
-  });
+function renderOrders() {
+  let chosenId = sessionStorage.getItem("chosenOrder");
+  console.log("chosenId "+ chosenId)
+  if(chosenId!=null || chosenId!=undefined){
+    console.log("inne")
+    openCustomerOrder();
+    chosenId =null;
+  } else {
+    console.log("ute")
+    $("#reservation").daterangepicker(null, function (start, end, label) {
+      startDate = new Date(start.toISOString());
+      endDate = new Date(end.toISOString());
+    });
+
+    orders.forEach((order) => {
+      const paymentStatusString = order.isPaid ? "Betald" : "Obetald";
+      $("#orders-container").append(`
+        <tr>
+            <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${
+              order.orderNumber
+            }</a> </th>
+            <th scope="row" class="ps-md-5"><a href="#" class="customer-tab">${
+              order.appUser.customerNumber
+            }</a> </th>
+            <td>${order.timeStamp.substring(0, 10)}</td>
+            <td>${order.totalCost.toLocaleString("sv-SE", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })} </td>
+            <td>${order.orderStatus.type}</td>
+            <td>${paymentStatusString}</td>
+        </tr>`);
+    });
+  }
 }
 
 $(document).on("click", ".order-number-link", openOrderTab);
@@ -74,6 +79,7 @@ function saveChosenOrder(id) {
 }
 
 function openCustomerOrder(){
+  console.log("inne i openCustomerOrder")
   renderLineItems();
   renderUserData();
   sessionStorage.removeItem("chosenOrder");
