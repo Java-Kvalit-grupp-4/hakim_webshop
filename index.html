@@ -274,7 +274,7 @@
               </li>
               <li>
                 <a href="mailto:hakimlivs@gmail.com"
-                  ><p>hakimlivs@gmail.com</p></a
+                  ><p class="footer-link-hover">hakimlivs@gmail.com</p></a
                 >
               </li>
               <li id="address-footer">
@@ -282,17 +282,17 @@
                   href="https://www.google.com/maps/search/Kungsgatan+65,+Stockholm+3/@59.3332978,18.0530605,17z/data=!3m1!4b1"
                   class="text-light"
                   target="_blank"
-                  ><div id="">Kungsgatan 65, Stockholm 3</div></a
+                  ><div id="" class="footer-link-hover">Kungsgatan 65, Stockholm 3</div></a
                 >
               </li>
             </ul>
           </div>
 
           <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-3">Om Hakim Livs</h5>
+            <h5 class="text-uppercase mb-3 ">Om Hakim Livs</h5>
             <ul class="list-unstyled mb-3">
               <li>
-                <a href="./pages/about/index.html" class="text-light"><p>Om oss</p></a>
+                <a href="./pages/about/index.html" class="text-light"><p class="footer-link-hover">Om oss</p></a>
               </li>
             </ul>
           </div>
@@ -305,8 +305,8 @@
               </li>
 
               <li>
-                <a href="./pages/about/index.html#deviating" class="text-light"
-                  ><p>Se avvikande öppetider</p></a
+                <a href="./pages/about/index.html" class="text-light "
+                  ><p class="footer-link-hover">Se avvikande öppetider</p></a
                 >
               </li>
             </ul>
@@ -319,8 +319,8 @@
     <div class="modal fade" id="login-modal">
       <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header border-0">
-            <h4 class="modal-title mx-auto">Logga in</h4>
+          <div class="modal-header border-0 col  ms-5 ps-sm-5">
+            <h4 class="modal-title  mx-auto ps-5" id="login-title">Logga in</h4>
             <button
               type="button"
               class="btn-close"
@@ -328,7 +328,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body m-3">
+          <div class="modal-body px-4 ">
             <form class="g-3 mt-3">
               <div class="form-floating my-3">
                 <input
@@ -657,10 +657,10 @@
             <div class="container">
               <div class="row border-bottom text-center">
                 <div class="col-1"><i class="bi bi-trash-fill"></i></div>
-                <div class="col-4 col-md-5 text-start"><h5>Produkt</h5></div>
-                <div class="col-2"><h5>Pris</h5></div>
-                <div class="col-3 col-md-2"><h5>Antal</h5></div>
-                <div class="col-2"><h5>Totalt</h5></div>
+                <div class="col-3 col-sm-4 col-md-5 text-start"><h5>Produkt</h5></div>
+                <div class="col-3 col-sm-2 text-end text-sm-center"><h5>Pris <small>kr</small></h5></div>
+                <div class="col-2 col-md-2 "><h5 class="qty-header">Antal</h5></div>
+                <div class="col-3 col-md-2 text-end text-md-center ms-n2"><h5>Totalt <small>kr</small></h5></div>
               </div>
             </div>
             <div class="list-group">
@@ -726,7 +726,8 @@
                   <div class="row">
                     <div class="col-12">
                       <h1 id="product-pop-up-title" class="text-lg-start">Laxfilé</h1>
-                      <h4 id="product-pop-up-unit">250 ml</h4>
+                      <h4 id="product-pop-up-brand"></h4>
+                      <h6 id="product-pop-up-unit"></h6>
                     </div>
                     <div class="col-12 mt-5">
                       <h4>Beskrivning:</h4>
@@ -745,9 +746,7 @@
                     </div>
                     <div class="row">
                       <div class="col-6">
-                        <p id="product-pop-up-comp-price">
-                          34 kr/kg
-                        </p>
+                        <p id="product-pop-up-comp-price"></p>
                       </div>
                       <div class="col-6">
                         <p id="product-pop-up-price">
