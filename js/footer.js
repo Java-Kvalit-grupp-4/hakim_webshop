@@ -26,7 +26,7 @@ $(function () {
         class="text-light"
         target="_blank"
       >
-        <div id="">${streetAddress}<br>
+        <div id="" class="footer-link-hover">${streetAddress}<br>
         ${zipCode} ${city}</div>
       </a>`;
 

@@ -20,7 +20,7 @@
     background-color: rgb(189, 14, 14);
 }
 
-@media(max-width: 599px) {
+@media(max-width: 630px) {
     #products{
         padding-top: 5rem;
     }
@@ -45,15 +45,16 @@
         border: 1px solid grey;
         padding: 0.5em;
         font-size: 1rem;
-        border-radius: 3px;
+        border-radius: 4px;
         cursor: pointer;
         height: 38px;
-        margin-top: 1.35em;
+        margin-top: 1.33em;
         transition: all 250ms ease-in-out;
         position: absolute;
         opacity: 1;
         pointer-events: all;
         color: #fff;
+        margin-left: -0.5rem  !important
         
     }
     .down-arrow{
