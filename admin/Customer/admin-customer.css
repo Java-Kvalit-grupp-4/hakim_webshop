@@ -48,8 +48,14 @@
 .table-fixed tbody td::after,
 .table-fixed tbody th::after,
 .table-fixed thead > tr > th::after {
-  content: "";
+  content: '';
   clear: both;
   display: block;
+}
+
+@media (max-width: 767px) {
+  table {
+    font-size: 0.65rem;
+  }
 }
 /*# sourceMappingURL=admin-customer.css.map */
