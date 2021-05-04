@@ -107,10 +107,19 @@ function load() {
         .get(productsUrl)
         .then((response) => {
             renderCategories(response.data);
+            addShippingProductToLocalStorage(response.data);
         })
         .catch((err) => {
             alert(err);
         });
+}
+
+const addShippingProductToLocalStorage = (array) => {
+    array.forEach((product)=> {
+        if(product.sku == 1){
+            localStorage.setItem('shipping', JSON.stringify(product))
+        } 
+    })
 }
 
 function renderCategories(data) {
