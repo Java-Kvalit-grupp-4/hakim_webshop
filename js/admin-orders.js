@@ -94,6 +94,10 @@ function renderChosenOrder() {
     if (order.orderNumber == chosenId) {
       $("#order-heading").html(`Order ${order.orderNumber}`)
       activeOrder = order;
+      
+      // sorting shipping to show last 
+      order.lineItems.sort(function(a, b){return b.product.sku - a.product.sku});
+
       order.lineItems.forEach((lineItem) => {
         totalCost += Number(lineItem.itemPrice) * Number(lineItem.quantity);
         $("#product-container").append(`

@@ -43,30 +43,26 @@ const renderLineItemsPdf = (order) => {
     $('#line-items').html('')
     $('#table-footer').html('')
     $('.modal-footer').html('')
-
-    let pricePlusShipping = 0
     
-    
-  
     order.forEach(element => {
-     
-        totalPrice += element.price
+      
+        totalPrice += Number(element.itemPrice) * Number(element.quantity)
         $('#line-items').append(`
-        <tr>
-            <td class="sku">${element.product.sku}</td>
-            <td class="product">${element.product.title}</td>
-            <td class="price">${element.product.price.toLocaleString("sv-SE", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              })}</td>
-            <td class="quantity">${element.quantity}</td>
-            <td class="total">${(element.itemPrice * element.quantity).toLocaleString("sv-SE", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              })}</td>
-        </tr>
+            <tr>
+                <td class="sku">${element.product.sku}</td>
+                <td class="product">${element.product.title}</td>
+                <td class="price">${element.product.price.toLocaleString("sv-SE", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  })}</td>
+                <td class="quantity">${element.quantity}</td>
+                <td class="total">${(element.itemPrice * element.quantity).toLocaleString("sv-SE", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  })}</td>
+            </tr>
         `)
-            pricePlusShipping += element.itemPrice
+            
     });
 
 
@@ -76,7 +72,7 @@ const renderLineItemsPdf = (order) => {
         <td></td>
         <td></td>
         <td>Totalpris </td>
-        <td>${(pricePlusShipping + 49).toLocaleString("sv-SE", {
+        <td>${(totalPrice).toLocaleString("sv-SE", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
           })}</td>
