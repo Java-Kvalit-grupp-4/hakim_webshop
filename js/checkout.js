@@ -51,6 +51,8 @@ $(document).ready(() => {
       ...shippingObject,
         inCart: 1 
     }
+
+    cartData.push(shippingObject)
     
 
     cart.html("");
@@ -184,6 +186,14 @@ function makeOrderObject() {
   let orderCommentInput = orderComment.text();
   let lineItems = [];
 
+  // adds shipping to order
+  let shipping = JSON.parse(localStorage.getItem('shipping'))
+  shipping = {
+    ...shipping,
+      inCart: 1 
+  }
+  cart.push(shipping);
+
   // create lineItems for database
   $.each(cart, (index, productElement) => {
     let lineItem = {
@@ -217,6 +227,8 @@ function sendOrderToServer(orderObject) {
   // const url = "https://hakim-test.herokuapp.com/customerOrder/add";
   // const url = "https://hakimlogintest.herokuapp.com/customerOrder/add";
   //const url = 'http://localhost:8080/customerOrder/add'
+
+  console.log(orderObject);
 
   axios
     .post(url, orderObject)
