@@ -195,15 +195,21 @@
                 type="text"
                 class="form-control mb-3"
                 id="title"
-                maxlength="50"
+                maxlength="50" required
               />
+              <div id="PRODUCTNAME_ERROR_MSG" class="error-msg">
+                Produktnamn måste bestå av endast bokstäver, max 50 tecken
+              </div>
               <label for="brandInput" class="form-label">Tillverkare</label>
               <input
                 type="text"
                 class="form-control mb-3"
                 id="brand"
-                maxlength="50"
+                maxlength="50" required
               />
+              <div id="BRAND_ERROR_MSG" class="error-msg">
+                Tillverkare måste bestå av endast bokstäver, max 50 tecken
+              </div>
               <label for="descriptionInput" class="form-label"
                 >Beskrivning</label
               >
@@ -234,6 +240,9 @@
                   Spara ny kategori
                 </button>
               </div>
+              <div id="CATEGORY_ERROR_MSG" class="error-msg">
+                Kategori måste bestå av endast bokstäver, max 50 tecken
+              </div>
               <label for="category" class="form-label mt-3">Kategori</label>
               <div class="col" id="column"></div>
               <div class="col">
@@ -259,6 +268,9 @@
                   Spara söktagg
                 </button>
               </div>
+              <div id="TAG_ERROR_MSG" class="error-msg">
+                Tag måste bestå av endast bokstäver, max 50 tecken
+              </div>
               <div class="col-12">
                 <label for="category" class="form-label mt-3">Tags</label>
                 <div id="tagColumn"></div>
@@ -271,15 +283,21 @@
                 type="text"
                 class="form-control mb-3"
                 id="price"
-                maxlength="50"
+                maxlength="50" required
               />
+              <div id="PRICE_ERROR_MSG" class="error-msg">
+                Pris måste bestå av endast siffror, decimaltal inkluderat
+              </div>
               <label for="lagerInput" class="form-label">Lagerstatus</label>
               <input
                 type="text"
                 class="form-control mb-3"
                 id="lager"
-                maxlength="5"
+                maxlength="5" required
               />
+              <div id="LAGER_ERROR_MSG" class="error-msg">
+                Lagerstatus måste bestå av endast siffror
+              </div>
               <label for="VAT" class="form-label">Moms</label>
               <select id="VAT" class="form-select mb-3">
                 <option value="1.25" id="25">
@@ -338,10 +356,13 @@
                     <option value="gr" id="gr">gr</option>
                     <option value="hg" id="hg">hg</option>
                     <option value="kg" id="kg">kg</option>
+                    <option value="st" id="st">st</option>
                   </select>
                 </div>
               </div>
-
+              <div id="WEIGHT_ERROR_MSG" class="error-msg">
+                Vikt/volym måste bestå av endast siffror, decimaltal inkluderat
+              </div>
               <div class="row gx-0 mt-5">
                 <div class="col-5 mt-3 text-end">
                   <button id="saveChanges" class="btn btn-secondary mb-3">
@@ -379,6 +400,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../../js/validate.js"></script>
     <script src="../../js/admin-products.js"></script>
   </body>
 </html>
