@@ -37,6 +37,7 @@ function renderOrders(orders) {
   });
   $("#orders-container").empty();
   orders.forEach((order) => {
+    console.log(order.orderNumber)
     const paymentStatusString = order.isPaid ? "Betald" : "Obetald";
     $("#orders-container").append(`
       <tr>
@@ -63,12 +64,26 @@ function openOrderTab() {
   saveChosenOrder(Number($(this).text()));
   renderChosenOrder();
   renderUserData();
+  addOrderToPdfBtn()
   $("#navbar-order-tab").tab("show");
   // sessionStorage.removeItem("chosenOrder");
 }
 
 function saveChosenOrder(id) {
   sessionStorage.setItem("chosenOrder", id);
+}
+
+function addOrderToPdfBtn(){
+  let chosenId = Number(sessionStorage.getItem("chosenOrder"));
+
+  allOrders.forEach((order) => {
+    if (order.orderNumber == chosenId) {
+      $("#generate-pdf").click(()=>{  
+        generatPdf(order)
+        printPdf();
+      }
+    )}
+  })
 }
 
 function renderChosenOrder() {
