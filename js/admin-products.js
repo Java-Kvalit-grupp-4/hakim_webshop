@@ -515,12 +515,12 @@ WEIGHT_ERROR_MSG = $("#WEIGHT_ERROR_MSG");
 
 productName.focusout(()=>{
   let bool = true
-  bool = checkForInput(testForName, productName, bool, PRODUCTNAME_ERROR_MSG)
+  bool = checkForInput(testForWords, productName, bool, PRODUCTNAME_ERROR_MSG)
 });
 
 brandName.focusout(()=>{
   let bool = true
-  bool = checkForInput(testForName, brandName, bool, BRAND_ERROR_MSG)
+  bool = checkForInput(testForWords, brandName, bool, BRAND_ERROR_MSG)
 });
 
 if (categoryNameInput.val() == "") {
@@ -529,7 +529,7 @@ if (categoryNameInput.val() == "") {
 else {
   categoryNameInput.focusout(()=>{
     let bool = true
-    bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG)
+    bool = checkForInput(testForWords, categoryNameInput, bool, CATEGORY_ERROR_MSG)
   });
 }
   
@@ -582,22 +582,22 @@ function resetsInputBorders() {
 function validateForm() {
   let bool = true;
 
-  bool = checkForInput(testForName, productName, bool, PRODUCTNAME_ERROR_MSG);
-  bool = checkForInput(testForName, brandName, bool, BRAND_ERROR_MSG);
+  bool = checkForInput(testForWords, productName, bool, PRODUCTNAME_ERROR_MSG);
+  bool = checkForInput(testForWords, brandName, bool, BRAND_ERROR_MSG);
   
   if (categoryNameInput.val() == "") {
     console.log("Empty field");
     bool = true;
   }
   else {
-    bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG);
+    bool = checkForInput(testForWords, categoryNameInput, bool, CATEGORY_ERROR_MSG);
   }
 
   if (tagName.val() == "") {
     bool = true;
   }
   else {
-    bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG);
+    bool = checkForInput(testForWords, tagName, bool, TAG_ERROR_MSG);
   }
   
   bool = checkForInput(testForDecimalNumbers, priceInput, bool, PRICE_ERROR_MSG)
@@ -609,13 +609,13 @@ function validateForm() {
 
 function validateCategory() {
   let bool = true;
-  bool = checkForInput(testForName, categoryNameInput, bool, CATEGORY_ERROR_MSG);
+  bool = checkForInput(testForWords, categoryNameInput, bool, CATEGORY_ERROR_MSG);
   return bool;
 }
 
 function validateTag() {
   let bool = true;
-  bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG);
+  bool = checkForInput(testForWords, tagName, bool, TAG_ERROR_MSG);
   return bool;
 }
 
