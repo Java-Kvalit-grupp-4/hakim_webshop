@@ -218,7 +218,7 @@ let orderObject =
 $("#preview-pdf").click(()=> {
     $('#save-pdf').show()
     // here you send in the selected order to generate a pdf preview
-    generatePdf(orderObject)
+    generatPdf(orderObject)
     $("#pdf-modal").modal("show");
 }) 
 
@@ -458,6 +458,7 @@ const renderLineItemsPdf = (order) => {
 const reverse = (s) => {
     return [...s].reverse().join("");
 }
+
 
 let totalPrice = 0;
     $.each($('.line-item-total-price'),(index, e) => totalPrice += parseFloat(e.innerText))
