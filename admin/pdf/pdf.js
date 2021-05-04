@@ -326,7 +326,7 @@ const renderLineItemsPdf = (order) => {
                 maximumFractionDigits: 2
               })}</td>
             <td class="quantity">${element.quantity}</td>
-            <td class="total">${element.itemPrice.toLocaleString("sv-SE", {
+            <td class="total">${(element.itemPrice * element.quantity).toLocaleString("sv-SE", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
               })}</td>
