@@ -162,8 +162,18 @@ function renderCategories(data) {
     })
    
     let uniqueCategories = [...new Set(categories)];
-     $("#categories-dropdown-button-list").html("")
+     $("#categories-dropdown-button-list").html("");
+     $("#categories-dropdown-button-list").append(`<li>
+                <button
+              id="all"
+              type="button"
+              class="dropdown-item"
+            >
+              Alla produkter
+          </button>
+              </li>`);
 
+     
     uniqueCategories.forEach((element) => {
         $("#categories-dropdown-button-list").append(`
         <li>
