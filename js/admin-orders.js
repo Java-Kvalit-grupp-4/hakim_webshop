@@ -1,14 +1,15 @@
 let allOrders = [];
 let activeOrder;
+let chosenOrder;
 const server = "https://hakimlivs.herokuapp.com/";
 // const server = "https://hakim-livs.herokuapp.com/";
 // const server = "http://localhost:8080/";
 const updateOrderLink = server + "customerOrder/update";
 const getAllOrders = server + "customerOrder/orders";
 
-$(function () {
+$(function () { 
   load();
-  reset();
+ // reset();
 });
 
 function load() {
@@ -27,34 +28,44 @@ function load() {
     });
 }
 
+$(document).on('click', '#nav-profile-tab', updatePage);
+
+$(document).on('click', '.customerNumber', openCustomerPage);
+
 let startDate;
 let endDate;
 
 function renderOrders(orders) {
-  $("#reservation").daterangepicker(null, function (start, end, label) {
-    startDate = moment(start);
-    endDate = moment(end);
-  });
-  $("#orders-container").empty();
-  orders.forEach((order) => {
-    const paymentStatusString = order.isPaid ? "Betald" : "Obetald";
-    $("#orders-container").append(`
-      <tr>
-          <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${
-            order.orderNumber
-          }</a> </th>
-          <th scope="row" class="ps-md-5" style="word-break:break-all;"><a href="#" class="customer-tab">${
-            order.appUser.customerNumber
-          }</a> </th>
-          <td>${order.timeStamp.substring(0, 10)}</td>
-          <td>${order.totalCost.toLocaleString("sv-SE", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })} </td>
-          <td>${order.orderStatus.type}</td>
-          <td>${paymentStatusString}</td>
-      </tr>`);
-  });
+  let chosenId = sessionStorage.getItem("chosenOrder");
+  if(chosenId!=null || chosenId!=undefined){
+    openCustomerOrder();
+    //chosenId =null;
+  } else {
+    $("#reservation").daterangepicker(null, function (start, end, label) {
+      startDate = moment(start);
+      endDate = moment(end);
+    });
+    $("#orders-container").empty();
+    orders.forEach((order) => {
+      const paymentStatusString = order.isPaid ? "Betald" : "Obetald";
+      $("#orders-container").append(`
+        <tr>
+            <th scope="row" class="ps-md-5"><a href="#" class="order-number-link">${
+              order.orderNumber
+            }</a> </th>
+            <th scope="row" class="ps-md-5" style="word-break:break-all;"><a href="#" class="customer-tab customerNumber">${
+              order.appUser.customerNumber
+            }</a> </th>
+            <td>${order.timeStamp.substring(0, 10)}</td>
+            <td>${order.totalCost.toLocaleString("sv-SE", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })} </td>
+            <td>${order.orderStatus.type}</td>
+            <td>${paymentStatusString}</td>
+        </tr>`);
+    });
+  }
 }
 
 $(document).on("click", ".order-number-link", openOrderTab);
@@ -63,20 +74,40 @@ function openOrderTab() {
   saveChosenOrder(Number($(this).text()));
   renderChosenOrder();
   renderUserData();
+  chosenOrder = sessionStorage.getItem("chosenOrder");
+  sessionStorage.removeItem("chosenOrder");
   addOrderToPdfBtn()
   $("#navbar-order-tab").tab("show");
-  // sessionStorage.removeItem("chosenOrder");
+}
+
+function updatePage(){
+  renderOrders(allOrders)
 }
 
 function saveChosenOrder(id) {
   sessionStorage.setItem("chosenOrder", id);
 }
 
+function openCustomerOrder(){
+  renderChosenOrder();
+  renderUserData();
+  chosenOrder = sessionStorage.getItem("chosenOrder");
+  addOrderToPdfBtn()
+  sessionStorage.removeItem("chosenOrder");
+  $("#navbar-order-tab").tab("show");
+}
+
+function openCustomerPage(){
+  sessionStorage.setItem("customerNumber", Number($(this).text()));
+  location.replace("../Customer/index.html");
+}
+
+
 function addOrderToPdfBtn(){
-  let chosenId = Number(sessionStorage.getItem("chosenOrder"));
+  //let chosenId = Number(sessionStorage.getItem("chosenOrder"));
 
   allOrders.forEach((order) => {
-    if (order.orderNumber == chosenId) {
+    if (order.orderNumber == chosenOrder) {
       $("#generate-pdf").click(()=>{  
         generatPdf(order)
         printPdf();
@@ -239,8 +270,8 @@ function updateQuantity(quantityField) {
     }
   });
 }
-
-$("#search-btn").on("click", search);
+$(document).on('click', '#search-btn', search)
+//$("#search-btn").on("click", search);
 $("#reset-btn").on("click", reset);
 
 let orderStatusFilter;

@@ -3,8 +3,9 @@
  * 
  */
 let customers = [];
-let orders = [];
+let allOrders = [];
 let choosedCustomer = "";
+
 // let getAllCustomers = "https://hakim-test.herokuapp.com/users";
 let getAllCustomers = "https://hakimlivs.herokuapp.com/users";
 let updateUser = "https://hakimlivs.herokuapp.com/users/adminUpdateUser";
@@ -14,8 +15,8 @@ let getCustomerOrder = "https://hakimlivs.herokuapp.com/customerOrder/getCustome
 // let getAllOrders =  "https://hakim-test.herokuapp.com/customerOrder/orders"
 let getAllOrders =  "https://hakimlivs.herokuapp.com/customerOrder/orders"
 
-let startDate = null;
-let endDate = null;
+let startDateC = null;
+let endDateC = null;
 let firstName = $('#customer-first-name'),
     lastName = $('#customer-last-name'),
     email = $('#customer-email'),
@@ -51,6 +52,8 @@ $(document).on('focus', '#search-select', function(){
     $("#input").val("");
 })
 
+$(document).on('click', ".orderLink", openOrderTab)
+ 
 $(document).on('click', '#nav-profile-tab', function(){
     $("#orderTable").empty();
     firstName.val("")
@@ -61,31 +64,44 @@ $(document).on('click', '#nav-profile-tab', function(){
     city.val("")
     zipCode.val("")
     customerComment.val("")
-    startDate = null;
-    endDate = null;
+    startDateC = null;
+    endDateC = null;
     load();
 })
 
-function load(){
-    hideAllErrorMsgs()
-    $("#reservation").daterangepicker(null, function (start, end, label) {
-        startDate = new Date(start.toISOString())
-        endDate = new Date(end.toISOString())
-    })
-    axios.get(getAllCustomers)
-        .then((response) =>{
-            if(response.status ===200){
-                showCustomers(response.data) 
-                customers = response.data   
-            }
-            else{
-                swal({title:"Något gick fel vid inläsning av kunder", icon:"warning"})
-            }
-        })
-        .catch(err =>{
-            alert("Serverfel!" + err)
-        })
+function openOrderTab(){
+    sessionStorage.setItem("chosenOrder",(Number($(this).text())));
+    location.replace("../Orders/index.html")
 }
+
+function load(){
+    let chosenId = sessionStorage.getItem("customerNumber");
+    if(chosenId!=null || chosenId!=undefined){       
+      openCustomerPage();
+      chosenId =null;
+    } else {
+        hideAllErrorMsgs()
+        $("#reservation").daterangepicker(null, function (start, end, label) {
+            startDateC = new Date(start.toISOString())
+            endDateC = new Date(end.toISOString())
+        })
+        axios.get(getAllCustomers)
+            .then((response) =>{
+                if(response.status ===200){
+                    showCustomers(response.data) 
+                    customers = response.data   
+                }
+                else{
+                    swal({title:"Något gick fel vid inläsning av kunder", icon:"warning"})
+                }
+            })
+            .catch(err =>{
+                alert("Serverfel!" + err)
+            })
+    }
+}
+
+
 
 function showCustomers(customerArr){
     $("#customerTable").empty();
@@ -151,12 +167,29 @@ function showCustomers(customerArr){
 }
 
 function openCustomerTab(){
+    console.log("inne i openCustomerTab")
     $("#orderTable").empty();
-    saveCustomer($(this).text());
-    $("#nav-contact-tab").tab('show');
+    sessionStorage.setItem("customerNumber", $(this).text())
+    saveCustomer();
+    sessionStorage.removeItem("customerNumber");
+    //$("#nav-contact-tab").tab('show');
+    openTab();
     };
 
-function saveCustomer(customerNumber){
+function openCustomerPage(){
+    console.log("inne i openCustomerPage")
+    saveCustomer();
+    sessionStorage.removeItem("customerNumber");
+    openTab();
+}
+
+function openTab(){
+    $("#nav-contact-tab").tab("show");
+}
+
+function saveCustomer(){
+    console.log("inne i saveCustomer")
+    let customerNumber = Number(sessionStorage.getItem("customerNumber"));
     customers.forEach(customer => {
 
         if(customer.customerNumber==customerNumber){
@@ -238,11 +271,11 @@ function filterSearch(){
                             let filterOrders = response.data
                             let date;
                             let filterOrders2=[];
-                            if(startDate!=null && endDate!=null){
+                            if(startDateC!=null && endDateC!=null){
                                 filterOrders
                                     .forEach(order => {
                                         date = new Date(order.timeStamp)
-                                        if( date>=startDate && date<=endDate){
+                                        if( date>=startDateC && date<=endDateC){
                                             filterOrders2.push(order)
                                         }})
                                 
@@ -281,13 +314,13 @@ function filterSearch(){
                             let filterOrders = response.data
                             let date;
                             let filterOrders2=[];
-                            console.log("startdate: " + startDate +"endDate: " +endDate);
-                            if(startDate!=null && endDate!=null){
+                            console.log("startdate: " + startDateC +"endDate: " +endDateC);
+                            if(startDateC!=null && endDateC!=null){
                                 filterOrders
                                     .forEach(order => {
                                         date = new Date(order.timeStamp)
                                         console.log(date)
-                                        if( date>=startDate && date<=endDate){
+                                        if( date>=startDateC && date<=endDateC){
                                             filterOrders2.push(order)
                                         }})
                                     
@@ -337,7 +370,7 @@ function showOrders(customerOrders){
             $("#orderTable").append(`
                 <tr>
                     <th scope="row" class="col-3">
-                    <a href="#" class="orderNumber">${orders.orderNumber}</a>
+                    <a href="#" class="orderLink">${orders.orderNumber}</a>
                     <td class="col-2">${orders.orderStatus.type}</td>
                     <td class="col-2">${isPaid}</td>
                     <td class="col-3">${orderDate}</td>
@@ -391,6 +424,11 @@ function updateCustomer(){
             })
         }
     }
+
+function saveAndOpenOrder(){
+    sessionStorage.setItem("chosenOrder", Number($(this).text()));
+    location.replace("../Orders/index.html");
+}
 
 
 function validateForm() {

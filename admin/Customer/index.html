@@ -170,9 +170,9 @@
               >
                 <option selected disabled>Filtrera efter...</option>
                 <option value="1">Visa alla</option>
-                <option value="2">Vip-kunder</option>
-                <option value="3">Total ordersumma över:</option>
-                <option value="4">Totalt antal ordrar över:</option>
+                <!--<option value="2">Vip-kunder</option>-->
+                <option value="2">Total ordersumma över:</option>
+                <option value="3">Totalt antal ordrar över:</option>
 
               </select>
 
@@ -387,12 +387,12 @@
         </div>
       </div>
     </div>
-   <!-- <script>
+    <script>
           let customer = JSON.parse(sessionStorage.getItem('customer'))
             if(customer==null || customer== undefined || customer.isAdmin==false){
               window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
             }
-    </script>-->
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       type="text/javascript"
@@ -408,6 +408,7 @@
     <script type="text/javascript" src="../../js/daterangpicker.js"></script>
     <script type="text/javascript"></script>
     <script src="../../js/validate.js"></script>
+    <!--<script src="../../js/admin-orders.js"></script>-->
     <script src="../../js/admin-customer.js"></script>
   </body>
 </html>
