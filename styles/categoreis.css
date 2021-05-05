@@ -5,16 +5,24 @@
 }
 
 #all{
-    background-color: sandybrown;
+    background-color: #265677;
+    color: #dddcdc;
+}
+.badge {
+    background-color: #265677 !important;
+}
+
+#all:hover {
+    color: burlywood;
 }
 
 .categories-dropdown-list{
-    background-color: wheat;
+    background-color: #dddcdc;
     scroll-behavior: auto;
     max-height: 50%;
 }
 .categories-dropdown-list:hover{
-    background-color: rgb(226, 197, 144)
+    background-color: #dddcdc;
 }
 .open {
     background-color: rgb(189, 14, 14);
@@ -30,7 +38,7 @@
     
     
     #sidomeny{
-        position: fixed;
+        /* position: fixed; */
     }
 
     .btn-wrapper{
@@ -48,6 +56,7 @@
         border-radius: 4px;
         cursor: pointer;
         height: 38px;
+        min-width: 133px;
         margin-top: 1.33em;
         transition: all 250ms ease-in-out;
         position: absolute;

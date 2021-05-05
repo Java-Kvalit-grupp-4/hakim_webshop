@@ -1,0 +1,405 @@
+[
+    {
+        "title": "Havregryn",
+        "description": "Gott till kokosbollar och havregrynsgröt",
+        "brand": {
+            "id": 334,
+            "name": "Axa"
+        },
+        "image": "https://picsum.photos/500?random=1",
+        "price": 12.0,
+        "quantity": 50,
+        "isAvailable": true,
+        "outOfStocks": [],
+        "categories": [
+            {
+                "id": "18d52f00-1ea1-4ae0-92b5-353053ea39b2",
+                "name": "Skafferi"
+            }
+        ],
+        "tags": [
+            {
+                "id": "ea4d2162-81cc-4dda-89d6-28d6cc79a28c",
+                "name": "Havregryn"
+            }
+        ],
+        "sku": 1234
+    },
+    {
+        "title": "Soltorkade tomater",
+        "description": "Finaste soltorkade tomaterna från spanien",
+        "brand": {
+            "id": 335,
+            "name": "Santa Maria"
+        },
+        "image": "https://picsum.photos/500?random=2",
+        "price": 25.0,
+        "quantity": 20,
+        "isAvailable": true,
+        "outOfStocks": [],
+        "categories": [
+            {
+                "id": "092c5b72-a4cb-48c5-b83b-7d8fb107665a",
+                "name": "eco"
+            },
+            {
+                "id": "18d52f00-1ea1-4ae0-92b5-353053ea39b2",
+                "name": "Skafferi"
+            }
+        ],
+        "tags": [],
+        "sku": 32410002
+    },
+    {
+        "title": "Saffran pistiller",
+        "description": "Pestiller från saffransblomman, torkade",
+        "brand": {
+            "id": 336,
+            "name": "Persiskt"
+        },
+        "image": "https://picsum.photos/500?random=3",
+        "price": 399.0,
+        "quantity": 20,
+        "isAvailable": true,
+        "outOfStocks": [],
+        "categories": [
+            {
+                "id": "18d52f00-1ea1-4ae0-92b5-353053ea39b2",
+                "name": "Skafferi"
+            }
+        ],
+        "tags": [],
+        "sku": 32410003
+    },
+    {
+        "title": "Senap stark",
+        "description": "Stark senap, gul",
+        "brand": {
+            "id": 337,
+            "name": "Hultberg"
+        },
+        "image": "https://picsum.photos/500?random=4",
+        "price": 19.0,
+        "quantity": 20,
+        "isAvailable": true,
+        "outOfStocks": [],
+        "categories": [
+            {
+                "id": "ad983bc6-d381-4011-bf5d-8429afe5066e",
+                "name": "Smaksättare"
+            }
+        ],
+        "tags": [],
+        "sku": 32410004
+    },
+    {
+        "title": "Dressing Italiensk",
+        "description": "God klassisk Italiensk salladsdressing",
+        "brand": {
+            "id": 338,
+            "name": "Felix"
+        },
+        "image": "https://picsum.photos/500?random=5",
+        "price": 25.0,
+        "quantity": 20,
+        "isAvailable": true,
+        "outOfStocks": [],
+        "categories": [
+            {
+                "id": "ad983bc6-d381-4011-bf5d-8429afe5066e",
+                "name": "Smaksättare"
+            }
+        ],
+        "tags": [],
+        "sku": 32410005
+    },
+    {
+        "title": "Coca-cola Zero",
+        "description": "God och utan socker",
+        "brand": {
+            "id": 339,
+            "name": "Coca Cola"
+        },
+        "image": "https://picsum.photos/500?random=6",
+        "price": 9.0,
+        "quantity": 20,
+        "isAvailable": true,
+        "outOfStocks": [],
+        "categories": [
+            {
+                "id": "232f5756-7e79-47fc-80fc-be35d0892814",
+                "name": "Drycker"
+            },
+            {
+                "id": "e5bde98e-9d04-49e1-aa2b-fa40d76ed6dc",
+                "name": "Läsk"
+            }
+        ],
+        "tags": [],
+        "sku": 32410006
+    },
+    {
+        "title": "Coca-cola",
+        "description": "Orginalet är godast",
+        "brand": {
+            "id": 339,
+            "name": "Coca Cola"
+        },
+        "image": "https://picsum.photos/500?random=7",
+        "price": 9.0,
+        "quantity": 20,
+        "isAvailable": true,
+        "outOfStocks": [],
+        "categories": [
+            {
+                "id": "232f5756-7e79-47fc-80fc-be35d0892814",
+                "name": "Drycker"
+            },
+            {
+                "id": "e5bde98e-9d04-49e1-aa2b-fa40d76ed6dc",
+                "name": "Läsk"
+            }
+        ],
+        "tags": [],
+        "sku": 32410007
+    },
+    {
+        "title": "Müsli Fruit",
+        "description": "En god musliblandning av synliga fruktbitar. AXA Fruit är en god müsli som är framtagen tillsammans med AXAs dietister. Den innehåller bland annat havregryn, aprikos, russin och bananchips. Innehåller totalt 25 % frukt.",
+        "brand": {
+            "id": 334,
+            "name": "Axa"
+        },
+        "image": "https://picsum.photos/500?random=19", 
+        "price": 29.9,
+        "quantity": 99,
+        "isAvailable": true,
+        "outOfStocks": [],
+        "categories": [
+            {
+                "id": "276ef36b-a247-4b78-99dd-b82d9266d8d0",
+                "name": "Pantry"
+            },
+            {
+                "id": "18d52f00-1ea1-4ae0-92b5-353053ea39b2",
+                "name": "Skafferi"
+            }
+        ],
+        "tags": [],
+        "sku": 32410019
+    },
+{
+        "sku": 32410008,
+        "title": "Havregryn", 
+        "description": "AXA Havregryn är en älskad favorit som kan användas som bas till allt från goda frukostar som gröt, müsli och granola till läckra bakverk. Våra älskade havregryn är fullproppad med fullkorn, rik på mineralerna järn och zink samt vitaminerna tiamin och folsyra.",
+        "image": "https://picsum.photos/500?random=8", 
+        "price": 14.90,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Axa"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Skafferi"    
+                }
+            ]
+    },
+{
+        "sku": 32410009,
+        "title": "Mannagryn", 
+        "description": "AXA Mannagryn framställs av den fina inre delen av vetekärnan och har en härligt mjuk smak. Perfekt för klassisk mannagrynsgröt eller en läcker efterrätt!",
+        "image": "https://picsum.photos/500?random=9", 
+        "price": 16.90,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Axa"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Skafferi"    
+                }
+            ]
+    },
+{
+        "sku": 32410010,
+        "title": "Mellanmjölk", 
+        "description": "Färsk mellanmjölk från Arla, gjord på svensk mjölk från Arlagårdar nu med ännu bättre djuromsorg hela året runt. Mellanmjölk har en härligt fyllig mjölksmak och är ett populärt val till frukostflingorna, gröten eller som dryck till måltiden. Arla Ko® färsk mellanmjölk är en naturlig källa till bland annat protein, kalcium och vitamin B12.",
+        "image": "https://picsum.photos/500?random=10", 
+        "price": 11.00,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Arla"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Drycker"    
+                },
+                {
+                    "name": "Mejeri"
+                }
+            ]
+    },
+{
+        "sku": 32410011,
+        "title": "Fanta", 
+        "description": "Kolsyrad läskedryck med apelsinsmak. Fanta Orange är en kolsyrad apelsinläsk som är gjord på fruktjuice med 100% naturliga aromer.",
+        "image": "https://picsum.photos/500?random=11", 
+        "price": 9.00,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Coca-Cola"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Drycker"    
+                },
+                {
+                    "name": "Läsk"
+                }
+            ]
+    },
+{
+        "sku": 32410012,
+        "title": "Julmust", 
+        "description": "Apotekarnes Julmust är en kolsyrad läskedryck som är en riktig storsäljare. Julmusten har en mörk färg, skummar ordentligt och har smak av humle och malt. Must hör till det svenskaste som finns och idag kan man knappast tänka sig ett svenskt julbord utan must. Apotekarnes Julmust bör serveras väl kyld. Passar såväl till julmat och lussekatter, men också alldeles utmärkt att avnjutas som den är.",
+        "image": "https://picsum.photos/500?random=12", 
+        "price": 15.00,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Apotekarnes"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Drycker"    
+                },
+                {
+                    "name": "Läsk"
+                }
+            ]
+    },
+{
+        "sku": 32410013,
+        "title": "Shampoo", 
+        "description": "Barnängen Hårvård är en serie milt vårdande produkter för naturligt vackert och friskt hår. Produkterna är dermatologiskt testade. Barnängen Normalt Schampo är till för normalt hår. Berikad med provitamin B5 och kalcium.",
+        "image": "https://picsum.photos/500?random=13", 
+        "price": 12.90,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Barnängen"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Hygien"    
+                },
+                {
+                    "name": "Hårvård"
+                }
+            ]
+    },
+{
+        "sku": 32410014,
+        "title": "Resorb Original", 
+        "description": "Resorb vätskeersättning används för att tillföra kroppen vätska och salter. Rekommenderas till vuxna och barn från 3 år.",
+        "image": "https://picsum.photos/500?random=14", 
+        "price": 49.90,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Nestle"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Kosttillskott"    
+                }
+            ]
+    },
+{
+        "sku": 32410015,
+        "title": "Barntvål", 
+        "description": "Barnängens fasta barntvål är milt parfymerad och ger ett mjukt lödder. En klassiker, helt fri från allergiframkallande ämnen som passar lika bra för vuxna som för barn. Innehåller hudvänliga och fettåtergivande ämnen.",
+        "image": "https://picsum.photos/500?random=15", 
+        "price": 19.90,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Barnängen"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Hygien"    
+                },
+                {
+                    "name": "Kroppsvård"
+                }
+            ]
+    },
+{
+        "sku": 32410016,
+        "title": "Fläskfilé", 
+        "description": "Vår fläskfilé är gourmetmörad genom marinering för att bli riktigt mör och god och för att behålla sin saftighet vid tillagning. Den är enkel att tillaga och det är svårt att misslyckas. Stek hel i ugn eller på grillen, kan även stekas i skivor. Kan med fördel användas i pastasåser och grytor.",
+        "image": "https://picsum.photos/500?random=16", 
+        "price": 129.90,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Nybergs"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Kött"    
+                }
+            ]
+    },
+{
+        "sku": 32410017,
+        "title": "Torskfilé", 
+        "description": "Findus filéer av torsk är fina bitar med ren smak från ett friskt ishav. De blir snabbt infrysta efter fångst för att behålla den fina kvalitén och det saftiga köttet. Torsken är populär i hela familjen med sin lena, goda smak och då den är lättlagad passar torsken utmärkt som både vardagsmat och helglyx. ",
+        "image": "https://picsum.photos/500?random=17", 
+        "price": 56.90,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Findus"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Fisk"    
+                }
+            ]
+    },
+{
+        "sku": 32410018,
+        "title": "Kycklingfilé", 
+        "description": "Färsk kycklinglårfilé av svensk fågel. En god produkt från svenska gårdar med höga krav på kvalitet. Skilj alltid den råa kycklingen och dess förpackning från andra matvaror. Diska köksredskap noga och tvätta händerna när du varit i kontakt med den råa kycklingen.",
+        "image": "https://picsum.photos/500?random=18", 
+        "price": 99.90,  
+        "quantity": 99,
+        "isAvailable": true, 
+        "brand":
+            {"name": "Kronfågel"}  
+            ,
+        "categories":
+            [ 
+                {
+                    "name": "Fågel"    
+                }
+            ]
+    }
+
+]

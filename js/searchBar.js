@@ -9,7 +9,7 @@ let productsToSerach = []
 $(document).ready(() => {
        axios.get(allProductsUrl)
        .then(response => {
-         createSearchWords(response.data)
+         createSearchWords(removeHiddenProductsFromArray(response.data))
        })
        .catch(err => {
          console.log('error in searchbar script! ' + err.response.status);

@@ -107,13 +107,27 @@ function load() {
         .get(productsUrl)
         .then((response) => {
             renderCategories(response.data);
+            addShippingProductToLocalStorage(response.data);
         })
         .catch((err) => {
             alert(err);
         });
 }
 
+const addShippingProductToLocalStorage = (array) => {
+    array.forEach((product)=> {
+        if(product.sku == 1){
+            localStorage.setItem('shipping', JSON.stringify(product))
+        } 
+    })
+}
+
+// removes products that are not available
+const removeHiddenProductsFromArray = (array) => array.filter(product => product.isAvailable == true)
+
+
 function renderCategories(data) {
+
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
     if(cartQuantity != null || cartQuantity>0) {
         totalItemsInCart.show();
@@ -125,9 +139,9 @@ function renderCategories(data) {
     } else {
         $("#myAccountDropdown").hide();
     }
-    products = data;
-    
 
+    products = removeHiddenProductsFromArray(data)
+    
   let categories = [];
   
   let availableProducts = [];
@@ -159,6 +173,8 @@ function renderCategories(data) {
 
     $("#sidomeny button").on("click", function () {
         let categoryName = $(this).attr("id");
+        let headingText = categoryName == 'all' ? "Produkter" : categoryName;
+        $("#heading").text(headingText);
         let selectedCategoryList = [];
         availableProducts.forEach((product) => {
             if (categoryName === "all") {

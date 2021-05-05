@@ -13,6 +13,7 @@
       href="../../styles/daterangpicker-bs3.css"
     />
     <link rel="stylesheet" href="../../styles/style.css" />
+   <link rel="stylesheet" href="../../styles/pdf.css" />
     <!-- <link rel="stylesheet" href="../Customer/admin-customer.css" /> -->
     <link rel="stylesheet" href="../Orders/admin-orders.css" />
     <title>Admin-ordrar</title>
@@ -261,7 +262,9 @@
                 <th scope="col" class="pb-3">Betalstatus</th>
               </tr>
             </thead>
+            
             <tbody id="orders-container">
+              
               <!-- <tr>
                     <th scope="row" class="ps-md-5"><a href="#">1234-4567</a> </th>
                     <th scope="row" class="ps-md-5"><a href="#">850216</a> </th>
@@ -272,6 +275,7 @@
                 </tr> -->
             </tbody>
           </table>
+          
         </div>
       </div>
       <div
@@ -391,12 +395,12 @@
             </div>
           </div>
           <div class="container col col-lg-9 pb-5 pe-0">
-            <div class="container col">
+            <div class="container col px-2">
               <div
-                class="product-info mt-5 container ms-xl-4 px-1 px-lg-0 ps-lg-5"
+                class="product-info mt-5 container ms-xl-4 px-3 px-lg-0 px-lg-5"
               >
                 <div class="mb-5">
-                  <h2>Produkter i ordern</h2>
+                  <h2 id="order-heading">Produkter i ordern</h2>
                 </div>
 
                 <table
@@ -406,15 +410,20 @@
                     <tr>
                       <th scope="col" class="pb-3 ps-md-5">Artikelnr</th>
                       <th scope="col" class="pb-3 ps-md-5">Produktnamn</th>
-                      <th scope="col" class="pb-3">Antal</th>
-                      <th scope="col" class="pb-3">Pris <small>kr</small></th>
+                      <th scope="col" class="pb-3 text-end">Pris <small>kr</small></th>
+                      <th scope="col" class="pb-3 text-center">Antal</th>
+                      
                       <th scope="col" class="pb-3">Totalt <small>kr</small></th>
                     </tr>
                   </thead>
                   <tbody id="product-container"></tbody>
+                  <tfoot>
+                    <th scope="col" colspan="4" class="pb-3 text-end pe-4">Totalt <small>kr</small></th>
+                    <td id="order-total-cost" class="pb-3"></td>
+                  </tfoot>
                 </table>
               </div>
-              <div class="row">
+              <div class="row gx-0 gx-lg-5 px-3 px-lg-5" id=small-row>
                 <!-- <div class="col col-8 text-end">
                   <button
                   type="submit"
@@ -424,13 +433,13 @@
                   >Uppdatera antal
                   </button>
                 </div> -->
-                <div class="col text-end pe-4 col-12" id="order-total-cost">
+                <!-- <div class="col text-end  col-12 pe-3" id="order-total-cost">
                   <p>Totalt: 0</p>
                 </div>
-              </div>
+              </div> -->
 
-              <div class="row ps-lg-5">
-                <div class="text mb-2 px-3 ms-xl-4 col-lg-6">
+              <div class="row  gx-0 gx-lg-5 ps-lg-5">
+                <div class="text mb-2   col-lg-6">
                   Orderstatus
                   <select
                     class="form-select"
@@ -444,7 +453,7 @@
                     <option value="4">Avbeställd</option>
                   </select>
                 </div>
-                <div class="text mb-2 px-3 ms-xl-4 col-lg-5">
+                <div class="text mb-2  col-lg-6">
                   Betalstatus
                   <select
                     class="form-select"
@@ -457,10 +466,10 @@
                   </select>
                 </div>
               </div>
-              <div class="row">
-                <div class="col">
+              <div class="row" id="order-sent-row">
+                <div class="col " >
                   <p
-                    class="lead fw-bold mt-4 ms-lg-5 mb-5 px-3 px-lg-0"
+                    class="lead fw-bold mt-4 ms-lg-5 mb-5  px-lg-0"
                     id="order-sent-date-field"
                   ></p>
                 </div>
@@ -480,40 +489,149 @@
                   style="height: 100px"
                   readonly
                 ></textarea>
-              </div>
-              <div class="container ps-lg-5 px-3 px-lg-0 pt-3 pt-5">
-                <h2>Ändringar</h2>
-                <ul class="list-group" id="order-changes"></ul>
-              </div>
-              <div class="container col-12 pt-5 ps-3 ps-lg-5">
-                <h2>Lägg till kommentar</h2>
-              </div>
-              <div class="container col px-3 ps-lg-5 pe-lg-0">
-                <textarea
-                  class="form-control"
-                  name=""
-                  id="add-comment-field"
-                  rows="10"
-                  placeholder=""
-                  style="height: 150px"
-                  maxlength="250"
-                ></textarea>
-                <div class="container mt-5">
-                  <button
-                    type="submit"
-                    class="btn btn-secondary save-button"
-                    style="width: 100px"
-                    id="save-order-btn"
-                  >
-                    Spara
-                  </button>
-                </div>
+            </div>
+            <div class="container ps-lg-5 px-3 px-lg-0 pt-3 pt-5">
+              <h2>Ändringar</h2>
+              <ul class="list-group" id="order-changes">
+            </ul>
+          </div>
+            <div class="container col-12 pt-5 ps-3 ps-lg-5">
+              <h2>Lägg till kommentar</h2>
+            </div>
+            <div class="container col px-3 ps-lg-5 pe-lg-0">
+              <textarea
+                class="form-control"
+                name=""
+                id="add-comment-field"
+                rows="10"
+                placeholder=""
+                style="height: 150px"
+                maxlength="250"
+              ></textarea>
+              <div class="container mt-5">
+                <button
+                  type="submit"
+                  class="btn btn-secondary save-button"
+                  style="width: 100px"
+                  id="save-order-btn"
+                >Spara
+                </button>
+                <button
+                class="btn btn-secondary save-button"
+                style="width: 100px"
+                id="generate-pdf"
+              >PDF
+              </button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+     <!-- PDF MODAL START -->
+    <div class="modal fade" id="pdf-modal">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div id="pdf" class="modal-body">
+            <div >
+              <header class="header-pdf clearfix">
+                  <div id="logo">
+                      <img src="../../logo.png"/>
+                  </div>
+                  
+                  <h1 class="h1-pdf">Faktura</h1>
+                  <div class="row mb-5">
+                    
+                    <div class="col-xl-2">
+                      <div id="customer">
+                        <div>Ordernummer:</div>         
+                        <div>Kundnamn:</div>                           
+                        <div>Leveransadress:</div>  
+                        <div>&nbsp;</div>                        
+                        <div>Email:</div>
+                    </div>
+                    </div>
+                    <div class="col-xl-6">
+                      <div id="customer">
+                        <div id="orderNumber"></div>
+                        <div id="fullName"></div>
+                        <div>
+                            
+                          <div id="address"></div>
+                          <div id="zip"></div>
+                          <div id="city"></div>
+                        
+                        </div>
+                        <div id="email"></div>
+                      </div>
+                    </div>
+                    <div class="col-xl-2 ps-2">
+                      <div id="project">
+                        <div>
+                            Fakturanummer:                            
+                        </div>
+                        <div>
+                            Fakturadatum:                            
+                        </div>
+                        <div>
+                            Leveransdatum:                           
+                        </div>
+                        <div>
+                            Betalningsvillkor                            
+                        </div>
+                        <div>
+                            Förfallodatum:                            
+                        </div>
+                        <div>
+                            Dröjsmålsränta:                           
+                        </div>
+                     </div>
+                    </div>
+                    <div class="col-xl-2">
+                      <div id="invoiceNumber"></div>
+                      <div id="invoiceDate"></div>
+                      <div id="deliveryDate"></div> 
+                      <div>14 dagar</div> 
+                      <div id="dueDate"></div>
+                      <div>7,5%</div>
+                    </div>
+                    
+                  </div>
+                  
+                  
+              </header>
+                  <table class="table-pdf">
+                      <thead>
+                          <tr>
+                              <th class="th-pdf">Artikelnummer</th>
+                              <th class="th-pdf">Produktnamn</th>
+                              <th class="th-pdf">Pris kr</th>
+                              <th class="th-pdf">Antal</th>
+                              <th class="th-pdf">Totalt kr</th>
+                          </tr>
+                      </thead>
+                      <tbody id="line-items"></tbody>
+                      <tbody id="table-footer"></tbody>
+                      
+                  </table>
+                  <div class="vat-container"></div>
+              
+              
+          </div>
+          <div class="modal-footer modal-footer-info"></div>
+          </div>
+          
+         
+            <button type="button" class="btn btn-dark" id="save-pdf">
+              Save pdf
+            </button>
+
+        </div>
+      </div>
+    </div>
+    <!-- PDF MODAL END -->
+  
     <script>
       let customer = JSON.parse(sessionStorage.getItem("customer"));
       if (
@@ -521,7 +639,7 @@
         customer == undefined ||
         customer.isAdmin == false
       ) {
-        window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html";
+        window.location.href = "../../";
       }
     </script>
 
@@ -535,8 +653,10 @@
       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
       crossorigin="anonymous"
     ></script>
-    <script src="../../js/validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../../js/validate.js"></script>    
+    <script type="text/javascript" src="../../admin/pdf/pdf.js"></script>
     <script type="text/javascript" src="../../js/moment.js"></script>
     <script type="text/javascript" src="../../js/daterangpicker.js"></script>
     <script src="../../js/admin-orders.js"></script>

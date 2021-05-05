@@ -1,0 +1,186 @@
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  #body-pdf {
+    position: relative;
+    width: 21cm;  
+    height: 29.7cm; 
+    margin: 0 auto; 
+    color: #001028;
+    background: #FFFFFF; 
+    font-family: Arial, sans-serif; 
+    font-size: 12px; 
+    font-family: Arial;
+  }
+  
+  #pdf {
+    margin: 1rem;
+  }
+  
+  #header-pdf {
+    padding: 10px 0;
+    margin-bottom: 30px;
+  }
+  
+  #logo {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  #logo img {
+    width: 300px;
+  }
+  
+  #h1-pdf {
+    border-top: 1px solid  #5D6975;
+    border-bottom: 1px solid  #5D6975;
+    color: #5D6975;
+    font-size: 2.4em;
+    line-height: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    margin: 0 0 20px 0;
+    background: url(dimension.png)
+  }
+  
+  #project {
+    float: left;
+  }
+  
+  #project span {
+    color: #5D6975;
+    text-align: left;
+    width: 80px;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 1em;
+  }
+
+  #customer {
+    float: center;
+  }
+  
+  #customer span {
+    color: #5D6975;
+    text-align: left;
+    width: 80px;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 1em;
+  }
+  
+  #company {
+    float: left;
+    text-align: left;
+  }
+  #company-bank{
+    float: right;
+    text-align: right;
+  }
+  #project div,
+  #company div {
+    white-space: nowrap;        
+  }
+  
+  #table-pdf {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+  }
+  
+  .table-pdf tr:nth-child(2n-1) td {
+    background: #F5F5F5;
+  }
+  /*
+  table th,
+  table td {
+    text-align: center;
+  }
+  */
+
+
+  .table-pdf{
+    width: 98%;
+    margin: auto;
+    
+  }
+  
+  .table-pdf .sku {
+    text-align: left;
+  }
+  .table-pdf .product {
+    text-align: left;
+  }
+
+  .table-pdf .price {
+    text-align: left;
+  }
+
+  .table-pdf .quantity {
+    text-align: left;
+  }
+
+  .table-pdf .total {
+    text-align: left;
+  }
+  
+  .table-pdf td.grand {
+    border-top: 1px solid #5D6975;;
+  }
+  
+  #notices .notice {
+    color: #5D6975;
+    font-size: 1.2em;
+  }
+  
+  #footer-pdf {
+    color: #5D6975;
+    width: 100%;
+    height: 30px;
+ 
+    bottom: 0;
+    border-top: 1px solid #C1CED9;
+    padding: 8px 0;
+    text-align: center;
+  }
+
+
+  /* OSCAR FIX */
+
+  .modal-footer-info{
+    width: 98%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  .clearfix span {
+    font-size: 0.6rem;
+    display: flex;
+    flex-direction: column;
+  
+  }
+
+  #company-bank span {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.6rem;
+  }
+
+  #vat-25 {
+    margin-top: -0.5rem;
+  }
+   #vat-12 {
+    margin-top: -0.7rem;
+  }
+   #vat-6 {
+    margin-top: -0.7rem;
+  }
+  #VAT-25, #VAT-12, #VAT-6  {
+    padding-left: 3rem;
+  }
+   

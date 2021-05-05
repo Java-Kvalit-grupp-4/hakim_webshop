@@ -119,11 +119,11 @@
                 data-bs-target="#cart-pop-up"
                 aria-expanded="false"
               >
-                Varukorg&nbsp;&nbsp;<span
+                <i class="bi bi-cart4"></i>&nbsp;&nbsp;<span
                   class="badge badge-pill bg-danger"
                   id="total-items-in-cart"
                   style="display: inline"
-                  >0</span
+                  ></span
                 >
               </button>
             </li>
@@ -140,21 +140,22 @@
     <!-- navbar end -->
     
     <div class="container-fluid">
-      <div class="row ms-1" style="margin-top: 10rem; margin-right: 0">
+      
+      <div class="row " style="margin-top: 7.3rem; margin-right: 0">
 <!--Sidebar start-->
 <!--<div class="col-12 col-sm-4 col-lg-3 col-xl-2 mb-5" id="sidebar-container">
   <div id="sidebar">-->
-    <div class="col-6 col-sm-4 col-lg-3 col-xl-2" >
-        <div class="col-6 col-sm-4 col-lg-3 col-xl-2" id="sidebar" style="background-color: aqua;">
+    <div class="col-6 col-sm-4 col-lg-3 col-xl-3  ps-0 pe-xl-5 " style="overflow-y: auto;" >
+        <div  id="sidebar">
           <!-- <div class="list-group"> -->
             <div id="fixedSidebar">
-          <div class="list-group" id="sidomeny">
-            <div class="all-categories " style="margin-left: -2rem;">Kategorier<i class="bi bi-caret-down-fill down-arrow"></i></div>
+          <div class="list-group " id="sidomeny">
+            <div class="all-categories ">Kategorier<i class="bi bi-caret-down-fill down-arrow"></i></div>
            
               <button
               id="all"
               type="button"
-              class="list-group-item list-group-item-action fs-4 categories-dropdown-list"
+              class="list-group-item list-group-item-action fs-4 categories-dropdown-list mt-0"
             >
               Alla produkter
           </button>
@@ -179,7 +180,7 @@
               </h1>
             </div>
           </div> -->
-
+          <div ><h2 id="heading" class="mt-5 ms-5">Produkter</h2> </div>
           <div class="dropdown text-end mt-3 sorting-dropdown">
             <button
               class="btn btn-secondary dropdown-toggle"
@@ -226,7 +227,7 @@
             </ul>
           </div>
 
-          <div class="row mt-3 mb-5" id="products">
+          <div class="row mt-md-3 mb-5" id="products">
             <!-- <div id="${element.productNr}"class="product-card">
               <div>
                 <div class="img-container">
@@ -254,13 +255,13 @@
               </div>
             </div> -->
           </div>
-          <!-- products ends -->
-        </div>
-      </div>
-    </div>
+          </div>
+          </div>
 
-  <!-- footer goes here-->
-     <footer class="bg-dark text-center text-lg-start">
+          <!-- products ends -->
+          <div class="row-sm" id="footer-row">
+<!-- footer goes here-->
+     <footer class="text-center text-lg-start">
       <div class="container pt-4 justify-content-center">
         <div class="row">
           <div class="col-1"></div>
@@ -313,6 +314,15 @@
         </div>
       </div>
     </footer>
+          
+          
+        </div>
+        
+      
+      
+    </div>
+
+  
 
     <!-- Login Modal -->
     <div class="modal fade" id="login-modal">
@@ -494,7 +504,7 @@
                     >Välj lösenord</label
                   >
                   <div id="WRONG_PASSWORD_ERROR_MSG" class="error-msg">
-                    Felaktigt lösenord
+                    Lösenordet måste innehålla stora och små bokstäver samt minst en siffra
                   </div>
                 </div>
                 <div class="col-md-6 form-floating mb-3">
