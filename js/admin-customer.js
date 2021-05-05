@@ -276,7 +276,8 @@ function filterSearch(){
                                 filterOrders
                                     .forEach(order => {
                                         date = new Date(order.timeStamp)
-                                        if( date>=startDateC && date<=endDateC){
+                                        date.setHours(10)
+                                        if( date>=startDateC.setHours(0) && date<=endDateC.setHours(23)){
                                             filterOrders2.push(order)
                                         }})
                                 
@@ -320,8 +321,8 @@ function filterSearch(){
                                 filterOrders
                                     .forEach(order => {
                                         date = new Date(order.timeStamp)
-                                        console.log(date)
-                                        if( date>=startDateC && date<=endDateC){
+                                        date.setHours(10)
+                                        if( date>=startDateC.setHours(0) && date<=endDateC.setHours(23)){
                                             filterOrders2.push(order)
                                         }})
                                     
