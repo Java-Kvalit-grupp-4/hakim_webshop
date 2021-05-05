@@ -172,7 +172,7 @@ html {
   color: rgb(151, 151, 151);
 }
 
-#paddding-footer-left {
+#padding-footer-left {
   background-color: #1A3A50;
 }
 
@@ -180,7 +180,16 @@ html {
   background-color: #1A3A50;
 }
 
+#sidebar {
+  display:none;
+}
 
+
+#categories-btn {
+    display:inline-block;
+    position:fixed;
+    left:2rem;
+  }
 
 
 footer {
@@ -196,6 +205,9 @@ footer {
     left: 0rem;
     top: 11.4%;
   }
+  #categories-btn {
+    display:none;
+  }
 
   .container-fluid {
     padding: 0;
@@ -209,6 +221,9 @@ footer {
   }
   #all {
     margin-top: -1.6rem !important;
+  }
+  #sidebar {
+    display:inline-block
   }
 }
 
