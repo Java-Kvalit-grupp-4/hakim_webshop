@@ -47,9 +47,9 @@ function fetchCustomerInfo(customer, openPage){
       setCustomer(response.data)
       location.replace(openPage)
     })
-    .catch((err) => {
-      alert(err);
-    });
+//     .catch((err) => {
+//       alert(err);
+//     });
 }
 
 function setCustomer(customer){
