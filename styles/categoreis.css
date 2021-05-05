@@ -24,9 +24,6 @@
 .categories-dropdown-list:hover{
     background-color: #dddcdc;
 }
-.open {
-    background-color: rgb(189, 14, 14);
-}
 
 @media(max-width: 630px) {
     #products{
@@ -38,13 +35,13 @@
     
     
     #sidomeny{
-        /* position: fixed; */
+        width: 100%;
     }
 
     .btn-wrapper{
         overflow: auto;
         height: 200px;
-        background-color: red;
+        
     }
     
     
