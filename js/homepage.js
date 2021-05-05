@@ -162,8 +162,16 @@ function renderCategories(data) {
     })
    
     let uniqueCategories = [...new Set(categories)];
+     $("#categories-dropdown-button-list").html("")
 
     uniqueCategories.forEach((element) => {
+        $("#categories-dropdown-button-list").append(`
+        <li>
+                <button class="dropdown-item" type="button" id="${element}">
+                  ${element}
+                </button>
+              </li>
+        `);
         $("#sidomeny").append(`
                   <button id= "${element}" type="button" class="list-group-item list-group-item-action fs-4 categories-dropdown-list" >${element}</button>`);
     });
@@ -196,6 +204,33 @@ function renderCategories(data) {
                 });
             }
         });
+    });
+
+    $("#categories-dropdown-button-list button").on("click", function () {
+      let categoryName = $(this).attr("id");
+      let headingText = categoryName == "all" ? "Produkter" : categoryName;
+      $("#heading").text(headingText);
+      let selectedCategoryList = [];
+      availableProducts.forEach((product) => {
+        if (categoryName === "all") {
+          $("#products").empty();
+          renderProducts(availableProducts);
+          localStorage.setItem("categoryList", JSON.stringify(products));
+        } else {
+          let currentProduct = product;
+          product.categories.forEach((category) => {
+            if (category.name == categoryName) {
+              selectedCategoryList.push(currentProduct);
+              $("#products").empty();
+              renderProducts(selectedCategoryList);
+              localStorage.setItem(
+                "categoryList",
+                JSON.stringify(selectedCategoryList)
+              );
+            }
+          });
+        }
+      });
     });
 }
 /**
