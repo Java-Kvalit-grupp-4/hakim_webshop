@@ -1,6 +1,7 @@
 let allOrders = [];
 let activeOrder;
 let chosenOrder;
+let firstLoad = true;
 const server = "https://hakimlivs.herokuapp.com/";
 // const server = "https://hakim-livs.herokuapp.com/";
 // const server = "http://localhost:8080/";
@@ -37,9 +38,10 @@ let endDate;
 
 function renderOrders(orders) {
   let chosenId = sessionStorage.getItem("chosenOrder");
-  if(chosenId!=null || chosenId!=undefined){
+  if(chosenId!=null || chosenId!=undefined && firstLoad){
     openCustomerOrder();
     //chosenId =null;
+    firstLoad = false;
   } else {
     $("#reservation").daterangepicker(null, function (start, end, label) {
       startDate = moment(start);
@@ -75,7 +77,7 @@ function openOrderTab() {
   renderChosenOrder();
   renderUserData();
   chosenOrder = sessionStorage.getItem("chosenOrder");
-  sessionStorage.removeItem("chosenOrder");
+  // sessionStorage.removeItem("chosenOrder");
   addOrderToPdfBtn()
   $("#navbar-order-tab").tab("show");
 }
@@ -93,7 +95,7 @@ function openCustomerOrder(){
   renderUserData();
   chosenOrder = sessionStorage.getItem("chosenOrder");
   addOrderToPdfBtn()
-  sessionStorage.removeItem("chosenOrder");
+  // sessionStorage.removeItem("chosenOrder");
   $("#navbar-order-tab").tab("show");
 }
 
@@ -249,6 +251,8 @@ function updateQuantity(quantityField) {
     alert("Ogiltig antal produkter för vara " + sku);
     return;
   }
+
+  console.log(activeOrder);
 
   activeOrder.lineItems.forEach((lineItem) => {
     if (lineItem.product.sku == sku) {
