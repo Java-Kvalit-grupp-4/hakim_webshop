@@ -184,6 +184,11 @@ html {
   display:none;
 }
 
+.dropdown-menu {
+ overflow-y:auto; 
+ max-height:60vh
+}
+
 
 #categories-btn {
     display:inline-block;
