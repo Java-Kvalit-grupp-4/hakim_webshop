@@ -120,15 +120,15 @@ const renderProductFromSearchWord = (searchWord) => {
     let resultMsg;
 
     // checks if searchwrod is among title, brand or description
-    filteredList = productsToSerach.filter(product => product.title.includes(searchWord) || 
-                                                            product.brand.name.includes(searchWord) || 
-                                                            product.description.includes(searchWord) 
+    filteredList = productsToSerach.filter(product => product.title.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase()) || 
+                                                            product.brand.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase()) || 
+                                                            product.description.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase()) 
                                                             );
 
     // check if searchwords is among the tags of each product
     productsToSerach.forEach(product => {
         product.tags.forEach(tag => {
-            if(tag.name.includes(searchWord)){
+            if(tag.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())){
                 filteredList.push(product)
             }
         })
@@ -137,7 +137,7 @@ const renderProductFromSearchWord = (searchWord) => {
      // check if searchwords is among the categories of each product
     productsToSerach.forEach(product => {
         product.categories.forEach(category => {
-            if(category.name.includes(searchWord)){
+            if(category.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())){
                 filteredList.push(product)
             }
         })

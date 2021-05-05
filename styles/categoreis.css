@@ -33,15 +33,13 @@
         background-color: #fff;
     }
     
-    
     #sidomeny{
         width: 100%;
     }
 
     .btn-wrapper{
         overflow: auto;
-        height: 200px;
-        
+        height: 200px;  
     }
     
     
