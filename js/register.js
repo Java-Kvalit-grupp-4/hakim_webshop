@@ -3,7 +3,7 @@ $(function () {
   addDayOptions();
 
   function addYearOptions() {
-    let year = new Date().getFullYear();
+    let year = new Date().getFullYear() - 18;
     for (let index = year; index >= year - 110; index--) {
       $("#register-year").append(`<option value="${index}">
                                        ${index}

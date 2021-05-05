@@ -117,6 +117,7 @@ const distinct = (value, index, self) => {
  */
 const renderProductFromSearchWord = (searchWord) => {
     let filteredList = []
+    let resultMsg;
 
     // checks if searchwrod is among title, brand or description
     filteredList = productsToSerach.filter(product => product.title.includes(searchWord) || 
@@ -148,6 +149,9 @@ const renderProductFromSearchWord = (searchWord) => {
     // sets the filtered list to localstorage
     localStorage.removeItem('categoryList')
     localStorage.setItem('categoryList', JSON.stringify(filteredList));
+
+    resultMsg = filteredList.length == 0 ? "Sökningen gav inga träffar" : "Resultat för " + searchWord
+    $('#heading').text(resultMsg)
                                       
     renderProducts(filteredList)
 }
