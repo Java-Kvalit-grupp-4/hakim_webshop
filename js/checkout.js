@@ -183,7 +183,7 @@ function clearAllInputFields() {
 
 function makeOrderObject() {
   let cart = JSON.parse(localStorage.getItem("cart"));
-  let orderCommentInput = orderComment.text();
+  let orderCommentInput = $('#order-comment').val();
   let lineItems = [];
 
   // adds shipping to order
