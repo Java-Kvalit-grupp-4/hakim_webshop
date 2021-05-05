@@ -278,12 +278,6 @@ footer {
   }
   
 
-  /* #footer-row {
-    min-width: 96vw !important;
-    max-width: 98vw !important;
-    margin-left: -1rem !important;
-    
-  } */
 }
 
 @media (max-width: 576px) {

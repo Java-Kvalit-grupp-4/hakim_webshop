@@ -83,6 +83,8 @@
         transition: all 250ms ease-in-out;
         font-size: 0.5rem;
         background-color: white;
+        pointer-events: all;
+        touch-action: all;
         
     }
     
