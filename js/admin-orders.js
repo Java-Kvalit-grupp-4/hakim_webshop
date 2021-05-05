@@ -1,5 +1,6 @@
 let allOrders = [];
 let activeOrder;
+let chosenOrder;
 const server = "https://hakimlivs.herokuapp.com/";
 // const server = "https://hakim-livs.herokuapp.com/";
 // const server = "http://localhost:8080/";
@@ -73,6 +74,7 @@ function openOrderTab() {
   saveChosenOrder(Number($(this).text()));
   renderChosenOrder();
   renderUserData();
+  chosenOrder = sessionStorage.getItem("chosenOrder");
   sessionStorage.removeItem("chosenOrder");
   addOrderToPdfBtn()
   $("#navbar-order-tab").tab("show");
@@ -89,6 +91,7 @@ function saveChosenOrder(id) {
 function openCustomerOrder(){
   renderChosenOrder();
   renderUserData();
+  chosenOrder = sessionStorage.getItem("chosenOrder");
   addOrderToPdfBtn()
   sessionStorage.removeItem("chosenOrder");
   $("#navbar-order-tab").tab("show");
@@ -101,10 +104,10 @@ function openCustomerPage(){
 
 
 function addOrderToPdfBtn(){
-  let chosenId = Number(sessionStorage.getItem("chosenOrder"));
+  //let chosenId = Number(sessionStorage.getItem("chosenOrder"));
 
   allOrders.forEach((order) => {
-    if (order.orderNumber == chosenId) {
+    if (order.orderNumber == chosenOrder) {
       $("#generate-pdf").click(()=>{  
         generatPdf(order)
         printPdf();
