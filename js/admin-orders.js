@@ -1,7 +1,6 @@
 let allOrders = [];
 let activeOrder;
 let chosenOrder;
-let firstLoad = true;
 const server = "https://hakimlivs.herokuapp.com/";
 // const server = "https://hakim-livs.herokuapp.com/";
 // const server = "http://localhost:8080/";
@@ -37,11 +36,12 @@ let startDate;
 let endDate;
 
 function renderOrders(orders) {
+  let redirect = sessionStorage.getItem("redirect");
   let chosenId = sessionStorage.getItem("chosenOrder");
-  if(chosenId!=null || chosenId!=undefined && firstLoad){
+  if((chosenId!=null || chosenId!=undefined) && redirect){
     openCustomerOrder();
     //chosenId =null;
-    firstLoad = false;
+    sessionStorage.removeItem("redirect");
   } else {
     $("#reservation").daterangepicker(null, function (start, end, label) {
       startDate = moment(start);
@@ -182,7 +182,6 @@ function renderChosenOrder() {
 
   let $orderChanges = $("#order-changes");
   $orderChanges.html("");
-  console.log(activeOrder);
   if(activeOrder.orderChanges.length>0){
     activeOrder.orderChanges.forEach((change) => {
     $orderChanges.prepend(`<li class="list-group-item">${
@@ -225,7 +224,6 @@ function updateOrder() {
         description: newCommentString,
       changeDateTime: moment().toISOString(true)}
       );
-      console.log(activeOrder.orderChanges);
     document.getElementById("add-comment-field").value = "";
   }
 

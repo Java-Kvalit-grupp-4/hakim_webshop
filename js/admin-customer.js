@@ -71,6 +71,7 @@ $(document).on('click', '#nav-profile-tab', function(){
 
 function openOrderTab(){
     sessionStorage.setItem("chosenOrder",(Number($(this).text())));
+    sessionStorage.setItem("redirect", true);
     location.replace("../Orders/index.html")
 }
 
