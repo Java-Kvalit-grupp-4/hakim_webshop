@@ -1,0 +1,1044 @@
+[
+    {
+        "title": "Vattenpipa",
+        "description": "Slå dig ner i en mysig soffa och njut",
+        "brand": {
+            "id": 327,
+            "name": "Hakim"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/vattenpipa.jpg",
+        "price": 699.0,
+        "quantity": -198,
+        "isAvailable": true,
+        "comparablePrice": "699.00",
+        "volume": 1.0,
+        "unit": "st",
+        "categories": [
+            {
+                "id": 325,
+                "name": "Tobak"
+            }
+        ],
+        "tags": [],
+        "sku": 20210847,
+        "vat": 1.25
+    },
+    {
+        "title": "Soltorkade tomater",
+        "description": "Med genuin smak av Medelhavet!",
+        "brand": {
+            "id": 18,
+            "name": "Santa Maria"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/soltorkade_tomater.jpg",
+        "price": 35.0,
+        "quantity": -216,
+        "isAvailable": true,
+        "comparablePrice": "125.00",
+        "volume": 280.0,
+        "unit": "gr",
+        "categories": [
+            {
+                "id": 20,
+                "name": "Konserver"
+            }
+        ],
+        "tags": [
+            {
+                "id": 21,
+                "name": "Olja"
+            },
+            {
+                "id": 22,
+                "name": "Tomat"
+            }
+        ],
+        "sku": 20210913,
+        "vat": 1.12
+    },
+    {
+        "title": "",
+        "description": "",
+        "brand": {
+            "id": 444,
+            "name": ""
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/53C6D9F6-CB4D-4867-B00F-D8A8CCEC4AAA.jpeg",
+        "price": 8899.0,
+        "quantity": -1,
+        "isAvailable": true,
+        "comparablePrice": "8899.00",
+        "volume": 1.0,
+        "unit": "st",
+        "categories": [
+            {
+                "id": 38,
+                "name": "Godis"
+            }
+        ],
+        "tags": [],
+        "sku": 20210924,
+        "vat": 1.12
+    },
+    {
+        "title": "mackan",
+        "description": "",
+        "brand": {
+            "id": 417,
+            "name": "Sandwish"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/sandvich2.png",
+        "price": 1111.0,
+        "quantity": 11,
+        "isAvailable": false,
+        "comparablePrice": "1111000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            },
+            {
+                "id": 298,
+                "name": "test 2"
+            },
+            {
+                "id": 299,
+                "name": "test 3"
+            },
+            {
+                "id": 300,
+                "name": "test 4"
+            },
+            {
+                "id": 416,
+                "name": "test ny kategori"
+            }
+        ],
+        "tags": [],
+        "sku": 20210513,
+        "vat": 1.12
+    },
+    {
+        "title": "Tea",
+        "description": "Det är bra för kroppen.",
+        "brand": {
+            "id": 438,
+            "name": "Tea"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/CABC56BC-4377-4CD3-9903-D8013F314E73.jpeg",
+        "price": 100.0,
+        "quantity": -199,
+        "isAvailable": false,
+        "comparablePrice": "100.00",
+        "volume": 1.0,
+        "unit": "kg",
+        "categories": [
+            {
+                "id": 52,
+                "name": "Dryck"
+            }
+        ],
+        "tags": [],
+        "sku": 20210971,
+        "vat": 1.12
+    },
+    {
+        "title": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor",
+        "description": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor",
+        "brand": {
+            "id": 643,
+            "name": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/testing1-kopia(4).png",
+        "price": 1.0,
+        "quantity": -100,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210131,
+        "vat": 1.12
+    },
+    {
+        "title": "Vattenmelon",
+        "description": "Vattenmelon",
+        "brand": {
+            "id": 454,
+            "name": "Vattenmelon från Kina"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/998595C3-973D-4DB8-A1EF-168C4EAF6EAF.jpeg",
+        "price": 0.99,
+        "quantity": -200,
+        "isAvailable": true,
+        "comparablePrice": ".99",
+        "volume": 1.0,
+        "unit": "kg",
+        "categories": [
+            {
+                "id": 52,
+                "name": "Dryck"
+            }
+        ],
+        "tags": [],
+        "sku": 20210811,
+        "vat": 1.12
+    },
+    {
+        "title": "Hushållsost, mild 26%",
+        "description": "En riktig klassiker - till frukost, lunch och middag!",
+        "brand": {
+            "id": 50,
+            "name": "Arla"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/hushållsost.jpg",
+        "price": 199.0,
+        "quantity": 11,
+        "isAvailable": false,
+        "comparablePrice": "90.45",
+        "volume": 2200.0,
+        "unit": "gr",
+        "categories": [
+            {
+                "id": 44,
+                "name": "Mejeri"
+            },
+            {
+                "id": 45,
+                "name": "Ost"
+            }
+        ],
+        "tags": [
+            {
+                "id": 46,
+                "name": "fika"
+            },
+            {
+                "id": 47,
+                "name": "macka"
+            },
+            {
+                "id": 48,
+                "name": "ost"
+            }
+        ],
+        "sku": 20210965,
+        "vat": 1.12
+    },
+    {
+        "title": "Havregryn",
+        "description": "Gott till cocosbollar",
+        "brand": {
+            "id": 377,
+            "name": "Axa"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/axa_havregryn_750g_ny.jpg",
+        "price": 15.0,
+        "quantity": -110,
+        "isAvailable": true,
+        "comparablePrice": "20.00",
+        "volume": 750.0,
+        "unit": "gr",
+        "categories": [
+            {
+                "id": 84,
+                "name": "Vegetariskt"
+            },
+            {
+                "id": 85,
+                "name": "Veganskt"
+            },
+            {
+                "id": 373,
+                "name": "Skafferi"
+            }
+        ],
+        "tags": [
+            {
+                "id": 374,
+                "name": "Havre"
+            },
+            {
+                "id": 375,
+                "name": "Gunde"
+            }
+        ],
+        "sku": 20210447,
+        "vat": 1.12
+    },
+    {
+        "title": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor",
+        "description": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor",
+        "brand": {
+            "id": 643,
+            "name": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/testing1-kopia(6).png",
+        "price": 1.0,
+        "quantity": -1,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210910,
+        "vat": 1.12
+    },
+    {
+        "title": "Tobak Äpple",
+        "description": "Godaste smaken. Go for it",
+        "brand": {
+            "id": 332,
+            "name": "Al Fakher"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/vattenpipa-smak-nakhla-boras-mark-bollebygd-7760171.jpg",
+        "price": 500.0,
+        "quantity": -100,
+        "isAvailable": true,
+        "comparablePrice": "500.00",
+        "volume": 1.0,
+        "unit": "kg",
+        "categories": [
+            {
+                "id": 325,
+                "name": "Tobak"
+            }
+        ],
+        "tags": [
+            {
+                "id": 330,
+                "name": "vattenpipa"
+            }
+        ],
+        "sku": 20210020,
+        "vat": 1.12
+    },
+    {
+        "title": "Ägg",
+        "description": "Ett ägg.",
+        "brand": {
+            "id": 137,
+            "name": "Höna"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/egg_3_web_xl.png",
+        "price": 2.0,
+        "quantity": 263,
+        "isAvailable": true,
+        "comparablePrice": "2.00",
+        "volume": 1.0,
+        "unit": "st",
+        "categories": [
+            {
+                "id": 35,
+                "name": "Världens mat"
+            }
+        ],
+        "tags": [
+            {
+                "id": 135,
+                "name": "Ägg"
+            }
+        ],
+        "sku": 20210614,
+        "vat": 1.12
+    },
+    {
+        "title": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor",
+        "description": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor",
+        "brand": {
+            "id": 643,
+            "name": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/testing1-kopia(7).png",
+        "price": 1.0,
+        "quantity": -1,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210798,
+        "vat": 1.12
+    },
+    {
+        "title": "Aloe Vera Yoghurt, dusch",
+        "description": "Barnängen Duschcreme Aloe Vera Yoghurt är en duschtvål med ett hudvänligt pH-värde och en mjuk och krämig formula. Tvålen innehåller yoghurtprotein och aloe vera-extrakt och hjälper till att skydda huden mot uttorkning.",
+        "brand": {
+            "id": 77,
+            "name": "Barnängen"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/ms122407_bae_shower_gel_youhurt_aloe_vera_250mljpg.jpg",
+        "price": 15.0,
+        "quantity": -212,
+        "isAvailable": true,
+        "comparablePrice": "60.00",
+        "volume": 250.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 70,
+                "name": "Hygien & Apotek"
+            },
+            {
+                "id": 79,
+                "name": "Hudvård"
+            }
+        ],
+        "tags": [],
+        "sku": 20210744,
+        "vat": 1.25
+    },
+    {
+        "title": "Grillchips",
+        "description": "Gott till fredagsmys",
+        "brand": {
+            "id": 243,
+            "name": "OLW"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/olw_grill.jpg",
+        "price": 22.0,
+        "quantity": -201,
+        "isAvailable": true,
+        "comparablePrice": "48.89",
+        "volume": 450.0,
+        "unit": "gr",
+        "categories": [
+            {
+                "id": 37,
+                "name": "Snacks"
+            }
+        ],
+        "tags": [],
+        "sku": 20210668,
+        "vat": 1.12
+    },
+    {
+        "title": "testing7",
+        "description": "testing7",
+        "brand": {
+            "id": 569,
+            "name": "testing7"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/testing1-kopia(8).png",
+        "price": 1.0,
+        "quantity": -1,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210897,
+        "vat": 1.12
+    },
+    {
+        "title": "Äpple",
+        "description": "",
+        "brand": {
+            "id": 363,
+            "name": "Skåne"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/dwarfarcher.png",
+        "price": 500.0,
+        "quantity": 1,
+        "isAvailable": false,
+        "comparablePrice": "500.00",
+        "volume": 1.0,
+        "unit": "st",
+        "categories": [],
+        "tags": [],
+        "sku": 20210546,
+        "vat": 1.12
+    },
+    {
+        "title": "Disktrasa, 3-pack",
+        "description": "Kommer i ett praktiskt trepack",
+        "brand": {
+            "id": 69,
+            "name": "Wettex"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/wet_new_wetter_art_collection_pink_edition_2020_3-pack_3pcs_.jpg",
+        "price": 35.0,
+        "quantity": -167,
+        "isAvailable": true,
+        "comparablePrice": "2.69",
+        "volume": 13.0,
+        "unit": "st",
+        "categories": [
+            {
+                "id": 62,
+                "name": "Hem"
+            },
+            {
+                "id": 63,
+                "name": "Städ"
+            }
+        ],
+        "tags": [
+            {
+                "id": 64,
+                "name": "disk"
+            },
+            {
+                "id": 65,
+                "name": "städning"
+            },
+            {
+                "id": 66,
+                "name": "rosa"
+            },
+            {
+                "id": 67,
+                "name": "trasa"
+            }
+        ],
+        "sku": 20210011,
+        "vat": 1.25
+    },
+    {
+        "title": "Daim Rolls 2-pack",
+        "description": "Gott till fikat. Perfekt i väskan!",
+        "brand": {
+            "id": 43,
+            "name": "Marabou"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/daimrollz.jpg",
+        "price": 26.0,
+        "quantity": -306,
+        "isAvailable": true,
+        "comparablePrice": "194.03",
+        "volume": 134.0,
+        "unit": "gr",
+        "categories": [
+            {
+                "id": 37,
+                "name": "Snacks"
+            },
+            {
+                "id": 38,
+                "name": "Godis"
+            }
+        ],
+        "tags": [
+            {
+                "id": 39,
+                "name": "choklad"
+            },
+            {
+                "id": 40,
+                "name": "chocklad"
+            },
+            {
+                "id": 41,
+                "name": "daim"
+            }
+        ],
+        "sku": 20210730,
+        "vat": 1.12
+    },
+    {
+        "title": "Våtservett Citron",
+        "description": "En fräsch våtservett med doft av citron. Rengör händerna snabbt och lätt och lämnar en härlig doft efter sig. Förpackningen kan enkelt återförslutas med remsan på toppen.",
+        "brand": {
+            "id": 82,
+            "name": "Gunry"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/ms122666_gun_wet_wipes_lemon_40pcsjpg.jpg",
+        "price": 15.0,
+        "quantity": -217,
+        "isAvailable": true,
+        "comparablePrice": ".38",
+        "volume": 40.0,
+        "unit": "st",
+        "categories": [
+            {
+                "id": 70,
+                "name": "Hygien & Apotek"
+            },
+            {
+                "id": 79,
+                "name": "Hudvård"
+            }
+        ],
+        "tags": [
+            {
+                "id": 75,
+                "name": "rengöring"
+            },
+            {
+                "id": 80,
+                "name": "tvättning"
+            }
+        ],
+        "sku": 20210214,
+        "vat": 1.25
+    },
+    {
+        "title": " 你好",
+        "description": "你好\n你好\n你好\n你好\n你好\n你好\n你好\n你好",
+        "brand": {
+            "id": 469,
+            "name": " 你好"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/Nihao1.png",
+        "price": 1.0,
+        "quantity": -201,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210418,
+        "vat": 1.12
+    },
+    {
+        "title": "testing4",
+        "description": "testing4",
+        "brand": {
+            "id": 514,
+            "name": "testing4"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/testing1-kopia(5).png",
+        "price": 1.0,
+        "quantity": -100,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210694,
+        "vat": 1.12
+    },
+    {
+        "title": "Test cs",
+        "description": "",
+        "brand": {
+            "id": 420,
+            "name": "cs"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/viagra.jpg",
+        "price": 1.5,
+        "quantity": -5,
+        "isAvailable": true,
+        "comparablePrice": "1500.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210247,
+        "vat": 1.12
+    },
+    {
+        "title": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor",
+        "description": "testing2",
+        "brand": {
+            "id": 643,
+            "name": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/testing1-kopia(3).png",
+        "price": 1.0,
+        "quantity": -100,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210335,
+        "vat": 1.12
+    },
+    {
+        "title": "Handtvål \"Refill Yoghurt\"",
+        "description": "Flytande tvål med doft av aloe vera för normal till torr hud. Här i en förpackning för påfyllning till tvålflaskan.",
+        "brand": {
+            "id": 77,
+            "name": "Barnängen"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/barnangen_handtval_refill_yoghurt.jpg",
+        "price": 19.0,
+        "quantity": -140,
+        "isAvailable": true,
+        "comparablePrice": "38.00",
+        "volume": 500.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 70,
+                "name": "Hygien & Apotek"
+            }
+        ],
+        "tags": [
+            {
+                "id": 71,
+                "name": "tvätta"
+            },
+            {
+                "id": 72,
+                "name": "händer"
+            },
+            {
+                "id": 73,
+                "name": "hand"
+            },
+            {
+                "id": 74,
+                "name": "tvål"
+            },
+            {
+                "id": 75,
+                "name": "rengöring"
+            }
+        ],
+        "sku": 20210829,
+        "vat": 1.12
+    },
+    {
+        "title": "Coca-Cola",
+        "description": "Världens mest populära läsk - sedan 1886!",
+        "brand": {
+            "id": 60,
+            "name": "Coca-Cola Company"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/coca-cola.jpg",
+        "price": 10.0,
+        "quantity": -222,
+        "isAvailable": true,
+        "comparablePrice": "30.30",
+        "volume": 33.0,
+        "unit": "cl",
+        "categories": [
+            {
+                "id": 52,
+                "name": "Dryck"
+            },
+            {
+                "id": 51,
+                "name": "Läsk"
+            }
+        ],
+        "tags": [
+            {
+                "id": 53,
+                "name": "cola"
+            },
+            {
+                "id": 54,
+                "name": "läsk"
+            },
+            {
+                "id": 55,
+                "name": "kolsyra"
+            },
+            {
+                "id": 56,
+                "name": "kolsyrat"
+            },
+            {
+                "id": 57,
+                "name": "kolsyrad"
+            },
+            {
+                "id": 58,
+                "name": "dricka"
+            }
+        ],
+        "sku": 20210657,
+        "vat": 1.12
+    },
+    {
+        "title": "Tacosås X-TRA HOT",
+        "description": "Gott till tacos!",
+        "brand": {
+            "id": 18,
+            "name": "Santa Maria"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/tacosås.jpg",
+        "price": 35.0,
+        "quantity": -261,
+        "isAvailable": true,
+        "comparablePrice": "125.00",
+        "volume": 280.0,
+        "unit": "gr",
+        "categories": [
+            {
+                "id": 35,
+                "name": "Världens mat"
+            },
+            {
+                "id": 20,
+                "name": "Konserver"
+            },
+            {
+                "id": 34,
+                "name": "Tex-Mex"
+            }
+        ],
+        "tags": [],
+        "sku": 20210519,
+        "vat": 1.12
+    },
+    {
+        "title": "testing9",
+        "description": "testing9",
+        "brand": {
+            "id": 573,
+            "name": "testing9"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/testing1.png",
+        "price": 1.0,
+        "quantity": -1,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210472,
+        "vat": 1.12
+    },
+    {
+        "title": "",
+        "description": "Madness! :D",
+        "brand": {
+            "id": 444,
+            "name": ""
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/testing1-kopia(2).png",
+        "price": 1.0,
+        "quantity": -100,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210943,
+        "vat": 1.12
+    },
+    {
+        "title": "Röda Linser",
+        "description": "Röda linser från GoGreen.",
+        "brand": {
+            "id": 87,
+            "name": "GoGreen"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/rodalinser.jpg",
+        "price": 11.0,
+        "quantity": -240,
+        "isAvailable": true,
+        "comparablePrice": "28.95",
+        "volume": 380.0,
+        "unit": "gr",
+        "categories": [
+            {
+                "id": 84,
+                "name": "Vegetariskt"
+            },
+            {
+                "id": 85,
+                "name": "Veganskt"
+            }
+        ],
+        "tags": [],
+        "sku": 20210669,
+        "vat": 1.12
+    },
+    {
+        "title": "Frakt",
+        "description": "",
+        "brand": {
+            "id": 25,
+            "name": "Hakim Livs"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/kalmar-verkstad-tjorven-10930-1527149536.jpeg",
+        "price": 49.0,
+        "quantity": 9920,
+        "isAvailable": false,
+        "comparablePrice": "49.00",
+        "volume": 1.0,
+        "unit": "st",
+        "categories": [
+            {
+                "id": 23,
+                "name": "Tjänster"
+            }
+        ],
+        "tags": [],
+        "sku": 1,
+        "vat": 1.25
+    },
+    {
+        "title": "Test cs 1",
+        "description": "",
+        "brand": {
+            "id": 387,
+            "name": "test"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/nobelq.jpg",
+        "price": 200.5,
+        "quantity": 100,
+        "isAvailable": false,
+        "comparablePrice": "200.50",
+        "volume": 1.0,
+        "unit": "kg",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            },
+            {
+                "id": 298,
+                "name": "test 2"
+            },
+            {
+                "id": 299,
+                "name": "test 3"
+            },
+            {
+                "id": 300,
+                "name": "test 4"
+            },
+            {
+                "id": 418,
+                "name": "test 5"
+            }
+        ],
+        "tags": [
+            {
+                "id": 160,
+                "name": "test "
+            }
+        ],
+        "sku": 20210062,
+        "vat": 1.12
+    },
+    {
+        "title": "",
+        "description": "",
+        "brand": {
+            "id": 444,
+            "name": ""
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/141BE9E3-7650-4162-9B48-D3A60E6F99A6.jpeg",
+        "price": 999.0,
+        "quantity": -101,
+        "isAvailable": true,
+        "comparablePrice": "999.00",
+        "volume": 1.0,
+        "unit": "kg",
+        "categories": [
+            {
+                "id": 62,
+                "name": "Hem"
+            }
+        ],
+        "tags": [],
+        "sku": 20210303,
+        "vat": 1.12
+    },
+    {
+        "title": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor",
+        "description": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor",
+        "brand": {
+            "id": 643,
+            "name": "Ĕ̠͇̦̻̟͆̇̽͆rͣ͗̊r̜̦̻̗͉̮̓̄͊̋͑ͫor"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/testing1-kopia.png",
+        "price": 1.0,
+        "quantity": 1,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210604,
+        "vat": 1.12
+    },
+    {
+        "title": "Oͨ̍ͫ̀̃̈ͦ.̇̃ͮͤo͇̮͍̦ͪ̊͌́",
+        "description": "Oͨ̍ͫ̀̃̈ͦ.̇̃ͮͤo͇̮͍̦ͪ̊͌́",
+        "brand": {
+            "id": 642,
+            "name": "Oͨ̍ͫ̀̃̈ͦ.̇̃ͮͤo͇̮͍̦ͪ̊͌́"
+        },
+        "image": "https://hakimlivs.herokuapp.com/api/v1/download/testing2.png",
+        "price": 1.0,
+        "quantity": 0,
+        "isAvailable": true,
+        "comparablePrice": "1000.00",
+        "volume": 1.0,
+        "unit": "ml",
+        "categories": [
+            {
+                "id": 297,
+                "name": "test 1"
+            }
+        ],
+        "tags": [],
+        "sku": 20210362,
+        "vat": 1.12
+    }
+]
