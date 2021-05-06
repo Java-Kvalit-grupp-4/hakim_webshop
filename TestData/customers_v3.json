@@ -1,0 +1,272 @@
+[
+    {
+        "customerNumber": 20210735,
+        "firstName": "Juliaääää",
+        "lastName": "Nihao",
+        "password": "Julia123",
+        "phoneNumber": "123456789",
+        "email": "qibaobao2008@gmail.com",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "Zetterlunds ",
+        "zipCode": "18654",
+        "city": {
+            "id": 323,
+            "name": "Täby"
+        },
+        "customerOrders": null,
+        "comment": "Hur mår du?"
+    },
+    {
+        "customerNumber": 20210421,
+        "firstName": "Hej",
+        "lastName": "Hej",
+        "password": "Hej1234",
+        "phoneNumber": "2222222222",
+        "email": "hej@email.com",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "Hej",
+        "zipCode": "12345",
+        "city": {
+            "id": 391,
+            "name": "Hej"
+        },
+        "customerOrders": null,
+        "comment": "Tjolahoppsan"
+    },
+    {
+        "customerNumber": 20210600,
+        "firstName": "Stefan",
+        "lastName": "Hennings",
+        "password": "hej123",
+        "phoneNumber": "0722746643",
+        "email": "stefan.hennings4@gmail.com",
+        "isAdmin": true,
+        "isVip": null,
+        "streetAddress": "Blekingegatan 4",
+        "zipCode": "12345",
+        "city": {
+            "id": 9,
+            "name": "Stockholm"
+        },
+        "customerOrders": null,
+        "comment": "Hur mår du"
+    },
+    {
+        "customerNumber": 20210484,
+        "firstName": "Test",
+        "lastName": "Test",
+        "password": "Christian2",
+        "phoneNumber": "12345678",
+        "email": "stulen.christian@gmail.com",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "test 7",
+        "zipCode": "11111",
+        "city": {
+            "id": 208,
+            "name": "Test"
+        },
+        "customerOrders": null,
+        "comment": "test 1"
+    },
+    {
+        "customerNumber": 20210497,
+        "firstName": "LinneaÄndring",
+        "lastName": "Test",
+        "password": "Test12",
+        "phoneNumber": "052123456",
+        "email": "test2@email.com",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "Testvägen 1",
+        "zipCode": "12345",
+        "city": {
+            "id": 405,
+            "name": "Testorten"
+        },
+        "customerOrders": null,
+        "comment": ""
+    },
+    {
+        "customerNumber": 20210834,
+        "firstName": "Testing",
+        "lastName": "TestTest",
+        "password": "Hej1234",
+        "phoneNumber": "073919190",
+        "email": "Test@email.com",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "Testgatan",
+        "zipCode": "14400",
+        "city": {
+            "id": 405,
+            "name": "Testorten"
+        },
+        "customerOrders": null,
+        "comment": ""
+    },
+    {
+        "customerNumber": 20210054,
+        "firstName": "Admin",
+        "lastName": "Forss",
+        "password": "Kalle1234",
+        "phoneNumber": "070133742069",
+        "email": "admin@email.com",
+        "isAdmin": true,
+        "isVip": false,
+        "streetAddress": "Adminvägen 1",
+        "zipCode": "66666",
+        "city": {
+            "id": 9,
+            "name": "Stockholm"
+        },
+        "customerOrders": null,
+        "comment": "Test"
+    },
+    {
+        "customerNumber": 20210287,
+        "firstName": "Minty",
+        "lastName": "Fresh",
+        "password": "MintyFresh1",
+        "phoneNumber": "000111222333",
+        "email": "mintyfresh@email.com",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "Limerick 99",
+        "zipCode": "42069",
+        "city": {
+            "id": 329,
+            "name": "Taffeetown"
+        },
+        "customerOrders": null,
+        "comment": "Hello"
+    },
+    {
+        "customerNumber": 20210724,
+        "firstName": "Hej",
+        "lastName": "Zhong",
+        "password": "Hakim88",
+        "phoneNumber": "0708442799",
+        "email": "aa@aa",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "Zetterlunds ",
+        "zipCode": "18699",
+        "city": {
+            "id": 414,
+            "name": "Vallentuna"
+        },
+        "customerOrders": null,
+        "comment": ""
+    },
+    {
+        "customerNumber": 20210034,
+        "firstName": "Al abbas",
+        "lastName": "Zhong",
+        "password": "Julia123",
+        "phoneNumber": "12345678999",
+        "email": "bb@bb",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "Aaaa999",
+        "zipCode": "189 88",
+        "city": {
+            "id": 467,
+            "name": "Vallentuna "
+        },
+        "customerOrders": null,
+        "comment": null
+    },
+    {
+        "customerNumber": 20210118,
+        "firstName": "Testhej",
+        "lastName": "Testhejdå",
+        "password": "Hejhej3",
+        "phoneNumber": "0737183032",
+        "email": "test@email.com",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "Hejstigen9",
+        "zipCode": "13340",
+        "city": {
+            "id": 260,
+            "name": "Hallåha"
+        },
+        "customerOrders": null,
+        "comment": ""
+    },
+    {
+        "customerNumber": 20210136,
+        "firstName": "adda",
+        "lastName": "sfsf",
+        "password": "Hejhejhej1",
+        "phoneNumber": "22234324",
+        "email": "adasd@dsd.sfs",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "134324",
+        "zipCode": "23423",
+        "city": {
+            "id": 365,
+            "name": "Dfsfsdf"
+        },
+        "customerOrders": null,
+        "comment": null
+    },
+    {
+        "customerNumber": 20210923,
+        "firstName": "Sara",
+        "lastName": "Carlsson",
+        "password": "Kalle123",
+        "phoneNumber": "0701233456",
+        "email": "carlssonsara_@hotmail.com",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "Blekingegatan 4",
+        "zipCode": "11856",
+        "city": {
+            "id": 9,
+            "name": "Stockholm"
+        },
+        "customerOrders": null,
+        "comment": "Jobbig kund!!!"
+    },
+    {
+        "customerNumber": 20210859,
+        "firstName": "Admin",
+        "lastName": "Master",
+        "password": "Customer1234",
+        "phoneNumber": "0701234567",
+        "email": "customer@email.com",
+        "isAdmin": true,
+        "isVip": false,
+        "streetAddress": "Adminvägen 31",
+        "zipCode": "12345",
+        "city": {
+            "id": 9,
+            "name": "Stockholm"
+        },
+        "customerOrders": null,
+        "comment": "hej"
+    },
+    {
+        "customerNumber": 20210791,
+        "firstName": "Tez",
+        "lastName": "Test",
+        "password": "Test11",
+        "phoneNumber": "0701234569",
+        "email": "Test1@email.com",
+        "isAdmin": false,
+        "isVip": false,
+        "streetAddress": "Testvägen 12",
+        "zipCode": "12345",
+        "city": {
+            "id": 389,
+            "name": "Testort"
+        },
+        "customerOrders": null,
+        "comment": ""
+    }
+]
