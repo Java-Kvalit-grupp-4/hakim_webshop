@@ -472,7 +472,7 @@ const createProductInDataBase = () => {
 
     console.table(newProduct)
 
-    axios.post(addProduct, newProduct)
+    axios.post(upsertProduct, newProduct)
       .then(() => {
         swal("Ny produkt tillagd", '', "success")
         imageStringForProduct = ""
