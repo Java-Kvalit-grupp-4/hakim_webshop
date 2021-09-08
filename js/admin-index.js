@@ -5,13 +5,13 @@
     $(document).on('click', '.productNumber', saveAndOpenProduct)
 
     function load(){
-        axios.get("https://hakimlivs.herokuapp.com/customerOrder/orders")
+        axios.get(getAllOrders)
         .then(response => {
         getOrderStatus(response.data)
         //console.log(response.data)
         })
 
-        axios.get("https://hakimlivs.herokuapp.com/products")
+        axios.get(getAllProducts)
         .then(response => {
         getOutOfStockProducts(response.data)
         })

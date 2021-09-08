@@ -2,12 +2,12 @@ const searchWrapper = $('.search-input')
 const searchField =  $('#search-field') 
 const suggBox = $('.autocom-box')
 const searchIcon = $('.icon')
-const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
+// const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
 let searchWords = []
 let productsToSerach = []
 
 $(document).ready(() => {
-       axios.get(allProductsUrl)
+       axios.get(getAllProducts)
        .then(response => {
          createSearchWords(removeHiddenProductsFromArray(response.data))
        })

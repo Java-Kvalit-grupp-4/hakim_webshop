@@ -1,11 +1,11 @@
-const fetchUrl = "https://hakimlivs.herokuapp.com/products/";
+// const fetchUrl = "https://hakimlivs.herokuapp.com/products/";
 // const fetchUrl = "https://hakim-test.herokuapp.com/products/";
 // const fetchUrl = "http://localhost:8080/products";
-const updateUrl = "https://hakimlivs.herokuapp.com/products/upsertProduct";
+// const updateUrl = "https://hakimlivs.herokuapp.com/products/upsertProduct";
 // const updateUrl = "https://hakim-test.herokuapp.com/products/upsertProduct";
 // const updateUrl = "http://localhost:8080/products/upsertProduct";
 // const postUrl = "http://localhost:8080/products/add";
-const postUrl = "https://hakimlivs.herokuapp.com/products/add";
+// const postUrl = "https://hakimlivs.herokuapp.com/products/add";
 // const postUrl = "https://hakim-test.herokuapp.com/products/add";
 $(document).ready(loadProducts);
 
@@ -17,7 +17,7 @@ let productId = "";
 
 function loadProducts() {
   axios
-    .get(fetchUrl)
+    .get(getAllProducts)
     .then((response) => {
       if (response.status === 200) {
         products = response.data;
@@ -234,7 +234,7 @@ function loadProducts() {
 
         swal("Produkten har sparats");
 
-        axios.post(updateUrl, productObject)
+        axios.post(upsertProduct, productObject)
           .then(() => {
           })
           .catch(() => {
@@ -350,7 +350,7 @@ const productImageUpload = (fileInputField) => {
     if (imagefile != undefined) {
       formData.append("file", imagefile, fileName);
       axios
-        .post("https://hakimlivs.herokuapp.com//api/v1/upload/db", formData, {
+        .post(imageUpload, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -472,7 +472,7 @@ const createProductInDataBase = () => {
 
     console.table(newProduct)
 
-    axios.post(postUrl, newProduct)
+    axios.post(addProduct, newProduct)
       .then(() => {
         swal("Ny produkt tillagd", '', "success")
         imageStringForProduct = ""

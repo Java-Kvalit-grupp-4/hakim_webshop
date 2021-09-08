@@ -1,11 +1,11 @@
 let allOrders = [];
 let activeOrder;
 let chosenOrder;
-const server = "https://hakimlivs.herokuapp.com/";
+// const server = "https://hakimlivs.herokuapp.com/";
 // const server = "https://hakim-livs.herokuapp.com/";
 // const server = "http://localhost:8080/";
-const updateOrderLink = server + "customerOrder/update";
-const getAllOrders = server + "customerOrder/orders";
+// const updateOrderLink = server + "customerOrder/update";
+// const getAllOrders = server + "customerOrder/orders";
 
 $(function () { 
   load();

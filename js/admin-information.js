@@ -1,14 +1,14 @@
-const testData = "../../TestData/test_data_admin_info.json";
-const localHost = "http://localhost:8080/information";
-const heroku = "https://hakimlivs.herokuapp.com/information";
-const imageSource = "https://hakimlivs.herokuapp.com/api/v1/images/";
+const testData = "../../TestData/test_data_admin_info.json"; // används denna?
+// const localHost = "http://localhost:8080/information";
+// const heroku = "https://hakimlivs.herokuapp.com/information";
+//const imageSource = "https://hakimlivs.herokuapp.com/api/v1/images/";
 let informationObject = new Object();
 const chosenImageName = "Hakim.jpg";
 
 $(function () {
   loadPage();
   function loadPage() {
-    fetch(heroku)
+    fetch(information)
       .then((response) => response.json())
       .then((response) => renderInformation(response))
       .catch((error) => console.error(error));
@@ -62,7 +62,7 @@ $(function () {
     let data = getInformationFromFields();
 
     axios
-      .post("https://hakimlivs.herokuapp.com/information/update", data)
+      .post(informationUpdate, data)
       .then(() => {
         swal(
           "Informationen har uppdaterats",
@@ -83,7 +83,7 @@ $(function () {
       let selectedImageFile = imagefile.files[0];
       formData.append("file", selectedImageFile, newFileName);
       axios
-        .post("https://hakimlivs.herokuapp.com/api/v1/upload/db", formData, {
+        .post(imageUpload, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -104,7 +104,7 @@ $(function () {
   }
 
   function removeImage(imageUrl) {
-    axios.get("https://hakimlivs.herokuapp.com/api/v1/delete/" + imageUrl);
+    axios.get(imageDelete + imageUrl);
     // .then(() => {
     //   swal("Bilden är borttagen");
     // })

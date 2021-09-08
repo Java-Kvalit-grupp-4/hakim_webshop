@@ -1,7 +1,7 @@
 $(function () {
   loadPage();
   function loadPage() {
-    fetch("https://hakimlivs.herokuapp.com/information")
+    fetch(information)
       .then((response) => response.json())
       .then((response) => renderInformation(response))
       .catch((error) => console.error(error));

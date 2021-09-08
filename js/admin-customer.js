@@ -7,13 +7,13 @@ let allOrders = [];
 let choosedCustomer = "";
 
 // let getAllCustomers = "https://hakim-test.herokuapp.com/users";
-let getAllCustomers = "https://hakimlivs.herokuapp.com/users";
-let updateUser = "https://hakimlivs.herokuapp.com/users/adminUpdateUser";
+// let getAllCustomers = "https://hakimlivs.herokuapp.com/users";
+// let updateUser = "https://hakimlivs.herokuapp.com/users/adminUpdateUser";
 // let updateUser = "https://hakim-test.herokuapp.com/users/adminUpdateUser";
-let getCustomerOrder = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email=";
+// let getCustomerOrder = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email=";
 // let getCustomerOrder = "https://hakim-test.herokuapp.com/customerOrder/getCustomerOrders?email=";
 // let getAllOrders =  "https://hakim-test.herokuapp.com/customerOrder/orders"
-let getAllOrders =  "https://hakimlivs.herokuapp.com/customerOrder/orders"
+// let getAllOrders =  "https://hakimlivs.herokuapp.com/customerOrder/orders"
 
 let startDateC = null;
 let endDateC = null;
