@@ -15,13 +15,6 @@ let emailToCheck = $("#login-email"),
 
 let adminview = $("#admin-view-link");
 
-// let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/'
-// let getCustomerUrl = 'https://hakim-test.herokuapp.com/users/getUser/'
-
-//const addUserUrl = "http://localhost:8080/users/add"
-// const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
-// const addUserUrl = "https://hakim-test.herokuapp.com/users/add";
-
 /**
  * Eventlistener
  */
@@ -665,6 +658,31 @@ $("#confirm-account").click(() => {
         } else {
           swal("Något fick fel!", "Vänligen försök igen", "warning");
         }
+      });
+  }
+});
+
+$("#forgottenPassword-button").click(() => {
+  let url = `${forgotPasswordUrl}?email=${emailToCheck.val()}`;
+
+  if (emailToCheck.val() == "") {
+    swal("Ange email adressen!", "warning");
+  } else {
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status !== 200) {
+          swal("Något gick fel!", "", "warning");
+        } else {
+          swal(
+            "Email med nytt lösenord är skickad.",
+            "Vänligen logga in igen",
+            "success"
+          );
+        }
+      })
+      .catch(() => {
+        alert("Serverfel!");
       });
   }
 });
