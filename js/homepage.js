@@ -15,12 +15,6 @@ let emailToCheck = $("#login-email"),
 
 let adminview = $("#admin-view-link");
 
-// let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/'
-// let getCustomerUrl = 'https://hakim-test.herokuapp.com/users/getUser/'
-
-//const addUserUrl = "http://localhost:8080/users/add"
-// const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
-// const addUserUrl = "https://hakim-test.herokuapp.com/users/add";
 
 /**
  * Eventlistener
@@ -96,12 +90,6 @@ $(document).ready(() => {
 })
 
 function load() {
-    //const productsUrl = './TestData/test_data_products_v1.2.JSON'
-    // const productsUrl = 'http://localhost:8080/products'
-    // const productsUrl = "https://hakimlivs.herokuapp.com/products";
-    // const productsUrl = "https://hakim-test.herokuapp.com/products";
-    //const productsUrl = "https://hakimlogintest.herokuapp.com/products";
-
 
     axios
         .get(getAllProducts)
@@ -635,6 +623,29 @@ function hideOrShowAdminView() {
         }
 
     });
+
+$("#forgottenPassword-button").click(() => {
+    let url = `https://hakim-livs-dev.herokuapp.com/users/forgot/password?email=${emailToCheck.val()}`;
+    
+    if (emailToCheck.val() == "") {
+        swal("Ange email adressen!", "warning")
+    }
+    else {
+        axios.get(url)
+            .then((response) => {
+                if (response.status !== 200) {
+                    swal("Något gick fel!", "", "warning");
+                   
+                } else {
+                    swal("Email med nytt lösenord är skickad.", "Vänligen logga in igen", "success")
+                }
+                    
+            })
+            .catch(() => {
+                alert("Serverfel!");
+            });
+    }
+});
 
 
     /**
