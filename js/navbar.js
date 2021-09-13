@@ -24,8 +24,11 @@ $(function () {
   addShowOrHidePasswordOnButton();
 
   if(loggedIn!=undefined) {
-    if (loggedIn.isAdmin) {
+    if(loggedIn.roleList){
+      if (loggedIn.roleList.some(role => role.name=="ADMIN")) {
     adminview.show();
+    }
+    
   }
   $("#checkOutLink").attr("href", "../../pages/checkout/");
   }
@@ -53,33 +56,45 @@ $(function () {
 
   $("#login-button").click(() => {
     //let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
-    let url = `https://hakim-livs-dev.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+    let url = `https://hakim-livs-dev.herokuapp.com/login?username=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
 
 
     axios
-      .get(url)
+      .post(url)
       .then((response) => {
-        if (response.status !== 200) {
-          swal("Fel email eller lösenord", "", "warning");
-          emailToCheck.val("");
-          passwordToCheck.val("");
+      if (response.status !== 200) {
+        swal("Fel email eller lösenord", "", "warning");
+        emailToCheck.val("");
+        passwordToCheck.val("");
+      } else {
+        getUserByEmail(emailToCheck.val())
+        .then(user => {
+          console.log(user);
+          if (user.roleList.some(role => role.name=="ADMIN")) {
+          location.replace("../../admin/index.html");
         } else {
-          sessionStorage.setItem("customer", JSON.stringify(response.data));
-
-          if (response.data.isAdmin == true) {
-            location.replace("../../admin/index.html");
-          } else {
-            loginModal.modal("hide");
-            navLoginBtn.text("Logga ut");
-            myAccountMenu.show();
-          }
+          loginModal.modal("hide");
+          navLoginBtn.text("Logga ut");
+          myAccountMenu.show();
         }
-      })
+        })
+      }
+    })
       .catch((err) => {
         alert("Serverfel!");
       });
   });
 
+  const getUserByEmail =  (email) => {
+  const url = `${getCustomer}${email}`;
+   return axios
+    .get(url)
+    .then((resp) => {
+      sessionStorage.setItem("customer", JSON.stringify(resp.data))
+      return resp.data
+    }
+    );
+};
   //---------------------------------- Regristration ---------------------------------\\
 
   let firstName = $("#register-first-name"),
@@ -123,8 +138,6 @@ $(function () {
         streetAddress: address.val(),
         password: newPassword.val(),
         socialSecurityNumber: year.val() + month.val() + day.val(),
-        isAdmin: false,
-        isVip: false,
         zipCode: zipCode.val(),
         city: {
           name: city.val(),

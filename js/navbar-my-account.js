@@ -12,7 +12,7 @@ $(function () {
   if (loggedIn == undefined) {
     window.location.href = "../../index.html";
   } else {
-    if (loggedIn.isAdmin) {
+    if (loggedIn.roleList.some(role => role.name=="ADMIN")) {
       adminview.show();
     }
     $("#checkOutLink").attr("href", "../../pages/checkout/");

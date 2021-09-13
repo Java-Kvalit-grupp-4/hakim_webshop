@@ -501,9 +501,11 @@ function hideOrShowAdminView() {
   if (loggedIn == undefined) {
     adminview.hide();
   } else {
-    if (loggedIn.isAdmin) {
+    if(loggedIn.roleList) {
+      if (loggedIn.roleList.some(role => role.name=="ADMIN")) {
       $("#checkOutLink").attr("href", "./pages/checkout/");
       adminview.show();
+      }
     }
   }
 }
@@ -523,29 +525,39 @@ $("#login-button").click(() => {
         emailToCheck.val("");
         passwordToCheck.val("");
       } else {
-        getUserByEmail(emailToCheck.val());
-
-        if (response.data.isAdmin == true) {
+        getUserByEmail(emailToCheck.val())
+        .then(user => {
+          console.log(user);
+          if (user.roleList.some(role => role.name=="ADMIN")) {
           location.replace("admin/index.html");
         } else {
           loginModal.modal("hide");
           navLoginBtn.text("Logga ut");
           myAccountMenu.show();
         }
+        })
       }
     })
     .catch((err) => {
-      console.log(err.response.data);
-      alert(err.response.data);
+      if(err.response) {
+        console.log(err.response.data);
+        alert(err.response.data);
+      } else {
+        console.log(err);
+      }
+      
+      
     });
 });
 
-const getUserByEmail = async (email) => {
+const getUserByEmail =  (email) => {
   const url = `${getCustomer}${email}`;
-  await axios
+   return axios
     .get(url)
-    .then((resp) =>
+    .then((resp) => {
       sessionStorage.setItem("customer", JSON.stringify(resp.data))
+      return resp.data
+    }
     );
 };
 
@@ -642,8 +654,6 @@ $("#confirm-account").click(() => {
       streetAddress: address.val(),
       password: newPassword.val(),
       socialSecurityNumber: year.val() + month.val() + day.val(),
-      isAdmin: false,
-      isVip: false,
       zipCode: zipCode.val(),
       city: {
         name: city.val(),
