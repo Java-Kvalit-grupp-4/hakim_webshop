@@ -30,7 +30,7 @@ WRONNG_PASSWORD_ERROR_MSG = $('#WRONG_PASSWORD_ERROR_MSG'),
 NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $('#NEW_PASSWORD_NOT_MATCH_ERROR_MSG'),
 NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $('#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG')
 
-let findAllOrdersURL = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email="
+// let findAllOrdersURL = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email="
 let customerOrders=[];
 
 /**
@@ -46,7 +46,7 @@ $('#submit').click( () => {
     
     resetsInputBorders()
     
-    let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
+    // let updateUserInfo = `https://hakimlivs.herokuapp.com/users/update/user/info`
     // let updateUserInfo = `https://hakimlogintest.herokuapp.com/users/update/user/info`
     //let updateUserInfo = `http://localhost:8080/users/update/user/info`
 
@@ -86,7 +86,7 @@ $(document).on('click', '.orderNumber', showOrder);
 $(document).ready(() => {
   hideAllErrorMsgs()
   fillInputFieldsWithLoggedIn()
-  getAllOrders()
+  getOrders()
 })
 
   /**
@@ -113,9 +113,9 @@ $(document).ready(() => {
      zipCode.val(formatZipCode(customer.zipCode))
   }
 
-  function getAllOrders(){
+  function getOrders(){
     let email = JSON.parse(sessionStorage.getItem('customer')).email
-    axios.get(findAllOrdersURL+ email)
+    axios.get(getCustomerOrder+ email)
         .then((response) =>{
             if(response.status ===200){
               customerOrders = response.data  
@@ -269,7 +269,7 @@ $(document).ready(() => {
 
   const updatePassword = (newPassword) => {
 
-    let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
+    // let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
     // let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
     //let updatePasswordUrl = `http://localhost:8080/users/update/password`
 
@@ -278,7 +278,7 @@ $(document).ready(() => {
       "password": newPassword.val().trim()
     }
 
-    axios.post(updatePasswordUrl,updatePassword)
+    axios.post(updateUserPassword,updatePassword)
     .then(respone => {
       if(respone.status == 200){
         swal("Nytt lösenord sparat", "", "success")

@@ -2,12 +2,12 @@ const searchWrapper = $('.search-input')
 const searchField =  $('#search-field') 
 const suggBox = $('.autocom-box')
 const searchIcon = $('.icon')
-const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
+// const allProductsUrl = 'https://hakimlivs.herokuapp.com/products'
 let searchWords = []
 let productsToSerach = []
 
 $(document).ready(() => {
-       axios.get(allProductsUrl)
+       axios.get(getAllProducts)
        .then(response => {
          createSearchWords(removeHiddenProductsFromArray(response.data))
        })
@@ -117,17 +117,18 @@ const distinct = (value, index, self) => {
  */
 const renderProductFromSearchWord = (searchWord) => {
     let filteredList = []
+    let resultMsg;
 
     // checks if searchwrod is among title, brand or description
-    filteredList = productsToSerach.filter(product => product.title.includes(searchWord) || 
-                                                            product.brand.name.includes(searchWord) || 
-                                                            product.description.includes(searchWord) 
+    filteredList = productsToSerach.filter(product => product.title.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase()) || 
+                                                            product.brand.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase()) || 
+                                                            product.description.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase()) 
                                                             );
 
     // check if searchwords is among the tags of each product
     productsToSerach.forEach(product => {
         product.tags.forEach(tag => {
-            if(tag.name.includes(searchWord)){
+            if(tag.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())){
                 filteredList.push(product)
             }
         })
@@ -136,7 +137,7 @@ const renderProductFromSearchWord = (searchWord) => {
      // check if searchwords is among the categories of each product
     productsToSerach.forEach(product => {
         product.categories.forEach(category => {
-            if(category.name.includes(searchWord)){
+            if(category.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())){
                 filteredList.push(product)
             }
         })
@@ -148,6 +149,9 @@ const renderProductFromSearchWord = (searchWord) => {
     // sets the filtered list to localstorage
     localStorage.removeItem('categoryList')
     localStorage.setItem('categoryList', JSON.stringify(filteredList));
+
+    resultMsg = filteredList.length == 0 ? "Sökningen gav inga träffar" : "Resultat för " + searchWord
+    $('#heading').text(resultMsg)
                                       
     renderProducts(filteredList)
 }

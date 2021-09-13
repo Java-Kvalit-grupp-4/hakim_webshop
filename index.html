@@ -112,7 +112,7 @@
             </li>
             <li class="nav-item mt-3 mt-xl-0">
               <button
-                class="btn btn-secondary"
+                class="btn btn-secondary me-xl-3"
                 type="button"
                 id="cartDropdown"
                 data-bs-toggle="modal"
@@ -139,13 +139,13 @@
 
     <!-- navbar end -->
     
-    <div class="container-fluid">
+    <div class="container-fluid m-0 p-0">
       
       <div class="row " style="margin-top: 7.3rem; margin-right: 0">
 <!--Sidebar start-->
 <!--<div class="col-12 col-sm-4 col-lg-3 col-xl-2 mb-5" id="sidebar-container">
   <div id="sidebar">-->
-    <div class="col-6 col-sm-4 col-lg-3 col-xl-3  ps-0 pe-xl-5 " style="overflow-y: auto;" >
+    <div class="col-6 col-sm-4 col-lg-3 col-xl-3  ps-0 pe-xl-5 " style="overflow-y: auto" >
         <div  id="sidebar">
           <!-- <div class="list-group"> -->
             <div id="fixedSidebar">
@@ -181,17 +181,32 @@
             </div>
           </div> -->
           <div ><h2 id="heading" class="mt-5 ms-5">Produkter</h2> </div>
+           <div class="dropdown text-start mt-3 sorting-dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="categories-btn"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Kategorier
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="categories-btn" id="categories-dropdown-button-list">
+              
+            </ul>
+          </div>
+          
           <div class="dropdown text-end mt-3 sorting-dropdown">
             <button
               class="btn btn-secondary dropdown-toggle"
               type="button"
-              id="dropdownMenu2"
+              id="filter-btn"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
               Sortera efter
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <ul class="dropdown-menu" aria-labelledby="filter-btn">
               <li>
                 <button class="dropdown-item" type="button" id="name-ascending">
                   A-Ö
@@ -259,62 +274,67 @@
           </div>
 
           <!-- products ends -->
-          <div class="row-sm" id="footer-row">
+          <div class="row gx-0 p-0" id="footer-row">
+            <div class="col-lg-2 m-0" id="paddding-footer-left"></div>
 <!-- footer goes here-->
-     <footer class="text-center text-lg-start">
-      <div class="container pt-4 justify-content-center">
-        <div class="row">
-          <div class="col-1"></div>
-          <div class="col-md-12 col-lg-4  mb-4 mb-md-0  ps-lg-5">
-            <h5 class="text-uppercase mb-3">Kontakt</h5>
-
-            <ul class="list-unstyled mb-3">
-              <li>
-                <p id="phone"></p></a>
-              </li>
-              <li>
-                <a href="mailto:hakimlivs@gmail.com"
-                  ><p class="footer-link-hover">hakimlivs@gmail.com</p></a
-                >
-              </li>
-              <li id="address-footer">
-                <a
-                  href="https://www.google.com/maps/search/Kungsgatan+65,+Stockholm+3/@59.3332978,18.0530605,17z/data=!3m1!4b1"
-                  class="text-light"
-                  target="_blank"
-                  ><div id="" class="footer-link-hover">Kungsgatan 65, Stockholm 3</div></a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-3 ">Om Hakim Livs</h5>
-            <ul class="list-unstyled mb-3">
-              <li>
-                <a href="./pages/about/index.html" class="text-light"><p class="footer-link-hover">Om oss</p></a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-3">Öppettider</h5>
-
-            <ul class="list-unstyled">
-              <li>
-                <div id="openingHours"></div>
-              </li>
-
-              <li>
-                <a href="./pages/about/index.html" class="text-light "
-                  ><p class="footer-link-hover">Se avvikande öppetider</p></a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
+            <div class="col-lg-10">
+              <footer class="text-center text-lg-start">
+                <div class="container pt-4 justify-content-center">
+                  <div class="row m-0 p-0">
+                    <div class="col-1"></div>
+                    <div class="col-md-12 col-lg-4  mb-4 mb-md-0  ps-lg-5">
+                      <h5 class="text-uppercase mb-3">Kontakt</h5>
           
+                      <ul class="list-unstyled mb-3">
+                        <li>
+                          <p id="phone"></p></a>
+                        </li>
+                        <li>
+                          <a href="mailto:hakimlivs@gmail.com"
+                            ><p class="footer-link-hover">hakimlivs@gmail.com</p></a
+                          >
+                        </li>
+                        <li id="address-footer">
+                          <a
+                            href="https://www.google.com/maps/search/Kungsgatan+65,+Stockholm+3/@59.3332978,18.0530605,17z/data=!3m1!4b1"
+                            class="text-light"
+                            target="_blank"
+                            ><div id="" class="footer-link-hover">Kungsgatan 65, Stockholm 3</div></a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+          
+                    <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                      <h5 class="text-uppercase mb-3 ">Om Hakim Livs</h5>
+                      <ul class="list-unstyled mb-3">
+                        <li>
+                          <a href="./pages/about/index.html" class="text-light"><p class="footer-link-hover">Om oss</p></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+                      <h5 class="text-uppercase mb-3">Öppettider</h5>
+          
+                      <ul class="list-unstyled">
+                        <li>
+                          <div id="openingHours"></div>
+                        </li>
+          
+                        <li>
+                          <a href="./pages/about/index.html" class="text-light "
+                            ><p class="footer-link-hover">Se avvikande öppetider</p></a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+                    
+
+            </div>
+     
           
         </div>
         
@@ -580,7 +600,7 @@
                     >Postnummer</label
                   >
                   <div id="ZIPCODE_ERROR_MSG" class="error-msg">
-                    Felaktigt postnummer, måste matas in t.ex "123 45"
+                    Felaktigt postnummer, ange t.ex "123 45"
                   </div>
                 </div>
 
@@ -786,6 +806,7 @@
       </div>
     </div>
 
+    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
@@ -801,6 +822,7 @@
     ></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="./js/api.js"></script>
     <script src="./js/format.js"></script>
     <script src="./js/cart-pop-up.js"></script>
     <script src="./js/validate.js"></script>

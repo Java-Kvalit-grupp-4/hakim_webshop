@@ -7,13 +7,13 @@ let allOrders = [];
 let choosedCustomer = "";
 
 // let getAllCustomers = "https://hakim-test.herokuapp.com/users";
-let getAllCustomers = "https://hakimlivs.herokuapp.com/users";
-let updateUser = "https://hakimlivs.herokuapp.com/users/adminUpdateUser";
+// let getAllCustomers = "https://hakimlivs.herokuapp.com/users";
+// let updateUser = "https://hakimlivs.herokuapp.com/users/adminUpdateUser";
 // let updateUser = "https://hakim-test.herokuapp.com/users/adminUpdateUser";
-let getCustomerOrder = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email=";
+// let getCustomerOrder = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email=";
 // let getCustomerOrder = "https://hakim-test.herokuapp.com/customerOrder/getCustomerOrders?email=";
 // let getAllOrders =  "https://hakim-test.herokuapp.com/customerOrder/orders"
-let getAllOrders =  "https://hakimlivs.herokuapp.com/customerOrder/orders"
+// let getAllOrders =  "https://hakimlivs.herokuapp.com/customerOrder/orders"
 
 let startDateC = null;
 let endDateC = null;
@@ -71,6 +71,7 @@ $(document).on('click', '#nav-profile-tab', function(){
 
 function openOrderTab(){
     sessionStorage.setItem("chosenOrder",(Number($(this).text())));
+    sessionStorage.setItem("redirect", true);
     location.replace("../Orders/index.html")
 }
 
@@ -275,7 +276,8 @@ function filterSearch(){
                                 filterOrders
                                     .forEach(order => {
                                         date = new Date(order.timeStamp)
-                                        if( date>=startDateC && date<=endDateC){
+                                        date.setHours(10)
+                                        if( date>=startDateC.setHours(0) && date<=endDateC.setHours(23)){
                                             filterOrders2.push(order)
                                         }})
                                 
@@ -319,8 +321,8 @@ function filterSearch(){
                                 filterOrders
                                     .forEach(order => {
                                         date = new Date(order.timeStamp)
-                                        console.log(date)
-                                        if( date>=startDateC && date<=endDateC){
+                                        date.setHours(10)
+                                        if( date>=startDateC.setHours(0) && date<=endDateC.setHours(23)){
                                             filterOrders2.push(order)
                                         }})
                                     

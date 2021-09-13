@@ -224,7 +224,7 @@ function makeOrderObject() {
 }
 
 function sendOrderToServer(orderObject) {
-  const url = "https://hakimlivs.herokuapp.com/customerOrder/add";
+  // const url = "https://hakimlivs.herokuapp.com/customerOrder/add";
   // const url = "https://hakim-test.herokuapp.com/customerOrder/add";
   // const url = "https://hakimlogintest.herokuapp.com/customerOrder/add";
   //const url = 'http://localhost:8080/customerOrder/add'
@@ -232,7 +232,7 @@ function sendOrderToServer(orderObject) {
   console.log(orderObject);
 
   axios
-    .post(url, orderObject)
+    .post(addOrder, orderObject)
     .then((response) => {
       if (response.status == 200) {
         swal({

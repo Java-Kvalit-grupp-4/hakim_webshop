@@ -15,7 +15,7 @@ let emailToCheck = $("#login-email"),
   loginModal = $("#login-modal");
 
 let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
-const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
+// const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
 
 $(function () {
   adminview.hide();
@@ -52,7 +52,9 @@ $(function () {
   //------------------------------------- login ----------------------------------\\
 
   $("#login-button").click(() => {
-    let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+    //let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+    let url = `https://hakim-livs-dev.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+
 
     axios
       .get(url)
@@ -130,7 +132,7 @@ $(function () {
       };
 
       axios
-        .post(addUserUrl, data)
+        .post(addUser, data)
         .then(() => {
           swal("Användare skapad!", "Vänligen logga in", "success")
             .then($("#registerForm").modal("hide"))

@@ -1,11 +1,11 @@
 let allOrders = [];
 let activeOrder;
 let chosenOrder;
-const server = "https://hakimlivs.herokuapp.com/";
+// const server = "https://hakimlivs.herokuapp.com/";
 // const server = "https://hakim-livs.herokuapp.com/";
 // const server = "http://localhost:8080/";
-const updateOrderLink = server + "customerOrder/update";
-const getAllOrders = server + "customerOrder/orders";
+// const updateOrderLink = server + "customerOrder/update";
+// const getAllOrders = server + "customerOrder/orders";
 
 $(function () { 
   load();
@@ -36,10 +36,12 @@ let startDate;
 let endDate;
 
 function renderOrders(orders) {
+  let redirect = sessionStorage.getItem("redirect");
   let chosenId = sessionStorage.getItem("chosenOrder");
-  if(chosenId!=null || chosenId!=undefined){
+  if((chosenId!=null || chosenId!=undefined) && redirect){
     openCustomerOrder();
     //chosenId =null;
+    sessionStorage.removeItem("redirect");
   } else {
     $("#reservation").daterangepicker(null, function (start, end, label) {
       startDate = moment(start);
@@ -75,7 +77,7 @@ function openOrderTab() {
   renderChosenOrder();
   renderUserData();
   chosenOrder = sessionStorage.getItem("chosenOrder");
-  sessionStorage.removeItem("chosenOrder");
+  // sessionStorage.removeItem("chosenOrder");
   addOrderToPdfBtn()
   $("#navbar-order-tab").tab("show");
 }
@@ -93,7 +95,7 @@ function openCustomerOrder(){
   renderUserData();
   chosenOrder = sessionStorage.getItem("chosenOrder");
   addOrderToPdfBtn()
-  sessionStorage.removeItem("chosenOrder");
+  // sessionStorage.removeItem("chosenOrder");
   $("#navbar-order-tab").tab("show");
 }
 
@@ -180,7 +182,6 @@ function renderChosenOrder() {
 
   let $orderChanges = $("#order-changes");
   $orderChanges.html("");
-  console.log(activeOrder);
   if(activeOrder.orderChanges.length>0){
     activeOrder.orderChanges.forEach((change) => {
     $orderChanges.prepend(`<li class="list-group-item">${
@@ -223,7 +224,6 @@ function updateOrder() {
         description: newCommentString,
       changeDateTime: moment().toISOString(true)}
       );
-      console.log(activeOrder.orderChanges);
     document.getElementById("add-comment-field").value = "";
   }
 
@@ -249,6 +249,8 @@ function updateQuantity(quantityField) {
     alert("Ogiltig antal produkter för vara " + sku);
     return;
   }
+
+  console.log(activeOrder);
 
   activeOrder.lineItems.forEach((lineItem) => {
     if (lineItem.product.sku == sku) {
