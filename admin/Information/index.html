@@ -206,7 +206,7 @@
   <!--slutar container-->
   <script>
     let customer = JSON.parse(sessionStorage.getItem('customer'))
-      if(customer==null || customer== undefined || customer.isAdmin==false){
+      if(customer==null || customer== undefined || customer.roleList.some(role => role.name=="ADMIN") == false){
         window.location.href = "http://127.0.0.1:5500/hakim_webshop/index.html"
       }
 </script>

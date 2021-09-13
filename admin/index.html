@@ -145,7 +145,7 @@
       if (
         customer == null ||
         customer == undefined ||
-        customer.isAdmin == false
+        customer.roleList.some(role => role.name=="ADMIN") == false
       ) {
         window.location.href = "../index.html";
       }
