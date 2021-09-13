@@ -1,31 +1,27 @@
-
 //const startUrl = 'https://hakimlivs.herokuapp.com'
-const startUrl = 'https://hakim-livs-dev.herokuapp.com'
-
-// Information-links
-let information = `${startUrl}/information`
-let informationUpdate = `${startUrl}/information/update`
+const startUrl = "https://hakim-livs-dev.herokuapp.com";
 
 // Customer-links
-let getAllCustomers = `${startUrl}/users`
-let getCustomer = `${startUrl}/users/getUser/`
-let updateUser = `${startUrl}/users/adminUpdateUser`
-let addUser = `${startUrl}/users/add`
-let updateUserInfo = `${startUrl}/users/update/user/info`
-let updateUserPassword = `${startUrl}/users/update/password`
-// let checkCredentials = `${startUrl}/users/checkCredentials?email=`
+let updateUserInfo = `${startUrl}/api/user/update/info`;
+let updateUserPassword = `${startUrl}/api/user/update/password`;
+let addOrder = `${startUrl}/api/user/create/order`;
+let getCustomerOrder = `${startUrl}/api/user/get/customer/orders?email=`;
 
-// Order-links
-let getAllOrders = `${startUrl}/customerOrder/orders`
-let updateOrderLink = `${startUrl}/customerOrder/update`
-let getCustomerOrder = `${startUrl}/customerOrder/getCustomerOrders?email=`
-let addOrder = `${startUrl}/customerOrder/add`
+// admin
+let getAllCustomers = `${startUrl}/api/admin/get/all/users`;
+let updateUser = `${startUrl}/api/admin/update/user`;
+let getAllOrders = `${startUrl}/api/admin/orders`;
+let updateOrderLink = `${startUrl}/api/admin/update/order`;
+let upsertProduct = `${startUrl}/api/admin/upsert/product`;
+let imageSource = `${startUrl}/api/admin/image`;
+let imageDelete = `${startUrl}/api/admin/delete/`;
+let imageUpload = `${startUrl}/api/admin/upload/db`;
+let informationUpdate = `${startUrl}/api/admin//upsert/information`;
 
-// Product-links
-let getAllProducts = `${startUrl}/products`
-let upsertProduct = `${startUrl}/products/upsertProduct`
-
-// Image-links
-let imageSource = `${startUrl}/api/v1/images`
-let imageDelete = `${startUrl}/api/v1/delete/`
-let imageUpload = `${startUrl}/api/v1/upload/db`
+// public
+let getAllProducts = `${startUrl}/api/public/get/all/products`;
+let addUser = `${startUrl}/api/public/create/user`;
+let forgotPasswordUrl = `${startUrl}/api/public/forgot/password`;
+let getCustomer = `${startUrl}/api/public/getUser/`;
+let information = `${startUrl}/api/public/get/store/information`;
+let loginUrl = `${startUrl}/login`;
