@@ -15,16 +15,6 @@ let emailToCheck = $("#login-email"),
 
 let adminview = $("#admin-view-link");
 
-//let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/'
-// let getCustomerUrl = 'https://hakim-test.herokuapp.com/users/getUser/'
-//let getCustomerUrl = 'https://localhost:8080/users/getUser/'
-let getCustomerUrl = 'https://hakim-livs-dev.herokuapp.com/users/getUser/'
-
-//const addUserUrl = "http://localhost:8080/users/add"
-
-//const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
-const addUserUrl = "https://hakim-livs-dev.herokuapp.com/users/add";
-// const addUserUrl = "https://hakim-test.herokuapp.com/users/add";
 
 /**
  * Eventlistener
@@ -100,12 +90,6 @@ $(document).ready(() => {
 })
 
 function load() {
-    //const productsUrl = './TestData/test_data_products_v1.2.JSON'
-    // const productsUrl = 'http://localhost:8080/products'
-    // const productsUrl = "https://hakimlivs.herokuapp.com/products";
-    // const productsUrl = "https://hakim-test.herokuapp.com/products";
-    //const productsUrl = "https://hakimlogintest.herokuapp.com/products";
-
 
     axios
         .get(getAllProducts)
