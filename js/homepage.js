@@ -625,7 +625,7 @@ function hideOrShowAdminView() {
     });
 
 $("#forgottenPassword-button").click(() => {
-    let url = `https://hakim-livs-dev.herokuapp.com/users/forgot/password?email=${emailToCheck.val()}`;
+    let url = `https://hakim-livs-dev.herokuapp.com/api/public/forgot/password?email=${emailToCheck.val()}`;
     
     if (emailToCheck.val() == "") {
         swal("Ange email adressen!", "warning")
