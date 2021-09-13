@@ -523,7 +523,7 @@ $("#login-button").click(() => {
         emailToCheck.val("");
         passwordToCheck.val("");
       } else {
-        sessionStorage.setItem("customer", JSON.stringify(response.data));
+        getUserByEmail(emailToCheck.val());
 
         if (response.data.isAdmin == true) {
           location.replace("admin/index.html");
@@ -539,6 +539,15 @@ $("#login-button").click(() => {
       alert(err.response.data);
     });
 });
+
+const getUserByEmail = async (email) => {
+  const url = `${getCustomer}${email}`;
+  await axios
+    .get(url)
+    .then((resp) =>
+      sessionStorage.setItem("customer", JSON.stringify(resp.data))
+    );
+};
 
 //---------------------------------- Regristration ---------------------------------\\
 
