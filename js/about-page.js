@@ -2,12 +2,14 @@ let adminview = $("#admin-view-link");
 let myAccountMenu = $("#myAccountDropdown");
 
 $(function () {
-  let loggedIn = sessionStorage.getItem("customer");
+  let loggedIn = JSON.parse(sessionStorage.getItem("customer"));
   if (loggedIn == undefined) {
     adminview.hide();
   } else {
-    if (loggedIn.isAdmin) {
+    if(loggedIn.roleList) {
+      if (loggedIn.roleList.some(role => role.name=="ADMIN")) {
       adminview.show();
+      }
     }
   }
 
