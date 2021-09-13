@@ -15,11 +15,15 @@ let emailToCheck = $("#login-email"),
 
 let adminview = $("#admin-view-link");
 
-let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/'
+//let getCustomerUrl = 'https://hakimlivs.herokuapp.com/users/getUser/'
 // let getCustomerUrl = 'https://hakim-test.herokuapp.com/users/getUser/'
+//let getCustomerUrl = 'https://localhost:8080/users/getUser/'
+let getCustomerUrl = 'https://hakim-livs-dev.herokuapp.com/users/getUser/'
 
 //const addUserUrl = "http://localhost:8080/users/add"
-const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
+
+//const addUserUrl = "https://hakimlivs.herokuapp.com/users/add";
+const addUserUrl = "https://hakim-livs-dev.herokuapp.com/users/add";
 // const addUserUrl = "https://hakim-test.herokuapp.com/users/add";
 
 /**
@@ -456,7 +460,10 @@ function hideOrShowAdminView() {
 //------------------------------------- login ----------------------------------\\
 
     $("#login-button").click(() => {
-        let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+        //let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+        let url = `https://hakim-livs-dev.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+
+
         // let url = `https://hakim-test.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
 
         axios.get(url)
@@ -590,6 +597,29 @@ function hideOrShowAdminView() {
         }
 
     });
+
+$("#forgottenPassword-button").click(() => {
+    let url = `https://hakim-livs-dev.herokuapp.com/users/forgot/password?email=${emailToCheck.val()}`;
+    
+    if (emailToCheck.val() == "") {
+        swal("Ange email adressen!", "warning")
+    }
+    else {
+        axios.get(url)
+            .then((response) => {
+                if (response.status !== 200) {
+                    swal("Något gick fel!", "", "warning");
+                   
+                } else {
+                    swal("Email med nytt lösenord är skickad.", "Vänligen logga in igen", "success")
+                }
+                    
+            })
+            .catch(() => {
+                alert("Serverfel!");
+            });
+    }
+});
 
 
     /**
