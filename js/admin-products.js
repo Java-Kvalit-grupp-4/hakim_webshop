@@ -16,8 +16,9 @@ let tags = [];
 let productId = "";
 
 function loadProducts() {
+   const config = getHeaderObjWithAuthorization();
   axios
-    .get(getAllProducts)
+    .get(getAllProducts, config)
     .then((response) => {
       if (response.status === 200) {
         products = response.data;
@@ -233,8 +234,9 @@ function loadProducts() {
 
 
         swal("Produkten har sparats");
+         const config = getHeaderObjWithAuthorization();
 
-        axios.post(upsertProduct, productObject)
+        axios.post(upsertProduct, productObject, config)
           .then(() => {
           })
           .catch(() => {
