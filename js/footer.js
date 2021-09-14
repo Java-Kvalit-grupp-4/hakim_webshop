@@ -37,4 +37,5 @@ $(function () {
     $("p#phone").text(phoneNumber);
     $("#openingHours").html(`${oh}`);
   }
+  
 });

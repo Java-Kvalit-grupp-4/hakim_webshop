@@ -111,10 +111,16 @@ function load() {
 
 const addShippingProductToLocalStorage = (array) => {
   array.forEach((product) => {
-    if (product.sku == 1) {
+    if (product.title == "Frakt") {
       localStorage.setItem("shipping", JSON.stringify(product));
     }
   });
+
+  /* array.forEach((product) => {
+    if (product.sku == 1) {
+      localStorage.setItem("shipping", JSON.stringify(product));
+    }
+  }); */
 };
 
 // removes products that are not available
@@ -501,10 +507,10 @@ function hideOrShowAdminView() {
   if (loggedIn == undefined) {
     adminview.hide();
   } else {
-    if(loggedIn.roleList) {
-      if (loggedIn.roleList.some(role => role.name=="ADMIN")) {
-      $("#checkOutLink").attr("href", "./pages/checkout/");
-      adminview.show();
+    if (loggedIn.roleList) {
+      if (loggedIn.roleList.some((role) => role.name == "ADMIN")) {
+        $("#checkOutLink").attr("href", "./pages/checkout/");
+        adminview.show();
       }
     }
   }
@@ -516,49 +522,44 @@ $("#login-button").click(() => {
   //let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
   //let url = `https://hakim-livs-dev.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
 
-  let url = `https://hakim-livs-dev.herokuapp.com/login?username=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
+  let url = `${startUrl}/login?username=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
   axios
     .post(url)
     .then((response) => {
+      saveJwtToLocalStorage(response.data.jwt_token);
       if (response.status !== 200) {
         swal("Fel email eller lösenord", "", "warning");
         emailToCheck.val("");
         passwordToCheck.val("");
       } else {
-        getUserByEmail(emailToCheck.val())
-        .then(user => {
-          console.log(user);
-          if (user.roleList.some(role => role.name=="ADMIN")) {
-          location.replace("admin/index.html");
-        } else {
-          loginModal.modal("hide");
-          navLoginBtn.text("Logga ut");
-          myAccountMenu.show();
-        }
-        })
+        getUserByEmail(emailToCheck.val()).then((user) => {
+          if (user.roleList.some((role) => role.name == "ADMIN")) {
+            location.replace("admin/index.html");
+          } else {
+            loginModal.modal("hide");
+            navLoginBtn.text("Logga ut");
+            myAccountMenu.show();
+          }
+        });
       }
     })
     .catch((err) => {
-      if(err.response) {
+      if (err.response) {
         console.log(err.response.data);
         alert(err.response.data);
       } else {
         console.log(err);
       }
-      
-      
     });
 });
 
-const getUserByEmail =  (email) => {
+const getUserByEmail = (email) => {
   const url = `${getCustomer}${email}`;
-   return axios
-    .get(url)
-    .then((resp) => {
-      sessionStorage.setItem("customer", JSON.stringify(resp.data))
-      return resp.data
-    }
-    );
+  const config = getHeaderObjWithAuthorization();
+  return axios.get(url, config).then((resp) => {
+    sessionStorage.setItem("customer", JSON.stringify(resp.data));
+    return resp.data;
+  });
 };
 
 //---------------------------------- Regristration ---------------------------------\\
@@ -685,13 +686,13 @@ $("#forgottenPassword-button").click(() => {
   let url = `${forgotPasswordUrl}?email=${emailToCheck.val()}`;
 
   if (emailToCheck.val() == "") {
-    swal("Ange email adressen!", "warning");
+    swal("Warning!", "Ange email adressen!", "warning");
   } else {
     axios
-      .get(url)
+      .post(url)
       .then((response) => {
         if (response.status !== 200) {
-          swal("Något gick fel!", "", "warning");
+          swal("Warning!", "Något gick fel!", "danger");
         } else {
           swal(
             "Email med nytt lösenord är skickad.",
@@ -700,8 +701,9 @@ $("#forgottenPassword-button").click(() => {
           );
         }
       })
-      .catch(() => {
-        alert("Serverfel!");
+      .catch((err) => {
+        console.log(err.response.data);
+        swal("Warning!", err.response.data.message, "warning");
       });
   }
 });

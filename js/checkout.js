@@ -30,9 +30,6 @@ $(document).ready(() => {
    * @param {Array} data array of products
    */
   function renderCart() {
-    
-
-
     let $VAT25 = $("#vat-25");
     $VAT25.hide();
     let $VAT12 = $("#vat-12");
@@ -46,14 +43,13 @@ $(document).ready(() => {
     let cart = $("#cart-container");
 
     // add shipping to order
-    let shippingObject = JSON.parse(localStorage.getItem('shipping'));
+    let shippingObject = JSON.parse(localStorage.getItem("shipping"));
     shippingObject = {
       ...shippingObject,
-        inCart: 1 
-    }
+      inCart: 1,
+    };
 
-    cartData.push(shippingObject)
-    
+    cartData.push(shippingObject);
 
     cart.html("");
     $.each(cartData, (index, e) => {
@@ -73,7 +69,7 @@ $(document).ready(() => {
           break;
       }
 
-      if(VAT25>0) {
+      if (VAT25 > 0) {
         $VAT25.show();
         $("#VAT-25").text(
           `${VAT25.toLocaleString("sv-SE", {
@@ -100,7 +96,8 @@ $(document).ready(() => {
           })}`
         );
       }
-
+      console.log(typeof e.price);
+      console.log(e.price);
       cart.append(`
         <div class="row pt-2 line-item-border">
             <div class="col col-xs-3 col-lg-3 cart-line-item"><p>${
@@ -119,22 +116,25 @@ $(document).ready(() => {
                 maximumFractionDigits: 2,
               }
             )}</p></div>
-            <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${linePrice.toLocaleString("sv-SE", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}</p></div>
+            <div class="col col-xs-2 col-lg-2 cart-line-item"><p class="line-item-total-price">${linePrice.toLocaleString(
+              "sv-SE",
+              {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }
+            )}</p></div>
         </div>
         `);
     });
 
     $("#cart-total-price").text(
-      Number(JSON.parse(localStorage.getItem("cartTotalPrice")) + shippingObject.price).toLocaleString(
-        "sv-SE",
-        {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }
-      )
+      Number(
+        JSON.parse(localStorage.getItem("cartTotalPrice")) +
+          shippingObject.price
+      ).toLocaleString("sv-SE", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
     );
 
     let cartQuantity = JSON.parse(localStorage.getItem("cartQuantity"));
@@ -183,17 +183,16 @@ function clearAllInputFields() {
 
 function makeOrderObject() {
   let cart = JSON.parse(localStorage.getItem("cart"));
-  let orderCommentInput = $('#order-comment').val();
+  let orderCommentInput = $("#order-comment").val();
   let lineItems = [];
 
   // adds shipping to order
-  let shipping = JSON.parse(localStorage.getItem('shipping'))
+  let shipping = JSON.parse(localStorage.getItem("shipping"));
   shipping = {
     ...shipping,
-      inCart: 1 
-  }
+    inCart: 1,
+  };
   cart.push(shipping);
-
   // create lineItems for database
   $.each(cart, (index, productElement) => {
     let lineItem = {
@@ -229,12 +228,15 @@ function sendOrderToServer(orderObject) {
   // const url = "https://hakimlogintest.herokuapp.com/customerOrder/add";
   //const url = 'http://localhost:8080/customerOrder/add'
 
+  const config = getHeaderObjWithAuthorization();
+
+  console.log("in here");
   console.log(orderObject);
 
   axios
-    .post(addOrder, orderObject)
+    .post(addOrder, orderObject, config)
     .then((response) => {
-      if (response.status == 200) {
+      if (response.status == 201) {
         swal({
           title: "Tack för din order!",
           text: `
@@ -246,7 +248,7 @@ function sendOrderToServer(orderObject) {
           button: "Ok",
         }).then(() => {
           clearAllInputFields();
-          localStorage.clear();
+          clearAllInLocalstorageExecptJwtToken();
           renderCart();
           window.location.href = "../../index.html";
         });
@@ -254,3 +256,9 @@ function sendOrderToServer(orderObject) {
     })
     .catch((err) => console.log(">> error from server: " + err));
 }
+
+const clearAllInLocalstorageExecptJwtToken = () => {
+  const jwtToken = getJwtTokenFromLocalstorage();
+  localStorage.clear();
+  saveJwtToLocalStorage(jwtToken);
+};

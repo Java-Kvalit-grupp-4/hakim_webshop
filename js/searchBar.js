@@ -6,16 +6,16 @@ const searchIcon = $(".icon");
 let searchWords = [];
 let productsToSerach = [];
 
-/* $(document).ready(() => {
-       axios.get(getAllProducts)
-       .then(response => {
-         createSearchWords(removeHiddenProductsFromArray(response.data))
-       })
-       .catch(err => {
-         console.log('error in searchbar script! ' + err.response.status);
-       }) 
-
-}) */
+$(document).ready(() => {
+  axios
+    .get(getAllProducts)
+    .then((response) => {
+      createSearchWords(removeHiddenProductsFromArray(response.data));
+    })
+    .catch((err) => {
+      console.log("error in searchbar script! " + err.response);
+    });
+});
 
 /**
  * Checks for keyPresses in the searchField
