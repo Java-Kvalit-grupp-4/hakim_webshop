@@ -7,14 +7,15 @@ let chosenOrder;
 // const updateOrderLink = server + "customerOrder/update";
 // const getAllOrders = server + "customerOrder/orders";
 
-$(function () { 
+$(function () {
   load();
- // reset();
+  // reset();
 });
 
 function load() {
+  const config = getHeaderObjWithAuthorization();
   axios
-    .get(getAllOrders)
+    .get(getAllOrders, config)
     .then((response) => {
       if (response.status === 200) {
         allOrders = response.data;
@@ -28,9 +29,9 @@ function load() {
     });
 }
 
-$(document).on('click', '#nav-profile-tab', updatePage);
+$(document).on("click", "#nav-profile-tab", updatePage);
 
-$(document).on('click', '.customerNumber', openCustomerPage);
+$(document).on("click", ".customerNumber", openCustomerPage);
 
 let startDate;
 let endDate;
@@ -38,7 +39,7 @@ let endDate;
 function renderOrders(orders) {
   let redirect = sessionStorage.getItem("redirect");
   let chosenId = sessionStorage.getItem("chosenOrder");
-  if((chosenId!=null || chosenId!=undefined) && redirect){
+  if ((chosenId != null || chosenId != undefined) && redirect) {
     openCustomerOrder();
     //chosenId =null;
     sessionStorage.removeItem("redirect");
@@ -78,58 +79,59 @@ function openOrderTab() {
   renderUserData();
   chosenOrder = sessionStorage.getItem("chosenOrder");
   // sessionStorage.removeItem("chosenOrder");
-  addOrderToPdfBtn()
+  addOrderToPdfBtn();
   $("#navbar-order-tab").tab("show");
 }
 
-function updatePage(){
-  renderOrders(allOrders)
+function updatePage() {
+  renderOrders(allOrders);
 }
 
 function saveChosenOrder(id) {
   sessionStorage.setItem("chosenOrder", id);
 }
 
-function openCustomerOrder(){
+function openCustomerOrder() {
   renderChosenOrder();
   renderUserData();
   chosenOrder = sessionStorage.getItem("chosenOrder");
-  addOrderToPdfBtn()
+  addOrderToPdfBtn();
   // sessionStorage.removeItem("chosenOrder");
   $("#navbar-order-tab").tab("show");
 }
 
-function openCustomerPage(){
+function openCustomerPage() {
   sessionStorage.setItem("customerNumber", Number($(this).text()));
   location.replace("../Customer/index.html");
 }
 
-
-function addOrderToPdfBtn(){
+function addOrderToPdfBtn() {
   //let chosenId = Number(sessionStorage.getItem("chosenOrder"));
 
   allOrders.forEach((order) => {
     if (order.orderNumber == chosenOrder) {
-      $("#generate-pdf").click(()=>{  
-        generatPdf(order)
+      $("#generate-pdf").click(() => {
+        generatPdf(order);
         printPdf();
-      }
-    )}
-  })
+      });
+    }
+  });
 }
 
 function renderChosenOrder() {
   let chosenId = Number(sessionStorage.getItem("chosenOrder"));
   let totalCost = 0;
-  
+
   $("#product-container").html("");
   allOrders.forEach((order) => {
     if (order.orderNumber == chosenId) {
-      $("#order-heading").html(`Order ${order.orderNumber}`)
+      $("#order-heading").html(`Order ${order.orderNumber}`);
       activeOrder = order;
-      
-      // sorting shipping to show last 
-      order.lineItems.sort(function(a, b){return b.product.sku - a.product.sku});
+
+      // sorting shipping to show last
+      order.lineItems.sort(function (a, b) {
+        return b.product.sku - a.product.sku;
+      });
 
       order.lineItems.forEach((lineItem) => {
         totalCost += Number(lineItem.itemPrice) * Number(lineItem.quantity);
@@ -182,15 +184,14 @@ function renderChosenOrder() {
 
   let $orderChanges = $("#order-changes");
   $orderChanges.html("");
-  if(activeOrder.orderChanges.length>0){
+  if (activeOrder.orderChanges.length > 0) {
     activeOrder.orderChanges.forEach((change) => {
-    $orderChanges.prepend(`<li class="list-group-item">${
-      change.changeDateTime.replace("T", " ")
-      .substring(2, 16)} 
+      $orderChanges.prepend(`<li class="list-group-item">${change.changeDateTime
+        .replace("T", " ")
+        .substring(2, 16)} 
     <p>${change.description}</p></li>`);
-  });
+    });
   }
-  
 
   //Checks for nullish value
   const sentDateText = activeOrder.sentTimestamp
@@ -215,23 +216,22 @@ function renderUserData() {
 $(document).on("click", "#save-order-btn", updateOrder);
 
 function updateOrder() {
+  const config = getHeaderObjWithAuthorization();
   activeOrder.isPaid = document.getElementById("payment-status").value;
   activeOrder.orderStatus.id = document.getElementById("order-status").value;
   let newCommentString = document.getElementById("add-comment-field").value;
   if (newCommentString != "" && testForWords(newCommentString)) {
-    activeOrder.orderChanges.push(
-      {
-        description: newCommentString,
-      changeDateTime: moment().toISOString(true)}
-      );
+    activeOrder.orderChanges.push({
+      description: newCommentString,
+      changeDateTime: moment().toISOString(true),
+    });
     document.getElementById("add-comment-field").value = "";
   }
 
   axios
-    .post(updateOrderLink, activeOrder)
+    .post(updateOrderLink, activeOrder, config)
     .then(() => {
-      swal("Ordern är uppdaterad!")
-      .then(()=> renderChosenOrder());
+      swal("Ordern är uppdaterad!").then(() => renderChosenOrder());
     })
     .catch(() => {
       swal("Något gick fel!", "Vänligen försök igen", "warning");
@@ -272,7 +272,7 @@ function updateQuantity(quantityField) {
     }
   });
 }
-$(document).on('click', '#search-btn', search)
+$(document).on("click", "#search-btn", search);
 //$("#search-btn").on("click", search);
 $("#reset-btn").on("click", reset);
 
