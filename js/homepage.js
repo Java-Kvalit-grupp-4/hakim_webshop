@@ -691,15 +691,11 @@ $("#forgottenPassword-button").click(() => {
     axios
       .post(url)
       .then((response) => {
-        if (response.status !== 200) {
-          swal("Warning!", "Något gick fel!", "danger");
-        } else {
-          swal(
-            "Email med nytt lösenord är skickad.",
-            "Vänligen logga in igen",
-            "success"
-          );
-        }
+        swal(
+          "Email med nytt lösenord är skickad.",
+          "Vänligen logga in igen",
+          "success"
+        );
       })
       .catch((err) => {
         console.log(err.response.data);
