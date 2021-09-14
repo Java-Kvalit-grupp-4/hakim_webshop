@@ -8,10 +8,15 @@ const chosenImageName = "Hakim.jpg";
 $(function () {
   loadPage();
   function loadPage() {
-    fetch(information)
-      .then((response) => response.json())
-      .then((response) => renderInformation(response))
-      .catch((error) => console.error(error));
+    const config = getHeaderObjWithAuthorization();
+    axios.get(information, config)
+    .then((response) => {
+      renderInformation(response.data)
+    })
+    .catch((error)=> {
+      console.log(error);
+    })
+    
   }
 
   function renderInformation(response) {
@@ -60,9 +65,10 @@ $(function () {
 
   $(".save-button").on("click", function () {
     let data = getInformationFromFields();
+    const config = getHeaderObjWithAuthorization();
 
     axios
-      .post(informationUpdate, data)
+      .post(informationUpdate, data, config)
       .then(() => {
         swal(
           "Informationen har uppdaterats",
@@ -82,11 +88,13 @@ $(function () {
     if (imagefile.files[0] != undefined) {
       let selectedImageFile = imagefile.files[0];
       formData.append("file", selectedImageFile, newFileName);
+      const config = getHeaderObjWithAuthorization();
       axios
         .post(imageUpload, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-          },
+            Authorization: getJwtTokenFromLocalstorage()
+          }, 
         })
         .then(() => {
           swal("Ny bild uppladdad", "Uppladdningen lyckades", "success")
@@ -104,7 +112,9 @@ $(function () {
   }
 
   function removeImage(imageUrl) {
-    axios.get(imageDelete + imageUrl);
+          const config = getHeaderObjWithAuthorization();
+
+    axios.get(imageDelete + imageUrl, config);
     // .then(() => {
     //   swal("Bilden är borttagen");
     // })
