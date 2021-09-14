@@ -14,10 +14,10 @@ let updateUser = `${startUrl}/api/admin/update/user`;
 let getAllOrders = `${startUrl}/api/admin/orders`;
 let updateOrderLink = `${startUrl}/api/admin/update/order`;
 let upsertProduct = `${startUrl}/api/admin/upsert/product`;
-let imageSource = `${startUrl}/api/admin/image`;
+let imageSource = `${startUrl}/api/public/download/`;
 let imageDelete = `${startUrl}/api/admin/delete/`;
 let imageUpload = `${startUrl}/api/admin/upload/db`;
-let informationUpdate = `${startUrl}/api/admin//upsert/information`;
+let informationUpdate = `${startUrl}/api/admin/upsert/information`;
 
 // public
 let getAllProducts = `${startUrl}/api/public/get/all/products`;
