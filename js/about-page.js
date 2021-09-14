@@ -33,6 +33,6 @@ $(function () {
 
     $("#deviating-hours").html(deviatingHours);
     $("#about-text-hakim-livs").html(aboutInfo);
-    $("#aboutPageImage").attr("src", response[0].imageUrl);
+    $("#aboutPageImage").attr("src", imageSource + response[0].imageUrl);
   }
 });
