@@ -257,7 +257,7 @@ function renderProducts(products) {
     if (element.unit == "ml" || element.unit == "cl" || element.unit == "l") {
       unitCheck = "l";
     }
-    if (element.unit == "gr" || element.unit == "hg" || element.unit == "kg") {
+    if (element.unit == "g" || element.unit == "hg" || element.unit == "kg") {
       unitCheck = "kg";
     }
     if (element.unit == "st") {
