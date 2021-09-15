@@ -24,11 +24,12 @@ let FIRSTNAME_ERROR_MSG = $("#FIRSTNAME_ERROR_MSG"),
   ADDRESS_ERROR_MSG = $("#ADDRESS_ERROR_MSG"),
   ZIPCODE_ERROR_MSG = $("#ZIPCODE_ERROR_MSG"),
   CITY_ERROR_MSG = $("#CITY_ERROR_MSG"),
-  WRONNG_PASSWORD_ERROR_MSG = $("#WRONG_PASSWORD_ERROR_MSG"),
+  WRONG_PASSWORD_ERROR_MSG = $("#WRONG_PASSWORD_ERROR_MSG"),
   NEW_PASSWORD_NOT_MATCH_ERROR_MSG = $("#NEW_PASSWORD_NOT_MATCH_ERROR_MSG"),
   NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG = $(
     "#NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG"
   );
+NEW_PASSWORD_NOT_VALID_ERROR_MSG = $("#NEW_PASSWORD_NOT_VALID_ERROR_MSG");
 
 // let findAllOrdersURL = "https://hakimlivs.herokuapp.com/customerOrder/getCustomerOrders?email="
 let customerOrders = [];
@@ -76,10 +77,6 @@ $("#submit").click(() => {
         swal("Informationen har ej sparats", "Vänligen försök igen", "warning");
       });
   }
-});
-
-$("#change-password-btn").click(() => {
-  checkPasswordChange();
 });
 
 $(document).on("click", ".orderNumber", showOrder);
@@ -223,7 +220,8 @@ function hideAllErrorMsgs() {
   CITY_ERROR_MSG.hide();
   NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide();
   NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide();
-  WRONNG_PASSWORD_ERROR_MSG.hide();
+  WRONG_PASSWORD_ERROR_MSG.hide();
+  NEW_PASSWORD_NOT_VALID_ERROR_MSG.hide();
 }
 
 function validateFormMyAccount() {
@@ -245,42 +243,81 @@ function validateFormMyAccount() {
   return bool;
 }
 
-function checkPasswordChange() {
-  let bool = true;
+//-------------------------------------------------------- CHANGE PASSWORD
+// Cache variebles
+const accountChangePasswordBtn = $("#change-password-btn");
+const accountMyOldPassword = $("#my-info-old-password");
+const accountMyNewPassword = $("#my-info-new-password");
+const accountReNewPassword = $("#my-info-re-new-password");
 
-  /* if (oldPassword.val() !== customer.password) {
-    WRONNG_PASSWORD_ERROR_MSG.show();
-    bool = false;
-  } else {
-    WRONNG_PASSWORD_ERROR_MSG.hide();
-  } */
-  if (newPassword.val() === oldPassword.val()) {
+accountChangePasswordBtn.click(() => {
+  const accountEmail = $("#my-info-email").val();
+  const accountNewPassword = accountMyNewPassword.val();
+  const accountOldPassword = accountMyOldPassword.val();
+  updatePassword(accountEmail, accountNewPassword, accountOldPassword);
+});
+
+accountChangePasswordBtn.attr("disabled", true);
+
+accountMyOldPassword.focusout(function () {
+  let bool = true;
+  bool = checkForInput(
+    testForPassword,
+    accountMyOldPassword,
+    bool,
+    WRONG_PASSWORD_ERROR_MSG
+  );
+  checkIfAllPasswordChangeFieldsAreFilledIn();
+});
+
+accountMyNewPassword.focusout(function () {
+  let bool = true;
+  bool = checkForInput(
+    testForPassword,
+    accountMyNewPassword,
+    bool,
+    NEW_PASSWORD_NOT_VALID_ERROR_MSG
+  );
+  if (accountMyNewPassword.val() == accountMyOldPassword.val()) {
+    accountMyNewPassword.css("border", "3px solid #F90A0A");
     NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.show();
-    bool = false;
   } else {
+    accountMyNewPassword.css("border", "2px solid #34F458");
     NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide();
   }
-  if (newPassword.val() !== confirmPassword.val()) {
-    NEW_PASSWORD_NOT_MATCH_ERROR_MSG.show();
-    bool = false;
+  checkIfAllPasswordChangeFieldsAreFilledIn();
+});
+
+accountReNewPassword.focusout(function () {
+  let bool = true;
+  bool = checkForInput(
+    testForPassword,
+    accountReNewPassword,
+    bool,
+    NEW_PASSWORD_NOT_MATCH_ERROR_MSG
+  );
+  checkIfAllPasswordChangeFieldsAreFilledIn();
+});
+
+const checkIfAllPasswordChangeFieldsAreFilledIn = () => {
+  if (
+    accountMyOldPassword.val() != "" &&
+    accountMyNewPassword.val() != "" &&
+    accountReNewPassword.val() != "" &&
+    accountMyOldPassword.val() !== accountMyNewPassword.val()
+  ) {
+    accountChangePasswordBtn.removeAttr("disabled");
   } else {
-    NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide();
+    accountChangePasswordBtn.attr("disabled", true);
   }
+};
 
-  if (bool) {
-    updatePassword(newPassword);
-  }
-}
-
-const updatePassword = (newPassword) => {
-  // let updatePasswordUrl = `https://hakimlivs.herokuapp.com/users/update/password`
-  // let updatePasswordUrl = `https://hakimlogintest.herokuapp.com/users/update/password`
-  //let updatePasswordUrl = `http://localhost:8080/users/update/password`
-
-  console.log("sending request password update to server");
+const updatePassword = (email, newPassword, oldPassword) => {
+  console.log(email);
   let updatePassword = {
-    email: email.val().trim(),
-    password: newPassword.val().trim(),
+    email: email.trim(),
+    newPassword: newPassword.trim(),
+    oldPassword: oldPassword.trim(),
   };
   const config = getHeaderObjWithAuthorization();
 
@@ -293,14 +330,53 @@ const updatePassword = (newPassword) => {
         // setting the updated customer to sessionStorage
         sessionStorage.setItem("customer", JSON.stringify(respone.data));
 
-        resetBorder(oldPassword);
-        resetBorder(newPassword);
-        resetBorder(confirmPassword);
+        resetBorder(accountMyOldPassword);
+        resetBorder(accountMyNewPassword);
+        resetBorder(accountReNewPassword);
+        accountMyOldPassword.val("");
+        accountMyNewPassword.val("");
+        accountReNewPassword.val("");
       }
     })
     .catch((err) => {
-      swal("Något gick fel försök igen", `${err}`, "warning");
+      swal("Något gick fel försök igen", err.response.data.message, "warning");
     });
 };
 
 fillInputFieldsWithLoggedIn();
+
+// DELETE USER
+
+const handleDeleteUser = () => {
+  const email = getUserEmail();
+  const password = $("#passwordForDelteUser").val();
+  const config = getHeaderObjWithAuthorization();
+  if (password) {
+    axios
+      .get(`${deleteUserUrl}?email=${email}&password=${password}`, config)
+      .then((resp) => {
+        console.log(resp.data);
+        swal("Konto borttaget").then(() => {
+          localStorage.clear();
+          location.replace("../../index.html");
+        });
+      })
+      .catch((err) => {
+        swal("Error! Konto ej borttaget", err.response.data.message, "error");
+      });
+  } else {
+    swal(
+      "",
+      "Du måste fylla i ditt lösenord för att kunna ta bort ditt konto",
+      "info"
+    );
+  }
+};
+
+const getUserEmail = () => {
+  const user = JSON.parse(sessionStorage.getItem("customer"));
+  return user.email;
+};
+
+// adding eventlistener to delete user button
+$("#deleteAccountBtn").click(handleDeleteUser);

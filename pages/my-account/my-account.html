@@ -272,7 +272,7 @@
                   <label for="my-info-first-name" class="form-label">Gammalt lösenord</label>
                   <input type="text" class="form-control" placeholder="Gammalt lösenord" aria-label="Gammalt lösenord" minlength="6" maxlength="50"
                     id="my-info-old-password">
-                    <div id="WRONG_PASSWORD_ERROR_MSG" class="error-msg">Felaktigt lösenord</div>
+                    <div id="WRONG_PASSWORD_ERROR_MSG" class="error-msg">Felaktigt lösenord, mata in ett giltigt lösenord. Lösenordet måste innehålla stora och små bokstäver samt minst en siffra</div>
                 </div>
                 </div>
                 <div class="row gx-5">
@@ -280,8 +280,8 @@
                   <label for="my-info-first-name" class="form-label">Nytt lösenord</label>
                   <input type="text" class="form-control" placeholder="Nytt lösenord" aria-label="Nytt lösenord" minlength="6" maxlength="50"
                     id="my-info-new-password">
-                    <div id="NEW_PASSWORD_NOT_MATCH_ERROR_MSG" class="error-msg">Lösenorden matchar inte</div>
                     <div id="NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG" class="error-msg">Du har redan detta lösenord</div>
+                    <div id="NEW_PASSWORD_NOT_VALID_ERROR_MSG" class="error-msg">Lösenordet måste innehålla stora och små bokstäver samt minst en siffra</div>
                 </div>
                 </div>
                 <div class="row gx-5 mb-5">
@@ -289,6 +289,7 @@
                   <label for="my-info-first-name" class="form-label">Bekräfta lösenord</label>
                   <input type="text" class="form-control" placeholder="Bekräfta nytt lösenord" aria-label="Bekräfta nytt lösenord" minlength="6" maxlength="50"
                     id="my-info-re-new-password">
+                    <div id="NEW_PASSWORD_NOT_MATCH_ERROR_MSG" class="error-msg">Lösenorden matchar inte</div>
                 </div>
                 <div class="col mb-3 mt-4">
                   <button type="" class="btn btn-secondary save-button" id="change-password-btn" style="width: 100px;">Spara</button>
@@ -296,11 +297,28 @@
                 
                 </div>
                 </div>
+                <!-- DELETE USER START-->
+                <div class="change-password mt-5">
+                  <div class="mb-5 ">
+                    <h2>Ta Bort Konto</h2>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <p>Du kan radera ditt konto när som helst. Om du ångrar dig går tyvär inte kontot att återställa. De ordrar som ligger som obetalda kommer dock att sparas fram tills dom är betalade.</p>
+                    </div>
+                    <div class="col-lg-6" style="display: flex; flex-direction: column; align-items: center;" >
+                      <input id="passwordForDelteUser" type="text" class="form-control mb-4" placeholder="Ditt lösenord för att kunna ta bort konto" maxlength="50" >
+                      <button id="deleteAccountBtn" class="btn btn-danger">Avsluta Konto</button>
+                    </div>
+                  </div> 
+                </div>
+                <!-- DELETE USER ENDS-->
             </div>
           </div>
           </form>
         </div>
       </div>
+      
     </div>
   </div>
   </div>
