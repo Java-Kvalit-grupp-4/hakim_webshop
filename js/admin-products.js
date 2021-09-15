@@ -16,14 +16,13 @@ let tags = [];
 let productId = "";
 
 function loadProducts() {
-   const config = getHeaderObjWithAuthorization();
+  const config = getHeaderObjWithAuthorization();
   axios
     .get(getAllProducts, config)
     .then((response) => {
       if (response.status === 200) {
         products = response.data;
-          render(products);
-  
+        render(products);
       } else {
         alert("Något gick fel vid inläsning av produkter");
       }
@@ -31,13 +30,11 @@ function loadProducts() {
     .catch((err) => {
       alert("Serverfel! " + err);
     });
-  
-  
-  function render(products) {
 
+  function render(products) {
     emptyAllFields();
 
-      products.forEach((element) => {
+    products.forEach((element) => {
       for (let i = 0; i < element.categories.length; i++) {
         let obj = element.categories[i];
         categories.push(obj.name);
@@ -64,7 +61,6 @@ function loadProducts() {
      * Add products that belong to the celected category
      */
     $("#select").on("change", function () {
-
       let categoryName = $(this).val();
       let list = [];
       products.forEach((element) => {
@@ -95,7 +91,6 @@ function loadProducts() {
       let input = $("#tagInput").val();
 
       if (validateTag()) {
-
         resetBorder(tagName);
 
         $("#tagColumn").append(`
@@ -105,22 +100,19 @@ function loadProducts() {
                   </div>
           `);
 
-      tags.push({ name: input});
+        tags.push({ name: input });
 
-      $("#tagSave").val("");
+        $("#tagSave").val("");
       }
-      
     });
 
-    
-       /**
+    /**
      * Add new category to the list of existed categories on product site
      */
     $("#inputSave").click(function () {
       let input = $("#categoryInput").val();
 
       if (validateCategory()) {
-
         resetBorder(categoryNameInput);
 
         $("#column").append(`
@@ -135,13 +127,10 @@ function loadProducts() {
       }
     });
 
-  
-
-   
     /**
      * Highlight chosen product in the table and select its id
      */
-   
+
     $("#products").on("click", "tr", function () {
       $(this).addClass("highlight").siblings().removeClass("highlight");
       productId = $(this).attr("id");
@@ -165,9 +154,9 @@ function loadProducts() {
           $("#brand").val(element.brand.name);
           $("#description").val(element.description);
           $("#img").val(element.image);
-          imageStringForProduct=element.image;
-          $('#img').attr('src', element.image)
-          $('#unit').val(element.unit)
+          imageStringForProduct = element.image;
+          $("#img").attr("src", element.image);
+          $("#unit").val(element.unit);
           $("#VAT").val(element.vat);
           $("#weight_volume").val(element.volume);
           $("#price").val(element.price);
@@ -176,10 +165,10 @@ function loadProducts() {
           showTags(element);
           sku = element.sku;
           if (element.isAvailable === false) {
-          $("#isProductHidden").prop("checked", true);
+            $("#isProductHidden").prop("checked", true);
+          }
         }
-        }
-      
+
         $("#column div").filter(function () {
           for (let i = 0; i < element.categories.length; i++) {
             let obj = element.categories[i];
@@ -203,15 +192,13 @@ function loadProducts() {
      * Make object of selected product and post it
      */
     $("#saveChanges").click(function () {
-     
       let productCategories = createCategoriesForProduct();
       let isAvailable = checkIfProductIsAvalible();
       let tagsIncluded = createTagsForProduct();
 
-
       if (validateForm()) {
         resetsInputBorders();
-     
+
         let productObject = {
           sku: sku,
           title: $("#title").val(),
@@ -232,29 +219,28 @@ function loadProducts() {
 
         console.table(productObject);
 
-
         swal("Produkten har sparats");
-         const config = getHeaderObjWithAuthorization();
+        const config = getHeaderObjWithAuthorization();
+        console.log(config);
 
-        axios.post(upsertProduct, productObject, config)
-          .then(() => {
-          })
+        axios
+          .post(upsertProduct, productObject, config)
+          .then(() => {})
           .catch(() => {
-            alert('Något fick fel!', 'Vänligen försök igen', 'warning')
-          })
+            alert("Något fick fel!", "Vänligen försök igen", "warning");
+          });
 
         emptyAllFields();
       }
     });
 
-      /**
+    /**
      * Empty form to add new product
      */
     $("#new").click(function () {
       emptyAllFields();
       $("#tab-product-site").tab("show");
     });
-    
   }
 }
 
@@ -266,14 +252,15 @@ function emptyAllFields() {
   $("#price").val("");
   $("#lager").val("");
   $("#isProductHidden").prop("checked", false);
-  $("#column div").children().each(function () {
-    $(this).prop("checked", false);     
-  });
+  $("#column div")
+    .children()
+    .each(function () {
+      $(this).prop("checked", false);
+    });
   $("#categoryInput").val("");
   $("#tagColumn").empty();
   $("#tagInput").val("");
 }
-
 
 /**
  * Generates a table with products
@@ -281,12 +268,11 @@ function emptyAllFields() {
  */
 function showProducts(l) {
   let productNumber = sessionStorage.getItem("productNumber");
-  if(productNumber!=null){
-    console.log("productNumber")
+  if (productNumber != null) {
+    console.log("productNumber");
     productId = productNumber;
     openProductTab();
-  }
-  else{
+  } else {
     l.forEach((element) => {
       $("#products").append(
         `<tr id="${element.sku}">
@@ -318,23 +304,19 @@ function showCategories() {
 function showTags(element) {
   let tags = element.tags;
 
-  tags.forEach(e => {
-
-  $("#tagColumn").append(`
+  tags.forEach((e) => {
+    $("#tagColumn").append(`
           <div id="${e.name}" class="form-check">
                       <input checked class="form-check-input me-3 tag" type="checkbox" value="" id="${e.name}" onchange="removeIfUnchecked(${e.name})">
                       <label class="form-check-label" for="${e.name}">${e.name}</label>
                   </div>
           `);
-        })
+  });
 }
 
 function removeIfUnchecked(value) {
   let v = $(this).children;
 }
-
-
-
 
 /* "https://hakimlivs.herokuapp.com/api/v1/upload/db" */
 
@@ -345,52 +327,72 @@ let weightVolume;
 let unit;
 
 const productImageUpload = (fileInputField) => {
-    let formData = new FormData();
-    let fileName = fileInputField.prop('files')[0].name.replaceAll(' ','')
-    let imagefile = fileInputField.prop('files')[0]
+  let formData = new FormData();
+  let fileName = fileInputField
+    .prop("files")[0]
+    .name.replaceAll(" ", "")
+    .replaceAll("-", "");
+  let imagefile = fileInputField.prop("files")[0];
 
-    if (imagefile != undefined) {
-      formData.append("file", imagefile, fileName);
-      axios
-        .post(imageUpload, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((resp) => {
-          swal("Ny bild uppladdad", "Uppladdningen lyckades", "success")
-            .then(imageStringForProduct = `${resp.data.downloadUrl}/${resp.data.fileName}`)
-        })
-        .catch((err) => {
-          if(err.response.status == 500){
-            swal("Bildnamn finns redan!", "Ändra bildnamn eller ladda upp en annan bild", "warning");
-          }else{
-            swal("Något fick fel!", "Vänligen försök igen", "warning");
-          }   
-        });
-    }
-}
+  if (imagefile != undefined) {
+    formData.append("file", imagefile, fileName);
+    axios
+      .post(imageUpload, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: getJwtTokenFromLocalstorage(),
+        },
+      })
+      .then((resp) => {
+        console.log(" i bilduppladdning " + resp.data);
+
+        if (resp.data == "") {
+          swal(
+            "Bildnamn finns redan!",
+            "Ändra bildnamn eller ladda upp en annan bild",
+            "warning"
+          );
+        } else {
+          swal("Ny bild uppladdad", "Uppladdningen lyckades", "success").then(
+            (imageStringForProduct = `${resp.data.downloadUrl}/${resp.data.fileName}`)
+          );
+        }
+      })
+      .catch((err) => {
+        if (err.response.status == 500) {
+          swal(
+            "Bildnamn finns redan!",
+            "Ändra bildnamn eller ladda upp en annan bild",
+            "warning"
+          );
+        } else {
+          swal("Något fick fel!", "Vänligen försök igen", "warning");
+        }
+      });
+  }
+};
 
 // eventlisteners
 
 // create product
-$('#new-product').click(() => {
-  if(imageStringForProduct == undefined ||imageStringForProduct == "" ){
-    swal('Varning', 'Du kan inte skapa en produkt utan att ladda upp produktbild', 'warning')
-  }else{
-    createProductInDataBase()
+$("#new-product").click(() => {
+  if (imageStringForProduct == undefined || imageStringForProduct == "") {
+    swal(
+      "Varning",
+      "Du kan inte skapa en produkt utan att ladda upp produktbild",
+      "warning"
+    );
+  } else {
+    createProductInDataBase();
   }
-  
-})
+});
 
-// setting the unit on change 
+// setting the unit on change
 
-  
- 
 // skapa productobject
 const createProductObjekt = () => {
-  unit =  $("#unit").val();
-  weightVolume = $('#weight_volume').val();
+  unit = $("#unit").val();
+  weightVolume = $("#weight_volume").val();
 
   let productCategories = createCategoriesForProduct();
   let isAvailable = checkIfProductIsAvalible();
@@ -411,7 +413,7 @@ const createProductObjekt = () => {
     tags: tags,
     categories: productCategories,
   };
-}
+};
 
 const createCategoriesForProduct = () => {
   let cat = [];
@@ -428,130 +430,128 @@ const createCategoriesForProduct = () => {
     productCategory.push({ name: element });
   });
   return productCategory;
-}
+};
 
 const createTagsForProduct = () => {
   let tagList = [];
- 
-  $("#tagColumn div").children().each(function () {
-    if ($(this).is(":checked")) {
-      let element = $(this).attr("id");
-      console.log("Element i tagColumn " + element);
-      tagList.push(element);
-    }
-  });
+
+  $("#tagColumn div")
+    .children()
+    .each(function () {
+      if ($(this).is(":checked")) {
+        let element = $(this).attr("id");
+        console.log("Element i tagColumn " + element);
+        tagList.push(element);
+      }
+    });
   let tagsIncluded = [];
-  
+
   tagList.forEach((element) => {
     tagsIncluded.push({ name: element });
   });
   console.log("tagsIncluded " + tagsIncluded);
   return tagsIncluded;
-}
+};
 
 const checkIfProductIsAvalible = () => {
-      if ($("#isProductHidden").is(":checked")) {
-        return false;
-      }else {
-        return true;
-      }
-  
-}
+  if ($("#isProductHidden").is(":checked")) {
+    return false;
+  } else {
+    return true;
+  }
+};
 
 const createProductInDataBase = () => {
-
   if ($("#column div input:checkbox:checked").length > 0) {
-    console.log("Correct!")
+    console.log("Correct!");
+  } else {
+    alert("Fel");
   }
-  else {
-    alert("Fel")
-  };
-  
+
   if (validateForm()) {
     resetsInputBorders();
 
-    const newProduct = createProductObjekt()
+    const newProduct = createProductObjekt();
+    const config = getHeaderObjWithAuthorization();
 
-    console.table(newProduct)
+    console.table(newProduct);
 
-    axios.post(upsertProduct, newProduct)
+    axios
+      .post(upsertProduct, newProduct, config)
       .then(() => {
-        swal("Ny produkt tillagd", '', "success")
-        imageStringForProduct = ""
+        swal("Ny produkt tillagd", "", "success");
+        imageStringForProduct = "";
       })
       .catch(() => {
-        swal('Något fick fel!', 'Vänligen försök igen', 'warning')
-      })
-    
+        swal("Något fick fel!", "Vänligen försök igen", "warning");
+      });
+
     emptyAllFields();
-      
   }
-}
-
-
+};
 
 // render the uploaded file to preview
-$('#fileUpload').change(function() {
+$("#fileUpload").change(function () {
   let reader = new FileReader();
   console.log(this.files[0].size);
-  if(this.files[0].size > 250000){
-    swal('Bilden är för stor!', 'max gräns är 250,0 kb', 'warning')
-  }else{
-    reader.onload = (e) => $('#img').attr('src', e.target.result)
-  reader.readAsDataURL(this.files[0]);
+  if (this.files[0].size > 250000) {
+    swal("Bilden är för stor!", "max gräns är 250,0 kb", "warning");
+  } else {
+    reader.onload = (e) => $("#img").attr("src", e.target.result);
+    reader.readAsDataURL(this.files[0]);
   }
-})
+});
 
-$('#uploadButton').click(() => {
-  productImageUpload($('#fileUpload'))
-})
+$("#uploadButton").click(() => {
+  productImageUpload($("#fileUpload"));
+});
 
 // Opens product tab if productNumber has been choosed from another admin-page
-function openProductTab(){
+function openProductTab() {
   $("#column").empty();
-    $("#tagColumn").empty();
-    $("#tagInput").val("");
-    $("#isProductHidden").prop("checked", false);
+  $("#tagColumn").empty();
+  $("#tagInput").val("");
+  $("#isProductHidden").prop("checked", false);
 
-    products.forEach((element) => {
-      if (element.sku == productId) {
-        $("#title").val(element.title);
-        $("#brand").val(element.brand.name);
-        $("#description").val(element.description);
-        $("#img").val(element.image);
-        imageStringForProduct=element.image;
-        $('#img').attr('src', element.image)
-        $('#unit').val(element.unit)
-        $("#VAT").val(element.vat);
-        $("#weight_volume").val(element.volume);
-        $("#price").val(element.price);
-        $("#lager").val(element.quantity);
-        showCategories();
-        showTags(element);
-        sku = element.sku;
-        if (element.isAvailable === false) {
+  products.forEach((element) => {
+    if (element.sku == productId) {
+      $("#title").val(element.title);
+      $("#brand").val(element.brand.name);
+      $("#description").val(element.description);
+      $("#img").val(element.image);
+      imageStringForProduct = element.image;
+      $("#img").attr("src", element.image);
+      $("#unit").val(element.unit);
+      $("#VAT").val(element.vat);
+      $("#weight_volume").val(element.volume);
+      $("#price").val(element.price);
+      $("#lager").val(element.quantity);
+      showCategories();
+      showTags(element);
+      sku = element.sku;
+      if (element.isAvailable === false) {
         $("#isProductHidden").prop("checked", true);
       }
-      }
-    
-      $("#column div").filter(function () {
-        for (let i = 0; i < element.categories.length; i++) {
-          let obj = element.categories[i];
+    }
 
-          if (element.sku == productId && obj.name == $(this).attr("id")) {
-            $(this).replaceWith(function () {
-              return `<div class="form-check ">
+    $("#column div").filter(function () {
+      for (let i = 0; i < element.categories.length; i++) {
+        let obj = element.categories[i];
+
+        if (element.sku == productId && obj.name == $(this).attr("id")) {
+          $(this).replaceWith(function () {
+            return `<div class="form-check ">
               <input class="form-check-input tag" type="checkbox" value="" id="${obj.name}" checked>
               <label class="form-check-label" for="cat1">${obj.name}</label>
           </div>`;
-            });
-          }
+          });
         }
-      });
+      }
     });
+  });
 
-    $("#tab-product-site").tab("show");
-    sessionStorage.removeItem("productNumber")   
+  $("#tab-product-site").tab("show");
+  sessionStorage.removeItem("productNumber");
 }
 // Fältvalidering
 
@@ -562,62 +562,78 @@ let productName = $("#title"),
   priceInput = $("#price"),
   lagerInput = $("#lager"),
   weight_volumeInput = $("#weight_volume");
-  
 
 let PRODUCTNAME_ERROR_MSG = $("#PRODUCTNAME_ERROR_MSG"),
-BRAND_ERROR_MSG = $("#BRAND_ERROR_MSG"),
-CATEGORY_ERROR_MSG = $("#CATEGORY_ERROR_MSG"),
-TAG_ERROR_MSG = $("#TAG_ERROR_MSG"),
-PRICE_ERROR_MSG = $("#PRICE_ERROR_MSG"),
-LAGER_ERROR_MSG = $("#LAGER_ERROR_MSG"),
-WEIGHT_ERROR_MSG = $("#WEIGHT_ERROR_MSG");
+  BRAND_ERROR_MSG = $("#BRAND_ERROR_MSG"),
+  CATEGORY_ERROR_MSG = $("#CATEGORY_ERROR_MSG"),
+  TAG_ERROR_MSG = $("#TAG_ERROR_MSG"),
+  PRICE_ERROR_MSG = $("#PRICE_ERROR_MSG"),
+  LAGER_ERROR_MSG = $("#LAGER_ERROR_MSG"),
+  WEIGHT_ERROR_MSG = $("#WEIGHT_ERROR_MSG");
 
-productName.focusout(()=>{
-  let bool = true
-  bool = checkForInput(testForWords, productName, bool, PRODUCTNAME_ERROR_MSG)
+productName.focusout(() => {
+  let bool = true;
+  bool = checkForInput(testForWords, productName, bool, PRODUCTNAME_ERROR_MSG);
 });
 
-brandName.focusout(()=>{
-  let bool = true
-  bool = checkForInput(testForWords, brandName, bool, BRAND_ERROR_MSG)
+brandName.focusout(() => {
+  let bool = true;
+  bool = checkForInput(testForWords, brandName, bool, BRAND_ERROR_MSG);
 });
 
 if (categoryNameInput.val() == "") {
-  console.log("Event listener for category turned off")
-}
-else {
-  categoryNameInput.focusout(()=>{
-    let bool = true
-    bool = checkForInput(testForWords, categoryNameInput, bool, CATEGORY_ERROR_MSG)
+  console.log("Event listener for category turned off");
+} else {
+  categoryNameInput.focusout(() => {
+    let bool = true;
+    bool = checkForInput(
+      testForWords,
+      categoryNameInput,
+      bool,
+      CATEGORY_ERROR_MSG
+    );
   });
 }
-  
+
 if (tagName.val() == "") {
-  console.log("Event listener for tag turned off")
+  console.log("Event listener for tag turned off");
+} else {
+  tagName.focusout(() => {
+    let bool = true;
+    bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG);
+  });
 }
-else {
-  tagName.focusout(()=>{
-  let bool = true
-  bool = checkForInput(testForName, tagName, bool, TAG_ERROR_MSG)
-});
-}
 
-
-priceInput.focusout(()=>{
-  let bool = true
-  bool = checkForInput(testForDecimalNumbers, priceInput, bool, PRICE_ERROR_MSG)
+priceInput.focusout(() => {
+  let bool = true;
+  bool = checkForInput(
+    testForDecimalNumbers,
+    priceInput,
+    bool,
+    PRICE_ERROR_MSG
+  );
 });
 
-lagerInput.focusout(()=>{
-  let bool = true
-  bool = checkForInput(testForNumbersOnlyNegativeIncluded, lagerInput, bool, LAGER_ERROR_MSG)
+lagerInput.focusout(() => {
+  let bool = true;
+  bool = checkForInput(
+    testForNumbersOnlyNegativeIncluded,
+    lagerInput,
+    bool,
+    LAGER_ERROR_MSG
+  );
 });
 
-weight_volumeInput.focusout(()=>{
-  let bool = true
-  bool = checkForInput(testForDecimalNumbers, weight_volumeInput, bool, WEIGHT_ERROR_MSG)
+weight_volumeInput.focusout(() => {
+  let bool = true;
+  bool = checkForInput(
+    testForDecimalNumbers,
+    weight_volumeInput,
+    bool,
+    WEIGHT_ERROR_MSG
+  );
 });
-  
+
 function hideAllErrorMsgs() {
   PRODUCTNAME_ERROR_MSG.hide();
   BRAND_ERROR_MSG.hide();
@@ -643,32 +659,55 @@ function validateForm() {
 
   bool = checkForInput(testForWords, productName, bool, PRODUCTNAME_ERROR_MSG);
   bool = checkForInput(testForWords, brandName, bool, BRAND_ERROR_MSG);
-  
+
   if (categoryNameInput.val() == "") {
     console.log("Empty field");
     bool = true;
-  }
-  else {
-    bool = checkForInput(testForWords, categoryNameInput, bool, CATEGORY_ERROR_MSG);
+  } else {
+    bool = checkForInput(
+      testForWords,
+      categoryNameInput,
+      bool,
+      CATEGORY_ERROR_MSG
+    );
   }
 
   if (tagName.val() == "") {
     bool = true;
-  }
-  else {
+  } else {
     bool = checkForInput(testForWords, tagName, bool, TAG_ERROR_MSG);
   }
-  
-  bool = checkForInput(testForDecimalNumbers, priceInput, bool, PRICE_ERROR_MSG)
-  bool = checkForInput(testForNumbersOnlyNegativeIncluded, lagerInput, bool, LAGER_ERROR_MSG)
-  bool = checkForInput(testForDecimalNumbers, weight_volumeInput, bool, WEIGHT_ERROR_MSG)
+
+  bool = checkForInput(
+    testForDecimalNumbers,
+    priceInput,
+    bool,
+    PRICE_ERROR_MSG
+  );
+  bool = checkForInput(
+    testForNumbersOnlyNegativeIncluded,
+    lagerInput,
+    bool,
+    LAGER_ERROR_MSG
+  );
+  bool = checkForInput(
+    testForDecimalNumbers,
+    weight_volumeInput,
+    bool,
+    WEIGHT_ERROR_MSG
+  );
 
   return bool;
 }
 
 function validateCategory() {
   let bool = true;
-  bool = checkForInput(testForWords, categoryNameInput, bool, CATEGORY_ERROR_MSG);
+  bool = checkForInput(
+    testForWords,
+    categoryNameInput,
+    bool,
+    CATEGORY_ERROR_MSG
+  );
   return bool;
 }
 
@@ -678,8 +717,4 @@ function validateTag() {
   return bool;
 }
 
-
-
-
 hideAllErrorMsgs();
-
