@@ -1,12 +1,13 @@
 //const startUrl = 'https://hakimlivs.herokuapp.com'
-const startUrl = "https://hakim-livs-dev.herokuapp.com";
-//const startUrl = "http://localhost:8080";
+//const startUrl = "https://hakim-livs-dev.herokuapp.com";
+const startUrl = "http://localhost:8080";
 
 // Customer-links
 let updateUserInfo = `${startUrl}/api/user/update/info`;
 let updateUserPasswordUrl = `${startUrl}/api/user/update/password`;
 let addOrder = `${startUrl}/api/user/create/order`;
 let getCustomerOrder = `${startUrl}/api/user/get/customer/orders?email=`;
+let deleteUserUrl = `${startUrl}/api/user/delete`;
 
 // admin
 let getAllCustomers = `${startUrl}/api/admin/get/all/users`;
