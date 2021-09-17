@@ -63,7 +63,9 @@ if (!getCookie("gdpr")) {
         break;
 
       default:
+        setCookie("gdpr", "false", "1");
         swal("Got away safely!");
+        break;
     }
   });
 }
