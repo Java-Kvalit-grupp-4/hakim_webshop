@@ -597,7 +597,7 @@ $("#login-button").click(() => {
     })
     .catch((err) => {
       swal(
-        "Error!",
+        "Ett Fel Uppstod!",
         "Något gick fel vänligen försök att logga in igen.",
         "error"
       );
