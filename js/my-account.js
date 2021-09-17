@@ -339,9 +339,6 @@ const updatePassword = (email, newPassword, oldPassword) => {
       if (respone.status == 200) {
         swal("Nytt lösenord sparat", "", "success");
 
-        // setting the updated customer to sessionStorage
-        //sessionStorage.setItem("customer", JSON.stringify(respone.data));
-
         resetBorder(accountMyOldPassword);
         resetBorder(accountMyNewPassword);
         resetBorder(accountReNewPassword);
@@ -370,6 +367,7 @@ const handleDeleteUser = () => {
         console.log(resp.data);
         swal("Konto borttaget").then(() => {
           localStorage.clear();
+          sessionStorage.clear();
           location.replace("../../index.html");
         });
       })
