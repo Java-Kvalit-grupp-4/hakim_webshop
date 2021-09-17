@@ -171,6 +171,7 @@ function showOrder() {
     if (order.orderNumber == orderNumber) {
       let totalQty = 0;
       order.lineItems.forEach((lineItem) => {
+        console.log(lineItem);
         totalQty += lineItem.quantity;
         $("#orderIncludes").append(`
           <tr>
@@ -180,13 +181,12 @@ function showOrder() {
                 maximumFractionDigits: 2,
               })}</td>
               <td>${lineItem.quantity}</td>
-              <td class="text-center">${lineItem.itemPrice.toLocaleString(
-                "sv-SE",
-                {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                }
-              )}</td>
+              <td class="text-center">${(
+                lineItem.itemPrice * lineItem.quantity
+              ).toLocaleString("sv-SE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}</td>
             </tr>`);
       });
       $("#totalQuantity").html(totalQty);
