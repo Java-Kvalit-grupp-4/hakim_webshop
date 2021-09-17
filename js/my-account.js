@@ -68,6 +68,7 @@ $("#submit").click(() => {
     axios
       .post(updateUserInfo, updateInfo, config)
       .then((response) => {
+        console.log(response.data);
         if (response.status == 200) {
           swal("Informationen har sparats", "", "success");
           sessionStorage.setItem("customer", JSON.stringify(response.data));
@@ -260,6 +261,18 @@ accountChangePasswordBtn.click(() => {
 accountChangePasswordBtn.attr("disabled", true);
 
 accountMyOldPassword.focusout(function () {
+  checkIfAllPasswordChangeFieldsAreFilledIn();
+});
+
+accountMyNewPassword.focusout(function () {
+  checkIfAllPasswordChangeFieldsAreFilledIn();
+});
+
+accountReNewPassword.focusout(function () {
+  checkIfAllPasswordChangeFieldsAreFilledIn();
+});
+
+const checkIfAllPasswordChangeFieldsAreFilledIn = () => {
   let bool = true;
   bool = checkForInput(
     testForPassword,
@@ -267,45 +280,45 @@ accountMyOldPassword.focusout(function () {
     bool,
     WRONG_PASSWORD_ERROR_MSG
   );
-  checkIfAllPasswordChangeFieldsAreFilledIn();
-});
 
-accountMyNewPassword.focusout(function () {
-  let bool = true;
   bool = checkForInput(
     testForPassword,
     accountMyNewPassword,
     bool,
     NEW_PASSWORD_NOT_VALID_ERROR_MSG
   );
-  if (accountMyNewPassword.val() == accountMyOldPassword.val()) {
-    accountMyNewPassword.css("border", "3px solid #F90A0A");
-    NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.show();
-  } else {
-    accountMyNewPassword.css("border", "2px solid #34F458");
-    NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide();
-  }
-  checkIfAllPasswordChangeFieldsAreFilledIn();
-});
 
-accountReNewPassword.focusout(function () {
-  let bool = true;
   bool = checkForInput(
     testForPassword,
     accountReNewPassword,
     bool,
     NEW_PASSWORD_NOT_MATCH_ERROR_MSG
   );
-  checkIfAllPasswordChangeFieldsAreFilledIn();
-});
 
-const checkIfAllPasswordChangeFieldsAreFilledIn = () => {
+  if (accountMyNewPassword.val() == accountMyOldPassword.val()) {
+    accountMyNewPassword.css("border", "3px solid #F90A0A");
+    NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.show();
+    bool = false;
+  } else if (bool) {
+    accountMyNewPassword.css("border", "2px solid #34F458");
+    NEW_PASSWORD_EQUALS_OLD_PASSWORD_ERROR_MSG.hide();
+    bool = true;
+  }
+
   if (
-    accountMyOldPassword.val() != "" &&
-    accountMyNewPassword.val() != "" &&
-    accountReNewPassword.val() != "" &&
-    accountMyOldPassword.val() !== accountMyNewPassword.val()
+    accountMyNewPassword.val() == accountReNewPassword.val() &&
+    accountReNewPassword.val() != ""
   ) {
+    accountReNewPassword.css("border", "2px solid #34F458");
+    NEW_PASSWORD_NOT_MATCH_ERROR_MSG.hide();
+    bool = true;
+  } else if (bool) {
+    accountReNewPassword.css("border", "3px solid #F90A0A");
+    NEW_PASSWORD_NOT_MATCH_ERROR_MSG.show();
+    bool = false;
+  }
+
+  if (bool) {
     accountChangePasswordBtn.removeAttr("disabled");
   } else {
     accountChangePasswordBtn.attr("disabled", true);

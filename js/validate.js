@@ -127,6 +127,9 @@ function testForPhoneNumber(input) {
  * @returns true or false
  */
 function testForPassword(input) {
+  if (input.length <= 6) {
+    return false;
+  }
   let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/;
   return testForSqlInjections(input) ? false : pattern.test(input);
 }
