@@ -40,16 +40,16 @@ const getCookie = (cname) => {
 
 if (!getCookie("gdpr")) {
   swal(
-    "We Use Cookies!",
-    "This website uses cookies We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.",
+    "Vi använder Cookies!",
+    "Den här hemsidan använder cookies. Vi använder cookies för att personifiera innehåll och analysera vår trafik.",
     {
       buttons: {
         deny: {
-          text: "Deny",
+          text: "Avstå",
           value: "deny",
         },
         allow: {
-          text: "Allow All",
+          text: "Tillåt",
           value: "allow",
         },
       },
@@ -59,11 +59,11 @@ if (!getCookie("gdpr")) {
     switch (value) {
       case "allow":
         setCookie("gdpr", "true", "1");
-        swal("We saved you chioce");
+        swal("Vi har sparat ditt val.");
         break;
 
       default:
-        swal("Got away safely!");
+        swal("Du slipper!");
     }
   });
 }
