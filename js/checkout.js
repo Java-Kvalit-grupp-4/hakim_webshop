@@ -11,10 +11,12 @@
   (orderComment = $("#order-comment"));
 
 $(document).ready(() => {
+  $("#send-order-btn").removeAttr("disabled");
   /**
    *  Eventlistiners
    */
   $("#send-order-btn").click(function () {
+    $("#send-order-btn").attr("disabled", true);
     sendOrderToServer(makeOrderObject());
   });
 
@@ -254,7 +256,11 @@ function sendOrderToServer(orderObject) {
         });
       }
     })
-    .catch((err) => console.log(">> error from server: " + err));
+    .catch((err) => {
+      swal("Något gick fel kunde inte lägga ordern!").then(() =>
+        $("#send-order-btn").removeAttr("disabled")
+      );
+    });
 }
 
 const clearAllInLocalstorageExecptJwtToken = () => {

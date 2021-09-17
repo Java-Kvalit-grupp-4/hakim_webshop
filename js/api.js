@@ -7,6 +7,7 @@ let updateUserInfo = `${startUrl}/api/user/update/info`;
 let updateUserPasswordUrl = `${startUrl}/api/user/update/password`;
 let addOrder = `${startUrl}/api/user/create/order`;
 let getCustomerOrder = `${startUrl}/api/user/get/customer/orders?email=`;
+let deleteUserUrl = `${startUrl}/api/user/delete`;
 
 // admin
 let getAllCustomers = `${startUrl}/api/admin/get/all/users`;

@@ -15,6 +15,59 @@ let emailToCheck = $("#login-email"),
 
 let adminview = $("#admin-view-link");
 
+const setCookie = (cname, cvalue, exdays) => {
+  const d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+};
+
+const getCookie = (cname) => {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return undefined;
+};
+
+if (!getCookie("gdpr")) {
+  swal(
+    "We Use Cookies!",
+    "This website uses cookies We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.",
+    {
+      buttons: {
+        deny: {
+          text: "Deny",
+          value: "deny",
+        },
+        allow: {
+          text: "Allow All",
+          value: "allow",
+        },
+      },
+    }
+  ).then((value) => {
+    console.log(value);
+    switch (value) {
+      case "allow":
+        setCookie("gdpr", "true", "1");
+        swal("We saved you chioce");
+        break;
+
+      default:
+        swal("Got away safely!");
+    }
+  });
+}
+
 /**
  * Eventlistener
  */
@@ -37,9 +90,6 @@ function fetchCustomerInfo(customer, openPage) {
     setCustomer(response.data);
     location.replace(openPage);
   });
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
 }
 
 function setCustomer(customer) {
@@ -67,7 +117,6 @@ $("#login-btn").click(function () {
     $("#checkOutLink").attr("href", "#");
     adminview.hide();
   }
-  console.log(loginUrl);
 });
 
 $("#myAccountDropdown").click(function () {
@@ -81,6 +130,12 @@ $(document).ready(() => {
   totalItemsInCart.hide();
   hideOrShowAdminView();
   load();
+  if (JSON.parse(sessionStorage.getItem("customer")) == undefined) {
+    $("#myAccountDropdown").hide();
+    $(this).text("Logga in");
+    $("#checkOutLink").attr("href", "#");
+    adminview.hide();
+  }
 });
 
 function load() {
@@ -519,9 +574,6 @@ function hideOrShowAdminView() {
 //------------------------------------- login ----------------------------------\\
 
 $("#login-button").click(() => {
-  //let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
-  //let url = `https://hakim-livs-dev.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
-
   let url = `${startUrl}/login?username=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
   axios
     .post(url)
@@ -544,12 +596,11 @@ $("#login-button").click(() => {
       }
     })
     .catch((err) => {
-      if (err.response) {
-        console.log(err.response.data);
-        alert(err.response.data);
-      } else {
-        console.log(err);
-      }
+      swal(
+        "Ett Fel Uppstod!",
+        "Något gick fel vänligen försök att logga in igen.",
+        "error"
+      );
     });
 });
 
