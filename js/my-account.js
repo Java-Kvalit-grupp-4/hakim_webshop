@@ -364,7 +364,6 @@ const handleDeleteUser = () => {
     axios
       .get(`${deleteUserUrl}?email=${email}&password=${password}`, config)
       .then((resp) => {
-        console.log(resp.data);
         swal("Konto borttaget").then(() => {
           localStorage.clear();
           sessionStorage.clear();

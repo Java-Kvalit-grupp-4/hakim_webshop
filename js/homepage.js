@@ -90,9 +90,6 @@ function fetchCustomerInfo(customer, openPage) {
     setCustomer(response.data);
     location.replace(openPage);
   });
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
 }
 
 function setCustomer(customer) {
@@ -120,7 +117,6 @@ $("#login-btn").click(function () {
     $("#checkOutLink").attr("href", "#");
     adminview.hide();
   }
-  console.log(loginUrl);
 });
 
 $("#myAccountDropdown").click(function () {
@@ -134,6 +130,12 @@ $(document).ready(() => {
   totalItemsInCart.hide();
   hideOrShowAdminView();
   load();
+  if (JSON.parse(sessionStorage.getItem("customer")) == undefined) {
+    $("#myAccountDropdown").hide();
+    $(this).text("Logga in");
+    $("#checkOutLink").attr("href", "#");
+    adminview.hide();
+  }
 });
 
 function load() {
