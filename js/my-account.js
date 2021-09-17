@@ -68,7 +68,6 @@ $("#submit").click(() => {
     axios
       .post(updateUserInfo, updateInfo, config)
       .then((response) => {
-        console.log(response.data);
         if (response.status == 200) {
           swal("Informationen har sparats", "", "success");
           sessionStorage.setItem("customer", JSON.stringify(response.data));
@@ -341,7 +340,7 @@ const updatePassword = (email, newPassword, oldPassword) => {
         swal("Nytt lösenord sparat", "", "success");
 
         // setting the updated customer to sessionStorage
-        sessionStorage.setItem("customer", JSON.stringify(respone.data));
+        //sessionStorage.setItem("customer", JSON.stringify(respone.data));
 
         resetBorder(accountMyOldPassword);
         resetBorder(accountMyNewPassword);
