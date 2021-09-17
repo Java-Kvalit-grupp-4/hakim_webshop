@@ -574,9 +574,6 @@ function hideOrShowAdminView() {
 //------------------------------------- login ----------------------------------\\
 
 $("#login-button").click(() => {
-  //let url = `https://hakimlivs.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
-  //let url = `https://hakim-livs-dev.herokuapp.com/users/checkCredentials?email=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
-
   let url = `${startUrl}/login?username=${emailToCheck.val()}&password=${passwordToCheck.val()}`;
   axios
     .post(url)
@@ -599,12 +596,11 @@ $("#login-button").click(() => {
       }
     })
     .catch((err) => {
-      if (err.response) {
-        console.log(err.response.data);
-        alert(err.response.data);
-      } else {
-        console.log(err);
-      }
+      swal(
+        "Error!",
+        "Något gick fel vänligen försök att logga in igen.",
+        "error"
+      );
     });
 });
 
