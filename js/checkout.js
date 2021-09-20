@@ -216,7 +216,7 @@ function makeOrderObject() {
     isPaid: false,
     orderStatus: {
       type: "Ohanterad",
-      id: 1,
+      //id: 1,
     },
     lineItems: lineItems,
   };
